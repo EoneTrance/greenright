@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenright.dao.MemberDao">
+
+  <resultMap type="Member" id="MemberMap">
+    <id column="member_no" property="member_no"/>
+    <!--  
+    <result column="name" property="name"/>
+    <result column="email" property="email"/>
+    <result column="tel" property="tel"/>
+    <result column="cdt" property="registeredDate"/>
+    -->
+  </resultMap>
+
+  <sql id="basicColumn">
+    select 
+      member_no,
+      name
+  </sql>
+
+  <sql id="where1">
+    where member_no=#{nzo}
+  </sql>
+  
+  <select id="findAll" resultMap="MemberMap">
+    <include refid="basicColumn"/>
+    from lms_member
+    order by name asc
+  </select>
+  
+  <select id="findBy" parameterType="int" resultMap="MemberMap">
+    <include refid="basicColumn"/>
+    from members
+    <include refid="where1"/>
+  </select>
+
+</mapper>

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-@ComponentScan("com.greenright.controller")
+@ComponentScan("com.greenright.web")
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
   

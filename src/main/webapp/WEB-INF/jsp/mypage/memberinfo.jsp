@@ -34,7 +34,7 @@
             </tr>
             <tr>
                 <th>이름</th>
-                <td><input type="text" name="member_name" readonly="readonly" value="이용재"></td>
+                <td><input type="text" name="member_name" readonly="readonly" value='${member.name}'></td>
             </tr>
             <tr>
                 <th rowspan="3">주소</th>
