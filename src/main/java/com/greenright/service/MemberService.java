@@ -12,5 +12,6 @@ import com.greenright.domain.Member;
 public interface MemberService {
   List<Member> list() throws Exception;
   Member get(int no) throws Exception;
+  void update(Member member) throws Exception;
   
 }

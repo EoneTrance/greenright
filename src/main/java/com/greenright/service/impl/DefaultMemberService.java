@@ -32,4 +32,9 @@ public class DefaultMemberService implements MemberService {
     } 
     return member;
   }
+  
+  @Override
+  public void update(Member member) throws Exception {
+    memberDao.update(member);
+  }
 }

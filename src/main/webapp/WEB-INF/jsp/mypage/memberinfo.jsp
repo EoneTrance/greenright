@@ -13,34 +13,49 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
+  
     <div class="container">
       
-    <form id="editForm" name="editForm" action="modify" method="post" target="_self">
+    <form id="editForm" name="editForm" action="name" method="post" target="_self">
       <table class="table table-striped table-bordered table-hover">
         <caption>기본정보</caption>
         <tbody>
             <tr>
+              <th>사진</th>
+              <td><button>등록하기</button></td>
+            </tr>
+        
+            <tr>
                 <th>아이디</th>
-                <td><input type="text" name="member_id" readonly="readonly" value="leeyc21">(영문소문자/숫자,4~16자)</td>
+                <td><input type="text" name="id" readonly="readonly" value='${member.id}'>(영문소문자/숫자,4~16자)</td>
             </tr>
         
             <tr>
                 <th>비밀번호</th>
                 <td><input type="text" name="member_password">(영문대소문자/숫자4자~16자)</td>
             </tr>
+           
             <tr>
                 <th>비밀번호 확인</th>
                 <td><input type="text" name="member_password_confirm"></td>
             </tr>
+           
             <tr>
                 <th>이름</th>
                 <td><input type="text" name="member_name" readonly="readonly" value='${member.name}'></td>
             </tr>
+            
+            <tr>
+                <th>닉네임</th>
+                <td><input type="text" name="nickname" value='${member.nickname}'></td>
+            </tr>
+            
+           
             <tr>
                 <th rowspan="3">주소</th>
-                <td><input type="text" name="address_number"><button>우편번호찾기</button></td></tr>
-                <tr><td><input type="text" name="default_address">기본주소</td></tr>
-                <tr><td><input type="text" name="detailed_address">상세주소</td></tr>
+                <td><input type="text" name="address_number" value='${member.postal_code}'><button>우편번호찾기</button></td></tr>
+                <tr><td><input type="text" name="default_address" value='${member.default_address}'>기본주소</td></tr>
+                <tr><td><input type="text" name="detailed_address" value='${member.detail_address}'>상세주소</td></tr>
             </tr>
             <tr>
                 <td>일반전화</td>
@@ -98,11 +113,15 @@
                 <td>
                   <input type="radio" name="accept" value="수신함" />수신함
                   <input type="radio" name="acceptNot" checked="checked" value="수신안함" /> 수신안함<br>
-                  쇼핑몰에서 제공한느 유익한 이벤트 소식을 이메일로 받으실 수 있습니다. 
-                </td>
+                                             쇼핑몰에서 제공하는 유익한 이벤트 소식을 이메일로 받으실 수 있습니다.
+                </td>          
             </tr>
+       
+              
+             
         </tbody>
     </table>
+       <button>수정하기</button>
     </form>
     </div>
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->

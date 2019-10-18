@@ -6,7 +6,7 @@
 
   <!-- 컬럼 이름과 자바 객체의 프로퍼티 이름을 연결한다. -->
   <resultMap type="Category" id="CategoryMap">
-    <id column="category_id" property="no"/>
+    <id column="category_id" property="id"/>
     <result column="category_name" property="name"/>
   </resultMap>
 
@@ -20,7 +20,9 @@
   
   <select id="findAll" resultMap="CategoryMap">
     <include refid="sql1"/>
-    order by category_id desc
+    order by category_id asc
   </select>
+  
+  
   
 </mapper>
