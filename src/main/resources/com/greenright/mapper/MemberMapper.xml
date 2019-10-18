@@ -17,11 +17,12 @@
   <sql id="basicColumn">
     select 
       member_no,
-      name
+      name,
+      id
   </sql>
 
   <sql id="where1">
-    where member_no=#{nzo}
+    where member_no=#{no}
   </sql>
   
   <select id="findAll" resultMap="MemberMap">
@@ -31,9 +32,29 @@
   </select>
   
   <select id="findBy" parameterType="int" resultMap="MemberMap">
-    <include refid="basicColumn"/>
+    select 
+      member_no,
+      name,
+      id,
+      postal_code,
+      default_address,
+      detail_address,
+      cell_phone,
+      nickname
     from members
-    <include refid="where1"/>
+    where member_no=#{member_no}
+  </select>
+  
+  <update id="update" parameterType="Member">
+    update members set
+        nickname=#{nickname}
+   where id=#{id} and #{nickname} is not null and #{nickname} != ''
+  </update>
+  
+  <select id="pwcheck" parameterType="map" resultType="int">
+    select count(*)
+    from members
+    where id=#{userId} and password=#{userPw}
   </select>
 
 </mapper>

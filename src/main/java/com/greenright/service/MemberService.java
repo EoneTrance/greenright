@@ -1,7 +1,6 @@
 package com.greenright.service;
 
 import java.util.List;
-
 import com.greenright.domain.Member;
 
 // 역할:
@@ -12,5 +11,7 @@ import com.greenright.domain.Member;
 public interface MemberService {
   List<Member> list() throws Exception;
   Member get(int no) throws Exception;
+  int update(Member member) throws Exception;
+  int pwcheck(String id, String pw) throws Exception;
   
 }
