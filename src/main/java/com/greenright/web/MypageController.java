@@ -1,5 +1,6 @@
 package com.greenright.web;
 
+import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -10,13 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.greenright.domain.Member;
+import com.greenright.domain.PrivateBoard;
 import com.greenright.service.MemberService;
+import com.greenright.service.PrivateBoardService;
 
 @Controller
 @RequestMapping("/mypage")
 public class MypageController {
   @Resource
   private MemberService memberService;
+  
   @GetMapping("memberinfo")
   public void memberinfo(Model model, HttpSession session) throws Exception {
     session.setAttribute("no", 1);
@@ -25,11 +29,7 @@ public class MypageController {
   }
   @PostMapping("update")
   public String update(Member member) throws Exception {
-    // 1) 사용자 인증
-    
-    // 2) 사용자 정보 변경
-    System.out.println("update호출");
-    System.out.println(memberService.update(member));
+    memberService.update(member);
     return "redirect:memberinfo";
   }
   
@@ -44,5 +44,6 @@ public class MypageController {
       return "fail";
     }
   }
+
 }
 
