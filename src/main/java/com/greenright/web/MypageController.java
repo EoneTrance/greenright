@@ -1,6 +1,5 @@
 package com.greenright.web;
 
-import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -11,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.greenright.domain.Member;
-import com.greenright.domain.PrivateBoard;
 import com.greenright.service.MemberService;
-import com.greenright.service.PrivateBoardService;
 
 @Controller
 @RequestMapping("/mypage")
