@@ -17,7 +17,12 @@
     insert into recommends(boards_id,member_id)
     values(#{recommendBoardNo}, #{recommendMemberNo})
   </insert>
-
+  
+  <delete id="deleteRecommendByNum" parameterType="int">
+    delete from recommends  
+    where boards_id=#{no} 
+  </delete>
+  
   <delete id="deleteRecommend" parameterType="Recommend">
     delete from recommends  
     where boards_id=#{recommendBoardNo} and member_id =#{recommendMemberNo}
