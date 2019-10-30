@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenright.dao.CategoryDao">
+
+  <!-- 컬럼 이름과 자바 객체의 프로퍼티 이름을 연결한다. -->
+  <resultMap type="Category" id="CategoryMap">
+    <id column="category_id" property="no"/>
+    <result column="category_name" property="name"/>
+  </resultMap>
+
+  <sql id="sql1">
+    select 
+      category_id,
+      category_name
+      from categorys
+  </sql>
+
+  
+  <select id="findAll" resultMap="CategoryMap">
+    <include refid="sql1"/>
+    order by category_id desc
+  </select>
+  
+</mapper>
