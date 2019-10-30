@@ -6,10 +6,12 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class AppWebApplicationInitializer
   extends AbstractAnnotationConfigDispatcherServletInitializer {
-    @Override
-    protected Class<?>[] getRootConfigClasses() {
-      return null;
-    }
+
+  @Override
+  protected Class<?>[] getRootConfigClasses() {
+    return new Class<?>[] {
+      AppConfig.class, DatabaseConfig.class, MybatisConfig.class};
+  }
     
     @Override
     protected Class<?>[] getServletConfigClasses() {
@@ -20,7 +22,10 @@ public class AppWebApplicationInitializer
     protected String[] getServletMappings() {
       return new String[] {"/greenright/*"};
     }
-    
+    @Override
+    protected String getServletName() {
+      return "greenright";
+    }
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
       System.out.println("onStartUP호출!");

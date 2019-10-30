@@ -1,0 +1,88 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>새 상품 등록 관리</title>
+<style>
+  #button{
+  margin-left: 100px;
+  }
+  #button2{
+  margin-left: 130px;
+  }
+</style>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+  <div id="mainFont">
+  <h1>새 상품 등록 관리</h1>
+  </div>
+  <h3>1. 상품 등록 및 진열 재고 관리</h3>
+  <h3>상품 카테고리 대분류 선택
+  <select id="Aselect"><option id="clean">청소</option>
+          <option id="office">사무</option>
+          <option id="organic">유기농</option>
+          <option id="furniture">가구</option> 
+  </select>
+  <select id="Bselect"><option id="">세제류</option>
+          <option id="">위생용품</option>
+          <option id="">화장지</option>
+          <option id="">티슈</option>
+  </select>
+  </h3>
+  <h3>상품명<input type="text"></h3>
+  <h3>상품 코드<input type="text"></h3>
+  <h3>판매자명<input type="text"></h3>
+  <h4>제조사<input type="text"></h4>
+  <h4>원산지<input type="text"></h4>
+  <h3>수량<input type="text"></h3>
+  <h3>판매가<input type="text"></h3>
+  <br>
+  <br>
+  <h3>2. 이미지 등록</h3>
+  <h4>메인 이미지<input type="file"></h4>
+  <h4>이미지<input type="file" id="btnAdd"></h4>+ - 최대 5장
+  <table id="list">  
+</table>
+  <br>
+  <br>
+  <h3>3. 배송비 관리</h3>
+  <h4>수량<input type="text"></h4>개 이상 무료배송
+  <h4>가격<input type="text"></h4>원 이상 무료배송
+  <br>
+  <br>
+  <h3>4. 옵션 관리</h3>
+  <h4>옵션 항목<input type="text"></h4>
+  <h4>옵션 내용(1)<input type="text"></h4>
+  <h4>옵션 내용(2)<input type="text"></h4>
+  <h4>옵션 내용(3)<input type="text"></h4>
+  <br>
+  <br>
+  <h3>5. 상품 설명</h3>
+  <textarea rows="50" cols="20">내용을 입력해주세요</textarea>
+  
+  <button id=button>등록하기</button>
+  <button id="button1">취소하기</button>
+  
+</body>
+<script >
+$(function(){
+  $("#btnAdd").click(function(){ 
+     
+     var html = '<tr><td><input type="file" name="filePath">'; 
+     html += '<button type="button" class="btnDel">Del</button>'
+     html += '</td></tr>';
+     
+     $("#list").append(html); 
+  });
+  
+  $("#list").on("click", ".btnDel", function() { 
+    $(this).parent().parent().remove(); 
+  });  
+
+})
+
+</script>
+</html>
