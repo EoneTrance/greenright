@@ -5,56 +5,106 @@
 <mapper namespace="com.greenright.dao.MemberDao">
 
   <resultMap type="Member" id="MemberMap">
-    <id column="member_no" property="member_no"/>
-    <!--  
-    <result column="name" property="name"/>
-    <result column="email" property="email"/>
-    <result column="tel" property="tel"/>
-    <result column="cdt" property="registeredDate"/>
-    -->
+    <id column="member_id" property="no"/>
+    <result column="registered_date" property="registeredDate"/>
+    <result column="certification_flag" property="certificationFlag"/>
+    <result column="cell_phone" property="cellPhone"/>
+    <result column="postal_code" property="postalCode"/>
+    <result column="default_address" property="defaultAddress"/>
+    <result column="detail_address" property="detailAddress"/>
   </resultMap>
 
-  <sql id="basicColumn">
-    select 
-      member_no,
-      name,
-      id
-  </sql>
+<sql id="basicColumn">
+  select
+    member_id,
+    registered_date,
+    id,
+    password,
+    certification_flag,
+    cell_phone,
+    tel,
+    nickname,
+    name,
+    email,
+    postal_code,
+    default_address,
+    detail_address,
+    question,
+    answer
+</sql>
 
-  <sql id="where1">
-    where member_no=#{no}
-  </sql>
-  
-  <select id="findAll" resultMap="MemberMap">
-    <include refid="basicColumn"/>
-    from lms_member
-    order by name asc
-  </select>
-  
-  <select id="findBy" parameterType="int" resultMap="MemberMap">
-    select 
-      member_no,
-      name,
-      id,
-      postal_code,
-      default_address,
-      detail_address,
-      cell_phone,
-      nickname
-    from members
-    where member_no=#{member_no}
-  </select>
-  
-  <update id="update" parameterType="Member">
-    update members set
-        nickname=#{nickname}
-   where id=#{id} and #{nickname} is not null and #{nickname} != ''
-  </update>
-  
-  <select id="pwcheck" parameterType="map" resultType="int">
-    select count(*)
-    from members
-    where id=#{userId} and password=#{userPw}
-  </select>
+<sql id="where1">
+where member_id=#{no}
+</sql>
+
+<select id="findBy" parameterType="int" resultMap="MemberMap">
+  <include refid="basicColumn"/>
+  from members
+  <include refid="where1"/>
+</select>
+
+<update id="update" parameterType="Member">
+  update members
+  <set>
+    <!-- <if test="registeredDate != null">registered_date=#{registeredDate},</if> -->
+    <if test="id != null">id=#{id},</if>
+    <if test="password != null">password=#{password},</if>
+    <!-- <if test="certificationFlag != null">certification_flag=#{certificationFlag},</if> -->
+    <if test="cellPhone != null">cell_phone=#{cellPhone},</if>
+    <if test="tel != null">tel=#{tel},</if>
+    <if test="nickname != null">nickname=#{nickname},</if>
+    <if test="name != null">name=#{name},</if>
+    <if test="email != null">email=#{email},</if>
+    <if test="postalCode != null">postal_code=#{postalCode},</if>
+    <if test="defaultAddress != null">default_address=#{defaultAddress},</if>
+    <if test="detailAddress != null">detail_address=#{detailAddress},</if>
+    <if test="question != null">question=#{question},</if>
+    <if test="answer != null">answer=#{answer}</if>
+  </set>
+  <include refid="where1"/>
+</update>
+
+<insert id="insert" parameterType="Member">
+  insert into members (registered_date,
+   id,
+   password,
+   certification_flag,
+   cell_phone,
+   tel,
+   nickname,
+   name,
+   email,
+   postal_code,
+   default_address,
+   detail_address,
+   question,
+   answer)
+   values(#{registeredDate},
+   #{id},
+   password(#{password}),
+   #{certificationFlag},
+   #{cellPhone},
+   #{tel},
+   #{nickname},
+   #{name},
+   #{email},
+   #{postalCode},
+   #{defaultAddress},
+   #{detailAddress},
+   #{question},
+   #{answer}
+   )
+</insert>
+
+<delete id="delete" parameterType="int">
+  delete from members
+  <include refid="where1"/>
+</delete>
+
+<select id="findAll" resultMap="MemberMap">
+<include refid="basicColumn"/>
+  from members
+  order by name asc
+</select>
 
 </mapper>

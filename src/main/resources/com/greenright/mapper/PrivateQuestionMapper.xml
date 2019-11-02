@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenright.dao.PrivateQuestionBoardDao">  
+
+  <resultMap type="PrivateQuestionBoard" id="PrivateQuestionMap">
+    <id column="private_question_id" property="privateQuestionID"/>
+    <result column="member_no" property="no"/>
+    <result column="question_type" property="questionType"/>
+    <result column="created_date" property="createdDate"/>
+  </resultMap>
+  
+  <sql id="basicColumn">
+   select
+   private_question_id
+   , member_id
+   , question_type
+   , title
+   , contents
+   , answer
+   , created_date
+   from private_questions
+  </sql>
+  
+  <sql id="where1">
+    where private_question_id=#{privateQuestionID}
+  </sql>
+  
+ <!--  <select id="findAll" resultMap="PrivateQuestionMap">
+    <include refid="basicColumn"/>
+    order by private_question_id asc
+  </select> -->
+  
+  
+  <!--테스트용  -->
+  <select id="findAll" resultMap="PrivateQuestionMap">
+    select * from private_questions
+    left join members
+    on private_questions.member_id = members.member_id
+    order by private_question_id asc
+  </select>
+  
+  
+  
+  <select id="findby" parameterType="int" resultMap="PrivateQuestionMap">
+    <include refid="basicColumn"/>
+    where private_question_id=#{privateQuestionID}
+  </select>
+  
+  <insert id="insert" parameterType="PrivateQuestionBoard">
+    insert into private_questions(
+    question_type
+    , member_id
+    , title
+    , contents
+    , answer
+    , created_date
+    )
+    values(
+    #{questionType}
+    , #{no}
+    , #{title}
+    , #{answer}
+    , #{contents}
+    , #{createdDate}
+    )
+  </insert>
+
+  <update id="update" parameterType="PrivateQuestionBoard">
+    update private_questions set
+      question_type=#{questionType}
+      , title=#{title}
+      , contents=#{contents}
+      , answer=#{answer}
+    where private_question_id=#{privateQuestionID}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from private_questions
+      where private_question_id=#{privateQuestionID}
+  </delete>
+
+
+</mapper>
