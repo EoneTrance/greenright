@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenright.dao.FAQDao">
+
+  <resultMap type="FAQ" id="FAQMap">
+    <id column="faq_id" property="faqID"/>
+    <result column="question_type" property="questionType"/>
+  </resultMap>
+
+
+  <sql id="basicColumn">
+    select
+      faq_id
+      , question_type
+      , title
+      , contents 
+  </sql>
+
+
+  <sql id="where1">
+	  where faq_id=#{faqID}
+  </sql>
+  
+  <insert id="insert" parameterType="FAQ">
+    insert into faqs (
+      question_type
+      , title
+      , contents
+    )
+    values(
+    #{questionType}
+    , #{title}
+    , #{contents}
+    )
+   </insert>
+   
+   <select id="findAll" resultMap="FAQMap">
+    <include refid="basicColumn"/>
+      from faqs
+      order by faq_id asc
+   </select>
+   
+   <select id="findBy" parameterType="int" resultMap="FAQMap">
+    <include refid="basicColumn"/>
+    from faqs
+    <include refid="where1"/>
+   </select>
+    
+   <update id="update" parameterType="FAQ">
+      update faqs
+      <set>
+        <if test="questionType != null"> question_type=#{questionType},</if>
+        <if test="title != null"> title=#{title},</if>
+        <if test="contents !=null"> contents=#{contents}</if>
+      </set>
+      <include refid="where1"/>  
+   </update>
+   
+   <delete id="delete" parameterType="int">
+    delete from faqs
+    <include refid="where1"/>
+   </delete>
+   
+   
+  <!--  <select id ="findByKeyword" resultType="FAQ">
+    select * 
+      from faqs
+     <if test="searchType != null">
+        <if test="searchType == 'shipping-information'.toString()">
+          and shipping-information like CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="searchType == 'order-payment'.toString()">
+          and order-payment like CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="searchType == 'order-cancel'.toString()">
+          and order-cancel like CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="searchType == 'exchange'.toString()">
+          and exchange like CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="searchType == 'refund'.toString()">
+          and refund like CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="searchType == 'point'.toString()">
+          and point like CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="searchType == 'etc'.toString()">
+          and etc like CONCAT('%', #{keyword}, '%')
+        </if>
+     </if>   
+     order by question_type
+   </select> -->
+   
+   
+   
+  <!--  
+  
+   <select id="findByKeyword"
+          parameterType="string"
+          resultMap="FAQMap">
+    <bind name="pattern" value="'%' + _parameter + '%'"/>
+    <include refid="basicColumn"/> 
+    from faqs
+    where question_type like #{pattern} and title like #{pattern}
+      or title like #{pattern} or question_type like #{pattern}
+    order by question_type
+    where question_type like #{pattern} or title like #{pattern}
+    order by question_type
+  
+  </select>
+    -->
+ 
+ 
+ <select id="findByKeyword"
+          parameterType="string"
+          resultMap="FAQMap">
+ <bind name="pattern" value="'%' + _parameter + '%'"/>
+  select
+      , question_type
+      , title
+ from faqs
+ where (question_type like #{pattern} and title like #{pattern}) <!-- or question_type like #{pattern} 
+ or title like #{pattern} -->
+ order by question_type
+ 
+ 
+ </select>
+ 
+  </mapper>
