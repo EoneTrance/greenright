@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+#header {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+#header img {
+  height: 35px;
+}
+
+#footer {
+  background-color: #524845;
+  color: #ffffff;
+  height: 40px;
+  width: 1100px;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 10px;
+  margin: auto auto;
+}
+
+#content {
+  width: 1100px;
+  padding-top: 10px;
+  margin: auto auto;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: auto auto;
+}
+
+#signform {
+  text-align: left;
+  width: 500px;
+  padding-top: 10px;
+  margin: auto auto;
+  font-weight: bold;
+}
+
+#signform input {
+  display: inline-block;
+  height: 50px;
+  border: solid gray 1px;
+  margin-top: 5px;
+}
+
+#signform #essential {
+  border: solid gray 2px;
+}
+
+#signform select {
+  display: inline-block;
+  height: 50px;
+  margin: 10px auto;
+}
+
+.photo1 {
+  height: 120px;
+}
+
+.photo2 {
+  height: 100px;
+  margin: 2px;
+}
+
+#userid {
+  margin: 10px;
+}
+
+#pwd {
+  margin-left: 14px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+
+
+/* #essential {
+  background-color: #d8d8d8;
+} */
