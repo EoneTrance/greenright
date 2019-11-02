@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenright.dao.ProductDao">
+  <insert id="insert" parameterType="Product"
+  useGeneratedKeys="true" keyColumn="product_id" keyProperty="no">
+    insert into products(group_id,member_id,registered_date,diy_flag,price,product_name,description,expiration_date,origin)
+    values(#{groupNo},#{memberNo},now(),#{diy},#{price},#{productName},#{description},#{expirationDate},#{origin})
+  </insert>
+</mapper>
+
+
+
+
