@@ -16,21 +16,23 @@
 	
 
 	<resultMap type="Member" id="MemberMap">
-		<id column="member_id" property="member_no" />
-		<result column="registered_date" property="registered_date" />
+		<id column="member_id" property="no" />
+		<result column="registered_date" property="registeredDate" />
 		<result column="id" property="id" />
 		<result column="password" property="password" />
 		<result column="certification_flag" property="certification" />
-		<result column="cell_phone" property="cell_phone" />
+		<result column="cell_phone" property="cellPhone" />
 		<result column="tel" property="tel" />
 		<result column="nickname" property="nickname" />
 		<result column="name" property="name" />
 		<result column="email" property="email" />
-		<result column="postal_code" property="postal_code" />
-		<result column="default_address" property="default_address" />
-		<result column="detail_address" property="detail_address" />
+		<result column="postal_code" property="postalCode" />
+		<result column="default_address" property="defaultAddress" />
+		<result column="detail_address" property="detailAddress" />
 		<result column="question" property="question" />
 		<result column="answer" property="answer" />
+		<result column="auth_key" property="authkey"/>
+		<result column="password_authkey" property="passwordAuthkey"/>
 	</resultMap>
 
 	<sql id="sql1">

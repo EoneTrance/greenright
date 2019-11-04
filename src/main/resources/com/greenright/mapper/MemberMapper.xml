@@ -110,7 +110,7 @@
     select id, email
     from members
     where id=#{id} and email=#{email} and question=#{question} and answer=#{answer}
-  </select>
+  </select> 
   
   <update id="setKey" parameterType="member">
     update members set authkey=#{authkey} where id=#{id}

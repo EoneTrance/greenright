@@ -24,7 +24,7 @@
 			<result column="tel" property="tel" />
 			<result column="point" property="point" />
 			<association property="member" javaType="Member">
-				<id column="member_id" property="member_no" />
+				<id column="member_id" property="no" />
 				<result column="name" property="name"/>
 			</association>
 		</association>
