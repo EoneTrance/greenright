@@ -2,23 +2,25 @@ package com.greenright.domain;
 
 import java.io.Serializable;
 
-public class Category implements Serializable {
+public class Category implements Serializable{
   private static final long serialVersionUID = 1L;
-  
-  private String id;
-  private String name;
-  
-  public String getId() {
-    return id;
+  private int no;
+  private String categoryName;
+  public int getNo() {
+    return no;
   }
-  public void setId(String id) {
-    this.id = id;
+  public void setNo(int no) {
+    this.no = no;
   }
-  public String getName() {
-    return name;
+  public String getCategoryName() {
+    return categoryName;
   }
-  public void setName(String name) {
-    this.name = name;
+  public void setCategoryName(String categoryName) {
+    this.categoryName = categoryName;
+  }
+  @Override
+  public String toString() {
+    return "category [no=" + no + ", categoryName=" + categoryName + "]";
   }
   
   

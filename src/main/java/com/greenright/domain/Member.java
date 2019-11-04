@@ -22,6 +22,17 @@ public class Member implements Serializable{
   private String question;
   private String answer;
   
+  
+  @Override
+  public String toString() {
+    return "Member [member_no=" + member_no + ", registered_date=" + registered_date + ", id=" + id
+        + ", password=" + password + ", certification=" + certification + ", cell_phone="
+        + cell_phone + ", tel=" + tel + ", nickname=" + nickname + ", name=" + name + ", email="
+        + email + ", postal_code=" + postal_code + ", default_address=" + default_address
+        + ", detail_address=" + detail_address + ", question=" + question + ", answer=" + answer
+        + "]";
+  }
+  
   public int getMember_no() {
     return member_no;
   }
