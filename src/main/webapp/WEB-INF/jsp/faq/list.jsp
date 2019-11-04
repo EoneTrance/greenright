@@ -423,56 +423,139 @@
 
   
   
+<script> 
+$(function(){
+  $("#faqselect").change(function(){
+    $.ajax({
+      url : "../json/faq/search",
+      type : "GET",
+      dataType : "json",
+      data :{keyword : $("#faqselect option:selected").val()},
+      success : function(data) {
+          console.log(data);
+        var list = data.result;
+        var tableTag ="";
+        $("td").removeClass("content-value faq");
+        for(var i = 0 ; i < list.length; i++) {
+          tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
+          "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
+        };
+        $("#tbody_insert").html(tableTag);
+        $("td").addClass("content-value faq");
+        
+      }
+    });
+  });
+});
+
+$(function (){
+  $("#searchbtn").click(function(){
+    var allData = {"keyword" : $("#keyword").val()}
+    $.ajax({
+      url : "../json/faq/search",
+      type : "GET",
+      dataType : "json",
+      data : allData,
+      success : function(data) {
+        console.log(data);
+        var list = data.result;
+        var tableTag ="";
+        $("td").removeClass("content-value faq");
+        for(var i = 0 ; i < list.length; i++) {
+          tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
+          "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
+        };
+        $("#tbody_insert").html(tableTag);
+        $("td").addClass("content-value faq");
+      }
+    });
+  })
+
+}); 
+
+$(function(){
+  
+  $("#keyword").keypress(function(key){
+    if(key.keyCode == 13) {
+      var allData = {"keyword" : $("#keyword").val()}
+      $.ajax({
+        url :"../json/faq/search",
+        type : "GET",
+        dataType : "json",
+        data : allData,
+        success : function(data) {
+          console.log(data);
+          var list = data.result;
+          var tableTag ="";
+          for(var i = 0 ; i < list.length; i++) {
+            $("td").removeClass("content-value faq");
+            tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
+            "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
+          };
+          $("td").addClass("content-value faq");
+          $("#tbody_insert").html(tableTag);
+        }
+        
+      });
+    }
+    
+  });
+ 
+})
+
+</script>  
+  
   
 <script>
 
-        $(function (){
-          
-          $("#faqselect").change(function(){
-            $.ajax({
-              url : "../json/faq/search",
-              type : "GET",
-              dataType : "json",
-              data : {keyword: $("#faqselect option:selected").val()},
-              success : function(data) {
-                console.log(data);
-                
-                var tableTag ="";
-                $("td").removeClass("content-value faq");
-                for(var i = 0 ; i < data.length; i++) {
-                  tableTag += "<tr><td>" + data.result[i].faqID + "</td><td>" + data.result[i].questionType + 
-                  "</td><td><a href='detail?no="+ data.result[i].faqID+"'>" + data.result[i].title +"</a></td></tr>"
-                };
-                $("#tbody_insert").html(tableTag);
-                $("td").addClass("content-value faq");
-              }
-            });
-          })
-          
-          $("#searchbtn").click(function(){
-            $.ajax({
-              url : "../json/faq/search",
-              type : "GET",
-              dataType : "json",
-              data : {questionType: $("#faqselect option:selected").val(), keyword: $("#keyword").val()},
-              success : function(data) {
-                console.log(data.result);
-                var list = data.result;
-                var tableTag ="";
-                $("td").removeClass("content-value faq");
-                for(var i = 0 ; i < list.length; i++) {
-                  tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
-                  "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
-                };
-                $("#tbody_insert").html(tableTag);
-                $("td").addClass("content-value faq");
-              }
-            });
-          })
-          
-        });
 
-       /*  $(function(){
+    /* $(function(){
+      $("#faqselect").change(function(){
+        $.ajax({
+          url : "../json/faq/search",
+          type : "GET",
+          dataType : "json",
+          data :{keyword : $("#faqselect option:selected").val()},
+          success : function(data) {
+            var list = data.result;
+            var tableTag ="";
+            $("td").removeClass("content-value faq");
+            for(var i = 0 ; i < list.length; i++) {
+              tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
+              "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
+            };
+            $("#tbody_insert").html(tableTag);
+            $("td").addClass("content-value faq");
+            
+            
+            $("#searchbtn").click(function(){
+              $.ajax({
+                url : "../json/faq/search",
+                type : "GET",
+                dataType : "json",
+                data : {keyword : $("#keyword").val()},
+                success : function(data) {
+                  var list = data.result;
+                  var tableTag ="";
+                  $("td").removeClass("content-value faq");
+                  for(var i = 0 ; i < list.length; i++) {
+                    tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
+                    "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
+                  };
+                  $("#tbody_insert").html(tableTag);
+                  $("td").addClass("content-value faq");
+                }
+                
+              });
+            });
+            
+          }
+        });
+      });
+    }); */
+        
+
+        /*  $(function(){
           
           $("#searchbtn").click(function(){
             var allData = {"keyword" : $("#keyword").val()}
@@ -523,8 +606,8 @@
           
           
         });
+ 
  */
-
 
 
 

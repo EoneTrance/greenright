@@ -49,12 +49,12 @@ public class FaqController {
   }
   
   
-  @GetMapping("search")
-  public void search(Model model, String keyword) throws Exception {
-    List<Faq> faqs = faqService.search(keyword);
-    model.addAttribute("faqs", faqs);
-    
-  }
+//  @GetMapping("search")
+//  public void search(Model model, String keyword) throws Exception {
+//    List<Faq> faqs = faqService.search(keyword);
+//    model.addAttribute("faqs", faqs);
+//    
+//  }
   
   @PostMapping("update")
   public String update(Faq faq) throws Exception {

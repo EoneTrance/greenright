@@ -1,6 +1,7 @@
 package com.greenright.web.json;
 
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,9 +64,12 @@ public class FAQController {
   }
   
   @GetMapping("search")
-  public JsonResult searach(String keyword) throws Exception{
+  public JsonResult searach(String keyword, String questionType) throws Exception{
     try {
-      List<Faq> faqs = faqService.search(keyword);
+//      List<Faq> faqs = faqService.search(keyword);
+      Map<String, String> faqs = faqService.search(keyword, questionType);
+      faqs.put("questionType", questionType);
+      faqs.put("keyword", keyword);
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(faqs);
     } catch (Exception e) {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());

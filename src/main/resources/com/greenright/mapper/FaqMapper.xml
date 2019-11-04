@@ -113,18 +113,30 @@
     -->
  
  
- <select id="findByKeyword"
+<!--  <select id="findByKeyword"
           parameterType="string"
           resultMap="FaqMap">
  <bind name="pattern" value="'%' + _parameter + '%'"/>
-  select
-      , question_type
-      , title
+     <include refid="basicColumn"/>
  from faqs
- where (question_type like #{pattern} and title like #{pattern}) <!-- or question_type like #{pattern} 
- or title like #{pattern} -->
+ where question_type like #{pattern} or title like #{pattern} or (question_type like #{pattern} and title like #{pattern})
  order by question_type
  
+ 
+ </select> -->
+ 
+ 
+  <select id="findByKeyword"
+          parameterType="string"
+          resultMap="FaqMap">
+ <bind name="pattern" value="'%' + _parameter + '%'"/>
+     <include refid="basicColumn"/>
+ from faqs
+ <if test="questionType != null or questionType =='default'">and question_type like #{questionType}</if>
+ <if test="keyword !=null and keyword ==''">
+  and keyword like #{keyword}
+  order by question_type
+ </if> 
  
  </select>
  

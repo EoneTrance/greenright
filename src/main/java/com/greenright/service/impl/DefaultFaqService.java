@@ -1,6 +1,7 @@
 package com.greenright.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.greenright.dao.FaqDao;
@@ -42,10 +43,15 @@ public class DefaultFaqService implements FaqService{
       throw new Exception ("해당데이터가 없습니다.");
     }
   }
-  
-  
+
   @Override
-  public List<Faq> search(String keyword) throws Exception {
-    return faqDao.findByKeyword(keyword);
+  public Map<String, String> search(String keyword, String questionType) throws Exception {
+    return faqDao.findByKeyword(keyword, questionType);
   }
+  
+  
+//  @Override
+//  public List<Faq> search(String keyword) throws Exception {
+//    return faqDao.findByKeyword(keyword);
+//  }
 }
