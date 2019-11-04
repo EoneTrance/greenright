@@ -350,6 +350,19 @@ h6#marginless {
   </div>
 
 
+  <br>
+  <br>
+  <h3>3. 옵션 관리</h3>
+  <h4>옵션 이름<input type="button" id ="optionN" value="옵션이름추가버튼"></h4>
+  <table id="optionplus"></table>
+  <br>
+  <br>
+  <h3>4. 상품 설명</h3>
+  <textarea rows="5" cols="10" name="description" required>내용을 입력해주세요</textarea>
+  
+  <button id=button>등록하기</button>
+  </form>
+  <button id="button1">이거 누르면 홈으로 돌아감 </button>
 </body>
 <script>
   $(function() {

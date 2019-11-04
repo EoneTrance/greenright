@@ -70,7 +70,10 @@ th, td {
   <th>글쓴이</th>
   <th>등록일</th>
   <th>조회수</th>
+<<<<<<< HEAD
   <th>추천수</th>
+=======
+>>>>>>> e1f1a8d54db4e875efdf18b2b0e218ae85a1bdb0
 </tr>
 </thead>
 <tbody>
@@ -81,7 +84,10 @@ th, td {
     <td>${board.member.name}</td>
     <td class="cdate">${board.createdDate}</td>
     <td>${board.viewCount}</td>
+<<<<<<< HEAD
     <td>${board.recommendation}</td>
+=======
+>>>>>>> e1f1a8d54db4e875efdf18b2b0e218ae85a1bdb0
   </tr>
 </c:forEach> 
  </tbody>
@@ -92,6 +98,7 @@ th, td {
     $("#np").text("검색결과 [총:"+ ((textareaVal.length/10)) +"개]");
     </script>
     <script>
+<<<<<<< HEAD
     
     $(document).ready(function(){
     $('#nSelect').val(5).trigger('change');
@@ -105,6 +112,20 @@ $setRows.change(function (e) {
     e.preventDefault();
     var rowPerPage = $('#nSelect option:selected').val() *1;
 
+=======
+var $setRows = $('#setRows');
+
+$setRows.submit(function (e) {
+    e.preventDefault();
+    var rowPerPage = $('[name="rowPerPage"]').val() * 1;
+
+
+    var zeroWarning = 'Sorry, but we cat\'t display "0" rows page. + \nPlease try again.'
+    if (!rowPerPage) {
+        alert(zeroWarning);
+        return;
+    }
+>>>>>>> e1f1a8d54db4e875efdf18b2b0e218ae85a1bdb0
     $('#nav').remove();
     var $products = $('#products');
 

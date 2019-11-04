@@ -56,6 +56,19 @@ public class ProductController {
     productService.insert(product);
     return "redirect:manage";
   }
+//  ArrayList<ProductOptionItem> poList = new ArrayList<>();
+//  int  j =0;
+//  for(int i =0; i<optionItem.length-1;i++) {
+//    if(optionItem[i].equals("divide")) {
+//       j = pList.get(0).getNo();
+//    }else {
+//      ProductOptionItem poi = new ProductOptionItem() ;
+//      poi.setOptionItemMatter(optionItem[i]);
+//      poi.setOptionsNo(j);
+//      poList.add(e)
+//    
+//    }
+//  }
   
   @GetMapping("detail")
   public void detail(Model model, int no) throws Exception {
@@ -80,4 +93,3 @@ public class ProductController {
   }
   
 }
-

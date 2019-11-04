@@ -60,6 +60,7 @@
 	  from comments c 
 	   left outer join members m on c.member_id=m.member_id 
 	   where boards_id = #{boardNo}
+	   order by c.comments_id desc
 	   
 
 	    

@@ -26,9 +26,4 @@ public class AppWebApplicationInitializer
     protected String getServletName() {
       return "greenright";
     }
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-      System.out.println("onStartUP호출!");
-    super.onStartup(servletContext);
-    }
   }

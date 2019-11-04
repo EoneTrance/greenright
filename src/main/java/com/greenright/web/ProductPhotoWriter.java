@@ -21,7 +21,6 @@ public class ProductPhotoWriter {
   public List<ProductPhoto> getPhotoFiles(MultipartFile[] filePath) throws Exception {
     List<ProductPhoto> photoFiles = new ArrayList<>();
     for (MultipartFile file : filePath) {
-      System.out.println(file.toString());
       if (file.isEmpty())
         continue;
       // 클라이언트가 보낸 파일을 디스크에 저장한다.

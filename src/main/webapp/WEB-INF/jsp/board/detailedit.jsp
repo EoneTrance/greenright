@@ -9,6 +9,7 @@
 display:none
 } 
 </style>
+<<<<<<< HEAD
   <title>사진게시물 보기</title>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
@@ -17,6 +18,15 @@ display:none
 <body>
 
 <jsp:include page="../header.jsp"/>
+=======
+  <title>Community update</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
+</head>
+<body>
+
+<jsp:include page="../greenheader.jsp"/>
+>>>>>>> e1f1a8d54db4e875efdf18b2b0e218ae85a1bdb0
     
 <div id='content'>
 <h1>사진게시물</h1>
@@ -61,7 +71,11 @@ $(function(){
 })
 
 </script>
+<<<<<<< HEAD
 <jsp:include page="../footer.jsp"/>
+=======
+<jsp:include page="../greenfooter.jsp"/>
+>>>>>>> e1f1a8d54db4e875efdf18b2b0e218ae85a1bdb0
 
 </body>
 </html>

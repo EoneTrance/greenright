@@ -1,6 +1,5 @@
 package com.greenright.dao;
 
-import java.util.List;
 import com.greenright.domain.Product;
 
 public interface ProductDao {

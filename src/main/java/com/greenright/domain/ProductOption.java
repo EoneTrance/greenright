@@ -5,12 +5,10 @@ import java.util.List;
 
 public class ProductOption implements Serializable{
   private static final long serialVersionUID = 1L;
-  
   private int no;
   private int productNo;
   private String optionName;
   private List<ProductOptionItem> optionItem;
-  
   public int getNo() {
     return no;
   }

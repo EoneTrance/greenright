@@ -62,6 +62,10 @@ public class BoardController {
   
   @GetMapping("detail")
   public void detail(Model model, int no,HttpSession session) throws Exception {
+<<<<<<< HEAD
+=======
+    session.setAttribute("memberNo", 1);
+>>>>>>> e1f1a8d54db4e875efdf18b2b0e218ae85a1bdb0
     Board board = boardService.get(no);
     model.addAttribute("board", board);
     List<Comment> comments = commentService.list(no);
@@ -128,6 +132,7 @@ public class BoardController {
     return String.valueOf(commentService.update(contents,commentNo));
   }
   
+<<<<<<< HEAD
   @PostMapping("recommend/add")
   @ResponseBody
   public Object recommendadd(Recommend recommend) throws Exception{
@@ -153,6 +158,9 @@ public class BoardController {
    return recommendService.checkNum(recommendBoardNo);
   }
 
+=======
+  
+>>>>>>> e1f1a8d54db4e875efdf18b2b0e218ae85a1bdb0
 }
 
 
