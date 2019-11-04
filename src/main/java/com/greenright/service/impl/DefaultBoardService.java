@@ -38,6 +38,7 @@ public class DefaultBoardService implements BoardService {
     }
     recommendDao.deleteAllRecommend(no);
     boardPhotoDao.deleteAll(no);
+    recommendDao.deleteRecommendByNum(no);
     boardDao.delete(no);
   }
 
