@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.greenright.dao.FAQDao">
+<mapper namespace="com.greenright.dao.FaqDao">
 
-  <resultMap type="FAQ" id="FAQMap">
+  <resultMap type="Faq" id="FaqMap">
     <id column="faq_id" property="faqID"/>
     <result column="question_type" property="questionType"/>
   </resultMap>
@@ -20,10 +20,10 @@
 
 
   <sql id="where1">
-	  where faq_id=#{faqID}
+    where faq_id=#{faqID}
   </sql>
   
-  <insert id="insert" parameterType="FAQ">
+  <insert id="insert" parameterType="Faq">
     insert into faqs (
       question_type
       , title
@@ -36,19 +36,19 @@
     )
    </insert>
    
-   <select id="findAll" resultMap="FAQMap">
+   <select id="findAll" resultMap="FaqMap">
     <include refid="basicColumn"/>
       from faqs
       order by faq_id asc
    </select>
    
-   <select id="findBy" parameterType="int" resultMap="FAQMap">
+   <select id="findBy" parameterType="int" resultMap="FaqMap">
     <include refid="basicColumn"/>
     from faqs
     <include refid="where1"/>
    </select>
     
-   <update id="update" parameterType="FAQ">
+   <update id="update" parameterType="Faq">
       update faqs
       <set>
         <if test="questionType != null"> question_type=#{questionType},</if>
@@ -115,7 +115,7 @@
  
  <select id="findByKeyword"
           parameterType="string"
-          resultMap="FAQMap">
+          resultMap="FaqMap">
  <bind name="pattern" value="'%' + _parameter + '%'"/>
   select
       , question_type

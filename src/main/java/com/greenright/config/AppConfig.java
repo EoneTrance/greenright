@@ -8,11 +8,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ComponentScan(
     basePackages = "com.greenright",
     excludeFilters = {
-        @Filter(type = FilterType.REGEX, pattern = "com.greenright.controller.*")
+        @Filter(type = FilterType.REGEX, pattern = "com.greenright.web.*")
     }
  )
 
 @EnableWebMvc
-public class Appconfig {
+public class AppConfig {
 }
 

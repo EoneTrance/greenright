@@ -2,7 +2,7 @@ package com.greenright.domain;
 
 import java.io.Serializable;
 
-public class FAQ implements Serializable {
+public class Faq implements Serializable {
   private static final long serialVersionUID = 1L;
   
   private int faqID;

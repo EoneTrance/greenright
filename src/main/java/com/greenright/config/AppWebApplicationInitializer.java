@@ -7,7 +7,7 @@ public class AppWebApplicationInitializer
     @Override
     protected Class<?>[] getRootConfigClasses() {
       return new Class<?>[] {
-        Appconfig.class, DatabaseConfig.class, MybatisConfig.class};
+        AppConfig.class, DatabaseConfig.class, MybatisConfig.class};
     }
     
     @Override

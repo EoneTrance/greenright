@@ -1,4 +1,4 @@
-package com.greenright.controller.json;
+package com.greenright.web.json;
 
 public class JsonResult {
   public static final String SUCCESS = "success";

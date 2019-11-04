@@ -3,23 +3,23 @@ package com.greenright.service.impl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.greenright.dao.FAQDao;
-import com.greenright.domain.FAQ;
-import com.greenright.service.FAQService;
+import com.greenright.dao.FaqDao;
+import com.greenright.domain.Faq;
+import com.greenright.service.FaqService;
 
 @Service
-public class FAQServiceImpl implements FAQService{
+public class DefaultFaqService implements FaqService{
 
   @Autowired
-  private FAQDao faqDao;
+  private FaqDao faqDao;
 
   @Override
-  public List<FAQ> list() throws Exception {
+  public List<Faq> list() throws Exception {
     return faqDao.findAll();
   }
 
   @Override
-  public FAQ get(int no) throws Exception {
+  public Faq get(int no) throws Exception {
     if(faqDao ==null ) {
       throw new Exception("해당 번호의 데이터가 없습니다.");
     }
@@ -27,12 +27,12 @@ public class FAQServiceImpl implements FAQService{
   }
 
   @Override
-  public void update(FAQ faq) throws Exception {
+  public void update(Faq faq) throws Exception {
     faqDao.update(faq);
   }
 
   @Override
-  public void insert(FAQ faq) throws Exception {
+  public void insert(Faq faq) throws Exception {
     faqDao.insert(faq);
   }
 
@@ -45,7 +45,7 @@ public class FAQServiceImpl implements FAQService{
   
   
   @Override
-  public List<FAQ> search(String keyword) throws Exception {
+  public List<Faq> search(String keyword) throws Exception {
     return faqDao.findByKeyword(keyword);
   }
 }
