@@ -1,5 +1,9 @@
 plugins {
     id 'java'
+<<<<<<< HEAD
+=======
+    id 'eclipse-wtp'
+>>>>>>> 0c67d1d585e8b801eedea493ea5b7cd7e0c24efa
     id 'war'
     id 'eclipse-wtp'
 }
