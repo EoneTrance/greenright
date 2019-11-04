@@ -10,7 +10,6 @@
   </description>
 
   <display-name>greenright</display-name>
-<<<<<<< HEAD
  <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -23,8 +22,6 @@
     <filter-name>CharacterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-=======
->>>>>>> 0c67d1d585e8b801eedea493ea5b7cd7e0c24efa
 
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

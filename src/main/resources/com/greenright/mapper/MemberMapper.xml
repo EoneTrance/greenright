@@ -219,7 +219,7 @@
     <include refid="whereMember"/>
   </delete>
    -->
-</sql>
+<!-- </sql> -->
 
 <sql id="where1">
 where member_id=#{no}
