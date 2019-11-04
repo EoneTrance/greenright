@@ -6,7 +6,7 @@ build/
 temp/
 Debug/
 Release/
-conf/
+
 
 package-lock.json
 .DS_Store

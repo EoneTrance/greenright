@@ -149,20 +149,20 @@
     </if>
   </update>
   
-  <update id="update" parameterType="Member">
-    update members
-    <set>
-      <if test="cellPhone != null">cell_phone=#{cellPhone}</if>
-      <if test="nickname != null">,nickname=#{nickname}</if>
-      <if test="email != null">,email=#{email}</if>
-      <if test="postalCode != null">,postal_code=#{postalCode}</if>
-      <if test="defaultAddress != null">,default_address=#{defaultAddress}</if>
-      <if test="detailAddress != null">,detail_address=#{detailAddress}</if>
-      <if test="question != null">,question=#{question}</if>
-      <if test="answer != null">,answer=#{answer}</if>
-    </set>
-    <include refid="whereMember"></include>
-  </update>
+<!--   <update id="update" parameterType="Member"> -->
+<!--     update members -->
+<!--     <set> -->
+<!--       <if test="cellPhone != null">cell_phone=#{cellPhone}</if> -->
+<!--       <if test="nickname != null">,nickname=#{nickname}</if> -->
+<!--       <if test="email != null">,email=#{email}</if> -->
+<!--       <if test="postalCode != null">,postal_code=#{postalCode}</if> -->
+<!--       <if test="defaultAddress != null">,default_address=#{defaultAddress}</if> -->
+<!--       <if test="detailAddress != null">,detail_address=#{detailAddress}</if> -->
+<!--       <if test="question != null">,question=#{question}</if> -->
+<!--       <if test="answer != null">,answer=#{answer}</if> -->
+<!--     </set> -->
+<!--     <include refid="whereMember"></include> -->
+<!--   </update> -->
   
 <!-- 
   <select id="findByKeyword" parameterType="string" resultMap="MemberMap">
@@ -221,7 +221,7 @@
    -->
 <!-- </sql> -->
 
-<sql id="where1">
+<!-- <sql id="where1">
 where member_id=#{no}
 </sql>
 
@@ -234,10 +234,10 @@ where member_id=#{no}
 <update id="update" parameterType="Member">
   update members
   <set>
-    <!-- <if test="registeredDate != null">registered_date=#{registeredDate},</if> -->
+    <if test="registeredDate != null">registered_date=#{registeredDate},</if>
     <if test="id != null">id=#{id},</if>
     <if test="password != null">password=#{password},</if>
-    <!-- <if test="certificationFlag != null">certification_flag=#{certificationFlag},</if> -->
+    <if test="certificationFlag != null">certification_flag=#{certificationFlag},</if>
     <if test="cellPhone != null">cell_phone=#{cellPhone},</if>
     <if test="tel != null">tel=#{tel},</if>
     <if test="nickname != null">nickname=#{nickname},</if>
@@ -294,5 +294,5 @@ where member_id=#{no}
   from members
   order by name asc
 </select>
-
+ -->
 </mapper>
