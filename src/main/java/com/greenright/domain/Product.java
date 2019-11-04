@@ -19,8 +19,8 @@ public class Product  implements Serializable {
   private String origin;
   private List<ProductPhoto> photos;
   private List<ProductOption> options;
-  
-  
+  private Seller seller;
+  private Group group;
   public int getNo() {
     return no;
   }
@@ -94,13 +94,25 @@ public class Product  implements Serializable {
   public void setOptions(List<ProductOption> options) {
     this.options = options;
   }
+  public Seller getSeller() {
+    return seller;
+  }
+  public void setSeller(Seller seller) {
+    this.seller = seller;
+  }
+  public Group getGroup() {
+    return group;
+  }
+  public void setGroup(Group group) {
+    this.group = group;
+  }
   @Override
   public String toString() {
     return "Product [no=" + no + ", groupNo=" + groupNo + ", memberNo=" + memberNo
         + ", registeredDate=" + registeredDate + ", diy=" + diy + ", price=" + price
         + ", productName=" + productName + ", description=" + description + ", expirationDate="
         + expirationDate + ", origin=" + origin + ", photos=" + photos + ", options=" + options
-        + "]";
+        + ", seller=" + seller + ", group=" + group + "]";
   }
   
   

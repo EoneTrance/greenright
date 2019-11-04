@@ -36,6 +36,7 @@ public class DefaultBoardService implements BoardService {
     if (boardDao.findBy(no) == null) {
       throw new Exception("해당 데이터가 없습니다.");
     }
+    recommendDao.deleteAllRecommend(no);
     boardPhotoDao.deleteAll(no);
     boardDao.delete(no);
   }

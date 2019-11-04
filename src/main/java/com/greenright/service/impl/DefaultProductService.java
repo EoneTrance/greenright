@@ -19,40 +19,62 @@ public class DefaultProductService implements ProductService{
   @Resource private ProductPhotoDao productPhotoDao;
   @Resource private ProductOptionDao optionDao;
   @Resource private ProductOptionItemDao optionItemDao;
-  
-  
+
+
   @Transactional
   @Override
   public void insert(Product product) throws Exception {
     if(product.getPhotos().size()==0) {
       throw new Exception("사진파일없음");
     }
-    System.out.println("insert하기전 ====>"+product.getNo());
-   productDao.insert(product);
-   System.out.println("insert한이후 ====>"+product.getNo());
-   for(ProductPhoto photo: product.getPhotos()) {
-     photo.setProductNo(product.getNo());
-     productPhotoDao.insert(photo);
-   }
-   for(ProductOption option: product.getOptions()) {
-     option.setProductNo(product.getNo());
-     optionDao.insert(option);
-     for(ProductOptionItem optionItem : option.getOptionItem()) {
-       System.out.println(option.getNo());
-       optionItem.setOptionsNo(option.getNo());
-       optionItemDao.insert(optionItem);
-     }
-   }
-   
+    productDao.insert(product);
+    for(ProductPhoto photo: product.getPhotos()) {
+      photo.setProductNo(product.getNo());
+      productPhotoDao.insert(photo);
+    }
+    for(ProductOption option: product.getOptions()) {
+      option.setProductNo(product.getNo());
+      optionDao.insert(option);
+      for(ProductOptionItem optionItem : option.getOptionItem()) {
+        System.out.println(option.getNo());
+        optionItem.setOptionsNo(option.getNo());
+        optionItemDao.insert(optionItem);
+      }
+    }
+
   }
+  
   @Override
   public Product get(int no) throws Exception {
     return productDao.findWithFilesBy(no);
   }
-  
+
   @Override
   public List<Product> list() throws Exception {
     return productDao.findAllWithFile();
   }
-
+  
+  @Override
+  public List<Product> searchbyGroup(int no) throws Exception {
+    return productDao.findByGroupNo(no);
+  }
+  
+  @Override
+  public List<Product> searchbyCategory(int no) throws Exception{
+    return productDao.findByCategoryNo(no);
+  }
+  
+  @Override
+  public List<Product> listBySeller(int no) throws Exception {
+    return productDao.findAllBySeller(no);
+  }
+  @Transactional
+  @Override
+  public void delete(int no) throws Exception {
+    optionItemDao.deleteAll(no);
+    optionDao.deleteAll(no);
+    productPhotoDao.deleteAll(no);
+    productDao.delete(no);
+  }
+  
 }

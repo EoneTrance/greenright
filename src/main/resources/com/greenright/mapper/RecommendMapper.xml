@@ -22,5 +22,11 @@
     delete from recommends  
     where boards_id=#{recommendBoardNo} and member_id =#{recommendMemberNo}
   </delete>
+  
+  <delete id="deleteAllRecommend" parameterType="int">
+    delete from recommends  
+    where boards_id=#{no}
+  </delete>
+  
  
 </mapper>

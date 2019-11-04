@@ -7,6 +7,7 @@ public class Group implements Serializable{
   private int no;
   private int categoryNo;
   private String groupName;
+  private Category category;
   public int getNo() {
     return no;
   }
@@ -25,10 +26,19 @@ public class Group implements Serializable{
   public void setGroupName(String groupName) {
     this.groupName = groupName;
   }
+  public Category getCategory() {
+    return category;
+  }
+  public void setCategory(Category category) {
+    this.category = category;
+  }
   @Override
   public String toString() {
-    return "group [no=" + no + ", categoryNo=" + categoryNo + ", groupName=" + groupName + "]";
+    return "Group [no=" + no + ", categoryNo=" + categoryNo + ", groupName=" + groupName
+        + ", category=" + category + "]";
   }
+  
+  
   
   
   

@@ -1,7 +1,9 @@
 package com.greenright.web;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -21,7 +23,7 @@ public class ProductController {
   private ProductService productService;
   @Resource
   private ProductPhotoWriter productPhotoWriter;
-
+  
   @GetMapping("form")
   public void form() { }
   @Transactional
@@ -52,7 +54,7 @@ public class ProductController {
     }
     product.setOptions(pList);
     productService.insert(product);
-    return "redirect:list";
+    return "redirect:manage";
   }
   
   @GetMapping("detail")
@@ -61,5 +63,21 @@ public class ProductController {
     System.out.println(product);
     model.addAttribute("product", product);
   }
+  @GetMapping("delete")
+  public String delete(int no) throws Exception {
+    productService.delete(no);
+
+    return "redirect:manage";
+  }
+  @RequestMapping("manage")
+  public void main(Model model,HttpSession session) throws Exception {
+    
+    //int no =(Integer)session.getAttribute("SellerNo");
+    //List<Product> products = productService.listBySeller(no);
+    List<Product> products = productService.listBySeller(1);
+    model.addAttribute("products", products);
+    System.out.println(products.toString());
+  }
+  
 }
 

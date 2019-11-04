@@ -20,8 +20,10 @@ public class Category implements Serializable{
   }
   @Override
   public String toString() {
-    return "category [no=" + no + ", categoryName=" + categoryName + "]";
+    return "Category [no=" + no + ", categoryName=" + categoryName + "]";
   }
+  
+  
   
   
 }
