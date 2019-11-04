@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+#header {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+#header img {
+  height: 35px;
+}
+
+#footer {
+  background-color: #524845;
+  color: #ffffff;
+  height: 40px;
+  width: 1200px;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 10px;
+  margin: auto auto;
+}
+
+a {
+  text-decoration:none !important;
+}
+
+h1 {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: auto auto;
+}
+
+#content {
+  width: 1200px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: auto auto;
+  text-align: center;
+}
+
+#memberInfoForm {
+  width: 960px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: auto auto;
+  text-align: center;
+}
+
+#signform, #loginForm, #findIdPassword, #passwordChangeForm {
+  text-align: left;
+  width: 500px;
+  margin: auto auto;
+  font-weight: bold;
+}
+
+#memberInfoForm input, #memberInfoForm select {
+  height: 40px;
+  width: 500px;
+  display: inline-block;
+}
+
+
+#memberInfoForm div.inputState {
+  display: inline-block;
+  width: 300px;
+}
+
+#memberInfoForm input.notChange {
+  border:0px !important;
+  background-color: rgba( 255, 255, 255, 0) !important;
+  outline: none !important;
+}
+
+#loginForm *, #findIdPassword * {
+  margin: auto auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#loginForm input, #loginForm select, #findIdPassword input, #findIdPassword select {
+  height: 40px;
+}
+
+#loginForm button, #findIdPassword button {
+  height: 50px;
+}
+
+#signform input, #passwordChangeForm input {
+  display: inline-block;
+  height: 50px;
+  border: solid gray 2px;
+  margin-top: 5px;
+}
+
+div#address input {
+  height: 50px;
+  width: 500px;
+  border: solid gray 2px;
+}
+
+#address input[name=postalCode] {
+  height: 50px;
+  width: 248px;
+  border: solid gray 2px;
+}
+
+#address input[name=searchPostalCode] {
+  height: 50px;
+  width: 248px;
+  border: solid gray 2px;
+}
+
+#signform input:not([name=tel]) {
+  border: solid gray 2px;
+}
+
+#signform select {
+  border: solid gray 2px;
+  display: inline-block;
+  height: 50px;
+  margin: 10px auto;
+}
+
+.photo1 {
+  height: 120px;
+}
+
+.photo2 {
+  height: 100px;
+  margin: 2px;
+}

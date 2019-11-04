@@ -1,6 +1,10 @@
 package com.greenright.config;
 
+import javax.servlet.Filter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import com.greenright.filter.AuthFilter;
+
 
 public class AppWebApplicationInitializer 
 extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -8,7 +12,7 @@ extends AbstractAnnotationConfigDispatcherServletInitializer {
   @Override
   protected Class<?>[] getRootConfigClasses() {
     return new Class<?>[] {
-      AppConfig.class, DatabaseConfig.class, MybatisConfig.class};
+      AppConfig.class, DatabaseConfig.class, MybatisConfig.class, MailSenderConfig.class};
   }
   
   @Override
@@ -24,5 +28,10 @@ extends AbstractAnnotationConfigDispatcherServletInitializer {
   @Override
   protected String getServletName() {
     return "greenright";
+  }
+  
+  @Override
+  protected Filter[] getServletFilters() {
+    return new Filter[]{new CharacterEncodingFilter("UTF-8"), new AuthFilter()};
   }
 }

@@ -6,33 +6,34 @@ import java.sql.Date;
 public class Member implements Serializable{
   private static final long serialVersionUID = 1L;
   
-  private int member_no;
-  private Date registered_date;
+  private int no;
+  private Date registeredDate;
   private String id;
   private String password;
-  private boolean certification;
-  private String cell_phone;
+  private int certificationFlag;
+  private String cellPhone;
   private String tel;
   private String nickname;
   private String name;
   private String email;
-  private String postal_code;
-  private String default_address;
-  private String detail_address;
+  private String postalCode;
+  private String defaultAddress;
+  private String detailAddress;
   private String question;
   private String answer;
-  
-  public int getMember_no() {
-    return member_no;
+  private String authkey;
+  private String passwordAuthkey;
+  public int getNo() {
+    return no;
   }
-  public void setMember_no(int member_no) {
-    this.member_no = member_no;
+  public void setNo(int no) {
+    this.no = no;
   }
-  public Date getRegistered_date() {
-    return registered_date;
+  public Date getRegisteredDate() {
+    return registeredDate;
   }
-  public void setRegistered_date(Date registered_date) {
-    this.registered_date = registered_date;
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
   }
   public String getId() {
     return id;
@@ -46,17 +47,17 @@ public class Member implements Serializable{
   public void setPassword(String password) {
     this.password = password;
   }
-  public boolean isCertification() {
-    return certification;
+  public int getCertificationFlag() {
+    return certificationFlag;
   }
-  public void setCertification(boolean certification) {
-    this.certification = certification;
+  public void setCertificationFlag(int certificationFlag) {
+    this.certificationFlag = certificationFlag;
   }
-  public String getCell_phone() {
-    return cell_phone;
+  public String getCellPhone() {
+    return cellPhone;
   }
-  public void setCell_phone(String cell_phone) {
-    this.cell_phone = cell_phone;
+  public void setCellPhone(String cellPhone) {
+    this.cellPhone = cellPhone;
   }
   public String getTel() {
     return tel;
@@ -82,23 +83,23 @@ public class Member implements Serializable{
   public void setEmail(String email) {
     this.email = email;
   }
-  public String getPostal_code() {
-    return postal_code;
+  public String getPostalCode() {
+    return postalCode;
   }
-  public void setPostal_code(String postal_code) {
-    this.postal_code = postal_code;
+  public void setPostalCode(String postalCode) {
+    this.postalCode = postalCode;
   }
-  public String getDefault_address() {
-    return default_address;
+  public String getDefaultAddress() {
+    return defaultAddress;
   }
-  public void setDefault_address(String default_address) {
-    this.default_address = default_address;
+  public void setDefaultAddress(String defaultAddress) {
+    this.defaultAddress = defaultAddress;
   }
-  public String getDetail_address() {
-    return detail_address;
+  public String getDetailAddress() {
+    return detailAddress;
   }
-  public void setDetail_address(String detail_address) {
-    this.detail_address = detail_address;
+  public void setDetailAddress(String detailAddress) {
+    this.detailAddress = detailAddress;
   }
   public String getQuestion() {
     return question;
@@ -112,8 +113,27 @@ public class Member implements Serializable{
   public void setAnswer(String answer) {
     this.answer = answer;
   }
-  public static long getSerialversionuid() {
-    return serialVersionUID;
+  public String getAuthkey() {
+    return authkey;
+  }
+  public void setAuthkey(String authkey) {
+    this.authkey = authkey;
+  }
+  public String getPasswordAuthkey() {
+    return passwordAuthkey;
+  }
+  public void setPasswordAuthkey(String passwordAuthkey) {
+    this.passwordAuthkey = passwordAuthkey;
+  }
+  
+  @Override
+  public String toString() {
+    return "Member [no=" + no + ", registeredDate=" + registeredDate + ", id=" + id + ", password="
+        + password + ", certificationFlag=" + certificationFlag + ", cellPhone=" + cellPhone
+        + ", tel=" + tel + ", nickname=" + nickname + ", name=" + name + ", email=" + email
+        + ", postalCode=" + postalCode + ", defaultAddress=" + defaultAddress + ", detailAddress="
+        + detailAddress + ", question=" + question + ", answer=" + answer + ", authkey=" + authkey
+        + ", passwordAuthkey=" + passwordAuthkey + "]";
   }
 
 }

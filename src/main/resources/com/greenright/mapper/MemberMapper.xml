@@ -5,35 +5,137 @@
 <mapper namespace="com.greenright.dao.MemberDao">
 
   <resultMap type="Member" id="MemberMap">
-    <id column="member_no" property="member_no"/>
-    <!--  
-    <result column="name" property="name"/>
-    <result column="email" property="email"/>
-    <result column="tel" property="tel"/>
-    <result column="cdt" property="registeredDate"/>
-    -->
+    <id column="member_id" property="no"/>
+    <result column="registered_date" property="registeredDate"/>
+    <result column="cell_phone" property="cellPhone"/>
+    <result column="postal_code" property="postalCode"/>
+    <result column="default_address" property="defaultAddress"/>
+    <result column="detail_address" property="detailAddress"/>
   </resultMap>
 
-  <sql id="basicColumn">
-    select 
-      member_no,
+    <sql id="selectMember">
+    select
+      member_id,
+      id,
       name,
-      id
-  </sql>
-
-  <sql id="where1">
-    where member_no=#{no}
+      email,
+      cell_phone,
+      registered_date
   </sql>
   
-  <select id="findAll" resultMap="MemberMap">
-    <include refid="basicColumn"/>
-    from lms_member
-    order by name asc
+  <sql id="whereMember">
+    where member_id=#{no}
+  </sql> 
+ 
+  <insert id="insert" parameterType="Member">
+    insert into
+      members(
+        id,
+        password,
+        name,
+        cell_phone,
+        tel,
+        email,
+        postal_code,
+        default_address,
+        detail_address,
+        question,
+        answer,
+        registered_date)
+      values(
+        #{id},
+        password(#{password}),
+        #{name},
+        #{cellPhone},
+        #{tel},
+        #{email},
+        #{postalCode},
+        #{defaultAddress},
+        #{detailAddress},
+        #{question},
+        #{answer},
+        curdate())
+  </insert>
+  
+  <select id="findById" parameterType="string" resultMap="MemberMap">
+     select id from members where id=#{id}
   </select>
+  
+  <select id="findByEmail" parameterType="string" resultMap="MemberMap">
+     select email from members where email=#{email}
+  </select>
+  
+  <select id="findByCellPhone" parameterType="string" resultMap="MemberMap">
+     select cell_phone from members where cell_phone=#{cellPhone}
+  </select>
+  
+  <select id="findByIdPassword" parameterType="member" resultMap="MemberMap">
+    select *
+    from members
+    where id=#{id} and password=password(#{password})
+  </select>
+  
+  <select id="findAll" parameterType="string" resultMap="MemberMap">
+    <include refid="selectMember"/>
+    from members
+    <if test="_parameter != null and _parameter != ''">
+     <bind name="bindValue" value="'%' + _parameter + '%'"/>
+      where
+      id like #{bindValue} or
+      email like #{bindValue} or
+      name like #{bindValue} or
+      cell_phone like #{bindValue}
+    </if>
+    order by member_id desc
+  </select>
+  
+  <select id="findByQuestionAnswer" parameterType="member" resultMap="MemberMap">
+    select id
+    from members
+    where email=#{email} and question=#{question} and answer=#{answer}
+  </select>
+  
+  <select id="findByQuestionAnswerWithId" parameterType="member" resultMap="MemberMap">
+    select id, email
+    from members
+    where id=#{id} and email=#{email} and question=#{question} and answer=#{answer}
+  </select>
+  
+  <update id="setKey" parameterType="member">
+    update members set authkey=#{authkey} where id=#{id}
+  </update>
+  
+  <update id="setPasswordKey" parameterType="member">
+    update members set password_authkey=#{passwordAuthkey} where id=#{id}
+  </update>
+  
+  <update id="setFlag" parameterType="member">
+    update members
+    <if test="authkey != 'COMPLETE'">
+      <set>
+        certification_flag=1,
+        authkey='COMPLETE'
+      </set> 
+        where id=#{id} and authkey=#{authkey}
+    </if>
+  </update>
+  
+  <select id="compareKey" parameterType="member" resultMap="MemberMap">
+    <include refid="selectMember"/>
+    from members
+    where id=#{id} and password_authkey=#{passwordAuthkey}
+  </select>
+  
+  <update id="passwordUpdate" parameterType="member">
+    update members set
+      password=password(#{password}),
+      password_authkey='COMPLETE'
+    where id=#{id} and password_authkey=#{passwordAuthkey}
+  </update>
   
   <select id="findBy" parameterType="int" resultMap="MemberMap">
     select 
-      member_no,
+      member_id,
       name,
       id,
       postal_code,
