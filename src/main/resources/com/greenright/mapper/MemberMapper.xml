@@ -2,59 +2,204 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
 <mapper namespace="com.greenright.dao.MemberDao">
-
   <resultMap type="Member" id="MemberMap">
-    <id column="member_no" property="member_no"/>
-    <!--  
-    <result column="name" property="name"/>
-    <result column="email" property="email"/>
-    <result column="tel" property="tel"/>
-    <result column="cdt" property="registeredDate"/>
-    -->
+    <id column="no" property="no"/>
+    <result column="registeredDate" property="registeredDate"/>
+    <result column="cellPhone" property="cellPhone"/>
+    <result column="postalCode" property="postalCode"/>
+    <result column="defaultAddress" property="defaultAddress"/>
+    <result column="detailAddress" property="detailAddress"/>
   </resultMap>
-
-  <sql id="basicColumn">
-    select 
-      member_no,
-      name,
-      id
-  </sql>
-
-  <sql id="where1">
-    where member_no=#{no}
-  </sql>
   
-  <select id="findAll" resultMap="MemberMap">
-    <include refid="basicColumn"/>
-    from lms_member
-    order by name asc
-  </select>
-  
-  <select id="findBy" parameterType="int" resultMap="MemberMap">
-    select 
-      member_no,
-      name,
+  <sql id="selectMember">
+    select
+      member_id,
       id,
-      postal_code,
-      default_address,
-      detail_address,
+      name,
+      email,
       cell_phone,
-      nickname
-    from members
-    where member_no=#{member_no}
+      registered_date
+  </sql>
+  
+  <sql id="whereMember">
+    where id=#{id}
+  </sql> 
+ 
+  <insert id="insert" parameterType="Member">
+    insert into
+      members(
+        id,
+        password,
+        name,
+        cell_phone,
+        tel,
+        email,
+        postal_code,
+        default_address,
+        detail_address,
+        question,
+        answer,
+        registered_date)
+      values(
+        #{id},
+        password(#{password}),
+        #{name},
+        #{cellPhone},
+        #{tel},
+        #{email},
+        #{postalCode},
+        #{defaultAddress},
+        #{detailAddress},
+        #{question},
+        #{answer},
+        now())
+  </insert>
+  
+  <select id="findById" parameterType="string" resultMap="MemberMap">
+     select id from members where id=#{id}
   </select>
   
-  <update id="update" parameterType="Member">
-    update members set
-        nickname=#{nickname}
-   where id=#{id} and #{nickname} is not null and #{nickname} != ''
+  <select id="findByEmail" parameterType="string" resultMap="MemberMap">
+     select email from members where email=#{email}
+  </select>
+  
+  <select id="findByCellPhone" parameterType="string" resultMap="MemberMap">
+     <if test="id != null || id != ''">
+     select id, cell_phone from members where cell_phone=#{cellPhone}
+     </if>
+     <if test="id == null || id == ''">
+     select cell_phone from members where cell_phone=#{cellPhone}
+     </if>
+  </select>
+  
+  <select id="findByIdPassword" parameterType="member" resultMap="MemberMap">
+    select *
+    from members
+    where id=#{id} and password=password(#{password})
+  </select>
+  
+  <select id="findUserInfo" parameterType="member" resultMap="MemberMap">
+    select *
+    from members
+    where id=#{id} and email=#{email}
+  </select>
+  
+  <select id="findAll" parameterType="string" resultMap="MemberMap">
+    <include refid="selectMember"/>
+    from members
+    <if test="_parameter != null and _parameter != ''">
+     <bind name="bindValue" value="'%' + _parameter + '%'"/>
+      where
+      id like #{bindValue} or
+      email like #{bindValue} or
+      name like #{bindValue} or
+      cell_phone like #{bindValue}
+    </if>
+    order by member_id desc
+  </select>
+  
+  <select id="findByQuestionAnswer" parameterType="member" resultMap="MemberMap">
+    select id
+    from members
+    where email=#{email} and question=#{question} and answer=#{answer}
+  </select>
+  
+  <select id="findByQuestionAnswerWithId" parameterType="member" resultMap="MemberMap">
+    select id, email
+    from members
+    where id=#{id} and email=#{email} and question=#{question} and answer=#{answer}
+  </select>
+  
+  <update id="setKey" parameterType="member">
+    update members set authkey=#{authkey} where id=#{id}
   </update>
   
-  <select id="pwcheck" parameterType="map" resultType="int">
-    select count(*)
+  <update id="setPasswordKey" parameterType="member">
+    update members set password_authkey=#{passwordAuthkey} where id=#{id}
+  </update>
+  
+  <update id="setFlag" parameterType="member">
+    update members
+    <if test="authkey != 'COMPLETE'">
+      <set>
+        certification_flag=1,
+        authkey='COMPLETE'
+      </set> 
+        where id=#{id} and authkey=#{authkey}
+    </if>
+  </update>
+  
+  <select id="compareKey" parameterType="member" resultMap="MemberMap">
+    <include refid="selectMember"/>
     from members
-    where id=#{userId} and password=#{userPw}
+    where id=#{id} and password_authkey=#{passwordAuthkey}
   </select>
-
+  
+  <update id="passwordUpdate" parameterType="member">
+    update members set
+      password=password(#{password})
+    <if test="passwordAuthkey != null || passwordAuthkey == ''">
+    , password_authkey='COMPLETE'
+    where id=#{id} and password_authkey=#{passwordAuthkey}
+    </if>
+    <if test="passwordAuthkey == null || passwordAuthkey == ''">
+    where id=#{id}
+    </if>
+  </update>
+  
+  <update id="update" parameterType="Member">
+    update members
+    <set>
+      <if test="cellPhone != null">cell_phone=#{cellPhone}</if>
+      <if test="nickname != null">,nickname=#{nickname}</if>
+      <if test="email != null">,email=#{email}</if>
+      <if test="postalCode != null">,postal_code=#{postalCode}</if>
+      <if test="defaultAddress != null">,default_address=#{defaultAddress}</if>
+      <if test="detailAddress != null">,detail_address=#{detailAddress}</if>
+      <if test="question != null">,question=#{question}</if>
+      <if test="answer != null">,answer=#{answer}</if>
+    </set>
+    <include refid="whereMember"></include>
+  </update>
+  
+<!-- 
+  <select id="findByKeyword" parameterType="string" resultMap="MemberMap">
+    <bind name="bindValue" value="'%' + _parameter + '%'"/>
+    <include refid="selectMember"/>
+    from
+      members
+    where
+      id like #{bindValue} or
+      email like #{bindValue} or
+      name like #{bindValue} or
+      cell_phone like #{bindValue}
+    order by member_id desc
+  </select> 
+-->
+  
+<!--   
+  
+  <select id="findBy" parameterType="int" resultMap="MemberMap">
+    <include refid="selectMember"/>,
+    certification_flag,
+    cell_phone,
+    tel,
+    nickname,
+    postal_code,
+    default_address,
+    detail_address,
+    question,
+    answer
+    from members
+    <include refid="whereMember"/>
+  </select>
+  
+  
+  <delete id="delete">
+    delete from members
+    <include refid="whereMember"/>
+  </delete>
+   -->
 </mapper>

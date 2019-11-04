@@ -7,6 +7,16 @@
     insert into option_items(options_id,option_item_matters)
     values(#{OptionsNo},#{OptionItemMatter})
   </insert>
+   <delete id="delete" parameterType="int">
+    delete from option_items
+    where options_id=#{optionsNo} and option_item_id =#{optionItemNo}
+  </delete>
+  
+  <delete id="deleteAll" parameterType="int">
+     delete from option_items  
+    where options_id =#{value}
+  </delete>
+  
 </mapper>
 
 

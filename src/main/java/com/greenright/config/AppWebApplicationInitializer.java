@@ -8,7 +8,7 @@ extends AbstractAnnotationConfigDispatcherServletInitializer {
   @Override
   protected Class<?>[] getRootConfigClasses() {
     return new Class<?>[] {
-      AppConfig.class, DatabaseConfig.class, MybatisConfig.class};
+      AppConfig.class, DatabaseConfig.class, MybatisConfig.class, MailSenderConfig.class};
   }
   
   @Override

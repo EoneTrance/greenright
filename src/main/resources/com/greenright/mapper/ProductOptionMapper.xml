@@ -3,11 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.greenright.dao.ProductOptionDao">
+  <resultMap type="ProductOption" id="options">
+  <id column ="options_id" property= "no"/>
+  <result column ="product_id" property="productNo"/>
+  <result column ="options_name" property ="optionName"/>
+  </resultMap>
   <insert id="insert" parameterType="ProductOption"
   useGeneratedKeys="true" keyColumn="options_id" keyProperty="no">
     insert into options(product_id,options_name)
     values(#{productNo},#{optionName})
   </insert>
+   <delete id="delete" parameterType="int">
+    delete from options  
+    where options_id=#{optionsNo} and product_id =#{productNo}
+  </delete>
+  
+  <delete id="deleteAll" parameterType="int">
+     delete from options  
+    where product_id =#{productNo}
+  </delete>
+  <select id="getProductOptionItemNum" parameterType="int"
+  resultMap="options">
+  select options_id from options
+  where product_id =#{value}
+  </select>
 </mapper>
 
 

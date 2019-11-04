@@ -1,7 +1,7 @@
 plugins {
     id 'java'
-    id 'eclipse-wtp'
     id 'war'
+    id 'eclipse-wtp'
 }
 
 tasks.withType(JavaCompile) {
@@ -15,23 +15,26 @@ repositories {
 }
 
 dependencies {
-   // Mybatis Persistence Framework
+    // Mybatis Persistence Framework
     compile group: 'org.mybatis', name: 'mybatis', version: '3.5.2'
     
     // MariaDB JDBC Driver
     compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.3'
     
-    // Spring IoC 컨테이너 - spring-webmvc 를 추가하면 이 라이브러리는 자동으로 포함된다.
-    //compile group: 'org.springframework', name: 'spring-context', version: '5.2.0.RELEASE'
+    // Spring IoC 컨테이너
+    compile group: 'org.springframework', name: 'spring-context', version: '5.1.9.RELEASE'
+    
+    // Spring Context Support
+    compile group: 'org.springframework', name: 'spring-context-support', version: '5.1.9.RELEASE'
     
     // Spring JDBC
-    compile group: 'org.springframework', name: 'spring-jdbc', version: '5.2.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '5.1.9.RELEASE'
     
     // Mybatis-Spring
     compile group: 'org.mybatis', name: 'mybatis-spring', version: '2.0.2'
     
     // Spring WebMVC
-    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.2.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.1.9.RELEASE'
     
     // Log4j2
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.1'
@@ -48,6 +51,9 @@ dependencies {
     // Javax Annotation API(for OpenJDK, Oracle JDK includes this library)
     compile group: 'javax.annotation', name: 'javax.annotation-api', version: '1.3.2'
     
+    // Java mail
+    compile group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
+    
     // Reflections
     compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
     
@@ -57,6 +63,9 @@ dependencies {
     // 파일 업로드 처리
     compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
     
-    implementation 'com.google.guava:guava:28.0-jre'
+    // Tiles 뷰 템플릿 엔진
+    compile group: 'org.apache.tiles', name: 'tiles-jsp', version: '3.0.8'
+    
+    implementation 'com.google.guava:guava:27.1-jre'
     testImplementation 'junit:junit:4.12'
 }

@@ -1,5 +1,6 @@
 package com.greenright.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -71,7 +72,10 @@ public class DefaultProductService implements ProductService{
   @Transactional
   @Override
   public void delete(int no) throws Exception {
-    optionItemDao.deleteAll(no);
+    List<ProductOption> options = optionDao.getProductOptionItemNum(no);
+    for(ProductOption a : options) {
+      optionItemDao.deleteAll(a.getNo());
+    }
     optionDao.deleteAll(no);
     productPhotoDao.deleteAll(no);
     productDao.delete(no);

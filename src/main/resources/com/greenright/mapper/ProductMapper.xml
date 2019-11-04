@@ -162,7 +162,10 @@ select
     
     order by p.product_id DESC
 	</select>
-
+<delete id="delete"  parameterType="int">
+  delete from products 
+  where product_id = #{value}
+</delete>
 <select id="findByCategoryNo" resultMap="ProductWithFilesMap"
     parameterType="int">
     select
