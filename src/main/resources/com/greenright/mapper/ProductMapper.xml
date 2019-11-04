@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenright.dao.ProductDao">
+
+  <resultMap type="Product" id="ProductMap">
+    <id column="product_id" property="no"/>
+    <result column="group_id" property="groupNo"/>
+    <result column="member_no" property="memberNo"/>
+    <result column="registered_date" property="registeredDate"/>
+    <result column="diy_flag" property="diy"/>
+    <result column="price" property="price"/>
+    <result column="product_name" property="productName"/>
+    <result column="description" property="description"/>
+    <result column="expiration_date" property="expirationDate"/>
+    <result column="origin" property="origin"/>
+  </resultMap>
+  
+  <resultMap type="Product" id="ProductWithFilesMap">
+    <id column="product_id" property="no"/>
+    <result column="group_id" property="groupNo"/>
+    <result column="member_no" property="memberNo"/>
+    <result column="registered_date" property="registeredDate"/>
+    <result column="diy_flag" property="diy"/>
+    <result column="price" property="price"/>
+    <result column="product_name" property="productName"/>
+    <result column="description" property="description"/>
+    <result column="expiration_date" property="expirationDate"/>
+    <result column="origin" property="origin"/>
+    <collection property="files" ofType="ProductFile">
+      <id column="product_photo_id" property="no"/>
+      <result column="product_id" property="productNo"/>
+      <result column="photo_path" property="filePath"/>
+      <result column="main_photo_flag" property="mainPhoto"/>
+    </collection>
+  </resultMap>
+  
+   <insert id="insert" 
+           parameterType="Product"
+           useGeneratedKeys="true"
+           keyColumn="product_id"
+           keyProperty="no">
+   INSERT INTO products (
+     group_id
+     , member_no
+     , registered_date
+     , price
+     , product_name
+     , description
+     )
+     VALUES (
+     #{groupNo}
+     , #{memberNo}
+     , curdate()
+     , #{price}
+     , #{productName}
+     , #{description}
+ );
+  </insert>
+  
+  <select id="findWithFilesBy"
+          parameterType="int"
+          resultMap="ProductWithFilesMap">
+    select
+      p.group_id,
+      p.member_no,
+      p.price,
+      p.product_name,
+      p.description,
+      f.product_id,
+      f.photo_path
+    from products p
+      left outer join product_photos f on p.product_id = f.product_id
+    where
+      p.product_id=#{value}
+  </select>
+  
+  <select id="findAllWithFile" resultMap="ProductWithFilesMap">
+    select
+      p.product_id,
+      p.group_id,
+      p.member_no,
+      p.price,
+      p.product_name,
+      p.description,
+      f.product_id,
+      f.photo_path
+    from products p
+      left outer join product_photos f on (p.product_id = f.product_id AND f.main_photo_flag = 1)
+      order by p.product_id DESC
+  </select>
+
+</mapper>

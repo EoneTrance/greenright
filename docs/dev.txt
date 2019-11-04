@@ -1,0 +1,7 @@
+1.테이블 생성
+2.데이터 입력 insert  insert into categorys(category_name) values('업사이클링');
+3.데이터 셀렉트하기  select * from 컬럼값 
+4.domain클래스 만들기
+5.mapper파일 작성
+6.select all 
+7.
