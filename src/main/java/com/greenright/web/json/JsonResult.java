@@ -1,19 +1,18 @@
 package com.greenright.web.json;
 
 public class JsonResult {
-  
-  public static final String SUCCESS = "success";
-  public static final String FAILURE = "failure";
-  
-  String state;
-  String message;
-  Object result;
-  
+  public static final String SUCCESS ="success";
+  public static final String FAILURE ="failure";
+
+  private String state;
+  private String message;
+  private Object result;
+
   @Override
   public String toString() {
     return "JsonResult [state=" + state + ", message=" + message + ", result=" + result + "]";
   }
-  
+
   public String getState() {
     return state;
   }
@@ -35,7 +34,8 @@ public class JsonResult {
     this.result = result;
     return this;
   }
-  
-  
+
+
+
 
 }

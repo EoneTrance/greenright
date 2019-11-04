@@ -6,34 +6,44 @@ import java.sql.Date;
 public class Member implements Serializable{
   private static final long serialVersionUID = 1L;
   
-  private int no;
-  private Date registeredDate;
+  private int member_no;
+  private Date registered_date;
   private String id;
   private String password;
-  private int certificationFlag;
-  private String cellPhone;
+  private boolean certification;
+  private String cell_phone;
   private String tel;
   private String nickname;
   private String name;
   private String email;
-  private String postalCode;
-  private String defaultAddress;
-  private String detailAddress;
+  private String postal_code;
+  private String default_address;
+  private String detail_address;
   private String question;
   private String answer;
-  private String authkey;
-  private String passwordAuthkey;
-  public int getNo() {
-    return no;
+  
+  
+  @Override
+  public String toString() {
+    return "Member [member_no=" + member_no + ", registered_date=" + registered_date + ", id=" + id
+        + ", password=" + password + ", certification=" + certification + ", cell_phone="
+        + cell_phone + ", tel=" + tel + ", nickname=" + nickname + ", name=" + name + ", email="
+        + email + ", postal_code=" + postal_code + ", default_address=" + default_address
+        + ", detail_address=" + detail_address + ", question=" + question + ", answer=" + answer
+        + "]";
   }
-  public void setNo(int no) {
-    this.no = no;
+  
+  public int getMember_no() {
+    return member_no;
   }
-  public Date getRegisteredDate() {
-    return registeredDate;
+  public void setMember_no(int member_no) {
+    this.member_no = member_no;
   }
-  public void setRegisteredDate(Date registeredDate) {
-    this.registeredDate = registeredDate;
+  public Date getRegistered_date() {
+    return registered_date;
+  }
+  public void setRegistered_date(Date registered_date) {
+    this.registered_date = registered_date;
   }
   public String getId() {
     return id;
@@ -47,17 +57,17 @@ public class Member implements Serializable{
   public void setPassword(String password) {
     this.password = password;
   }
-  public int getCertificationFlag() {
-    return certificationFlag;
+  public boolean isCertification() {
+    return certification;
   }
-  public void setCertificationFlag(int certificationFlag) {
-    this.certificationFlag = certificationFlag;
+  public void setCertification(boolean certification) {
+    this.certification = certification;
   }
-  public String getCellPhone() {
-    return cellPhone;
+  public String getCell_phone() {
+    return cell_phone;
   }
-  public void setCellPhone(String cellPhone) {
-    this.cellPhone = cellPhone;
+  public void setCell_phone(String cell_phone) {
+    this.cell_phone = cell_phone;
   }
   public String getTel() {
     return tel;
@@ -83,23 +93,23 @@ public class Member implements Serializable{
   public void setEmail(String email) {
     this.email = email;
   }
-  public String getPostalCode() {
-    return postalCode;
+  public String getPostal_code() {
+    return postal_code;
   }
-  public void setPostalCode(String postalCode) {
-    this.postalCode = postalCode;
+  public void setPostal_code(String postal_code) {
+    this.postal_code = postal_code;
   }
-  public String getDefaultAddress() {
-    return defaultAddress;
+  public String getDefault_address() {
+    return default_address;
   }
-  public void setDefaultAddress(String defaultAddress) {
-    this.defaultAddress = defaultAddress;
+  public void setDefault_address(String default_address) {
+    this.default_address = default_address;
   }
-  public String getDetailAddress() {
-    return detailAddress;
+  public String getDetail_address() {
+    return detail_address;
   }
-  public void setDetailAddress(String detailAddress) {
-    this.detailAddress = detailAddress;
+  public void setDetail_address(String detail_address) {
+    this.detail_address = detail_address;
   }
   public String getQuestion() {
     return question;
@@ -113,27 +123,8 @@ public class Member implements Serializable{
   public void setAnswer(String answer) {
     this.answer = answer;
   }
-  public String getAuthkey() {
-    return authkey;
-  }
-  public void setAuthkey(String authkey) {
-    this.authkey = authkey;
-  }
-  public String getPasswordAuthkey() {
-    return passwordAuthkey;
-  }
-  public void setPasswordAuthkey(String passwordAuthkey) {
-    this.passwordAuthkey = passwordAuthkey;
-  }
-  
-  @Override
-  public String toString() {
-    return "Member [no=" + no + ", registeredDate=" + registeredDate + ", id=" + id + ", password="
-        + password + ", certificationFlag=" + certificationFlag + ", cellPhone=" + cellPhone
-        + ", tel=" + tel + ", nickname=" + nickname + ", name=" + name + ", email=" + email
-        + ", postalCode=" + postalCode + ", defaultAddress=" + defaultAddress + ", detailAddress="
-        + detailAddress + ", question=" + question + ", answer=" + answer + ", authkey=" + authkey
-        + ", passwordAuthkey=" + passwordAuthkey + "]";
+  public static long getSerialversionuid() {
+    return serialVersionUID;
   }
 
 }

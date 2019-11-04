@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-public class Product implements Serializable{
+public class Product  implements Serializable {
+
   private static final long serialVersionUID = 1L;
-  
   private int no ; 
   private int groupNo;
   private int memberNo;
@@ -17,7 +17,9 @@ public class Product implements Serializable{
   private String description;
   private Date expirationDate;
   private String origin;
-  private List<ProductFile> files;
+  private List<ProductPhoto> photos;
+  private List<ProductOption> options;
+  
   
   public int getNo() {
     return no;
@@ -79,20 +81,28 @@ public class Product implements Serializable{
   public void setOrigin(String origin) {
     this.origin = origin;
   }
-  public List<ProductFile> getFiles() {
-    return files;
+  public List<ProductPhoto> getPhotos() {
+    return photos;
   }
-  public void setFiles(List<ProductFile> files) {
-    this.files = files;
+  public void setPhotos(List<ProductPhoto> photos) {
+    this.photos = photos;
   }
-  
+  public List<ProductOption> getOptions() {
+    return options;
+  }
+  public void setOptions(List<ProductOption> options) {
+    this.options = options;
+  }
   @Override
   public String toString() {
     return "Product [no=" + no + ", groupNo=" + groupNo + ", memberNo=" + memberNo
         + ", registeredDate=" + registeredDate + ", diy=" + diy + ", price=" + price
         + ", productName=" + productName + ", description=" + description + ", expirationDate="
-        + expirationDate + ", origin=" + origin + ", files=" + files + "]";
+        + expirationDate + ", origin=" + origin + ", photos=" + photos + ", options=" + options
+        + "]";
   }
   
+  
 
+  
 }
