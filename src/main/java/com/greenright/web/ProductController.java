@@ -60,7 +60,8 @@ public class ProductController {
   @GetMapping("detail")
   public void detail(Model model, int no) throws Exception {
     Product product = productService.get(no);
-    System.out.println(product);
+    Product productPhoto = productService.getforPhoto(no);
+    model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);
   }
   @GetMapping("delete")

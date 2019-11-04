@@ -49,7 +49,11 @@ public class DefaultProductService implements ProductService{
   public Product get(int no) throws Exception {
     return productDao.findWithFilesBy(no);
   }
-
+  @Override
+  public Product getforPhoto(int no) throws Exception {
+    return productDao.findForPhoto(no);
+  }
+  
   @Override
   public List<Product> list() throws Exception {
     return productDao.findAllWithFile();
@@ -80,5 +84,24 @@ public class DefaultProductService implements ProductService{
     productPhotoDao.deleteAll(no);
     productDao.delete(no);
   }
-  
+  @Transactional
+  @Override
+  public void update(Product product,String productPhotoNum[]) throws Exception {
+    if(productPhotoNum[0]!="0") {
+      for(String bpn : productPhotoNum) {
+        if(bpn!="0") {
+          int a =  Integer.parseInt(bpn);
+          productPhotoDao.delete(a);
+        }
+      }
+    }
+
+    productDao.update(product);
+    for (ProductPhoto photo : product.getPhotos()) {
+      photo.setProductNo(product.getNo()); 
+      // 새로 추가한 사진과 , 기존에 삭제하지않고 남겨진 사진들을 product 
+      // 에 insert 하는 부분 
+      
+    }
+  }
 }

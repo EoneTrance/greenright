@@ -38,7 +38,7 @@
 </p>
  <c:forEach begin="1" end="6">
   사진: <input type='file' name='photoPath'><br>
-</c:forEach> 
+ </c:forEach> 
 
 <button>변경</button>
 <a href='delete?no=${product.no}'>삭제</a>

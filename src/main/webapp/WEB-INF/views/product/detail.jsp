@@ -4,6 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+ #ndp {
+display:none
+} 
+</style>
   <title>사진게시물 보기</title>
   <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
   <link rel='stylesheet' href='/css/common.css'>
@@ -32,8 +37,10 @@
 </c:forEach>
 
 <p>
-<c:forEach items="${product.photos}" var="file">
+<c:forEach items="${productPhoto.photos}" var="file">
+선택시 삭제 <input type="checkbox" name = "productPhotoNum" value='${file.no}' id="daaa">
   <img src='/upload/product/${file.photoPath}' class='photo2'><br>
+  <input type="text" name="productPhotoNum" value ="0" id="ndp">
 </c:forEach>
 </p>
  <c:forEach begin="1" end="6">
