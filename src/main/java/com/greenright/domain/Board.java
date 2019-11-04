@@ -16,20 +16,19 @@ public class Board implements Serializable {
   private int memberNo;
   private int viewCount;
   private Member member;
+  private int recommendation;
   private List<BoardPhoto> photos;
-
-  
-  
-
-  @Override
-  public String toString() {
-    return "Board [no=" + no + ", title=" + title + ", contents=" + contents + ", createdDate="
-        + createdDate + ", memberNo=" + memberNo + ", viewCount=" + viewCount + ", member=" + member
-        + ", photos=" + photos + "]";
-  }
 
   public Member getMember() {
     return member;
+  }
+
+  public int getRecommendation() {
+    return recommendation;
+  }
+
+  public void setRecommendation(int recommendation) {
+    this.recommendation = recommendation;
   }
 
   public void setMember(Member member) {
@@ -91,12 +90,12 @@ public class Board implements Serializable {
   public void setPhotos(List<BoardPhoto> photos) {
     this.photos = photos;
   }
-  
-  
 
-  
+  @Override
+  public String toString() {
+    return "Board [no=" + no + ", title=" + title + ", contents=" + contents + ", createdDate="
+        + createdDate + ", memberNo=" + memberNo + ", viewCount=" + viewCount + ", member=" + member
+        + ", recommendation=" + recommendation + ", photos=" + photos + "]";
+  }
 
-  
-  
-  
 }

@@ -13,18 +13,33 @@
 <div id='content'>
 <h1>상품게시물</h1>
 <form action='update' method='post' enctype='multipart/form-data'>
-그룹아디 : <input type='text' name='no' value='${product.groupNo}' readonly><br>
-멤버넘버 : <input type='text' name='no' value='${product.memberNo}' readonly><br>
+대분류명 : <input type='text' name='no' value='${product.group.category.categoryName}' readonly><br>
+소분류명 : <input type='text' name='no' value='${product.group.groupName}' readonly><br>
+판매자명 : <input type='text' name='no' value='${product.seller.member.name}' readonly><br>
 상품가격 : <input type='text' name='no' value='${product.price}' readonly><br>
 상품이름 : <input type='text' name='no' value='${product.productName}' readonly><br>
 상품설명 : <input type='text' name='no' value='${product.description}' readonly><br>
+직접제작여부 : <input type='text' name='no' value='${product.diy}' readonly><br>
+등록일 : <input type='text' name='no' value='${product.registeredDate}' readonly><br>
+유통기한 : <input type='text' name='no' value='${product.expirationDate}' readonly><br>
+원산지 : <input type='text' name='no' value='${product.origin}' readonly><br>
+
+<c:forEach items="${product.options}" var="option">
+  옵션명 : <input type='text' name='no' value='${option.optionName}' readonly><br>
+  <c:forEach items="${option.optionItem}" var="item">
+  옵션항목명 : <input type='text' name='no' value='${item.optionItemMatter}' readonly><br>
+  </c:forEach> 
+</c:forEach>
+<%-- 옵션명 : <input type='text' name='no' value='${product.description}' readonly><br>
+옵션항목명 : <input type='text' name='no' value='${product.description}' readonly><br> --%>
+
 <p>
-<c:forEach items="${product.files}" var="file">
-  <img src='/upload/product/${file.filePath}' class='photo2'> 
+<c:forEach items="${product.photos}" var="file">
+  <img src='/upload/product/${file.photoPath}' class='photo2'><br>
 </c:forEach>
 </p>
 <c:forEach begin="1" end="6">
-  사진: <input type='file' name='filePath'><br>
+  사진: <input type='file' name='photoPath'><br>
 </c:forEach>
 
 <button>변경</button>

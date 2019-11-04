@@ -7,7 +7,7 @@ import com.greenright.domain.Category;
 public interface CategoryDao {
 
   List<Category> findAll() throws Exception;
- 
+  int insert(Category category) throws Exception;
 }
 
 

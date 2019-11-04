@@ -5,8 +5,16 @@
 <mapper namespace="com.greenright.dao.ProductPhotoDao">
   <insert id="insert" parameterType="ProductPhoto">
     insert into product_photos(product_id,photo_path,main_photo_flag)
-    values(#{productNo},#{photoPath},#{mainPhoto})
+    values(#{productNo},#{photoPath},false)
   </insert>
+  
+       
+  <insert id="insertTrue" parameterType="ProductPhoto">
+   INSERT INTO product_photos (product_id,photo_path,main_photo_flag)
+     VALUES (#{productNo},#{photoPath},true)
+  </insert>
+  
+  
 </mapper>
 
 

@@ -69,6 +69,7 @@ th, td {
   <th>글쓴이</th>
   <th>등록일</th>
   <th>조회수</th>
+  <th>추천수</th>
 </tr>
 </thead>
 <tbody>
@@ -79,6 +80,7 @@ th, td {
     <td>${board.member.name}</td>
     <td class="cdate">${board.createdDate}</td>
     <td>${board.viewCount}</td>
+    <td>${board.recommendation}</td>
   </tr>
 </c:forEach> 
 </tbody>
@@ -89,17 +91,19 @@ th, td {
     $("#np").text("검색결과 [총:"+ ((textareaVal.length/10)) +"개]");
     </script>
     <script>
+    
+    $(document).ready(function(){
+    $('#nSelect').val(5).trigger('change');
+
+  });
+
+
 var $setRows = $('#nSelect');
 
 $setRows.change(function (e) {
     e.preventDefault();
     var rowPerPage = $('#nSelect option:selected').val() *1;
 
-    var zeroWarning = 'Sorry, but we cat\'t display "0" rows page. + \nPlease try again.'
-    if (!rowPerPage) {
-        alert(zeroWarning);
-        return;
-    }
     $('#nav').remove();
     var $products = $('#products');
 
@@ -152,7 +156,6 @@ $setRows.change(function (e) {
 
 
 $setRows.submit();
-
 </script>
 <jsp:include page="../footer.jsp"/>
 

@@ -1,15 +1,9 @@
 package com.greenright.web;
 
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import com.greenright.domain.Board;
-import com.greenright.domain.Comment;
-import com.greenright.service.BoardService;
-import com.greenright.service.CommentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import com.greenright.domain.Board;
+import com.greenright.domain.Comment;
+import com.greenright.domain.Recommend;
+import com.greenright.service.BoardService;
+import com.greenright.service.CommentService;
+import com.greenright.service.RecommendService;
 
 @Controller
 @RequestMapping("/board")
@@ -26,8 +26,10 @@ public class BoardController {
   private BoardPhotoWriter boardPhotoWriter;
   @Resource
   private BoardService boardService;
-  @Resource private CommentService commentService;
-  
+  @Resource 
+  private CommentService commentService;
+  @Resource
+  private RecommendService recommendService;
   @GetMapping("form")
   public void form() {}
   @GetMapping("detailedit")
@@ -60,7 +62,6 @@ public class BoardController {
   
   @GetMapping("detail")
   public void detail(Model model, int no,HttpSession session) throws Exception {
-    session.setAttribute("memberNo", 1);
     Board board = boardService.get(no);
     model.addAttribute("board", board);
     List<Comment> comments = commentService.list(no);
@@ -127,7 +128,31 @@ public class BoardController {
     return String.valueOf(commentService.update(contents,commentNo));
   }
   
+  @PostMapping("recommend/add")
+  @ResponseBody
+  public Object recommendadd(Recommend recommend) throws Exception{
+    recommendService.insert(recommend);
+    return recommend;
+  }
   
+  @PostMapping("recommend/delete")
+  @ResponseBody
+  public void recommenddelete(Recommend recommend)throws Exception{
+    recommendService.delete(recommend);
+  }
+
+  @PostMapping("recommend/checkRecommendForCheck")
+  @ResponseBody
+  public int checkRecommendForCheck(Recommend recommend)throws Exception{
+    return recommendService.checkRecommendForCheck(recommend);
+  }
+  
+  @PostMapping("recommend/checkNum")
+  @ResponseBody
+  public int checkNum (int recommendBoardNo) throws Exception {
+   return recommendService.checkNum(recommendBoardNo);
+  }
+
 }
 
 

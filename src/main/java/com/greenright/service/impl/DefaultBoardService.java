@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.greenright.dao.BoardDao;
 import com.greenright.dao.BoardPhotoDao;
+import com.greenright.dao.RecommendDao;
 import com.greenright.domain.Board;
 import com.greenright.domain.BoardPhoto;
 import com.greenright.service.BoardService;
@@ -15,11 +16,13 @@ public class DefaultBoardService implements BoardService {
 
   @Resource private BoardDao boardDao;
   @Resource private BoardPhotoDao boardPhotoDao;
-
+  @Resource private RecommendDao recommendDao;
   @Transactional
   @Override
   public void insert(Board board) throws Exception {
-   
+    if (board.getPhotos().size() == 0 || board.getContents().length()==0 ||board.getTitle().length()==0) {
+      throw new Exception("board 에대한 내용 부족 ");
+    }
     boardDao.insert(board);
     for (BoardPhoto photo : board.getPhotos()) {
       photo.setBoardNo(board.getNo()); 
@@ -33,6 +36,7 @@ public class DefaultBoardService implements BoardService {
     if (boardDao.findBy(no) == null) {
       throw new Exception("해당 데이터가 없습니다.");
     }
+    recommendDao.deleteAllRecommend(no);
     boardPhotoDao.deleteAll(no);
     boardDao.delete(no);
   }
@@ -49,7 +53,12 @@ public class DefaultBoardService implements BoardService {
 
   @Override
   public List<Board> list() throws Exception {
-    return boardDao.findAll();
+    List<Board> boardList= boardDao.findAll();
+      for(Board b : boardList) {
+        int a = b.getNo();
+        b.setRecommendation(recommendDao.CountRecommend(a));
+      }
+    return boardList;
   }
 
   @Transactional
@@ -73,20 +82,32 @@ public class DefaultBoardService implements BoardService {
   }
   @Override
   public List<Board> search1(String title) throws Exception {
-    return boardDao.findyByKeyword1(title);
+    List<Board> boardList = boardDao.findyByKeyword1(title);
+    for(Board b : boardList) {
+      int a = b.getNo();
+      b.setRecommendation(recommendDao.CountRecommend(a));
+    }
+  return boardList;
   }
 
   @Override
   public List<Board> search2(String contents) throws Exception {
-    // TODO Auto-generated method stub
-    return boardDao.findyByKeyword2(contents);
+    List<Board> boardList = boardDao.findyByKeyword2(contents);
+    for(Board b : boardList) {
+      int a = b.getNo();
+      b.setRecommendation(recommendDao.CountRecommend(a));
+    }
+  return boardList;
   }
 
   @Override
   public List<Board> search3(String name) throws Exception {
-    // TODO Auto-generated method stub
-    return boardDao.findyByKeyword3(name);
-
+    List<Board> boardList = boardDao.findyByKeyword3(name);
+    for(Board b : boardList) {
+      int a = b.getNo();
+      b.setRecommendation(recommendDao.CountRecommend(a));
+    }
+  return boardList;
   }
 
 
