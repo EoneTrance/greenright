@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"
+  trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Community List</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel='stylesheet' href='/css/node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='/css/bootstrap.min.css'>
 <link rel='stylesheet' href='/css/common.css'>
 
 <style>
@@ -17,9 +18,13 @@
   border-bottom-right-radius: 5px;
   margin-bottom: 5px;
   weight: 50px !important;
- 
 }
-
+#my-paging-last span:hover {
+  background-color:#82ae46;
+}
+#my-paging-first span:hover {
+  background-color: #82ae46;
+}
 </style>
 </head>
 <body>
@@ -76,33 +81,101 @@
               <td>${board.member.name}</td>
               <td class="cdate">${board.createdDate}</td>
               <td>${board.viewCount}</td>
-              <td>1</td>
+                <td>${board.recommendation}</td>
             </tr>
           </c:forEach>
         </tbody>
       </table>
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul id="my-paging">
+                <li id='my-paging-first'><span>&lt;</span></li>
+                <li data-no="1" class="active">
+                  <span class="my-page-no">1</span></li>
+                    <c:forEach var="i" begin="2" end="5" step="1">
+                     <li data-no="${i}"><span class="my-page-no">${i}</span></li>
+                    </c:forEach>
+                <li id="my-paging-last"><span>&gt;</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
     </div>
   </section>
+<script>
+var indexP=1;
+$('#my-paging').on('click','.my-page-no', () => {
+  var currentLi = $(event.target).parent().attr('data-no');
+  $(event.target).parent().parent().children('.active').removeClass('active');
+  $(event.target).parent().addClass('active');
+  //var boardNo = parseInt(document.querySelector('#jisooBoardNo').value);
+  //var param = "commentNo="+commentNo+"&boardNo="+boardNo;
+  
+});
+
+$('#my-paging-first').click(function(e){
+  var page='';
+  indexP-=5;
+  var i = indexP;
+  console.log(i)
+  
+  if(i <= 1) {
+    indexP=1;
+    i = indexP;
+    console.log(i);
+  }
+  
+  page += "\n<li class='active' data-no='"+i+"'><span class='my-page-no'>"+i+"</span></li>\n";
+  page += "<li data-no='"+(i+1)+"'><span class='my-page-no'>"+(i+1)+"</span></li>\n";
+  page += "<li data-no='"+(i+2)+"'><span class='my-page-no'>"+(i+2)+"</span></li>\n";
+  page += "<li data-no='"+(i+3)+"'><span class='my-page-no'>"+(i+3)+"</span></li>\n";
+  page += "<li data-no='"+(i+4)+"'><span class='my-page-no'>"+(i+4)+"</span></li>\n";
+  
+  
+  $('#my-paging > li[data-no]').remove();
+  $('#my-paging-first').after(page);
+  
+  
+});
+
+$('#my-paging-last').click(function(){
+  var page='';
+  indexP+=5;
+  var i = indexP;
+  console.log(i)
+  
+ 
+  var list-count = $('#products tbody tr').length;
+  
+  console.log(count)
+  
+ 
+   
+  page += "\n<li class='active' data-no='"+i+"'><span class='my-page-no'>"+i+"</span></li>\n";
+  page += "<li data-no='"+(i+1)+"'><span class='my-page-no'>"+(i+1)+"</span></li>\n";
+  page += "<li data-no='"+(i+2)+"'><span class='my-page-no'>"+(i+2)+"</span></li>\n";
+  page += "<li data-no='"+(i+3)+"'><span class='my-page-no'>"+(i+3)+"</span></li>\n";
+  page += "<li data-no='"+(i+4)+"'><span class='my-page-no'>"+(i+4)+"</span></li>\n";
+  
+  $('#my-paging > li[data-no]').remove();
+  $('#my-paging-first').after(page);
+
+});
+
+</script>
     <select id="Aselect" name="Aselect">
       <option value="Aoption1">제목</option>
       <option value="Aoption2">내용</option>
       <option value="Aoption3">글쓴이</option>
     </select>
   <div id="forsel">
-
     <form action='search1'>
       <input type='text' name='title'>
       <button id='search1'>검색</button>
     </form>
-
   </div>
-  <caption>
-    한페이지당: <select id="nSelect" name="rowPerPage1">
-      <option value=5>5개</option>
-      <option value=10>10개</option>
-      <option value=20>20개</option>
-    </select>
-  </caption>
+<jsp:include page="../greenfooter.jsp" />
 
   <script>
       $('#Aselect')
@@ -238,8 +311,5 @@
       </div>
     </div>
   </section>
-
-  <jsp:include page="../greenfooter.jsp" />
-
 </body>
 </html>

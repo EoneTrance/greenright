@@ -18,7 +18,7 @@
 }
 
 #hr1 {
-  width: 800px;
+  width: 1100px;
 }
 
 .btn.btn-primary {
@@ -26,6 +26,13 @@
    border-top-right-radius: 2px;
    border-bottom-right-radius: 2px;
    border-bottom-left-radius: 2px;
+}
+
+.banner {
+  margin-top: 60px;
+  max-width: 500px;
+  max-height: 500px;
+  
 }
 </style>
 </head>
@@ -46,34 +53,34 @@
           <tr>
             <th style="width:1100px;">
               <hr id="hr1">
-              <p style="text-align: center;">${board.title}</p>
+              <p style="text-align: center; font-size: 25px;">${board.title}</p>
               <hr id="hr1">
               <div class="row">
                 <div class="col">
-                  <span style="font-size: 13px; font-weight: normal;">등록일
-                    : ${board.createdDate}</span><br> 
-                    <span
-                    style="font-size: 13px; font-weight: normal;">작성자
-                    : ${board.member.name}</span>
+                  <span style="font-size: 13px; font-weight: normal;">등록일: ${board.createdDate}</span><br> 
+                  <span style="font-size: 13px; font-weight: normal;">작성자 : ${board.member.name}</span>
                 </div>
                 <div class="col" style="text-align: right;">
-                  <span style="font-size: 13px; font-weight: normal;">조회수
-                    : ${board.viewCount}</span><br> <span
-                    style="font-size: 13px; font-weight: normal;">추천수
-                    : 1</span>
+                  <span style="font-size: 13px; font-weight: normal;">조회수: ${board.viewCount}</span><br> 
+                    <span style="font-size: 13px; font-weight: normal;">추천수: 1</span>
                 </div>
               </div>
               <hr id="hr1">
                <input id="jisooBoardNo" type='text' name='no' value='${board.no}' style="display:none;"><br>
               <p style="text-align: center;">
-                <c:forEach items="${board.photos}" var="photo">
-                  <img src='/upload/board/${photo.filePath}'
-                    class='photo2'>
+              <c:choose>
+                <c:when test="${board.photos[0].filePath == null}">                  
+                </c:when>
+                <c:otherwise>
+                  <c:forEach items="${board.photos}" var="photo">
+                  <img src='/upload/board/${photo.filePath}' class='banner'>
                   <br>
                   <br>
-                </c:forEach>
+                </c:forEach>                
+                </c:otherwise>
+              </c:choose>
               </p>
-              <p style="font-weight: normal;">${board.contents}</p>
+              <span style="display: block; font-weight: normal; width: 1100px; font-size: 20px; word-break:break-all;">${board.contents}</span>
               <hr id="hr1">
               <p style="text-align: right;">
                 <button type="button" class="btn btn-primary"
@@ -89,36 +96,35 @@
   </div>
 
 
-  <div class="container"  style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
-    
-    <div class="input-group" style="width: 802px; margin-left:170px;">
-    <label for="content">댓글</label>
+  <div class="container" style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
+    <div style="width: inherit;">
+    <div class="input-group" style="width: 870px; margin: auto;">댓글</div>
+    <div class="input-group" style="width: 870px; margin: auto;">
       <input type="text" class="my-comment-form" style="width:800px; height:70px;" placeholder="내용을 입력하세요.">
+      <button id='my-add-btn' class="btn btn-primary">등록</button>
     </div>
-     <p style="text-align: right; width: 802px; margin-left:170px">
-      <button id='my-add-btn'>등록</button>
-     </p>
-
+    </div>
     <br> <br>
 
-    <div id='mymy-comment' style="width: 802px; margin-left:170px;">
+  <div style="width: 1140px;">
+    <div id='mymy-comment' style="width: 870px; margin: auto;">
       <c:forEach items="${comments}" var="comment">
         <div class='my-comment-div comment-${comment.no}'
           data-no='${comment.no}'>
-          <span class='id-${comment.no}'>${comment.id}</span> <span
-            class='createdDate-${comment.no}'>${comment.createdDate}</span>
+          <span class='id-${comment.no}'>${comment.id}</span> 
+          <span class='createdDate-${comment.no}'>${comment.createdDate}</span>
           <p class='my-comment-content contents-${comment.no}'>${comment.contents}</p>
           <div>
             <textarea class="my-comment">${comment.contents}</textarea>
             <c:if test="${comment.memberNo == memberNo}">
               <div class="my-comment-control"
                 data-member-no='${comment.memberNo}'>
-                <button id='my-save-btn' style="display: none"
+                <button class='my-save-btn btn btn-primary' style="display: none"
                   data-no='${comment.no}' align="right">저장</button>
-                <button id='my-cancel-btn' style="display: none"
+                <button class='my-cancel-btn btn btn-primary' style="display: none"
                   data-no='${comment.no}' align="right">취소</button>
-                <button id='my-update-btn'>수정</button>
-                <button id='my-delete-btn'>삭제</button>
+                <button class='my-update-btn btn btn-primary'>수정</button>
+                <button class='my-delete-btn btn btn-primary'>삭제</button>
               </div>
             </c:if>
           </div>
@@ -126,8 +132,10 @@
         </div>
       </c:forEach>
     </div>
-
   </div>
+  <div style="margin-bottom: 50px;"></div>
+  </div>
+  
 
 
 
@@ -139,7 +147,37 @@ if(member!=smember){
   $("#editNum").remove();
 }
 </script> -->
-
+<script>
+$('.recommend').on('click',(event) =>{
+  let recommendBoardNo = parseInt(document.querySelector('#jisooBoardNo').value);
+  let recommendMemberNo = 1;
+   $.post("recommend/checkRecommendForCheck",{
+     "recommendBoardNo":recommendBoardNo,
+     "recommendMemberNo":recommendMemberNo
+   }, function(data){
+     if(data ==0){
+       $.post("recommend/add",{
+         "recommendBoardNo":recommendBoardNo,
+         "recommendMemberNo":recommendMemberNo
+       }, function(data){
+         
+       })
+     }else{
+       $.post("recommend/delete",{
+         "recommendBoardNo":recommendBoardNo,
+         "recommendMemberNo":recommendMemberNo
+       }, function(data){
+         
+       })
+     }
+     $.post("recommend/checkNum",{
+       "recommendBoardNo":recommendBoardNo,
+     }, function(data){
+       $('#recommendCount').val(data);
+     });
+   });
+});
+</script>
   <script>
  $('#my-add-btn').on('click', (event) => {
 
@@ -165,10 +203,10 @@ if(member!=smember){
           comment += "<p class='my-comment-content contents-"+result.no+"'>"+result.contents+"</p><div>";
           comment += "<textarea class='my-comment'>"+result.contents+"</textarea>";
           comment += "<div class='my-comment-control' data-member-no='"+result.memberNo+"'>";
-          comment += "<button class='my-save-btn' style='display: none' data-no='"+result.no+"' align='right'>저장</button>";
-          comment += "<button class='my-cancel-btn' style='display: none' data-no='"+result.no+"' align='right'>취소</button>";
-          comment += "<button class='my-update-btn' >수정</button>";
-          comment += "<button class='my-delete-btn'>삭제</button></div></div><hr></div>";
+          comment += "<button class='my-save-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>저장</button>";
+          comment += "<button class='my-cancel-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>취소</button>";
+          comment += "<button class='my-update-btn btn btn-primary'>수정</button>";
+          comment += "<button class='my-delete-btn btn btn-primary'>삭제</button></div></div><hr></div>";
           $("#mymy-comment").append(comment); 
          
           var comment = "<div class='ana comment-"+result.no+"' data-no='"+result.no+"'>";
@@ -181,7 +219,7 @@ if(member!=smember){
   
   
   
- $('#mymy-comment').on('click','#my-delete-btn', () => {
+ $('#mymy-comment').on('click','.my-delete-btn', () => {
  
       var commentDiv = event.target.parentNode.parentNode.parentNode;
       var commentNo = commentDiv.getAttribute('data-no');
@@ -205,14 +243,14 @@ if(member!=smember){
   
   
   
-  $('#mymy-comment').on('click','#my-cancel-btn', () => {
+  $('#mymy-comment').on('click','.my-cancel-btn', () => {
     var commentDiv = event.target.parentNode.parentNode.parentNode;
     var commentP = commentDiv.querySelector('.my-comment-content');
     var commentTa = commentDiv.querySelector('textarea'); 
-    var commentS = commentDiv.querySelector('#my-save-btn');
+    var commentS = commentDiv.querySelector('.my-save-btn');
     var commentC = event.target;
-    var commentD = commentDiv.querySelector('#my-delete-btn');
-    var commentU = commentDiv.querySelector('#my-update-btn');
+    var commentD = commentDiv.querySelector('.my-delete-btn');
+    var commentU = commentDiv.querySelector('.my-update-btn');
 
     commentP.style['display'] = 'block';
     commentTa.style['display'] = 'none';
@@ -223,7 +261,7 @@ if(member!=smember){
   });
 
   
-  $('#mymy-comment').on('click','#my-save-btn', () => {
+  $('#mymy-comment').on('click','.my-save-btn', () => {
     
     var commentDiv = event.target.parentNode.parentNode.parentNode;
     var str = commentDiv.querySelector('textarea').value;
@@ -237,12 +275,12 @@ if(member!=smember){
       "commentNo" : commentNo
     }, function(result){
         
-          var commentS = commentDiv.querySelector('#my-save-btn');
-          var commentC = commentDiv.querySelector('#my-cancel-btn');
-          var commentU = commentDiv.querySelector('#my-update-btn');
+          var commentS = commentDiv.querySelector('.my-save-btn');
+          var commentC = commentDiv.querySelector('.my-cancel-btn');
+          var commentU = commentDiv.querySelector('.my-update-btn');
           var commentTa = commentDiv.querySelector('textarea');
           var commentP = commentDiv.querySelector('.my-comment-content');
-          var commentD = commentDiv.querySelector('#my-delete-btn');
+          var commentD = commentDiv.querySelector('.my-delete-btn');
           commentS.style['display'] = 'none';
           commentC.style['display'] = 'none';
           commentU.style['display'] = 'inline-block';
@@ -257,13 +295,13 @@ if(member!=smember){
   });
 
 
-$('#mymy-comment').on('click', '#my-update-btn', () => {
+$('#mymy-comment').on('click', '.my-update-btn', () => {
   var commentDiv = event.target.parentNode.parentNode.parentNode;
   var commentP = commentDiv.querySelector('.my-comment-content');
   var commentTa = commentDiv.querySelector('textarea'); 
-  var commentS = commentDiv.querySelector('#my-save-btn');
-  var commentC = commentDiv.querySelector('#my-cancel-btn');
-  var commentD = commentDiv.querySelector('#my-delete-btn');
+  var commentS = commentDiv.querySelector('.my-save-btn');
+  var commentC = commentDiv.querySelector('.my-cancel-btn');
+  var commentD = commentDiv.querySelector('.my-delete-btn');
   var commentU = event.target;
   commentP.style['display'] = 'none';
   commentTa.style['display'] = 'inline-block';
