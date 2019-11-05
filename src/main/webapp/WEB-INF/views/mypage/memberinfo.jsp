@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <link rel="stylesheet" href="/css/memberInfo.css">
+
 <div id=memberInfoForm>
 <form action='update' method='post' enctype='multipart/form-data' onsubmit="return checkState()">
   <table class="table table-bordered table-hover" style="margin:auto auto;text-align:left;">
@@ -120,7 +122,14 @@
   <button name="submitBtn" class="btn btn-lg btn-success btn-block signup-btn" type="submit">회원정보 수정</button>
 </form>
 </div>
-  
+
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous">
+</script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
 <script>
 "use strict"
 

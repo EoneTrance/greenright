@@ -11,9 +11,6 @@
 <% session.setAttribute("SellerNo", 1); %>
   <div class="bigout">
       <h1>물품 관리</h1>
-      <br>
-      <h2>여기서 물품 옵션 선택할수있게하면 될듯 </h2>
-      <h2>상품 나오는거는 판매자가 등록한 자기 상품만 볼수있도록</h2>
       <div class="out">
         <table border="1" width="500">
             <tr>
