@@ -157,7 +157,7 @@ $setRows.change(function (e) {
 
 $setRows.submit();
 </script>
-<jsp:include page="../footer2.jsp"/>
+<jsp:include page="../footer.jsp"/>
 
 </body></html>
 

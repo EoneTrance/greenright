@@ -113,7 +113,6 @@ public class BoardController {
   @PostMapping("detail/add")
   @ResponseBody
   public Object commentadd(Comment comment) throws Exception {
-    // ?�비??컴포?�트�??�해 ?�이?��? ?�?�한??
     commentService.insert(comment);
     return comment;
     
@@ -138,25 +137,6 @@ public class BoardController {
     recommendService.insert(recommend);
     return recommend;
   }
-  
-  @PostMapping("recommend/delete")
-  @ResponseBody
-  public void recommenddelete(Recommend recommend)throws Exception{
-    recommendService.delete(recommend);
-  }
-
-  @PostMapping("recommend/checkRecommendForCheck")
-  @ResponseBody
-  public int checkRecommendForCheck(Recommend recommend)throws Exception{
-    return recommendService.checkRecommendForCheck(recommend);
-  }
-  
-  @PostMapping("recommend/checkNum")
-  @ResponseBody
-  public int checkNum (int recommendBoardNo) throws Exception {
-   return recommendService.checkNum(recommendBoardNo);
-  }
-
   
   @PostMapping("recommend/delete")
   @ResponseBody

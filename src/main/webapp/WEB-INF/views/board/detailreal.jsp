@@ -232,7 +232,7 @@ $('#mymy-comment').on('click', '.my-update-btn', () => {
 
 
 
-  <jsp:include page="../footer2.jsp" />
+  <jsp:include page="../footer.jsp" />
 
 </body>
 </html>
