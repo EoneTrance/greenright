@@ -3,6 +3,7 @@ package com.greenright.web;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,6 +80,17 @@ public class ProductController {
     model.addAttribute("products", products);
     System.out.println(products.toString());
   }
+  @Transactional
+  @PostMapping("update")
+  public String update(HttpServletRequest request, Product product, MultipartFile[] photoPath
+      ,String optionName[],String optionItemMatter[])
+      throws Exception {
+    product.setPhotos(productPhotoWriter.getPhotoFiles(photoPath));
+
+    productService.update(product,optionName,optionItemMatter);
+
+    return "redirect:manage";
   
 }
 
+}

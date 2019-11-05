@@ -12,5 +12,5 @@ List<Product> listBySeller(int no) throws Exception;
 List<Product> searchbyGroup(int no) throws Exception;
 List<Product> searchbyCategory(int no) throws Exception;
 void delete (int no)throws Exception;
-void update(Product product, String[] productPhotoNum) throws Exception;
+void update(Product product,String optionName[],String optionItemMatter[]) throws Exception;
 }
