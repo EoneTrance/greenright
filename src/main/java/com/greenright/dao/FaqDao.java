@@ -12,6 +12,5 @@ public interface FaqDao {
   int update(Faq faq) throws Exception;
   int delete(int no) throws Exception;
   
-//  List<Faq> findByKeyword(String keyword) throws Exception;
-  Map<String, String> findByKeyword(String keyword, String questionType) throws Exception;
+ List<Faq> findByKeyword(Map<String, String> param) throws Exception;
 }

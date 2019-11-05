@@ -66,10 +66,7 @@ public class FAQController {
   @GetMapping("search")
   public JsonResult searach(String keyword, String questionType) throws Exception{
     try {
-//      List<Faq> faqs = faqService.search(keyword);
-      Map<String, String> faqs = faqService.search(keyword, questionType);
-      faqs.put("questionType", questionType);
-      faqs.put("keyword", keyword);
+      List<Faq> faqs = faqService.search(keyword, questionType);
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(faqs);
     } catch (Exception e) {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());

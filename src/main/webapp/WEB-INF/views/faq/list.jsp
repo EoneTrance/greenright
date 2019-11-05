@@ -5,6 +5,27 @@
 <html lang="ko">
 <head>
 <style>
+    /* .off-screen {
+    display: none;
+    } 
+    #nav {
+    width: 500px;
+    text-align: center;
+    }
+    
+    #nav a {
+    display: inline-block;
+    padding: 3px 5px;
+    margin-right: 10px;
+    font-family:Tahoma;
+    background: #ccc;
+    color: #000;
+    text-decoration: none;
+    }
+    #nav a.active {
+        background: #333;
+        color: #fff;
+    } */
     
     
     div#entire{
@@ -126,8 +147,23 @@
     margin-bottom: 100px;
     }
     
-    tr{
+    #pagination .page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #82ae46 ;
+    border-color: #82ae46 ;
     }
+    
+    #pagination .page-link {
+    color:#000000 ;
+    }
+    
+    nav#pagination-nav {
+    margin: auto;
+    inline-size: min-content;
+    margin-top: 40px;
+    }
+    
     
 
  </style>
@@ -149,6 +185,8 @@
     <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="/css/jquery.timepicker.css">
     <link rel="stylesheet" href="/css/style.css">
+    
+   
 
 
 </head>
@@ -246,12 +284,11 @@
                   <div class="faq select-wrap">
                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                     <select name="faqselect" id="faqselect" class="form-control faq">
-                      <option value="default">- 질문 유형을 선택하세요 -</option>
+                      <option value="default">전체 </option>
                       <option value="배송안내">배송안내</option>
                       <option value="주문결제">주문결제</option>
                       <option value="주문취소">주문취소</option>
-                      <option value="교환">교환</option>
-                      <option value="환불">환불</option>
+                      <option value="교환, 환불">교환, 환불</option>
                       <option value="적립금">적립금</option>
                       <option value="기타">기타</option>
                     </select>
@@ -305,17 +342,40 @@
           </c:forEach>
         </tbody>
       </table>
-    
+     
+      <!--페이지네이션  -->
+      <!-- <div id="pagination-wrap" class="container">
+        <nav id="pagination-nav" aria-label="Page navigation">
+          <ul class="pagination" id="pagination"></ul>
+        </nav>
+      </div> -->
       
-      <nav id="faq-page" aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-      </ul>
+      
+      
+      
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+         
+          <li class="page-item">
+            <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
+          
+          <li class="page-item">
+            <a class="page-link" href="javascript:void(0)" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+       
+        </ul>
       </nav>
+      
+      
+      
       
       
       <div id="btn-wrap" style="text-align: center;">
@@ -323,9 +383,6 @@
         <a href="#" class="btn btn-primary">1대1 문의</a>
       </div>
       
-      <!-- <div class="insert-wrap" >
-        <input id="faq-insert-btn" class="btn btn-primary submit px-3 faq faqbtn" type="button" value="새글">      
-      </div> -->
     
     
   </div>  
@@ -407,7 +464,7 @@
 
 
   
- <script src='/js/jquery.min.js'></script>
+<script src='/js/jquery.min.js'></script>
 <script src='/js/jquery-migrate-3.0.1.min.js'></script>
 <script src='/js/jquery.easing.1.3.js'></script>
 <script src='/js/jquery.waypoints.min.js'></script>
@@ -420,17 +477,87 @@
 <script src="/js/aos.js"></script>
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
+<script src="/js/jquery.twbsPagination.min.js"></script>
 
-  
+
+<script>
+
+        
+
+
+     /*  var $setRows = $('#nSelect');
+      
+         $("#nSelect").val(5).trigger("change"); 
+      
+         $setRows.change(function (e) {
+        e.preventDefault();
+        
+        var rowPerPage = $('#nSelect option:selected').val() *1;
+        
+        
+        $('#nav').remove();
+        var $faq = $('#faq-table');
+        
+        $faq.after('<div id="nav">');
+        
+        var $tr = $($faq).find('tbody tr');
+        var rowTotals = $tr.length;
+        
+        var pageTotal = Math.ceil(rowTotals/rowPerPage);
+        var i = 0;
+        
+        for(; i < pageTotal; i++) {
+          $('<a href="#"></a>')
+          .attr('rel', i)
+          .html(i + 1)
+          .appendTo('#nav');
+        }
+        
+        $tr.addClass('off-screen')
+        .slice(0, rowPerPage)
+        .removeClass('off-screen');
+        
+        var $pagingLink = $('#nav a');
+        $pagingLink.on('click', function (evt) {
+          evt.preventDefault();
+          var $this = $(this);
+          if ($this.hasClass('active')){
+            return;
+          }
+          $pagingLink.removeClass('active');
+          $this.addClass('active');
+          
+          var currPage = $this.attr('rel');
+          var startItem = currPage * rowPerPage;
+          var endItem = startItem + rowPerPage;
+          $tr.css('opacity', '0.0')
+          .addClass('off-screen')
+          .slice(startItem, endItem)
+          .removeClass('off-screen')
+          .animate({opacity: 1}, 300);
+        });
+        
+        $pagingLink.filter(':first').addClass('active');
+        
+      });
+      
+      $setRows.submit();  
+       */
+
+
+</script>
+ 
   
 <script> 
+/* 셀렐트 ajax */
 $(function(){
   $("#faqselect").change(function(){
+    var allData = {questionType: $("#faqselect option:selected").val(), keyword: $("#keyword").val()};
     $.ajax({
       url : "../json/faq/search",
       type : "GET",
       dataType : "json",
-      data :{keyword : $("#faqselect option:selected").val()},
+      data : allData,
       success : function(data) {
           console.log(data);
         var list = data.result;
@@ -448,9 +575,10 @@ $(function(){
   });
 });
 
+/* 검색 이벤트 ajax  */
 $(function (){
   $("#searchbtn").click(function(){
-    var allData = {"keyword" : $("#keyword").val()}
+    var allData = {"questionType": $("#faqselect option:selected").val(), "keyword": $("#keyword").val()};
     $.ajax({
       url : "../json/faq/search",
       type : "GET",
@@ -474,10 +602,10 @@ $(function (){
 }); 
 
 $(function(){
-  
+  /* enter 이벤트 ajax  */
   $("#keyword").keypress(function(key){
     if(key.keyCode == 13) {
-      var allData = {"keyword" : $("#keyword").val()}
+      var allData = {"questionType": $("#faqselect option:selected").val(), "keyword": $("#keyword").val()};
       $.ajax({
         url :"../json/faq/search",
         type : "GET",
@@ -487,13 +615,13 @@ $(function(){
           console.log(data);
           var list = data.result;
           var tableTag ="";
+          $("td").removeClass("content-value faq");
           for(var i = 0 ; i < list.length; i++) {
-            $("td").removeClass("content-value faq");
             tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
             "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
           };
-          $("td").addClass("content-value faq");
           $("#tbody_insert").html(tableTag);
+          $("td").addClass("content-value faq");
         }
         
       });
@@ -506,110 +634,23 @@ $(function(){
 </script>  
   
   
+  
 <script>
 
-
-    /* $(function(){
-      $("#faqselect").change(function(){
-        $.ajax({
-          url : "../json/faq/search",
-          type : "GET",
-          dataType : "json",
-          data :{keyword : $("#faqselect option:selected").val()},
-          success : function(data) {
-            var list = data.result;
-            var tableTag ="";
-            $("td").removeClass("content-value faq");
-            for(var i = 0 ; i < list.length; i++) {
-              tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
-              "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
-            };
-            $("#tbody_insert").html(tableTag);
-            $("td").addClass("content-value faq");
-            
-            
-            $("#searchbtn").click(function(){
-              $.ajax({
-                url : "../json/faq/search",
-                type : "GET",
-                dataType : "json",
-                data : {keyword : $("#keyword").val()},
-                success : function(data) {
-                  var list = data.result;
-                  var tableTag ="";
-                  $("td").removeClass("content-value faq");
-                  for(var i = 0 ; i < list.length; i++) {
-                    tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
-                    "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
-                  };
-                  $("#tbody_insert").html(tableTag);
-                  $("td").addClass("content-value faq");
-                }
-                
-              });
-            });
-            
-          }
-        });
-      });
-    }); */
-        
-
-        /*  $(function(){
-          
-          $("#searchbtn").click(function(){
-            var allData = {"keyword" : $("#keyword").val()}
-            $.ajax({
-              url : "../json/faq/search",
-              type : "GET",
-              dataType : "json",
-              data : allData,
-              success : function(data) {
-                var list = data.result;
-                var tableTag ="";
-                $("td").removeClass("content-value faq");
-                for(var i = 0 ; i < list.length; i++) {
-                  tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
-                  "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
-                };
-                $("#tbody_insert").html(tableTag);
-                $("td").addClass("content-value faq");
-              }
-            });
-          })
-          
-          $("#keyword").keypress(function(key){
-            if(key.keyCode == 13) {
-              var allData = {"keyword" : $("#keyword").val()}
-              $.ajax({
-                url :"../json/faq/search",
-                type : "GET",
-                dataType : "json",
-                data : allData,
-                success : function(data) {
-                  var list = data.result;
-                  var tableTag ="";
-                  $("td").removeClass("content-value faq");
-                  for(var i = 0 ; i < list.length; i++) {
-                    tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
-                    "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
-                  };
-                  $("#tbody_insert").html(tableTag);
-                  $("td").addClass("content-value faq");
-                }
-                
-              });
-            }
-            
-          });
-          
-          
-          
-        });
- 
- */
-
-
+$('#pagination').twbsPagination({
+  totalPages: 35,
+  visiblePages: 7,
+  onPageClick: function (event) {
+  }
+});    
+    
+</script>
+  
+  
+  
+  
+  
+<script>
 
    /*검색 ajax 적용*/
     /*   $(function (){
@@ -715,10 +756,6 @@ $(function(){
   }) */
   
   
-  
-
-  
-    
   
 </script>   
        
