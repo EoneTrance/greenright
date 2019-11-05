@@ -141,26 +141,7 @@ public class BoardController {
   
   @PostMapping("recommend/delete")
   @ResponseBody
-  public void recommenddelete(Recommend recommend)throws Exception{
-    recommendService.delete(recommend);
-  }
-
-  @PostMapping("recommend/checkRecommendForCheck")
-  @ResponseBody
-  public int checkRecommendForCheck(Recommend recommend)throws Exception{
-    return recommendService.checkRecommendForCheck(recommend);
-  }
-  
-  @PostMapping("recommend/checkNum")
-  @ResponseBody
-  public int checkNum (int recommendBoardNo) throws Exception {
-   return recommendService.checkNum(recommendBoardNo);
-  }
-
-  
-  @PostMapping("recommend/delete")
-  @ResponseBody
-  public void recommenddelete(Recommend recommend)throws Exception{
+  public void recommenddelete(Recommend recommend) throws Exception{
     recommendService.delete(recommend);
   }
 
