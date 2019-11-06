@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>새 상품 등록 관리</title>
 <meta name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link
@@ -249,8 +244,6 @@ h6#marginless {
   href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-</head>
-<body class="goto-here">
 
   <%
     session.setAttribute("memberNo", "1");
@@ -350,7 +343,6 @@ h6#marginless {
   </div>
 
 
-</body>
 <script>
   $(function() {
     $("#optionN")
@@ -567,4 +559,3 @@ h6#marginless {
 </script>
 
 
-</html>

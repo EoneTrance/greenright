@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
 <style>
     
     
@@ -132,7 +129,6 @@
 
  </style>
 <meta charset="UTF-8">
-<title>FAQ 게시판</title>
 <link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <script src='/node_modules/jquery/dist/jquery.min.js'></script>
 
@@ -151,9 +147,6 @@
     <link rel="stylesheet" href="/css/style.css">
 
 
-</head>
-
-<body>
 
    <div class="py-1 bg-primary">
       <div class="container">
@@ -727,5 +720,3 @@ $(function(){
   
   
 
-</body>
-</html>

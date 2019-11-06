@@ -170,15 +170,19 @@ select
     p.member_id,
     p.price,
     p.product_name,
+    p.registered_date,
     p.description,
+    g.group_name, 
+    g.category_id,
+    c.category_name,
     f.product_id,
     f.photo_path
     from products p
     left outer join product_photos f on (p.product_id = f.product_id AND
     f.main_photo_flag = 0)
-    
-    where p.group_id=#{no}
-    
+    left outer join groups g on g.group_id = p.group_id 
+    left outer join categorys c on c.category_id = g.category_id
+    where p.group_id=#{no} and p.member_id=1
     order by p.product_id DESC
 	</select>
 <delete id="delete"  parameterType="int">
@@ -193,13 +197,18 @@ select
     p.member_id,
     p.price,
     p.product_name,
+    p.registered_date,
     p.description,
+    g.group_name, 
+    g.category_id,
+    c.category_name,
     f.product_id,
     f.photo_path
     from products p
     left outer join product_photos f on (p.product_id = f.product_id AND
     f.main_photo_flag = 0)
     left outer join groups g on g.group_id = p.group_id
+    left outer join categorys c on c.category_id = g.category_id
     <if test="no != 0"> 
     where g.category_id=#{no}
     </if>
