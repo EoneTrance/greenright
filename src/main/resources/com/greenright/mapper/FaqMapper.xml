@@ -126,17 +126,23 @@
  </select> -->
  
  
-  <select id="findByKeyword"
-          parameterType="string"
+ 
+ 
+ <select id="findByKeyword"
+          parameterType="map"
           resultMap="FaqMap">
- <bind name="pattern" value="'%' + _parameter + '%'"/>
-     <include refid="basicColumn"/>
+ <bind name="pattern" value="'%' + keyword + '%'"/>
+ <include refid="basicColumn"/>
  from faqs
- <if test="questionType != null or questionType =='default'">and question_type like #{questionType}</if>
- <if test="keyword !=null and keyword ==''">
-  and keyword like #{keyword}
-  order by question_type
+ <where>
+   <if test="questionType != null and questionType != 'default'">question_type like #{questionType}</if>
+   <if test="keyword != null and keyword !=''">and title like #{pattern}</if>
+ <!-- <if test="keyword !=null and keyword !=''">
+  and keyword like #{pattern}
  </if> 
+ <if test="questionType != default and keyword !='' ">and (questionType like {#pattern} and  </if> -->
+ </where>
+  order by question_type
  
  </select>
  

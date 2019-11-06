@@ -1,7 +1,7 @@
 package com.greenright.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.greenright.dao.FaqDao;
@@ -45,8 +45,12 @@ public class DefaultFaqService implements FaqService{
   }
 
   @Override
-  public Map<String, String> search(String keyword, String questionType) throws Exception {
-    return faqDao.findByKeyword(keyword, questionType);
+  public List<Faq> search(String keyword, String questionType) throws Exception {
+    HashMap<String, String> param = new HashMap<>();
+    param.put("keyword", keyword);
+    param.put("questionType", questionType);
+  
+    return faqDao.findByKeyword(param);
   }
   
   
