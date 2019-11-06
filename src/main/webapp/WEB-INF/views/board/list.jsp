@@ -5,8 +5,6 @@
 <%@ page import="java.sql.*,java.text.SimpleDateFormat,java.util.Date"%>
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
 <title>Community List</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel='stylesheet'
@@ -52,8 +50,6 @@
 }
 
 </style>
-</head>
-<body>
 
   <jsp:include page="../greenheader.jsp" />
   <%
@@ -308,5 +304,3 @@ $('#my-paging-last').click(function(){
       }
     </script>
 
-</body>
-</html>
