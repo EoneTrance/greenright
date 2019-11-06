@@ -9,7 +9,6 @@
  #ndp {
 display:none
 } 
-
 .btn.btn-primary {
   width: 58px;
   height: 38px;
@@ -18,14 +17,12 @@ display:none
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 2px;
 }
-
 .adder {
   width: 250px;
   height: 30px;
   resize: none; /* 크기고정 */
   /*   resize: horizontal; // 가로크기만 조절가능  resize: vertical;  세로크기만 조절가능  */
 }
-
 inpit {
   width: 40px;
   height: 50px;
@@ -38,15 +35,12 @@ inpit {
 .hasDatepicker {
   cursor: pointer;
 }
-
 .dv {
   border: solid 0.5px #82ae46;
 }
-
 .fordivide {
   display: none;
 }
-
 .out {
   text-align: center;
   width: 1000px;
@@ -54,7 +48,6 @@ inpit {
   border: solid 0.5px #82ae46;
   background: #f7f6f2 !important;
 }
-
 select#Bselect {
   height: 30px;
   padding-top: 0px;
@@ -62,11 +55,9 @@ select#Bselect {
   width: 760px;
   margin-left: 10px;
 }
-
 select.custom-select {
   width: 120px;
 }
-
 .in {
   padding-left: 10px;
   text-align: left;
@@ -75,7 +66,6 @@ select.custom-select {
   padding-top: 5px;
   padding-bottom: 8px;
 }
-
 .btn {
   height: 40px;
   padding: 0px 0px 0px 0px !important;
@@ -85,17 +75,14 @@ select.custom-select {
   border-bottom-left-radius: 2px;
   margin-right: 3px;
 }
-
 h5 {
   color: #82ae46;
   font-weight: bold;
 }
-
 h6 {
   padding-bottom: 10px;
   font-weight: 600;
 }
-
 select#Aselect {
   height: 30px;
   padding-top: 0px;
@@ -103,59 +90,47 @@ select#Aselect {
   width: 760px;
   margin-left: 10px;
 }
-
 form {
   padding-top: 20px;
 }
-
 h3 {
   color: #82ae46;
   font-weight: bold;
 }
-
 input#pN {
   margin-top: 5px;
   width: 963.1px;
 }
-
 input#mN {
   margin-top: 5px;
   width: 963.5px;
 }
-
 input#datetimepicker4 {
   width: 963.5px;
   margin-top: 5px;
 }
-
 input#original {
   width: 963.5px;
   margin-top: 5px;
 }
-
 input#sellprice {
   width: 963.5px;
   margin-top: 5px;
 }
-
 input#btnAdd {
   margin-left: 10px;
 }
-
 input#optionN {
   margin-left: 10px;
 }
-
 body.goto-here {
   padding-top: 15px;
   padding-bottom: 15px;
 }
-
 .attachFileDiv {
   display: inline-block;
   margin-right: 10px;
 }
-
 .attachFileDiv label {
   -webkit-appearance: button;
   display: inline-block;
@@ -181,7 +156,6 @@ body.goto-here {
   cursor: pointer;
   margin: 0px 0px 0px 0px;
 }
-
 .attachFileDiv input[type="file"] { /* 파일 필드 숨기기 */
   position: absolute;
   width: 1px;
@@ -192,29 +166,23 @@ body.goto-here {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
-
 #addbutton {
   padding: 0px;
 }
-
 td.dv {
   font-weight: bolder;
 }
-
 label {
   font-weight: 400;
 }
-
 textarea {
   overflow: auto;
   resize: none;
 }
-
 h6#marginless {
   margin: 0px;
   padding-bottom: 1px;
 }
-
 .label {
   margin-left: 3px;
   margin-right: 3px;
@@ -222,14 +190,13 @@ h6#marginless {
   font-style: italic;
 }
 </style>
-  <title>사진게시물 보기</title>
+  <title>Community update</title>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
-  <link rel='stylesheet' href='/css/common.css'>
+<link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
 </head>
 <body>
 
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../greenheader.jsp"/>
     
 <div  style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
  <h1 style="text-align: center; margin-top: 40px; font-size: 40px;">Community</h1>
@@ -303,21 +270,17 @@ $(function(){
     add : function() { // 파일필드 추가
       var o = this;
       var idx = o.idx;
-
       var div = document.createElement('div');
       div.style.marginTop = '3px';
       div.style.display="inline-block";
       
       div.id = 'file' + o.idx;
-
       var label = document.createElement('label');
       label.setAttribute("for", 'fileField' + o.idx);
       label.innerHTML = "파일선택";
-
       var dv = document.createElement('dv');
       dv.style.marginTop = '3px';
       dv.id = 'dv' + o.idx;
-
       var file = document.all ? document.createElement('<input name="files">')
           : document.createElement('input');
       file.type = 'file';
@@ -368,13 +331,10 @@ $(function(){
           var src = document.selection.createRange().text; // get file full path(IE9, IE10에서 사용 불가)
           var ie_preview_error = document.getElementById("ie_preview_error_"
               + View_area);
-
           if (ie_preview_error) {
             preview.removeChild(ie_preview_error); //error가 있으면 delete
           }
-
           var img = document.getElementById(View_area); //이미지가 뿌려질 곳
-
           //이미지 로딩, sizingMethod는 div에 맞춰서 사이즈를 자동조절 하는 역할
           img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"
               + src + "', sizingMethod='scale')";
@@ -429,7 +389,6 @@ $(function(){
           }
         }
       }
-
     }
   }
 </script>

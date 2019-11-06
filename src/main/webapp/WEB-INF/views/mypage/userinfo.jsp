@@ -16,16 +16,6 @@
       padding-bottom: 10px;
       margin: auto auto;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 550px}
     

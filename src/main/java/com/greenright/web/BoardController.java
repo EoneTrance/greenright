@@ -140,6 +140,7 @@ public class BoardController {
   
   @PostMapping("recommend/delete")
   @ResponseBody
+
   public void recommenddelete(Recommend recommend)throws Exception{
     recommendService.delete(recommend);
   }

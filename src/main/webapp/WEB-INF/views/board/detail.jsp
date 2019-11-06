@@ -1,35 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>사진게시물 보기</title>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
-  <link rel='stylesheet' href='/css/common.css'>
+<title>Community Detail</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <style>
 .my-comment-control {
-  /* display: inline-block; */
   
 }
-
 .my-comment {
   display: none;
   width: 500px;
 }
-
 #hr1 {
   width: 1100px;
 }
-
 .btn.btn-primary {
    border-top-left-radius: 2px;
    border-top-right-radius: 2px;
    border-bottom-right-radius: 2px;
    border-bottom-left-radius: 2px;
 }
-
 .banner {
   margin-top: 60px;
   max-width: 500px;
@@ -39,25 +33,8 @@
 </style>
 </head>
 <body>
-<% session.setAttribute("memberName","choi");%>
-<jsp:include page="../header.jsp"/>
-    
-<div id='content'>
-<h1>사진게시물</h1>
-<form action='update'
-      method='post' enctype='multipart/form-data'>
-번호: <input id="jisooBoardNo" type='text' name='no' value='${board.no}' readonly><br>
-제목: <input type='text' name='title' value='${board.title}' readonly><br>
-내용: <textarea name='contents' rows='5' cols='50' readonly>${board.contents}</textarea><br>
-작성자: <input type='text' name='writer' value='${board.member.name}' readonly><br>
-조회수: <input type='text' name='viewCount' value='${board.viewCount}' readonly><br>
-추천수 : <input type='text' id='recommendCount' value='8' readonly><br>
-<p>
-<c:forEach items="${board.photos}" var="photo">
-  <img src='/upload/board/${photo.filePath}' class='photo2'> 
-  <br><br>
-</c:forEach>
-</p>
+  <% session.setAttribute("memberName","kim");%>
+  <jsp:include page="../greenheader.jsp" />
 
   <!-- <div id='content'
     style="width: 1140px; margin-left: 374px; padding-right: 15px; padding-left: 15px;"> -->
@@ -114,18 +91,6 @@
     </form>
   </div>
 
-</form>
- <button class='recommend'>추천</button>
-</div>
-<script>
-window.onload = function(){
-  let recommendBoardNo = parseInt(document.querySelector('#jisooBoardNo').value);
-   $.post("recommend/checkNum",{
-     "recommendBoardNo":recommendBoardNo,
-   }, function(data){
-     $('#recommendCount').val(data);
-   });
-};
 
   <div class="container" style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
     <div style="width: inherit;">
@@ -147,7 +112,7 @@ window.onload = function(){
           <p class='my-comment-content contents-${comment.no}'>${comment.contents}</p>
           <div>
             <textarea class="my-comment">${comment.contents}</textarea>
-            <c:if test="${comment.memberNo == memberNo}" >
+            <c:if test="${comment.memberNo == memberNo}">
               <div class="my-comment-control"
                 data-member-no='${comment.memberNo}'>
                 <button class='my-save-btn btn btn-primary' style="display: none"
@@ -162,7 +127,6 @@ window.onload = function(){
           <hr>
         </div>
       </c:forEach>
-
     </div>
   </div>
   <div style="margin-bottom: 50px;"></div>
@@ -172,13 +136,13 @@ window.onload = function(){
 
 
 
-<script>
+  <!-- <script>
 var member ="${board.member.name}"
 var smember ="${memberName}"
 if(member!=smember){
   $("#editNum").remove();
 }
-</script>
+</script> -->
 <script>
 $('.recommend').on('click',(event) =>{
   let recommendBoardNo = parseInt(document.querySelector('#jisooBoardNo').value);
@@ -211,11 +175,10 @@ $('.recommend').on('click',(event) =>{
 });
 </script>
   <script>
- $('.my-add-btn').on('click', (event) => {
-
+ $('#my-add-btn').on('click', (event) => {
     let boardNo = parseInt(document.querySelector('#jisooBoardNo').value);
     let memberNo = 1; // 1번 멤버 : jisoo
-    let id = 'choi';
+    let id = 'jisoo';
     let contents = document.querySelector('.my-comment-form').value;
     
     
@@ -283,7 +246,6 @@ $('.recommend').on('click',(event) =>{
     var commentC = event.target;
     var commentD = commentDiv.querySelector('.my-delete-btn');
     var commentU = commentDiv.querySelector('.my-update-btn');
-
     commentP.style['display'] = 'block';
     commentTa.style['display'] = 'none';
     commentS.style['display'] = 'none';
@@ -291,7 +253,6 @@ $('.recommend').on('click',(event) =>{
     commentD.style['display'] = 'inline-block';
     commentU.style['display'] = 'inline-block';
   });
-
   
   $('#mymy-comment').on('click','.my-save-btn', () => {
     
@@ -325,8 +286,6 @@ $('.recommend').on('click',(event) =>{
       
     });
   });
-
-
 $('#mymy-comment').on('click', '.my-update-btn', () => {
   var commentDiv = event.target.parentNode.parentNode.parentNode;
   var commentP = commentDiv.querySelector('.my-comment-content');
@@ -343,15 +302,12 @@ $('#mymy-comment').on('click', '.my-update-btn', () => {
   commentU.style['display'] = 'none';
     console.log(commentDiv.getAttribute('data-no'));
 });
-
-
-
 </script>
 
 
 
 
-<jsp:include page="../footer.jsp"/>
+  <jsp:include page="../greenfooter.jsp" />
 
 </body>
 </html>
