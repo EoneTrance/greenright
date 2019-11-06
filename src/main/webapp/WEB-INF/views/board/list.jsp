@@ -2,29 +2,55 @@
   pageEncoding="UTF-8"
   trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.sql.*,java.text.SimpleDateFormat,java.util.Date"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Community List</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel='stylesheet' href='/css/bootstrap.min.css'>
-<link rel='stylesheet' href='/css/common.css'>
+<link rel='stylesheet'
+  href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel="stylesheet" href="/css/fontawesome/css/all.css">
+<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="/css/aos.css">
+
+    <link rel="stylesheet" href="/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/css/jquery.timepicker.css">
+
+    
+    <link rel="stylesheet" href="/css/flaticon.css">
+    <link rel="stylesheet" href="/css/icomoon.css">
+    <link rel="stylesheet" href="/css/style.css">
 <style>
-#newC {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  margin-bottom: 5px;
-  weight: 50px !important;
-}
 #my-paging-last span:hover {
   background-color:#82ae46;
 }
 #my-paging-first span:hover {
   background-color: #82ae46;
 }
+.btn.btn-primary {
+   width: 68px;
+   height: 38px;
+   border-top-left-radius: 2px;
+   border-top-right-radius: 2px;
+   border-bottom-right-radius: 2px;
+   border-bottom-left-radius: 2px;
+   font-size: 14px; 
+}
+
 </style>
 </head>
 <body>
@@ -36,29 +62,31 @@
   <%
     session.setAttribute("loginName", "choi");
   %>
+  
+  
 
-  <div class="hero-wrap hero-bread"
-    style="background-image: url('/images/bg_1.jpg');">
-    <div class="container">
-      <div
-        class="row no-gutters slider-text align-items-center justify-content-center">
-        <div class="col-md-9 ftco-animate text-center">
-          <p class="breadcrumbs">
-            <span class="mr-2"> <a href="index.html"></a>
-            </span> <span>greenright</span>
-          </p>
-          <h1 class="mb-0 bread">COMMUNITY</h1>
+ 
+
+ <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center fadeInUp ftco-animated">
+            <p class="breadcrumbs">
+              <span class="mr-2">
+                <a href="index.html"></a>
+              </span> 
+              <span>greenright</span>
+            </p>
+            <h1 class="mb-0 bread">COMMUNITY</h1>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <section class="ftco-section ftco-cart">
+  <section class="ftco-section">
     <div id='content'
       style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
       
-      <div id="np" style="float: right;">새글개수[개]</div>
-      <button type="button" onclick="location.href='form.jsp'" id='newC'>글쓰기</button>
-     
+      <div id="np" style="float: left;"></div>
       <br>
 
       <table class='table table-hover' id="products">
@@ -76,6 +104,7 @@
         <tbody id='tb1'>
           <c:forEach items="${boards}" var="board">
             <tr class="tr1">
+              
               <td>${board.no}</td>
               <td><a href='detail?no=${board.no}'>${board.title}</a></td>
               <td>${board.member.name}</td>
@@ -86,6 +115,27 @@
           </c:forEach>
         </tbody>
       </table>
+      <p style="text-align: right;">
+       <button type="button" onclick="location.href='form.jsp'" id='newC' class="btn btn-primary" >글쓰기</button>
+       </p>
+       
+ 
+   
+    <select id="Aselect" name="Aselect" style="height:33px;">
+      <option value="Aoption1">제목</option>
+      <option value="Aoption2">내용</option>
+      <option value="Aoption3">글쓴이</option>
+    </select>
+ 
+    <div id="forsel" style="display:inline-block; width:auto;">
+      <form action='search1'>
+        <input type='text' name='title' style= "width:auto;">
+        <button id='search1' class="btn btn-primary" style="height:33px;">검색</button>
+      </form>
+    </div>
+   
+   
+ 
         <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
@@ -144,7 +194,7 @@ $('#my-paging-last').click(function(){
   console.log(i)
   
  
-  var list-count = $('#products tbody tr').length;
+  var listcount = $('#products tbody tr').length;
   
   console.log(count)
   
@@ -160,17 +210,8 @@ $('#my-paging-last').click(function(){
   $('#my-paging-first').after(page);
 });
 </script>
-    <select id="Aselect" name="Aselect">
-      <option value="Aoption1">제목</option>
-      <option value="Aoption2">내용</option>
-      <option value="Aoption3">글쓴이</option>
-    </select>
-  <div id="forsel">
-    <form action='search1'>
-      <input type='text' name='title'>
-      <button id='search1'>검색</button>
-    </form>
-  </div>
+<br>
+<br>
 <jsp:include page="../greenfooter.jsp" />
 
   <script>
@@ -180,19 +221,19 @@ $('#my-paging-last').click(function(){
                 var state = jQuery('#Aselect option:selected').val();
                 if (state == 'Aoption1') {
                 } else if (state == 'Aoption2') {
-                  $("#forsel").remove;
+                 $("#forsel").remove; 
                   $("#forsel")
                       .html(
-                          "<form action='search2'><input type='text' name='contents'><button id='search2'>검색</button></form>");
+                          "<form action='search2'><input type='text' name='contents'><button id='search2' class='btn btn-primary' style='height:33px;'>검색</button></form>");
                 } else {
                   $("#forsel").remove;
                   $("#forsel")
                       .html(
-                          "<form action='search3'><input type='text' name='name'><button id='search3'>검색</button></form>");
+                          "<form action='search3'><input type='text' name='name'><button id='search3' class='btn btn-primary' style='height:33px;'>검색</button></form>");
                 }
               });
     </script>
-  <script>
+<script>
       var textareaVal = $(".cdate").text();
       var count = 0;
       var dt = new Date();
@@ -205,6 +246,7 @@ $('#my-paging-last').click(function(){
       if (day < 10) {
         day = "0" + day;
       }
+      
       for (var i = 0; i < (textareaVal.length / 10) + 1; i++) {
         var tday = textareaVal.substring(8 + (10 * i), (10 * (i + 1)));
         var tyear = textareaVal.substring((10 * i), (4 + (10 * i)));
@@ -215,7 +257,6 @@ $('#my-paging-last').click(function(){
       }
       $("#np").text("새글[" + count + "/" + ((textareaVal.length / 10)) + "]");
     </script>
-
   <script>
       $(document).ready(function() {
         $("select option[value=5]").attr("selected", true);
@@ -259,7 +300,7 @@ $('#my-paging-last').click(function(){
     </script>
 
 
-  <script>
+    <script>
       var member = "${loginName}"
       var smember = "${memberName}"
       if (member != smember) {
@@ -267,26 +308,5 @@ $('#my-paging-last').click(function(){
       }
     </script>
 
-  <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-    <div class="container py-4">
-      <div class="row d-flex justify-content-center py-5">
-        <div class="col-md-6">
-          <h2 style="font-size: 22px;" class="mb-0">Subcribe to our
-            Newsletter</h2>
-          <span>Get e-mail updates about our latest shops and
-            special offers</span>
-        </div>
-        <div class="col-md-6 d-flex align-items-center">
-          <form action="#" class="subscribe-form">
-            <div class="form-group d-flex">
-              <input type="text" class="form-control"
-                placeholder="Enter email address"> <input
-                type="submit" value="Subscribe" class="submit px-3">
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
 </body>
 </html>

@@ -20,7 +20,7 @@ public class DefaultBoardService implements BoardService {
   @Transactional
   @Override
   public void insert(Board board) throws Exception {
-    if (board.getPhotos().size() == 0 || board.getContents().length()==0 ||board.getTitle().length()==0) {
+    if (board.getContents().length()==0 ||board.getTitle().length()==0) {
       throw new Exception("board 에대한 내용 부족 ");
     }
     boardDao.insert(board);

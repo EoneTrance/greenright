@@ -51,8 +51,8 @@
               <hr id="hr1">
               <p style="text-align: center; font-size: 25px;">${board.title}</p>
               <hr id="hr1">
-              <div class="row">
-                <div class="col">
+              <div class="row" >
+                <div class="col" style="text-align: left;">
                   <span style="font-size: 13px; font-weight: normal;">등록일: ${board.createdDate}</span><br> 
                   <span style="font-size: 13px; font-weight: normal;">작성자 : ${board.member.name}</span>
                 </div>
@@ -112,7 +112,7 @@
           <p class='my-comment-content contents-${comment.no}'>${comment.contents}</p>
           <div>
             <textarea class="my-comment">${comment.contents}</textarea>
-            <c:if test="${comment.memberNo == memberNo}">
+            <c:if test="${comment.memberNo == 1}">
               <div class="my-comment-control"
                 data-member-no='${comment.memberNo}'>
                 <button class='my-save-btn btn btn-primary' style="display: none"
@@ -200,7 +200,7 @@ $('.recommend').on('click',(event) =>{
           comment += "<div class='my-comment-control' data-member-no='"+result.memberNo+"'>";
           comment += "<button class='my-save-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>저장</button>";
           comment += "<button class='my-cancel-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>취소</button>";
-          comment += "<button class='my-update-btn btn btn-primary'>수정</button>";
+          comment += "<button class='my-update-btn btn btn-primary'>수정</button>\n";
           comment += "<button class='my-delete-btn btn btn-primary'>삭제</button></div></div><hr></div>";
           $("#mymy-comment").append(comment); 
          
