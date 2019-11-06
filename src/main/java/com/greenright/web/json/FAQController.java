@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.greenright.domain.Faq;
 import com.greenright.service.FaqService;
@@ -54,7 +55,7 @@ public class FAQController {
   }
   
   @GetMapping("list")
-  public JsonResult list() throws Exception {
+  public JsonResult list(@RequestParam(defaultValue = "5") int pageSize) throws Exception {
     try {
       List<Faq> faqs = faqService.list();
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(faqs);

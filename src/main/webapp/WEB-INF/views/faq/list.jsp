@@ -165,6 +165,12 @@
     }
     
     
+    
+    
+    
+    
+    
+    
 
  </style>
 <meta charset="UTF-8">
@@ -333,47 +339,151 @@
           </tr>
         </thead>
         <tbody id="tbody_insert">
-          <c:forEach items="${faqs}" var="FAQ">
-            <tr id="contents">
+           <c:forEach items="${faqs}" var="FAQ">
+            <tr id="contents" class="contents">
               <td class="content-value faq">${FAQ.faqID }</td>
               <td class="content-value faq">${FAQ.questionType }</td>
               <td class="content-value faq"><a href='detail?no=${FAQ.faqID}'>${FAQ.title}</a></td>
             </tr>
           </c:forEach>
+          
+          
+          <!--   <tr class="contents">
+              <td class="content-value faq">1</td>
+              <td class="content-value faq">1</td>
+              <td class="content-value faq">1</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">2</td>
+              <td class="content-value faq">2</td>
+              <td class="content-value faq">2</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">3</td>
+              <td class="content-value faq">3</td>
+              <td class="content-value faq">3</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">4</td>
+              <td class="content-value faq">4</td>
+              <td class="content-value faq">4</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">5</td>
+              <td class="content-value faq">5</td>
+              <td class="content-value faq">5</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">6</td>
+              <td class="content-value faq">6</td>
+              <td class="content-value faq">6</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">7</td>
+              <td class="content-value faq">7</td>
+              <td class="content-value faq">7</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">8</td>
+              <td class="content-value faq">8</td>
+              <td class="content-value faq">8</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">9</td>
+              <td class="content-value faq">9</td>
+              <td class="content-value faq">9</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">10</td>
+              <td class="content-value faq">10</td>
+              <td class="content-value faq">10</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">11</td>
+              <td class="content-value faq">11</td>
+              <td class="content-value faq">11</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">12</td>
+              <td class="content-value faq">12</td>
+              <td class="content-value faq">12</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">13</td>
+              <td class="content-value faq">13</td>
+              <td class="content-value faq">13</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">14</td>
+              <td class="content-value faq">14</td>
+              <td class="content-value faq">14</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">15</td>
+              <td class="content-value faq">15</td>
+              <td class="content-value faq">15</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">16</td>
+              <td class="content-value faq">16</td>
+              <td class="content-value faq">16</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">17</td>
+              <td class="content-value faq">17</td>
+              <td class="content-value faq">17</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">18</td>
+              <td class="content-value faq">18</td>
+              <td class="content-value faq">18</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">19</td>
+              <td class="content-value faq">19</td>
+              <td class="content-value faq">19</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">20</td>
+              <td class="content-value faq">20</td>
+              <td class="content-value faq">20</td>
+            </tr> -->
+            
+          
         </tbody>
       </table>
      
       <!--페이지네이션  -->
-      <!-- <div id="pagination-wrap" class="container">
-        <nav id="pagination-nav" aria-label="Page navigation">
-          <ul class="pagination" id="pagination"></ul>
-        </nav>
-      </div> -->
-      
-      
-      
-      
       <nav aria-label="Page navigation example">
         <ul class="pagination">
          
           <li class="page-item">
-            <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+            <a id="previous-page" class="page-link" href="javascript:void(0)" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
               <span class="sr-only">Previous</span>
             </a>
           </li>
-          <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
-          
-          <li class="page-item">
-            <a class="page-link" href="javascript:void(0)" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-       
         </ul>
       </nav>
-      
       
       
       
@@ -482,8 +592,147 @@
 
 <script>
 
-        
+          var numberOfItems = $("#tbody_insert .contents").length;
+          var limitPerPage = $("#nSelect option:selected").val();
+          
+          
+          $("tbody_insert .contents:gt(" + (limitPerPage - 1) + ")").hide();
+          var totalPages = Math.round(numberOfItems / limitPerPage);
+          $(".pagination").append("<li class='page-item current-page active'><a class='page-link' href='javascript:void(0)'>" + 1 + "</a></li>");
+          $(".pagination li").trigger("click");
+          
+          for(var i = 2; i <= totalPages; i++) {
+            $(".pagination").append("<li class='page-item current-page'><a class='page-link' href='javascript:void(0)'>" + i + "</a></li>");
+          }
+           
+          $(".pagination").append("<li id='next-page' class='page-item'><a class='page-link' href='javascript:void(0)' aria-label='Next'><span aria-hidden='true'>&raquo;</span><span class='sr-only'>Next</span></a></li>");
+          
+          $(".pagination li.current-page").on("click", function() {
+            if($(this).hasClass("active")) {
+              return false;
+            } else {
+                   var currentPage = $(this).index();
+                   $(".pagination li").removeClass("active");
+                   $(this).addClass("active");
+                   $("#tbody_insert .contents").hide();
+                   
+                   var grandTotal = limitPerPage * currentPage;
+                   
+                   for(var i = grandTotal - limitPerPage; i < grandTotal; i++){
+                     $("#tbody_insert .contents:eq("+ i +")").show();                
+                   }
+            }
+          });
+          
+          
+                  $("#next-page").on("click", function() {
+                     var currentPage = $(".pagination li.active").index();
+                     if (currentPage === totalPages) {
+                       return false;
+                     } else {
+                       currentPage++;
+                       $(".pagination li").removeClass("active");
+                       $("#tbody_insert .contents").hide();
+                       
+                       var grandTotal = limitPerPage * currentPage;
+                       
+                       for(var i = grandTotal - limitPerPage; i < grandTotal; i++){
+                         $("#tbody_insert .contents:eq( "+ i +")").show();                
+                       }
+                       $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass("active");
+                     }
+                     
+                  });
+                  
+                  $("#previous-page").on("click", function() {
+                    var currentPage = $(".pagination li.active").index();
+                    if (currentPage === 1) {
+                      return false;
+                    } else {
+                      currentPage--;
+                      $(".pagination li").removeClass("active");
+                      $("#tbody_insert .contents").hide();
+                      
+                      var grandTotal = limitPerPage * currentPage;
+                      
+                      for(var i = grandTotal - limitPerPage; i < grandTotal; i++){
+                        $("#tbody_insert .contents:eq( "+ i +")").show();                
+                      }
+                      $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass("active");
+                    }
+                    
+                  });
 
+
+/* var numberOfItems = $("#tbody_insert #contents").length;
+var limitPerPage = 10;
+
+$("tbody_insert #contents:gt(" + (limitPerPage - 1) + ")").hide();
+var totalPages = Math.round(numberOfItems / limitPerPage);
+$(".pagination").append("<li class='page-item current-page active'><a class='page-link' href='javascript:void(0)'>" + 1 + "</a></li>");
+
+for(var i = 2; i <= totalPages; i++) {
+  $(".pagination").append("<li class='page-item current-page'><a class='page-link' href='javascript:void(0)'>" + i + "</a></li>");
+}
+ 
+$(".pagination").append("<li id='next-page' class='page-item'><a class='page-link' href='javascript:void(0)' aria-label='Next'><span aria-hidden='true'>&raquo;</span><span class='sr-only'>Next</span></a></li>");
+
+$(".pagination li.current-page").on("click", function() {
+  if($(this).hasClass("active")) {
+    return false;
+  } else {
+         var currentPage = $(this).index();
+         $(".pagination li").removeClass("active");
+         $(this).addClass("active");
+         $("#tbody_insert #contents").hide();
+         
+         var grandTotal = limitPerPage * currentPage;
+         
+         for(var i = grandTotal - limitPerPage; i < grandTotal; i++){
+           $("#tbody_insert #contents:eq("+ i +")").show();                
+         }
+  }
+});
+
+
+        $("#next-page").on("click", function() {
+           var currentPage = $(".pagination li.active").index();
+           if (currentPage === totalPages) {
+             return false;
+           } else {
+             currentPage++;
+             $(".pagination li").removeClass("active");
+             $("#tbody_insert #contents").hide();
+             
+             var grandTotal = limitPerPage * currentPage;
+             
+             for(var i = grandTotal - limitPerPage; i < grandTotal; i++){
+               $("#tbody_insert #contents:eq( "+ i +")").show();                
+             }
+             $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass("active");
+           }
+           
+        });
+        
+        $("#previous-page").on("click", function() {
+          var currentPage = $(".pagination li.active").index();
+          if (currentPage === 1) {
+            return false;
+          } else {
+            currentPage--;
+            $(".pagination li").removeClass("active");
+            $("#tbody_insert #contents").hide();
+            
+            var grandTotal = limitPerPage * currentPage;
+            
+            for(var i = grandTotal - limitPerPage; i < grandTotal; i++){
+              $("#tbody_insert #contents:eq( "+ i +")").show();                
+            }
+            $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass("active");
+          }
+          
+        });
+ */
 
      /*  var $setRows = $('#nSelect');
       
@@ -635,17 +884,7 @@ $(function(){
   
   
   
-<script>
 
-$('#pagination').twbsPagination({
-  totalPages: 35,
-  visiblePages: 7,
-  onPageClick: function (event) {
-  }
-});    
-    
-</script>
-  
   
   
   
@@ -676,9 +915,7 @@ $('#pagination').twbsPagination({
         })
       
       }); */
-</script>
 
-<script>
 
 /*셀렉트 ajax 적용 */
   /* $(function(){
@@ -758,8 +995,7 @@ $('#pagination').twbsPagination({
   
   
 </script>   
-       
-      
+
       
   
   
