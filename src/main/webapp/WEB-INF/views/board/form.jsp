@@ -202,12 +202,12 @@ h6#marginless {
 
       <div class="form-group">
         <label for="message"><b>내용</b></label>
-        <textarea name='contents' rows="10" cols="30" class="form-control"></textarea>
+        <textarea name='contents' rows="10" cols="30" class="form-control" id="my-contents"></textarea>
       </div>
 
    <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="btnAdd">Upload</span>
+          <span class="input-group-text">Upload</span>
         </div>
         <div class="custom-file">
           <input type="button" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
@@ -234,7 +234,9 @@ h6#marginless {
 $('#my-add').click(function(){
   console.log("123");
   if($('#my-title').val() == ""){
-    alert("제목을 입력해주세요!")
+    swal ( "No" ,  "제목을 입력해주세요!" ,  "error" )
+  } else if ($('#my-contents').val() == "") {
+    swal ( "No" ,  "내용을 입력해주세요!" ,  "error" )
   } else {
     $('#my-form').submit();
   }

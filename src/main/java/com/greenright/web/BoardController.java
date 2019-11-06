@@ -87,7 +87,7 @@ public class BoardController {
   public String update(HttpServletRequest request, Board board, MultipartFile[] filePath
       ,String boardPhotoNumber[])
       throws Exception {
-      
+   
     board.setPhotos(boardPhotoWriter.getPhotoFiles(filePath));
 
     boardService.update(board,boardPhotoNumber);
