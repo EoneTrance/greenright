@@ -147,7 +147,7 @@
     margin-bottom: 100px;
     }
     
-    #pagination .page-item.active .page-link {
+   /* #pagination .page-item.active .page-link {
     z-index: 1;
     color: #fff;
     background-color: #82ae46 ;
@@ -163,6 +163,7 @@
     inline-size: min-content;
     margin-top: 40px;
     }
+    */
     
     
     
@@ -574,7 +575,7 @@
 
 
   
-<script src='/js/jquery.min.js'></script>
+ <script src='/js/jquery.min.js'></script>
 <script src='/js/jquery-migrate-3.0.1.min.js'></script>
 <script src='/js/jquery.easing.1.3.js'></script>
 <script src='/js/jquery.waypoints.min.js'></script>
@@ -599,7 +600,6 @@
           $("tbody_insert .contents:gt(" + (limitPerPage - 1) + ")").hide();
           var totalPages = Math.round(numberOfItems / limitPerPage);
           $(".pagination").append("<li class='page-item current-page active'><a class='page-link' href='javascript:void(0)'>" + 1 + "</a></li>");
-          $(".pagination li").trigger("click");
           
           for(var i = 2; i <= totalPages; i++) {
             $(".pagination").append("<li class='page-item current-page'><a class='page-link' href='javascript:void(0)'>" + i + "</a></li>");
@@ -915,7 +915,6 @@ $(function(){
         })
       
       }); */
-
 
 /*셀렉트 ajax 적용 */
   /* $(function(){

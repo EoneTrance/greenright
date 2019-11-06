@@ -14,9 +14,9 @@
      VALUES (#{productNo},#{photoPath},true)
   </insert>
   
-  <delete id="delete" parameterType="Recommend">
+  <delete id="delete" parameterType="int">
     delete from product_photos  
-    where product_photo_id=#{productPhotoNo} and product_id =#{productNo}
+    where product_photo_id=#{value}
   </delete>
   
   <delete id="deleteAll" parameterType="int">

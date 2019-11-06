@@ -1,6 +1,5 @@
 package com.greenright.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -44,27 +43,31 @@ public class DefaultProductService implements ProductService{
     }
 
   }
-  
+
   @Override
   public Product get(int no) throws Exception {
     return productDao.findWithFilesBy(no);
+  }
+  @Override
+  public Product getforPhoto(int no) throws Exception {
+    return productDao.findForPhoto(no);
   }
 
   @Override
   public List<Product> list() throws Exception {
     return productDao.findAllWithFile();
   }
-  
+
   @Override
   public List<Product> searchbyGroup(int no) throws Exception {
     return productDao.findByGroupNo(no);
   }
-  
+
   @Override
   public List<Product> searchbyCategory(int no) throws Exception{
     return productDao.findByCategoryNo(no);
   }
-  
+
   @Override
   public List<Product> listBySeller(int no) throws Exception {
     return productDao.findAllBySeller(no);
@@ -80,5 +83,59 @@ public class DefaultProductService implements ProductService{
     productPhotoDao.deleteAll(no);
     productDao.delete(no);
   }
-  
+  @Transactional
+  @Override
+  public void update(Product product
+      ,String ProductOptionNo[],String ProductOptionItemNo[]) throws Exception {
+    ProductOption productOption = new ProductOption();
+    for(int i = 0 ; i<ProductOptionNo.length; i++) {
+      System.out.print(ProductOptionNo[i]+"---------------------------------------------");
+      System.out.println(i);
+      if(i%2==0) {
+        productOption.setOptionName(ProductOptionNo[i]);
+      }else {
+        productOption.setNo(Integer.parseInt(ProductOptionNo[i]));
+        optionDao.update(productOption);
+      }
+
+    }
+    System.out.println("a");
+    ProductOptionItem productOptionItem = new ProductOptionItem();
+    for(int i =0 ; i<ProductOptionItemNo.length; i++) {
+      System.out.print(ProductOptionItemNo[i]+"---------------------------------------------");
+      System.out.println(i);
+      if(i%3==0) {
+        productOptionItem.setOptionItemMatter(ProductOptionItemNo[i]);
+      }else if(i%3==1) {
+        productOptionItem.setNo(Integer.parseInt(ProductOptionItemNo[i]));
+      }else {
+        productOptionItem.setOptionsNo(Integer.parseInt(ProductOptionItemNo[i]));
+        optionItemDao.update(productOptionItem);
+      }
+    }
+
+    productDao.update(product);
+    for (ProductPhoto photo : product.getPhotos()) {
+      photo.setProductNo(product.getNo()); 
+      productPhotoDao.insert(photo);
+    }
+  }
 }
+//1122 : 옵션 변경할값 
+//144 : 옵션을 어디서 변경할건지 위치 
+//5566 : 옵션 변경할값
+//145  : 옵션을 어디서 변경할건지 위치
+
+//33  :옵션 항목 변경할값 
+//173 : 옵션항목 어디서 변경할건지 위치
+//144 : 옵션항목을 어디다 저장할건지 번호 
+//44
+//174
+//144
+//77
+//175
+//145
+//88
+//176
+//145
+

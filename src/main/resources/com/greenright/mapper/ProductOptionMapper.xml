@@ -15,7 +15,7 @@
   </insert>
    <delete id="delete" parameterType="int">
     delete from options  
-    where options_id=#{optionsNo} and product_id =#{productNo}
+    where options_id=#{optionsNo} 
   </delete>
   
   <delete id="deleteAll" parameterType="int">
@@ -27,6 +27,11 @@
   select options_id from options
   where product_id =#{value}
   </select>
+  <update id="update" parameterType="ProductOption">
+  update options set 
+  options_name=#{optionName}
+  where options_id =#{no}
+  </update>
 </mapper>
 
 

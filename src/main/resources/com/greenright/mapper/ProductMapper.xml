@@ -69,7 +69,7 @@
 
 	<select id="findWithFilesBy" parameterType="int"
 		resultMap="ProductWithFilesMap">
-select
+select DISTINCT
     p.product_id,
     p.group_id,
     p.price,
@@ -80,14 +80,14 @@ select
     p.diy_flag,
     p.origin,
     m.name,
+    m.member_id,
     g.group_name, 
     g.category_id,
     c.category_name,
     o.options_id,
     o.options_name,
     i.option_item_matters,
-    f.product_id,
-    f.photo_path
+    i.option_item_id
     from products p
     left outer join product_photos f on (p.product_id = f.product_id AND
     f.main_photo_flag = 0)
@@ -100,6 +100,25 @@ select
     where p.product_id=#{value}
 	</select>
 
+    <select id="findForPhoto" parameterType="int"
+    resultMap="ProductWithFilesMap">
+select DISTINCT
+    f.product_id,
+    f.photo_path,
+    f.product_photo_id
+    from products p
+    left outer join product_photos f on (p.product_id = f.product_id AND
+    f.main_photo_flag = 0)
+    left outer join sellers s on s.member_id = p.member_id
+    left outer join members m  on m.member_id = s.member_id
+    left outer join options o on o.product_id = p.product_id
+    left outer join groups g on g.group_id = p.group_id 
+    left outer join categorys c on c.category_id = g.category_id
+    left outer join option_items i on o.options_id = i.options_id
+    where p.product_id=#{value}
+  </select>
+  
+  
 	<select id="findAllWithFile" resultMap="ProductWithFilesMap">
 		select
 		p.product_id,
@@ -188,5 +207,12 @@ select
     </if>
     order by p.product_id DESC
   </select>
+  <update id="update" parameterType="Product">
+    update products set
+    price=#{price},
+    description=#{description}
+    where product_id=#{no}
+  </update>
+  
 </mapper>
 
