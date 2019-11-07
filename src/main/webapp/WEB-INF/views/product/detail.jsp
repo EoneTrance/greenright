@@ -96,6 +96,8 @@ h6 {
   padding-top: 10px;
   padding-bottom: 8px;
 }
+input:focus {outline:2px solid #82ae46;}
+
 </style>
  
     
@@ -111,9 +113,9 @@ h6 {
 <h6>소분류명  <input type='text' class="form-control" name='categoryName' value='${product.group.groupName}' readonly><br></h6>
 <h6>판매자명  <input type='text' class="form-control" name='name' value='${product.seller.member.name}' readonly><br></h6>
 <h6>상품가격  <input type='text' class="form-control" name='price' value='${product.price}' readonly><br></h6>
-<h6>상품이름  <input type='text' class="form-control" name='productName' value='${product.productName}'><br></h6>
+<h6>상품이름  <input type='text' class="form-control" name='productName' value='${product.productName}' readonly><br></h6>
 <h6>상품설명  <input type='text' class="form-control" name='description' value='${product.description}'><br></h6>
-<h6>직접제작여부  <input type='text' class="form-control" name='diy' value='${product.diy}' readonly><br></h6>
+<h6>수량  <input type='number' class="form-control" name='diy' value='${product.quantity}' ><br></h6>
 <h6>등록일  <input type='text' class="form-control" name='registeredDate' value='${product.registeredDate}' readonly><br></h6>
 <h6>유통기한  <input type='text' class="form-control" name='expirationDate' value='${product.expirationDate}' readonly><br></h6>
 <h6>원산지  <input type='text' class="form-control" name='origin' value='${product.origin}' readonly ><br></h6>
@@ -131,9 +133,11 @@ h6 {
  </div>
   <c:forEach items="${option.optionItem}"  var="item">
  <div class="${item.no}" id ="optionItems" > 
- <h6> 옵션항목명  <input type='text' name='optionItemMatter' class="form-control" value='${item.optionItemMatter}' >
-  <input type="text" name="optionItemMatter" class="form-control" value ="${item.no}" hidden>
-  <input type="text" name="optionItemMatter" value="${item.optionsNo}" hidden>
+ <h6> 옵션항목명  <input type='text' name='optionItemMatter' class="form-control" value='${item.optionItemMatter}' ></h6>
+ <h6> 추가금액  <input type='number' name='optionItemMatter' class="form-control" value='${item.optionsPrice}' step=10 ></h6>
+ <h6> 옵션당개수  <input type='number' name='optionItemMatter' class="form-control" value='${item.optionsquantity}'>
+ <input type="text" name="optionItemMatter" class="form-control" value ="${item.no}" hidden>
+ <input type="text" name="optionItemMatter" value="${item.optionsNo}" hidden>
   <img src="/images/xmark.png" class="optionItemDelete"  width="10" height="10" alt="" ></h6>
   </div>
   </c:forEach> 
@@ -204,7 +208,7 @@ $(document).on("click", ".imageDelete", function() {
    $(document).on("click", ".optionItemDelete", function() {
   
   var allData = {"no" : $(this).parent().parent().attr('class')}
-  $(this).parent().remove()
+  $(this).parent().parent().remove()
   $.ajax({
     url : "/greenright/json/Product/deleteoptionitems",
     type : "GET",

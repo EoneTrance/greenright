@@ -13,7 +13,7 @@
   }
 }
 .col-sm-3.sidenav.hidden-xs {
-    height: 660px;
+    height: 605px;
 }
 #myPageContent {
   width: 960px;
@@ -122,6 +122,14 @@ select#subSelect {
     height: 30px;
     font-size: medium;
 }
+
+}
+td {
+    font-weight: 500;
+}
+div#forright {
+    padding: 3.75px 17.5px 3.75px 7.5px;
+}
 </style>
 <meta charset="UTF-8">
 <title>물품관리</title>
@@ -175,7 +183,6 @@ select#subSelect {
            <h4 class="font-weight-bold text-center">상품</h4>
           <ul class="nav flex-column nav-pills nav-stacked">
             <li class="my-menu active"><a href="/greenright/product/manage">상품관리</a></li>
-            <li class="my-menu"><a href="/greenright/product/form">상품등록</a></li>
           </ul>
           <br>
         </div>
@@ -186,20 +193,21 @@ select#subSelect {
           <div class="row">
             <div class="col-sm-12">
               <div class="btn-toolbar mb-2" role="toolbar"
-                aria-label="Toolbar with button groups">
+                aria-label="Toolbar with button groups"  style="width:100%;">
                 <div class="btn-group" role="group"
                   aria-label="Third group" style="width: 15%">
                   <select class="selectpicker bigselect custom-select"
                     data-style="btn btn-sm w-50" id ="Aselect">
                     <optgroup label="대분류명">
-                      <option value="all" selected>전체</option>
-                      <option value="clean">청소</option>
-                      <option value="office">사무</option>
-                      <option value="organic">유기농</option>
-                      <option value="furniture">가구</option>
-                      <option value="upcycleing">업사이클링</option>
+                      <option value= 23 selected>전체</option>
+                      <option value= 19 >청소</option>
+                      <option value= 20 >사무</option>
+                      <option value= 21 >유기농</option>
+                      <option value= 22>가구</option>
+                      <option value= 18>업사이클링</option>
                     </optgroup>
                   </select>
+                  
                 </div>
                   &nbsp;&nbsp;&nbsp;
                 <div class="btn-group" role="group"
@@ -211,10 +219,9 @@ select#subSelect {
                     </optgroup>
                   </select>
                 </div>
-                <span class="btn-group" role="group">
-                  <button type="button" class="btn btn-sm ml-4" id="search"
-                    style="width: 158%">조회</button>
-                </span>
+                <div id = forright class="active" style= "text-align:right;float:right;width: 66%;">
+                <a href="/greenright/product/form" id="formlink" >상품 등록</a>
+              </div>
               </div>
             </div>
           </div>
@@ -257,23 +264,23 @@ select#subSelect {
 $('#Aselect').change(
     function() {
       var state = $('#Aselect option:selected').val();
-      if (state == 'clean') {
+      if (state == 19) {
         $("#subSelect")
             .html("<optgroup label='소분류명'><option selected value=19>전체</option><option value=1>세제류</option><option value=2>위생용품</option><option value=3>화장지</option><option  value=4>티슈</option></optgroup>");
-      } else if (state == 'office') {
+      } else if (state == 20) {
         $("#subSelect")
             .html("<optgroup label='소분류명'><option selected value=20>전체</option><option value=5>복사용지</option><option value=6>화일</option><option value=7>토너</option><option value=8>기타</option></optgroup>");
-      } else if (state == 'organic') {
+      } else if (state == 21) {
         $("#subSelect")
         .html("<optgroup label='소분류명'><option selected  value=21>전체</option><option value=9>과일</option><option value=10>채소</option><option value=11>간식</option><option value=12>축산품</option></optgroup>");
-      } else if (state == 'furniture') {
+      } else if (state == 22) {
         $("#subSelect")
         .html("<optgroup label='소분류명'><option selected  value=22>전체</option><option value=13>침대</option><option value=14>소파</option><option value=15>테이블</option><option value=16>의자</option><option value=17>파티션</option></optgroup>");
 
-      } else if(state == 'upcycleing'){
+      } else if(state == 18 ){
         $("#subSelect")
                 .html("<optgroup label='소분류명'><option selected value=18>전체</option></optgroup>");
-      }else if(state == "all"){
+      }else if(state == 23 ){
         $("#subSelect")
         .html(
             "<optgroup label='소분류명'><option selected  value =23>전체</option>")
@@ -281,7 +288,32 @@ $('#Aselect').change(
       }
     });
     
-    $(document).on("click","#search",function() {
+$(document).on("change","#Aselect",function() {
+  var allData ={"no" : $('#Aselect option:selected').val() }
+  $.ajax({
+    url : "/greenright/json/Product/search",
+    type : "GET",
+    dataType : "json",
+    data : allData,
+    success : function(data) {
+      console.log(data);
+       var list = data.result;
+       var tableTag ="";
+       for(var i = 0 ; i < list.length; i++) {
+        tableTag += "<tr><td>"+list[i].no+"</td>"
+        tableTag += "<td><a href='detail?no="+list[i].no+"'>"+list[i].productName+"</a></td>"
+        tableTag += "<td>"+list[i].group.category.categoryName+"</td>"
+        tableTag += "<td>"+list[i].group.groupName+"</td>" 
+        tableTag += "<td>"+list[i].registeredDate+"</td>"
+        tableTag += "<td>"+list[i].price+"</td></tr>";
+      };
+      $("#addto").html(tableTag);  
+    }
+  });
+})
+    
+    
+    $(document).on("change","#subSelect",function() {
       var allData ={"no" : $('#subSelect option:selected').val() }
       $.ajax({
         url : "/greenright/json/Product/search",

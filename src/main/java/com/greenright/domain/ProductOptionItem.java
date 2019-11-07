@@ -7,14 +7,11 @@ public class ProductOptionItem implements Serializable{
   
   private int no;
   private int OptionsNo;
+  private int OptionsPrice;
+  private int Optionsquantity;
   private String OptionItemMatter;
   
-  @Override
-  public String toString() {
-    return "ProductOptionItem [no=" + no + ", OptionsNo=" + OptionsNo + ", OptionItemMatter="
-        + OptionItemMatter + "]";
-  }
-  
+
   public int getNo() {
     return no;
   }
@@ -38,5 +35,31 @@ public class ProductOptionItem implements Serializable{
   public void setOptionItemMatter(String optionItemMatter) {
     OptionItemMatter = optionItemMatter;
   }
+
+  public int getOptionsPrice() {
+    return OptionsPrice;
+  }
+
+  public void setOptionsPrice(int optionsPrice) {
+    OptionsPrice = optionsPrice;
+  }
+
+  public int getOptionsquantity() {
+    return Optionsquantity;
+  }
+
+  public void setOptionsquantity(int optionsquantity) {
+    Optionsquantity = optionsquantity;
+  }
+
+  @Override
+  public String toString() {
+    return "ProductOptionItem [no=" + no + ", OptionsNo=" + OptionsNo + ", OptionsPrice="
+        + OptionsPrice + ", Optionsquantity=" + Optionsquantity + ", OptionItemMatter="
+        + OptionItemMatter + "]";
+  }
+  
+  
+  
   
 }

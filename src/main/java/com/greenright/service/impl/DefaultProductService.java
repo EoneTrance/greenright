@@ -101,11 +101,15 @@ public class DefaultProductService implements ProductService{
     if(ProductOptionItemNo.length!=0) {
       ProductOptionItem productOptionItem = new ProductOptionItem();
       for(int i =0 ; i<ProductOptionItemNo.length; i++) {
-        if(i%3==0) {
+        if(i%5==0) {
           productOptionItem.setOptionItemMatter(ProductOptionItemNo[i]);
-        }else if(i%3==1) {
+        }else if(i%5==1) {
+          productOptionItem.setOptionsPrice(Integer.parseInt(ProductOptionItemNo[i]));
+        }else if(i%5==2) {
+          productOptionItem.setOptionsquantity(Integer.parseInt(ProductOptionItemNo[i]));
+        }else if(i%5==3) {
           productOptionItem.setNo(Integer.parseInt(ProductOptionItemNo[i]));
-        }else {
+        }else{
           productOptionItem.setOptionsNo(Integer.parseInt(ProductOptionItemNo[i]));
           optionItemDao.update(productOptionItem);
         }

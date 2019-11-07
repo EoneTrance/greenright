@@ -226,6 +226,8 @@ h6#marginless {
   font-size: larger;
   font-style: italic;
 }
+  input:focus {outline:2px solid #82ae46;}
+
 </style>
 <script src="../../js/jquery.min.js"></script>
 <script src="../../js/jquery-migrate-3.0.1.min.js"></script>
@@ -279,10 +281,17 @@ h6#marginless {
           상품명 <br> <input class="adder form-control" type="text"
             id="pN" name="productName" required>
         </h6>
+      
         <h6>
+      <!--  일단 판매자 값을 받아서 처리중 나중에 마이페이지 구현되었을경우에는 세션에서 값 빼와서 처리할수있도록 .  -->   
           판매자명 <br> <input class="adder form-control" type="text"
             id="mN" name="memberNo" required>
         </h6>
+      
+      <h6>
+      수량 <input class="adder form-control" type="number"  id="pN" name="quantity" min="0"  required>
+      </h6>
+      
         <h6>
           유통기한 <br> <input
             class="adder datetimepicker4 form-control" type='text'
@@ -290,13 +299,13 @@ h6#marginless {
         </h6>
         <!-- <input type='radio' name='diy' value=1 />yes
                <input type='radio' name='diy' value=0 />no -->
-        <h6 id="marginless">직접제작여부</h6>
+        <!-- <h6 id="marginless">직접제작여부</h6>
         <div class="checks">
           <input type="radio" id="ex_rd2" name='diy' value=1> <label
             for="ex_rd2" class="label">yes</label> <input type="radio"
             id="ex_rd2" name='diy' value=0 checked> <label
             for="ex_rd2" class="label">no</label>
-        </div>
+        </div> -->
 
 
 
@@ -306,7 +315,7 @@ h6#marginless {
         </h6>
         <h6>
           판매가 <br> <input class="adder form-control" id="sellprice"
-            type="text" name="price" class="form-control" required>
+            type="number" name="price" class="form-control" step=10 required>
         </h6>
       </div>
       <div class="in">
@@ -326,6 +335,10 @@ h6#marginless {
         <h6>
           옵션 이름<input class="btn btn-primary py-3 px-4" type="button"
             id="optionN" value="옵션이름추가버튼">
+            <input type="text" name="optionName" value="neverNo"  hidden/>
+            <input type="text" name="optionContents" value="neverNo"  hidden/>
+            <input type="text" name="optionprice" value="neverNo"  hidden/>
+            <input type="text" name="optionquantity" value="neverNo"  hidden/>
         </h6>
         <table id="optionplus"></table>
       </div>
@@ -337,7 +350,7 @@ h6#marginless {
         <button class="btn btn-primary py-3 px-4" id=button>등록하기</button>
         <INPUT type="button" value="취소"
           class="btn btn-primary py-3 px-4"
-          onClick="location.href='http://www.jasko.co.kr'">
+          onClick="location.href='/greenright/product/manage'">
       </div>
     </form>
   </div>
@@ -353,6 +366,8 @@ h6#marginless {
               html += '<input class="btn btn-primary py-3 px-4" type="button" id="btnDel" value="옵션삭제"/>'
               html += '<table class="dr"><input class="btn btn-primary py-3 px-4" type="button" id="optionitemadd" value="옵션항목추가"></table>'
               html += '<input type ="text" name="optionContents" value="divide" class="fordivide">';
+              html += '<input type ="text" name="optionprice" value="divide" class="fordivide">';
+              html += '<input type ="text" name="optionquantity" value="divide" class="fordivide">';
               html += '</td></tr>';
 
               $("#optionplus").append(html);
@@ -369,6 +384,8 @@ h6#marginless {
             "#optionitemadd",
             function() {
               var oip = '<tr><td>옵션내용<input type="text" name="optionContents" required>';
+              oip += '추가금액<input type="number" name="optionprice" required min="0" step=10>';
+              oip += '개수<input type="number" name="optionquantity" required min="0">';
               oip += '<input class="btn btn-primary py-3 px-4" type="button" id="buttonDel"value="옵션항목삭제"/>';
               oip += '</td></tr>';
               $(this).parent().append(oip);
