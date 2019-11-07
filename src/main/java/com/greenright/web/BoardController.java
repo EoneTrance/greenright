@@ -33,7 +33,9 @@ public class BoardController {
   private RecommendService recommendService;
   
   @GetMapping("form")
-  public void form() {}
+  public void form(Model model) {
+    model.addAttribute("title", " - 게시물 등록");
+  }
   @GetMapping("detailedit")
   public void detailedit(Model model, int no,HttpSession session)throws Exception {
     Board board = boardService.get(no);

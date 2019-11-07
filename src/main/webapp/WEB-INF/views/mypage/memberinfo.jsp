@@ -37,9 +37,9 @@
     </td>
     </tr>
     <tr>
-      <th>이름</th>
+      <th>닉네임</th>
       <td>
-      <input type="text" name="name" class="form-control input-lg my-essential notChange" value='${loginUser.name}' readonly/>
+      <input type="text" name="nickname" class="form-control input-lg my-essential notChange" value='${loginUser.name}' readonly/>
       </td>
     </tr>
     <tr>

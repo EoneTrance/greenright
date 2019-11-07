@@ -5,6 +5,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,8 @@ public class AuthController {
   UserMailSendService mailSender;
 
   @GetMapping("form")
-  public void form() throws Exception {
+  public void form(Model model) throws Exception {
+    model.addAttribute("title", " - 로그인");
   }
 
   @PostMapping("login")
@@ -36,6 +38,6 @@ public class AuthController {
     Member loginUser = memberService.login(member);
     session.setAttribute("loginUser", loginUser);
 
-    return "redirect:../mypage/memberinfo";
+    return "redirect:../mypage/userinfo";
   }
 }

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #header {
-  width: 1100px;
+  width: 1200px;
   margin: 0 auto;
 }
 
@@ -13,18 +13,15 @@
   background-color: #524845;
   color: #ffffff;
   height: 40px;
-  width: 1100px;
+  width: 1200px;
   text-align: center;
   vertical-align: middle;
   padding-top: 10px;
   margin: auto auto;
 }
 
-#content {
-  width: 1100px;
-  padding-top: 10px;
-  margin: auto auto;
-  text-align: center;
+a {
+  text-decoration:none !important;
 }
 
 h1 {
@@ -34,26 +31,66 @@ h1 {
   margin: auto auto;
 }
 
-#signform {
+#content {
+  width: 1200px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: auto auto;
+  text-align: center;
+}
+
+#signform, #loginForm, #findIdPassword, #passwordChangeForm {
   text-align: left;
   width: 500px;
-  padding-top: 10px;
   margin: auto auto;
   font-weight: bold;
 }
 
-#signform input {
+#loginForm *, #findIdPassword * {
+  margin: auto auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#loginForm input, #loginForm select, #findIdPassword input, #findIdPassword select {
+  height: 40px;
+}
+
+#loginForm button, #findIdPassword button {
+  height: 50px;
+}
+
+#signform input, #passwordChangeForm input {
   display: inline-block;
   height: 50px;
-  border: solid gray 1px;
+  border: solid gray 2px;
   margin-top: 5px;
 }
 
-#signform #essential {
+div#address input {
+  height: 50px;
+  width: 500px;
+  border: solid gray 2px;
+}
+
+#address input[name=postalCode] {
+  height: 50px;
+  width: 248px;
+  border: solid gray 2px;
+}
+
+#address input[name=searchPostalCode] {
+  height: 50px;
+  width: 248px;
+  border: solid gray 2px;
+}
+
+#signform input:not([name=tel]) {
   border: solid gray 2px;
 }
 
 #signform select {
+  border: solid gray 2px;
   display: inline-block;
   height: 50px;
   margin: 10px auto;
@@ -67,19 +104,3 @@ h1 {
   height: 100px;
   margin: 2px;
 }
-
-#userid {
-  margin: 10px;
-}
-
-#pwd {
-  margin-left: 14px;
-  margin-top: 1px;
-  margin-bottom: 1px;
-}
-
-
-
-/* #essential {
-  background-color: #d8d8d8;
-} */

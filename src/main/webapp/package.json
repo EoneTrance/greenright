@@ -1,5 +1,5 @@
 {
-  "name": "greenright",
+  "name": "webapp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,9 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@chenfengyuan/datepicker": "^1.0.9",
     "bootstrap": "^4.3.1",
+    "bootstrap-datepicker": "^1.9.0",
+    "bootstrap-select": "^1.13.12",
     "jquery": "^3.4.1",
-    "json": "^9.0.6",
+    "popper.js": "^1.16.0",
     "sweetalert": "^2.1.2"
   }
 }

@@ -12,9 +12,7 @@ public class Member implements Serializable {
   private String password;
   private int certificationFlag;
   private String cellPhone;
-  private String tel;
   private String nickname;
-  private String name;
   private String email;
   private String postalCode;
   private String defaultAddress;
@@ -23,150 +21,105 @@ public class Member implements Serializable {
   private String answer;
   private String authkey;
   private String passwordAuthkey;
+  
   @Override
   public String toString() {
     return "Member [no=" + no + ", registeredDate=" + registeredDate + ", id=" + id + ", password="
         + password + ", certificationFlag=" + certificationFlag + ", cellPhone=" + cellPhone
-        + ", tel=" + tel + ", nickname=" + nickname + ", name=" + name + ", email=" + email
-        + ", postalCode=" + postalCode + ", defaultAddress=" + defaultAddress + ", detailAddress="
-        + detailAddress + ", question=" + question + ", answer=" + answer + ", authkey=" + authkey
-        + ", passwordAuthkey=" + passwordAuthkey + "]";
+        + ", nickname=" + nickname + ", email=" + email + ", postalCode=" + postalCode
+        + ", defaultAddress=" + defaultAddress + ", detailAddress=" + detailAddress + ", question="
+        + question + ", answer=" + answer + ", authkey=" + authkey + ", passwordAuthkey="
+        + passwordAuthkey + "]";
   }
-
+  
   public int getNo() {
     return no;
   }
-
   public void setNo(int no) {
     this.no = no;
   }
-
   public Date getRegisteredDate() {
     return registeredDate;
   }
-
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-
   public String getId() {
     return id;
   }
-
   public void setId(String id) {
     this.id = id;
   }
-
   public String getPassword() {
     return password;
   }
-
   public void setPassword(String password) {
     this.password = password;
   }
-
   public int getCertificationFlag() {
     return certificationFlag;
   }
-
   public void setCertificationFlag(int certificationFlag) {
     this.certificationFlag = certificationFlag;
   }
-
   public String getCellPhone() {
     return cellPhone;
   }
-
   public void setCellPhone(String cellPhone) {
     this.cellPhone = cellPhone;
   }
-
-  public String getTel() {
-    return tel;
-  }
-
-  public void setTel(String tel) {
-    this.tel = tel;
-  }
-
   public String getNickname() {
     return nickname;
   }
-
   public void setNickname(String nickname) {
     this.nickname = nickname;
   }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
   public String getEmail() {
     return email;
   }
-
   public void setEmail(String email) {
     this.email = email;
   }
-
   public String getPostalCode() {
     return postalCode;
   }
-
   public void setPostalCode(String postalCode) {
     this.postalCode = postalCode;
   }
-
   public String getDefaultAddress() {
     return defaultAddress;
   }
-
   public void setDefaultAddress(String defaultAddress) {
     this.defaultAddress = defaultAddress;
   }
-
   public String getDetailAddress() {
     return detailAddress;
   }
-
   public void setDetailAddress(String detailAddress) {
     this.detailAddress = detailAddress;
   }
-
   public String getQuestion() {
     return question;
   }
-
   public void setQuestion(String question) {
     this.question = question;
   }
-
   public String getAnswer() {
     return answer;
   }
-
   public void setAnswer(String answer) {
     this.answer = answer;
   }
-
   public String getAuthkey() {
     return authkey;
   }
-
   public void setAuthkey(String authkey) {
     this.authkey = authkey;
   }
-
   public String getPasswordAuthkey() {
     return passwordAuthkey;
   }
-
   public void setPasswordAuthkey(String passwordAuthkey) {
     this.passwordAuthkey = passwordAuthkey;
   }
-
 }

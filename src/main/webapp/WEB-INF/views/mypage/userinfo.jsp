@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
     
   <style>
@@ -11,11 +9,12 @@
     }
     
     #myPageContent {
-      width: 960px;
+      width: 992px;
       padding-top: 10px;
       padding-bottom: 10px;
       margin: auto auto;
     }
+    
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 550px}
     
@@ -87,17 +86,26 @@
       border: none !important;
       background-color: rgba( 255, 255, 255, 0) !important;
       outline: none !important;
-      width: 100% !important;
     }
     
     #memberInfoForm input, #memberInfoForm button {
       width:49%;
     }
     
+    .my-btn {
+      background-color:#77A43E !important;
+      color:#FFFFFF;
+    }
+    
+    /* [readonly]:not(.notChange) {
+      background-color: !important;
+    } */
+    
   </style>
-  
+
 <div id="myPageContent">
-<nav class="navbar navbar-inverse visible-xs">
+
+<!-- <nav class="navbar navbar-inverse visible-xs">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -119,25 +127,25 @@
       </ul>
     </div>
   </div>
-</nav>
+</nav> -->
 
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav hidden-xs">
       <h2 class="text-center">MyPage</h2>
       <hr>
-      <h4 class="font-weight-bold text-center">기본정보</h4>
-      <ul class="nav flex-column nav-pills nav-stacked">
+      <h4 class="font-weight-bold">기본정보</h4>
+      <ul class="nav flex-column nav-pills nav-stacked text-center">
         <li class="my-menu active"><a href="userinfo">기본정보</a></li>
       </ul>
-      <h4 class="font-weight-bold text-center">구매</h4>
-      <ul class="nav flex-column nav-pills nav-stacked">
+      <h4 class="font-weight-bold">구매</h4>
+      <ul class="nav flex-column nav-pills nav-stacked text-center">
         <li class="my-menu"><a href="order">주문내역</a></li>
         <li class="my-menu"><a href="#section3">관심상품</a></li>
         <li class="my-menu"><a href="#section3">업적</a></li>
       </ul>
-      <h4 class="font-weight-bold text-center">판매</h4>
-      <ul class="nav flex-column nav-pills nav-stacked">
+      <h4 class="font-weight-bold">판매</h4>
+      <ul class="nav flex-column nav-pills nav-stacked text-center">
         <li class="my-menu"><a href="#section3">판매내역</a></li>
         <li class="my-menu"><a href="#section3">개인전</a></li>
         <li class="my-menu"><a href="#section3">판매회원 전환</a></li>
@@ -163,7 +171,7 @@
             <th id="passwordTh" class="col-sm-2">비밀번호</th>
             <td class="col-sm-10">
             <div id="my-password-form">
-              <input type="button" name="changePw" class="form-control input-md btn-success"
+              <input type="button" name="changePw" class="form-control input-md my-btn"
               value="비밀번호 변경하기" onclick='changePassword()'/>
             </div>
               <span class="inputState"></span>
@@ -172,8 +180,8 @@
           <tr>
             <th class="col-sm-2">이름</th>
             <td class="col-sm-10">
-            <input type="text" name="name" class="input-md notChange"
-            value='${loginUser.name}' readonly/>
+            <input type="text" name="nickname" class="input-md notChange"
+            value='${loginUser.nickname}' readonly/>
             </td>
           </tr>
           <tr>
@@ -195,15 +203,11 @@
           <tr>
             <th class="col-sm-2">우편번호</th>
             <td class="col-sm-10">
-              <input type="text" class="form-control input-md my-essential my-essential-input"
+              <input type="text" class="form-control input-md my-essential my-essential-input d-inline-block"
                      id="sample3_postcode" name="postalCode" value='${loginUser.postalCode}'
-                     readonly style="background-color:#E1E1E1;display:inline-block;">
-              <input type="button" class="form-control input-md" name="searchPostalCode"
-                     onclick="sample3_execDaumPostcode()" value="우편번호 찾기"
-                     style="background-color:#CC723D;
-                            display:inline-block;
-                            /* border:solid #CC723D 3px; */
-                            color:#FFFFFF;">
+                     readonly="readonly">
+              <input type="button" class="form-control input-md my-btn d-inline-block" name="searchPostalCode"
+                     onclick="sample3_execDaumPostcode()" value="우편번호 찾기">
               <span class="inputState"></span>
               <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
               <img src="//t1.daumcdn.net/postcode/resource/images/close.png"
@@ -218,7 +222,7 @@
             <td class="col-sm-10">
             <input type="text" id="sample3_address" name="defaultAddress"
                    class="form-control input-md my-essential my-essential-input" value='${loginUser.defaultAddress}'
-                   readonly style="background-color:#E1E1E1;text-align:left;">
+                   readonly="readonly" style="text-align:left;">
             <span class="inputState"></span>
             </td>
           </tr>
@@ -257,7 +261,7 @@
           </tr>
           </tbody>
         </table>
-        <button name="submitBtn" class="btn btn-lg btn-success btn-inline-block signup-btn" type="submit">회원정보 수정</button>
+        <button name="submitBtn" class="btn btn-lg my-btn btn-inline-block signup-btn" type="submit">회원정보 수정</button>
         <button name="cancelBtn" class="btn btn-lg btn-danger btn-inline-block signup-btn" type="button">취소</button>
       </form>
       </div>
@@ -278,7 +282,6 @@
 
 <script>
 "use strict"
-var checkInputState = [false,false];
 
 if ('${loginUser.question}' != '') {
   $("select[name=question]").val('${loginUser.question}');
@@ -286,12 +289,15 @@ if ('${loginUser.question}' != '') {
 
 var userId = '${loginUser.id}';
 
+const checkInputMap = new Map();
+const checkPasswordInputMap = new Map();
+
 function changePassword() {
   $("#my-password-form").children("input").remove();
   $("#my-password-form").append(
         "<input type='password' name='currentPassword' class='form-control input-md mr-1'"
       + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
-      + "<input type='button' name='checkPw' class='form-control input-md btn-success ml-1'"
+      + "<input type='button' name='checkPw' class='form-control input-md my-btn ml-1'"
       + "value='비밀번호 확인' style='display:inline-block;' onclick='checkPassword()'/>");
 };
 
@@ -308,7 +314,7 @@ function checkPassword() {
         $("#my-password-form").append(
               "<input type='password' name='password' class='form-control input-md mr-1 my-password-input'"
             + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
-            + "<input type='button' name='doChangePw' class='form-control input-md btn-success ml-1'"
+            + "<input type='button' name='doChangePw' class='form-control input-md my-btn ml-1'"
             + "value='비밀번호 변경하기' style='display:inline-block;' onclick='doChangePassword()'/>"
             + "<input type='password' name='confirmPassword' class='form-control input-md mr-1 my-password-input'"
             + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
@@ -333,6 +339,20 @@ function checkPassword() {
 };
 
 function doChangePassword() {
+  
+  var passwordInputs = $("#my-password-form input");
+  
+  for (var i = 0; i < passwordInputs.length; i++) {
+    passwordInputs[i].focus();
+  }
+  passwordInputs[passwordInputs.length-1].blur();
+  
+  for (var check of checkPasswordInputMap.values()) {
+    if (check == false) {
+      return;
+    }
+  }
+  
   $.ajax({
     type: "POST",
     url: "/greenright/json/member/passwordUpdate",
@@ -343,7 +363,7 @@ function doChangePassword() {
       if (checkAccountJsonData.message == "success") {
         $("#my-password-form").children("input").remove();
         $("#my-password-form").append(
-              "<input type='button' name='changePw' class='form-control input-md btn-success'"
+              "<input type='button' name='changePw' class='form-control input-md my-btn'"
             + "value='비밀번호 변경하기' onclick='changePassword()'/>");
         $("#my-password-form ~ span.inputState").css("color", "green");
         $("#my-password-form ~ span.inputState").css("font-size", "80%");
@@ -373,32 +393,25 @@ function doChangePassword() {
 function cancelChangePassword() {
   $("#my-password-form").children("input").remove();
   $("#my-password-form").append(
-      "<input type='button' name='changePw' class='form-control input-md btn-success'"
+      "<input type='button' name='changePw' class='form-control input-md my-btn'"
     + "value='비밀번호 변경하기' onclick='changePassword()'/>");
   $("#my-password-form ~ span.inputState").html("");
   $("th#passwordTh").html("비밀번호");
 };
-
-</script>
-
-<script>
-
-"use strict"
-var checkInputState = [false,false];
 
 $("#my-cellphone-input").on("focusout", function(e) {
   var regularNumber = /^01(?:[0-1]|[6-9])(?:[0-9]{7,8})$/;
   var getConditionTag = $(e.target).siblings("span.inputState");
   
   if (e.target.value == "") {
-    checkInputState[0] = false;
+    checkInputMap.set(e.target.name, false);
     $(e.target).css("border", "solid #C7CED5 1px");
     $(getConditionTag).css("color", "red");
     $(getConditionTag).css("font-size", "80%");
     $(getConditionTag).html("필수 입력 항목입니다.");
     e.stopPropagation();
   } else if (!regularNumber.test(e.target.value)) {
-    checkInputState[1] = false;
+    checkInputMap.set(e.target.name, false);
     $(e.target).css("border", "solid red 3px");
     $(e.target).css("background-color", "#FFF9F9");
     $(getConditionTag).css("color", "red");
@@ -411,28 +424,28 @@ $("#my-cellphone-input").on("focusout", function(e) {
       url: "/greenright/json/member/checkDuplicateCellPhone",
       data: "cellPhone=" + e.target.value,
       dataType: "json",
-      async: true,
+      async: false,
       success: function(checkCellphoneJsonData) {
         if (checkCellphoneJsonData.message == "exist") {
-          if ('${loginUser.id}' != checkCellphoneJsonData.result.id) {
-            checkInputState[1] = false;
-            $(e.target).css("border", "solid red 3px");
-            $(e.target).css("background-color", "#FFF9F9");
-            $(getConditionTag).css("color", "red");
-            $(getConditionTag).css("font-size", "80%");
-            $(getConditionTag).html("이미 가입된 번호입니다.");
-            e.stopPropagation();
-          } else {
-            checkInputState[1] = true;
+          if ('${loginUser.id}' == checkCellphoneJsonData.result.id) {
+            checkInputMap.set(e.target.name, true);
             $(e.target).css("border", "solid #C7CED5 1px");
             $(e.target).css("background-color", "#FFFFFF");
             $(getConditionTag).css("color", "gray");
             $(getConditionTag).css("font-size", "80%");
             $(getConditionTag).html("");
             e.stopPropagation();
+          } else {
+            checkInputMap.set(e.target.name, false);
+            $(e.target).css("border", "solid red 3px");
+            $(e.target).css("background-color", "#FFF9F9");
+            $(getConditionTag).css("color", "red");
+            $(getConditionTag).css("font-size", "80%");
+            $(getConditionTag).html("이미 가입된 번호입니다.");
+            e.stopPropagation();
           }
         } else if (checkCellphoneJsonData.message == "notExist") {
-          checkInputState[1] = true;
+          checkInputMap.set(e.target.name, true);
           $(e.target).css("border", "solid green 3px");
           $(e.target).css("background-color", "#F9FFF9");
           $(getConditionTag).css("color", "green");
@@ -440,7 +453,7 @@ $("#my-cellphone-input").on("focusout", function(e) {
           $(getConditionTag).html("사용 가능한 번호입니다.");
           e.stopPropagation();
         } else {
-          checkInputState[1] = false;
+          checkInputMap.set(e.target.name, false);
           $(e.target).css("border", "solid red 3px");
           $(e.target).css("background-color", "#FFF9F9");
           $(getConditionTag).css("color", "red");
@@ -458,6 +471,7 @@ $(document).on("focusout", ".my-password-input", function(e) {
   var getConditionTag = $(e.target).parent("#my-password-form").siblings("span.inputState");
   
   if (e.target.value == "") {
+    checkPasswordInputMap.set(e.target.name, false);
     $(e.target).css("border", "solid #C7CED5 1px");
     $(getConditionTag).css("color", "red");
     $(getConditionTag).css("font-size", "80%");
@@ -467,6 +481,7 @@ $(document).on("focusout", ".my-password-input", function(e) {
   } else if (e.target.name == "password") {
     
     if (!regularPassword.test($(e.target).val())) {
+      checkPasswordInputMap.set(e.target.name, false);
       $(e.target).css("border", "solid red 3px");
       $(e.target).css("background-color", "#FFF9F9");
       $(getConditionTag).css("color", "red");
@@ -475,6 +490,7 @@ $(document).on("focusout", ".my-password-input", function(e) {
       e.stopPropagation();
       
     } else if ($("input[name=password]").val() != $("input[name=confirmPassword]").val()) {
+      checkPasswordInputMap.set(e.target.name, false);
       $(e.target).css("border", "solid red 3px");
       $(e.target).css("background-color", "#FFF9F9");
       $("input[name=confirmPassword]").css("border", "solid red 3px");
@@ -485,6 +501,7 @@ $(document).on("focusout", ".my-password-input", function(e) {
       e.stopPropagation();
       
     } else {
+      checkPasswordInputMap.set(e.target.name, true);
       $(e.target).css("border", "solid green 3px");
       $(e.target).css("background-color", "#F9FFF9");
       $("input[name=confirmPassword]").css("border", "solid green 3px");
@@ -497,6 +514,7 @@ $(document).on("focusout", ".my-password-input", function(e) {
   } else if (e.target.name == "confirmPassword") {
     
     if (!regularPassword.test($(e.target).val())) {
+      checkPasswordInputMap.set(e.target.name, false);
       $(e.target).css("border", "solid red 3px");
       $(e.target).css("background-color", "#FFF9F9");
       $(getConditionTag).css("color", "red");
@@ -505,6 +523,7 @@ $(document).on("focusout", ".my-password-input", function(e) {
       e.stopPropagation();
       
     } else if ($("input[name=password]").val() != $("input[name=confirmPassword]").val()) {
+      checkPasswordInputMap.set(e.target.name, false);
       $(e.target).css("border", "solid red 3px");
       $("input[name=password]").css("border", "solid red 3px");
       $(getConditionTag).css("color", "red");
@@ -513,6 +532,7 @@ $(document).on("focusout", ".my-password-input", function(e) {
       e.stopPropagation();
       
     } else {
+      checkPasswordInputMap.set(e.target.name, true);
       $(e.target).css("border", "solid green 3px");
       $("input[name=password]").css("border", "solid green 3px");
       $(getConditionTag).css("color", "green");
@@ -526,7 +546,7 @@ $(document).on("focusout", ".my-password-input", function(e) {
 $(".my-essential-input").on("focusout", function(e){
   var getConditionTag = $(e.target).siblings("span.inputState");
   if (e.target.value == "") {
-    checkInputState[0] = false;
+    checkInputMap.set(e.target.name, false);
     $(e.target).css("border", "solid #C7CED5 1px");
     $(getConditionTag).css("color", "red");
     $(getConditionTag).css("font-size", "80%");
@@ -534,9 +554,11 @@ $(".my-essential-input").on("focusout", function(e){
     e.stopPropagation();
     
   } else if (e.target.value != "") {
-    checkInputState[0] = true;
-    $(e.target).css("border", "solid #C7CED5 1px");
-    $(e.target).css("background-color", "#FFFFFF");
+    checkInputMap.set(e.target.name, true);
+    if (e.target.readonly) {
+      $(e.target).css("border", "solid #C7CED5 1px");
+      $(e.target).css("background-color", "#FFFFFF");
+    }
     $(getConditionTag).css("color", "gray");
     $(getConditionTag).css("font-size", "80%");
     $(getConditionTag).html("");
@@ -579,23 +601,19 @@ function checkState() {
     essentials[essentials.length-1].blur();
   };
   
-  var eventGenerator = function() {
-    for (var i = 0; i < essentials.length; i++) {
-      if (essentials[i].name != undefined){
-        essentials[i].focus();
-      }
-    }
-    essentials[essentials.length-1].blur();
-  };
-  
   eventGenerator();
   
-  for (var check of checkInputState) {
-    console.log(check);
+  for (var check of checkInputMap.values()) {
     if (check == false) {
       return false;
     }
   }
+  
+  /* for (var check of checkInputState) {
+    if (check == false) {
+      return false;
+    }
+  } */
   
   return true;
 };

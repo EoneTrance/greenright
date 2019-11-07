@@ -86,7 +86,7 @@
       b.boards_id,
       b.title,
       b.contents,
-      m.name,
+      m.id,
       b.created_date,
       b.vw_count
     from
@@ -104,7 +104,7 @@
       b.boards_id,
       b.title,
       b.contents,
-      m.name,
+      m.id,
       b.created_date,
       b.vw_count
     from
@@ -122,13 +122,13 @@
       b.boards_id,
       b.title,
       b.contents,
-      m.name,
+      m.id,
       b.created_date,
       b.vw_count
     from
       boards b
         left outer join members m on b.member_id=m.member_id
-      where m.name like #{pattern}
+      where m.id like #{pattern}
       order by b.created_date desc
   </select>
   
@@ -139,7 +139,7 @@
       b.boards_id,
       b.title,
       b.contents,
-      m.name,
+      m.id,
       b.created_date,
       b.vw_count
     from
@@ -160,7 +160,7 @@
       b.member_id,
       p.board_photo_id,
       p.photo_path,
-      m.name
+      m.id
     from
       boards b
         left outer join board_photos p on b.boards_id=p.boards_id

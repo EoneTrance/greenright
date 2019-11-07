@@ -23,6 +23,7 @@ public class MypageController {
   
   @GetMapping("userinfo")
   public void userinfo(Model model) throws Exception {
+    model.addAttribute("title", " - 기본정보");
   }
   
   @PostMapping("update")
@@ -40,7 +41,8 @@ public class MypageController {
   }
   
   @GetMapping("order")
-  public void order(Member member, HttpSession session) throws Exception {
+  public void order(Member member, HttpSession session, Model model) throws Exception {
+    model.addAttribute("title", " - 주문내역");
 //    Member loginUser = memberService.getUserInfo(member);
 //    session.setAttribute("loginUser", loginUser);
   }

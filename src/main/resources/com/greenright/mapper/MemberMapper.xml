@@ -5,19 +5,19 @@
   
 <mapper namespace="com.greenright.dao.MemberDao">
   <resultMap type="Member" id="MemberMap">
-    <id column="no" property="no"/>
-    <result column="registeredDate" property="registeredDate"/>
-    <result column="cellPhone" property="cellPhone"/>
-    <result column="postalCode" property="postalCode"/>
-    <result column="defaultAddress" property="defaultAddress"/>
-    <result column="detailAddress" property="detailAddress"/>
+    <id column="member_id" property="no"/>
+    <result column="registered_date" property="registeredDate"/>
+    <result column="cell_phone" property="cellPhone"/>
+    <result column="postal_code" property="postalCode"/>
+    <result column="default_address" property="defaultAddress"/>
+    <result column="detail_address" property="detailAddress"/>
   </resultMap>
   
   <sql id="selectMember">
     select
       member_id,
       id,
-      name,
+      nickname,
       email,
       cell_phone,
       registered_date
@@ -32,9 +32,8 @@
       members(
         id,
         password,
-        name,
+        nickname,
         cell_phone,
-        tel,
         email,
         postal_code,
         default_address,
@@ -45,9 +44,8 @@
       values(
         #{id},
         password(#{password}),
-        #{name},
+        #{id},
         #{cellPhone},
-        #{tel},
         #{email},
         #{postalCode},
         #{defaultAddress},
@@ -94,7 +92,7 @@
       where
       id like #{bindValue} or
       email like #{bindValue} or
-      name like #{bindValue} or
+      nickname like #{bindValue} or
       cell_phone like #{bindValue}
     </if>
     order by member_id desc
@@ -110,7 +108,7 @@
     select id, email
     from members
     where id=#{id} and email=#{email} and question=#{question} and answer=#{answer}
-  </select> 
+  </select>
   
   <update id="setKey" parameterType="member">
     update members set authkey=#{authkey} where id=#{id}
@@ -149,20 +147,20 @@
     </if>
   </update>
   
-<!--   <update id="update" parameterType="Member"> -->
-<!--     update members -->
-<!--     <set> -->
-<!--       <if test="cellPhone != null">cell_phone=#{cellPhone}</if> -->
-<!--       <if test="nickname != null">,nickname=#{nickname}</if> -->
-<!--       <if test="email != null">,email=#{email}</if> -->
-<!--       <if test="postalCode != null">,postal_code=#{postalCode}</if> -->
-<!--       <if test="defaultAddress != null">,default_address=#{defaultAddress}</if> -->
-<!--       <if test="detailAddress != null">,detail_address=#{detailAddress}</if> -->
-<!--       <if test="question != null">,question=#{question}</if> -->
-<!--       <if test="answer != null">,answer=#{answer}</if> -->
-<!--     </set> -->
-<!--     <include refid="whereMember"></include> -->
-<!--   </update> -->
+  <update id="update" parameterType="Member">
+    update members
+    <set>
+      <if test="cellPhone != null">cell_phone=#{cellPhone}</if>
+      <if test="nickname != null">,nickname=#{nickname}</if>
+      <if test="email != null">,email=#{email}</if>
+      <if test="postalCode != null">,postal_code=#{postalCode}</if>
+      <if test="defaultAddress != null">,default_address=#{defaultAddress}</if>
+      <if test="detailAddress != null">,detail_address=#{detailAddress}</if>
+      <if test="question != null">,question=#{question}</if>
+      <if test="answer != null">,answer=#{answer}</if>
+    </set>
+    <include refid="whereMember"></include>
+  </update>
   
 <!-- 
   <select id="findByKeyword" parameterType="string" resultMap="MemberMap">
@@ -183,27 +181,9 @@
   
   <select id="findBy" parameterType="int" resultMap="MemberMap">
     <include refid="selectMember"/>,
-    <id column="member_id" property="no"/>
-    <result column="registered_date" property="registeredDate"/>
-    <result column="certification_flag" property="certificationFlag"/>
-    <result column="cell_phone" property="cellPhone"/>
-    <result column="postal_code" property="postalCode"/>
-    <result column="default_address" property="defaultAddress"/>
-    <result column="detail_address" property="detailAddress"/>
-  </resultMap>
-
-<sql id="basicColumn">
-  select
-    member_id,
-    registered_date,
-    id,
-    password,
     certification_flag,
     cell_phone,
-    tel,
     nickname,
-    name,
-    email,
     postal_code,
     default_address,
     detail_address,
@@ -219,80 +199,4 @@
     <include refid="whereMember"/>
   </delete>
    -->
-<!-- </sql> -->
-
-<!-- <sql id="where1">
-where member_id=#{no}
-</sql>
-
-<select id="findBy" parameterType="int" resultMap="MemberMap">
-  <include refid="basicColumn"/>
-  from members
-  <include refid="where1"/>
-</select>
-
-<update id="update" parameterType="Member">
-  update members
-  <set>
-    <if test="registeredDate != null">registered_date=#{registeredDate},</if>
-    <if test="id != null">id=#{id},</if>
-    <if test="password != null">password=#{password},</if>
-    <if test="certificationFlag != null">certification_flag=#{certificationFlag},</if>
-    <if test="cellPhone != null">cell_phone=#{cellPhone},</if>
-    <if test="tel != null">tel=#{tel},</if>
-    <if test="nickname != null">nickname=#{nickname},</if>
-    <if test="name != null">name=#{name},</if>
-    <if test="email != null">email=#{email},</if>
-    <if test="postalCode != null">postal_code=#{postalCode},</if>
-    <if test="defaultAddress != null">default_address=#{defaultAddress},</if>
-    <if test="detailAddress != null">detail_address=#{detailAddress},</if>
-    <if test="question != null">question=#{question},</if>
-    <if test="answer != null">answer=#{answer}</if>
-  </set>
-  <include refid="where1"/>
-</update>
-
-<insert id="insert" parameterType="Member">
-  insert into members (registered_date,
-   id,
-   password,
-   certification_flag,
-   cell_phone,
-   tel,
-   nickname,
-   name,
-   email,
-   postal_code,
-   default_address,
-   detail_address,
-   question,
-   answer)
-   values(#{registeredDate},
-   #{id},
-   password(#{password}),
-   #{certificationFlag},
-   #{cellPhone},
-   #{tel},
-   #{nickname},
-   #{name},
-   #{email},
-   #{postalCode},
-   #{defaultAddress},
-   #{detailAddress},
-   #{question},
-   #{answer}
-   )
-</insert>
-
-<delete id="delete" parameterType="int">
-  delete from members
-  <include refid="where1"/>
-</delete>
-
-<select id="findAll" resultMap="MemberMap">
-<include refid="basicColumn"/>
-  from members
-  order by name asc
-</select>
- -->
 </mapper>

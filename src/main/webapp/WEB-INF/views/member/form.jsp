@@ -64,6 +64,14 @@
 </div>
 </div>
 
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous">
+</script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+
 <script>
 "use strict"
 
@@ -256,7 +264,8 @@ $("#signform")[0].addEventListener("focusout", function(e) {
         }
       } else if ((e.target.value != "" || e.target.value != "질문 유형 선택") && e.target.type != "button") {
         $(getTagNameByName)[0].style = "border: solid gray 2px; background-color:#FFFFFF;";
-        $(getConditionTag)[0].style = "color:gray; font-size:80%;";
+        $(getConditionTag).css("color", "gray");
+        $(getConditionTag).css("font-size", "80%");
         $(getConditionTag)[0].innerHTML = "";
         e.stopPropagation();
       }

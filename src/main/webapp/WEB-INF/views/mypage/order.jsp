@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/node_modules/@chenfengyuan/datepicker/dist/datepicker.min.css">
   <link rel="stylesheet" href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
   
   <style>
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 550px}
+    .row.content {height: 550px;}
     
     /* Set gray background color and 100% height */
     .sidenav {
@@ -33,19 +32,24 @@
     }
     
     ul.nav-pills li.active a, ul.nav-pills li.active a:hover {
-      background-color: #77A43E;
       color: #FFFFFF;
     }
     
-    .nav-pills li a:hover {
+    ul.nav-pills li.active, ul.nav-pills li.active:hover {
+      background-color: #77A43E;
+    }
+    
+    .nav-pills li.my-menu:hover {
       background-color:RGBA(119,164,62,0.5);
     }
     
-    .nav-pills li a {
-      color: #77A43E;
+    .nav-pills li {
+      color:#77A43E;
+      padding-top: 2%;
+      padding-bottom: 2%;
     }
     
-    .btn-group button, .btn-group .dropdown-menu .inner li.active a,
+    .btn-group button, .btn-group .dropdown-menu .inner li.active,
     .btn-group button:focus
     {
       background-color:#77A43E;
@@ -66,8 +70,52 @@
     }
     
     
+    .my-col-1 {
+      width:8.33%;
+    }
     
+    .my-col-2 {
+      width:16.66%;
+    }
     
+    .my-col-3 {
+      width:25%;
+    }
+    
+    .my-col-4 {
+      width:33.33%;
+    }
+    
+    .my-col-5 {
+      width:41.66%;
+    }
+    
+    .my-col-6 {
+      width:50%;
+    }
+    .my-col-7 {
+      width:58.33%;
+    }
+    
+    .my-col-8 {
+      width:66.66%;
+    }
+    
+    .my-col-9 {
+      width:75%;
+    }
+    
+    .my-col-10 {
+      width:83.33%;
+    }
+    
+    .my-col-11 {
+      width:91.66%;
+    }
+    
+    .my-col-12 {
+      width:100%;
+    }
     
     
     
@@ -77,11 +125,11 @@
     
     /* On small screens, set height to 'auto' for the grid */
     @media screen and (max-width: 767px) {
-      .row.content {height: auto;} 
+      .row.content {height: auto} 
     }
     
     #myPageContent {
-      width: 960px;
+      width: 992px;
       padding-top: 10px;
       padding-bottom: 10px;
       margin: auto auto;
@@ -94,7 +142,7 @@
   </style>
   
 <div id="myPageContent">
-<nav class="navbar navbar-inverse visible-xs">
+<!-- <nav class="navbar navbar-inverse visible-xs">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -116,12 +164,12 @@
       </ul>
     </div>
   </div>
-</nav>
+</nav> -->
 
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav hidden-xs">
-      <h2 class="text-center">MyPage</h2>
+      <h2 class="text-center mt-2 font-weight-bold">MyPage</h2>
       <hr>
       <h4 class="font-weight-bold">기본정보</h4>
       <ul class="nav flex-column nav-pills nav-stacked text-center">
@@ -157,27 +205,27 @@
       
       <div class="row">
         <div class="col-sm-3">
-          <div class="well pb-2 text-center">
-            <h4>입금대기중</h4>
-            <p>3</p> 
+          <div class="well text-center">
+            <h4 class="mt-3 mb-0">입금대기중</h4>
+            <p class="mb-1">3</p>
           </div>
         </div>
         <div class="col-sm-3">
-          <div class="well pb-2 text-center">
-            <h4>발송준비중</h4>
-            <p>3</p> 
+          <div class="well text-center">
+            <h4 class="mt-3 mb-0">발송준비중</h4>
+            <p class="mb-1">3</p>
           </div>
         </div>
         <div class="col-sm-3">
-          <div class="well pb-2 text-center">
-            <h4>발송진행중</h4>
-            <p>3</p> 
+          <div class="well text-center">
+            <h4 class="mt-3 mb-0">발송진행중</h4>
+            <p class="mb-1">3</p>
           </div>
         </div>
         <div class="col-sm-3">
-          <div class="well pb-2 text-center">
-            <h4>발송완료</h4>
-            <p>3</p> 
+          <div class="well text-center">
+            <h4 class="mt-3 mb-0">발송완료</h4>
+            <p class="mb-1">3</p>
           </div>
         </div>
       </div>
@@ -193,27 +241,27 @@
                 <button type="button" class="btn btn-sm">3개월</button>
                 <button type="button" class="btn btn-sm">6개월</button>
               </div>
-              <div class="btn-group mr-3 pb-2 ml-4 text-center" role="group" 
+              <div class="btn-group mx-4 text-center" role="group" 
                    aria-label="Second group"
-                   style="border:solid #77A43E 2px;width:36%;height:120%;">
-                <span class="text-left">
-                  <input type="text" data-trigger="#from-datepicker" class="text-center"
-                         style="outline:0px;border:0px;width:30%;">
+                   style="border:solid #77A43E 2px;width:40%;height:120%;">
+                <span class="text-center pt-0">
+                  <input type="text" data-trigger="#from-datepicker" class="text-left"
+                         style="outline:0px;border:0px;width:60%;">
                   <span id="from-datepicker" class="">
-                    <img src="/img/btn_cal.gif">
+                    <img src="/images/btn_cal.gif">
                   </span>
                 </span>
-                <span class="mx-4">~</span>
-                <span class="text-right">
-                  <input type="text" data-trigger="#to-datepicker" class="text-center"
-                         style="outline:0px;border:0px;width:30%;">
-                  <span id="to-datepicker" class="mr-1">
-                    <img src="/img/btn_cal.gif">
+                <span class="mx-2">~</span>
+                <span class="text-center">
+                  <input type="text" data-trigger="#to-datepicker" class="text-left"
+                         style="outline:0px;border:0px;width:60%;">
+                  <span id="to-datepicker" class="">
+                    <img src="/images/btn_cal.gif">
                   </span>
                 </span>
               </div>
               <div class="btn-group" role="group" aria-label="Third group" style="width:15%">
-                <select class="selectpicker" data-style="btn btn-sm w-50">
+                <select class="selectpicker" data-style="btn btn-sm h-100">
                   <optgroup label="주문상태">
                     <option disable hidden>주문상태</option>
                     <option selected>전체</option>
@@ -226,20 +274,19 @@
                 </select>
               </div>
               <span class="btn-group" role="group">
-                <button type="button" class="btn btn-sm ml-4" style="width:158%">조회</button>
+                <button type="button" class="btn-sm px-3 ml-4">조회</button>
               </span>
             </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-12">
-          <table class="table table-hover text-center my-product-table">
+          <table class="table-hover text-center my-product-table my-col-12" >
           <thead>
             <tr>
-              <th class="col-sm-2 text-center">날짜</th>
-              <th class="col-sm-6 text-center">상품</th>
-              <th class="col-sm-2 text-center">상태</th>
-              <th class="col-sm-2 text-center">판매자</th>
+              <th class="text-center my-col-2">날짜</th>
+              <th class="text-center my-col-6">상품</th>
+              <th class="text-center my-col-2">상태</th>
+              <th class="text-center my-col-2">판매자</th>
             </tr>
           </thead>
           <tbody>
@@ -251,7 +298,6 @@
             </tr>
           </tbody>
           </table>
-        </div>
       </div>
       
     </div>
