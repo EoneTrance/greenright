@@ -1,5 +1,7 @@
 package com.greenright.config;
 
+import javax.servlet.Filter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppWebApplicationInitializer 
@@ -24,5 +26,12 @@ extends AbstractAnnotationConfigDispatcherServletInitializer {
   @Override
   protected String getServletName() {
     return "greenright";
+  }
+  
+  @Override
+  protected Filter[] getServletFilters() {
+    return new Filter[] {
+        new CharacterEncodingFilter("UTF-8")
+        /*, new AuthFilter()*/ };
   }
 }

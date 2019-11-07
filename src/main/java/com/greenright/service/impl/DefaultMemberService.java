@@ -1,11 +1,10 @@
 package com.greenright.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
-
 import com.greenright.dao.MemberDao;
 import com.greenright.domain.Member;
 import com.greenright.service.MemberService;
@@ -34,7 +33,17 @@ public class DefaultMemberService implements MemberService {
   }
   
   @Override
-  public void update(Member member) throws Exception {
-    memberDao.update(member);
+
+  public int update(Member member) throws Exception {
+    return memberDao.update(member);
+  }
+  
+@Override
+  public int pwcheck(String id, String pw) throws Exception {
+  Map<String,String> map = new HashMap<>();
+  map.put("userId", id);
+  map.put("userPw", pw);
+  return memberDao.pwcheck(map);
+
   }
 }

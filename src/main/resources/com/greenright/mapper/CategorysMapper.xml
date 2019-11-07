@@ -17,12 +17,34 @@
       from categorys
   </sql>
 
+  <select id="findBy"  parameterType="int" resultMap="CategoryMap">
+    select
+      category_id,
+      category_name
+     from
+      categorys
+     where category_id = #{value}
+  </select>
+  
   
   <select id="findAll" resultMap="CategoryMap">
     <include refid="sql1"/>
     order by category_id asc
   </select>
+
+  <insert id="insert" parameterType="Category">
+    insert into categorys(category_name)    
+    values(#{name}) 
+  </insert>
   
+   <update id="update" parameterType="Category">
+   update categorys set
+    category_name = #{name}
+   where category_id = #{id}
+  </update>
   
-  
+    <delete id="delete" parameterType="Category">
+    delete from categorys 
+    where category_id=#{value}
+  </delete>
 </mapper>

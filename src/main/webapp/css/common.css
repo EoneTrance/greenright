@@ -1,0 +1,11 @@
+td{
+  background: aliceblue;
+  list-style:none;
+  padding:0 20px;
+  margin: 0;
+  height: 60px;
+  font-weight:bolder;
+  text-align:center; 
+  position:relative;
+  
+}

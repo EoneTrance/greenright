@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenright.dao.GroupDao">
+
+  <!-- 컬럼 이름과 자바 객체의 프로퍼티 이름을 연결한다. -->
+  <resultMap type="Group" id="GroupMap">
+    <id column="group_id" property="id"/>
+    <result column="group_name" property="name"/>
+  </resultMap>
+
+  <sql id="sql1">
+    select 
+      group_id,
+      group_name
+      from groups
+  </sql>
+
+ <select id="findBy"  parameterType="int" resultMap="GroupMap">
+    select
+      group_id,
+      group_name
+     from
+      groups
+     where group_id = #{value}
+  </select>
+  
+  <select id="findAll" resultMap="GroupMap">
+    <include refid="sql1"/>
+    order by group_id asc
+  </select>
+  
+  <insert id="insert" parameterType="Group">
+    insert into groups(group_name)    
+    values(#{name}) 
+  </insert>
+  
+   <update id="update" parameterType="Group">
+   update groups set
+    group_name = #{name}
+   where group_id = #{id}
+  </update>
+  
+    <delete id="delete" parameterType="Group">
+    delete from groups 
+    where group_id=#{value}
+  </delete>
+  
+</mapper>

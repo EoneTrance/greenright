@@ -9,8 +9,11 @@ import com.greenright.domain.Category;
 // => 여러 페이지 컨트롤러가 사용한다.
 //
 public interface CategoryService {
-  List<Category> list() throws Exception;
-
+  List<Category> findAll() throws Exception;
+  Category get(int no) throws Exception;
+  void insert(Category category) throws Exception;
+  void update(Category category) throws Exception;
+  void delete(int no) throws Exception;
 }
 
 
