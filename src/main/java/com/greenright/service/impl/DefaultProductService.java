@@ -5,42 +5,117 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.greenright.dao.ProductDao;
-import com.greenright.dao.ProductFileDao;
+import com.greenright.dao.ProductOptionDao;
+import com.greenright.dao.ProductOptionItemDao;
+import com.greenright.dao.ProductPhotoDao;
 import com.greenright.domain.Product;
-import com.greenright.domain.ProductFile;
+import com.greenright.domain.ProductOption;
+import com.greenright.domain.ProductOptionItem;
+import com.greenright.domain.ProductPhoto;
 import com.greenright.service.ProductService;
-
 @Service
-public class DefaultProductService implements ProductService {
-  
-  @Resource
-  ProductDao productDao;
-  @Resource
-  ProductFileDao productFileDao;
-  
+public class DefaultProductService implements ProductService{
+  @Resource private ProductDao productDao;
+  @Resource private ProductPhotoDao productPhotoDao;
+  @Resource private ProductOptionDao optionDao;
+  @Resource private ProductOptionItemDao optionItemDao;
+
+
   @Transactional
   @Override
   public void insert(Product product) throws Exception {
-    if(product.getFiles().size() == 0) {
-      throw new Exception("사진 파일 없음!");
+    if(product.getPhotos().size()==0) {
+      throw new Exception("사진파일없음");
     }
     productDao.insert(product);
-    product.getFiles().get(0).setProductNo(product.getNo());
-    productFileDao.insertTrue(product.getFiles().remove(0));
-    for (ProductFile file : product.getFiles()) {
-      file.setProductNo(product.getNo());
-      productFileDao.insert(file);
+    for(ProductPhoto photo: product.getPhotos()) {
+      photo.setProductNo(product.getNo());
+      productPhotoDao.insert(photo);
     }
+    for(ProductOption option: product.getOptions()) {
+      option.setProductNo(product.getNo());
+      optionDao.insert(option);
+      for(ProductOptionItem optionItem : option.getOptionItem()) {
+        System.out.println(option.getNo());
+        optionItem.setOptionsNo(option.getNo());
+        optionItemDao.insert(optionItem);
+      }
+    }
+
   }
-  
+
   @Override
   public Product get(int no) throws Exception {
     return productDao.findWithFilesBy(no);
   }
-  
+  @Override
+  public Product getforPhoto(int no) throws Exception {
+    return productDao.findForPhoto(no);
+  }
+
   @Override
   public List<Product> list() throws Exception {
     return productDao.findAllWithFile();
   }
 
+  @Override
+  public List<Product> searchbyGroup(int no) throws Exception {
+    return productDao.findByGroupNo(no);
+  }
+
+  @Override
+  public List<Product> searchbyCategory(int no) throws Exception{
+    return productDao.findByCategoryNo(no);
+  }
+
+  @Override
+  public List<Product> listBySeller(int no) throws Exception {
+    return productDao.findAllBySeller(no);
+  }
+  @Transactional
+  @Override
+  public void delete(int no) throws Exception {
+    List<ProductOption> options = optionDao.getProductOptionItemNum(no);
+    for(ProductOption a : options) {
+      optionItemDao.deleteAll(a.getNo());
+    }
+    optionDao.deleteAll(no);
+    productPhotoDao.deleteAll(no);
+    productDao.delete(no);
+  }
+  @Transactional
+  @Override
+  public void update(Product product
+      ,String ProductOptionNo[],String ProductOptionItemNo[]) throws Exception {
+    ProductOption productOption = new ProductOption();
+    if(ProductOptionNo.length!=0) {
+      for(int i = 0 ; i<ProductOptionNo.length; i++) {
+        if(i%2==0) {
+          productOption.setOptionName(ProductOptionNo[i]);
+        }else {
+          productOption.setNo(Integer.parseInt(ProductOptionNo[i]));
+          optionDao.update(productOption);
+        }
+      }
+    }
+    if(ProductOptionItemNo.length!=0) {
+      ProductOptionItem productOptionItem = new ProductOptionItem();
+      for(int i =0 ; i<ProductOptionItemNo.length; i++) {
+        if(i%3==0) {
+          productOptionItem.setOptionItemMatter(ProductOptionItemNo[i]);
+        }else if(i%3==1) {
+          productOptionItem.setNo(Integer.parseInt(ProductOptionItemNo[i]));
+        }else {
+          productOptionItem.setOptionsNo(Integer.parseInt(ProductOptionItemNo[i]));
+          optionItemDao.update(productOptionItem);
+        }
+      }
+    }
+    productDao.update(product);
+    for (ProductPhoto photo : product.getPhotos()) {
+      photo.setProductNo(product.getNo()); 
+      productPhotoDao.insert(photo);
+    }
+  }
 }
+

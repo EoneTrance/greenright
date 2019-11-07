@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenright.dao.BoardDao">
+
+  <resultMap type="Board" id="BoardMap">
+    <id column="boards_id" property="no" />
+    <result column="title" property="title" />
+    <result column="contents" property="contents" />
+    <result column="created_date" property="createdDate" />
+    <result column="vw_count" property="viewCount" />
+    <result column="member_id" property="memberNo" />
+    <collection resultMap="MemberMap" property="member"/>
+  </resultMap>
+
+  <resultMap type="Board" id="BoardWithFilesMap">
+    <id column="boards_id" property="no" />
+    <result column="title" property="title" />
+    <result column="contents" property="contents" />
+    <result column="created_date" property="createdDate" />
+    <result column="vw_count" property="viewCount" />
+    <result column="member_id" property="memberNo" />
+    
+    <!-- 회원 데이터를 Member 객체에 저장 -->
+    <association property="member" javaType="Member">
+      <id column="member_id" property="no"/>
+      <result column="name" property="name" />
+    </association>
+
+    <!-- 자식 테이블의 데이터와 PhotoFile 객체 연결 -->
+    <collection property="photos" ofType="BoardPhoto">
+      <id column="board_photo_id" property="no" />
+      <result column="photo_path" property="filePath" />
+      <result column="boards_id" property="boardNo" />
+    </collection>
+  </resultMap>
+
+  <resultMap type="Member" id="MemberMap">
+    <id column="member_id" property="no" />
+    <result column="registered_date" property="registeredDate" />
+    <result column="id" property="id" />
+    <result column="password" property="password" />
+    <result column="certification_flag" property="certification" />
+    <result column="cell_phone" property="cellPhone" />
+    <result column="tel" property="tel" />
+    <result column="nickname" property="nickname" />
+    <result column="name" property="name" />
+    <result column="email" property="email" />
+    <result column="postal_code" property="postalCode" />
+    <result column="default_address" property="defaultAddress" />
+    <result column="detail_address" property="detailAddress" />
+    <result column="question" property="question" />
+    <result column="answer" property="answer" />
+    <result column="auth_key" property="authkey"/>
+    <result column="password_authkey" property="passwordAuthkey"/>
+    
+    
+
+  </resultMap>
+
+  <sql id="select1">
+    select
+    boards_id,
+    title,
+    created_date,
+    vw_count,
+    member_id,
+    contents
+    from
+    boards
+  </sql>
+
+
+  <select id="findBy" parameterType="int" resultMap="BoardMap">
+    <include refid="select1" />
+    where
+    boards_id=#{value}
+  </select>
+  
+  <select id="findyByKeyword1"
+          parameterType="string"
+          resultMap="BoardMap">
+  <bind name="pattern" value="'%' + _parameter + '%'"/>
+ select
+      b.boards_id,
+      b.title,
+      b.contents,
+      m.name,
+      b.created_date,
+      b.vw_count
+    from
+      boards b
+        left outer join members m on b.member_id=m.member_id
+      where b.title like #{pattern}
+      order by b.created_date desc
+      
+  </select>
+  <select id="findyByKeyword2"
+          parameterType="string"
+          resultMap="BoardMap">
+  <bind name="pattern" value="'%' + _parameter + '%'"/>
+    select
+      b.boards_id,
+      b.title,
+      b.contents,
+      m.name,
+      b.created_date,
+      b.vw_count
+    from
+      boards b
+        left outer join members m on b.member_id=m.member_id
+      where b.contents like #{pattern}
+      order by b.created_date desc
+  </select>
+  
+   <select id="findyByKeyword3"
+          parameterType="string"
+          resultMap="BoardMap">
+   <bind name="pattern" value="'%' + _parameter + '%'"/>
+     select
+      b.boards_id,
+      b.title,
+      b.contents,
+      m.name,
+      b.created_date,
+      b.vw_count
+    from
+      boards b
+        left outer join members m on b.member_id=m.member_id
+      where m.name like #{pattern}
+      order by b.created_date desc
+  </select>
+  
+   
+  
+  <select id="findAll" resultMap="BoardMap">
+    select
+      b.boards_id,
+      b.title,
+      b.contents,
+      m.name,
+      b.created_date,
+      b.vw_count
+    from
+      boards b
+        left outer join members m on b.member_id=m.member_id
+    order by b.created_date desc, b.boards_id desc
+  </select>
+   
+  <select id="findWithFilesBy" 
+          parameterType="int"
+          resultMap="BoardWithFilesMap">
+    select
+      b.boards_id,
+      b.title,
+      b.contents,
+      b.created_date,
+      b.vw_count,
+      b.member_id,
+      p.board_photo_id,
+      p.photo_path,
+      m.name
+    from
+      boards b
+        left outer join board_photos p on b.boards_id=p.boards_id
+        left outer join members m on b.member_id=m.member_id
+    where
+      b.boards_id=#{value}
+  </select>
+
+  <update id="increaseViewCount" parameterType="int">
+    update boards set
+    vw_count=vw_count + 1
+    where
+    boards_id=#{value}
+  </update>
+
+  <insert id="insert" parameterType="Board"
+    useGeneratedKeys="true" keyColumn="boards_id" keyProperty="no">
+    insert into boards(member_id, title, contents,created_date, vw_count)
+    values(#{memberNo}, #{title}, #{contents}, now(), 0)
+  </insert>
+
+  <update id="update" parameterType="Board">
+    update boards set
+    title=#{title},
+    contents=#{contents}
+    where boards_id=#{no}
+  </update>
+
+  <delete id="delete" parameterType="int">
+    delete from boards
+    where boards_id=#{no}
+  </delete>
+ 
+</mapper>

@@ -19,4 +19,3 @@ public class MainController {
     model.addAttribute("products", products);
   }
 }
-

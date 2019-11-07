@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+  <properties resource="com/greenright/conf/jdbc.properties"></properties>
+  
+  <typeAliases>
+    <package name="com.greenright.domain"/>
+  </typeAliases>
+  
+  <environments default="development">
+    
+    <environment id="development">
+      
+      <transactionManager type="JDBC"/>
+      
+      <dataSource type="POOLED">
+        <property name="driver" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <mappers>
+  
+  <mapper resource="com/greenright/mapper/MemberMapper.xml"/>
+    <mapper resource="com/greenright/mapper/BoardMapper.xml"/>
+    <mapper resource="com/greenright/mapper/BoardPhotoMapper.xml"/>
+    <mapper resource="com/greenright/mapper/ProductMapper.xml"/>
+  <mapper resource="com/greenright/mapper/ProductPhotoMapper.xml"/>
+  <mapper resource="com/greenright/mapper/ProductOptionMapper.xml"/>
+  <mapper resource="com/greenright/mapper/RecommendMapper.xml"/>
+  <mapper resource="com/greenright/mapper/CategoryMapper.xml"/>
+  </mappers>
+</configuration>
+
+
+
+
+
+
+
+
