@@ -245,7 +245,7 @@ h6#marginless {
 <div class="form-group">
        <p style="text-align: right;">
           <button class="btn btn-primary">변경</button>
-          <button type="button" class="btn btn-primary" 
+          <button type="button" class="btn btn-primary" id="board-delete"
           onclick="location.href='delete.jsp?no=${board.no}'">삭제</button>
         </p>
  </div>
@@ -257,6 +257,7 @@ h6#marginless {
 <br>
 <br>
 <jsp:include page="../greenfooter.jsp"/>
+
 
 <script>
 var temp;
