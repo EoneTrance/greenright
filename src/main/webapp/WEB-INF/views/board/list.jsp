@@ -65,7 +65,9 @@
   
   
 
- 
+  <div id="newimg" style="display:none">
+    <img  src='/images/new.jpg'/>
+    </div>
 
  <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
       <div class="container">
@@ -107,7 +109,7 @@
             <tr class="tr1">
               
               <td>${board.no}</td>
-              <td><a href='detail?no=${board.no}'>${board.title}</a></td>
+              <td id="btitle"><a href='detail?no=${board.no}'>${board.title}</a></td>
               <td>${board.member.name}</td>
               <td class="cdate">${board.createdDate}</td>
               <td>${board.viewCount}</td>
@@ -160,9 +162,6 @@
             </div>
           </div>
         </div>
-        
-         
-         
     </div>
   </section>
 
@@ -322,7 +321,29 @@ $('#my-paging-last').click(function(){
               });
     </script>
 <script>
-      var textareaVal = $(".cdate").text();
+
+
+var dt;
+dt = new Date();
+dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate();
+console.log(dt);
+var img = document.getElementById('#newimg');
+console.log(img);
+
+if($('.cdate') == dt) {
+  $('#btitle').append(imgs);
+}
+
+
+
+/* var newt = "<img src='/images/new.jpg' />"
+if(year.equals(yea)){
+  $("#btitle").append("newt");
+} */
+
+
+
+   /*    var textareaVal = $(".cdate").text();
       var count = 0;
       var dt = new Date();
       var day = dt.getDate();
@@ -343,7 +364,7 @@ $('#my-paging-last').click(function(){
           count++
         }
       }
-      $("#np").text("새글[" + count + "/" + ((textareaVal.length / 10)) + "]");
+      $("#np").text("새글[" + count + "/" + ((textareaVal.length / 10)) + "]"); */
     </script>
   <script>
       $(document).ready(function() {
