@@ -18,6 +18,24 @@
   display: none;
   width: 500px;
 }
+
+#hr1 {
+  width: 1100px;
+}
+
+.btn.btn-primary {
+   border-top-left-radius: 2px;
+   border-top-right-radius: 2px;
+   border-bottom-right-radius: 2px;
+   border-bottom-left-radius: 2px;
+}
+
+.banner {
+  margin-top: 60px;
+  max-width: 500px;
+  max-height: 500px;
+  
+}
 </style>
 </head>
 <body>
@@ -41,9 +59,60 @@
 </c:forEach>
 </p>
 
-<table id="list">  
-</table>
-<a  id ="editNum" href='detailedit?no=${board.no}'>수정</a>
+  <!-- <div id='content'
+    style="width: 1140px; margin-left: 374px; padding-right: 15px; padding-left: 15px;"> -->
+    <div id='content'
+    style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
+    <h1 style="text-align: center; margin-top: 40px; font-size: 40px;">Community</h1>
+    <p style="text-align: center;">GreenRight 커뮤니티입니다.</p>
+    <form action='update' method='post' enctype='multipart/form-data' 
+      style="width: 1140px; padding-right: 15px; padding-left: 15px;">
+      <table style="margin: auto; margin-top: 20px;">
+        <thead>
+          <tr>
+            <th style="width:1100px;">
+              <hr id="hr1">
+              <p style="text-align: center; font-size: 25px;">${board.title}</p>
+              <hr id="hr1">
+              <div class="row">
+                <div class="col">
+                  <span style="font-size: 13px; font-weight: normal;">등록일: ${board.createdDate}</span><br> 
+                  <span style="font-size: 13px; font-weight: normal;">작성자 : ${board.member.name}</span>
+                </div>
+                <div class="col" style="text-align: right;">
+                  <span style="font-size: 13px; font-weight: normal;">조회수: ${board.viewCount}</span><br> 
+                    <span style="font-size: 13px; font-weight: normal;">추천수: 1</span>
+                </div>
+              </div>
+              <hr id="hr1">
+               <input id="jisooBoardNo" type='text' name='no' value='${board.no}' style="display:none;"><br>
+              <p style="text-align: center;">
+              <c:choose>
+                <c:when test="${board.photos[0].filePath == null}">                  
+                </c:when>
+                <c:otherwise>
+                  <c:forEach items="${board.photos}" var="photo">
+                  <img src='/upload/board/${photo.filePath}' class='banner'>
+                  <br>
+                  <br>
+                </c:forEach>                
+                </c:otherwise>
+              </c:choose>
+              </p>
+              <span style="display: block; font-weight: normal; width: 1100px; font-size: 20px; word-break:break-all;">${board.contents}</span>
+              <hr id="hr1">
+              <p style="text-align: right;">
+                <button type="button" class="btn btn-primary"
+                  onclick="location.href='detailedit.jsp?no=${board.no}'">수정</button>
+              </p>
+            </th>
+          </tr>
+        </thead>
+      </table>
+      <table id="list">
+      </table>
+    </form>
+  </div>
 
 </form>
  <button class='recommend'>추천</button>
@@ -58,34 +127,35 @@ window.onload = function(){
    });
 };
 
-</script>
-<div class="container">
-    <label for="content">댓글</label>
-    <div class="input-group">
-      <input type="text" class="my-comment-form"
-        placeholder="내용을 입력하세요.">
-      <button class='my-add-btn'>등록</button>
+  <div class="container" style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
+    <div style="width: inherit;">
+    <div class="input-group" style="width: 870px; margin: auto;">댓글</div>
+    <div class="input-group" style="width: 870px; margin: auto;">
+      <input type="text" class="my-comment-form" style="width:800px; height:70px;" placeholder="내용을 입력하세요.">
+      <button id='my-add-btn' class="btn btn-primary">등록</button>
     </div>
     </div>
-    <div>
-      <br> <br>
-      
-      <div id='mymy-comment'>
+    <br> <br>
+
+  <div style="width: 1140px;">
+    <div id='mymy-comment' style="width: 870px; margin: auto;">
       <c:forEach items="${comments}" var="comment">
-        <div class='my-comment-div comment-${comment.no}' data-no='${comment.no}'>
-          <span class='id-${comment.no}'>${comment.id}</span> <span class='createdDate-${comment.no}'>${comment.createdDate}</span>
+        <div class='my-comment-div comment-${comment.no}'
+          data-no='${comment.no}'>
+          <span class='id-${comment.no}'>${comment.id}</span> 
+          <span class='createdDate-${comment.no}'>${comment.createdDate}</span>
           <p class='my-comment-content contents-${comment.no}'>${comment.contents}</p>
           <div>
             <textarea class="my-comment">${comment.contents}</textarea>
             <c:if test="${comment.memberNo == memberNo}" >
               <div class="my-comment-control"
                 data-member-no='${comment.memberNo}'>
-                <button class='my-save-btn' style="display: none"
+                <button class='my-save-btn btn btn-primary' style="display: none"
                   data-no='${comment.no}' align="right">저장</button>
-                <button class='my-cancel-btn' style="display: none"
+                <button class='my-cancel-btn btn btn-primary' style="display: none"
                   data-no='${comment.no}' align="right">취소</button>
-                <button class='my-update-btn' >수정</button>
-                <button class='my-delete-btn'>삭제</button>
+                <button class='my-update-btn btn btn-primary'>수정</button>
+                <button class='my-delete-btn btn btn-primary'>삭제</button>
               </div>
             </c:if>
           </div>
@@ -94,8 +164,10 @@ window.onload = function(){
       </c:forEach>
 
     </div>
-
   </div>
+  <div style="margin-bottom: 50px;"></div>
+  </div>
+  
 
 
 
@@ -163,10 +235,10 @@ $('.recommend').on('click',(event) =>{
           comment += "<p class='my-comment-content contents-"+result.no+"'>"+result.contents+"</p><div>";
           comment += "<textarea class='my-comment'>"+result.contents+"</textarea>";
           comment += "<div class='my-comment-control' data-member-no='"+result.memberNo+"'>";
-          comment += "<button class='my-save-btn' style='display: none' data-no='"+result.no+"' align='right'>저장</button>";
-          comment += "<button class='my-cancel-btn' style='display: none' data-no='"+result.no+"' align='right'>취소</button>";
-          comment += "<button class='my-update-btn' >수정</button>";
-          comment += "<button class='my-delete-btn'>삭제</button></div></div><hr></div>";
+          comment += "<button class='my-save-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>저장</button>";
+          comment += "<button class='my-cancel-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>취소</button>";
+          comment += "<button class='my-update-btn btn btn-primary'>수정</button>";
+          comment += "<button class='my-delete-btn btn btn-primary'>삭제</button></div></div><hr></div>";
           $("#mymy-comment").append(comment); 
          
           var comment = "<div class='ana comment-"+result.no+"' data-no='"+result.no+"'>";

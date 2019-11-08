@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.greenright.domain.Board;
 import com.greenright.domain.Comment;
+import com.greenright.domain.PagingControl;
 import com.greenright.domain.Recommend;
 import com.greenright.service.BoardService;
 import com.greenright.service.CommentService;
@@ -30,6 +31,7 @@ public class BoardController {
   private CommentService commentService;
   @Resource
   private RecommendService recommendService;
+  
   @GetMapping("form")
   public void form() {}
   @GetMapping("detailedit")
@@ -76,13 +78,16 @@ public class BoardController {
     model.addAttribute("boards", boards);
     model.addAttribute("memberName", session.getAttribute("memberName"));
     model.addAttribute("loginName", session.getAttribute("loginName"));
+    PagingControl pc = new PagingControl();
+    pc.setListCount(20);
+    model.addAttribute("Pagings",pc);
   }
 
   @PostMapping("update")
   public String update(HttpServletRequest request, Board board, MultipartFile[] filePath
       ,String boardPhotoNumber[])
       throws Exception {
-      
+   
     board.setPhotos(boardPhotoWriter.getPhotoFiles(filePath));
 
     boardService.update(board,boardPhotoNumber);
@@ -108,7 +113,6 @@ public class BoardController {
   @PostMapping("detail/add")
   @ResponseBody
   public Object commentadd(Comment comment) throws Exception {
-    // 서비스 컴포넌트를 통해 데이터를 저장한다.
     commentService.insert(comment);
     return comment;
     
@@ -127,8 +131,7 @@ public class BoardController {
   public String commentupdate(@RequestParam(value = "contents", required = false) String contents, @RequestParam(value = "commentNo", required = false) String commentNo) throws Exception {
     return String.valueOf(commentService.update(contents,commentNo));
   }
-  
-  @PostMapping("recommend/add")
+    @PostMapping("recommend/add")
   @ResponseBody
   public Object recommendadd(Recommend recommend) throws Exception{
     recommendService.insert(recommend);
@@ -137,6 +140,7 @@ public class BoardController {
   
   @PostMapping("recommend/delete")
   @ResponseBody
+
   public void recommenddelete(Recommend recommend)throws Exception{
     recommendService.delete(recommend);
   }

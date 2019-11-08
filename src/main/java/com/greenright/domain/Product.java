@@ -3,6 +3,7 @@ package com.greenright.domain;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Product  implements Serializable {
 
@@ -10,9 +11,11 @@ public class Product  implements Serializable {
   private int no ; 
   private int groupNo;
   private int memberNo;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date registeredDate;
   private int diy;
   private int price;
+  private int quantity;
   private String productName;
   private String description;
   private Date expirationDate;
@@ -106,13 +109,19 @@ public class Product  implements Serializable {
   public void setGroup(Group group) {
     this.group = group;
   }
+  public int getQuantity() {
+    return quantity;
+  }
+  public void setQuantity(int quantity) {
+    this.quantity = quantity;
+  }
   @Override
   public String toString() {
     return "Product [no=" + no + ", groupNo=" + groupNo + ", memberNo=" + memberNo
-        + ", registeredDate=" + registeredDate + ", diy=" + diy + ", price=" + price
-        + ", productName=" + productName + ", description=" + description + ", expirationDate="
-        + expirationDate + ", origin=" + origin + ", photos=" + photos + ", options=" + options
-        + ", seller=" + seller + ", group=" + group + "]";
+        + ", registeredDate=" + registeredDate + ", diy=" + diy + ", price=" + price + ", quantity="
+        + quantity + ", productName=" + productName + ", description=" + description
+        + ", expirationDate=" + expirationDate + ", origin=" + origin + ", photos=" + photos
+        + ", options=" + options + ", seller=" + seller + ", group=" + group + "]";
   }
   
   

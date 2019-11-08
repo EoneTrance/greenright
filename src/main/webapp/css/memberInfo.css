@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+#memberInfoForm {
+  width: 960px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: auto auto;
+  text-align: center;
+}
+
+#memberInfoForm th {
+  background-color:#F8F8F8;
+  padding: 43px;
+  width: 20%;
+  text-align: center;
+}
+
+#memberInfoForm td {
+  padding: 30px;
+}
+
+#memberInfoForm dl {
+  display:inline-block;
+}
+
+#memberInfoForm dt {
+  width:450px;
+  background-color:#F8F8F8;
+  padding: 30px;
+}
+
+#memberInfoForm dd {
+  width:450px;
+}
+
+#memberInfoForm input[type=button], #memberInfoForm .my-address {
+  width:248px;
+  height:40px;
+}
+
+
+#memberInfoForm #passwordChange input {
+  width:248px;
+  height:40px;
+}
+
+#memberInfoForm input, #memberInfoForm select {
+  height: 40px !important;
+  width: 500px;
+  display: inline-block;
+  margin-bottom: 3px;
+  margin-top: 3px;
+}
+
+
+#memberInfoForm div.inputState {
+  display: inline-block;
+  width: 300px;
+}
+
+#memberInfoForm input.notChange {
+  border:0px !important;
+  background-color: rgba( 255, 255, 255, 0) !important;
+  outline: none !important;
+}
