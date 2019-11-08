@@ -44,10 +44,6 @@ inpit {
   cursor: pointer;
 }
 
-.dv {
-  border: solid 0.5px #82ae46;
-}
-
 .fordivide {
   display: none;
 }
@@ -230,6 +226,28 @@ h6#marginless {
 input:focus {
   outline: 2px solid #82ae46;
 }
+input.btn.btn-primary.py-3.px-4 {
+    width: 58px;
+}
+.optionAdd {
+    width: 100px !important;
+    height:33px !important;
+}
+button#button {
+    width: 100px;
+}
+td.dv {
+    width: 980px;
+    padding-left: 22px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.margininput{
+margin :0px 10px 0px 10px;
+}
+#postionsaver{
+margin:0px 10px 0px 10.9px !important;
+}
 </style>
 <script src="../../js/jquery.min.js"></script>
 <script src="../../js/jquery-migrate-3.0.1.min.js"></script>
@@ -337,8 +355,8 @@ input:focus {
           type="text" name="optionquantity" value="neverNo" hidden />
       </h6>
       <table id="optionplus">
-       <tr><td class="dv">옵션명<input type="text" name="optionName" required>
-    <table class="dr"><input class="btn btn-primary py-3 px-4" type="button" id="optionitemadd" value="옵션항목추가"/></table>
+       <tr><td class="dv">옵션명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<input type="text" name="optionName"  id ="postionsaver"class="margininput" placeholder="수량-색깔-성별 형태로입력" required>
+    <table class="dr"><input class="btn btn-primary py-3 px-4 optionAdd" type="button" id="optionitemadd" value="옵션항목추가"/></table>
     <input type ="text" name="optionContents" value="divide" class="fordivide">
     <input type ="text" name="optionprice" value="divide" class="fordivide">
     <input type ="text" name="optionquantity" value="divide" class="fordivide">
@@ -371,10 +389,10 @@ $(document).on("click",".adderButton",function(){
             "click",
             "#optionitemadd",
             function() {
-              var oip = '<tr><td>옵션내용<input type="text" name="optionContents" required>';
-              oip += '추가금액<input type="number" name="optionprice" required min="0" step=10>';
-              oip += '개수<input type="number" name="optionquantity" required min="0" class="optionsQuantity">';
-              oip += '<input class="btn btn-primary py-3 px-4" type="button" id="buttonDel"value="옵션항목삭제"/>';
+              var oip = '<tr><td>옵션내용:<input type="text"  class="margininput" name="optionContents" placeholder="수량-색깔-성별 형태로입력" required>';
+              oip += '추가금액:<input type="number" name="optionprice" class="margininput" required min="0" step=10>';
+              oip += '개수:<input type="number" name="optionquantity"  class="margininput" required min="0" class="optionsQuantity">';
+              oip += '<input class="btn btn-primary py-3 px-4 optionAdd margininput" type="button" id="buttonDel" value="옵션항목삭제"/>';
               oip += '</td></tr>';
               $(this).parent().append(oip);
             });

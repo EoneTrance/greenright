@@ -72,6 +72,15 @@ public class ProductController {
     model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);
   }
+  @GetMapping("buydetail")
+  public void buydetail(Model model, int no) throws Exception {
+    Product product = productService.get(no);
+    Product productPhoto = productService.getforPhoto(no);
+    model.addAttribute("productPhoto", productPhoto);
+    model.addAttribute("product", product);
+  }
+  
+  
   @GetMapping("delete")
   public String delete(int no) throws Exception {
     productService.delete(no);

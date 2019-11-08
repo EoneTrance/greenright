@@ -53,7 +53,7 @@
                  <c:forEach items="${products}" var="product">
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
-                        <a href="#" class="img-prod">
+                        <a href="/greenright/product/buydetail?no=${product.no}" class="img-prod">
                         <img class="img-fluid" src='/upload/product/${product.photos[0].photoPath}'  alt="Colorlib Template" style="width:253px; height:202px; object-fit:cover;"> 
                             <span class="status">30%</span>
                         </a>
@@ -301,7 +301,7 @@ $('#my-command').on('click','.my-wish-add', (e) => {
               for(var i = 0 ; i < list.length; i++) {
                 tableTag += "<div class='col-md-6 col-lg-3'>"
                 tableTag += "<div class='product'>"
-                tableTag += "<a href='#' class='img-prod'>"
+                tableTag += "<a href='/greenright/product/buydetail?no="+list[i].no+"' class='img-prod'>"
                 tableTag += "<img class='img-fluid' src='/upload/product/"+list[i].photos[0].photoPath+ "' alt='Colorlib Template' style='width:253px; height:202px; object-fit:cover;' >" 
                 tableTag += "<span class='status'>30%</span>"
                 tableTag += "<div class='overlay'></div></a>"
@@ -348,7 +348,7 @@ $('#my-command').on('click','.my-wish-add', (e) => {
                 for(var i = 0 ; i < list.length; i++) {
                   tableTag += "<div class='col-md-6 col-lg-3'>"
                   tableTag += "<div class='product'>"
-                  tableTag += "<a href='#' class='img-prod'>"
+                  tableTag += "<a href='/greenright/product/buydetail?no="+list[i].no+"' class='img-prod'>"
                   tableTag += "<img class='img-fluid' src='/upload/product/"+list[i].photos[0].photoPath+ "' alt='Colorlib Template' style='width:253px; height:202px; object-fit:cover;' >" 
                   tableTag += "<span class='status'>30%</span>"
                   tableTag += "<div class='overlay'></div></a>"
