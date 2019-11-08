@@ -17,6 +17,6 @@ public class DefaultWishListService implements WishListService {
 
   @Override
   public int count(int no) throws Exception {
-    return wishListDao.count( no);
+    return wishListDao.count(no);
   }
 }

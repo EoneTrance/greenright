@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.greenright.domain.Member;
 import com.greenright.domain.WishList;
 import com.greenright.service.WishListService;
 
@@ -29,9 +30,8 @@ public class WishListController {
   @ResponseBody
   @GetMapping("count")
   public int count(HttpSession session) throws Exception {
-    //session.setAttribute("no", 3);
-    if(session.getAttribute("no") != null)
-      return wishListService.count((int)session.getAttribute("no"));
+    if(session.getAttribute("loginUser") != null)
+      return wishListService.count(((Member)session.getAttribute("loginUser")).getNo());
     else
       return 0;
   }

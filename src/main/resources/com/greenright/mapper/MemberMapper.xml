@@ -5,7 +5,7 @@
   
 <mapper namespace="com.greenright.dao.MemberDao">
   <resultMap type="Member" id="MemberMap">
-    <id column="no" property="no"/>
+    <id column="member_id" property="no"/>
     <result column="registeredDate" property="registeredDate"/>
     <result column="cellPhone" property="cellPhone"/>
     <result column="postalCode" property="postalCode"/>
