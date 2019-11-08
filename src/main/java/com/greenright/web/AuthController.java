@@ -23,7 +23,10 @@ public class AuthController {
   UserMailSendService mailSender;
 
   @GetMapping("form")
-  public void form() throws Exception {
+  public void form(HttpSession session) throws Exception {
+    if(session.getAttribute("loginUser") != null) {
+      session.removeAttribute("loginUser");
+    }
   }
 
   @PostMapping("login")
@@ -36,6 +39,6 @@ public class AuthController {
     Member loginUser = memberService.login(member);
     session.setAttribute("loginUser", loginUser);
 
-    return "redirect:../mypage/memberinfo";
+    return "redirect:/greenright/main";
   }
 }

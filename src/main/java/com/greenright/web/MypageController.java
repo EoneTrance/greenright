@@ -56,5 +56,10 @@ public class MypageController {
       return "fail";
     }
   }
+  
+  @GetMapping("wishlist")
+  public void wishlist() throws Exception {
+  }
+
 }
 

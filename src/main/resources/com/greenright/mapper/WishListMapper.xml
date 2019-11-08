@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenright.dao.WishListDao">
+
+  <resultMap type="WishList" id="WishListMap">
+    <id column="member_id" property="memberId" />
+    <id column="product_id" property="productId" />
+    <result column="registered_date" property="registeredDate" />
+    <result column="quantity" property="quantity" />
+  </resultMap>
+
+  <insert id="insert" parameterType="WishList">
+    insert into baskets(member_id,product_id) values (#{memberId},#{productId});
+  </insert>
+  
+  <select id="count" parameterType="int" resultType="int">
+    select count(*) from baskets where member_id=#{no};
+  </select>
+</mapper>
+

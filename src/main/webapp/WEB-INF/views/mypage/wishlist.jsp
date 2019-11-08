@@ -3,110 +3,72 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
-    <link rel='stylesheet' href='/css/bootstrap.min.css'>
-    <link rel="stylesheet" href="/css/fontawesome/css/all.css">
-    <link rel="stylesheet" href="/css/animate.css">
-    <link rel="stylesheet" href="/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/css/magnific-popup.css">
-    <link rel="stylesheet" href="/css/aos.css">
-    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/css/jquery.timepicker.css">
-    <link rel="stylesheet" href="/css/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="utf-8">
+<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+<link rel='stylesheet' href='/css/bootstrap.min.css'>
+<link rel="stylesheet" href="/css/fontawesome/css/all.css">
+<link rel="stylesheet" href="/css/animate.css">
+<link rel="stylesheet" href="/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/css/owl.theme.default.min.css">
+<link rel="stylesheet" href="/css/magnific-popup.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="/css/jquery.timepicker.css">
+<link rel="stylesheet" href="/css/style.css">
     <!--------------------------------------------------------------------------------------->
     <div class="hero-wrap hero-bread" style="background-image: url('../../images/main.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <p class="breadcrumbs"><span class="mr-2"><a href="#">Green</a></span> <span>Right</span></p>
-            <h1 class="mb-0 bread">친환경 제품을 사용해 보세요.</h1>
+            <p class="breadcrumbs"><span class="mr-2"><a href="/greenright/main">Home</a></span> <span>Wishlist</span></p>
+            <h1 class="mb-0 bread">My Cart</h1>
           </div>
         </div>
       </div>
     </div>
     <!--------------------------------------------------------------------------------------->
-    <!--------------------------------------------------------------------------------------->
-    <section class="ftco-section">
-        <div class="container">
-            <!------------------------------------------------------------------------------->
-            <div class="row justify-content-center">
-                <div class="col-md-10 mb-5 text-center" style=margin-bottom:0px;>
-                    <ul class="product-category big_c">
-                        <li value=0 class="searchbtn" id ="set"><a  class="vv active" id="productAll"><b>All</b></a></li>
-                        <li value=1 class="searchbtn" id ="clean"><a class="vv"  ><b>청소</b></a></li>
-                        <li value=2 class="searchbtn" id ="office"><a class="vv" ><b>사무</b></a></li>
-                        <li value=3 class="searchbtn" id ="organic"><a class="vv" ><b>유기농</b></a></li>
-                        <li value=4 class="searchbtn" id ="furniture"><a class="vv" ><b>가구</b></a></li>
-                        <li value=5 class="searchbtn" id ="upcycleing"><a class="vv" ><b>업사이클링</b></a></li>
-                    </ul>
-                    <div class="listchange">
-                    </div>
-                </div >
-            </div>
-            <!-- ----------------------------------------------------------------- -->
-            <div id="my-command" class="row addto">
-                 <c:forEach items="${products}" var="product">
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod">
-                        <img class="img-fluid" src='/upload/product/${product.photos[0].photoPath}'  alt="Colorlib Template" style="width:253px; height:202px; object-fit:cover;"> 
-                            <span class="status">30%</span>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">
-                                ${product.productName}
-                            </a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span class="mr-2 price-dc">
-                                    <fmt:formatNumber value="${product.price+5000}" groupingUsed="true" />
-                                      </span><span class="price-sale">
-                                    <fmt:formatNumber value="${product.price}" groupingUsed="true" /></span></p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3" data-no='${product.no}'>
-                                <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <i class="fas fa-comments"></i>
-                                    </a>
-                                    <a href="#" data-no="${product.no}" class="buy-now d-flex justify-content-center align-items-center mx-1 my-wish-add">
-                                        <span><i data-no="${product.no}" class="fas fa-cart-plus"></i></span>
-                                    </a>
-                                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                        <span><i class="far fa-heart"></i></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </c:forEach> 
-            </div><!-- row 클래스 종료 -->
-            <!--------------------------------------------------------------------------->
-            <div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-              <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
-              </ul>
-            </div>
-          </div>
+    <section class="ftco-section ftco-cart">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 ftco-animate">
+        <div class="cart-list">
+          <table class="table">
+            <thead class="thead-primary">
+              <tr class="text-center">
+                <th>&nbsp;</th>
+                <th>Product List</th>
+                <th>&nbsp;</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center">
+                <td class="product-remove"><a href="#"><i class="fas fa-times"></i></a></td>
+                <td class="image-prod"><div class="img" style="background-image:url(/images/product-1.jpg);"></div></td>
+                <td class="product-name">
+                  <h3>Bell Pepper</h3>
+                  <p>Far far away, behind the word mountains, far from the countries</p>
+                </td>
+                <td class="price">$4.90</td>
+                <td class="quantity">
+                  <div class="input-group mb-3">
+                    <input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+                  </div>
+                </td>
+                <td class="total">5000￦</td>
+              </tr><!-- END TR-->
+            </tbody>
+          </table>
         </div>
-        <!--------------------------------------------------------------------------->
-        </div><!--컨테이너종료-->
-    </section><!--section종료-->
-
+      </div>
+    </div>
+  </div>
+</section>
+<!----------------------------------------------section end----------------------------------->
         <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
       <div class="container py-4">
         <div class="row d-flex justify-content-center py-5">
@@ -215,32 +177,6 @@
 <script src="/js/aos.js"></script>
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
-
-<script>
-$('#my-command').on('click','.my-wish-add', (e) => {
-  e.preventDefault();
-  var a = $(e.target).attr('data-no');
-  var param = "productNo="+a;
-  $.ajax({
-    url : "mypage/wishlist/add",
-    type: 'get',
-    cache: false,
-    data: param,
-    dataType: "text",
-    success : function(result){
-      alert("장바구니 추가!");
-      var count = $('#my-wishlist').text().substring(1,2);
-      count = Number(count)+1;
-      $('#my-wishlist').text("["+count+"]");
-    },
-    error : function(request, status, error ) {
-      console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-        alert("이미 장바구니에 있습니다!");
-      }
-  });
-});
-</script>
-
 <script>
    // 카테고리 검새액(유기농, 가구 ... )
       $(function(){
