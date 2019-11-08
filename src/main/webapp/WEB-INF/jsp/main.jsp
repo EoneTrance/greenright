@@ -111,7 +111,7 @@
                  <c:forEach items="${products}" var="product">
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
-                        <a href="#" class="img-prod">
+                        <a href="/greenright/product/buydetail?no=${product.no}" class="img-prod">
                         <img class="img-fluid" src='/upload/product/${product.photos[0].photoPath}' width="253px" height="202px" alt="Colorlib Template"> 
                             <span class="status">30%</span>
                             <div class="overlay"></div>
@@ -329,7 +329,7 @@
               for(var i = 0 ; i < list.length; i++) {
                 tableTag += "<div class='col-md-6 col-lg-3'>"
                 tableTag += "<div class='product'>"
-                tableTag += "<a href='#' class='img-prod'>"
+                tableTag += "<a href='/greenright/product/buydetail?no="+list[i].no+"' class='img-prod'>"
                 tableTag += "<img class='img-fluid' src='/upload/product/"+list[i].photos[0].photoPath+ "'width='253px' height='202px' alt='Colorlib Template' >" 
                 tableTag += "<span class='status'>30%</span>"
                 tableTag += "<div class='overlay'></div></a>"
@@ -373,7 +373,7 @@
                 for(var i = 0 ; i < list.length; i++) {
                   tableTag += "<div class='col-md-6 col-lg-3'>"
                   tableTag += "<div class='product'>"
-                  tableTag += "<a href='#' class='img-prod'>"
+                    tableTag += "<a href='/greenright/product/buydetail?no="+list[i].no+"' class='img-prod'>"
                   tableTag += "<img class='img-fluid' src='/upload/product/"+list[i].photos[0].photoPath+ "'width='253px' height='202px' alt='Colorlib Template' >" 
                   tableTag += "<span class='status'>30%</span>"
                   tableTag += "<div class='overlay'></div></a>"

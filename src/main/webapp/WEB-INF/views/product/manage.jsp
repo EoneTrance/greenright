@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -147,7 +148,7 @@ div#forright {
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
-            <li class="my-menu active"><a href="userinfo">기본정보</a></li>
+            <li class="my-menu active"><a href="/greenright/mypage/userinfo">기본정보</a></li>
             <li class="my-menu"><a href="order">주문내역</a></li>
             <li class="my-menu"><a href="#">관심상품</a></li>
             <li class="my-menu"><a href="#">업적</a></li>
@@ -166,11 +167,11 @@ div#forright {
           <hr>
           <h4 class="font-weight-bold text-center">기본정보</h4>
           <ul class="nav flex-column nav-pills nav-stacked">
-            <li class="my-menu"><a href="userinfo">기본정보</a></li>
+            <li class="my-menu"><a href="/greenright/mypage/userinfo">기본정보</a></li>
           </ul>
           <h4 class="font-weight-bold text-center">구매</h4>
           <ul class="nav flex-column nav-pills nav-stacked">
-            <li class="my-menu"><a href="order">주문내역</a></li>
+            <li class="my-menu"><a href="/greenright/mypage/order">주문내역</a></li>
             <li class="my-menu"><a href="#section3">관심상품</a></li>
             <li class="my-menu"><a href="#section3">업적</a></li>
           </ul>
@@ -249,7 +250,7 @@ div#forright {
                       <td>${product.group.category.categoryName}</td>
                       <td>${product.group.groupName}</td>
                       <td>${product.registeredDate}</td>
-                      <td>${product.price}</td>
+                      <td><fmt:formatNumber value="${product.price}" groupingUsed="true" /></td>
                     </tr>
                   </c:forEach>
                 </tbody>
@@ -302,16 +303,15 @@ $(document).on("change","#Aselect",function() {
        for(var i = 0 ; i < list.length; i++) {
         tableTag += "<tr><td>"+list[i].no+"</td>"
         tableTag += "<td><a href='detail?no="+list[i].no+"'>"+list[i].productName+"</a></td>"
-        tableTag += "<td>"+list[i].group.category.categoryName+"</td>"
-        tableTag += "<td>"+list[i].group.groupName+"</td>" 
-        tableTag += "<td>"+list[i].registeredDate+"</td>"
-        tableTag += "<td>"+list[i].price+"</td></tr>";
-      };
+        tableTag += "<td>" +list[i].group.category.categoryName+"</td>"
+        tableTag += "<td>" +list[i].group.groupName+"</td>" 
+        tableTag += "<td>" +list[i].registeredDate+"</td>"
+        tableTag += "<td>" +list[i].price + "</td></tr>";
+   };
       $("#addto").html(tableTag);  
     }
   });
 })
-    
     
     $(document).on("change","#subSelect",function() {
       var allData ={"no" : $('#subSelect option:selected').val() }
@@ -330,11 +330,17 @@ $(document).on("change","#Aselect",function() {
             tableTag += "<td>"+list[i].group.category.categoryName+"</td>"
             tableTag += "<td>"+list[i].group.groupName+"</td>" 
             tableTag += "<td>"+list[i].registeredDate+"</td>"
-            tableTag += "<td>"+list[i].price+"</td></tr>";
+            tableTag += "<td>numberFormat("+list[i].price+")</td></tr>";
           };
           $("#addto").html(tableTag);  
         }
       });
     })
+    
+    
+    function numberFormat(inputNumber) {
+   return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+    
 </script>
 
