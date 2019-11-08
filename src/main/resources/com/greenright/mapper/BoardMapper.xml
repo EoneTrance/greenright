@@ -145,7 +145,7 @@
     from
       boards b
         left outer join members m on b.member_id=m.member_id
-    order by b.created_date desc, b.boards_id desc
+    order by b.created_date desc, b.boards_id desc  limit #{offset}, #{pageSize}
   </select>
    
   <select id="findWithFilesBy" 
@@ -193,5 +193,7 @@
     delete from boards
     where boards_id=#{no}
   </delete>
- 
+ <select id="countAll" resultType="int">
+    select count(*) from boards
+  </select>
 </mapper>

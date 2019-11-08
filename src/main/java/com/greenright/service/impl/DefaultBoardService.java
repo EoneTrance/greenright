@@ -1,5 +1,6 @@
 package com.greenright.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -52,12 +53,17 @@ public class DefaultBoardService implements BoardService {
   }
 
   @Override
-  public List<Board> list() throws Exception {
-    List<Board> boardList= boardDao.findAll();
+  public List<Board> list(int pageNo, int pageSize) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("offset", (pageNo - 1) * pageSize);
+    param.put("pageSize", pageSize);
+    
+    List<Board> boardList= boardDao.findAll(param);
       for(Board b : boardList) {
         int a = b.getNo();
         b.setRecommendation(recommendDao.CountRecommend(a));
       }
+     
     return boardList;
   }
 
@@ -108,6 +114,11 @@ public class DefaultBoardService implements BoardService {
       b.setRecommendation(recommendDao.CountRecommend(a));
     }
   return boardList;
+  }
+  
+  @Override
+  public int size() throws Exception {
+    return boardDao.countAll();
   }
 
 
