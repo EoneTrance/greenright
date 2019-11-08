@@ -76,8 +76,10 @@ public class ProductController {
   public void buydetail(Model model, int no) throws Exception {
     Product product = productService.get(no);
     Product productPhoto = productService.getforPhoto(no);
+    List<Product>productLiST = productService.gettopbyCategoryNum(no);
     model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);
+    model.addAttribute("productLiST",productLiST);
   }
   
   

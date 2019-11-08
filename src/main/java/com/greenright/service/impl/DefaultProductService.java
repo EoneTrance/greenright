@@ -121,5 +121,13 @@ public class DefaultProductService implements ProductService{
       productPhotoDao.insert(photo);
     }
   }
+
+  @Override
+  public List<Product> gettopbyCategoryNum(int no) throws Exception {
+   int a =productDao.getgroupNo(no); 
+    // 상품번호로 그룹 번호를 알아내는 메서드
+   return productDao.getTopOnGroup(a);
+    // 그룹번호로 최신순 4개의 상품을 추천하는 메서드 
+  }
 }
 

@@ -13,4 +13,5 @@ List<Product> searchbyGroup(int no) throws Exception;
 List<Product> searchbyCategory(int no) throws Exception;
 void delete (int no)throws Exception;
 void update(Product product,String optionName[],String optionItemMatter[]) throws Exception;
+List<Product> gettopbyCategoryNum(int no) throws Exception;
 }

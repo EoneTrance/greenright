@@ -232,6 +232,36 @@ select
     description=#{description}
     where product_id=#{no}
   </update>
-  
+  <select id="getgroupNo" resultType="int" parameterType="int">
+  select group_id from products 
+  where product_id  =#{no}
+  </select>
+  <select id="getTopOnGroup" resultMap="ProductWithFilesMap" parameterType="int">
+  select
+    p.product_id,
+    p.group_id,
+    p.price,
+    p.product_name,
+    p.description,
+    p.registered_date,
+    p.quantity,
+    m.name,
+    g.group_name, 
+    g.category_id,
+    c.category_name,
+    f.product_id,
+    f.photo_path
+    from products p
+    left outer join product_photos f on (p.product_id = f.product_id AND
+    f.main_photo_flag = 0)
+    left outer join sellers s on s.member_id = p.member_id
+    left outer join members m  on m.member_id = s.member_id
+    left outer join options o on o.product_id = p.product_id
+    left outer join groups g on g.group_id = p.group_id 
+    left outer join categorys c on c.category_id = g.category_id
+    where p.group_id=#{no}
+    order by p.product_id DESC
+    limit 4;
+  </select>
 </mapper>
 

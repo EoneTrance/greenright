@@ -10,7 +10,7 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  width:450px;
+  width: 450px;
 }
 
 li {
@@ -19,13 +19,14 @@ li {
   border: 0;
   float: left;
 }
+
 img.img-fluid {
-    margin-bottom: 14px;
-}
-select.form-control {
-    width: 400px;
+  margin-bottom: 14px;
 }
 
+select.form-control {
+  width: 400px;
+}
 </style>
 <meta name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -148,12 +149,14 @@ select.form-control {
     <div class="row">
       <div class="col-lg-6 mb-5 ftco-animate">
         <img src='/upload/product/${productPhoto.photos[0].photoPath}'
-          id ="clickchange"class="img-fluid" alt="Colorlib Template"
+          id="clickchange" class="img-fluid" alt="Colorlib Template"
           style="width: 450px; height: 450px; object-fit: cover;">
         <ul>
           <c:forEach items="${productPhoto.photos}" var="photo">
             <li><img src='/upload/product/${photo.photoPath}'
-             id ="/upload/product/${photo.photoPath}"  class="changesaver" style="width: 50px; height: 50px; object-fit: cover;">
+              id="/upload/product/${photo.photoPath}"
+              class="changesaver"
+              style="width: 50px; height: 50px; object-fit: cover;">
             </li>
           </c:forEach>
         </ul>
@@ -187,6 +190,7 @@ select.form-control {
                       <option value="${item.no}">옵션명:&nbsp;${item.optionItemMatter}&nbsp;|&nbsp;가격:&nbsp;+${item.optionsPrice}원</option>
                     </c:forEach>
                   </select>
+          
                 </c:forEach>
               </div>
             </div>
@@ -230,21 +234,24 @@ select.form-control {
   </div>
   <div class="container">
     <div class="row">
+              <input type="text" value="${product.no}" class="numberfinder" hidden/>
+  <c:forEach items="${productLiST}" var="production">
+      <c:if test="${production.no ne product.no}">
       <div class="col-md-6 col-lg-3 ftco-animate">
         <div class="product">
           <a href="#" class="img-prod"><img class="img-fluid"
-            src="/images/product-1.jpg" alt="Colorlib Template"> <span
+            src="/upload/product/${production.photos[0].photoPath}" alt="Colorlib Template" style="width:208px; height:208px; object-fit:cover;"> <span
             class="status">30%</span> </a>
           <div class="overlay"></div>
           <div class="text py-3 pb-4 px-3 text-center">
             <h3>
-              <a href="#">Bell Pepper</a>
+              <a href="#">"${production.productName}"</a>
             </h3>
             <div class="d-flex">
               <div class="pricing">
                 <p class="price">
-                  <span class="mr-2 price-dc">$120.00</span><span
-                    class="price-sale">$80.00</span>
+                  <span class="mr-2 price-dc">"${production.price}"</span><span
+                    class="price-sale">"${production.price-5000}"</span>
                 </p>
               </div>
             </div>
@@ -265,105 +272,11 @@ select.form-control {
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-lg-3 ftco-animate">
-        <div class="product">
-          <a href="#" class="img-prod"><img class="img-fluid"
-            src="/images/product-2.jpg" alt="Colorlib Template"> </a>
-          <div class="overlay"></div>
-          <div class="text py-3 pb-4 px-3 text-center">
-            <h3>
-              <a href="#">Strawberry</a>
-            </h3>
-            <div class="d-flex">
-              <div class="pricing">
-                <p class="price">
-                  <span>$120.00</span>
-                </p>
-              </div>
-            </div>
-            <div class="bottom-area d-flex px-3">
-              <div class="m-auto d-flex">
-                <a href="#"
-                  class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                  <span><i class="ion-ios-menu"></i></span>
-                </a> <a href="#"
-                  class="buy-now d-flex justify-content-center align-items-center mx-1">
-                  <span><i class="ion-ios-cart"></i></span>
-                </a> <a href="#"
-                  class="heart d-flex justify-content-center align-items-center ">
-                  <span><i class="ion-ios-heart"></i></span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-3 ftco-animate">
-        <div class="product">
-          <a href="#" class="img-prod"><img class="img-fluid"
-            src="/images/product-3.jpg" alt="Colorlib Template"> </a>
-          <div class="overlay"></div>
-          <div class="text py-3 pb-4 px-3 text-center">
-            <h3>
-              <a href="#">Green Beans</a>
-            </h3>
-            <div class="d-flex">
-              <div class="pricing">
-                <p class="price">
-                  <span>$120.00</span>
-                </p>
-              </div>
-            </div>
-            <div class="bottom-area d-flex px-3">
-              <div class="m-auto d-flex">
-                <a href="#"
-                  class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                  <span><i class="ion-ios-menu"></i></span>
-                </a> <a href="#"
-                  class="buy-now d-flex justify-content-center align-items-center mx-1">
-                  <span><i class="ion-ios-cart"></i></span>
-                </a> <a href="#"
-                  class="heart d-flex justify-content-center align-items-center ">
-                  <span><i class="ion-ios-heart"></i></span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-3 ftco-animate">
-        <div class="product">
-          <a href="#" class="img-prod"><img class="img-fluid"
-            src="/images/product-4.jpg" alt="Colorlib Template"> </a>
-          <div class="overlay"></div>
-          <div class="text py-3 pb-4 px-3 text-center">
-            <h3>
-              <a href="#">Purple Cabbage</a>
-            </h3>
-            <div class="d-flex">
-              <div class="pricing">
-                <p class="price">
-                  <span>$120.00</span>
-                </p>
-              </div>
-            </div>
-            <div class="bottom-area d-flex px-3">
-              <div class="m-auto d-flex">
-                <a href="#"
-                  class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                  <span><i class="ion-ios-menu"></i></span>
-                </a> <a href="#"
-                  class="buy-now d-flex justify-content-center align-items-center mx-1">
-                  <span><i class="ion-ios-cart"></i></span>
-                </a> <a href="#"
-                  class="heart d-flex justify-content-center align-items-center ">
-                  <span><i class="ion-ios-heart"></i></span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </c:if>
+      <c:if test="${product.no eq number }">
+      
+      </c:if>
+      </c:forEach>
     </div>
   </div>
 </section>
@@ -471,7 +384,9 @@ select.form-control {
         <p>
           <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
           Copyright &copy;
-          <script>document.write(new Date().getFullYear());</script>
+          <script>
+                      document.write(new Date().getFullYear());
+                    </script>
           All rights reserved | This template is made with <i
             class="icon-heart color-danger" aria-hidden="true"></i> by <a
             href="https://colorlib.com" target="_blank">Colorlib</a>
@@ -512,47 +427,46 @@ select.form-control {
 <script src="/js/google-map.js"></script>
 <script src="/js/main.js"></script>
 <script>
-$(document).on("click",".changesaver",function(){
-  var a = $(this).attr("id");
-  $("#clickchange").attr("src",a);
-  
-})
+  $(document).on("click", ".changesaver", function() {
+    var a = $(this).attr("id");
+    $("#clickchange").attr("src", a);
 
+  })
+  var number = $(".numberfinder").val();
 </script>
 <script>
-    $(document).ready(function(){
+  $(document).ready(function() {
 
-    var quantitiy=0;
-       $('.quantity-right-plus').click(function(e){
-            
-            // Stop acting like a button
-            e.preventDefault();
-            // Get the field name
-            var quantity = parseInt($('#quantity').val());
-            
-            // If is not undefined
-                
-                $('#quantity').val(quantity + 1);
+    var quantitiy = 0;
+    $('.quantity-right-plus').click(function(e) {
 
-              
-                // Increment
-            
-        });
+      // Stop acting like a button
+      e.preventDefault();
+      // Get the field name
+      var quantity = parseInt($('#quantity').val());
 
-         $('.quantity-left-minus').click(function(e){
-            // Stop acting like a button
-            e.preventDefault();
-            // Get the field name
-            var quantity = parseInt($('#quantity').val());
-            
-            // If is not undefined
-          
-                // Increment
-                if(quantity>0){
-                $('#quantity').val(quantity - 1);
-                }
-        });
-        
+      // If is not undefined
+
+      $('#quantity').val(quantity + 1);
+
+      // Increment
+
     });
-  </script>
+
+    $('.quantity-left-minus').click(function(e) {
+      // Stop acting like a button
+      e.preventDefault();
+      // Get the field name
+      var quantity = parseInt($('#quantity').val());
+
+      // If is not undefined
+
+      // Increment
+      if (quantity > 0) {
+        $('#quantity').val(quantity - 1);
+      }
+    });
+
+  });
+</script>
 
