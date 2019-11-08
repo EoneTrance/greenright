@@ -566,4 +566,7 @@ $(document).on("click",".adderButton",function(){
 
 
 </script>
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
