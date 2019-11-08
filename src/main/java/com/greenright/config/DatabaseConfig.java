@@ -9,11 +9,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-//@Configuration
 
-// <tx:annotation-driven/> 의 Java Config 설정 
-// => @Transactional 애노테이션을 처리할 객체를 등록한다.
-@EnableTransactionManagement 
+@EnableTransactionManagement
 
 @PropertySource("classpath:com/greenright/conf/jdbc.properties")
 public class DatabaseConfig {
@@ -29,7 +26,7 @@ public class DatabaseConfig {
   @Bean
   public DataSource dataSource() {
     DriverManagerDataSource ds = new DriverManagerDataSource();
-    ds.setDriverClassName(this.jdbcDriver); 
+    ds.setDriverClassName(this.jdbcDriver);
     ds.setUrl(this.jdbcUrl);
     ds.setUsername(this.jdbcUsername);
     ds.setPassword(this.jdbcPassword);
@@ -37,13 +34,9 @@ public class DatabaseConfig {
   }
   
   @Bean
-  public PlatformTransactionManager transactionManager(DataSource dataSource) {
+  public PlatformTransactionManager transctionManager(DataSource dataSource) {
     return new DataSourceTransactionManager(dataSource);
   }
+  
+  
 }
-
-
-
-
-
-

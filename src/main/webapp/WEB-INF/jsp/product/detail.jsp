@@ -30,17 +30,15 @@
   옵션항목명 : <input type='text' name='no' value='${item.optionItemMatter}' readonly><br>
   </c:forEach> 
 </c:forEach>
-<%-- 옵션명 : <input type='text' name='no' value='${product.description}' readonly><br>
-옵션항목명 : <input type='text' name='no' value='${product.description}' readonly><br> --%>
 
 <p>
 <c:forEach items="${product.photos}" var="file">
   <img src='/upload/product/${file.photoPath}' class='photo2'><br>
 </c:forEach>
 </p>
-<c:forEach begin="1" end="6">
+ <c:forEach begin="1" end="6">
   사진: <input type='file' name='photoPath'><br>
-</c:forEach>
+ </c:forEach> 
 
 <button>변경</button>
 <a href='delete?no=${product.no}'>삭제</a>

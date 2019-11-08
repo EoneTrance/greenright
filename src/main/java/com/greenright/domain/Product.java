@@ -3,6 +3,7 @@ package com.greenright.domain;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Product  implements Serializable {
 
@@ -10,6 +11,7 @@ public class Product  implements Serializable {
   private int no ; 
   private int groupNo;
   private int memberNo;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date registeredDate;
   private int diy;
   private int price;
