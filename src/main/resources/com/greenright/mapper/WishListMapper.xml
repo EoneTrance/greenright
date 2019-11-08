@@ -9,14 +9,46 @@
     <id column="product_id" property="productId" />
     <result column="registered_date" property="registeredDate" />
     <result column="quantity" property="quantity" />
+    <result column="item_no" property="itemNo" />
+      <association property="seller" javaType="Seller">
+      <id column="member_id" property="no" />
+      <result column="account_num" property="accountNum" />
+      <result column="account_holder" property="accountHolder" />
+      <result column="tel" property="tel" />
+      <result column="point" property="point" />
+      <association property="member" javaType="Member">
+        <id column="member_id" property="no" />
+        <result column="name" property="name"/>
+      </association>
+    </association>
   </resultMap>
 
   <insert id="insert" parameterType="WishList">
     insert into baskets(member_id,product_id) values (#{memberId},#{productId});
   </insert>
   
+  <insert id="insertFull" parameterType="WishList">
+    insert into baskets(member_id,product_id,quantity,item_no) values (#{memberId},#{productId},#{quantity},#{itemNo});
+  </insert>
+  
   <select id="count" parameterType="int" resultType="int">
     select count(*) from baskets where member_id=#{no};
+  </select>
+    <select id="findAll" resultMap="WishListMap">
+    select
+    p.product_id,
+    p.quantity,
+    p.group_id,
+    p.member_id,
+    p.price,
+    p.product_name,
+    p.description,
+    f.product_id,
+    f.photo_path
+    from products p
+    left outer join product_photos f on (p.product_id = f.product_id AND
+    f.main_photo_flag = 0)
+    order by p.product_id DESC
   </select>
 </mapper>
 

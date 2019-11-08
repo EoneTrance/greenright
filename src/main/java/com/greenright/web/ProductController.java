@@ -78,6 +78,7 @@ public class ProductController {
     Product productPhoto = productService.getforPhoto(no);
     model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);
+    model.addAttribute("productNo", no);
   }
   
   

@@ -10,6 +10,7 @@ public class WishList implements Serializable {
   int productId;
   Date registeredDate;
   int quantity;
+  int itemNo;
   Product product;
   
   public int getMemberId() {
@@ -18,23 +19,29 @@ public class WishList implements Serializable {
   public void setMemberId(int memberId) {
     this.memberId = memberId;
   }
-  public int getProducId() {
+  public int getProductId() {
     return productId;
   }
-  public void setProducId(int producId) {
-    this.productId = producId;
+  public void setProductId(int productId) {
+    this.productId = productId;
   }
-  public Date getRegistereDate() {
+  public Date getRegisteredDate() {
     return registeredDate;
   }
-  public void setRegistereDate(Date registereDate) {
-    this.registeredDate = registereDate;
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
   }
   public int getQuantity() {
     return quantity;
   }
   public void setQuantity(int quantity) {
     this.quantity = quantity;
+  }
+  public int getItemNo() {
+    return itemNo;
+  }
+  public void setItemNo(int itemNo) {
+    this.itemNo = itemNo;
   }
   public Product getProduct() {
     return product;
@@ -45,8 +52,9 @@ public class WishList implements Serializable {
   
   @Override
   public String toString() {
-    return "WishList [memberId=" + memberId + ", producId=" + productId + ", registereDate="
-        + registeredDate + ", quantity=" + quantity + ", product=" + product + "]";
+    return "WishList [memberId=" + memberId + ", productId=" + productId + ", registeredDate="
+        + registeredDate + ", quantity=" + quantity + ", itemNo=" + itemNo + ", product=" + product
+        + "]";
   }
 
 }

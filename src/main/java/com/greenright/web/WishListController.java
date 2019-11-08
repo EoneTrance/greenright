@@ -20,11 +20,27 @@ public class WishListController {
   @ResponseBody
   @GetMapping("add")
   public int add(@RequestParam(value = "productNo", required = false) int productNo, HttpSession session) throws Exception {
-    //세션 구현 시 세션에서 member_id을 받아온다.
     WishList wl = new WishList();
-    wl.setMemberId(3);
-    wl.setProducId(productNo);
+    wl.setMemberId(((Member)session.getAttribute("loginUser")).getNo());
+    wl.setProductId(productNo);
     return wishListService.insert(wl);
+  }
+  
+  @ResponseBody
+  @GetMapping("add2")
+  public int add2(@RequestParam(value = "productNo", required = false) int productNo,
+                  @RequestParam(value = "productNo", required = false) int itemNo,
+                  @RequestParam(value = "productNo", required = false) int quantity,HttpSession session) throws Exception {
+    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    System.out.println(productNo);
+    System.out.println(itemNo);
+    System.out.println(quantity);
+    WishList wl = new WishList();
+    wl.setMemberId(((Member)session.getAttribute("loginUser")).getNo());
+    wl.setProductId(productNo);
+    wl.setItemNo(itemNo);
+    wl.setQuantity(quantity);
+    return wishListService.insertFull(wl);
   }
   
   @ResponseBody

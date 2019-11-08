@@ -1,5 +1,6 @@
 package com.greenright.service.impl;
 
+import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.greenright.dao.WishListDao;
@@ -18,5 +19,15 @@ public class DefaultWishListService implements WishListService {
   @Override
   public int count(int no) throws Exception {
     return wishListDao.count(no);
+  }
+
+  @Override
+  public int insertFull(WishList wishList) throws Exception {
+    return wishListDao.insertFull(wishList);
+  }
+
+  @Override
+  public List<WishList> list(int no) throws Exception {
+    return wishListDao.findAll(no);
   }
 }

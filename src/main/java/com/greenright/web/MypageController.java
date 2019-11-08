@@ -59,6 +59,7 @@ public class MypageController {
   
   @GetMapping("wishlist")
   public void wishlist() throws Exception {
+    
   }
 
 }
