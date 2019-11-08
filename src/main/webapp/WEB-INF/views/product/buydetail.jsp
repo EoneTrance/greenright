@@ -22,6 +22,9 @@ li {
 img.img-fluid {
     margin-bottom: 14px;
 }
+select.form-control {
+    width: 400px;
+}
 
 </style>
 <meta name="viewport"
@@ -181,7 +184,7 @@ img.img-fluid {
                 <c:forEach items="${product.options}" var="option">
                   <select name="" id="" class="form-control">
                     <c:forEach items="${option.optionItem}" var="item">
-                      <option value="${item.optionItemMatter}">${item.optionItemMatter}</option>
+                      <option value="${item.no}">옵션명:&nbsp;${item.optionItemMatter}&nbsp;|&nbsp;가격:&nbsp;+${item.optionsPrice}원</option>
                     </c:forEach>
                   </select>
                 </c:forEach>
