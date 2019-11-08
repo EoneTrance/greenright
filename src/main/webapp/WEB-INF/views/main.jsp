@@ -234,7 +234,6 @@ $('#my-command').on('click','.my-wish-add', (e) => {
       $('#my-wishlist').text("["+count+"]");
     },
     error : function(request, status, error ) {
-      console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         alert("이미 장바구니에 있습니다!");
       }
   });
