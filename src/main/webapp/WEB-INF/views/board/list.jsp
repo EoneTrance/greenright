@@ -61,9 +61,7 @@
   
   
 
-  <div id="newimg" style="display:none">
-    <img  src='/images/new.jpg'/>
-    </div>
+  
 
  <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
       <div class="container">
@@ -104,8 +102,13 @@
           <c:forEach items="${boards}" var="board">
             <tr class="tr1">
               
-              <td>${board.no}</td>
-              <td id="btitle"><a href='detail?no=${board.no}'>${board.title}</a></td>
+              <td id="nono">${board.no}</td>
+              <td>
+              <a  href='detail?no=${board.no}'>${board.title}</a>
+              <c:if test="${board.createdDate == today}">
+              <img  src='/images/new.jpg'/>
+              </c:if>
+              </td>
               <td>${board.member.name}</td>
               <td class="cdate">${board.createdDate}</td>
               <td>${board.viewCount}</td>
@@ -236,63 +239,7 @@ $('.page-item').click((e) => {
 
 </script>  
   
-<!-- <script>
-var indexP=1;
-$('#my-paging').on('click','.my-page-no', () => {
-  var currentLi = $(event.target).parent().attr('data-no');
-  $(event.target).parent().parent().children('.active').removeClass('active');
-  $(event.target).parent().addClass('active');
-  //var boardNo = parseInt(document.querySelector('#jisooBoardNo').value);
-  //var param = "commentNo="+commentNo+"&boardNo="+boardNo;
-  
-});
-$('#my-paging-first').click(function(e){
-  var page='';
-  indexP-=5;
-  var i = indexP;
-  console.log(i)
-  
-  if(i <= 1) {
-    indexP=1;
-    i = indexP;
-    console.log(i);
-  }
-  
-  page += "\n<li class='active' data-no='"+i+"'><span class='my-page-no'>"+i+"</span></li>\n";
-  page += "<li data-no='"+(i+1)+"'><span class='my-page-no'>"+(i+1)+"</span></li>\n";
-  page += "<li data-no='"+(i+2)+"'><span class='my-page-no'>"+(i+2)+"</span></li>\n";
-  page += "<li data-no='"+(i+3)+"'><span class='my-page-no'>"+(i+3)+"</span></li>\n";
-  page += "<li data-no='"+(i+4)+"'><span class='my-page-no'>"+(i+4)+"</span></li>\n";
-  
-  
-  $('#my-paging > li[data-no]').remove();
-  $('#my-paging-first').after(page);
-  
-  
-});
-$('#my-paging-last').click(function(){
-  var page='';
-  indexP+=5;
-  var i = indexP;
-  console.log(i)
-  
- 
-  var listcount = $('#products tbody tr').length;
-  
-  console.log(count)
-  
- 
-   
-  page += "\n<li class='active' data-no='"+i+"'><span class='my-page-no'>"+i+"</span></li>\n";
-  page += "<li data-no='"+(i+1)+"'><span class='my-page-no'>"+(i+1)+"</span></li>\n";
-  page += "<li data-no='"+(i+2)+"'><span class='my-page-no'>"+(i+2)+"</span></li>\n";
-  page += "<li data-no='"+(i+3)+"'><span class='my-page-no'>"+(i+3)+"</span></li>\n";
-  page += "<li data-no='"+(i+4)+"'><span class='my-page-no'>"+(i+4)+"</span></li>\n";
-  
-  $('#my-paging > li[data-no]').remove();
-  $('#my-paging-first').after(page);
-});
-</script> -->
+
 <br>
 <br>
 <jsp:include page="../greenfooter.jsp" />
@@ -316,53 +263,8 @@ $('#my-paging-last').click(function(){
                 }
               });
     </script>
+
 <script>
-
-
-var dt;
-dt = new Date();
-dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate();
-console.log(dt);
-var img = document.getElementById('#newimg');
-console.log(img);
-
-if($('.cdate') == dt) {
-  $('#btitle').append(imgs);
-}
-
-
-
-/* var newt = "<img src='/images/new.jpg' />"
-if(year.equals(yea)){
-  $("#btitle").append("newt");
-} */
-
-
-
-   /*    var textareaVal = $(".cdate").text();
-      var count = 0;
-      var dt = new Date();
-      var day = dt.getDate();
-      var month = (dt.getMonth() + 1);
-      var year = dt.getFullYear();
-      if (month < 10) {
-        month = "0" + month;
-      }
-      if (day < 10) {
-        day = "0" + day;
-      }
-      
-      for (var i = 0; i < (textareaVal.length / 10) + 1; i++) {
-        var tday = textareaVal.substring(8 + (10 * i), (10 * (i + 1)));
-        var tyear = textareaVal.substring((10 * i), (4 + (10 * i)));
-        var tmonth = textareaVal.substring((5 + (10 * i)), (7 + (10 * i)));
-        if (tday == day && tyear == year && tmonth == (month)) {
-          count++
-        }
-      }
-      $("#np").text("새글[" + count + "/" + ((textareaVal.length / 10)) + "]"); */
-    </script>
-  <script>
       $(document).ready(function() {
         $("select option[value=5]").attr("selected", true);
       });

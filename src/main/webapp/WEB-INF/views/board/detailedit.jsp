@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <link rel="stylesheet" href="/css/fontawesome/css/all.css">
+<link rel='stylesheet'
+  href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
+  
 <style>
  #ndp {
 display:none
@@ -252,7 +255,25 @@ h6#marginless {
 <br>
 <br>
 <jsp:include page="../greenfooter.jsp"/>
+<script>
+$('#board-delete').click(function() {
+  swal({
+    title: "Are you sure?",
+    text: "You will not be able to recover this imaginary file!",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Yes, delete it!",
+    closeOnConfirm: false
+  },
+  function(){
+    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+  });
+  
+});
 
+
+</script>
 
 <script>
 var temp;

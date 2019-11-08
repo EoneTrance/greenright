@@ -1,5 +1,6 @@
 package com.greenright.web;
 
+import java.sql.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -106,6 +107,7 @@ public class BoardController {
     model.addAttribute("endPage", (pageNo + 2) < totalPage ? (pageNo + 2) : totalPage);
     model.addAttribute("memberName", session.getAttribute("memberName"));
     model.addAttribute("loginName", session.getAttribute("loginName"));
+    model.addAttribute("today", new Date(System.currentTimeMillis()).toString());
     /*
      * PagingControl pc = new PagingControl(); pc.setListCount(20);
      */
