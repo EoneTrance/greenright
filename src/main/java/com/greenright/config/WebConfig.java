@@ -29,8 +29,6 @@ public class WebConfig implements WebMvcConfigurer {
     mr.setMaxUploadSizePerFile(5000000);
     return mr; 
   }
-  
-  
   @Bean
   public ViewResolver viewResolver() {
     InternalResourceViewResolver vr = new InternalResourceViewResolver("/WEB-INF/jsp/", ".jsp");

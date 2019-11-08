@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<title>Community form</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel='stylesheet'
   href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
@@ -190,16 +187,14 @@ h6#marginless {
   font-style: italic;
 }
 </style>
-</head>
-<body>
 
   <jsp:include page="../greenheader.jsp" />
 
+    <form action="add" method='post' enctype='multipart/form-data' id="my-form">
   <div
     style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
     <h1 style="text-align: center; margin-top: 40px; font-size: 40px;">Community</h1>
     <p style="text-align: center;">GreenRight 커뮤니티입니다.</p>
-    <form action="add" method='post' enctype='multipart/form-data' id="my-form">
       <div class="form-group">
         <label for="inputTitle"><b>제목</b></label> 
         <input type='text' name='title' class="form-control" value="" id="my-title">
@@ -273,7 +268,6 @@ $(function(){
   session.setAttribute("userNo", 1);
 %>
     </form>
-  </div>
   <br>
   <br>
   <jsp:include page="../greenfooter.jsp" />
@@ -406,5 +400,3 @@ var temp;
     }
   }
 </script>
-</body>
-</html>

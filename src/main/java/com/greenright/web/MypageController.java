@@ -21,12 +21,16 @@ public class MypageController {
   public void memberinfo(Model model) throws Exception {
   }
   
+  @GetMapping("userinfo")
+  public void userinfo(Model model) throws Exception {
+  }
+  
   @PostMapping("update")
   public String update(Member member, HttpSession session) throws Exception {
     memberService.update(member);
     Member loginUser = memberService.getUserInfo(member);
     session.setAttribute("loginUser", loginUser);
-    return "mypage/memberinfo";
+    return "mypage/userinfo";
   }
   
   @GetMapping("mypage")

@@ -30,28 +30,35 @@ public class ProductController {
   @Transactional
   @PostMapping("add")
   public String add (MultipartFile[] photoPath,
-      Product product,String[] optionName, String[] optionContents)throws Exception {
+      Product product,String[] optionName, String[] optionContents,String[] optionprice
+      ,String[] optionquantity)throws Exception {
     product.setPhotos(productPhotoWriter.getPhotoFiles(photoPath));
     ArrayList<ProductOption> pList = new ArrayList<>();
-    for(String optionN : optionName) {
+    if(optionName.length!=1) {
+    for(int i =1 ; i<optionName.length ; i++) {
       ProductOption productOption = new ProductOption();
-      productOption.setOptionName(optionN);
+      productOption.setOptionName(optionName[i]);
       pList.add(productOption);
+    }
     }
     int count =-1;
     ArrayList<ProductOptionItem> poiList = null;
-    for(int i =0; i<optionContents.length; i++) {
+    if(optionContents.length!=1) {
+    for(int i =1; i<optionContents.length; i++) {
       ProductOptionItem  productOptionItem = new ProductOptionItem();
       if(optionContents[i].equals("divide")) {
         poiList = new ArrayList<>();
         count++;
       }else {
         productOptionItem.setOptionItemMatter(optionContents[i]);
+        productOptionItem.setOptionsPrice(Integer.parseInt(optionprice[i]));
+        productOptionItem.setOptionsquantity(Integer.parseInt(optionquantity[i]));
         poiList.add(productOptionItem);
        ProductOption pOption = pList.get(count);
        pOption.setOptionItem(poiList);
        pList.set(count, pOption);
       }
+    }
     }
     product.setOptions(pList);
     productService.insert(product);
@@ -86,7 +93,7 @@ public class ProductController {
       ,String optionName[],String optionItemMatter[])
       throws Exception {
     product.setPhotos(productPhotoWriter.getPhotoFiles(photoPath));
-
+    
     productService.update(product,optionName,optionItemMatter);
 
     return "redirect:manage";

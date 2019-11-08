@@ -15,6 +15,7 @@
 		<result column="description" property="description" />
 		<result column="expiration_date" property="expirationDate" />
 		<result column="origin" property="origin" />
+		<result column="quantity" property="quantity"/>
     <result column="group_id" property="groupNo"/>
     
 		<association property="seller" javaType="Seller">
@@ -47,6 +48,8 @@
 				<id column="option_item_id" property="no" />
 				<result column="options_id" property="OptionsNo" />
 				<result column="option_item_matters" property="OptionItemMatter" />
+				<result column="options_price" property="OptionsPrice"/>
+				<result column="options_quantity" property="Optionsquantity"/>
 			</collection>
 		</collection>
 
@@ -62,8 +65,8 @@
 	<insert id="insert" parameterType="Product"
 		useGeneratedKeys="true" keyColumn="product_id" keyProperty="no">
 		insert into
-		products(group_id,member_id,registered_date,diy_flag,price,product_name,description,expiration_date,origin)
-		values(#{groupNo},#{memberNo},now(),#{diy},#{price},#{productName},#{description},#{expirationDate},#{origin})
+		products(group_id,member_id,registered_date,diy_flag,price,product_name,description,expiration_date,origin,quantity)
+		values(#{groupNo},#{memberNo},now(),#{diy},#{price},#{productName},#{description},#{expirationDate},#{origin},#{quantity})
 	</insert>
 
 
@@ -79,6 +82,7 @@ select DISTINCT
     p.expiration_date,
     p.diy_flag,
     p.origin,
+    p.quantity,
     m.name,
     m.member_id,
     g.group_name, 
@@ -87,6 +91,8 @@ select DISTINCT
     o.options_id,
     o.options_name,
     i.option_item_matters,
+    i.options_price,
+    i.options_quantity,
     i.option_item_id
     from products p
     left outer join product_photos f on (p.product_id = f.product_id AND
@@ -122,6 +128,7 @@ select DISTINCT
 	<select id="findAllWithFile" resultMap="ProductWithFilesMap">
 		select
 		p.product_id,
+		p.quantity,
 		p.group_id,
 		p.member_id,
 		p.price,
@@ -144,6 +151,7 @@ select
     p.product_name,
     p.description,
     p.registered_date,
+    p.quantity,
     m.name,
     g.group_name, 
     g.category_id,
@@ -170,15 +178,20 @@ select
     p.member_id,
     p.price,
     p.product_name,
+    p.registered_date,
+    p.quantity,
     p.description,
+    g.group_name, 
+    g.category_id,
+    c.category_name,
     f.product_id,
     f.photo_path
     from products p
     left outer join product_photos f on (p.product_id = f.product_id AND
     f.main_photo_flag = 0)
-    
-    where p.group_id=#{no}
-    
+    left outer join groups g on g.group_id = p.group_id 
+    left outer join categorys c on c.category_id = g.category_id
+    where p.group_id=#{no} and p.member_id=1
     order by p.product_id DESC
 	</select>
 <delete id="delete"  parameterType="int">
@@ -193,13 +206,19 @@ select
     p.member_id,
     p.price,
     p.product_name,
+    p.registered_date,
+    p.quantity,
     p.description,
+    g.group_name, 
+    g.category_id,
+    c.category_name,
     f.product_id,
     f.photo_path
     from products p
     left outer join product_photos f on (p.product_id = f.product_id AND
     f.main_photo_flag = 0)
     left outer join groups g on g.group_id = p.group_id
+    left outer join categorys c on c.category_id = g.category_id
     <if test="no != 0"> 
     where g.category_id=#{no}
     </if>
@@ -209,7 +228,7 @@ select
   </select>
   <update id="update" parameterType="Product">
     update products set
-    price=#{price},
+    quantity=#{quantity},
     description=#{description}
     where product_id=#{no}
   </update>

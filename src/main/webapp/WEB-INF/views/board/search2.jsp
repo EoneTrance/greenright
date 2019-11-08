@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-<head>
-  <title>사진 게시물 목록</title>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
   <link rel='stylesheet' href='/css/common.css'>
@@ -40,8 +37,6 @@ th, td {
     color: #fff;
 }
 </style>
-</head>
-<body>
 
 <jsp:include page="../header.jsp"/>
 
@@ -158,4 +153,3 @@ $setRows.submit();
 </script>
 <jsp:include page="../footer.jsp"/>
 
-</body></html>

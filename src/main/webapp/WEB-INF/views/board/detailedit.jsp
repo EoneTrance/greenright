@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-<head>
 <link rel="stylesheet" href="/css/fontawesome/css/all.css">
 <style>
  #ndp {
@@ -190,11 +188,8 @@ h6#marginless {
   font-style: italic;
 }
 </style>
-  <title>Community update</title>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
-</head>
-<body>
 
 <jsp:include page="../greenheader.jsp"/>
     
@@ -393,5 +388,3 @@ $(function(){
     }
   }
 </script>
-</body>
-</html>

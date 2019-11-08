@@ -1,10 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
 <style>
+    /* .off-screen {
+    display: none;
+    } 
+    #nav {
+    width: 500px;
+    text-align: center;
+    }
+    
+    #nav a {
+    display: inline-block;
+    padding: 3px 5px;
+    margin-right: 10px;
+    font-family:Tahoma;
+    background: #ccc;
+    color: #000;
+    text-decoration: none;
+    }
+    #nav a.active {
+        background: #333;
+        color: #fff;
+    } */
     
     
     div#entire{
@@ -126,13 +144,34 @@
     margin-bottom: 100px;
     }
     
-    tr{
+   /* #pagination .page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #82ae46 ;
+    border-color: #82ae46 ;
     }
+    
+    #pagination .page-link {
+    color:#000000 ;
+    }
+    
+    nav#pagination-nav {
+    margin: auto;
+    inline-size: min-content;
+    margin-top: 40px;
+    }
+    */
+    
+    
+    
+    
+    
+    
+    
     
 
  </style>
 <meta charset="UTF-8">
-<title>FAQ 게시판</title>
 <link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <script src='/node_modules/jquery/dist/jquery.min.js'></script>
 
@@ -149,11 +188,10 @@
     <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="/css/jquery.timepicker.css">
     <link rel="stylesheet" href="/css/style.css">
+    
+   
 
 
-</head>
-
-<body>
 
    <div class="py-1 bg-primary">
       <div class="container">
@@ -246,12 +284,11 @@
                   <div class="faq select-wrap">
                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                     <select name="faqselect" id="faqselect" class="form-control faq">
-                      <option value="default">- 질문 유형을 선택하세요 -</option>
+                      <option value="default">전체 </option>
                       <option value="배송안내">배송안내</option>
                       <option value="주문결제">주문결제</option>
                       <option value="주문취소">주문취소</option>
-                      <option value="교환">교환</option>
-                      <option value="환불">환불</option>
+                      <option value="교환, 환불">교환, 환불</option>
                       <option value="적립금">적립금</option>
                       <option value="기타">기타</option>
                     </select>
@@ -296,26 +333,153 @@
           </tr>
         </thead>
         <tbody id="tbody_insert">
-          <c:forEach items="${faqs}" var="FAQ">
-            <tr id="contents">
+           <c:forEach items="${faqs}" var="FAQ">
+            <tr id="contents" class="contents">
               <td class="content-value faq">${FAQ.faqID }</td>
               <td class="content-value faq">${FAQ.questionType }</td>
               <td class="content-value faq"><a href='detail?no=${FAQ.faqID}'>${FAQ.title}</a></td>
             </tr>
           </c:forEach>
+          
+          
+          <!--   <tr class="contents">
+              <td class="content-value faq">1</td>
+              <td class="content-value faq">1</td>
+              <td class="content-value faq">1</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">2</td>
+              <td class="content-value faq">2</td>
+              <td class="content-value faq">2</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">3</td>
+              <td class="content-value faq">3</td>
+              <td class="content-value faq">3</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">4</td>
+              <td class="content-value faq">4</td>
+              <td class="content-value faq">4</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">5</td>
+              <td class="content-value faq">5</td>
+              <td class="content-value faq">5</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">6</td>
+              <td class="content-value faq">6</td>
+              <td class="content-value faq">6</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">7</td>
+              <td class="content-value faq">7</td>
+              <td class="content-value faq">7</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">8</td>
+              <td class="content-value faq">8</td>
+              <td class="content-value faq">8</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">9</td>
+              <td class="content-value faq">9</td>
+              <td class="content-value faq">9</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">10</td>
+              <td class="content-value faq">10</td>
+              <td class="content-value faq">10</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">11</td>
+              <td class="content-value faq">11</td>
+              <td class="content-value faq">11</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">12</td>
+              <td class="content-value faq">12</td>
+              <td class="content-value faq">12</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">13</td>
+              <td class="content-value faq">13</td>
+              <td class="content-value faq">13</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">14</td>
+              <td class="content-value faq">14</td>
+              <td class="content-value faq">14</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">15</td>
+              <td class="content-value faq">15</td>
+              <td class="content-value faq">15</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">16</td>
+              <td class="content-value faq">16</td>
+              <td class="content-value faq">16</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">17</td>
+              <td class="content-value faq">17</td>
+              <td class="content-value faq">17</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">18</td>
+              <td class="content-value faq">18</td>
+              <td class="content-value faq">18</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">19</td>
+              <td class="content-value faq">19</td>
+              <td class="content-value faq">19</td>
+            </tr>
+            
+            <tr class="contents">
+              <td class="content-value faq">20</td>
+              <td class="content-value faq">20</td>
+              <td class="content-value faq">20</td>
+            </tr> -->
+            
+          
         </tbody>
       </table>
-    
-      
-      <nav id="faq-page" aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-      </ul>
+     
+      <!--페이지네이션  -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+         
+          <li class="page-item">
+            <a id="previous-page" class="page-link" href="javascript:void(0)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+        </ul>
       </nav>
+      
+      
       
       
       <div id="btn-wrap" style="text-align: center;">
@@ -323,9 +487,6 @@
         <a href="#" class="btn btn-primary">1대1 문의</a>
       </div>
       
-      <!-- <div class="insert-wrap" >
-        <input id="faq-insert-btn" class="btn btn-primary submit px-3 faq faqbtn" type="button" value="새글">      
-      </div> -->
     
     
   </div>  
@@ -420,17 +581,225 @@
 <script src="/js/aos.js"></script>
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
+<script src="/js/jquery.twbsPagination.min.js"></script>
 
-  
+
+<script>
+
+          var numberOfItems = $("#tbody_insert .contents").length;
+          var limitPerPage = $("#nSelect option:selected").val();
+          
+          
+          $("tbody_insert .contents:gt(" + (limitPerPage - 1) + ")").hide();
+          var totalPages = Math.round(numberOfItems / limitPerPage);
+          $(".pagination").append("<li class='page-item current-page active'><a class='page-link' href='javascript:void(0)'>" + 1 + "</a></li>");
+          
+          for(var i = 2; i <= totalPages; i++) {
+            $(".pagination").append("<li class='page-item current-page'><a class='page-link' href='javascript:void(0)'>" + i + "</a></li>");
+          }
+           
+          $(".pagination").append("<li id='next-page' class='page-item'><a class='page-link' href='javascript:void(0)' aria-label='Next'><span aria-hidden='true'>&raquo;</span><span class='sr-only'>Next</span></a></li>");
+          
+          $(".pagination li.current-page").on("click", function() {
+            if($(this).hasClass("active")) {
+              return false;
+            } else {
+                   var currentPage = $(this).index();
+                   $(".pagination li").removeClass("active");
+                   $(this).addClass("active");
+                   $("#tbody_insert .contents").hide();
+                   
+                   var grandTotal = limitPerPage * currentPage;
+                   
+                   for(var i = grandTotal - limitPerPage; i < grandTotal; i++){
+                     $("#tbody_insert .contents:eq("+ i +")").show();                
+                   }
+            }
+          });
+          
+          
+                  $("#next-page").on("click", function() {
+                     var currentPage = $(".pagination li.active").index();
+                     if (currentPage === totalPages) {
+                       return false;
+                     } else {
+                       currentPage++;
+                       $(".pagination li").removeClass("active");
+                       $("#tbody_insert .contents").hide();
+                       
+                       var grandTotal = limitPerPage * currentPage;
+                       
+                       for(var i = grandTotal - limitPerPage; i < grandTotal; i++){
+                         $("#tbody_insert .contents:eq( "+ i +")").show();                
+                       }
+                       $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass("active");
+                     }
+                     
+                  });
+                  
+                  $("#previous-page").on("click", function() {
+                    var currentPage = $(".pagination li.active").index();
+                    if (currentPage === 1) {
+                      return false;
+                    } else {
+                      currentPage--;
+                      $(".pagination li").removeClass("active");
+                      $("#tbody_insert .contents").hide();
+                      
+                      var grandTotal = limitPerPage * currentPage;
+                      
+                      for(var i = grandTotal - limitPerPage; i < grandTotal; i++){
+                        $("#tbody_insert .contents:eq( "+ i +")").show();                
+                      }
+                      $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass("active");
+                    }
+                    
+                  });
+
+
+/* var numberOfItems = $("#tbody_insert #contents").length;
+var limitPerPage = 10;
+
+$("tbody_insert #contents:gt(" + (limitPerPage - 1) + ")").hide();
+var totalPages = Math.round(numberOfItems / limitPerPage);
+$(".pagination").append("<li class='page-item current-page active'><a class='page-link' href='javascript:void(0)'>" + 1 + "</a></li>");
+
+for(var i = 2; i <= totalPages; i++) {
+  $(".pagination").append("<li class='page-item current-page'><a class='page-link' href='javascript:void(0)'>" + i + "</a></li>");
+}
+ 
+$(".pagination").append("<li id='next-page' class='page-item'><a class='page-link' href='javascript:void(0)' aria-label='Next'><span aria-hidden='true'>&raquo;</span><span class='sr-only'>Next</span></a></li>");
+
+$(".pagination li.current-page").on("click", function() {
+  if($(this).hasClass("active")) {
+    return false;
+  } else {
+         var currentPage = $(this).index();
+         $(".pagination li").removeClass("active");
+         $(this).addClass("active");
+         $("#tbody_insert #contents").hide();
+         
+         var grandTotal = limitPerPage * currentPage;
+         
+         for(var i = grandTotal - limitPerPage; i < grandTotal; i++){
+           $("#tbody_insert #contents:eq("+ i +")").show();                
+         }
+  }
+});
+
+
+        $("#next-page").on("click", function() {
+           var currentPage = $(".pagination li.active").index();
+           if (currentPage === totalPages) {
+             return false;
+           } else {
+             currentPage++;
+             $(".pagination li").removeClass("active");
+             $("#tbody_insert #contents").hide();
+             
+             var grandTotal = limitPerPage * currentPage;
+             
+             for(var i = grandTotal - limitPerPage; i < grandTotal; i++){
+               $("#tbody_insert #contents:eq( "+ i +")").show();                
+             }
+             $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass("active");
+           }
+           
+        });
+        
+        $("#previous-page").on("click", function() {
+          var currentPage = $(".pagination li.active").index();
+          if (currentPage === 1) {
+            return false;
+          } else {
+            currentPage--;
+            $(".pagination li").removeClass("active");
+            $("#tbody_insert #contents").hide();
+            
+            var grandTotal = limitPerPage * currentPage;
+            
+            for(var i = grandTotal - limitPerPage; i < grandTotal; i++){
+              $("#tbody_insert #contents:eq( "+ i +")").show();                
+            }
+            $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass("active");
+          }
+          
+        });
+ */
+
+     /*  var $setRows = $('#nSelect');
+      
+         $("#nSelect").val(5).trigger("change"); 
+      
+         $setRows.change(function (e) {
+        e.preventDefault();
+        
+        var rowPerPage = $('#nSelect option:selected').val() *1;
+        
+        
+        $('#nav').remove();
+        var $faq = $('#faq-table');
+        
+        $faq.after('<div id="nav">');
+        
+        var $tr = $($faq).find('tbody tr');
+        var rowTotals = $tr.length;
+        
+        var pageTotal = Math.ceil(rowTotals/rowPerPage);
+        var i = 0;
+        
+        for(; i < pageTotal; i++) {
+          $('<a href="#"></a>')
+          .attr('rel', i)
+          .html(i + 1)
+          .appendTo('#nav');
+        }
+        
+        $tr.addClass('off-screen')
+        .slice(0, rowPerPage)
+        .removeClass('off-screen');
+        
+        var $pagingLink = $('#nav a');
+        $pagingLink.on('click', function (evt) {
+          evt.preventDefault();
+          var $this = $(this);
+          if ($this.hasClass('active')){
+            return;
+          }
+          $pagingLink.removeClass('active');
+          $this.addClass('active');
+          
+          var currPage = $this.attr('rel');
+          var startItem = currPage * rowPerPage;
+          var endItem = startItem + rowPerPage;
+          $tr.css('opacity', '0.0')
+          .addClass('off-screen')
+          .slice(startItem, endItem)
+          .removeClass('off-screen')
+          .animate({opacity: 1}, 300);
+        });
+        
+        $pagingLink.filter(':first').addClass('active');
+        
+      });
+      
+      $setRows.submit();  
+       */
+
+
+</script>
+ 
   
 <script> 
+/* 셀렐트 ajax */
 $(function(){
   $("#faqselect").change(function(){
+    var allData = {questionType: $("#faqselect option:selected").val(), keyword: $("#keyword").val()};
     $.ajax({
       url : "../json/faq/search",
       type : "GET",
       dataType : "json",
-      data :{keyword : $("#faqselect option:selected").val()},
+      data : allData,
       success : function(data) {
           console.log(data);
         var list = data.result;
@@ -448,9 +817,10 @@ $(function(){
   });
 });
 
+/* 검색 이벤트 ajax  */
 $(function (){
   $("#searchbtn").click(function(){
-    var allData = {"keyword" : $("#keyword").val()}
+    var allData = {"questionType": $("#faqselect option:selected").val(), "keyword": $("#keyword").val()};
     $.ajax({
       url : "../json/faq/search",
       type : "GET",
@@ -474,10 +844,10 @@ $(function (){
 }); 
 
 $(function(){
-  
+  /* enter 이벤트 ajax  */
   $("#keyword").keypress(function(key){
     if(key.keyCode == 13) {
-      var allData = {"keyword" : $("#keyword").val()}
+      var allData = {"questionType": $("#faqselect option:selected").val(), "keyword": $("#keyword").val()};
       $.ajax({
         url :"../json/faq/search",
         type : "GET",
@@ -487,13 +857,13 @@ $(function(){
           console.log(data);
           var list = data.result;
           var tableTag ="";
+          $("td").removeClass("content-value faq");
           for(var i = 0 ; i < list.length; i++) {
-            $("td").removeClass("content-value faq");
             tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
             "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
           };
-          $("td").addClass("content-value faq");
           $("#tbody_insert").html(tableTag);
+          $("td").addClass("content-value faq");
         }
         
       });
@@ -506,110 +876,13 @@ $(function(){
 </script>  
   
   
+  
+
+  
+  
+  
+  
 <script>
-
-
-    /* $(function(){
-      $("#faqselect").change(function(){
-        $.ajax({
-          url : "../json/faq/search",
-          type : "GET",
-          dataType : "json",
-          data :{keyword : $("#faqselect option:selected").val()},
-          success : function(data) {
-            var list = data.result;
-            var tableTag ="";
-            $("td").removeClass("content-value faq");
-            for(var i = 0 ; i < list.length; i++) {
-              tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
-              "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
-            };
-            $("#tbody_insert").html(tableTag);
-            $("td").addClass("content-value faq");
-            
-            
-            $("#searchbtn").click(function(){
-              $.ajax({
-                url : "../json/faq/search",
-                type : "GET",
-                dataType : "json",
-                data : {keyword : $("#keyword").val()},
-                success : function(data) {
-                  var list = data.result;
-                  var tableTag ="";
-                  $("td").removeClass("content-value faq");
-                  for(var i = 0 ; i < list.length; i++) {
-                    tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
-                    "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
-                  };
-                  $("#tbody_insert").html(tableTag);
-                  $("td").addClass("content-value faq");
-                }
-                
-              });
-            });
-            
-          }
-        });
-      });
-    }); */
-        
-
-        /*  $(function(){
-          
-          $("#searchbtn").click(function(){
-            var allData = {"keyword" : $("#keyword").val()}
-            $.ajax({
-              url : "../json/faq/search",
-              type : "GET",
-              dataType : "json",
-              data : allData,
-              success : function(data) {
-                var list = data.result;
-                var tableTag ="";
-                $("td").removeClass("content-value faq");
-                for(var i = 0 ; i < list.length; i++) {
-                  tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
-                  "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
-                };
-                $("#tbody_insert").html(tableTag);
-                $("td").addClass("content-value faq");
-              }
-            });
-          })
-          
-          $("#keyword").keypress(function(key){
-            if(key.keyCode == 13) {
-              var allData = {"keyword" : $("#keyword").val()}
-              $.ajax({
-                url :"../json/faq/search",
-                type : "GET",
-                dataType : "json",
-                data : allData,
-                success : function(data) {
-                  var list = data.result;
-                  var tableTag ="";
-                  $("td").removeClass("content-value faq");
-                  for(var i = 0 ; i < list.length; i++) {
-                    tableTag += "<tr><td>" + list[i].faqID + "</td><td>" + list[i].questionType + 
-                    "</td><td><a href='detail?no="+ list[i].faqID+"'>" + list[i].title +"</a></td></tr>"
-                  };
-                  $("#tbody_insert").html(tableTag);
-                  $("td").addClass("content-value faq");
-                }
-                
-              });
-            }
-            
-          });
-          
-          
-          
-        });
- 
- */
-
-
 
    /*검색 ajax 적용*/
     /*   $(function (){
@@ -635,9 +908,6 @@ $(function(){
         })
       
       }); */
-</script>
-
-<script>
 
 /*셀렉트 ajax 적용 */
   /* $(function(){
@@ -716,16 +986,9 @@ $(function(){
   
   
   
-
-  
-    
-  
 </script>   
-       
-      
+
       
   
   
 
-</body>
-</html>

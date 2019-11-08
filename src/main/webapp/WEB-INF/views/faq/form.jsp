@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
 <meta charset="UTF-8">
-<title>FAQ 게시물 입력</title>
 <link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
-</head>
-<body>
  <div>
  
   <form action="add" method="post">
@@ -35,5 +29,3 @@
  </div>
  
 
-</body>
-</html>
