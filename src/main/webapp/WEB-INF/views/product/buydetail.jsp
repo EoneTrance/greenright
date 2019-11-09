@@ -43,9 +43,6 @@ li.useruse {
 ul.widthsizer {
   width: 1110px
 }
-div.productscore{
-background-color: red;
-}
 </style>
 <meta name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -310,17 +307,17 @@ background-color: red;
       <div
         class="col-md-12 heading-section text-center ftco-animate bordermaker">
         <ul class="widthsizer">
-          <li class="useruse"><h4>
-              <a>상품평</a>
+          <li class="useruse" id="producttest"><h4>
+             상품평
             </h4></li>
-          <li class="useruse"><h4>
-              <a>상세설명</a>
+          <li class="useruse" id="detaildesc"><h4>
+             상세설명
             </h4></li>
-          <li class="useruse"><h4>
-              <a>상품문의</a>
+          <li class="useruse" id="question"><h4>
+             상품문의
             </h4></li>
-          <li class="useruse"><h4>
-              <a>리뷰</a>
+          <li class="useruse" id="review"><h4>
+           리뷰
             </h4></li>
         </ul>
       </div>
@@ -489,13 +486,54 @@ background-color: red;
 <script src="/js/google-map.js"></script>
 <script src="/js/main.js"></script>
 <script>
-  $(document).on("click", ".changesaver", function() {
+$(document).on("click",".useruse",function(){
+  if($(this).attr("id")=="producttest"){
+    var a="";
+    a += "<div class='review'>"
+    a += "상품평 볼수있는 부분"
+    a += "</div>";
+   
+    $(".userusechanage").html(a);
+  }
+  if($(this).attr("id")=="detaildesc"){
+    var a="";
+    a += "<div class='review'>"
+    a += "상서설명 볼수있는부분"
+    a += "</div>";
+   
+    $(".userusechanage").html(a);
+  }
+  if($(this).attr("id")=="question"){
+    var a="";
+    a += "<div class='review'>"
+    a += "상품문의 하는부분"
+    a += "</div>";
+   
+    $(".userusechanage").html(a);
+  }
+  if($(this).attr("id")=="review"){
+    var a="";
+    a += "<div class='review'>"
+    a += "리뷰를 작성하는부분"
+    a += "</div>";
+   
+    $(".userusechanage").html(a);
+  }
+  
+  
+})
+
+
+</script>
+
+<script>
+  $(document).on("mouseenter", ".changesaver", function() {
     var a = $(this).attr("id");
     $("#clickchange").attr("src", a);
 
   })
-  var number = $(".numberfinder").val();
 </script>
+
 <script>
   $(document).ready(function() {
 

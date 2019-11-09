@@ -17,7 +17,7 @@
   select 
     private_question_id,
     questIon_type,
-    member_no,
+    member_id,
     created_date,
     title,
     contents,
