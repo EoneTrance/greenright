@@ -75,6 +75,7 @@ public class ProductController {
   @GetMapping("buydetail")
   public void buydetail(Model model, int no) throws Exception {
     Product product = productService.get(no);
+    System.out.println(product);
     Product productPhoto = productService.getforPhoto(no);
     model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);

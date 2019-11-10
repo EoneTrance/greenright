@@ -4,23 +4,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.greenright.dao.WishListDao">
 
-  <resultMap type="WishList" id="WishListMap">
+ <resultMap type="WishList" id="WishListMap">
     <id column="member_id" property="memberId" />
-    <id column="product_id" property="productId" />
+    <result column="product_id" property="productId" />
     <result column="registered_date" property="registeredDate" />
     <result column="quantity" property="quantity" />
     <result column="item_no" property="itemNo" />
-      <association property="seller" javaType="Seller">
-      <id column="member_id" property="no" />
-      <result column="account_num" property="accountNum" />
-      <result column="account_holder" property="accountHolder" />
-      <result column="tel" property="tel" />
-      <result column="point" property="point" />
-      <association property="member" javaType="Member">
-        <id column="member_id" property="no" />
-        <result column="name" property="name"/>
-      </association>
-    </association>
+    <collection property="product" ofType="Product">
+      <id column="product_id" property="no" />
+      <result column="price" property="price" />
+      <result column="product_name" property="productName" />
+      <result column="description" property="description" />
+      <collection property="photos" ofType="ProductPhoto">
+        <id column="product_photo_id" property="no" />
+        <result column="product_id" property="productNo" />
+        <result column="photo_path" property="photoPath" />
+        <result column="main_photo_flag" property="mainPhoto" />
+      </collection>
+      <collection property="options" ofType="ProductOption">
+      <id column="options_id" property="no" />
+      <result column="product_id" property="productNo" />
+      <result column="options_name" property="optionName" />
+        <collection property="optionItem" ofType="ProductOptionItem">
+          <id column="option_item_id" property="no" />
+          <result column="options_id" property="OptionsNo" />
+          <result column="option_item_matters" property="OptionItemMatter" />
+          <result column="options_price" property="OptionsPrice"/>
+          <result column="options_quantity" property="Optionsquantity"/>
+        </collection>
+      </collection>
+    </collection>
   </resultMap>
 
   <insert id="insert" parameterType="WishList">
@@ -34,21 +47,30 @@
   <select id="count" parameterType="int" resultType="int">
     select count(*) from baskets where member_id=#{no};
   </select>
-    <select id="findAll" resultMap="WishListMap">
-    select
+  
+  <select id="findAll" parameterType="int" resultMap="WishListMap">
+  select
+    o.options_id,
+    o.options_name,
     p.product_id,
-    p.quantity,
     p.group_id,
-    p.member_id,
     p.price,
     p.product_name,
     p.description,
+    p.quantity,
     f.product_id,
-    f.photo_path
-    from products p
+    f.photo_path,
+    b.product_id,
+    b.registered_date,
+    b.quantity,
+    b.item_no
+  from options o
+    right outer join products p on p.product_id = o.product_id
     left outer join product_photos f on (p.product_id = f.product_id AND
     f.main_photo_flag = 0)
-    order by p.product_id DESC
+    right outer join baskets b on b.product_id = p.product_id
+  where b.member_id=#{no};
   </select>
+  
 </mapper>
 

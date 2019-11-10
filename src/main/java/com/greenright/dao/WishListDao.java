@@ -1,6 +1,7 @@
 package com.greenright.dao;
 
 import java.util.List;
+
 import com.greenright.domain.WishList;
 
 public interface WishListDao {

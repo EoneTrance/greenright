@@ -52,9 +52,8 @@ public class WishList implements Serializable {
   
   @Override
   public String toString() {
-    return "WishList [memberId=" + memberId + ", productId=" + productId + ", registeredDate="
-        + registeredDate + ", quantity=" + quantity + ", itemNo=" + itemNo + ", product=" + product
-        + "]";
+    return "WishList [memberId=" + memberId + ", productId=" + productId + ", registeredDate=" + registeredDate
+        + ", quantity=" + quantity + ", itemNo=" + itemNo + ", product=" + product + "]";
   }
 
 }

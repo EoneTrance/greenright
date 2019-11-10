@@ -29,12 +29,8 @@ public class WishListController {
   @ResponseBody
   @GetMapping("add2")
   public int add2(@RequestParam(value = "productNo", required = false) int productNo,
-                  @RequestParam(value = "productNo", required = false) int itemNo,
-                  @RequestParam(value = "productNo", required = false) int quantity,HttpSession session) throws Exception {
-    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-    System.out.println(productNo);
-    System.out.println(itemNo);
-    System.out.println(quantity);
+                  @RequestParam(value = "itemNo", required = false) int itemNo,
+                  @RequestParam(value = "quantity", required = false) int quantity,HttpSession session) throws Exception {
     WishList wl = new WishList();
     wl.setMemberId(((Member)session.getAttribute("loginUser")).getNo());
     wl.setProductId(productNo);

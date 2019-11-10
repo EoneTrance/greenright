@@ -1,8 +1,11 @@
 package com.greenright.service.impl;
 
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+
 import com.greenright.dao.WishListDao;
 import com.greenright.domain.WishList;
 import com.greenright.service.WishListService;
@@ -30,4 +33,5 @@ public class DefaultWishListService implements WishListService {
   public List<WishList> list(int no) throws Exception {
     return wishListDao.findAll(no);
   }
+
 }
