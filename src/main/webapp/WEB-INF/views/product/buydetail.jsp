@@ -43,6 +43,14 @@ li.useruse {
 ul.widthsizer {
   width: 1110px
 }
+.btn.btn-primary {
+   border-top-left-radius: 2px;
+   border-top-right-radius: 2px;
+   border-bottom-right-radius: 2px;
+   border-bottom-left-radius: 2px;
+}
+textarea{
+resize:none;}
 </style>
 <meta name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -179,6 +187,7 @@ ul.widthsizer {
       </div>
       <div class="col-lg-6 product-details pl-md-5 ftco-animate">
         <h3>${product.productName}</h3>
+        <input type="text" value="${product.no}" id ="productNo" hidden>
         <div class="rating d-flex">
           <p class="text-left mr-4">
             <a href="#" class="mr-2">5.0</a> <a href="#"><span
@@ -317,7 +326,7 @@ ul.widthsizer {
              상품문의
             </h4></li>
           <li class="useruse" id="review"><h4>
-           리뷰
+           상품평작성
             </h4></li>
         </ul>
       </div>
@@ -513,19 +522,58 @@ $(document).on("click",".useruse",function(){
   }
   if($(this).attr("id")=="review"){
     var a="";
-    a += "<div class='review'>"
-    a += "리뷰를 작성하는부분"
-    a += "</div>";
-   
+    a += "<div class='container' style='width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;'>"
+    a += "<div style='width: inherit;'>"
+    a += "<div class='input-group' style='width: 1000px; margin: auto;'>"
+    a += "<input type='text' id='title' style='width :700px' placeholder='제목을입력하세요'/>"
+    a += "<select id='rating' style='width:101px;'><option value=1>★☆☆☆☆</option><option value=2>★★☆☆☆</option><option value=3>★★★☆☆</option><option value=4>★★★★☆</option><option value=5>★★★★★</option></select>"
+    a += "<br><TEXTAREA  id ='contents' cols='90' rows='10' style='resize:none;'  placeholder='내용을 입력하세요.'/>"
+    a += "<button id='review-add-btn' class='btn btn-primary'>등록</button>"
+    a += "<input type='file' id='filePath'>"
+    a += "<img src='' id='view_file' alt='' style='width: 150px; height: 150px; object-fit: cover;' >"
+    a += "</div></div><br><br>";
     $(".userusechanage").html(a);
   }
   
-  
 })
-
-
 </script>
-
+<script>
+$(document).on("click","#review-add-btn",function(){
+  console.log("why?")
+  let productNo = $("#productNo").val();
+  let memberNo = 1;
+  let rating = $("#rating option:selected").val();
+  let title = $("#title").val();
+  let contents = $("#contents").val();
+  let ReviewPhoto = $("#filePath").val();
+  console.log(ReviewPhoto)
+  $.post("/greenright/json/Review/add",{
+    "productNo" :productNo,
+    "memberNo" :memberNo,
+    "rating" : rating,
+    "title" : title,
+    "contents" :contents,
+    "ReviewPhoto" :ReviewPhoto
+    }, function(result){
+   console.log(result);
+    })
+})
+</script>
+<script>
+$(document).on("change","#filePath",(function() {
+     var input = document.getElementById("filePath");
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#view_file').attr('src', e.target.result);
+            }
+        reader.readAsDataURL(input.files[0]);
+    }
+    var dp = document.getElementById("view_file");
+    dp.style.display = "block";
+})
+);
+</script>
 <script>
   $(document).on("mouseenter", ".changesaver", function() {
     var a = $(this).attr("id");

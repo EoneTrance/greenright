@@ -15,6 +15,9 @@ public class Review implements Serializable {
   private int rating;
   private String title;
   private String contents;
+  private Member member;
+  private ReviewPhoto Photos;
+  private ReviewReply replys;
   public int getNo() {
     return no;
   }
@@ -57,12 +60,31 @@ public class Review implements Serializable {
   public void setContents(String contents) {
     this.contents = contents;
   }
+  public Member getMember() {
+    return member;
+  }
+  public void setMember(Member member) {
+    this.member = member;
+  }
+  public ReviewPhoto getPhotos() {
+    return Photos;
+  }
+  public void setPhotos(ReviewPhoto photos) {
+    Photos = photos;
+  }
+  public ReviewReply getReplys() {
+    return replys;
+  }
+  public void setReplys(ReviewReply replys) {
+    this.replys = replys;
+  }
   @Override
   public String toString() {
     return "Review [no=" + no + ", productNo=" + productNo + ", memberNo=" + memberNo
         + ", createdDate=" + createdDate + ", rating=" + rating + ", title=" + title + ", contents="
-        + contents + "]";
+        + contents + ", member=" + member + ", Photos=" + Photos + ", replys=" + replys + "]";
   }
+  
   
   
 }
