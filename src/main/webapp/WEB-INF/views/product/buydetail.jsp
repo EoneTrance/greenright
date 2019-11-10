@@ -43,14 +43,17 @@ li.useruse {
 ul.widthsizer {
   width: 1110px
 }
+
 .btn.btn-primary {
-   border-top-left-radius: 2px;
-   border-top-right-radius: 2px;
-   border-bottom-right-radius: 2px;
-   border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
 }
-textarea{
-resize:none;}
+
+textarea {
+  resize: none;
+}
 </style>
 <meta name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -187,7 +190,7 @@ resize:none;}
       </div>
       <div class="col-lg-6 product-details pl-md-5 ftco-animate">
         <h3>${product.productName}</h3>
-        <input type="text" value="${product.no}" id ="productNo" hidden>
+        <input type="text" value="${product.no}" id="productNo" hidden>
         <div class="rating d-flex">
           <p class="text-left mr-4">
             <a href="#" class="mr-2">5.0</a> <a href="#"><span
@@ -316,18 +319,10 @@ resize:none;}
       <div
         class="col-md-12 heading-section text-center ftco-animate bordermaker">
         <ul class="widthsizer">
-          <li class="useruse" id="producttest"><h4>
-             상품평
-            </h4></li>
-          <li class="useruse" id="detaildesc"><h4>
-             상세설명
-            </h4></li>
-          <li class="useruse" id="question"><h4>
-             상품문의
-            </h4></li>
-          <li class="useruse" id="review"><h4>
-           상품평작성
-            </h4></li>
+          <li class="useruse" id="producttest"><h4>상품평</h4></li>
+          <li class="useruse" id="detaildesc"><h4>상세설명</h4></li>
+          <li class="useruse" id="question"><h4>상품문의</h4></li>
+          <li class="useruse" id="review"><h4>상품평작성</h4></li>
         </ul>
       </div>
     </div>
@@ -339,11 +334,9 @@ resize:none;}
     <div class="row justify-content-center mb-3 pb-3">
       <div
         class="col-md-12 heading-section text-center ftco-animate userusechanage">
-      
-        <div class="productscore">
-        평점이 몇점인지 볼수있는 부분 
-        </div>
-      
+
+        <div class="productscore">평점이 몇점인지 볼수있는 부분</div>
+
       </div>
     </div>
   </div>
@@ -546,17 +539,19 @@ $(document).on("click","#review-add-btn",function(){
   let title = $("#title").val();
   let contents = $("#contents").val();
   let ReviewPhoto = $("#filePath").val();
-  console.log(ReviewPhoto)
-  $.post("/greenright/json/Review/add",{
-    "productNo" :productNo,
-    "memberNo" :memberNo,
-    "rating" : rating,
-    "title" : title,
-    "contents" :contents,
-    "ReviewPhoto" :ReviewPhoto
-    }, function(result){
-   console.log(result);
-    })
+  let param  ="productNo="+productNo+"memberNo="+memberNo+"&rating="+rating+"&title="+title+"&contents="+contents+"&ReviewPhoto="+ReviewPhoto;
+  $.ajax({
+    url:"/greenright/json/Review/add",
+    enctype:"multipart/form-data",
+    type:"post",
+    data:param,
+    processData: false,
+    contentType: false,
+    cache: false,
+    success : function(result){
+      console.log(result)
+},  
+});
 })
 </script>
 <script>
