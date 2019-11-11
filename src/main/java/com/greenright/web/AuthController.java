@@ -2,6 +2,7 @@ package com.greenright.web;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -24,12 +25,13 @@ public class AuthController {
   UserMailSendService mailSender;
 
   @GetMapping("form")
-  public void form(Model model) throws Exception {
+  public void form(Model model, HttpServletRequest request) throws Exception {
     model.addAttribute("title", " - 로그인");
   }
 
   @PostMapping("login")
-  public String login(HttpServletResponse response, HttpSession session, Member member)
+  public String login(HttpServletResponse response, HttpServletRequest request,
+      HttpSession session, Model model, Member member)
       throws Exception {
     Cookie cookie = new Cookie("id", member.getId());
     cookie.setMaxAge(60 * 60 * 24 * 30);
@@ -37,7 +39,17 @@ public class AuthController {
 
     Member loginUser = memberService.login(member);
     session.setAttribute("loginUser", loginUser);
-
-    return "redirect:../mypage/userinfo";
+    String redirectURI = (String)request.getSession().getAttribute("redirectURI");
+    if (redirectURI.indexOf("auth") != -1 || redirectURI == null) {
+      redirectURI = "/greenright/main";
+    }
+    return "redirect:" + redirectURI;
+  }
+  
+  @GetMapping("logout")
+  public String logout(HttpSession session, HttpServletRequest request) throws Exception {
+    session.invalidate();
+    request.getHeader("referer");
+    return "redirect:" + request.getHeader("referer");
   }
 }

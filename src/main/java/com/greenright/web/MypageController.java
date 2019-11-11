@@ -17,6 +17,10 @@ public class MypageController {
   @Resource
   private MemberService memberService;
   
+  @GetMapping("")
+  public void mypage(Member member) throws Exception {
+  }
+  
   @GetMapping("memberinfo")
   public void memberinfo(Model model) throws Exception {
   }
@@ -34,15 +38,16 @@ public class MypageController {
     return "mypage/userinfo";
   }
   
-  @GetMapping("mypage")
-  public void mypage(Member member, HttpSession session) throws Exception {
-    Member loginUser = memberService.getUserInfo(member);
-    session.setAttribute("loginUser", loginUser);
-  }
-  
   @GetMapping("order")
   public void order(Member member, HttpSession session, Model model) throws Exception {
-    model.addAttribute("title", " - 주문내역");
+    model.addAttribute("title", " - 구매내역");
+//    Member loginUser = memberService.getUserInfo(member);
+//    session.setAttribute("loginUser", loginUser);
+  }
+  
+  @GetMapping("sale")
+  public void sale(Member member, HttpSession session, Model model) throws Exception {
+    model.addAttribute("title", " - 판매내역");
 //    Member loginUser = memberService.getUserInfo(member);
 //    session.setAttribute("loginUser", loginUser);
   }

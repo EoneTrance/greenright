@@ -1,108 +1,94 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <link rel="stylesheet" href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
-    
-  <style>
-    /* On small screens, set height to 'auto' for the grid */
-    @media screen and (max-width: 767px) {
-      .row.content {height: auto;} 
-    }
-    
-    #myPageContent {
-      width: 992px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      margin: auto auto;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 550px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      height: 100%;
-      border: solid #77A43E 10px;
-      background-color: RGBA(119,164,62,0.1);
-    }
-    
-    div.well {
-      border: dashed #77A43E 5px;
-      background-color: RGBA(119,164,62,0.1);
-    }
-    
-/*       #597B2F */
+  
+<link rel="stylesheet" href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="/css/mypage.css">
+  
+<style>
 
-    div.well h4 {
-      font-weight:bold;
-    }
-    
-    div.well p {
-      font-size:300%;
-      color:#77A43E;
-    }
-    
-    ul.nav-pills li.active a, ul.nav-pills li.active a:hover {
-      background-color: #77A43E;
-      color: #FFFFFF;
-    }
-    
-    .nav-pills li a:hover {
-      background-color:RGBA(119,164,62,0.5);
-    }
-    
-    .nav-pills li a {
-      color:#77A43E;
-    }
-    
-    div.dropdown div.dropdown-menu div.inner ul li.active a,
-    .btn-group button:focus
-    {
-      background-color:#77A43E !important;
-      color:#FFFFFF !important;
-    }
-    
-    button:hover {
-      background-color:RGBA(119,164,62,0.5);
-    }
-    
-    table.my-join-table tbody tr:hover {
-      background-color:RGBA(119,164,62,0.1);
-    }
-    
-    .dropdown-menu .inner li a:hover
-    {
-      background-color:RGBA(119,164,62,0.5);
-    }
-    
-    tbody th {
-      color:#77A43E;
-    }
-    
-    .my-menu {
-      font-weight:bold;
-    }
-    
-    .notChange, .notChange:focus {
-      border: none !important;
-      background-color: rgba( 255, 255, 255, 0) !important;
-      outline: none !important;
-    }
-    
-    #memberInfoForm input, #memberInfoForm button {
-      width:49%;
-    }
-    
-    .my-btn {
-      background-color:#77A43E !important;
-      color:#FFFFFF;
-    }
-    
-    /* [readonly]:not(.notChange) {
-      background-color: !important;
-    } */
-    
-  </style>
+  div.well {
+    border: dashed #82AE46 5px;
+    background-color: RGBA(130,174,70,0.1);
+  }
+  
+  /* #597B2F */
 
+  div.well h4 {
+    font-weight:bold;
+  }
+  
+  div.well p {
+    font-size:300%;
+    color:#82AE46;
+  }
+  
+  .dropdown .dropdown-menu .inner ul .active a,
+  .dropdown .dropdown-menu .inner ul .active
+  {
+    background-color:#82AE46;
+    color:#FFFFFF;
+  }
+  
+  .dropdown-menu .inner li a:hover
+  {
+    background-color:RGBA(130,174,70,0.5);
+  }
+  
+  .filter-option-inner {
+    text-align: center;
+  }
+  
+  div.dropdown.bootstrap-select.my-essential {
+    width:49% !important;
+  }
+  
+  table.my-join-table tbody th {
+    border-right:solid RGBA(130,174,70,0.5) 1px;
+    border-bottom:solid RGBA(130,174,70,0.5) 1px;
+  }
+  
+  .notChange, .notChange:focus {
+    border: none !important;
+    background-color: rgba( 255, 255, 255, 0) !important;
+    outline: none !important;
+  }
+  
+  #memberInfoForm input, #memberInfoForm button, #memberInfoForm select {
+    width:49%;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  /* #memberInfoForm form .my-btn {
+    background-color:#82AE46;
+    color:#FFFFFF;
+  } */
+  
+  /* .hr-sect {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+  }
+  
+  .hr-sect::before,
+  .hr-sect::after {
+    content: "";
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.2);
+    height: 1px;
+    font-size: 0px;
+    line-height: 0px;
+    margin: 0px 10px;
+  } */
+  
+</style>
+
+
+<div id="mypage-title-h1">
+<h1>PROFILE</h1>
+</div>
+
+<section class="ftco-section py-5">
 <div id="myPageContent">
 
 <!-- <nav class="navbar navbar-inverse visible-xs">
@@ -118,11 +104,11 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="my-menu active"><a href="userinfo">기본정보</a></li>
-        <li class="my-menu"><a href="order">주문내역</a></li>
+        <li class="my-menu"><a href="order">주문관리</a></li>
         <li class="my-menu"><a href="#">관심상품</a></li>
         <li class="my-menu"><a href="#">업적</a></li>
-        <li class="my-menu"><a href="#">판매내역</a></li>
-        <li class="my-menu"><a href="#">개인전</a></li>
+        <li class="my-menu"><a href="sale">판매관리</a></li>
+        <li class="my-menu"><a href="#">개인전관리</a></li>
         <li class="my-menu"><a href="#">판매회원 전환</a></li>
       </ul>
     </div>
@@ -130,24 +116,24 @@
 </nav> -->
 
 <div class="container-fluid">
-  <div class="row content">
-    <div class="col-sm-3 sidenav hidden-xs">
-      <h2 class="text-center">MyPage</h2>
+  <div class="row">
+    <div class="my-col-20 sidenav hidden-xs px-1">
+      <h2 class="text-center mt-2 font-weight-bold">MyPage</h2>
       <hr>
-      <h4 class="font-weight-bold">기본정보</h4>
-      <ul class="nav flex-column nav-pills nav-stacked text-center">
+      <h4 class="font-weight-bold ml-2">기본정보</h4>
+      <ul class="nav flex-column nav-pills nav-stacked text-center mb-4">
         <li class="my-menu active"><a href="userinfo">기본정보</a></li>
       </ul>
-      <h4 class="font-weight-bold">구매</h4>
-      <ul class="nav flex-column nav-pills nav-stacked text-center">
-        <li class="my-menu"><a href="order">주문내역</a></li>
+      <h4 class="font-weight-bold ml-2">구매</h4>
+      <ul class="nav flex-column nav-pills nav-stacked text-center mb-4">
+        <li class="my-menu"><a href="order">구매내역</a></li>
         <li class="my-menu"><a href="#section3">관심상품</a></li>
         <li class="my-menu"><a href="#section3">업적</a></li>
       </ul>
-      <h4 class="font-weight-bold">판매</h4>
+      <h4 class="font-weight-bold ml-2">판매</h4>
       <ul class="nav flex-column nav-pills nav-stacked text-center">
-        <li class="my-menu"><a href="#section3">판매내역</a></li>
-        <li class="my-menu"><a href="#section3">개인전</a></li>
+        <li class="my-menu"><a href="sale">판매내역</a></li>
+        <li class="my-menu"><a href="#section3">개인전관리</a></li>
         <li class="my-menu"><a href="#section3">판매회원 전환</a></li>
       </ul>
       <br>
@@ -155,58 +141,58 @@
     <br>
     
     <div class="col-sm-9">
-      
       <div id=memberInfoForm>
+      <h2 id="mypage-title-h2">기본정보</h2>
+      <hr>
       <form action='update' method='post' enctype='multipart/form-data' onsubmit="return checkState()">
-        <table class="table table-hover my-join-table">
+        <table class="col-sm-12 table-hover my-table my-join-table" cellpadding="20" cellspacing="5">
           <!-- <caption>기본정보</caption> -->
           <tbody>
           <tr>
-            <th class="col-sm-2 mute">아이디</th>
-            <td class="col-sm-10">
+            <th class="my-col-3 mute">아이디</th>
+            <td class="my-col-9">
             <input type="text" name="id" class="input-md notChange" value='${loginUser.id}' readonly/>
             </td>
           </tr>
           <tr>
-            <th id="passwordTh" class="col-sm-2">비밀번호</th>
-            <td class="col-sm-10">
+            <th id="passwordTh" class="my-col-3">비밀번호</th>
+            <td class="my-col-9">
             <div id="my-password-form">
-              <input type="button" name="changePw" class="form-control input-md my-btn"
+              <input type="button" name="changePw" class="btn btn-md my-btn my-btn-hover d-inline-block"
               value="비밀번호 변경하기" onclick='changePassword()'/>
             </div>
               <span class="inputState"></span>
             </td>
           </tr>
           <tr>
-            <th class="col-sm-2">이름</th>
-            <td class="col-sm-10">
-            <input type="text" name="nickname" class="input-md notChange"
-            value='${loginUser.nickname}' readonly/>
+            <th class="my-col-3">별명</th>
+            <td class="my-col-9">
+            <input type="text" name="nickname" class="input-md" value='${loginUser.nickname}'/>
             </td>
           </tr>
           <tr>
-            <th class="col-sm-2">이메일</th>
-            <td class="col-sm-10">
+            <th class="my-col-3">이메일</th>
+            <td class="my-col-9">
             <input type="email" name="email" class="input-md notChange"
             value='${loginUser.email}' placeholder="입력하신 메일 주소로 인증메일이 발송됩니다." readonly/>
             <span class="inputState"></span>
             </td>
           </tr>
           <tr>
-            <th class="col-sm-2">핸드폰번호</th>
-            <td class="col-sm-10">
-            <input type="text" name="cellPhone" class="form-control input-md my-essential"
+            <th class="my-col-3">핸드폰번호</th>
+            <td class="my-col-9">
+            <input type="text" name="cellPhone" class="input-md my-essential"
             id="my-cellphone-input" value='${loginUser.cellPhone}' maxlength="11"/>
             <span class="inputState"></span>
             </td>
           </tr>
           <tr>
-            <th class="col-sm-2">우편번호</th>
-            <td class="col-sm-10">
-              <input type="text" class="form-control input-md my-essential my-essential-input d-inline-block"
+            <th class="my-col-3">우편번호</th>
+            <td class="my-col-9">
+              <input type="text" class="input-md my-essential my-essential-input d-inline-block"
                      id="sample3_postcode" name="postalCode" value='${loginUser.postalCode}'
                      readonly="readonly">
-              <input type="button" class="form-control input-md my-btn d-inline-block" name="searchPostalCode"
+              <input type="button" class="btn btn-md my-btn my-btn-hover d-inline-block ml-1" name="searchPostalCode"
                      onclick="sample3_execDaumPostcode()" value="우편번호 찾기">
               <span class="inputState"></span>
               <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
@@ -218,29 +204,29 @@
             </td>
           </tr>
           <tr>
-            <th class="col-sm-2">기본주소</th>
-            <td class="col-sm-10">
+            <th class="my-col-3">기본주소</th>
+            <td class="my-col-9">
             <input type="text" id="sample3_address" name="defaultAddress"
-                   class="form-control input-md my-essential my-essential-input" value='${loginUser.defaultAddress}'
+                   class="input-md my-essential my-essential-input" value='${loginUser.defaultAddress}'
                    readonly="readonly" style="text-align:left;">
             <span class="inputState"></span>
             </td>
           </tr>
           <tr>
-            <th class="col-sm-2">상세주소</th>
-            <td class="col-sm-10">
+            <th class="my-col-3">상세주소</th>
+            <td class="my-col-9">
             <input type="text" id="sample3_detailAddress" name="detailAddress"
-                   class="form-control input-md my-essential my-essential-input" value='${loginUser.detailAddress}'
+                   class="input-md my-essential my-essential-input" value='${loginUser.detailAddress}'
                    style="text-align:left;">
             <span class="inputState"></span>
             </td>
           </tr>
           <tr>
-            <th class="col-sm-2">본인 확인 질문</th>
-            <td class="col-sm-10">
-            <select class="selectpicker my-essential form-control" name="question"
-                    data-style="btn btn-md">
-              <optgroup id="questionOpt" label="비밀번호 찾기 질문">
+            <th class="my-col-3">본인 확인 질문</th>
+            <td class="my-col-9">
+            <select class="selectpicker my-essential" name="question"
+                    data-style="btn btn-md my-btn my-btn-hover w-100">
+              <optgroup id="questionOpt" label="본인 확인 질문">
                 <option selected disabled hidden>질문 유형 선택</option>
                 <option>좋아하는 책?</option>
                 <option>졸업한 초등학교?</option>
@@ -253,25 +239,36 @@
             </td>
           </tr>
           <tr>
-            <th class="col-sm-2">본인 확인 답변</th>
-            <td class="col-sm-10">
-            <input type="text" name="answer" class="form-control input-md my-essential my-essential-input" value='${loginUser.answer}'/>
+            <th class="my-col-3">본인 확인 답변</th>
+            <td class="my-col-9">
+            <input type="text" name="answer" class="input-md my-essential my-essential-input" value='${loginUser.answer}'/>
             <span class="inputState"></span>
             </td>
           </tr>
           </tbody>
         </table>
-        <button name="submitBtn" class="btn btn-lg my-btn btn-inline-block signup-btn" type="submit">회원정보 수정</button>
-        <button name="cancelBtn" class="btn btn-lg btn-danger btn-inline-block signup-btn" type="button">취소</button>
+        <hr>
+        <button name="submitBtn" class="btn btn-lg my-btn my-btn-hover btn-inline-block signup-btn mr-1" type="submit">회원정보 수정</button>
+        <button name="cancelBtn" class="btn btn-lg my-btn-hover btn-danger btn-inline-block signup-btn ml-1" type="button">취소</button>
       </form>
       </div>
-      
+      <hr>
     </div>
   </div>
 </div>
 </div>
-  
+</section>
+
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src='/js/jquery-migrate-3.0.1.min.js'></script>
+<script src='/js/jquery.easing.1.3.js'></script>
+<script src='/js/jquery.waypoints.min.js'></script>
+<script src='/js/jquery.stellar.min.js'></script>
+<script src='/js/jquery.magnific-popup.min.js'></script>
+<script src='/js/jquery.animateNumber.min.js'></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/scrollax.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous">
@@ -279,6 +276,7 @@
 <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 <script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src="/js/main.js"></script>
 
 <script>
 "use strict"
@@ -295,9 +293,9 @@ const checkPasswordInputMap = new Map();
 function changePassword() {
   $("#my-password-form").children("input").remove();
   $("#my-password-form").append(
-        "<input type='password' name='currentPassword' class='form-control input-md mr-1'"
+        "<input type='password' name='currentPassword' class='input-md mr-1'"
       + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
-      + "<input type='button' name='checkPw' class='form-control input-md my-btn ml-1'"
+      + "<input type='button' name='checkPw' class='btn btn-md my-btn my-btn-hover ml-1'"
       + "value='비밀번호 확인' style='display:inline-block;' onclick='checkPassword()'/>");
 };
 
@@ -312,13 +310,13 @@ function checkPassword() {
       if (checkAccountJsonData.message == "exist") {
         $("#my-password-form").children("input").remove();
         $("#my-password-form").append(
-              "<input type='password' name='password' class='form-control input-md mr-1 my-password-input'"
+              "<input type='password' name='password' class='input-md mr-1 my-password-input'"
             + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
-            + "<input type='button' name='doChangePw' class='form-control input-md my-btn ml-1'"
+            + "<input type='button' name='doChangePw' class='btn btn-md my-btn my-btn-hover ml-1 mb-1'"
             + "value='비밀번호 변경하기' style='display:inline-block;' onclick='doChangePassword()'/>"
-            + "<input type='password' name='confirmPassword' class='form-control input-md mr-1 my-password-input'"
+            + "<input type='password' name='confirmPassword' class='input-md mr-1 my-password-input'"
             + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
-            + "<input type='button' name='cancelChangePw' class='form-control input-md btn-danger ml-1'"
+            + "<input type='button' name='cancelChangePw' class='btn btn-md my-btn-hover btn-danger ml-1'"
             + "value='취소' style='display:inline-block;' onclick='cancelChangePassword()'/>");
         $("#my-password-form ~ span.inputState").html("");
         $("th#passwordTh").html("비밀번호<br><br>비밀번호 확인");
@@ -363,11 +361,10 @@ function doChangePassword() {
       if (checkAccountJsonData.message == "success") {
         $("#my-password-form").children("input").remove();
         $("#my-password-form").append(
-              "<input type='button' name='changePw' class='form-control input-md my-btn'"
+              "<input type='button' name='changePw' class='btn btn-md my-btn my-btn-hover'"
             + "value='비밀번호 변경하기' onclick='changePassword()'/>");
         $("#my-password-form ~ span.inputState").css("color", "green");
         $("#my-password-form ~ span.inputState").css("font-size", "80%");
-        $("#my-password-form ~ span.inputState").css("margin-left", "10px");
         $("#my-password-form ~ span.inputState").html("비밀번호가 변경되었습니다.");
         $("th#passwordTh").html("비밀번호");
       } else {
@@ -375,7 +372,6 @@ function doChangePassword() {
         $("input[name=confirmPassword]").css("background-color", "#FFF9F9");
         $("#my-password-form ~ span.inputState").css("color", "red");
         $("#my-password-form ~ span.inputState").css("font-size", "80%");
-        $("#my-password-form ~ span.inputState").css("margin-left", "10px");
         $("#my-password-form ~ span.inputState").html("비밀번호 변경 중 오류가 발생했습니다.");
       }
     },
@@ -384,7 +380,6 @@ function doChangePassword() {
       $("input[name=confirmPassword]").css("background-color", "#FFF9F9");
       $("#my-password-form ~ span.inputState").css("color", "red");
       $("#my-password-form ~ span.inputState").css("font-size", "80%");
-      $("#my-password-form ~ span.inputState").css("margin-left", "10px");
       $("#my-password-form ~ span.inputState").html("비밀번호 변경 중 오류가 발생했습니다.");
     }
   });
@@ -393,7 +388,7 @@ function doChangePassword() {
 function cancelChangePassword() {
   $("#my-password-form").children("input").remove();
   $("#my-password-form").append(
-      "<input type='button' name='changePw' class='form-control input-md my-btn'"
+      "<input type='button' name='changePw' class='btn btn-md my-btn my-btn-hover'"
     + "value='비밀번호 변경하기' onclick='changePassword()'/>");
   $("#my-password-form ~ span.inputState").html("");
   $("th#passwordTh").html("비밀번호");

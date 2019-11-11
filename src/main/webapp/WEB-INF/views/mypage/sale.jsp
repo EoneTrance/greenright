@@ -55,7 +55,7 @@
 </style>
 
 <div id="mypage-title-h1">
-<h1>ORDERS</h1>
+<h1>SALES</h1>
 </div>
 
 <section class="ftco-section py-5">
@@ -74,10 +74,10 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="my-menu"><a href="userinfo">기본정보</a></li>
-        <li class="my-menu active"><a href="order">주문관리</a></li>
+        <li class="my-menu"><a href="order">주문관리</a></li>
         <li class="my-menu"><a href="#">관심상품</a></li>
         <li class="my-menu"><a href="#">업적</a></li>
-        <li class="my-menu"><a href="sale">판매관리</a></li>
+        <li class="my-menu active"><a href="sale">판매관리</a></li>
         <li class="my-menu"><a href="#">개인전관리</a></li>
         <li class="my-menu"><a href="#">판매회원 전환</a></li>
       </ul>
@@ -96,13 +96,13 @@
       </ul>
       <h4 class="font-weight-bold ml-2">구매</h4>
       <ul class="nav flex-column nav-pills nav-stacked text-center mb-4">
-        <li class="my-menu active"><a href="order">구매내역</a></li>
+        <li class="my-menu"><a href="order">구매내역</a></li>
         <li class="my-menu"><a href="#section3">관심상품</a></li>
         <li class="my-menu"><a href="#section3">업적</a></li>
       </ul>
       <h4 class="font-weight-bold ml-2">판매</h4>
       <ul class="nav flex-column nav-pills nav-stacked text-center">
-        <li class="my-menu"><a href="sale">판매내역</a></li>
+        <li class="my-menu active"><a href="sale">판매내역</a></li>
         <li class="my-menu"><a href="#section3">개인전관리</a></li>
         <li class="my-menu"><a href="#section3">판매회원 전환</a></li>
       </ul>
@@ -111,7 +111,7 @@
     <br>
     
     <div class="my-col-80">
-      <h2 id="mypage-title-h2">구매내역</h2>
+      <h2 id="mypage-title-h2">판매내역</h2>
       <hr>
       
       <!-- <div class="well">
@@ -157,10 +157,10 @@
         <div class="col-sm-12">
             <div class="btn-toolbar mb-2" role="toolbar" aria-label="Toolbar with button groups">
               <div class="btn-group" role="group" aria-label="First group">
-                <button type="button" class="btn btn-sm my-btn my-btn-hover">1주일</button>
-                <button type="button" class="btn btn-sm my-btn my-btn-hover">1개월</button>
-                <button type="button" class="btn btn-sm my-btn my-btn-hover">3개월</button>
-                <button type="button" class="btn btn-sm my-btn my-btn-hover">6개월</button>
+                <button type="button" class="btn my-btn my-btn-hover btn-sm">1주일</button>
+                <button type="button" class="btn my-btn my-btn-hover btn-sm">1개월</button>
+                <button type="button" class="btn my-btn my-btn-hover btn-sm">3개월</button>
+                <button type="button" class="btn my-btn my-btn-hover btn-sm">6개월</button>
               </div>
               <div class="btn-group mx-4 text-center" role="group" 
                    aria-label="Second group"
@@ -195,7 +195,7 @@
                 </select>
               </div>
               <span class="btn-group" role="group">
-                <button type="button" class="searchbtn btn-sm my-btn my-btn-hover px-4 ml-4">조회</button>
+                <button type="button" class="btn-sm my-btn my-btn-hover px-3 ml-4">조회</button>
               </span>
             </div>
         </div>
@@ -208,10 +208,58 @@
               <th class="text-center my-col-3">날짜</th>
               <th class="text-center my-col-5">상품</th>
               <th class="text-center my-col-2">상태</th>
-              <th class="text-center my-col-2">판매자</th>
+              <th class="text-center my-col-2">구매자</th>
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td class="my-date">2019-09-09</td>
+              <td class="my-product">Doe</td>
+              <td class="my-state">배송완료</td>
+              <td class="my-seller">이원주</td>
+            </tr>
+            <tr>
+              <td class="my-date">2019-09-09</td>
+              <td class="my-product">Doe</td>
+              <td class="my-state">배송완료</td>
+              <td class="my-seller">이원주</td>
+            </tr>
+            <tr>
+              <td class="my-date">2019-09-09</td>
+              <td class="my-product">Doe</td>
+              <td class="my-state">배송완료</td>
+              <td class="my-seller">이원주</td>
+            </tr>
+            <tr>
+              <td class="my-date">2019-09-09</td>
+              <td class="my-product">Doe</td>
+              <td class="my-state">배송완료</td>
+              <td class="my-seller">이원주</td>
+            </tr>
+            <tr>
+              <td class="my-date">2019-09-09</td>
+              <td class="my-product">Doe</td>
+              <td class="my-state">배송완료</td>
+              <td class="my-seller">이원주</td>
+            </tr>
+            <tr>
+              <td class="my-date">2019-09-09</td>
+              <td class="my-product">Doe</td>
+              <td class="my-state">배송완료</td>
+              <td class="my-seller">이원주</td>
+            </tr>
+            <tr>
+              <td class="my-date">2019-09-09</td>
+              <td class="my-product">Doe</td>
+              <td class="my-state">배송완료</td>
+              <td class="my-seller">이원주</td>
+            </tr>
+            <tr>
+              <td class="my-date">2019-09-09</td>
+              <td class="my-product">Doe</td>
+              <td class="my-state">배송완료</td>
+              <td class="my-seller">이원주</td>
+            </tr>
             <tr>
               <td class="my-date">2019-09-09</td>
               <td class="my-product">Doe</td>
