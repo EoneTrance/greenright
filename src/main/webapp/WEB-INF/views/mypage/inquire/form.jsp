@@ -12,9 +12,12 @@
   <title>1:1문의 등록폼</title>
 </head>
 <body>
-<div id='content'>
-<h1>게시물 등록폼</h1>
-<br><br><br><br><br><br>
+<jsp:include page="../../greenheader.jsp" />  
+
+ <div
+    style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
+     <h1 style="text-align: center; margin-top: 40px; font-size: 40px;">1:1 문의게시판</h1>
+    <p style="text-align: center;">GreenRight 1:1 문의게시판입니다.</p>
 <form action='add' method='post'>
 <table class="table table-striped table-bordered table-hover">
         <tbody>
@@ -39,4 +42,7 @@
 </form>
 </div>
 </body>
+<br>
+<br>
+  <jsp:include page="../../greenfooter.jsp" />
 </html>

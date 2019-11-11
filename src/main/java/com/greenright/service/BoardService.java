@@ -10,8 +10,8 @@ public interface BoardService {
   void insert(Board board) throws Exception;
   void update(Board board,String boardPhotoNumber[]) throws Exception;
   void delete(int no) throws Exception;
-  List<Board> search1(String title) throws Exception;
-  List<Board> search2(String contents) throws Exception;
-  List<Board> search3(String name) throws Exception;
+  List<Board> search1(String title,int pageNo, int pageSize) throws Exception;
+  List<Board> search2(String contents,int pageNo, int pageSize) throws Exception;
+  List<Board> search3(String name,int pageNo, int pageSize) throws Exception;
   int size() throws Exception;
 }

@@ -89,7 +89,11 @@ public class DefaultBoardService implements BoardService {
     }
   }
   @Override
-  public List<Board> search1(String title) throws Exception {
+  public List<Board> search1(String title,int pageNo, int pageSize) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("offset", (pageNo - 1) * pageSize);
+    param.put("pageSize", pageSize);
+    
     List<Board> boardList = boardDao.findyByKeyword1(title);
     for(Board b : boardList) {
       int a = b.getNo();
@@ -99,7 +103,11 @@ public class DefaultBoardService implements BoardService {
   }
 
   @Override
-  public List<Board> search2(String contents) throws Exception {
+  public List<Board> search2(String contents,int pageNo, int pageSize) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("offset", (pageNo - 1) * pageSize);
+    param.put("pageSize", pageSize);
+    
     List<Board> boardList = boardDao.findyByKeyword2(contents);
     for(Board b : boardList) {
       int a = b.getNo();
@@ -109,7 +117,11 @@ public class DefaultBoardService implements BoardService {
   }
 
   @Override
-  public List<Board> search3(String name) throws Exception {
+  public List<Board> search3(String name,int pageNo, int pageSize) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("offset", (pageNo - 1) * pageSize);
+    param.put("pageSize", pageSize);
+    
     List<Board> boardList = boardDao.findyByKeyword3(name);
     for(Board b : boardList) {
       int a = b.getNo();

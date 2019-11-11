@@ -7,7 +7,7 @@
   <resultMap type="PrivateBoard" id="PrivateBoardMap">
     <id column="private_question_id" property="no"/>
     <result column="questIon_type" property="type"/>
-    <result column="member_no" property="memberNo"/>
+    <result column="member_id" property="memberNo"/>
     <result column="created_date" property="date"/>
     <result column="answer_tf" property="answerTrueFalse"/>
     <result column="answer" property="answer"/>
@@ -17,7 +17,7 @@
   select 
     private_question_id,
     questIon_type,
-    member_no,
+    member_id,
     created_date,
     title,
     contents,
@@ -26,7 +26,7 @@
   </sql>
 
   <sql id="where">
-    where member_no=#{no}
+    where member_id=#{no}
   </sql>
   
   <select id="findBy" parameterType="int" resultMap="PrivateBoardMap">
@@ -38,7 +38,7 @@
     <insert id="insert" parameterType="PrivateBoard">
     INSERT INTO private_questions (
       questIon_type
-      , member_no
+      , member_id
       , created_date
       , title
       , contents)

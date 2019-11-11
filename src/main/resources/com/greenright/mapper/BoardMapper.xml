@@ -93,7 +93,7 @@
       boards b
         left outer join members m on b.member_id=m.member_id
       where b.title like #{pattern}
-      order by b.created_date desc
+      order by b.created_date desc 
       
   </select>
   <select id="findyByKeyword2"

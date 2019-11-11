@@ -126,22 +126,93 @@ public class BoardController {
     return "redirect:list";
   }
   @GetMapping("search1")
-  public void search1(Model model, String title)throws Exception{
-    List<Board> boards = boardService.search1(title);
+  public void search1(
+      @RequestParam(defaultValue = "1") int pageNo, 
+      @RequestParam(defaultValue = "5") int pageSize, 
+      Model model, String title)throws Exception{
+    
+    if (pageSize < 5 || pageSize > 20) {
+      pageSize = 5;
+    }
+    int size = boardService.size();
+    int totalPage = size / pageSize; // 13 / 5 = 2.x
+    if (size % pageSize > 0) {
+      totalPage++;
+    }
+    
+    // 요청하는 페이지 번호가 유효하지 않을 때는 기본 값으로 1페이지로 지정한다.
+    if (pageNo < 1 || pageNo > totalPage) {
+      pageNo = 1;
+    }
+   
+    List<Board> boards = boardService.search1(title,pageNo, pageSize);
    model.addAttribute("boards",boards);
+   model.addAttribute("pageNo", pageNo);
+   model.addAttribute("pageSize", pageSize);
+   model.addAttribute("totalPage", totalPage);
+   model.addAttribute("size", size);
+   model.addAttribute("beginPage", (pageNo - 2) > 0 ? (pageNo - 2) : 1);
+   model.addAttribute("endPage", (pageNo + 2) < totalPage ? (pageNo + 2) : totalPage);
   }
   @GetMapping("search2")
-  public void search2(Model model, String contents)throws Exception{
-   List<Board> boards = boardService.search2(contents);
+  public void search2(
+      @RequestParam(defaultValue = "1") int pageNo, 
+      @RequestParam(defaultValue = "5") int pageSize, 
+      Model model, String contents)throws Exception{
+    if (pageSize < 5 || pageSize > 20) {
+      pageSize = 5;
+    }
+    int size = boardService.size();
+    int totalPage = size / pageSize; // 13 / 5 = 2.x
+    if (size % pageSize > 0) {
+      totalPage++;
+    }
+    
+    // 요청하는 페이지 번호가 유효하지 않을 때는 기본 값으로 1페이지로 지정한다.
+    if (pageNo < 1 || pageNo > totalPage) {
+      pageNo = 1;
+    }
+    
+   List<Board> boards = boardService.search2(contents,pageNo, pageSize);
    model.addAttribute("boards",boards);
+   model.addAttribute("pageNo", pageNo);
+   model.addAttribute("pageSize", pageSize);
+   model.addAttribute("totalPage", totalPage);
+   model.addAttribute("size", size);
+   model.addAttribute("beginPage", (pageNo - 2) > 0 ? (pageNo - 2) : 1);
+   model.addAttribute("endPage", (pageNo + 2) < totalPage ? (pageNo + 2) : totalPage);
   }
   @GetMapping("search3")
-  public void search3(Model model, String name)throws Exception{
-   List<Board> boards = boardService.search3(name);
+  public void search3(
+      @RequestParam(defaultValue = "1") int pageNo, 
+      @RequestParam(defaultValue = "5") int pageSize, 
+      Model model, String name)throws Exception{
+    if (pageSize < 5 || pageSize > 20) {
+      pageSize = 5;
+    }
+    int size = boardService.size();
+    int totalPage = size / pageSize; // 13 / 5 = 2.x
+    if (size % pageSize > 0) {
+      totalPage++;
+    }
+    
+    // 요청하는 페이지 번호가 유효하지 않을 때는 기본 값으로 1페이지로 지정한다.
+    if (pageNo < 1 || pageNo > totalPage) {
+      pageNo = 1;
+    }
+    
+   List<Board> boards = boardService.search3(name,pageNo, pageSize);
    model.addAttribute("boards",boards);
+   model.addAttribute("pageNo", pageNo);
+   model.addAttribute("pageSize", pageSize);
+   model.addAttribute("totalPage", totalPage);
+   model.addAttribute("size", size);
+   model.addAttribute("beginPage", (pageNo - 2) > 0 ? (pageNo - 2) : 1);
+   model.addAttribute("endPage", (pageNo + 2) < totalPage ? (pageNo + 2) : totalPage);
   }
   
   @PostMapping("detail/add")
+  
   @ResponseBody
   public Object commentadd(Comment comment) throws Exception {
     commentService.insert(comment);
