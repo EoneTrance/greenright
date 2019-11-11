@@ -5,9 +5,9 @@
 <mapper namespace="com.greenright.dao.ReviewPhotoDao">
 
  
-  <insert id="insert" parameterType="RevieWPhoto">
+  <insert id="insertReviewPhoto" parameterType="ReviewPhoto">
     insert into review_photos(review_id, photo_path)
-    values(#{reviewNo},#{PhotoPath})
+    values(#{reviewNo},#{photoPath})
   </insert>
   
   

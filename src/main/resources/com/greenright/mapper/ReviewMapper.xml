@@ -49,11 +49,19 @@
   <result column="contents" property="contents"/>
 </collection>
 
-
-
 	</resultMap>
 
-
+  <select id="findAll" resultMap="ReviewMap" parameterType="int" >
+  select
+  r.title,
+  r.contents,
+  r.rating,
+  r.created_date,
+  m.id
+  from reviews r
+  left outer join members m on m.member_id = r.member_id
+  where product_id =#{no}
+  </select>
 
 	<insert id="insertReview" parameterType="Review"
 	        useGeneratedKeys="true"
@@ -62,6 +70,8 @@
 		insert into reviews(product_id, member_id,created_date,rating,title,contents)
 		values(#{productNo}, #{memberNo},now(),#{rating},#{title},#{contents})
 	</insert>
-
+<select id="checkReview" parameterType="Review" resultType="int">
+  select count(*) from reviews where member_id =#{memberNo} and product_id =#{productNo}
+</select>
 
 </mapper>

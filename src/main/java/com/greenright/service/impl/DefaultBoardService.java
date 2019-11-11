@@ -47,6 +47,8 @@ public class DefaultBoardService implements BoardService {
     if (board == null) {
       throw new Exception("해당 번호의 데이터가 없습니다!");
     }
+    int a = board.getNo();
+    board.setRecommendation(recommendDao.CountRecommend(a));
     boardDao.increaseViewCount(no);
     return board;
   }

@@ -7,7 +7,7 @@ public class ReviewPhoto implements Serializable {
   
   private int no;
   private int reviewNo;
-  private String PhotoPath;
+  private String photoPath;
   
   public int getNo() {
     return no;
@@ -22,14 +22,14 @@ public class ReviewPhoto implements Serializable {
     this.reviewNo = reviewNo;
   }
   public String getPhotoPath() {
-    return PhotoPath;
+    return photoPath;
   }
   public void setPhotoPath(String photoPath) {
-    PhotoPath = photoPath;
+    this.photoPath = photoPath;
   }
   @Override
   public String toString() {
-    return "ReviewPhoto [no=" + no + ", reviewNo=" + reviewNo + ", PhotoPath=" + PhotoPath + "]";
+    return "ReviewPhoto [no=" + no + ", reviewNo=" + reviewNo + ", photoPath=" + photoPath + "]";
   }
 
   

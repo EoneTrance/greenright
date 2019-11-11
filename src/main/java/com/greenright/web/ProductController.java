@@ -11,11 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.greenright.domain.Product;
 import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
+import com.greenright.domain.Review;
 import com.greenright.service.ProductService;
+import com.greenright.service.ReviewService;
 
 @Controller
 @RequestMapping("/product")
@@ -24,6 +27,8 @@ public class ProductController {
   private ProductService productService;
   @Resource
   private ProductPhotoWriter productPhotoWriter;
+  @Resource
+  private ReviewService reviewService;
   
   @GetMapping("form")
   public void form() { }
@@ -109,6 +114,11 @@ public class ProductController {
 
     return "redirect:manage";
   
-}
+}   
+  @PostMapping("review/check")
+  @ResponseBody
+  public int ReviewCheck(Review review) throws Exception{
+    return reviewService.checkReview(review);
+  }
 
 }

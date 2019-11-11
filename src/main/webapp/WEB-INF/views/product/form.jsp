@@ -355,7 +355,7 @@ margin:0px 10px 0px 10.9px !important;
           type="text" name="optionquantity" value="neverNo" hidden />
       </h6>
       <table id="optionplus">
-       <tr><td class="dv">옵션명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<input type="text" name="optionName"  id ="postionsaver"class="margininput" placeholder="수량-색깔-성별 형태로입력" required>
+       <tr><td class="dv">옵션명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<input type="text" name="optionName"  id ="postionsaver"class="margininput" placeholder="수량-색깔-성별 형태로입력" >
     <table class="dr"><input class="btn btn-primary py-3 px-4 optionAdd" type="button" id="optionitemadd" value="옵션항목추가"/></table>
     <input type ="text" name="optionContents" value="divide" class="fordivide">
     <input type ="text" name="optionprice" value="divide" class="fordivide">
@@ -389,7 +389,7 @@ $(document).on("click",".adderButton",function(){
             "click",
             "#optionitemadd",
             function() {
-              var oip = '<tr><td>옵션내용:<input type="text"  class="margininput" name="optionContents" placeholder="수량-색깔-성별 형태로입력" required>';
+              var oip = '<tr><td>옵션내용:<input type="text"  class="margininput" name="optionContents" placeholder="수량-색깔-성별 형태로입력" >';
               oip += '추가금액:<input type="number" name="optionprice" class="margininput" required min="0" step=10>';
               oip += '개수:<input type="number" name="optionquantity"  class="margininput" required min="0" class="optionsQuantity">';
               oip += '<input class="btn btn-primary py-3 px-4 optionAdd margininput" type="button" id="buttonDel" value="옵션항목삭제"/>';

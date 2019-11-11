@@ -53,7 +53,7 @@
                 </div>
                 <div class="col" style="text-align: right;">
                   <span style="font-size: 13px; font-weight: normal;">조회수: ${board.viewCount}</span><br> 
-                    <span style="font-size: 13px; font-weight: normal;">추천수: 1</span>
+                    <span style="font-size: 13px; font-weight: normal;">추천수: ${board.recommendation }</span>
                 </div>
               </div>
               <hr id="hr1">

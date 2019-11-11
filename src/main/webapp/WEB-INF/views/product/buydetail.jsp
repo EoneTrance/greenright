@@ -487,15 +487,65 @@ textarea {
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="/js/google-map.js"></script>
 <script src="/js/main.js"></script>
+<script src="/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/node_modules/chart.js/dist/Chart.min.js"></script>
 <script>
 $(document).on("click",".useruse",function(){
   if($(this).attr("id")=="producttest"){
+    
+    
     var a="";
     a += "<div class='review'>"
     a += "상품평 볼수있는 부분"
     a += "</div>";
+    a += "<div>평점: <canvas id='myChart' width='200' height='200'></canvas>"
    
     $(".userusechanage").html(a);
+    
+    
+    
+    
+    
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['1점', '2점', '3점', '4점', '5점'],
+            datasets: [{
+                label: '평점',
+                data: [ 3, 3, 3, 1, 2],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+          responsive: false,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    
   }
   if($(this).attr("id")=="detaildesc"){
     var a="";
@@ -514,6 +564,8 @@ $(document).on("click",".useruse",function(){
     $(".userusechanage").html(a);
   }
   if($(this).attr("id")=="review"){
+  
+    
     var a="";
     a += "<div class='container' style='width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;'>"
     a += "<div style='width: inherit;'>"
@@ -522,37 +574,90 @@ $(document).on("click",".useruse",function(){
     a += "<select id='rating' style='width:101px;'><option value=1>★☆☆☆☆</option><option value=2>★★☆☆☆</option><option value=3>★★★☆☆</option><option value=4>★★★★☆</option><option value=5>★★★★★</option></select>"
     a += "<br><TEXTAREA  id ='contents' cols='90' rows='10' style='resize:none;'  placeholder='내용을 입력하세요.'/>"
     a += "<button id='review-add-btn' class='btn btn-primary'>등록</button>"
-    a += "<input type='file' id='filePath'>"
+    a += "<input type='file' id='filePath' name='reviewPhoto'>"
     a += "<img src='' id='view_file' alt='' style='width: 150px; height: 150px; object-fit: cover;' >"
     a += "</div></div><br><br>";
     $(".userusechanage").html(a);
+  
+     $("#review-add-btn").click(function(){
+      let productNo = $("#productNo").val();
+      let memberNo = 1;
+      let rating = $("#rating option:selected").val();
+      let title = $("#title").val();
+      let contents = $("#contents").val();
+      let ReviewPhoto = $("#filePath").val();
+      $.post("review/check",{
+        "productNo":productNo,
+        "memberNo":memberNo
+      }, function(a) {
+      if(a==0){
+        $.ajax({
+          url:"/greenright/json/Review/add",
+          type:"post",
+          data: {
+            "productNo": productNo,
+            "memberNo": memberNo,
+            "rating": rating,
+            "title": title,
+            "contents": contents,
+          },
+          success : function(result){
+            swal("상품평 등록완료")
+      },  
+      });
+      }else{
+        swal("이미 상품평을 작성하셨습니다.")
+      }
+      })
+     
+    }) 
+    
+    $('#filePath').fileupload({
+      url:"/greenright/json/Review/add",
+      dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
+      add: function (e, data) {
+        $("#review-add-btn").unbind();
+        $("#review-add-btn").off();
+        $('#review-add-btn').click(function() {
+          
+          $.post("review/check",{
+            "productNo":$("#productNo").val(),
+            "memberNo":1
+          }, function(a) {
+          if(a==0){
+            data.submit(); // submit()을 호출하면, 서버에 데이터를 보내기 전에 submit 이벤트가 발생한다.
+            swal("상품평 등록완료")
+          }else{
+            swal("이미 상품평을 작성하셨습니다.")
+          }
+          })
+        
+        });
+      },
+      submit: function (e, data) { // submit 이벤트가 발생했을 때 호출됨. 서버에 전송하기 전에 호출됨.
+        data.formData = {
+            "productNo": $("#productNo").val(),
+            "memberNo": 1,
+            "rating": $("#rating option:selected").val(),
+            "title": $("#title").val(),
+            "contents": $("#contents").val()
+      }
+     }
+    }); 
   }
   
 })
 </script>
 <script>
-$(document).on("click","#review-add-btn",function(){
-  console.log("why?")
-  let productNo = $("#productNo").val();
-  let memberNo = 1;
-  let rating = $("#rating option:selected").val();
-  let title = $("#title").val();
-  let contents = $("#contents").val();
-  let ReviewPhoto = $("#filePath").val();
-  let param  ="productNo="+productNo+"memberNo="+memberNo+"&rating="+rating+"&title="+title+"&contents="+contents+"&ReviewPhoto="+ReviewPhoto;
-  $.ajax({
-    url:"/greenright/json/Review/add",
-    enctype:"multipart/form-data",
-    type:"post",
-    data:param,
-    processData: false,
-    contentType: false,
-    cache: false,
-    success : function(result){
-      console.log(result)
-},  
-});
+
+function reviewCheck(memberNo,productNo){
+$.post("review/check",{
+  "productNo":productNo,
+  "memberNo":memberNo
+}, function(data) {
 })
+}
+
 </script>
 <script>
 $(document).on("change","#filePath",(function() {
