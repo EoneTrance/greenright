@@ -2,74 +2,55 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.greenright.dao.WishListDao">
+<mapper namespace="com.greenright.dao.WishProductDao">
 
- <resultMap type="WishList" id="WishListMap">
-    <id column="member_id" property="memberId" />
+ <resultMap type="WishProduct" id="WishProductMap">
+    <id column="wishlist_id" property="no" />
+    <result column="member_id" property="memberId" />
     <result column="product_id" property="productId" />
+    <result column="option_item_id" property="optionItemNo" />
     <result column="registered_date" property="registeredDate" />
     <result column="quantity" property="quantity" />
-    <result column="item_no" property="itemNo" />
-    <collection property="product" ofType="Product">
+    <association property="product" javaType="Product">
       <id column="product_id" property="no" />
       <result column="price" property="price" />
       <result column="product_name" property="productName" />
       <result column="description" property="description" />
-      <collection property="photos" ofType="ProductPhoto">
-        <id column="product_photo_id" property="no" />
-        <result column="product_id" property="productNo" />
-        <result column="photo_path" property="photoPath" />
-        <result column="main_photo_flag" property="mainPhoto" />
-      </collection>
-      <collection property="options" ofType="ProductOption">
-      <id column="options_id" property="no" />
+    </association>
+    <association property="productPhoto" javaType="ProductPhoto">
+      <id column="product_photo_id" property="no" />
       <result column="product_id" property="productNo" />
-      <result column="options_name" property="optionName" />
-        <collection property="optionItem" ofType="ProductOptionItem">
-          <id column="option_item_id" property="no" />
-          <result column="options_id" property="OptionsNo" />
-          <result column="option_item_matters" property="OptionItemMatter" />
-          <result column="options_price" property="OptionsPrice"/>
-          <result column="options_quantity" property="Optionsquantity"/>
-        </collection>
-      </collection>
-    </collection>
+      <result column="photo_path" property="photoPath" />
+      <result column="main_photo_flag" property="mainPhoto" />
+    </association>
   </resultMap>
 
-  <insert id="insert" parameterType="WishList">
-    insert into baskets(member_id,product_id) values (#{memberId},#{productId});
-  </insert>
-  
-  <insert id="insertFull" parameterType="WishList">
-    insert into baskets(member_id,product_id,quantity,item_no) values (#{memberId},#{productId},#{quantity},#{itemNo});
-  </insert>
-  
-  <select id="count" parameterType="int" resultType="int">
-    select count(*) from baskets where member_id=#{no};
-  </select>
-  
-  <select id="findAll" parameterType="int" resultMap="WishListMap">
+  <select id="findAll" parameterType="int" resultMap="WishProductMap">
   select
-    o.options_id,
-    o.options_name,
-    p.product_id,
-    p.group_id,
+    b.quantity,
+    b.option_item_id,
     p.price,
     p.product_name,
     p.description,
     p.quantity,
-    f.product_id,
-    f.photo_path,
-    b.product_id,
-    b.registered_date,
-    b.quantity,
-    b.item_no
-  from options o
-    right outer join products p on p.product_id = o.product_id
+    f.photo_path
+  from baskets b
+    left outer join products p on p.product_id = b.product_id
     left outer join product_photos f on (p.product_id = f.product_id AND
-    f.main_photo_flag = 0)
-    right outer join baskets b on b.product_id = p.product_id
+       f.main_photo_flag = 0)
   where b.member_id=#{no};
+  </select>
+  
+    <insert id="insert" parameterType="WishProduct">
+    insert into baskets(member_id,product_id) values (#{memberId},#{productId});
+  </insert>
+  
+  <insert id="insertFull" parameterType="WishProduct">
+    insert into baskets(member_id,product_id,quantity,option_item_id) values (#{memberId},#{productId},#{quantity},#{optionItemNo});
+  </insert>
+  
+  <select id="count" parameterType="int" resultType="int">
+    select count(*) from baskets where member_id=#{no};
   </select>
   
 </mapper>

@@ -1,20 +1,19 @@
 package com.greenright.web;
 
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.greenright.domain.Member;
-import com.greenright.domain.WishList;
+import com.greenright.domain.ProductOptionItem;
+import com.greenright.domain.WishProduct;
 import com.greenright.service.MemberService;
+import com.greenright.service.ProductOptionItemService;
 import com.greenright.service.WishListService;
 
 @Controller
@@ -22,6 +21,7 @@ import com.greenright.service.WishListService;
 public class MypageController {
   @Resource private MemberService memberService;
   @Resource private WishListService wishListService;
+  @Resource private ProductOptionItemService productOptionItemService;
   
   @GetMapping("memberinfo")
   public void memberinfo(Model model) throws Exception {
@@ -67,12 +67,19 @@ public class MypageController {
   public void wishlist(Model model, HttpSession session) throws Exception {
     if(session.getAttribute("loginUser") != null) {
       int no = ((Member)session.getAttribute("loginUser")).getNo();
-      List<WishList> wishLists =  wishListService.list(no);
-      //System.out.println(wishLists.size());
-      //System.out.println(wishLists);
+      List<WishProduct> wishLists =  wishListService.list(no);
+      
+      for(WishProduct wishlist : wishLists) {
+        if(wishlist.getOptionItemNo() == 0) {
+          wishlist.setOptionName("없음");
+          continue;
+        }
+        ProductOptionItem ProductOptionItem = productOptionItemService.searchItemAll(wishlist.getOptionItemNo());
+        wishlist.setOptionName(ProductOptionItem.getOptionItemMatter());
+        wishlist.setOptionPrice(ProductOptionItem.getOptionsPrice());
+      }
       model.addAttribute("wishLists", wishLists);
     }
-    
   }
 
 }

@@ -7,4 +7,6 @@ public interface ProductOptionItemDao {
   int delete(int no) throws Exception;
   int deleteAll(int no) throws Exception;
   int update(ProductOptionItem productOptionItem)throws Exception;
+  String searchItem(int no) throws Exception;
+  ProductOptionItem searchItemAll(int no) throws Exception; 
 }

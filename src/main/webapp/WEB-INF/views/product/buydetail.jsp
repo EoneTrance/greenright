@@ -450,7 +450,7 @@ $('#my-add-cart').click(function(e){
   e.preventDefault();
   var a = $('#my-option option:selected').val();
   var b = $('#quantity').val();
-  var param = "productNo="+${productNo}+"&itemNo="+a+"&quantity="+b;
+  var param = "productNo="+${productNo}+"&optionItemNo="+a+"&quantity="+b;
   $.ajax({
     url : "/greenright/mypage/wishlist/add2",
     type: 'get',

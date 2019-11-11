@@ -6,32 +6,32 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.greenright.dao.WishListDao;
-import com.greenright.domain.WishList;
+import com.greenright.dao.WishProductDao;
+import com.greenright.domain.WishProduct;
 import com.greenright.service.WishListService;
 
 @Service
 public class DefaultWishListService implements WishListService {
-  @Resource private WishListDao wishListDao;
+  @Resource private WishProductDao wishProductDao;
 
   @Override
-  public int insert(WishList wishList) throws Exception {
-    return wishListDao.insert(wishList);
+  public int insert(WishProduct wishList) throws Exception {
+    return wishProductDao.insert(wishList);
   }
 
   @Override
   public int count(int no) throws Exception {
-    return wishListDao.count(no);
+    return wishProductDao.count(no);
   }
 
   @Override
-  public int insertFull(WishList wishList) throws Exception {
-    return wishListDao.insertFull(wishList);
+  public int insertFull(WishProduct wishList) throws Exception {
+    return wishProductDao.insertFull(wishList);
   }
 
   @Override
-  public List<WishList> list(int no) throws Exception {
-    return wishListDao.findAll(no);
+  public List<WishProduct> list(int no) throws Exception {
+    return wishProductDao.findAll(no);
   }
 
 }

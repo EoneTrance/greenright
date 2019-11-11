@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.greenright.domain.Member;
-import com.greenright.domain.WishList;
+import com.greenright.domain.WishProduct;
 import com.greenright.service.WishListService;
 
 @Controller
@@ -20,7 +20,7 @@ public class WishListController {
   @ResponseBody
   @GetMapping("add")
   public int add(@RequestParam(value = "productNo", required = false) int productNo, HttpSession session) throws Exception {
-    WishList wl = new WishList();
+    WishProduct wl = new WishProduct();
     wl.setMemberId(((Member)session.getAttribute("loginUser")).getNo());
     wl.setProductId(productNo);
     return wishListService.insert(wl);
@@ -29,13 +29,14 @@ public class WishListController {
   @ResponseBody
   @GetMapping("add2")
   public int add2(@RequestParam(value = "productNo", required = false) int productNo,
-                  @RequestParam(value = "itemNo", required = false) int itemNo,
+                  @RequestParam(value = "optionItemNo", required = false) int optionItemNo,
                   @RequestParam(value = "quantity", required = false) int quantity,HttpSession session) throws Exception {
-    WishList wl = new WishList();
+    WishProduct wl = new WishProduct();
     wl.setMemberId(((Member)session.getAttribute("loginUser")).getNo());
     wl.setProductId(productNo);
-    wl.setItemNo(itemNo);
+    wl.setOptionItemNo(optionItemNo);
     wl.setQuantity(quantity);
+    System.out.println(wl);
     return wishListService.insertFull(wl);
   }
   

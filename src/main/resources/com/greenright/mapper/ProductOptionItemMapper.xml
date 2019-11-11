@@ -3,9 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.greenright.dao.ProductOptionItemDao">
+
+  <resultMap type="ProductOptionItem" id="ProductOptionItemMap">
+    <id column="option_item_id" property="no"/>
+    <result column="options_id" property="optionsNo"/>
+    <result column="option_item_matters" property="optionItemMatter"/>
+    <result column="options_price" property="optionsPrice"/>
+    <result column="options_quantity" property="optionsquantity"/>
+  </resultMap>
+
   <insert id="insert" parameterType="ProductOptionItem">
     insert into option_items(options_id,option_item_matters,options_price,options_quantity)
-    values(#{OptionsNo},#{OptionItemMatter},#{OptionsPrice},#{Optionsquantity})
+    values(#{optionsNo},#{optionItemMatter},#{optionsPrice},#{optionsquantity})
   </insert>
    <delete id="delete" parameterType="int">
     delete from option_items
@@ -20,9 +29,23 @@
   update option_items set
   option_item_matters = #{optionItemMatter},
   options_price =#{optionsPrice},
-  options_quantity =#{Optionsquantity}
+  options_quantity =#{optionsquantity}
   where option_item_id =#{no}
   </update>
+  
+  <select id="searchItem" parameterType="int" resultType="String">
+    select option_item_matters from 
+      option_items 
+    where option_item_id=#{no}
+  </select>
+  
+  <select id="searchItemAll" parameterType="int" resultMap="ProductOptionItemMap">
+    select 
+      option_item_id,options_id,option_item_matters,options_price,options_quantity
+    from 
+      option_items 
+    where option_item_id=#{no}
+  </select>
 </mapper>
 
 

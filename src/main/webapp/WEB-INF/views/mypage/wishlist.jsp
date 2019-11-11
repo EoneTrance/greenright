@@ -39,7 +39,7 @@
               <tr class="text-center">
                 <th>&nbsp;</th>
                 <th>Product List</th>
-                <th>&nbsp;</th>
+                <th>Name<br>Description</th>
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Option</th>
@@ -52,12 +52,13 @@
               <c:forEach items="${wishLists}" var="wishList">
               <tr class="text-center">
                 <td class="product-remove"><a href="#"><i class="fas fa-times"></i></a></td>
-                <td class="image-prod"><img class="img-fluid" src='/upload/product/${wishList.product.photos[0].photoPath}' style="width:120px; height:120px;"></td>
+                <td class="image-prod"><img class="img-fluid" src='/upload/product/${wishList.productPhoto.photoPath}' style="width:120px; height:120px;"></td>
                 <td class="product-name">
                   <h3>${wishList.product.productName}</h3>
                   <p>${wishList.product.description}</p>
                 </td>
                 <td class="price">${wishList.product.price}￦</td>
+                <td>${wishList.optionName}<p>${wishList.optionPrice}￦</p></td>
                 <td class="quantity">
                   <div class="input-group mb-3">
                     <button type="button" class="quantity-left-minus"><i class="fas fa-minus"></i></button>
@@ -65,8 +66,7 @@
                     <button type="button" class="quantity-right-plus"><i class="fas fa-plus"></i></button>
                   </div>
                 </td>
-                <td>${wishList.product.options[0].optionName}</td>
-                <td class="total">5000</td>
+                <td class="total">${(wishList.optionPrice+wishList.product.price)*3}￦</td>
               </tr>
               </c:forEach>
                 
