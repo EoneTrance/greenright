@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.greenright.domain.Board;
 import com.greenright.domain.Comment;
-import com.greenright.domain.PagingControl;
 import com.greenright.domain.Recommend;
 import com.greenright.service.BoardService;
 import com.greenright.service.CommentService;
 import com.greenright.service.RecommendService;
+import com.greenright.web.json.JsonResult;
 
 @Controller
 @RequestMapping("/board")
@@ -162,18 +162,19 @@ public class BoardController {
   public String commentupdate(@RequestParam(value = "contents", required = false) String contents, @RequestParam(value = "commentNo", required = false) String commentNo) throws Exception {
     return String.valueOf(commentService.update(contents,commentNo));
   }
-    @PostMapping("recommend/add")
+  
+  @PostMapping("recommend/add")
   @ResponseBody
-  public Object recommendadd(Recommend recommend) throws Exception{
-    recommendService.insert(recommend);
-    return recommend;
+  public JsonResult recommendadd(Recommend recommend) throws Exception{
+    return new JsonResult().setState(JsonResult.SUCCESS)
+        .setResult(recommendService.insert(recommend));
   }
   
   @PostMapping("recommend/delete")
   @ResponseBody
-
-  public void recommenddelete(Recommend recommend)throws Exception{
-    recommendService.delete(recommend);
+  public JsonResult recommenddelete(Recommend recommend)throws Exception{
+    return new JsonResult().setState(JsonResult.SUCCESS)
+        .setResult(recommendService.delete(recommend));
   }
 
   @PostMapping("recommend/checkRecommendForCheck")

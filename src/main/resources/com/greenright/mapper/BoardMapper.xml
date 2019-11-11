@@ -175,6 +175,8 @@
     where
     boards_id=#{value}
   </update>
+  
+  
 
   <insert id="insert" parameterType="Board"
     useGeneratedKeys="true" keyColumn="boards_id" keyProperty="no">
@@ -193,6 +195,7 @@
     delete from boards
     where boards_id=#{no}
   </delete>
+  
  <select id="countAll" resultType="int">
     select count(*) from boards
   </select>

@@ -16,4 +16,5 @@ public interface BoardDao {
   List<Board> findyByKeyword2(String contents)throws Exception;
   List<Board> findyByKeyword3(String name)throws Exception;
   int countAll() throws Exception;
+ 
  }
