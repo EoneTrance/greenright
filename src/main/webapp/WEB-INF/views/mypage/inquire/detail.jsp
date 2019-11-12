@@ -12,11 +12,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>1:1문의게시판</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+<style>
+  .btn.btn-primary {
+   border-top-left-radius: 2px;
+   border-top-right-radius: 2px;
+   border-bottom-right-radius: 2px;
+   border-bottom-left-radius: 2px;
+}
+
+  
+</style>
   </head>
   <body>
-    <div class="container">
-    <br><br><br><br><br><br><br><br><br>
-      <table class="table table-striped table-bordered table-hover">
+ <jsp:include page="../../greenheader.jsp" />  
+  <div
+    style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
+     <h1 style="text-align: center; margin-top: 40px; font-size: 40px;">1:1 문의게시판</h1>
+    <p style="text-align: center;">GreenRight 1 : 1 문의게시판입니다.</p>
+    <br>
+      <table class="table-striped table-bordered table-hover" style="width:1140px; height:200px; text-align:center;">
         <caption>1:1답변</caption>
         <tbody>
             <tr>
@@ -38,12 +52,16 @@
               <td colspan="3">${privateBoard.answer}</td>
             </tr>
         </tbody>
-    </table><br><br>
+    </table><br>
+     </div>
     <P align="center">
-      <button type="button" class="btn btn-success">목록</button>
-      <button type="button" class="btn btn-danger">추가문의</button></p>
-    </div>
+      <button type="button" class="btn btn-primary">목록</button>
+      <button type="button" class="btn btn-primary">추가문의</button></p>
+   
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   </body>
+<br>
+<br>
+<jsp:include page="../../greenfooter.jsp" />
 </html>

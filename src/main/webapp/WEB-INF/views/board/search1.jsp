@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -171,7 +170,8 @@ $('.page-item').click((e) => {
 */
 
  var currentPage = ${pageNo};
- var title = $('#searchtitle').val();
+ 
+
 $('.page-item').click((e) => {
   e.preventDefault();
   // e.currentTarget? 리스너가 호출될 때, 그 리스너가 등록된 태그를 가르킨다.
@@ -181,18 +181,18 @@ $('.page-item').click((e) => {
   if (page == "prev") {
     if (currentPage == 1)
       return;
-    location.href = "search1?title=" +title + "&pageNo=" + (currentPage - 1) + "&pageSize=" + ${pageSize};
+    location.href = "search1?title="+"${title}"+"&pageNo=" + (currentPage - 1) + "&pageSize=" + ${pageSize};
     
     
   } else if (page == "next") {
     if (currentPage >= ${totalPage})
       return
-    location.href = "search1?title=" + title + "&pageNo="+ (currentPage + 1) + "&pageSize=" + ${pageSize};
+    location.href = "search1?title=" +"${title}" + "&pageNo="+ (currentPage + 1) + "&pageSize=" + ${pageSize};
   
   } else {
     console.log(e.currentTarget);
     if (page != currentPage)
-      location.href = "search1?title=" + title + "&pageNo=" + page + "&pageSize=" + ${pageSize};
+      location.href = "search1?title="+ "${title}" +"&pageNo=" + page + "&pageSize=" + ${pageSize};
     
   }
 }); 

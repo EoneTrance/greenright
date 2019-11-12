@@ -93,13 +93,15 @@ public class DefaultBoardService implements BoardService {
     HashMap<String,Object> param = new HashMap<>();
     param.put("offset", (pageNo - 1) * pageSize);
     param.put("pageSize", pageSize);
+    param.put("title", title);
     
-    List<Board> boardList = boardDao.findyByKeyword1(title);
+    List<Board> boardList = boardDao.findByKeyword1(param);
     for(Board b : boardList) {
       int a = b.getNo();
       b.setRecommendation(recommendDao.CountRecommend(a));
     }
   return boardList;
+  
   }
 
   @Override
@@ -107,8 +109,9 @@ public class DefaultBoardService implements BoardService {
     HashMap<String,Object> param = new HashMap<>();
     param.put("offset", (pageNo - 1) * pageSize);
     param.put("pageSize", pageSize);
+    param.put("contents", contents);
     
-    List<Board> boardList = boardDao.findyByKeyword2(contents);
+    List<Board> boardList = boardDao.findByKeyword2(param);
     for(Board b : boardList) {
       int a = b.getNo();
       b.setRecommendation(recommendDao.CountRecommend(a));
@@ -121,8 +124,9 @@ public class DefaultBoardService implements BoardService {
     HashMap<String,Object> param = new HashMap<>();
     param.put("offset", (pageNo - 1) * pageSize);
     param.put("pageSize", pageSize);
+    param.put("name", name);
     
-    List<Board> boardList = boardDao.findyByKeyword3(name);
+    List<Board> boardList = boardDao.findByKeyword3(param);
     for(Board b : boardList) {
       int a = b.getNo();
       b.setRecommendation(recommendDao.CountRecommend(a));
@@ -135,7 +139,18 @@ public class DefaultBoardService implements BoardService {
     return boardDao.countAll();
   }
 
-
+  @Override
+  public int search1Size(String title) throws Exception {
+    return boardDao.countAll1(title);
+  }
+  @Override
+  public int search2Size(String contents) throws Exception {
+    return boardDao.countAll2(contents);
+  }
+  @Override
+  public int search3Size(String name) throws Exception {
+    return boardDao.countAll3(name);
+  }
 
 
 

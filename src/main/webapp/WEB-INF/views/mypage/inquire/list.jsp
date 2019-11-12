@@ -117,10 +117,108 @@
             <option>아이디</option>
             <option>닉네임</option>
       </select>
+       <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul id="my-paging">
+                <li id='my-paging-first'>
+                 <span class="page-item" data-page="prev"  style="cursor: pointer;">&lt;</span>
+                </li>
+                <li data-page="1" class="active">
+               <!-- <span class="my-page-no">1</span> -->  
+                 </li>
+                   <c:forEach begin="${beginPage}" end="${endPage}" var="page" >
+                     <li class="page-item" data-page="${page}">
+                       <span style ="${page != pageNo ? "cursor: pointer;" : "color: white; background-color: #82ae46;"} border:1px solid #e6e6e6">${page}</span>
+                     </li>
+                    </c:forEach>
+                    
+                      <li id="my-paging-last">
+                      <span class="page-item" data-page="next" style="cursor: pointer;">&gt;</span> 
+                      </li>
+              </ul>
+            </div>
+          </div>
+        </div>
     </div>
 </section>
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   </body>
+  
+ <script>
+$('#my-paging').on('click','.page-item', () => {
+  /*  var currentLi = $(event.target).parent().attr('data-page'); 
+   $(event.target).parent().parent().children('.active').removeClass('active'); */ 
+  $(event.target).parent().addClass('active');
+  
+  //var boardNo = parseInt(document.querySelector('#jisooBoardNo').value);
+  //var param = "commentNo="+commentNo+"&boardNo="+boardNo;
+  
+});
+
+/* var currentPage = ${pageNo};
+
+$('.page-item').click((e) => {
+  //e.preventDefault();
+ 
+  //var page = e.currentTarget.getAttribute('data-page');
+  var page = $(e.currentTarget).attr('data-page');
+
+  $.get("list",{
+  }, function(success) {
+    if (page == "prev") {
+      if (currentPage == 1)
+        return;
+      location.href = "list?pageNo=" + (currentPage - 1) + "&pageSize=" + ${pageSize};
+      
+      
+    } else if (page == "next") {
+      if (currentPage >= ${totalPage})
+        return
+      location.href = "list?pageNo=" + (currentPage + 1) + "&pageSize=" + ${pageSize};
+    
+    } else {
+      location.href = "list?pageNo=" + page + "&pageSize=" + ${pageSize};
+    
+    }
+    
+  });
+
+
+}); 
+
+*/
+
+ var currentPage = ${pageNo};
+
+$('.page-item').click((e) => {
+  e.preventDefault();
+  // e.currentTarget? 리스너가 호출될 때, 그 리스너가 등록된 태그를 가르킨다.
+  // e.target? 이벤트가 발생된 원천 태그이다. 
+  //var page = e.currentTarget.getAttribute('data-page');
+  var page = $(e.currentTarget).attr('data-page');
+  if (page == "prev") {
+    if (currentPage == 1)
+      return;
+    location.href = "list?pageNo=" + (currentPage - 1) + "&pageSize=" + ${pageSize};
+    
+    
+  } else if (page == "next") {
+    if (currentPage >= ${totalPage})
+      return
+    location.href = "list?pageNo=" + (currentPage + 1) + "&pageSize=" + ${pageSize};
+  
+  } else {
+    console.log(e.currentTarget);
+    if (page != currentPage)
+      location.href = "list?pageNo=" + page + "&pageSize=" + ${pageSize};
+    
+  }
+}); 
+
+
+
+</script>  
   <jsp:include page="../../greenfooter.jsp" />
 </html>

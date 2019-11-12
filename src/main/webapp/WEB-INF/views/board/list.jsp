@@ -216,6 +216,7 @@ $('.page-item').click((e) => {
   // e.target? 이벤트가 발생된 원천 태그이다. 
   //var page = e.currentTarget.getAttribute('data-page');
   var page = $(e.currentTarget).attr('data-page');
+
   if (page == "prev") {
     if (currentPage == 1)
       return;

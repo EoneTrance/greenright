@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.greenright.domain.PrivateBoard;
 import com.greenright.service.PrivateBoardService;
 
@@ -22,11 +23,40 @@ public class InquireController {
   }
 
   @GetMapping("list")
-  public void inquire(Model model, HttpSession session) throws Exception {
+  public void inquire(
+      @RequestParam(defaultValue = "1") int pageNo, 
+      @RequestParam(defaultValue = "5") int pageSize, 
+      Model model, HttpSession session) throws Exception {
+   
+    // 총 페이지 개수 알아내기
+    if (pageSize < 5 || pageSize > 20) {
+      pageSize = 5;
+    }
+    int size = privateBoardService.size();
+    int totalPage = size / pageSize; // 13 / 5 = 2.x
+    if (size % pageSize > 0) {
+      totalPage++;
+      
+    }
+    
+    // 요청하는 페이지 번호가 유효하지 않을 때는 기본 값으로 1페이지로 지정한다.
+    if (pageNo < 1 || pageNo > totalPage) {
+      pageNo = 1;
+    }
+      
+   
     session.setAttribute("no", 1);
     int no = (int)session.getAttribute("no");
-    List<PrivateBoard> privateBoards = privateBoardService.list(no);
+    
+    
+    List<PrivateBoard> privateBoards = privateBoardService.list(no,pageNo, pageSize);
     model.addAttribute("boards", privateBoards);
+    model.addAttribute("pageNo", pageNo);
+    model.addAttribute("pageSize", pageSize);
+    model.addAttribute("totalPage", totalPage);
+    model.addAttribute("size", size);
+    model.addAttribute("beginPage", (pageNo - 2) > 0 ? (pageNo - 2) : 1);
+    model.addAttribute("endPage", (pageNo + 2) < totalPage ? (pageNo + 2) : totalPage);
 
   }
 

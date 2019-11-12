@@ -14,4 +14,7 @@ public interface BoardService {
   List<Board> search2(String contents,int pageNo, int pageSize) throws Exception;
   List<Board> search3(String name,int pageNo, int pageSize) throws Exception;
   int size() throws Exception;
+  int search1Size(String title) throws Exception;
+  int search2Size(String contents) throws Exception;
+  int search3Size(String name) throws Exception;
 }

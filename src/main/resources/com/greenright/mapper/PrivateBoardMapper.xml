@@ -55,7 +55,10 @@
     <include refid="basicColumn"/>
     from private_questions
     <include refid="where"/>
-    order by private_question_id asc
+    order by private_question_id asc limit #{offset}, #{pageSize}
   </select>
 
+  <select id="countAll" resultType="int">
+    select count(*) from private_questions
+  </select>
 </mapper>

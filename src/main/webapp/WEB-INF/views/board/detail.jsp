@@ -31,7 +31,6 @@
 .far.fa-thumbs-up.active {
   color:#82ae46;
 }
-
 </style>
   <% session.setAttribute("memberName","kim");%>
   <jsp:include page="../greenheader.jsp" />
@@ -49,7 +48,7 @@
           <tr>
             <th style="width:1100px;">
               <hr id="hr1">
-              <p style="text-align: center; font-size: 25px;">${board.title}</p>
+              <p style="text-align: center; font-size: 25px; font-weight: normal;">${board.title}</p>
               <hr id="hr1">
               <div class="row" >
                 <div class="col" style="text-align: left;">
@@ -184,7 +183,6 @@ $('.recommend').on('click',() =>{
      }
    });
 });
-
 function countRecommend(boardNo) {
   $.post("recommend/checkNum",{
     "recommendBoardNo":boardNo,
@@ -210,9 +208,7 @@ $(document).ready(function() {
         $('.far.fa-thumbs-up').addClass('active');
     }
   });
-
 });
-
 </script>
 
   <script>
@@ -349,4 +345,3 @@ $('#mymy-comment').on('click', '.my-update-btn', () => {
 
 
   <jsp:include page="../greenfooter.jsp" />
-

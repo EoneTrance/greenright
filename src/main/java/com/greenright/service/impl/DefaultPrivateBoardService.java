@@ -1,5 +1,6 @@
 package com.greenright.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,12 @@ public class DefaultPrivateBoardService implements PrivateBoardService {
   PrivateBoardDao privateBoardDao;
   
   @Override
-  public List<PrivateBoard> list(int no) throws Exception {
-    return privateBoardDao.findAll(no);
+  public List<PrivateBoard> list(int no, int pageNo, int pageSize) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("offset", (pageNo - 1) * pageSize);
+    param.put("pageSize", pageSize);
+    param.put("no", no);
+    return privateBoardDao.findAll(param);
   }
   
   @Override
@@ -31,4 +36,10 @@ public class DefaultPrivateBoardService implements PrivateBoardService {
     }
     return privateBoard;
   }
+  @Override
+  public int size() throws Exception {
+    return privateBoardDao.countAll();
+  }
+
+
 }
