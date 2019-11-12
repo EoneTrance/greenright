@@ -312,7 +312,7 @@ $('.page-item').click((e) => {
       var member = "${loginName}"
       var smember = "${memberName}"
       if (member != smember) {
-        $("#newC").remove();
+       /*  $("#newC").remove(); */
       }
     </script>
 

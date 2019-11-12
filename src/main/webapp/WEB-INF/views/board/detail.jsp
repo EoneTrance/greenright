@@ -235,7 +235,7 @@ $(document).ready(function() {
           comment += "<p class='my-comment-content contents-"+result.no+"'>"+result.contents+"</p><div>";
           comment += "<textarea class='my-comment'>"+result.contents+"</textarea>";
           comment += "<div class='my-comment-control' data-member-no='"+result.memberNo+"'>";
-          comment += "<button class='my-save-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>저장</button>";
+          comment += "<button class='my-save-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>저장</button>\n";
           comment += "<button class='my-cancel-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>취소</button>";
           comment += "<button class='my-update-btn btn btn-primary'>수정</button>\n";
           comment += "<button class='my-delete-btn btn btn-primary'>삭제</button></div></div><hr></div>";
@@ -289,6 +289,8 @@ $(document).ready(function() {
     commentC.style['display'] = 'none';
     commentD.style['display'] = 'inline-block';
     commentU.style['display'] = 'inline-block';
+
+    
   });
   
   $('#mymy-comment').on('click','.my-save-btn', () => {
@@ -338,6 +340,7 @@ $('#mymy-comment').on('click', '.my-update-btn', () => {
   commentD.style['display'] = 'none';
   commentU.style['display'] = 'none';
     console.log(commentDiv.getAttribute('data-no'));
+  
 });
 </script>
 
