@@ -594,20 +594,21 @@ label.star:before {
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
 <script>
-let ratingNum = 1;
-let ratingSum = 1;
-let ratingAver= 1;
-let Num1 =0;
-let Num2 =0;
-let Num3 =0;
-let Num4 =0;
-let Num5 =0;
+
   $(document)
       .on(
           "click",
           ".useruse",
           function() {
             if ($(this).attr("id") == "producttest") {
+              let ratingNum = 1;
+              let ratingSum = 1;
+              let ratingAver= 1;
+              let Num1 =0;
+              let Num2 =0;
+              let Num3 =0;
+              let Num4 =0;
+              let Num5 =0;
               $.get(
                       "/greenright/json/Review/list",
                       {
@@ -721,6 +722,7 @@ let Num5 =0;
                       $.get("/greenright/json/Review/getRatingAVer",{
                         "no" : $("#productNo").val()
                       },function(a){
+                        console.log(a.result);
                       ratingAver = a.result;
                         if(1<ratingAver<= 1.5 ){
                           console.log("1");
