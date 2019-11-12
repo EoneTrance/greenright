@@ -3,7 +3,6 @@ package com.greenright.web.json;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,11 +36,31 @@ public class ReviewController {
       return new JsonResult().setResult(JsonResult.FAILURE);
     }
   }
-  
+  @GetMapping("get")
+  public JsonResult get(int no) throws Exception{
+    try {
+      Review review = reviewService.findByReviewNo(no);
+      return new JsonResult().setState(JsonResult.SUCCESS).setResult(review);
+    }catch(Exception e) {
+      return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
+    }
+  }
   @GetMapping("list")
-  public void list(Model model, int no ) throws Exception{
+  public JsonResult list(int no) throws Exception{
+    try {
     List<Review> reviews = reviewService.list(no);
-    model.addAttribute("reviews", reviews);
-    
+      return new JsonResult().setState(JsonResult.SUCCESS).setResult(reviews);
+    } catch (Exception e) {
+      return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
+    }
+  }
+  @GetMapping("getRatingAVer")
+  public JsonResult getRatingAver(int no) throws Exception{
+    try {
+      int RatingAver = reviewService.getRatingAver(no);
+      return new JsonResult().setState(JsonResult.SUCCESS).setResult(RatingAver);
+    }catch (Exception e) {
+      return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
+    }
   }
 }

@@ -7,4 +7,6 @@ public interface ReviewDao {
   int insertReview (Review review) throws Exception;
   int checkReview (Review review) throws Exception;
   List<Review> findAll(int ProductNo)throws Exception;
+  Review findBy(int no) throws Exception;
+  int getRatingAver(int no) throws Exception;
 }

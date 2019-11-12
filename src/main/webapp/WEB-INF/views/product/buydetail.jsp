@@ -54,10 +54,69 @@ ul.widthsizer {
 textarea {
   resize: none;
 }
+
+div.biglr {
+  width: 100%;
+  height: 500Wpx;
+}
+
+div.leftphoto {
+  width: 60%;
+  float: left;
+  box-sizing: border-box;
+  line-height: 500px;
+}
+
+div.rightcontents {
+  width: 40%;
+  float: right;
+  box-sizing: border-box;
+}
+.tcontents {
+    margin-top: 19px;
+}
+
+
+
+div.stars {
+  width: 270px;
+  display: inline-block;
+}
+
+input.star { display: none; }
+
+label.star {
+  float: right;
+  padding: 10px;
+  font-size: 36px;
+  color: #444;
+  transition: all .2s;
+}
+
+input.star:checked ~ label.star:before {
+  content: '\f005';
+  color: #FD4;
+  transition: all .25s;
+}
+
+input.star-5:checked ~ label.star:before {
+  color: #FE7;
+  text-shadow: 0 0 20px #952;
+}
+
+input.star-1:checked ~ label.star:before { color: #F62; }
+
+label.star:hover { transform: rotate(-15deg) scale(1.3); }
+
+label.star:before {
+  content: '\f006';
+  font-family: FontAwesome;
+}
+
+
 </style>
 <meta name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 <link
   href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
   rel="stylesheet">
@@ -67,6 +126,9 @@ textarea {
 <link
   href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
   rel="stylesheet">
+<!-- 별점 표시를 위한 css -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
 
 <link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="/css/animate.css">
@@ -469,6 +531,43 @@ textarea {
       stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 </div>
 
+<!--  모달 만들기용  -->
+
+<div class="modal bd-example-modal-xl" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">리뷰</h5>
+        <button type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="biglr">
+          <div class="leftphoto">
+            <img class="img-fluid modalimgget" src="/images/bg_1.jpg"
+              alt=""
+              style="width: 630px; height: 533px; object-fit: cover;">
+          </div>
+          <div class="rightcontents">
+          <div class="memberinfo">
+          </div>
+          <div class="tcontents">
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <button type="button" class="btn btn-secondary"
+          data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery-migrate-3.0.1.min.js"></script>
@@ -487,192 +586,331 @@ textarea {
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="/js/google-map.js"></script>
 <script src="/js/main.js"></script>
-<script src="/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script
+  src="/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script
+  src="/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
 <script src="/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
 <script>
-$(document).on("click",".useruse",function(){
-  if($(this).attr("id")=="producttest"){
-    
-    
-    var a="";
-    a += "<div class='review'>"
-    a += "상품평 볼수있는 부분"
-    a += "</div>";
-    a += "<div>평점: <canvas id='myChart' width='200' height='200'></canvas>"
-   
-    $(".userusechanage").html(a);
-    
-    
-    
-    
-    
-    var ctx = document.getElementById('myChart');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['1점', '2점', '3점', '4점', '5점'],
-            datasets: [{
-                label: '평점',
-                data: [ 3, 3, 3, 1, 2],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-          responsive: false,
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
+let ratingNum = 1;
+let ratingSum = 1;
+let ratingAver= 1;
+let Num1 =0;
+let Num2 =0;
+let Num3 =0;
+let Num4 =0;
+let Num5 =0;
+  $(document)
+      .on(
+          "click",
+          ".useruse",
+          function() {
+            if ($(this).attr("id") == "producttest") {
+              $.get(
+                      "/greenright/json/Review/list",
+                      {
+                        "no" : $("#productNo").val()
+                      },
+                      function(k) {
+                        console.log(k);
+                        var a = "";
+                        if (k.result != null) {
+                          ratingNum = k.result.length ;
+                          a += "<div class='ratinggraph'><canvas id='myChart' width='200' height='200'></canvas>"  
+                          a += "<img src='' alt='' class='ratingimg' style='width:100px height:200px'></div>"
+                          a += "<div>"
+                          for (var i = 0; i < k.result.length; i++) {
+                            ratingSum += k.result[i].rating;
+                            if(k.result[i].rating==1){
+                              Num1 ++;
+                            }else if(k.result[i].rating==2){
+                              Num2 ++;
+                            }else if(k.result[i].rating==3){
+                              Num3 ++;
+                            }else if(k.result[i].rating==4){
+                              Num4 ++;
+                            }else if(k.result[i].rating==5){
+                              Num5 ++;
+                            }
+                            if (k.result[i].photos.photoPath != null) {
+                                                            
+                              a += "<img class='img-fluid modal_maker' id="+k.result[i].no+" src='/upload/review/"+k.result[i].photos.photoPath+"'  alt='' style='width:100px; height:100px; object-fit:cover;'> "
+                            }
+                          }
+                          a += "</div>"
+                          a += "<div>"
+                          a += "<table><thead><tr><th>제목</th><th>아이디</th><th>평점</th>"
+                          a += "<th>내용</th><th>작성일</th></tr></thead><tbody>"
+                          for (var i = 0; i < k.result.length; i++) {
+                            a += "<tr><td>" + k.result[i].title + "</td>"
+                            a += "<td>" + k.result[i].member.id + "</td>"
+                            a += "<td>" + k.result[i].rating + "</td>"
+                            a += "<td>" + k.result[i].contents + "</td>"
+                            a += "<td>" + k.result[i].createdDate
+                                + "</td></tr>"
+                          }
+                          a += "</tbody></div>"
+                        } else {
+                          a += "상품평이 하나도없습니다";
+                        }
+                        $(".userusechanage").html(a);
+
+                        var ctx = document.getElementById('myChart');
+                        var myChart = new Chart(ctx, {
+                          type : 'bar',
+                          data : {
+                            labels : [ '1점', '2점', '3점', '4점', '5점' ],
+                            datasets : [ {
+                              label : '평점',
+                              data : [ Num1, Num2,Num3,Num4, Num5],
+                              backgroundColor : [ 'rgba(54, 162, 235, 0.2)',
+                                  'rgba(255, 206, 86, 0.2)',
+                                  'rgba(75, 192, 192, 0.2)',
+                                  'rgba(153, 102, 255, 0.2)',
+                                  'rgba(255, 159, 64, 0.2)' ],
+                              borderColor : [ 'rgba(54, 162, 235, 1)',
+                                  'rgba(255, 206, 86, 1)',
+                                  'rgba(75, 192, 192, 1)',
+                                  'rgba(153, 102, 255, 1)',
+                                  'rgba(255, 159, 64, 1)' ],
+                              borderWidth : 1
+                            } ]
+                          },
+                          options : {
+                            responsive : false,
+                            scales : {
+                              yAxes : [ {
+                                ticks : {
+                                  beginAtZero : true
+                                }
+                              } ]
+                            }
+                          }
+                        });
+
+                        $(document).on("click",".modal_maker",function(){
+                           let reviewNo = $(this).attr('id');
+                           let imagesrc = $(this).attr("src");
+                           console.log(imagesrc);
+                           console.log(reviewNo)
+                           $(".modalimgget").attr("src",imagesrc);
+                           $.get("/greenright/json/Review/get", {
+                             "no" : reviewNo
+                           }, function(a) {
+                             let html1  = "";
+                             html1 += "<img src='/images/member.PNG' style='width:30px; height:30px; object-fit:cover;'>"
+                             html1 += "평점 :"+a.result.rating+"점<br>" ;
+                             html1 += "아이디: "+a.result.member.id+""; 
+                             html1 += "작성일:"+a.result.createdDate+"";
+                                 $(".memberinfo").html(html1);
+                             let html2 = "";
+                             html2 += "제목:"+a.result.title+"<br>"
+                             html2 += "내용:"+a.result.contents+"";
+                             $(".tcontents").html(html2);
+                           })
+                           
+                           
+                           
+                           $('div.modal').modal();
+                        })
+                        
+                      })
+                      
+                      $.get("/greenright/json/Review/getRatingAVer",{
+                        "no" : $("#productNo").val()
+                      },function(a){
+                      ratingAver = a.result;
+                        if(1<ratingAver<= 1.5 ){
+                          console.log("1");
+                          $(".ratingimg").attr("src","/images/1.PNG")
+                        }else if(1.5<ratingAver<=2.5){
+                          console.log("2");
+                          $(".ratingimg").attr("src","/images/2.PNG")
+                        }else if(2.5<ratingAver<=3.5){
+                          console.log("3");
+                          $(".ratingimg").attr("src","/images/3.PNG")
+                        }else if(3.5<ratingAver<=4.5){
+                          console.log("4");
+                          $(".ratingimg").attr("src","/images/4.PNG")
+                        }else{
+                          console.log("5");
+                          $(".ratingimg").attr("src","/images/5.PNG")
+                        }
+                        
+                      })
+                      
+                      
+                      
+                      
+            }
+            if ($(this).attr("id") == "detaildesc") {
+              var a = "";
+              a += "<div class='review'>"
+              a += "상서설명 볼수있는부분"
+              a += "</div>";
+
+              $(".userusechanage").html(a);
+            }
+            if ($(this).attr("id") == "question") {
+              var a = "";
+              a += "<div class='review'>"
+              a += "상품문의 하는부분"
+              a += "</div>";
+
+              $(".userusechanage").html(a);
+            }
+            if ($(this).attr("id") == "review") {
+
+              var a = "";
+              a += "<div class='container' style='width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;'>"
+              a += "<div style='width: inherit;'>"
+              a += "<div class='input-group' style='width: 1000px; margin: auto;'>"
+              a += "<input type='text' id='title' style='width :700px' placeholder='제목을입력하세요'/>"
+              a += "<div class='stars'>"
+              a += "<input class='star star-5' id='star-5' type='radio' name='rating' value=5 />"
+              a += "<label class='star star-5' for='star-5'></label>"
+              a += "<input class='star star-4' id='star-4' type='radio' name='rating' value=4 />"
+              a += "<label class='star star-4' for='star-4'></label>"
+              a += "<input class='star star-3' id='star-3' type='radio' name='rating' value=3 />"
+              a += "<label class='star star-3' for='star-3'></label>"
+              a += "<input class='star star-2' id='star-2' type='radio' name='rating' value=2 />"
+              a += "<label class='star star-2' for='star-2'></label>"
+              a += "<input class='star star-1' id='star-1' type='radio' name='rating' value=1 />"
+              a += "<label class='star star-1' for='star-1'></label>"
+              a += "</div>"  
+              a += "<br><TEXTAREA  id ='contents' cols='90' rows='10' style='resize:none;'  placeholder='내용을 입력하세요.'/>"
+              a += "<button id='review-add-btn' class='btn btn-primary'>등록</button>"
+              a += "<input type='file' id='filePath' name='reviewPhoto'>"
+              a += "<div id='images-div'></div>"
+              a += "</div></div><br><br>";
+              $(".userusechanage").html(a);
+              
+              let ratingch  = 5 ;
+              $(document).on("change",".star",function(){
+                ratingch = $(this).val();                
+              })
+                
+            
+              $("#review-add-btn").click(function() {
+                let productNo = $("#productNo").val();
+                let memberNo = 1;
+                let rating = ratingch
+                let title = $("#title").val();
+                let contents = $("#contents").val();
+                let ReviewPhoto = $("#filePath").val();
+                $.post("review/check", {
+                  "productNo" : productNo,
+                  "memberNo" : memberNo
+                }, function(a) {
+                  if (a == 0) {
+                    $.ajax({
+                      url : "/greenright/json/Review/add",
+                      type : "post",
+                      data : {
+                        "productNo" : productNo,
+                        "memberNo" : memberNo,
+                        "rating" : rating,
+                        "title" : title,
+                        "contents" : contents,
+                      },
+                      success : function(result) {
+                        swal("상품평 등록완료")
+                      },
+                    });
+                  } else {
+                    swal("이미 상품평을 작성하셨습니다.")
+                  }
+                })
+
+              })
+
+              $('#filePath').fileupload(
+                  {
+                    url : "/greenright/json/Review/add",
+                    dataType : 'json', // 서버가 보낸 응답이 JSON임을 지정하기
+                    previewMaxWidth : 100, // 미리보기 이미지 너비
+                    previewMaxHeight : 100, // 미리보기 이미지 높이 
+                    previewCrop : true,
+                    processalways : function(e, data) {
+                      var imagesDiv = $('#images-div');
+                      imagesDiv.html("");
+                      for (var i = 0; i < data.files.length; i++) {
+                        try {
+                          if (data.files[i].preview.toDataURL) {
+                            console.log(data.files[i].preview.toDataURL());
+                            $("<img>").attr('src',
+                                data.files[i].preview.toDataURL()).css('width',
+                                '100px').appendTo(imagesDiv);
+                          }
+                        } catch (err) {
+                        }
+                      }
+                      $('#upload-btn').unbind("click");
+                      $('#upload-btn').click(function() {
+                        data.submit();
+                      });
+                    },
+                    add : function(e, data) {
+                      $("#review-add-btn").unbind();
+                      $("#review-add-btn").off();
+                      $('#review-add-btn').click(function() {
+
+                        $.post("review/check", {
+                          "productNo" : $("#productNo").val(),
+                          "memberNo" : 1
+                        }, function(a) {
+                          if (a == 0) {
+                            data.submit(); // submit()을 호출하면, 서버에 데이터를 보내기 전에 submit 이벤트가 발생한다.
+                            swal("상품평 등록완료2")
+                          } else {
+                            swal("이미 상품평을 작성하셨습니다.")
+                          }
+                        })
+
+                      });
+                    },
+                    submit : function(e, data) { // submit 이벤트가 발생했을 때 호출됨. 서버에 전송하기 전에 호출됨.
+                      data.formData = {
+                        "productNo" : $("#productNo").val(),
+                        "memberNo" : 1,
+                        "rating" : ratingch,
+                        "title" : $("#title").val(),
+                        "contents" : $("#contents").val()
+                      }
                     }
-                }]
+                  });
+
+              /*      $(document).on("change","#filePath",(function() {
+               var input = document.getElementById("filePath");
+               if (input.files && input.files[0]) {
+               var reader = new FileReader();
+               reader.onload = function(e) {
+               $('#view_file').attr('src', e.target.result);
+               }
+               reader.readAsDataURL(input.files[0]);
+               }
+               var dp = document.getElementById("view_file");
+               dp.style.display = "block";
+               })
+               ); */
+
             }
-        }
-    });
-    
-  }
-  if($(this).attr("id")=="detaildesc"){
-    var a="";
-    a += "<div class='review'>"
-    a += "상서설명 볼수있는부분"
-    a += "</div>";
-   
-    $(".userusechanage").html(a);
-  }
-  if($(this).attr("id")=="question"){
-    var a="";
-    a += "<div class='review'>"
-    a += "상품문의 하는부분"
-    a += "</div>";
-   
-    $(".userusechanage").html(a);
-  }
-  if($(this).attr("id")=="review"){
-  
-    
-    var a="";
-    a += "<div class='container' style='width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;'>"
-    a += "<div style='width: inherit;'>"
-    a += "<div class='input-group' style='width: 1000px; margin: auto;'>"
-    a += "<input type='text' id='title' style='width :700px' placeholder='제목을입력하세요'/>"
-    a += "<select id='rating' style='width:101px;'><option value=1>★☆☆☆☆</option><option value=2>★★☆☆☆</option><option value=3>★★★☆☆</option><option value=4>★★★★☆</option><option value=5>★★★★★</option></select>"
-    a += "<br><TEXTAREA  id ='contents' cols='90' rows='10' style='resize:none;'  placeholder='내용을 입력하세요.'/>"
-    a += "<button id='review-add-btn' class='btn btn-primary'>등록</button>"
-    a += "<input type='file' id='filePath' name='reviewPhoto'>"
-    a += "<img src='' id='view_file' alt='' style='width: 150px; height: 150px; object-fit: cover;' >"
-    a += "</div></div><br><br>";
-    $(".userusechanage").html(a);
-  
-     $("#review-add-btn").click(function(){
-      let productNo = $("#productNo").val();
-      let memberNo = 1;
-      let rating = $("#rating option:selected").val();
-      let title = $("#title").val();
-      let contents = $("#contents").val();
-      let ReviewPhoto = $("#filePath").val();
-      $.post("review/check",{
-        "productNo":productNo,
-        "memberNo":memberNo
-      }, function(a) {
-      if(a==0){
-        $.ajax({
-          url:"/greenright/json/Review/add",
-          type:"post",
-          data: {
-            "productNo": productNo,
-            "memberNo": memberNo,
-            "rating": rating,
-            "title": title,
-            "contents": contents,
-          },
-          success : function(result){
-            swal("상품평 등록완료")
-      },  
-      });
-      }else{
-        swal("이미 상품평을 작성하셨습니다.")
-      }
-      })
-     
-    }) 
-    
-    $('#filePath').fileupload({
-      url:"/greenright/json/Review/add",
-      dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
-      add: function (e, data) {
-        $("#review-add-btn").unbind();
-        $("#review-add-btn").off();
-        $('#review-add-btn').click(function() {
-          
-          $.post("review/check",{
-            "productNo":$("#productNo").val(),
-            "memberNo":1
-          }, function(a) {
-          if(a==0){
-            data.submit(); // submit()을 호출하면, 서버에 데이터를 보내기 전에 submit 이벤트가 발생한다.
-            swal("상품평 등록완료")
-          }else{
-            swal("이미 상품평을 작성하셨습니다.")
-          }
+
           })
-        
-        });
-      },
-      submit: function (e, data) { // submit 이벤트가 발생했을 때 호출됨. 서버에 전송하기 전에 호출됨.
-        data.formData = {
-            "productNo": $("#productNo").val(),
-            "memberNo": 1,
-            "rating": $("#rating option:selected").val(),
-            "title": $("#title").val(),
-            "contents": $("#contents").val()
-      }
-     }
-    }); 
+</script>
+<script>
+  function reviewCheck(memberNo, productNo) {
+    $.post("review/check", {
+      "productNo" : productNo,
+      "memberNo" : memberNo
+    }, function(data) {
+    })
   }
+</script>
+<script>
   
-})
-</script>
-<script>
-
-function reviewCheck(memberNo,productNo){
-$.post("review/check",{
-  "productNo":productNo,
-  "memberNo":memberNo
-}, function(data) {
-})
-}
-
-</script>
-<script>
-$(document).on("change","#filePath",(function() {
-     var input = document.getElementById("filePath");
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#view_file').attr('src', e.target.result);
-            }
-        reader.readAsDataURL(input.files[0]);
-    }
-    var dp = document.getElementById("view_file");
-    dp.style.display = "block";
-})
-);
 </script>
 <script>
   $(document).on("mouseenter", ".changesaver", function() {

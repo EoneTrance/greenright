@@ -15,7 +15,7 @@
 		<result column="contents" property="contents"></result>
 	
 
-	<association property="Member" javaType="Member">
+	<association property="member" javaType="Member">
 		<id column="member_id" property="no" />
 		<result column="registered_date" property="registeredDate" />
 		<result column="id" property="id" />
@@ -43,23 +43,42 @@
 
 <collection property="replys" javaType="ReviewReply">
   <id column ="review_reply_id" property="no"/>
-  <result column="review_id" property="reviewNo"/>
+  <result column="review_id" property="reivewNo"/>
   <result column="member_id" property="memberNo"/>
   <result column ="created_date" property="createdDate"/>
   <result column="contents" property="contents"/>
 </collection>
 
 	</resultMap>
-
-  <select id="findAll" resultMap="ReviewMap" parameterType="int" >
+	<select id="findBy" resultMap="ReviewMap" parameterType="int">
   select
+  r.review_id,
   r.title,
+  r.product_id,
+  r.review_id,
   r.contents,
   r.rating,
   r.created_date,
   m.id
   from reviews r
+  LEFT OUTER JOIN members m ON m.member_id = r.member_id 
+  where review_id = #{no}
+	</select>
+
+  <select id="findAll" resultMap="ReviewMap" parameterType="int" >
+  select
+  r.review_id,
+  r.title,
+  r.product_id,
+  r.review_id,
+  r.contents,
+  r.rating,
+  r.created_date,
+  m.id,
+  p.photo_path
+  from reviews r
   left outer join members m on m.member_id = r.member_id
+  left outer join review_photos p on r.review_id = p.review_id
   where product_id =#{no}
   </select>
 
@@ -72,6 +91,11 @@
 	</insert>
 <select id="checkReview" parameterType="Review" resultType="int">
   select count(*) from reviews where member_id =#{memberNo} and product_id =#{productNo}
+</select>
+<select id="getRatingAver" parameterType= "int" resultType="int">
+SELECT AVG(rating)
+FROM reviews
+WHERE product_id = #{no}
 </select>
 
 </mapper>

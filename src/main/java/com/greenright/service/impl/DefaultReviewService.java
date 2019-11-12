@@ -41,6 +41,18 @@ public class DefaultReviewService implements ReviewService{
   public List<Review> list(int no) throws Exception {
     return reviewDao.findAll(no);
   }
+
+
+  @Override
+  public Review findByReviewNo(int no) throws Exception {
+    return reviewDao.findBy(no);
+  }
+
+
+  @Override
+  public int getRatingAver(int no) throws Exception {
+    return reviewDao.getRatingAver(no);
+  }
   
   
   
