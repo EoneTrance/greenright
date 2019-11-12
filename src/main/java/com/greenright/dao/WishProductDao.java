@@ -9,4 +9,5 @@ public interface WishProductDao {
   int insertFull(WishProduct wishList) throws Exception;
   int count(int no) throws Exception;
   List<WishProduct> findAll(int no) throws Exception;
+  int delete(int no) throws Exception;
 }

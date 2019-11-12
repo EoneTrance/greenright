@@ -27,8 +27,10 @@
 
   <select id="findAll" parameterType="int" resultMap="WishProductMap">
   select
+    b.wishlist_id,
     b.quantity,
     b.option_item_id,
+    p.product_id,
     p.price,
     p.product_name,
     p.description,
@@ -52,6 +54,11 @@
   <select id="count" parameterType="int" resultType="int">
     select count(*) from baskets where member_id=#{no};
   </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from baskets
+    where wishlist_id=#{no}
+  </delete>
   
 </mapper>
 

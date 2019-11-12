@@ -25,6 +25,12 @@ public class WishListController {
     wl.setProductId(productNo);
     return wishListService.insert(wl);
   }
+  @ResponseBody
+  @GetMapping("delete")
+  public int delete(@RequestParam(value = "wishlistNo", required = false) int wishlistNo,HttpSession session) throws Exception {
+    //본인 인증 후 삭제하기 추가.
+    return wishListService.delete(wishlistNo);
+  }
   
   @ResponseBody
   @GetMapping("add2")

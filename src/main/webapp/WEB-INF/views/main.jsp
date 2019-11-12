@@ -55,7 +55,6 @@
                     <div class="product">
                         <a href="/greenright/product/buydetail?no=${product.no}" class="img-prod">
                         <img class="img-fluid" src='/upload/product/${product.photos[0].photoPath}'  alt="Colorlib Template" style="width:253px; height:202px; object-fit:cover;"> 
-                            <span class="status">30%</span>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
                             <h3><a href="#">
@@ -63,10 +62,7 @@
                             </a></h3>
                             <div class="d-flex">
                                 <div class="pricing">
-                                    <p class="price"><span class="mr-2 price-dc">
-                                    <fmt:formatNumber value="${product.price+5000}" groupingUsed="true" />
-                                      </span><span class="price-sale">
-                                    <fmt:formatNumber value="${product.price}" groupingUsed="true" /></span></p>
+                                    <p class="price"><span>${product.price}￦</span></p>
                                 </div>
                             </div>
                             <div class="bottom-area d-flex px-3" data-no='${product.no}'>

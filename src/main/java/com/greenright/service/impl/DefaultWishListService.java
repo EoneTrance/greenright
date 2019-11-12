@@ -34,4 +34,9 @@ public class DefaultWishListService implements WishListService {
     return wishProductDao.findAll(no);
   }
 
+  @Override
+  public int delete(int no) throws Exception {
+    return wishProductDao.delete(no);
+  }
+
 }

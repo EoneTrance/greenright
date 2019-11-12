@@ -9,4 +9,5 @@ public interface WishListService {
   int insertFull(WishProduct wishList) throws Exception;
   int count(int no) throws Exception;
   List<WishProduct> list(int no) throws Exception;
+  int delete(int no) throws Exception;
 }
