@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenright.dao.ProductQuestionDao">
+
+<resultMap type="ProductQuestion" id="ProductQuestionMap">
+    <id column="product_question_id" property="no" />
+    <result column="product_id" property="productNo" />
+    <result column="member_id" property="memberNo" />
+    <result column="created_date" property="createdDate" />
+    <result column="secret_flag" property="secretFlag" />
+    <result column="title" property="title" />
+    <result column="contents" property="contents"/>
+  
+
+  <association property="member" javaType="Member">
+    <id column="member_id" property="no" />
+    <result column="registered_date" property="registeredDate" />
+    <result column="id" property="id" />
+    <result column="password" property="password" />
+    <result column="certification_flag" property="certification" />
+    <result column="cell_phone" property="cellPhone" />
+    <result column="tel" property="tel" />
+    <result column="nickname" property="nickname" />
+    <result column="name" property="name" />
+    <result column="email" property="email" />
+    <result column="postal_code" property="postalCode" />
+    <result column="default_address" property="defaultAddress" />
+    <result column="detail_address" property="detailAddress" />
+    <result column="question" property="question" />
+    <result column="answer" property="answer" />
+    <result column="auth_key" property="authkey"/>
+    <result column="password_authkey" property="passwordAuthkey"/>
+  </association>
+  </resultMap>
+
+	<insert id="add" parameterType="ProductQuestion"
+	        useGeneratedKeys="true"
+          keyColumn="review_id"
+          keyProperty="no">
+		insert into product_questions(member_id, product_id,created_date,secret_flag,title,contents)
+		values(#{memberNo}, #{productNo},now(),#{secretFlag},#{title},#{contents})
+	</insert>
+  <select id="get" resultMap="ProductQuestionMap" parameterType="int">
+  select 
+  q.member_id,
+  q.product_id,
+  q.created_date,
+  q.secret_flag,
+  q.title,
+  q.contents,
+  m.id
+  from product_questions q
+  left outer join members m on m.member_id = q.member_id
+  where product_id =#{no}
+  </select>
+  
+</mapper>

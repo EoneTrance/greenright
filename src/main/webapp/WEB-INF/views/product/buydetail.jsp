@@ -72,18 +72,19 @@ div.rightcontents {
   float: right;
   box-sizing: border-box;
 }
+
 .tcontents {
-    margin-top: 19px;
+  margin-top: 19px;
 }
-
-
 
 div.stars {
   width: 270px;
   display: inline-block;
 }
 
-input.star { display: none; }
+input.star {
+  display: none;
+}
 
 label.star {
   float: right;
@@ -104,15 +105,73 @@ input.star-5:checked ~ label.star:before {
   text-shadow: 0 0 20px #952;
 }
 
-input.star-1:checked ~ label.star:before { color: #F62; }
+input.star-1:checked ~ label.star:before {
+  color: #F62;
+}
 
-label.star:hover { transform: rotate(-15deg) scale(1.3); }
+label.star:hover {
+  transform: rotate(-15deg) scale(1.3);
+}
 
 label.star:before {
   content: '\f006';
   font-family: FontAwesome;
 }
 
+.qnamodal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.qnamodal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Could be more or less, depending on screen size */
+}
+/* The Close Button */
+.qnaclose {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.qnaclose:hover, .qnaclose:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+input.titleholder {
+    width: 100%;
+}
+
+textarea.contentholder {
+    height: 200px;
+    width: 100%;
+}
+div.qnabody{
+width:97%
+}
+button#submitbut {
+    float: right;
+}
+.anqfooter {
+    margin-bottom: 10px;
+}
+details {
+    text-align: left;
+}
 
 </style>
 <meta name="viewport"
@@ -127,7 +186,8 @@ label.star:before {
   href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
   rel="stylesheet">
 <!-- 별점 표시를 위한 css -->
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+  href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 
 <link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
@@ -255,7 +315,8 @@ label.star:before {
         <input type="text" value="${product.no}" id="productNo" hidden>
         <div class="rating d-flex">
           <p class="text-left mr-4">
-            <img src="" alt=""  class= "ratingimg" style="width: 243px ; height:50px; object-fit:cover;">
+            <img src="" alt="" class="ratingimg"
+              style="width: 243px; height: 50px; object-fit: cover;">
           </p>
         </div>
         <p class="price">
@@ -392,24 +453,36 @@ label.star:before {
       <div
         class="col-md-12 heading-section text-center ftco-animate userusechanage">
         <div class="productscore">상세설명</div>
-       <br> 
-      <div class ="productrating">상품평</div>
-      <br>
-      <div class ="productquestion">상품문의
-      <br>
-      <br>
-      <br>
-      <br>
-      <button class='qnaAdd'>상품문의작성</button>
-      </div>
-      <br>
-      <br>
-      <div class ="review">상품평작성
-      
-      
-      
-      
-      </div>
+        <br>
+        <hr>
+        <div class="productrating">상품평</div>
+        <br>
+        <hr>
+        <div class="productquestion">
+          상품문의 <br> <br>
+          
+          <button class='qnaAdd'>상품문의작성</button>
+        <br>
+       <%--  <c:forEach items="productQuestionList" var="question">
+          <c:if test="${question.secretFlag eq 0}">
+        <details class="nosecret">
+          <summary>답변상태 : yes 제목 : ${question.title} &nbsp; 작성자 ${question.member.id}
+                작성일${question.createdDate}  
+          </summary>
+       <p> 내용 : ${question.contents}</p>
+        </details>        
+        </c:if>
+        <c:if test="${question.secretFlag ne 0}">
+        <details class="secret">
+          <summary>비밀글입니다 ㅁ^^ㅁ  
+          </summary>
+            <p>내용 : ${question.contents}</p>
+        </details>
+        </c:if>
+        </c:forEach> --%>
+        </div>
+        <hr>
+        <div class="review">상품평작성</div>
 
       </div>
     </div>
@@ -562,15 +635,12 @@ label.star:before {
               style="width: 630px; height: 533px; object-fit: cover;">
           </div>
           <div class="rightcontents">
-          <div class="memberinfo">
-          </div>
-          <div class="tcontents">
-          </div>
+            <div class="memberinfo"></div>
+            <div class="tcontents"></div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
         <button type="button" class="btn btn-secondary"
           data-dismiss="modal">Close</button>
       </div>
@@ -578,27 +648,26 @@ label.star:before {
   </div>
 </div>
 <!-- 상품 q&a 작성시 버튼 클릭시 보이는 모달 작성용  -->
-<div class="modal2 bd-example-modal-xl" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">리뷰</h5>
-        <button type="button" class="close" data-dismiss="modal"
-          aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      
-      모달임.
-      </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-        <button type="button" class="btn btn-secondary"
-          data-dismiss="modal">Close</button>
-      </div>
+<div id="myModal" class="qnamodal">
+  <!-- Modal content -->
+  <div class="qnamodal-content">
+    <div class ="qnaheader">
+    <span class="qnaclose">&times;</span>
+    </div>
+    <br>
+    <div class ="qnabody">
+    <input type="text"  class ="titleholder"name="qnatitle" placeholder="제목을 입력해주세요 ">
+    <br>
+    <textarea  class="contentholder" name="qnacontents" placeholder="내용을 입력해주세요" maxlength=1000 style="resize:none;"></textarea>
+    <br>
+    <input type="checkbox" name="private" class="priv" value=0 > 비공개 
+    <button id="submitbut" >작성</button>
+    </div>
+    <div class ="anqfooter">
+    
     </div>
   </div>
+
 </div>
 
 <script src="/js/jquery.min.js"></script>
@@ -682,23 +751,20 @@ $(document).ready(function(){
                               Num5 ++;
                             }
                             if (k.result[i].photos.photoPath != null) {
-                                                            
+                              a += "상품평<br>"                              
                               a += "<img class='img-fluid modal_maker' id="+k.result[i].no+" src='/upload/review/"+k.result[i].photos.photoPath+"'  alt='' style='width:100px; height:100px; object-fit:cover;'> "
                             }
                           }
                           a += "</div>"
                           a += "<div>"
-                          a += "<table><thead><tr><th>제목</th><th>아이디</th><th>평점</th>"
-                          a += "<th>내용</th><th>작성일</th></tr></thead><tbody>"
                           for (var i = 0; i < k.result.length; i++) {
-                            a += "<tr><td>" + k.result[i].title + "</td>"
-                            a += "<td>" + k.result[i].member.id + "</td>"
-                            a += "<td>" + k.result[i].rating + "</td>"
-                            a += "<td>" + k.result[i].contents + "</td>"
-                            a += "<td>" + k.result[i].createdDate
-                                + "</td></tr><br>"
+                            a += "<details><summary>제목:" + k.result[i].title + "&nbsp;&nbsp;&nbsp;"
+                            a += "아이디:" + k.result[i].member.id + "&nbsp;&nbsp;&nbsp;"
+                            a += "평점:" + k.result[i].rating + "점 &nbsp;&nbsp;&nbsp;"
+                            a += "작성일" + k.result[i].createdDate +"</summary>"
+                            a += "내용:" + k.result[i].contents + "</details>"
                           }
-                          a += "</tbody></div>"
+                          a += "</div>"
                         } else {
                           a += "상품평이 하나도없습니다";
                         }
@@ -733,9 +799,9 @@ $(document).ready(function(){
                       })
   
                       
-              $(document).on("click",".qnaAdd",function(){
+             /*  $(document).on("click",".qnaAdd",function(){
               $('div.modal2').modal();
-              })
+              }) */
                       
   
               var a = "";
@@ -858,186 +924,61 @@ $(document).ready(function(){
                   });
               
               
+       
+              // When the user clicks on the button, open the modal 
+              $(document).on("click",".qnaAdd",function(){
+                document.getElementById('myModal').style.display = "block";
+                
+              })
+       
+              // When the user clicks on <span> (x), close the modal
+              $(document).on("click",".qnaclose",function(){
+                document.getElementById('myModal').style.display = "none";
+                
+              })
+       
+              // When the user clicks anywhere outside of the modal, close it
+              $(document).on("click",window,function(){
+                  if (event.target == document.getElementById('myModal') ) {
+                    document.getElementById('myModal').style.display = "none";
+                  }
+              })
+              
+              $(document).on("click","#submitbut",function(){
+                let titl = $(".titleholder").val()
+                let contents = $(".contentholder").val()
+                let pri = $(".priv").val()
+                let productNo = $("#productNo").val();
+                let memberNo = 1;
+                if(titl == "" || contents ==""){
+                  swal("제목 혹은 내용을 입력하세요")
+                }else {
+                  $.post("/greenright/json/ProductQuestion/add", {
+                    "productNo" : productNo,
+                    "memberNo" : memberNo,
+                    "secretFlag" : pri,
+                    "title" : titl,
+                    "contents" : contents
+                  }, function(a) {
+                    console.log(a);
+                  })
+                document.getElementById('myModal').style.display = "none";
+                }
+              })
               
               
-              
+              $(document).on("change",".priv",function(){
+                if($(this).is(":checked")){
+                    $(this).attr("value",1)
+                }else{
+                    $(this).attr("value",0);
+                }
+            });
   
   })  
   
 </script>
 
-<script>
-
-  $(document)
-      .on(
-          "click",
-          ".useruse",
-          function() {
-            if ($(this).attr("id") == "producttest") {
-                                       
-                      
-                      
-                      
-            }
-            if ($(this).attr("id") == "detaildesc") {
-              var a = "";
-              a += "<div class='review'>"
-              a += "상서설명 볼수있는부분"
-              a += "</div>";
-
-              $(".userusechanage").html(a);
-            }
-            if ($(this).attr("id") == "question") {
-              var a = "";
-              a += "<div class='review'>"
-              a += "<button class='qnaAdd'>상품q&a작성</button>"
-              a += "</div>";
-
-              $(".userusechanage").html(a);
-          
-              
-              
-              
-            }
-            if ($(this).attr("id") == "review") {
-
-              var a = "";
-              a += "<div class='container' style='width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;'>"
-              a += "<div style='width: inherit;'>"
-              a += "<div class='input-group' style='width: 1000px; margin: auto;'>"
-              a += "<input type='text' id='title' style='width :700px' placeholder='제목을입력하세요'/>"
-              a += "<div class='stars'>"
-              a += "<input class='star star-5' id='star-5' type='radio' name='rating' value=5 />"
-              a += "<label class='star star-5' for='star-5'></label>"
-              a += "<input class='star star-4' id='star-4' type='radio' name='rating' value=4 />"
-              a += "<label class='star star-4' for='star-4'></label>"
-              a += "<input class='star star-3' id='star-3' type='radio' name='rating' value=3 />"
-              a += "<label class='star star-3' for='star-3'></label>"
-              a += "<input class='star star-2' id='star-2' type='radio' name='rating' value=2 />"
-              a += "<label class='star star-2' for='star-2'></label>"
-              a += "<input class='star star-1' id='star-1' type='radio' name='rating' value=1 />"
-              a += "<label class='star star-1' for='star-1'></label>"
-              a += "</div>"  
-              a += "<br><TEXTAREA  id ='contents' cols='90' rows='10' style='resize:none;'  placeholder='내용을 입력하세요.'/>"
-              a += "<button id='review-add-btn' class='btn btn-primary'>등록</button>"
-              a += "<input type='file' id='filePath' name='reviewPhoto'>"
-              a += "<div id='images-div'></div>"
-              a += "</div></div><br><br>";
-              $(".userusechanage").html(a);
-              
-              let ratingch  = 5 ;
-              $(document).on("change",".star",function(){
-                ratingch = $(this).val();                
-              })
-                
-            
-              $("#review-add-btn").click(function() {
-                let productNo = $("#productNo").val();
-                let memberNo = 1;
-                let rating = ratingch
-                let title = $("#title").val();
-                let contents = $("#contents").val();
-                let ReviewPhoto = $("#filePath").val();
-                $.post("review/check", {
-                  "productNo" : productNo,
-                  "memberNo" : memberNo
-                }, function(a) {
-                  if (a == 0) {
-                    $.ajax({
-                      url : "/greenright/json/Review/add",
-                      type : "post",
-                      data : {
-                        "productNo" : productNo,
-                        "memberNo" : memberNo,
-                        "rating" : rating,
-                        "title" : title,
-                        "contents" : contents,
-                      },
-                      success : function(result) {
-                        swal("상품평 등록완료")
-                      },
-                    });
-                  } else {
-                    swal("이미 상품평을 작성하셨습니다.")
-                  }
-                })
-
-              })
-
-              $('#filePath').fileupload(
-                  {
-                    url : "/greenright/json/Review/add",
-                    dataType : 'json', // 서버가 보낸 응답이 JSON임을 지정하기
-                    previewMaxWidth : 100, // 미리보기 이미지 너비
-                    previewMaxHeight : 100, // 미리보기 이미지 높이 
-                    previewCrop : true,
-                    processalways : function(e, data) {
-                      var imagesDiv = $('#images-div');
-                      imagesDiv.html("");
-                      for (var i = 0; i < data.files.length; i++) {
-                        try {
-                          if (data.files[i].preview.toDataURL) {
-                            console.log(data.files[i].preview.toDataURL());
-                            $("<img>").attr('src',
-                                data.files[i].preview.toDataURL()).css('width',
-                                '100px').appendTo(imagesDiv);
-                          }
-                        } catch (err) {
-                        }
-                      }
-                      $('#upload-btn').unbind("click");
-                      $('#upload-btn').click(function() {
-                        data.submit();
-                      });
-                    },
-                    add : function(e, data) {
-                      $("#review-add-btn").unbind();
-                      $("#review-add-btn").off();
-                      $('#review-add-btn').click(function() {
-
-                        $.post("review/check", {
-                          "productNo" : $("#productNo").val(),
-                          "memberNo" : 1
-                        }, function(a) {
-                          if (a == 0) {
-                            data.submit(); // submit()을 호출하면, 서버에 데이터를 보내기 전에 submit 이벤트가 발생한다.
-                            swal("상품평 등록완료2")
-                          } else {
-                            swal("이미 상품평을 작성하셨습니다.")
-                          }
-                        })
-
-                      });
-                    },
-                    submit : function(e, data) { // submit 이벤트가 발생했을 때 호출됨. 서버에 전송하기 전에 호출됨.
-                      data.formData = {
-                        "productNo" : $("#productNo").val(),
-                        "memberNo" : 1,
-                        "rating" : ratingch,
-                        "title" : $("#title").val(),
-                        "contents" : $("#contents").val()
-                      }
-                    }
-                  });
-
-              /*      $(document).on("change","#filePath",(function() {
-               var input = document.getElementById("filePath");
-               if (input.files && input.files[0]) {
-               var reader = new FileReader();
-               reader.onload = function(e) {
-               $('#view_file').attr('src', e.target.result);
-               }
-               reader.readAsDataURL(input.files[0]);
-               }
-               var dp = document.getElementById("view_file");
-               dp.style.display = "block";
-               })
-               ); */
-
-            }
-
-          })
-</script>
 <script>
   function reviewCheck(memberNo, productNo) {
     $.post("review/check", {

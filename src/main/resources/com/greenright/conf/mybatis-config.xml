@@ -36,6 +36,7 @@
   <mapper resource="com/greenright/mapper/RecommendMapper.xml"/>
   <mapper resource="com/greenright/mapper/ReviewMapper.xmL"/>
   <mapper resource="com/greenright/mapper/ReviewPhotoMapper.xml"/>
+  <mapper resource="com/greenright/mapper/ProductQuestionMapper.xml"/>
   </mappers>
 </configuration>
 

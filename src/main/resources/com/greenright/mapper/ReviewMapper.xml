@@ -12,7 +12,7 @@
 		<result column="created_date" property="createdDate" />
 		<result column="rating" property="rating" />
 		<result column="title" property="title" />
-		<result column="contents" property="contents"></result>
+		<result column="contents" property="contents"/>
 	
 
 	<association property="member" javaType="Member">
