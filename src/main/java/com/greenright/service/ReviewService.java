@@ -8,5 +8,5 @@ public interface ReviewService {
   Review findByReviewNo(int no) throws Exception;
   void insert(Review review)throws Exception;
   int checkReview(Review review)throws Exception;
-  int getRatingAver(int no) throws Exception;
+  double getRatingAver(int no) throws Exception;
 }

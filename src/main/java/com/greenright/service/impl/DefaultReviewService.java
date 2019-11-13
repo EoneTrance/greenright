@@ -50,7 +50,7 @@ public class DefaultReviewService implements ReviewService{
 
 
   @Override
-  public int getRatingAver(int no) throws Exception {
+  public double getRatingAver(int no) throws Exception {
     return reviewDao.getRatingAver(no);
   }
   

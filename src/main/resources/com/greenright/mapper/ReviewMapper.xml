@@ -92,7 +92,7 @@
 <select id="checkReview" parameterType="Review" resultType="int">
   select count(*) from reviews where member_id =#{memberNo} and product_id =#{productNo}
 </select>
-<select id="getRatingAver" parameterType= "int" resultType="int">
+<select id="getRatingAver" parameterType= "int" resultType="double">
 SELECT AVG(rating)
 FROM reviews
 WHERE product_id = #{no}

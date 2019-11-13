@@ -255,7 +255,12 @@ label.star:before {
         <input type="text" value="${product.no}" id="productNo" hidden>
         <div class="rating d-flex">
           <p class="text-left mr-4">
-            <img src="" alt=""  class= "ratingimg" style="width: 243px ; height:50px; object-fit:cover;">
+            <a href="#" class="mr-2">5.0</a> <a href="#"><span
+              class="ion-ios-star-outline"></span></a> <a href="#"><span
+              class="ion-ios-star-outline"></span></a> <a href="#"><span
+              class="ion-ios-star-outline"></span></a> <a href="#"><span
+              class="ion-ios-star-outline"></span></a> <a href="#"><span
+              class="ion-ios-star-outline"></span></a>
           </p>
         </div>
         <p class="price">
@@ -391,25 +396,8 @@ label.star:before {
     <div class="row justify-content-center mb-3 pb-3">
       <div
         class="col-md-12 heading-section text-center ftco-animate userusechanage">
-        <div class="productscore">상세설명</div>
-       <br> 
-      <div class ="productrating">상품평</div>
-      <br>
-      <div class ="productquestion">상품문의
-      <br>
-      <br>
-      <br>
-      <br>
-      <button class='qnaAdd'>상품문의작성</button>
-      </div>
-      <br>
-      <br>
-      <div class ="review">상품평작성
-      
-      
-      
-      
-      </div>
+
+        <div class="productscore">평점이 몇점인지 볼수있는 부분</div>
 
       </div>
     </div>
@@ -626,30 +614,14 @@ label.star:before {
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
 <script>
-$(document).ready(function(){
-  $.get("/greenright/json/Review/getRatingAVer",{
-    "no" : $("#productNo").val()
-  },function(a){
-    console.log("평균구하기"+ a.result);
-    ratingAver = a.result;
-    if(ratingAver<= 1){
-      $(".ratingimg").attr("src","/images/0.PNG")
-    }else if(ratingAver<= 1.5){
-      $(".ratingimg").attr("src","/images/1.PNG")
-    }else if(ratingAver<=2.5){
-      $(".ratingimg").attr("src","/images/2.PNG")
-    }else if(ratingAver<=3.5){
-      $(".ratingimg").attr("src","/images/3.PNG")
-    }else if(ratingAver<=4.5){
-      $(".ratingimg").attr("src","/images/4.PNG")
-    }else if(ratingAver<=5.0){
-      $(".ratingimg").attr("src","/images/5.PNG")
-    }else{
-      $(".ratingimg").attr("src","/images/0.PNG")
-    }
-    
-  })
-   let ratingNum = 1;
+
+  $(document)
+      .on(
+          "click",
+          ".useruse",
+          function() {
+            if ($(this).attr("id") == "producttest") {
+              let ratingNum = 1;
               let ratingSum = 1;
               let ratingAver= 0;
               let Num1 =0;
@@ -667,6 +639,9 @@ $(document).ready(function(){
                         var a = "";
                         if (k.result != null) {
                           ratingNum = k.result.length ;
+                          console.log("사진 뿌리기")
+                          a += "<div class='ratinggraph'><canvas id='myChart' width='200' height='200'></canvas>"  
+                          a += "<img src='' alt='' class='ratingimg' style='width:100px height:200px'></div>"
                           a += "<div>"
                           for (var i = 0; i < k.result.length; i++) {
                             ratingSum += k.result[i].rating;
@@ -696,15 +671,46 @@ $(document).ready(function(){
                             a += "<td>" + k.result[i].rating + "</td>"
                             a += "<td>" + k.result[i].contents + "</td>"
                             a += "<td>" + k.result[i].createdDate
-                                + "</td></tr><br>"
+                                + "</td></tr>"
                           }
                           a += "</tbody></div>"
                         } else {
                           a += "상품평이 하나도없습니다";
                         }
-                        $(".productrating").html(a);
+                        $(".userusechanage").html(a);
 
-                    
+                        var ctx = document.getElementById('myChart');
+                        var myChart = new Chart(ctx, {
+                          type : 'bar',
+                          data : {
+                            labels : [ '1점', '2점', '3점', '4점', '5점' ],
+                            datasets : [ {
+                              label : '평점',
+                              data : [ Num1, Num2,Num3,Num4, Num5],
+                              backgroundColor : [ 'rgba(54, 162, 235, 0.2)',
+                                  'rgba(255, 206, 86, 0.2)',
+                                  'rgba(75, 192, 192, 0.2)',
+                                  'rgba(153, 102, 255, 0.2)',
+                                  'rgba(255, 159, 64, 0.2)' ],
+                              borderColor : [ 'rgba(54, 162, 235, 1)',
+                                  'rgba(255, 206, 86, 1)',
+                                  'rgba(75, 192, 192, 1)',
+                                  'rgba(153, 102, 255, 1)',
+                                  'rgba(255, 159, 64, 1)' ],
+                              borderWidth : 1
+                            } ]
+                          },
+                          options : {
+                            responsive : false,
+                            scales : {
+                              yAxes : [ {
+                                ticks : {
+                                  beginAtZero : true
+                                }
+                              } ]
+                            }
+                          }
+                        });
 
                         $(document).on("click",".modal_maker",function(){
                            let reviewNo = $(this).attr('id');
@@ -731,150 +737,27 @@ $(document).ready(function(){
                         })
                         
                       })
-  
                       
-              $(document).on("click",".qnaAdd",function(){
-              $('div.modal2').modal();
-              })
-                      
-  
-              var a = "";
-              a += "<div class='container' style='width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;'>"
-              a += "<div style='width: inherit;'>"
-              a += "<div class='input-group' style='width: 1000px; margin: auto;'>"
-              a += "<input type='text' id='title' style='width :700px' placeholder='제목을입력하세요'/>"
-              a += "<div class='stars'>"
-              a += "<input class='star star-5' id='star-5' type='radio' name='rating' value=5 />"
-              a += "<label class='star star-5' for='star-5'></label>"
-              a += "<input class='star star-4' id='star-4' type='radio' name='rating' value=4 />"
-              a += "<label class='star star-4' for='star-4'></label>"
-              a += "<input class='star star-3' id='star-3' type='radio' name='rating' value=3 />"
-              a += "<label class='star star-3' for='star-3'></label>"
-              a += "<input class='star star-2' id='star-2' type='radio' name='rating' value=2 />"
-              a += "<label class='star star-2' for='star-2'></label>"
-              a += "<input class='star star-1' id='star-1' type='radio' name='rating' value=1 />"
-              a += "<label class='star star-1' for='star-1'></label>"
-              a += "</div>"  
-              a += "<br><TEXTAREA  id ='contents' cols='90' rows='10' style='resize:none;'  placeholder='내용을 입력하세요.'/>"
-              a += "<button id='review-add-btn' class='btn btn-primary'>등록</button>"
-              a += "<input type='file' id='filePath' name='reviewPhoto'>"
-              a += "<div id='images-div'></div>"
-              a += "</div></div><br><br>";
-              $(".review").html(a);
-              
-              let ratingch  = 5 ;
-              $(document).on("change",".star",function(){
-                ratingch = $(this).val();                
-              })
-                
-            
-              $("#review-add-btn").click(function() {
-                let productNo = $("#productNo").val();
-                let memberNo = 1;
-                let rating = ratingch
-                let title = $("#title").val();
-                let contents = $("#contents").val();
-                let ReviewPhoto = $("#filePath").val();
-                $.post("review/check", {
-                  "productNo" : productNo,
-                  "memberNo" : memberNo
-                }, function(a) {
-                  if (a == 0) {
-                    $.ajax({
-                      url : "/greenright/json/Review/add",
-                      type : "post",
-                      data : {
-                        "productNo" : productNo,
-                        "memberNo" : memberNo,
-                        "rating" : rating,
-                        "title" : title,
-                        "contents" : contents,
-                      },
-                      success : function(result) {
-                        swal("상품평 등록완료")
-                      },
-                    });
-                  } else {
-                    swal("이미 상품평을 작성하셨습니다.")
-                  }
-                })
-
-              })
-
-              $('#filePath').fileupload(
-                  {
-                    url : "/greenright/json/Review/add",
-                    dataType : 'json', // 서버가 보낸 응답이 JSON임을 지정하기
-                    previewMaxWidth : 100, // 미리보기 이미지 너비
-                    previewMaxHeight : 100, // 미리보기 이미지 높이 
-                    previewCrop : true,
-                    processalways : function(e, data) {
-                      var imagesDiv = $('#images-div');
-                      imagesDiv.html("");
-                      for (var i = 0; i < data.files.length; i++) {
-                        try {
-                          if (data.files[i].preview.toDataURL) {
-                            console.log(data.files[i].preview.toDataURL());
-                            $("<img>").attr('src',
-                                data.files[i].preview.toDataURL()).css('width',
-                                '100px').appendTo(imagesDiv);
-                          }
-                        } catch (err) {
+                      $(document).ready(function(){
+                      $.get("/greenright/json/Review/getRatingAVer",{
+                        "no" : $("#productNo").val()
+                      },function(a){
+                        console.log("평균구하기"+ a.result);
+                        ratingAver = a.result;
+                        if(ratingAver<= 1.5 ){
+                          $(".ratingimg").attr("src","/images/1.PNG")
+                        }else if(ratingAver<=2.5){
+                          $(".ratingimg").attr("src","/images/2.PNG")
+                        }else if(ratingAver<=3.5){
+                          $(".ratingimg").attr("src","/images/3.PNG")
+                        }else if(ratingAver<=4.5){
+                          $(".ratingimg").attr("src","/images/4.PNG")
+                        }else{
+                          $(".ratingimg").attr("src","/images/5.PNG")
                         }
-                      }
-                      $('#upload-btn').unbind("click");
-                      $('#upload-btn').click(function() {
-                        data.submit();
-                      });
-                    },
-                    add : function(e, data) {
-                      $("#review-add-btn").unbind();
-                      $("#review-add-btn").off();
-                      $('#review-add-btn').click(function() {
-
-                        $.post("review/check", {
-                          "productNo" : $("#productNo").val(),
-                          "memberNo" : 1
-                        }, function(a) {
-                          if (a == 0) {
-                            data.submit(); // submit()을 호출하면, 서버에 데이터를 보내기 전에 submit 이벤트가 발생한다.
-                            swal("상품평 등록완료2")
-                          } else {
-                            swal("이미 상품평을 작성하셨습니다.")
-                          }
-                        })
-
-                      });
-                    },
-                    submit : function(e, data) { // submit 이벤트가 발생했을 때 호출됨. 서버에 전송하기 전에 호출됨.
-                      data.formData = {
-                        "productNo" : $("#productNo").val(),
-                        "memberNo" : 1,
-                        "rating" : ratingch,
-                        "title" : $("#title").val(),
-                        "contents" : $("#contents").val()
-                      }
-                    }
-                  });
-              
-              
-              
-              
-              
-  
-  })  
-  
-</script>
-
-<script>
-
-  $(document)
-      .on(
-          "click",
-          ".useruse",
-          function() {
-            if ($(this).attr("id") == "producttest") {
-                                       
+                        
+                      })
+                      })                      
                       
                       
                       
@@ -894,7 +777,10 @@ $(document).ready(function(){
               a += "</div>";
 
               $(".userusechanage").html(a);
-          
+              $(document).on("click",".qnaAdd",function(){
+              $('div.modal2').modal();
+                
+              })
               
               
               

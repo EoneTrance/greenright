@@ -57,7 +57,7 @@ public class ReviewController {
   @GetMapping("getRatingAVer")
   public JsonResult getRatingAver(int no) throws Exception{
     try {
-      int RatingAver = reviewService.getRatingAver(no);
+      double RatingAver = reviewService.getRatingAver(no);
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(RatingAver);
     }catch (Exception e) {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
