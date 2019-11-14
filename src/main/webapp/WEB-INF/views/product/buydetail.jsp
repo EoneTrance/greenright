@@ -1129,14 +1129,3 @@ $(window).scroll(
 );  
 </script> 
 
-<script>
-$(document).ready(function(){
-  
-  $(document).on("click",".togglediv",function(){
-    console.log("들어는감?")
-    $(this).children('.slideTogglebox').slideToggle();
-  })
-  
-  
-})
-</script>
