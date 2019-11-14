@@ -8,4 +8,5 @@ public interface PrivateBoardService {
   void insert(PrivateBoard privateBoard) throws Exception;
   PrivateBoard get(int no) throws Exception;
   int size() throws Exception;
+  
 }

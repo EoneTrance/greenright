@@ -96,7 +96,7 @@
     <p style="text-align: right;">
      <button type="button" onclick="location.href='form.jsp'"  class="btn btn-primary" >문의 작성</button>
     </p>
-        <select name="answer" value='${member.cell_phone.substring(0,3)}'
+        <select id = 'answeranswer' name="answer" value='${member.cell_phone.substring(0,3)}'
             style="width:120px;height:35px;display: inline;">
             <option>전체</option>
             <option>미답변</option>
@@ -109,14 +109,14 @@
             <option>한달</option>
             <option>세달</option>
       </select>
-      <select name="type" value='${member.cell_phone.substring(0,3)}'
+      <%-- <select name="type" value='${member.cell_phone.substring(0,3)}'
             style="width:120px; height: 33px; display: inline;">
             <option>제목</option>
             <option>내용</option>
             <option>글쓴이</option>
             <option>아이디</option>
             <option>닉네임</option>
-      </select>
+      </select> --%>
        <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
@@ -145,7 +145,16 @@
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   </body>
+ 
+<script>
+$(document).ready(function() {
+  var answer = $('#answeranswer').val();
+  console.log(answer)
   
+  
+  
+});
+</script>  
  <script>
 $('#my-paging').on('click','.page-item', () => {
   /*  var currentLi = $(event.target).parent().attr('data-page'); 

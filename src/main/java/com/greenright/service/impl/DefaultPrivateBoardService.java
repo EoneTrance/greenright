@@ -36,10 +36,13 @@ public class DefaultPrivateBoardService implements PrivateBoardService {
     }
     return privateBoard;
   }
+  
   @Override
   public int size() throws Exception {
     return privateBoardDao.countAll();
   }
+  
+  
 
 
 }

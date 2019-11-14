@@ -90,7 +90,7 @@
 
         <thead class="thead-primary">
           <tr class="text-center">
-            <th>번호</th>
+            <th>No</th>
             <th>제목</th>
             <th>글쓴이</th>
             <th>등록일</th>
