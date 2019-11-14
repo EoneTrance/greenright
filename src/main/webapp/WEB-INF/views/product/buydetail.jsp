@@ -41,7 +41,8 @@ li.useruse {
 }
 
 ul.widthsizer {
-  width: 1110px
+  width: 1110px;
+  padding-left: 203px;
 }
 
 .btn.btn-primary {
@@ -172,7 +173,31 @@ button#submitbut {
 details {
     text-align: left;
 }
+.fix {
+position:fixed;_position:absolute;width:100%;top:0;z-index:100
+}
+.c23{
+ color : #82ae46;
+}
+.reviewimagepresent {
+    text-align: left;
+}
 
+.togglediv{
+width:500px; 
+height:50px; 
+background-color:#fff; 
+cursor:pointer; 
+margin-right : 50px;
+text-align:left; 
+line-height:50px;
+}
+.slideTogglebox{
+width:500px; 
+height:100px; 
+background-color:beige; 
+display:none; 
+}
 </style>
 <meta name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -305,7 +330,7 @@ details {
             <li><img src='/upload/product/${photo.photoPath}'
               id="/upload/product/${photo.photoPath}"
               class="changesaver"
-              style="width: 50px; height: 50px; object-fit: cover;">
+              style="width: 50px; height: 50px; object-fit: cover;cursor:pointer;">
             </li>
           </c:forEach>
         </ul>
@@ -373,8 +398,7 @@ details {
   <div class="container">
     <div class="row justify-content-center mb-3 pb-3">
       <div class="col-md-12 heading-section text-center ftco-animate">
-        <span class="subheading">상품</span>
-        <h2 class="mb-4">같이 보면 좋은 상품</h2>
+        <h3 class="mb-4 recommendproduct">같이 보면 좋은 상품</h3>
       </div>
     </div>
   </div>
@@ -429,68 +453,62 @@ details {
     </div>
   </div>
 </section>
-<!-- 상품평 상품문의 상세설명 리뷰 -->
 
+
+
+
+<!-- 상품평 상품문의 상세설명 리뷰 -->
+<div class="floatMenu">
 <section class="ftco-section">
   <div class="container">
     <div class="row justify-content-center mb-3 pb-3">
       <div
-        class="col-md-12 heading-section text-center ftco-animate bordermaker">
+        class="col-md-12 heading-section text-center ftco-animate bordermaker justify-content-center">
+          <nav id="nav">
         <ul class="widthsizer">
-          <li class="useruse" id="detaildesc"><h4>상세설명</h4></li>
-          <li class="useruse" id="producttest"><h4>상품평</h4></li>
-          <li class="useruse" id="question"><h4>상품문의</h4></li>
-          <li class="useruse" id="review"><h4>상품평작성</h4></li>
+          <li class="useruse" id="detaildesc" onclick="fnMove('1')"><h4  id="de1" style="cursor:pointer">상세설명</h4></li>
+          <li class="useruse" id="producttest" onclick="fnMove('2')"><h4 id="de2" style="cursor:pointer">상품평</h4></li>
+          <li class="useruse" id="question" onclick="fnMove('3')"><h4 id="de3" style="cursor:pointer">상품문의</h4></li>
+          <li class="useruse" id="review" onclick="fnMove('4')"><h4 id="de4" style="cursor:pointer">상품평작성</h4></li>
         </ul>
+        </nav>
       </div>
     </div>
   </div>
 </section>
+</div>
 <!--  상품평 누를시 상품평 나오고 딴거 누를시 딴거 나오게 할부분  -->
 <Section class="ftco-section">
   <div class="container">
     <div class="row justify-content-center mb-3 pb-3">
       <div
         class="col-md-12 heading-section text-center ftco-animate userusechanage">
-        <div class="productscore">상세설명</div>
+        <div class="productscore target" id="div1"><br><br><br></div>
         <br>
         <hr>
-        <div class="productrating">상품평</div>
+        <div class="productrating target" id="div2"><br><br></div>
         <br>
         <hr>
-        <div class="productquestion">
-          상품문의 <br> <br>
+        <div class="productquestion target" id="div3"> <br> 
           
           <button class='qnaAdd'>상품문의작성</button>
-        <br>
-       <%--  <c:forEach items="productQuestionList" var="question">
-          <c:if test="${question.secretFlag eq 0}">
-        <details class="nosecret">
-          <summary>답변상태 : yes 제목 : ${question.title} &nbsp; 작성자 ${question.member.id}
-                작성일${question.createdDate}  
-          </summary>
-       <p> 내용 : ${question.contents}</p>
-        </details>        
-        </c:if>
-        <c:if test="${question.secretFlag ne 0}">
-        <details class="secret">
-          <summary>비밀글입니다 ㅁ^^ㅁ  
-          </summary>
-            <p>내용 : ${question.contents}</p>
-        </details>
-        </c:if>
-        </c:forEach> --%>
+        <div class="ProductQuestionList" >
+        
+        </div>
         </div>
         <hr>
-        <div class="review">상품평작성</div>
+        <br>
+        <br>
+        <br>
+        <div class="review target" id="div4"><br></div>
 
       </div>
     </div>
   </div>
 </Section>
-
+  
 <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-  <div class="container py-4">
+  <div class="container py-4" id="div5">
     <div class="row d-flex justify-content-center py-5">
       <div class="col-md-6">
         <h2 style="font-size: 22px;" class="mb-0">Subcribe to our
@@ -669,7 +687,12 @@ details {
   </div>
 
 </div>
-
+     
+     
+     
+     
+     
+     
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
@@ -694,12 +717,12 @@ details {
 <script src="/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
+
 <script>
 $(document).ready(function(){
   $.get("/greenright/json/Review/getRatingAVer",{
     "no" : $("#productNo").val()
   },function(a){
-    console.log("평균구하기"+ a.result);
     ratingAver = a.result;
     if(ratingAver<= 1){
       $(".ratingimg").attr("src","/images/0.PNG")
@@ -718,51 +741,31 @@ $(document).ready(function(){
     }
     
   })
-   let ratingNum = 1;
-              let ratingSum = 1;
               let ratingAver= 0;
-              let Num1 =0;
-              let Num2 =0;
-              let Num3 =0;
-              let Num4 =0;
-              let Num5 =0;
               $.get(
                       "/greenright/json/Review/list",
                       {
                         "no" : $("#productNo").val()
                       },
                       function(k) {
-                        console.log(k);
                         var a = "";
+                         a+="<h5>사진/리뷰</h5>"
                         if (k.result != null) {
-                          ratingNum = k.result.length ;
-                          a += "<div>"
+                          a += "<div class='reviewimagepresent'>"
                           for (var i = 0; i < k.result.length; i++) {
-                            ratingSum += k.result[i].rating;
-                            if(k.result[i].rating==1){
-                              Num1 ++;
-                            }else if(k.result[i].rating==2){
-                              Num2 ++;
-                            }else if(k.result[i].rating==3){
-                              Num3 ++;
-                            }else if(k.result[i].rating==4){
-                              Num4 ++;
-                            }else if(k.result[i].rating==5){
-                              Num5 ++;
-                            }
                             if (k.result[i].photos.photoPath != null) {
-                              a += "상품평<br>"                              
-                              a += "<img class='img-fluid modal_maker' id="+k.result[i].no+" src='/upload/review/"+k.result[i].photos.photoPath+"'  alt='' style='width:100px; height:100px; object-fit:cover;'> "
+                              a += "<img class='img-fluid modal_maker' id="+k.result[i].no+" src='/upload/review/"+k.result[i].photos.photoPath+"'  alt='' style='width:100px; height:100px; object-fit:cover; cursor:pointer;'> "
                             }
                           }
                           a += "</div>"
-                          a += "<div>"
+                          a += "<div class='reviewpresent'>"
+                          a += "<h5>리뷰</h5>"
                           for (var i = 0; i < k.result.length; i++) {
-                            a += "<details><summary>제목:" + k.result[i].title + "&nbsp;&nbsp;&nbsp;"
+                            a += "<div class='togglediv'>제목:" + k.result[i].title + "&nbsp;&nbsp;&nbsp;"
                             a += "아이디:" + k.result[i].member.id + "&nbsp;&nbsp;&nbsp;"
                             a += "평점:" + k.result[i].rating + "점 &nbsp;&nbsp;&nbsp;"
-                            a += "작성일" + k.result[i].createdDate +"</summary>"
-                            a += "내용:" + k.result[i].contents + "</details>"
+                            a += "작성일" + k.result[i].createdDate +"<div class='slideTogglebox'>"
+                            a += "내용:" + k.result[i].contents + "</div></div>"
                           }
                           a += "</div>"
                         } else {
@@ -858,6 +861,7 @@ $(document).ready(function(){
                       },
                       success : function(result) {
                         swal("상품평 등록완료")
+                        
                       },
                     });
                   } else {
@@ -880,7 +884,6 @@ $(document).ready(function(){
                       for (var i = 0; i < data.files.length; i++) {
                         try {
                           if (data.files[i].preview.toDataURL) {
-                            console.log(data.files[i].preview.toDataURL());
                             $("<img>").attr('src',
                                 data.files[i].preview.toDataURL()).css('width',
                                 '100px').appendTo(imagesDiv);
@@ -904,10 +907,12 @@ $(document).ready(function(){
                         }, function(a) {
                           if (a == 0) {
                             data.submit(); // submit()을 호출하면, 서버에 데이터를 보내기 전에 submit 이벤트가 발생한다.
-                            swal("상품평 등록완료2")
+                            swal("상품평 등록완료")
                           } else {
                             swal("이미 상품평을 작성하셨습니다.")
                           }
+                          
+                          
                         })
 
                       });
@@ -934,13 +939,16 @@ $(document).ready(function(){
               // When the user clicks on <span> (x), close the modal
               $(document).on("click",".qnaclose",function(){
                 document.getElementById('myModal').style.display = "none";
-                
+                $(".contentholder").val("");
+                $(".titleholder").val("");
               })
        
               // When the user clicks anywhere outside of the modal, close it
               $(document).on("click",window,function(){
                   if (event.target == document.getElementById('myModal') ) {
                     document.getElementById('myModal').style.display = "none";
+                    $(".contentholder").val("");
+                    $(".titleholder").val("");
                   }
               })
               
@@ -960,9 +968,28 @@ $(document).ready(function(){
                     "title" : titl,
                     "contents" : contents
                   }, function(a) {
-                    console.log(a);
+                    $.get("/greenright/json/ProductQuestion/getQuestion",{
+                      "no": $("#productNo").val()
+                    },function(a){
+                      $(".ProductQuestionList").html("");
+                      for(i=0; i<a.result.length; i++){
+                      if(a.result[i].secretFlag == 0){
+                      let qa ="";
+                      qa +="<details><summary>답변상태:No 제목:"+a.result[i].title+" 작성자:"+a.result[i].member.id+" 작성일:"+a.result[i].createdDate+" </summary>"
+                      qa +="내용 : "+a.result[i].contents+"</details>"
+                      $(".ProductQuestionList").append(qa);
+                      }else{
+                      let qa ="";
+                      qa +="<details><summary>비밀글임니다^ㅁ^)</summary>"
+                      qa +="내용 : "+a.result[i].contents+"</details>"
+                      $(".ProductQuestionList").append(qa);
+                      }
+                      }
+                    })
                   })
                 document.getElementById('myModal').style.display = "none";
+                  $(".contentholder").val("");
+                  $(".titleholder").val("");
                 }
               })
               
@@ -975,6 +1002,26 @@ $(document).ready(function(){
                 }
             });
   
+              $.get("/greenright/json/ProductQuestion/getQuestion",{
+                "no": $("#productNo").val()
+              },function(a){
+                for(i=0; i<a.result.length; i++){
+                if(a.result[i].secretFlag == 0){
+                let qa ="";
+                qa +="<details><summary>답변상태:No 제목:"+a.result[i].title+" 작성자:"+a.result[i].member.id+" 작성일:"+a.result[i].createdDate+" </summary>"
+                qa +="내용 : "+a.result[i].contents+"</details>"
+                $(".ProductQuestionList").append(qa);
+                }else{
+                let qa ="";
+                qa +="<details><summary>비밀글임니다^ㅁ^)</summary>"
+                qa +="내용 : "+a.result[i].contents+"</details>"
+                $(".ProductQuestionList").append(qa);
+                }
+                }
+              })
+              
+              
+              
   })  
   
 </script>
@@ -1034,4 +1081,62 @@ $(document).ready(function(){
 
   });
 </script>
+<script> 
+function fnMove(seq){
+  var offset = $("#div" + seq).offset();
+  
+  $('html, body').animate({scrollTop : offset.top-200}, 400);
+}
+$(window).scroll(  
+    function(){
+      let offSettop1 = $("#div1").offset().top-210;
+      let offSettop2 = $("#div2").offset().top-210;
+      let offSettop3 = $("#div3").offset().top-210;
+      let offSettop4 = $("#div4").offset().top-210;
+      let offSettop5 = $("#div5").offset().top-210;
+        if(window.pageYOffset >= $('.recommendproduct').offset().top){   
+            $('.floatMenu').addClass("fix");
+            if(window.pageYOffset<=offSettop2){
+              $("#de1").addClass("c23");
+              $("#de2").removeClass("c23");
+              $("#de3").removeClass("c23");
+              $("#de4").removeClass("c23");
+            }else if(window.pageYOffset<=offSettop3){
+              $("#de1").removeClass("c23");
+              $("#de2").addClass("c23");
+              $("#de3").removeClass("c23");
+              $("#de4").removeClass("c23");
+            }else if(window.pageYOffset<=offSettop4){
+              $("#de1").removeClass("c23");
+              $("#de2").removeClass("c23");
+              $("#de3").addClass("c23");
+              $("#de4").removeClass("c23");              
+            }else if(window.pageYOffset>=offSettop4){
+              $("#de1").removeClass("c23");
+              $("#de2").removeClass("c23");
+              $("#de3").removeClass("c23");              
+              $("#de4").addClass("c23");
+            }else if(window.pageYOffset>=offSettop5){
+              $("#de1").removeClass("c23");
+              $("#de2").removeClass("c23");
+              $("#de3").removeClass("c23");              
+              $("#de4").removeClass("c23");
+            }
+        }else{  
+            $('.floatMenu').removeClass("fix");  
+        }  
+    }  
+);  
+</script> 
 
+<script>
+$(document).ready(function(){
+  
+  $(document).on("click",".togglediv",function(){
+    console.log("들어는감?")
+    $(this).children('.slideTogglebox').slideToggle();
+  })
+  
+  
+})
+</script>

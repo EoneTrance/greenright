@@ -1,6 +1,8 @@
 package com.greenright.web.json;
 
+import java.util.List;
 import javax.annotation.Resource;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,4 +24,14 @@ public JsonResult add(ProductQuestion productQuestion) throws Exception{
     return new JsonResult().setResult(JsonResult.FAILURE).setMessage(e.getMessage());
   }
 }
+  @GetMapping("getQuestion")
+  public JsonResult getQuestion(int no)throws Exception{
+    try {
+      List<ProductQuestion>ProductQuestionList = productQuestionService.get(no);
+      return new JsonResult().setResult(JsonResult.SUCCESS).setResult(ProductQuestionList);
+    }catch(Exception e) {
+      return new JsonResult().setResult(JsonResult.FAILURE).setMessage(e.getMessage());
+    }
+  }
+  
 }

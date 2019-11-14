@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.greenright.domain.Product;
 import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
-import com.greenright.domain.ProductQuestion;
 import com.greenright.domain.Review;
 import com.greenright.service.ProductQuestionService;
 import com.greenright.service.ProductService;
@@ -82,18 +81,19 @@ public class ProductController {
     model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);
   }
-  @ResponseBody
+  
   @GetMapping("buydetail")
   public void buydetail(Model model, int no) throws Exception {
     Product product = productService.get(no);
     Product productPhoto = productService.getforPhoto(no);
     List<Product>productLiST = productService.gettopbyCategoryNum(no);
-   // List<ProductQuestion>ProductQuestionList = productQuestionService.get(no);
+    
+    
     model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);
     model.addAttribute("productLiST",productLiST);
-   // model.addAttribute("productQuestionList",ProductQuestionList);
   }
+  
   
   
   @GetMapping("delete")
