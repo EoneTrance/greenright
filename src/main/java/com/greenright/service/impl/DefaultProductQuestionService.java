@@ -21,4 +21,9 @@ public class DefaultProductQuestionService implements ProductQuestionService {
     return productQuestionDao.get(no);
   }
 
+  @Override
+  public ProductQuestion getOneQuestion(int questionNo) throws Exception {
+    return productQuestionDao.getOneQuestion(questionNo);
+  }
+
 }

@@ -33,5 +33,14 @@ public JsonResult add(ProductQuestion productQuestion) throws Exception{
       return new JsonResult().setResult(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
+  @GetMapping("getOneQuestion")
+  public JsonResult getOnteQuestion (int questionNo) throws Exception{
+    try{
+     ProductQuestion productQuestion= productQuestionService.getOneQuestion(questionNo);
+      return new JsonResult().setResult(JsonResult.SUCCESS).setResult(productQuestion);
+      }catch (Exception e) {
+      return new JsonResult().setResult(JsonResult.FAILURE).setMessage(e.getMessage());
+    }
+  }
   
 }

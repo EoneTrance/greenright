@@ -16,7 +16,7 @@ public class ProductQuestion implements Serializable {
   private String title;
   private String contents;
   private Member member;
-  
+  private ProductAnswer productAnswer;
   public int getNo() {
     return no;
   }
@@ -65,12 +65,21 @@ public class ProductQuestion implements Serializable {
   public void setMember(Member member) {
     this.member = member;
   }
+  public ProductAnswer getProductAnswer() {
+    return productAnswer;
+  }
+  public void setProductAnswer(ProductAnswer productAnswer) {
+    this.productAnswer = productAnswer;
+  }
   @Override
   public String toString() {
     return "ProductQuestion [no=" + no + ", memberNo=" + memberNo + ", productNo=" + productNo
         + ", createdDate=" + createdDate + ", secretFlag=" + secretFlag + ", title=" + title
-        + ", contents=" + contents + ", member=" + member + "]";
+        + ", contents=" + contents + ", member=" + member + ", productAnswer=" + productAnswer
+        + "]";
   }
+
+  
   
  
   

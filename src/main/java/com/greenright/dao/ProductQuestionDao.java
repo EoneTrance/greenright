@@ -8,4 +8,6 @@ public interface ProductQuestionDao {
   void add(ProductQuestion productQuestion) throws Exception;
 
   List<ProductQuestion> get(int no) throws Exception;
+
+  ProductQuestion getOneQuestion(int questionNo) throws Exception;
 }

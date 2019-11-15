@@ -3,7 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 li {
-  list-style: none
+  list-style: none;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  border: 0;
+  float: left;
 }
 
 ul {
@@ -11,13 +15,6 @@ ul {
   margin: 0;
   padding: 0;
   width: 450px;
-}
-
-li {
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  border: 0;
-  float: left;
 }
 
 img.img-fluid {
@@ -79,7 +76,7 @@ div.rightcontents {
 }
 
 div.stars {
-  width: 270px;
+  width: 301px;
   display: inline-block;
 }
 
@@ -119,7 +116,7 @@ label.star:before {
   font-family: FontAwesome;
 }
 
-.qnamodal {
+.qnamodal, .sellermodal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -133,7 +130,7 @@ label.star:before {
 }
 
 /* Modal Content/Box */
-.qnamodal-content {
+.qnamodal-content, .sellermdal-content {
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
@@ -141,63 +138,91 @@ label.star:before {
   width: 50%; /* Could be more or less, depending on screen size */
 }
 /* The Close Button */
-.qnaclose {
+.qnaclose, .sellerclose {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-.qnaclose:hover, .qnaclose:focus {
+.qnaclose:hover, .qnaclose:focus, .sellerclose:hover, .sellerclose:focus
+  {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
+
 input.titleholder {
-    width: 100%;
+  width: 100%;
 }
 
-textarea.contentholder {
-    height: 200px;
-    width: 100%;
+textarea.contentholder, textarea.sellerholder {
+  height: 200px;
+  width: 100%;
 }
-div.qnabody{
-width:97%
+
+div.qnabody, div.sellerbody {
+  width: 97%
 }
-button#submitbut {
-    float: right;
+
+button#submitbut, button#answersubmit {
 }
-.anqfooter {
-    margin-bottom: 10px;
+
+.anqfooter, .sellerfooter {
+  margin-bottom: 10px;
 }
-details {
-    text-align: left;
-}
+
 .fix {
-position:fixed;_position:absolute;width:100%;top:0;z-index:100
-}
-.c23{
- color : #82ae46;
-}
-.reviewimagepresent {
-    text-align: left;
+  position: fixed;
+  _position: absolute;
+  width: 100%;
+  top: 0;
+  z-index: 100
 }
 
-.togglediv{
-width:500px; 
-height:50px; 
-background-color:#fff; 
-cursor:pointer; 
-margin-right : 50px;
-text-align:left; 
-line-height:50px;
+.c23 {
+  color: #82ae46;
 }
-.slideTogglebox{
-width:500px; 
-height:100px; 
-background-color:beige; 
-display:none; 
+
+.reviewimagepresent {
+  text-align: left;
 }
+
+td.conts {
+  text-align: left;
+  width: 690px;
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: large;
+}
+tr:hover { background-color: lightyellow; }
+
+td.title {
+  text-align: left;
+  cursor: pointer;
+  width: 707px;
+  height: 50px;
+  font-size: large;
+  border-top: 0.5px solid beige;
+  border-bottom: 0.5px solid beige;
+}
+#title{
+    width: 743px;
+    height: 50px;
+    margin-right: 31px;
+}
+textarea#contents {
+    margin-right: 200px;
+}
+button.qnaAdd.btn.btn-primary {
+    margin-bottom: 30px;
+}
+p.starpoint {
+    display: inline;
+}
+
+
 </style>
 <meta name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -276,7 +301,7 @@ display:none;
 
     <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="/greenright/main" class="nav-link">Home</a></li>
         <li class="nav-item active dropdown"><a
           class="nav-link dropdown-toggle" href="#" id="dropdown04"
           data-toggle="dropdown" aria-haspopup="true"
@@ -308,8 +333,8 @@ display:none;
       class="row no-gutters slider-text align-items-center justify-content-center">
       <div class="col-md-9 ftco-animate text-center">
         <p class="breadcrumbs">
-          <span class="mr-2"><a href="index.html">Home</a></span> <span
-            class="mr-2"><a href="index.html">Product</a></span> <span>Product
+          <span class="mr-2"><a href="/greenright/main">Home</a></span> <span
+            class="mr-2"><a href="/greenright/main">Product</a></span> <span>Product
             Single</span>
         </p>
         <h1 class="mb-0 bread">Product Single</h1>
@@ -330,7 +355,7 @@ display:none;
             <li><img src='/upload/product/${photo.photoPath}'
               id="/upload/product/${photo.photoPath}"
               class="changesaver"
-              style="width: 50px; height: 50px; object-fit: cover;cursor:pointer;">
+              style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;">
             </li>
           </c:forEach>
         </ul>
@@ -459,23 +484,27 @@ display:none;
 
 <!-- 상품평 상품문의 상세설명 리뷰 -->
 <div class="floatMenu">
-<section class="ftco-section">
-  <div class="container">
-    <div class="row justify-content-center mb-3 pb-3">
-      <div
-        class="col-md-12 heading-section text-center ftco-animate bordermaker justify-content-center">
+  <section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center mb-3 pb-3">
+        <div
+          class="col-md-12 heading-section text-center ftco-animate bordermaker justify-content-center">
           <nav id="nav">
-        <ul class="widthsizer">
-          <li class="useruse" id="detaildesc" onclick="fnMove('1')"><h4  id="de1" style="cursor:pointer">상세설명</h4></li>
-          <li class="useruse" id="producttest" onclick="fnMove('2')"><h4 id="de2" style="cursor:pointer">상품평</h4></li>
-          <li class="useruse" id="question" onclick="fnMove('3')"><h4 id="de3" style="cursor:pointer">상품문의</h4></li>
-          <li class="useruse" id="review" onclick="fnMove('4')"><h4 id="de4" style="cursor:pointer">상품평작성</h4></li>
-        </ul>
-        </nav>
+            <ul class="widthsizer">
+              <li class="useruse" id="detaildesc" onclick="fnMove('1')"><h4
+                  id="de1" style="cursor: pointer">상세설명</h4></li>
+              <li class="useruse" id="producttest" onclick="fnMove('2')"><h4
+                  id="de2" style="cursor: pointer">상품평</h4></li>
+              <li class="useruse" id="question" onclick="fnMove('3')"><h4
+                  id="de3" style="cursor: pointer">상품문의</h4></li>
+              <li class="useruse" id="review" onclick="fnMove('4')"><h4
+                  id="de4" style="cursor: pointer">상품평작성</h4></li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 </div>
 <!--  상품평 누를시 상품평 나오고 딴거 누를시 딴거 나오게 할부분  -->
 <Section class="ftco-section">
@@ -483,30 +512,32 @@ display:none;
     <div class="row justify-content-center mb-3 pb-3">
       <div
         class="col-md-12 heading-section text-center ftco-animate userusechanage">
-        <div class="productscore target" id="div1"><br><br><br></div>
-        <br>
-        <hr>
-        <div class="productrating target" id="div2"><br><br></div>
-        <br>
-        <hr>
-        <div class="productquestion target" id="div3"> <br> 
-          
-          <button class='qnaAdd'>상품문의작성</button>
-        <div class="ProductQuestionList" >
-        
+        <div class="productscore target" id="div1">
+          <br> <br> <br>
         </div>
+        <br>
+        <hr>
+        <div class="productrating target" id="div2">
+          <br> <br>
+        </div>
+        <br>
+        <hr>
+        <div class="productquestion target" id="div3">
+          <br>
+          <button class='qnaAdd btn btn-primary'>상품문의작성</button>
+          <div class="ProductQuestionList"></div>
         </div>
         <hr>
-        <br>
-        <br>
-        <br>
-        <div class="review target" id="div4"><br></div>
+        <br> <br> <br>
+        <div class="review target" id="div4">
+          <br>
+        </div>
 
       </div>
     </div>
   </div>
 </Section>
-  
+
 <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
   <div class="container py-4" id="div5">
     <div class="row d-flex justify-content-center py-5">
@@ -640,7 +671,7 @@ display:none;
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">리뷰</h5>
-        <button type="button" class="close" data-dismiss="modal"
+        <button type="button" class="close btn btn-primary" data-dismiss="modal"
           aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -665,34 +696,49 @@ display:none;
     </div>
   </div>
 </div>
-<!-- 상품 q&a 작성시 버튼 클릭시 보이는 모달 작성용  -->
+<!-- 상품 question 작성시 버튼 클릭시 보이는 모달 작성용  -->
 <div id="myModal" class="qnamodal">
   <!-- Modal content -->
   <div class="qnamodal-content">
-    <div class ="qnaheader">
-    <span class="qnaclose">&times;</span>
+    <div class="qnaheader">
+      <span class="qnaclose">&times;</span>
     </div>
     <br>
-    <div class ="qnabody">
-    <input type="text"  class ="titleholder"name="qnatitle" placeholder="제목을 입력해주세요 ">
-    <br>
-    <textarea  class="contentholder" name="qnacontents" placeholder="내용을 입력해주세요" maxlength=1000 style="resize:none;"></textarea>
-    <br>
-    <input type="checkbox" name="private" class="priv" value=0 > 비공개 
-    <button id="submitbut" >작성</button>
+    <div class="qnabody">
+      <input type="text" class="titleholder" name="qnatitle"
+        placeholder="제목을 입력해주세요 "> <br>
+      <textarea class="contentholder" name="qnacontents"
+        placeholder="내용을 입력해주세요" maxlength=1000 style="resize: none;"></textarea>
+      <br> <input type="checkbox" name="private" class="priv"
+        value=0> 비공개
+      <button id="submitbut" class="btn btn-primary">작성</button>
     </div>
-    <div class ="anqfooter">
-    
-    </div>
+    <div class="anqfooter"></div>
   </div>
-
 </div>
-     
-     
-     
-     
-     
-     
+<!--  상품 문의 답변 버튼을 클릭시 보이는 모달  -->
+<div id="sellerModal" class="sellermodal">
+  <div class="sellermdal-content">
+    <div class="sellerheader">
+      문의답변 <span class="sellerclose">&times;</span>
+    </div>
+    <div class="sellerbody">
+      <div class="before">작성한 질문의 제목과 내용 출력할 자리</div>
+      <div class="now">
+        <textarea class="sellerholder" name="sellercontents"
+          placeholder="답변내용을 입력해주세요" maxlength=1000
+          style="resize: none;"></textarea>
+      </div>
+      <button id="answersubmit" class="btn btn-primary">작성</button>
+    </div>
+    <div class="sellerfooter"></div>
+  </div>
+</div>
+
+
+
+
+
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
@@ -719,311 +765,613 @@ display:none;
 <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
 
 <script>
-$(document).ready(function(){
-  $.get("/greenright/json/Review/getRatingAVer",{
-    "no" : $("#productNo").val()
-  },function(a){
-    ratingAver = a.result;
-    if(ratingAver<= 1){
-      $(".ratingimg").attr("src","/images/0.PNG")
-    }else if(ratingAver<= 1.5){
-      $(".ratingimg").attr("src","/images/1.PNG")
-    }else if(ratingAver<=2.5){
-      $(".ratingimg").attr("src","/images/2.PNG")
-    }else if(ratingAver<=3.5){
-      $(".ratingimg").attr("src","/images/3.PNG")
-    }else if(ratingAver<=4.5){
-      $(".ratingimg").attr("src","/images/4.PNG")
-    }else if(ratingAver<=5.0){
-      $(".ratingimg").attr("src","/images/5.PNG")
-    }else{
-      $(".ratingimg").attr("src","/images/0.PNG")
-    }
-    
-  })
-              let ratingAver= 0;
-              $.get(
-                      "/greenright/json/Review/list",
-                      {
-                        "no" : $("#productNo").val()
-                      },
-                      function(k) {
-                        var a = "";
-                         a+="<h5>사진/리뷰</h5>"
-                        if (k.result != null) {
-                          a += "<div class='reviewimagepresent'>"
-                          for (var i = 0; i < k.result.length; i++) {
-                            if (k.result[i].photos.photoPath != null) {
-                              a += "<img class='img-fluid modal_maker' id="+k.result[i].no+" src='/upload/review/"+k.result[i].photos.photoPath+"'  alt='' style='width:100px; height:100px; object-fit:cover; cursor:pointer;'> "
-                            }
+  $(document)
+      .ready(
+          function() {
+            $.get("/greenright/json/Review/getRatingAVer", {
+              "no" : $("#productNo").val()
+            }, function(a) {
+              ratingAver = a.result;
+              if (ratingAver <= 1) {
+                $(".ratingimg").attr("src", "/images/0.PNG")
+              } else if (ratingAver <= 1.5) {
+                $(".ratingimg").attr("src", "/images/1.PNG")
+              } else if (ratingAver <= 2.5) {
+                $(".ratingimg").attr("src", "/images/2.PNG")
+              } else if (ratingAver <= 3.5) {
+                $(".ratingimg").attr("src", "/images/3.PNG")
+              } else if (ratingAver <= 4.5) {
+                $(".ratingimg").attr("src", "/images/4.PNG")
+              } else if (ratingAver <= 5.0) {
+                $(".ratingimg").attr("src", "/images/5.PNG")
+              } else {
+                $(".ratingimg").attr("src", "/images/0.PNG")
+              }
+
+            })
+            let ratingAver = 0;
+            $
+                .get(
+                    "/greenright/json/Review/list",
+                    {
+                      "no" : $("#productNo").val()
+                    },
+                    function(k) {
+                      var a = "";
+                      a += "<h5>사진/리뷰</h5>"
+                      if (k.result != null) {
+                        a += "<div class='reviewimagepresent'>"
+                        for (var i = 0; i < k.result.length; i++) {
+                          if (k.result[i].photos.photoPath != null) {
+                            a += "<img class='img-fluid modal_maker' id="+k.result[i].no+" src='/upload/review/"+k.result[i].photos.photoPath+"'  alt='' style='width:100px; height:100px; object-fit:cover; cursor:pointer;'> "
                           }
-                          a += "</div>"
-                          a += "<div class='reviewpresent'>"
-                          a += "<h5>리뷰</h5>"
-                          for (var i = 0; i < k.result.length; i++) {
-                            a += "<div class='togglediv'>제목:" + k.result[i].title + "&nbsp;&nbsp;&nbsp;"
-                            a += "아이디:" + k.result[i].member.id + "&nbsp;&nbsp;&nbsp;"
-                            a += "평점:" + k.result[i].rating + "점 &nbsp;&nbsp;&nbsp;"
-                            a += "작성일" + k.result[i].createdDate +"<div class='slideTogglebox'>"
-                            a += "내용:" + k.result[i].contents + "</div></div>"
-                          }
-                          a += "</div>"
-                        } else {
-                          a += "상품평이 하나도없습니다";
                         }
-                        $(".productrating").html(a);
-
-                    
-
-                        $(document).on("click",".modal_maker",function(){
-                           let reviewNo = $(this).attr('id');
-                           let imagesrc = $(this).attr("src");
-                           $(".modalimgget").attr("src",imagesrc);
-                           $.get("/greenright/json/Review/get", {
-                             "no" : reviewNo
-                           }, function(a) {
-                             let html1  = "";
-                             html1 += "<img src='/images/member.PNG' style='width:30px; height:30px; object-fit:cover;'>"
-                             html1 += "평점 :"+a.result.rating+"점<br>" ;
-                             html1 += "아이디: "+a.result.member.id+""; 
-                             html1 += "작성일:"+a.result.createdDate+"";
-                                 $(".memberinfo").html(html1);
-                             let html2 = "";
-                             html2 += "제목:"+a.result.title+"<br>"
-                             html2 += "내용:"+a.result.contents+"";
-                             $(".tcontents").html(html2);
-                           })
-                           
-                           
-                           
-                           $('div.modal').modal();
-                        })
-                        
-                      })
-  
-                      
-             /*  $(document).on("click",".qnaAdd",function(){
-              $('div.modal2').modal();
-              }) */
-                      
-  
-              var a = "";
-              a += "<div class='container' style='width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;'>"
-              a += "<div style='width: inherit;'>"
-              a += "<div class='input-group' style='width: 1000px; margin: auto;'>"
-              a += "<input type='text' id='title' style='width :700px' placeholder='제목을입력하세요'/>"
-              a += "<div class='stars'>"
-              a += "<input class='star star-5' id='star-5' type='radio' name='rating' value=5 />"
-              a += "<label class='star star-5' for='star-5'></label>"
-              a += "<input class='star star-4' id='star-4' type='radio' name='rating' value=4 />"
-              a += "<label class='star star-4' for='star-4'></label>"
-              a += "<input class='star star-3' id='star-3' type='radio' name='rating' value=3 />"
-              a += "<label class='star star-3' for='star-3'></label>"
-              a += "<input class='star star-2' id='star-2' type='radio' name='rating' value=2 />"
-              a += "<label class='star star-2' for='star-2'></label>"
-              a += "<input class='star star-1' id='star-1' type='radio' name='rating' value=1 />"
-              a += "<label class='star star-1' for='star-1'></label>"
-              a += "</div>"  
-              a += "<br><TEXTAREA  id ='contents' cols='90' rows='10' style='resize:none;'  placeholder='내용을 입력하세요.'/>"
-              a += "<button id='review-add-btn' class='btn btn-primary'>등록</button>"
-              a += "<input type='file' id='filePath' name='reviewPhoto'>"
-              a += "<div id='images-div'></div>"
-              a += "</div></div><br><br>";
-              $(".review").html(a);
-              
-              let ratingch  = 5 ;
-              $(document).on("change",".star",function(){
-                ratingch = $(this).val();                
-              })
-                
-            
-              $("#review-add-btn").click(function() {
-                let productNo = $("#productNo").val();
-                let memberNo = 1;
-                let rating = ratingch
-                let title = $("#title").val();
-                let contents = $("#contents").val();
-                let ReviewPhoto = $("#filePath").val();
-                $.post("review/check", {
-                  "productNo" : productNo,
-                  "memberNo" : memberNo
-                }, function(a) {
-                  if (a == 0) {
-                    $.ajax({
-                      url : "/greenright/json/Review/add",
-                      type : "post",
-                      data : {
-                        "productNo" : productNo,
-                        "memberNo" : memberNo,
-                        "rating" : rating,
-                        "title" : title,
-                        "contents" : contents,
-                      },
-                      success : function(result) {
-                        swal("상품평 등록완료")
-                        
-                      },
-                    });
-                  } else {
-                    swal("이미 상품평을 작성하셨습니다.")
-                  }
-                })
-
-              })
-
-              $('#filePath').fileupload(
-                  {
-                    url : "/greenright/json/Review/add",
-                    dataType : 'json', // 서버가 보낸 응답이 JSON임을 지정하기
-                    previewMaxWidth : 100, // 미리보기 이미지 너비
-                    previewMaxHeight : 100, // 미리보기 이미지 높이 
-                    previewCrop : true,
-                    processalways : function(e, data) {
-                      var imagesDiv = $('#images-div');
-                      imagesDiv.html("");
-                      for (var i = 0; i < data.files.length; i++) {
-                        try {
-                          if (data.files[i].preview.toDataURL) {
-                            $("<img>").attr('src',
-                                data.files[i].preview.toDataURL()).css('width',
-                                '100px').appendTo(imagesDiv);
-                          }
-                        } catch (err) {
+                        a += "</div>"
+                        a += "<h5>리뷰</h5>"
+                        a += "<table id='contents'>"
+                        for (var i = 0; i < k.result.length; i++) {
+                          a += "<tr><td class='title'><strong>제목:</strong>" + k.result[i].title
+                              + "&nbsp;&nbsp;&nbsp;"
+                          a += "<strong>아이디:</strong>" + k.result[i].member.id
+                              + "&nbsp;&nbsp;&nbsp;"
+                          a += "<strong>평점:</strong>" + k.result[i].rating
+                              + "점 &nbsp;&nbsp;&nbsp;"
+                          a += "<strong>작성일:</strong>" + k.result[i].createdDate + "</td></tr>"
+                          a += "<tr><td class='conts'><strong>내용</strong>:"
+                              + k.result[i].contents + "</td><tr>"
                         }
+                        a += "</table>"
+                      } else {
+                        a += "상품평이 하나도없습니다";
                       }
-                      $('#upload-btn').unbind("click");
-                      $('#upload-btn').click(function() {
-                        data.submit();
+                      $(".productrating").html(a);
+                      
+                      $('#contents tr').hide();
+                      $('#contents').find('.title').parent().show();
+                      $('#contents .title').parent().click(function() {
+                        var tr = $('#contents tr');
+                        var rindex = $(this).parent().children().index(this);
+                        if ($(tr[rindex + 1]).css("display") == "none") {
+                          $(tr[rindex + 1]).show();
+                        } else {
+                          $(tr[rindex + 1]).hide();
+                        }
                       });
-                    },
-                    add : function(e, data) {
-                      $("#review-add-btn").unbind();
-                      $("#review-add-btn").off();
-                      $('#review-add-btn').click(function() {
+                      
+                      $(document)
+                          .on(
+                              "click",
+                              ".modal_maker",
+                              function() {
+                                let reviewNo = $(this).attr('id');
+                                let imagesrc = $(this).attr("src");
+                                $(".modalimgget").attr("src", imagesrc);
+                                $
+                                    .get(
+                                        "/greenright/json/Review/get",
+                                        {
+                                          "no" : reviewNo
+                                        },
+                                        function(a) {
 
-                        $.post("review/check", {
-                          "productNo" : $("#productNo").val(),
-                          "memberNo" : 1
-                        }, function(a) {
-                          if (a == 0) {
-                            data.submit(); // submit()을 호출하면, 서버에 데이터를 보내기 전에 submit 이벤트가 발생한다.
-                            swal("상품평 등록완료")
-                          } else {
-                            swal("이미 상품평을 작성하셨습니다.")
-                          }
-                          
-                          
-                        })
+                                          let html1 = "";
+                                          html1 += "<img src='/images/member.PNG' style='width:30px; height:30px; object-fit:cover;'>"
+                                          html1 += "<strong>평점 :</strong>" + a.result.rating
+                                              + "점<br>";
+                                          html1 += "<strong>아이디:</strong>" + a.result.member.id
+                                              + "";
+                                          html1 += "<strong>작성일:</strong>"
+                                              + a.result.createdDate + "";
+                                          $(".memberinfo").html(html1);
+                                          let html2 = "";
+                                          html2 += "<strong>제목:</strong>" + a.result.title
+                                              + "<br>"
+                                          html2 += "<strong>내용:</strong>" + a.result.contents
+                                              + "";
+                                          $(".tcontents").html(html2);
+                                        })
 
-                      });
+                                $('div.modal').modal();
+                              })
+
+                    })
+
+            /*  $(document).on("click",".qnaAdd",function(){
+             $('div.modal2').modal();
+             }) */
+
+            var a = "";
+            a += "<div class='container' style='width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;'>"
+            a += "<div style='width: inherit;'>"
+            a += "<div class='input-group' style='width: 1000px; margin: auto;'>"
+            a += "<p class='starpoint'>별점:</p>"
+            a += "<div class='stars' style ='border: 0.1px solid azure'>"
+            a += "<input class='star star-5' id='star-5' type='radio' name='rating' value=5 />"
+            a += "<label class='star star-5' for='star-5'></label>"
+            a += "<input class='star star-4' id='star-4' type='radio' name='rating' value=4 />"
+            a += "<label class='star star-4' for='star-4'></label>"
+            a += "<input class='star star-3' id='star-3' type='radio' name='rating' value=3 />"
+            a += "<label class='star star-3' for='star-3'></label>"
+            a += "<input class='star star-2' id='star-2' type='radio' name='rating' value=2 />"
+            a += "<label class='star star-2' for='star-2'></label>"
+            a += "<input class='star star-1' id='star-1' type='radio' name='rating' value=1 />"
+            a += "<label class='star star-1' for='star-1'></label>"
+            a += "</div>"
+            a += "<input type='text' id='title' style='width :743px' placeholder='제목을입력하세요'/>"
+            a += "<br><TEXTAREA  id ='contents' cols='90' rows='10' style='resize:none;'  placeholder='내용을 입력하세요.'/><br>"
+            a += "<button id='review-add-btn' class='btn btn-primary'>등록</button>"
+            a += "<input type='file' id='filePath' name='reviewPhoto'>"
+            a += "<div id='images-div'></div>"
+            a += "</div></div><br><br>";
+            $(".review").html(a);
+
+            let ratingch = 5;
+            $(document).on("change", ".star", function() {
+              ratingch = $(this).val();
+            })
+
+            $("#review-add-btn").click(function() {
+              let productNo = $("#productNo").val();
+              let memberNo = 1;
+              let rating = ratingch
+              let title = $("#title").val();
+              let contents = $("#contents").val();
+              let ReviewPhoto = $("#filePath").val();
+              $.post("review/check", {
+                "productNo" : productNo,
+                "memberNo" : memberNo
+              }, function(a) {
+                if (a == 0) {
+                  $.ajax({
+                    url : "/greenright/json/Review/add",
+                    type : "post",
+                    data : {
+                      "productNo" : productNo,
+                      "memberNo" : memberNo,
+                      "rating" : rating,
+                      "title" : title,
+                      "contents" : contents,
                     },
-                    submit : function(e, data) { // submit 이벤트가 발생했을 때 호출됨. 서버에 전송하기 전에 호출됨.
-                      data.formData = {
-                        "productNo" : $("#productNo").val(),
-                        "memberNo" : 1,
-                        "rating" : ratingch,
-                        "title" : $("#title").val(),
-                        "contents" : $("#contents").val()
+                    success : function(result) {
+                      swal("상품평 등록완료")
+
+                    },
+                  });
+                } else {
+                  swal("이미 상품평을 작성하셨습니다.")
+                }
+              })
+
+            })
+
+            $('#filePath').fileupload(
+                {
+                  url : "/greenright/json/Review/add",
+                  dataType : 'json', // 서버가 보낸 응답이 JSON임을 지정하기
+                  previewMaxWidth : 100, // 미리보기 이미지 너비
+                  previewMaxHeight : 100, // 미리보기 이미지 높이 
+                  previewCrop : true,
+                  processalways : function(e, data) {
+                    var imagesDiv = $('#images-div');
+                    imagesDiv.html("");
+                    for (var i = 0; i < data.files.length; i++) {
+                      try {
+                        if (data.files[i].preview.toDataURL) {
+                          $("<img>").attr('src',
+                              data.files[i].preview.toDataURL()).css('width',
+                              '100px').appendTo(imagesDiv);
+                        }
+                      } catch (err) {
                       }
                     }
-                  });
-              
-              
-       
-              // When the user clicks on the button, open the modal 
-              $(document).on("click",".qnaAdd",function(){
-                document.getElementById('myModal').style.display = "block";
-                
-              })
-       
-              // When the user clicks on <span> (x), close the modal
-              $(document).on("click",".qnaclose",function(){
+                    $('#upload-btn').unbind("click");
+                    $('#upload-btn').click(function() {
+                      data.submit();
+                    });
+                  },
+                  add : function(e, data) {
+                    $("#review-add-btn").unbind();
+                    $("#review-add-btn").off();
+                    $('#review-add-btn').click(function() {
+
+                      $.post("review/check", {
+                        "productNo" : $("#productNo").val(),
+                        "memberNo" : 1
+                      }, function(a) {
+                        if (a == 0) {
+                          data.submit(); // submit()을 호출하면, 서버에 데이터를 보내기 전에 submit 이벤트가 발생한다.
+                          swal("상품평 등록완료")
+                        } else {
+                          swal("이미 상품평을 작성하셨습니다.")
+                        }
+
+                      })
+
+                    });
+                  },
+                  submit : function(e, data) { // submit 이벤트가 발생했을 때 호출됨. 서버에 전송하기 전에 호출됨.
+                    data.formData = {
+                      "productNo" : $("#productNo").val(),
+                      "memberNo" : 1,
+                      "rating" : ratingch,
+                      "title" : $("#title").val(),
+                      "contents" : $("#contents").val()
+                    }
+                  }
+                });
+
+            // When the user clicks on the button, open the modal 
+            //질문 등록 하는 부분 
+            $(document).on("click", ".qnaAdd", function() {
+              document.getElementById('myModal').style.display = "block";
+            })
+
+            //답변 등록하는 부분 
+            $(document)
+                .on(
+                    "click",
+                    ".answersend",
+                    function() {
+                      document.getElementById('sellerModal').style.display = "block";
+                      let questionNo = $(this).prev().val()
+                      $.get("/greenright/json/ProductQuestion/getOneQuestion",
+                          {
+                            "questionNo" : questionNo
+                          }, function(a) {
+                            let before = "";
+                            before += "<strong>제목 :</strong> " + a.result.title + "<br>"
+                            before += "<strong>내용 :</strong> " + a.result.contents
+                            $(".before").html(before);
+                          })
+                      $(document)
+                          .on(
+                              "click",
+                              "#answersubmit",
+                              function() {
+                                if($(".sellerholder").val()==""){
+                                  swal("답변 내용을 입력해주세요")
+                                }else{
+                                $.post(
+                                        "/greenright/json/ProductAnswer/add",
+                                        {
+                                          "no" : questionNo,
+                                          "answerContents" : $(".sellerholder").val()
+                                        },
+                                        function(result) {
+                                          if (result.result == "success") {
+                                            swal("등록에 성공하셨습니다 . ")
+                                            $(".sellerclose").trigger("click");
+                                          } else {
+                                            swal("등록에 실패하셨습니다 .  ")
+                                            $(".sellerclose").trigger("click");
+                                          }
+
+                                          $.get(
+                                              "/greenright/json/ProductQuestion/getQuestion",
+                                              {
+                                                "no" : $("#productNo").val()
+                                              },
+                                              function(a) {
+                                                let qa = "";
+                                                qa += "<table id='questions'>"
+                                                for (i = 0; i < a.result.length; i++) {
+
+                                                  if (a.result[i].secretFlag == 0) {
+                                                    if (a.result[i].productAnswer.answerContents != null) {
+                                                      qa += "<tr><td class='title'><strong>답변상태:</strong>YES 제목:"
+                                                          + a.result[i].title
+                                                          + "<strong> 작성자:</strong>"
+                                                          + a.result[i].member.id
+                                                          + "<strong> 작성일:</strong>"
+                                                          + a.result[i].createdDate
+                                                          + "</td></tr>"
+                                                      qa += "<tr><td class='conts'><strong>내용 :</strong> "
+                                                          + a.result[i].contents
+                                                          + "<input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                          + "<br><strong>답변내용 :</strong> "
+                                                          + a.result[i].productAnswer.answerContents
+                                                          + "</td></tr>"
+                                                    } else {
+                                                      qa += "<tr><td class='title'><strong>답변상태:</strong>NO <strong>제목:</strong>"
+                                                          + a.result[i].title
+                                                          + "<strong> 작성자:</strong>"
+                                                          + a.result[i].member.id
+                                                          + "<strong> 작성일:</strong>"
+                                                          + a.result[i].createdDate
+                                                          + "</td></tr>"
+                                                      qa += "<tr><td class='conts'><strong>내용 :</strong> "
+                                                          + a.result[i].contents
+                                                          + "<input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                          + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
+                                                    }
+                                                  } else {
+                                                    if (a.result[i].productAnswer.answerContents != null) {
+                                                      qa += "<tr><td class='title secretwrite'><strong>답변상태:</strong>YES &nbsp;&nbsp;비밀글임니다^ㅁ^</td></tr>"
+                                                      qa += "<tr><td class='conts'><strong>내용 :</strong> "
+                                                          + a.result[i].contents
+                                                          + "<input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                          + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
+                                                    } else {
+                                                      qa += "<tr><td class='title secretwrite'><strong>답변상태:</strong>NO &nbsp;&nbsp;비밀글임니다^ㅁ^</td></tr>"
+                                                      qa += "<tr><td class='conts'><strong>내용 : </strong>"
+                                                          + a.result[i].contents
+                                                          + "<input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                          + "<br><strong>답변내용 :</strong> "
+                                                          + a.result[i].productAnswer.answerContents
+                                                          + "</td></tr>"
+                                                    }
+
+                                                  }
+                                                }
+                                                qa += "</table>"
+                                                $(".ProductQuestionList").html(qa);
+
+                                                $('#questions tr').hide();
+                                                $('#questions').find('.title')
+                                                    .parent().show();
+                                                $('#questions .title')
+                                                    .parent()
+                                                    .click(
+                                                        function() {
+                                                          var tr = $('#questions tr');
+                                                          var rindex = $(this)
+                                                              .parent().children()
+                                                              .index(this);
+                                                          if ($(tr[rindex + 1])
+                                                              .css("display") == "none") {
+                                                            if ($(tr[rindex])
+                                                                .children()
+                                                                .hasClass(
+                                                                    "secretwrite")) {
+                                                              swal("비밀글은 작성자와 운영자만 볼수있습니다.");
+                                                            } else {
+                                                              $(tr[rindex + 1])
+                                                                  .show();
+                                                            }
+                                                          } else {
+                                                            $(tr[rindex + 1])
+                                                                .hide();
+                                                          }
+                                                        });
+
+                                              })
+
+                                        })
+                                }
+                              })
+                    })
+
+            //질문 등록하는 모달 닫기 버튼 누르면 
+            $(document).on("click", ".qnaclose", function() {
+              document.getElementById('myModal').style.display = "none";
+              $(".contentholder").val("");
+              $(".titleholder").val("");
+            })
+            $(document).on("click", ".sellerclose", function() {
+              document.getElementById('sellerModal').style.display = "none"
+              $(".sellerholder").val("");
+            })
+            // When the user clicks anywhere outside of the modal, close it
+            $(document).on("click", window, function() {
+              if (event.target == document.getElementById('myModal')) {
                 document.getElementById('myModal').style.display = "none";
                 $(".contentholder").val("");
                 $(".titleholder").val("");
-              })
-       
-              // When the user clicks anywhere outside of the modal, close it
-              $(document).on("click",window,function(){
-                  if (event.target == document.getElementById('myModal') ) {
-                    document.getElementById('myModal').style.display = "none";
-                    $(".contentholder").val("");
-                    $(".titleholder").val("");
-                  }
-              })
-              
-              $(document).on("click","#submitbut",function(){
-                let titl = $(".titleholder").val()
-                let contents = $(".contentholder").val()
-                let pri = $(".priv").val()
-                let productNo = $("#productNo").val();
-                let memberNo = 1;
-                if(titl == "" || contents ==""){
-                  swal("제목 혹은 내용을 입력하세요")
-                }else {
-                  $.post("/greenright/json/ProductQuestion/add", {
-                    "productNo" : productNo,
-                    "memberNo" : memberNo,
-                    "secretFlag" : pri,
-                    "title" : titl,
-                    "contents" : contents
-                  }, function(a) {
-                    $.get("/greenright/json/ProductQuestion/getQuestion",{
-                      "no": $("#productNo").val()
-                    },function(a){
-                      $(".ProductQuestionList").html("");
-                      for(i=0; i<a.result.length; i++){
-                      if(a.result[i].secretFlag == 0){
-                      let qa ="";
-                      qa +="<details><summary>답변상태:No 제목:"+a.result[i].title+" 작성자:"+a.result[i].member.id+" 작성일:"+a.result[i].createdDate+" </summary>"
-                      qa +="내용 : "+a.result[i].contents+"</details>"
-                      $(".ProductQuestionList").append(qa);
-                      }else{
-                      let qa ="";
-                      qa +="<details><summary>비밀글임니다^ㅁ^)</summary>"
-                      qa +="내용 : "+a.result[i].contents+"</details>"
-                      $(".ProductQuestionList").append(qa);
-                      }
+              }
+            })
+
+            $(document).on("click", window, function() {
+              if (event.target == document.getElementById('sellerModal')) {
+                document.getElementById('sellerModal').style.display = "none";
+                $(".sellerholder").val("");
+              }
+            })
+            $(document)
+                .on(
+                    "click",
+                    "#submitbut",
+                    function() {
+                      let titl = $(".titleholder").val()
+                      let contents = $(".contentholder").val()
+                      let pri = $(".priv").val()
+                      let productNo = $("#productNo").val();
+                      let memberNo = 1;
+                      if (titl == "" || contents == "") {
+                        swal("제목 혹은 내용을 입력하세요")
+                      } else {
+                        $
+                            .post(
+                                "/greenright/json/ProductQuestion/add",
+                                {
+                                  "productNo" : productNo,
+                                  "memberNo" : memberNo,
+                                  "secretFlag" : pri,
+                                  "title" : titl,
+                                  "contents" : contents
+                                },
+                                function(a) {
+                                  $
+                                  $.get(
+                                          "/greenright/json/ProductQuestion/getQuestion",
+                                          {
+                                            "no" : $("#productNo").val()
+                                          },
+                                          function(a) {
+                                            let qa = "";
+                                            qa += "<table id='questions'>"
+                                            for (i = 0; i < a.result.length; i++) {
+
+                                              if (a.result[i].secretFlag == 0) {
+                                                if (a.result[i].productAnswer.answerContents != null) {
+                                                  qa += "<tr><td class='title'><strong>답변상태:</strong>YES <strong>제목:</strong>"
+                                                      + a.result[i].title
+                                                      + "<strong>작성자:</strong>"
+                                                      + a.result[i].member.id
+                                                      + " <strong>작성일:</strong>"
+                                                      + a.result[i].createdDate
+                                                      + "</td></tr>"
+                                                  qa += "<tr><td class='conts'><strong>내용 :</strong> "
+                                                      + a.result[i].contents
+                                                      + "<input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                      + "<br><strong>답변내용 :</strong> "
+                                                      + a.result[i].productAnswer.answerContents
+                                                      + "</td></tr>"
+                                                } else {
+                                                  qa += "<tr><td class='title'><strong>답변상태:</strong>NO <strong>제목:</strong>"
+                                                      + a.result[i].title
+                                                      + " <strong>작성자:</strong>"
+                                                      + a.result[i].member.id
+                                                      + " <strong>작성일:</strong>"
+                                                      + a.result[i].createdDate
+                                                      + "</td></tr>"
+                                                  qa += "<tr><td class='conts'><strong>내용 :</strong> "
+                                                      + a.result[i].contents
+                                                      + "<input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                      + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
+                                                }
+                                              } else {
+                                                if (a.result[i].productAnswer.answerContents != null) {
+                                                  qa += "<tr><td class='title secretwrite'><strong>답변상태:</strong>YES &nbsp;&nbsp;비밀글임니다^ㅁ^</td></tr>"
+                                                  qa += "<tr><td class='conts'><strong>내용 :</strong> "
+                                                      + a.result[i].contents
+                                                      + "<input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                      + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
+                                                } else {
+                                                  qa += "<tr><td class='title secretwrite'><strong>답변상태:</strong>NO &nbsp;&nbsp;비밀글임니다^ㅁ^</td></tr>"
+                                                  qa += "<tr><td class='conts'><strong>내용 :</strong> "
+                                                      + a.result[i].contents
+                                                      + "<input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                      + "<br><strong>답변내용 :</strong> "
+                                                      + a.result[i].productAnswer.answerContents
+                                                      + "</td></tr>"
+                                                }
+
+                                              }
+                                            }
+                                            qa += "</table>"
+                                            $(".ProductQuestionList").html(qa);
+
+                                            $('#questions tr').hide();
+                                            $('#questions').find('.title')
+                                                .parent().show();
+                                            $('#questions .title')
+                                                .parent()
+                                                .click(
+                                                    function() {
+                                                      var tr = $('#questions tr');
+                                                      var rindex = $(this)
+                                                          .parent().children()
+                                                          .index(this);
+                                                      if ($(tr[rindex + 1])
+                                                          .css("display") == "none") {
+                                                        if ($(tr[rindex])
+                                                            .children()
+                                                            .hasClass(
+                                                                "secretwrite")) {
+                                                          swal("비밀글은 작성자와 운영자만 볼수있습니다.");
+                                                        } else {
+                                                          $(tr[rindex + 1])
+                                                              .show();
+                                                        }
+                                                      } else {
+                                                        $(tr[rindex + 1])
+                                                            .hide();
+                                                      }
+                                                    });
+
+                                          })
+                                })
+                        document.getElementById('myModal').style.display = "none";
+                        $(".contentholder").val("");
+                        $(".titleholder").val("");
                       }
                     })
-                  })
-                document.getElementById('myModal').style.display = "none";
-                  $(".contentholder").val("");
-                  $(".titleholder").val("");
-                }
-              })
-              
-              
-              $(document).on("change",".priv",function(){
-                if($(this).is(":checked")){
-                    $(this).attr("value",1)
-                }else{
-                    $(this).attr("value",0);
-                }
+
+            $(document).on("change", ".priv", function() {
+              if ($(this).is(":checked")) {
+                $(this).attr("value", 1)
+              } else {
+                $(this).attr("value", 0);
+              }
             });
-  
-              $.get("/greenright/json/ProductQuestion/getQuestion",{
-                "no": $("#productNo").val()
-              },function(a){
-                for(i=0; i<a.result.length; i++){
-                if(a.result[i].secretFlag == 0){
-                let qa ="";
-                qa +="<details><summary>답변상태:No 제목:"+a.result[i].title+" 작성자:"+a.result[i].member.id+" 작성일:"+a.result[i].createdDate+" </summary>"
-                qa +="내용 : "+a.result[i].contents+"</details>"
-                $(".ProductQuestionList").append(qa);
-                }else{
-                let qa ="";
-                qa +="<details><summary>비밀글임니다^ㅁ^)</summary>"
-                qa +="내용 : "+a.result[i].contents+"</details>"
-                $(".ProductQuestionList").append(qa);
-                }
-                }
-              })
-              
-              
-              
-  })  
-  
+
+            $
+                .get(
+                    "/greenright/json/ProductQuestion/getQuestion",
+                    {
+                      "no" : $("#productNo").val()
+                    },
+                    function(a) {
+                      let qa = "";
+                      qa += "<table id='questions'>"
+                      for (i = 0; i < a.result.length; i++) {
+
+                        if (a.result[i].secretFlag == 0) {
+                          if (a.result[i].productAnswer.answerContents != null) {
+                            qa += "<tr><td class='title'><strong>답변상태:</strong>YES <strong>제목:</strong>"
+                                + a.result[i].title + " <strong>작성자:</strong>"
+                                + a.result[i].member.id + " <strong>작성일:</strong>"
+                                + a.result[i].createdDate + "</td></tr>"
+                            qa += "<tr><td class='conts'><strong>내용 :</strong> "
+                                + a.result[i].contents
+                                + "<input class='questionNo' value="+a.result[i].no+" hidden>"
+                                + "<br><strong>답변내용 :</strong> "
+                                + a.result[i].productAnswer.answerContents
+                                + "</td></tr>"
+                          } else {
+                            qa += "<tr><td class='title'><strong>답변상태:</strong>NO <strong>제목:</strong>"
+                                + a.result[i].title + " <strong>작성자:</strong>"
+                                + a.result[i].member.id + " <strong>작성일:</strong>"
+                                + a.result[i].createdDate + "</td></tr>"
+                            qa += "<tr><td class='conts'><strong>내용 :</strong> "
+                                + a.result[i].contents
+                                + "<input class='questionNo' value="+a.result[i].no+" hidden>"
+                                + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
+                          }
+                        } else {
+                          if (a.result[i].productAnswer.answerContents != null) {
+                            qa += "<tr><td class='title secretwrite'><strong>답변상태:</strong>YES &nbsp;&nbsp;비밀글임니다^ㅁ^</td></tr>"
+                            qa += "<tr><td class='conts'><strong>내용 :</strong> "
+                                + a.result[i].contents
+                                + "<input class='questionNo' value="+a.result[i].no+" hidden>"
+                                + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
+                          } else {
+                            qa += "<tr><td class='title secretwrite'><strong>답변상태:</strong>NO &nbsp;&nbsp;비밀글임니다^ㅁ^</td></tr>"
+                            qa += "<tr><td class='conts'><strong>내용 :</strong> "
+                                + a.result[i].contents
+                                + "<input class='questionNo' value="+a.result[i].no+" hidden>"
+                                + "<br><strong>답변내용 : </strong>"
+                                + a.result[i].productAnswer.answerContents
+                                + "</td></tr>"
+                          }
+
+                        }
+                      }
+                      qa += "</table>"
+                      $(".ProductQuestionList").append(qa);
+                      
+                      $('#questions tr').hide();
+                      $('.answersend').hide();
+                      $('#questions').find('.title').parent().show();
+                      $('#questions .title').parent().click(function() {
+                        var tr = $('#questions tr');
+                        var rindex = $(this).parent().children().index(this);
+                        if ($(tr[rindex + 1]).css("display") == "none") {
+                          if ($(tr[rindex]).children().hasClass("secretwrite")) {
+                            swal("비밀글은 작성자와 운영자만 볼수있습니다.");
+                          } else {
+                            $(tr[rindex + 1]).show();
+                            $(tr[rindex + 1]).find(".answersend").show();
+                          }
+                        } else {
+                          $(tr[rindex + 1]).hide();
+                          $(this).find(".answersend").hide();
+                        }
+                      });
+                      
+                    })
+
+          })
 </script>
 
 <script>
@@ -1081,51 +1429,53 @@ $(document).ready(function(){
 
   });
 </script>
-<script> 
-function fnMove(seq){
-  var offset = $("#div" + seq).offset();
-  
-  $('html, body').animate({scrollTop : offset.top-200}, 400);
-}
-$(window).scroll(  
-    function(){
-      let offSettop1 = $("#div1").offset().top-210;
-      let offSettop2 = $("#div2").offset().top-210;
-      let offSettop3 = $("#div3").offset().top-210;
-      let offSettop4 = $("#div4").offset().top-210;
-      let offSettop5 = $("#div5").offset().top-210;
-        if(window.pageYOffset >= $('.recommendproduct').offset().top){   
-            $('.floatMenu').addClass("fix");
-            if(window.pageYOffset<=offSettop2){
-              $("#de1").addClass("c23");
-              $("#de2").removeClass("c23");
-              $("#de3").removeClass("c23");
-              $("#de4").removeClass("c23");
-            }else if(window.pageYOffset<=offSettop3){
-              $("#de1").removeClass("c23");
-              $("#de2").addClass("c23");
-              $("#de3").removeClass("c23");
-              $("#de4").removeClass("c23");
-            }else if(window.pageYOffset<=offSettop4){
-              $("#de1").removeClass("c23");
-              $("#de2").removeClass("c23");
-              $("#de3").addClass("c23");
-              $("#de4").removeClass("c23");              
-            }else if(window.pageYOffset>=offSettop4){
-              $("#de1").removeClass("c23");
-              $("#de2").removeClass("c23");
-              $("#de3").removeClass("c23");              
-              $("#de4").addClass("c23");
-            }else if(window.pageYOffset>=offSettop5){
-              $("#de1").removeClass("c23");
-              $("#de2").removeClass("c23");
-              $("#de3").removeClass("c23");              
-              $("#de4").removeClass("c23");
-            }
-        }else{  
-            $('.floatMenu').removeClass("fix");  
-        }  
-    }  
-);  
-</script> 
+<script>
+  function fnMove(seq) {
+    var offset = $("#div" + seq).offset();
+
+    $('html, body').animate({
+      scrollTop : offset.top - 200
+    }, 400);
+  }
+  $(window).scroll(function() {
+    let offSettop1 = $("#div1").offset().top - 210;
+    let offSettop2 = $("#div2").offset().top - 210;
+    let offSettop3 = $("#div3").offset().top - 210;
+    let offSettop4 = $("#div4").offset().top - 210;
+    let offSettop5 = $("#div5").offset().top - 210;
+    if (window.pageYOffset >= $('.recommendproduct').offset().top) {
+      $('.floatMenu').addClass("fix");
+      if (window.pageYOffset <= offSettop2) {
+        $("#de1").addClass("c23");
+        $("#de2").removeClass("c23");
+        $("#de3").removeClass("c23");
+        $("#de4").removeClass("c23");
+      } else if (window.pageYOffset <= offSettop3) {
+        $("#de1").removeClass("c23");
+        $("#de2").addClass("c23");
+        $("#de3").removeClass("c23");
+        $("#de4").removeClass("c23");
+      } else if (window.pageYOffset <= offSettop4) {
+        $("#de1").removeClass("c23");
+        $("#de2").removeClass("c23");
+        $("#de3").addClass("c23");
+        $("#de4").removeClass("c23");
+      } else if (window.pageYOffset >= offSettop4) {
+        $("#de1").removeClass("c23");
+        $("#de2").removeClass("c23");
+        $("#de3").removeClass("c23");
+        $("#de4").addClass("c23");
+      } else if (window.pageYOffset >= offSettop5) {
+        $("#de1").removeClass("c23");
+        $("#de2").removeClass("c23");
+        $("#de3").removeClass("c23");
+        $("#de4").removeClass("c23");
+      }
+    } else {
+      $('.floatMenu').removeClass("fix");
+    }
+  });
+
+</script>
+
 
