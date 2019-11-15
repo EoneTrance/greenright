@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/common.css">
+<script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src='/node_modules/sweetalert/dist/sweetalert.min.js'></script>
 <title>GreenRight</title>
