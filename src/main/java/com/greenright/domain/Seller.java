@@ -5,12 +5,13 @@ import java.io.Serializable;
 public class Seller implements Serializable{
   
   private static final long serialVersionUID = 1L;
+  
   private int no;
-  private int accountNum;
+  private String bankName;
+  private String accountNum;
   private String accountHolder;
   private String tel;
   private int point;
-  private Member member;
   
   public int getNo() {
     return no;
@@ -18,10 +19,16 @@ public class Seller implements Serializable{
   public void setNo(int no) {
     this.no = no;
   }
-  public int getAccountNum() {
+  public String getBankName() {
+    return bankName;
+  }
+  public void setBankName(String bankName) {
+    this.bankName = bankName;
+  }
+  public String getAccountNum() {
     return accountNum;
   }
-  public void setAccountNum(int accountNum) {
+  public void setAccountNum(String accountNum) {
     this.accountNum = accountNum;
   }
   public String getAccountHolder() {
@@ -42,17 +49,10 @@ public class Seller implements Serializable{
   public void setPoint(int point) {
     this.point = point;
   }
-  public Member getMember() {
-    return member;
-  }
-  public void setMember(Member member) {
-    this.member = member;
-  }
+  
   @Override
   public String toString() {
-    return "Seller [no=" + no + ", accountNum=" + accountNum + ", accountHolder=" + accountHolder
-        + ", tel=" + tel + ", point=" + point + ", member=" + member + "]";
+    return "Seller [no=" + no + ", bankName=" + bankName + ", accountNum=" + accountNum
+        + ", accountHolder=" + accountHolder + ", tel=" + tel + ", point=" + point + "]";
   }
-  
-  
 }

@@ -32,16 +32,17 @@ public class DefaultProductService implements ProductService{
       photo.setProductNo(product.getNo());
       productPhotoDao.insert(photo);
     }
-    for(ProductOption option: product.getOptions()) {
-      option.setProductNo(product.getNo());
-      optionDao.insert(option);
-      for(ProductOptionItem optionItem : option.getOptionItem()) {
-        System.out.println(option.getNo());
-        optionItem.setOptionsNo(option.getNo());
-        optionItemDao.insert(optionItem);
+    if(product.getOptions()!=null) {
+      for(ProductOption option: product.getOptions()) {
+        option.setProductNo(product.getNo());
+        optionDao.insert(option);
+        for(ProductOptionItem optionItem : option.getOptionItem()) {
+          System.out.println(option.getNo());
+          optionItem.setOptionsNo(option.getNo());
+          optionItemDao.insert(optionItem);
+        }
       }
     }
-
   }
 
   @Override
@@ -101,11 +102,15 @@ public class DefaultProductService implements ProductService{
     if(ProductOptionItemNo.length!=0) {
       ProductOptionItem productOptionItem = new ProductOptionItem();
       for(int i =0 ; i<ProductOptionItemNo.length; i++) {
-        if(i%3==0) {
+        if(i%5==0) {
           productOptionItem.setOptionItemMatter(ProductOptionItemNo[i]);
-        }else if(i%3==1) {
+        }else if(i%5==1) {
+          productOptionItem.setOptionsPrice(Integer.parseInt(ProductOptionItemNo[i]));
+        }else if(i%5==2) {
+          productOptionItem.setOptionsquantity(Integer.parseInt(ProductOptionItemNo[i]));
+        }else if(i%5==3) {
           productOptionItem.setNo(Integer.parseInt(ProductOptionItemNo[i]));
-        }else {
+        }else{
           productOptionItem.setOptionsNo(Integer.parseInt(ProductOptionItemNo[i]));
           optionItemDao.update(productOptionItem);
         }
@@ -116,6 +121,14 @@ public class DefaultProductService implements ProductService{
       photo.setProductNo(product.getNo()); 
       productPhotoDao.insert(photo);
     }
+  }
+
+  @Override
+  public List<Product> gettopbyCategoryNum(int no) throws Exception {
+    int a =productDao.getgroupNo(no); 
+    // 상품번호로 그룹 번호를 알아내는 메서드
+    return productDao.getTopOnGroup(a);
+    // 그룹번호로 최신순 4개의 상품을 추천하는 메서드 
   }
 }
 

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.greenright.domain.Member;
+import com.greenright.domain.Seller;
 import com.greenright.service.MemberService;
+import com.greenright.service.SellerService;
 import com.greenright.service.impl.UserMailSendService;
 
 @Controller
@@ -21,6 +23,9 @@ public class AuthController {
   @Resource
   MemberService memberService;
 
+  @Resource
+  SellerService sellerService;
+  
   @Resource
   UserMailSendService mailSender;
 
@@ -39,8 +44,14 @@ public class AuthController {
 
     Member loginUser = memberService.login(member);
     session.setAttribute("loginUser", loginUser);
+    
+    Seller loginSeller = sellerService.get(loginUser.getNo());
+    if (loginSeller != null) {
+      session.setAttribute("loginSeller", loginSeller);
+    }
+    
     String redirectURI = (String)request.getSession().getAttribute("redirectURI");
-    if (redirectURI.indexOf("auth") != -1 || redirectURI == null) {
+    if (redirectURI == null || redirectURI.indexOf("auth") != -1) {
       redirectURI = "/greenright/main";
     }
     return "redirect:" + redirectURI;
@@ -51,5 +62,17 @@ public class AuthController {
     session.invalidate();
     request.getHeader("referer");
     return "redirect:" + request.getHeader("referer");
+  }
+  
+  @GetMapping("mailAuthentication")
+  public String mailAuthentication(Member member) throws Exception {
+    if (mailSender.setState(member, UserMailSendService.JOIN) != 1) {
+      return "auth/invalidAuth";
+    }
+    return "auth/mailAuthentication";
+  }
+  
+  @GetMapping("wellcome")
+  public void wellcome(Member member) {
   }
 }

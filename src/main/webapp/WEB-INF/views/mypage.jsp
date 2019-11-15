@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-<meta name="generator" content="Jekyll v3.8.5"> -->
-
 <link rel="stylesheet" href="/css/mypage.css">
-<!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/pricing/"> -->
 
 <style>
   .bd-placeholder-img {
@@ -123,7 +117,9 @@
           <ul class="list-unstyled mt-3 mb-4">
             <li>개인전 관리</li>
           </ul>
+          <a href="mypage/exhibition">
           <button type="button" class="btn btn-lg btn-block my-btn">EXHIBITION</button>
+          </a>
         </div>
       </div>
     </div>
@@ -131,7 +127,6 @@
 </div>
 </section>
 
-<!--------------------------------------------section------------------------------------------>
 <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
   <div class="container py-4">
     <div class="row d-flex justify-content-center py-5">
@@ -152,6 +147,9 @@
 </section>
 
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script src='/js/jquery-migrate-3.0.1.min.js'></script>
 <script src='/js/jquery.easing.1.3.js'></script>
 <script src='/js/jquery.waypoints.min.js'></script>
@@ -161,9 +159,4 @@
 <script src="/js/owl.carousel.min.js"></script>
 <script src="/js/aos.js"></script>
 <script src="/js/scrollax.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous">
-</script>
-<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/js/main.js"></script>

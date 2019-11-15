@@ -52,11 +52,16 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item my-login-state-n" style="display:none;"><a href="/greenright/auth/form" class="nav-link">LOGIN</a></li>
         <li class="nav-item dropdown my-login-state-y" style="display:none;">
-          <a class="nav-link dropdown-toggle font-weight-bold" href="/greenright/mypage" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="mypage()">${loginUser.nickname}님</a>
+          <a class="nav-link dropdown-toggle font-weight-bold" href="/greenright/mypage" 
+                id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+           onclick="mypage()" style="padding-top:1.188rem;padding-bottom:1.188rem;">
+            <span style="font-size:150%;color:#82AE46;">${loginUser.nickname}</span>님
+          </a>
           <div class="dropdown-menu my-0" aria-labelledby="dropdown04">
             <a id="my-dropdown-hover" class="dropdown-item" href="/greenright/mypage/userinfo">PROFILE</a>
             <a id="my-dropdown-hover" class="dropdown-item" href="/greenright/mypage/order">ORDER</a>
             <a id="my-dropdown-hover" class="dropdown-item" href="/greenright/mypage/sale">SALE</a>
+            <a id="my-dropdown-hover" class="dropdown-item" href="/greenright/mypage/exhibition">MY EXHIBITION</a>
             <hr>
             <a id='my-dropdown-hover' class='dropdown-item' href='/greenright/auth/logout'>LOGOUT</a>
           </div>
@@ -71,26 +76,26 @@
 function mypage() {
   location.href="/greenright/mypage";
 }
-window.onload = function(){
-  var loginUser = '${loginUser.id}';
-  var loginStateY = $(".my-login-state-y");
-  var loginStateN = $(".my-login-state-n");
-  if (loginUser == null || loginUser == '') {
-    for (var stateY of loginStateY) {
-      stateY.style.display = 'none';
-    }
-    for (var stateN of loginStateN) {
-      stateN.style.display = 'inline-block';
-    }
-  } else {
-    for (var stateN of loginStateN) {
-      stateN.style.display = 'none';
-    }
-    for (var stateY of loginStateY) {
-      stateY.style.display = 'inline-block';
-    }
+
+var loginUser = '${loginUser.id}';
+var loginStateY = document.querySelectorAll(".my-login-state-y");
+var loginStateN = document.querySelectorAll(".my-login-state-n");
+if (loginUser == null || loginUser == '') {
+  for (var stateY of loginStateY) {
+    stateY.style.display = 'none';
   }
-};
+  for (var stateN of loginStateN) {
+    stateN.style.display = 'inline-block';
+  }
+} else {
+  for (var stateN of loginStateN) {
+    stateN.style.display = 'none';
+  }
+  for (var stateY of loginStateY) {
+    stateY.style.display = 'inline-block';
+  }
+}
+
 </script>
 
 <!-- <script>

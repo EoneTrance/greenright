@@ -6,6 +6,7 @@
 <mapper namespace="com.greenright.dao.MemberDao">
   <resultMap type="Member" id="MemberMap">
     <id column="member_id" property="no"/>
+    <result column="member_class" property="memberClass"/>
     <result column="registered_date" property="registeredDate"/>
     <result column="cell_phone" property="cellPhone"/>
     <result column="postal_code" property="postalCode"/>
@@ -55,6 +56,12 @@
         now())
   </insert>
   
+  <select id="findBy" parameterType="int" resultMap="MemberMap">
+    select *
+    from members
+    where member_id=#{no}
+  </select>
+  
   <select id="findById" parameterType="string" resultMap="MemberMap">
      select id from members where id=#{id}
   </select>
@@ -64,12 +71,7 @@
   </select>
   
   <select id="findByCellPhone" parameterType="string" resultMap="MemberMap">
-     <if test="id != null || id != ''">
      select id, cell_phone from members where cell_phone=#{cellPhone}
-     </if>
-     <if test="id == null || id == ''">
-     select cell_phone from members where cell_phone=#{cellPhone}
-     </if>
   </select>
   
   <select id="findByIdPassword" parameterType="member" resultMap="MemberMap">
@@ -160,6 +162,10 @@
       <if test="answer != null">,answer=#{answer}</if>
     </set>
     <include refid="whereMember"></include>
+  </update>
+  
+  <update id="updateClass" parameterType="Member">
+    update members set member_class=#{memberClass} where member_id=#{no};
   </update>
   
 <!-- 

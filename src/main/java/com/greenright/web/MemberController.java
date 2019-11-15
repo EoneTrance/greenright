@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,7 @@ public class MemberController {
   public String join(Member member) throws Exception {
     memberService.insert(member);
     mailSender.mailSendWithUserKey(member, UserMailSendService.JOIN);
-    return "member/wellcome";
+    return "auth/wellcome";
   }
 
   @GetMapping("list")
@@ -41,18 +42,6 @@ public class MemberController {
     model.addAttribute("members", members);
   }
 
-  @GetMapping("mailAuthentication")
-  public String mailAuthentication(Member member) throws Exception {
-    if (mailSender.setState(member, UserMailSendService.JOIN) != 1) {
-      return "auth/invalidAuth";
-    }
-    return "member/mailAuthentication";
-  }
-  
-  @GetMapping("wellcome")
-  public void wellcome(Member member) {
-  }
-  
   @PostMapping("findAccount/*")
   public String findAccount(Model model, String foundId) {
     model.addAttribute("path", "findPw");
@@ -104,5 +93,13 @@ public class MemberController {
       return "auth/invalidAuth";
     }
     return "member/changeResult";
+  }
+
+  @PostMapping("update")
+  public String update(Member member, HttpSession session) throws Exception {
+    memberService.update(member);
+    Member loginUser = memberService.getUserInfo(member);
+    session.setAttribute("loginUser", loginUser);
+    return "/mypage/userinfo";
   }
 }

@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
-  <link rel='stylesheet' href='/css/common.css'>
+
 <style>
 form {
     width: 500px;
@@ -38,8 +35,6 @@ th, td {
 }
 </style>
 
-<jsp:include page="../header.jsp"/>
-
 <div id='content'>
 <h1>게시판</h1>
  
@@ -71,7 +66,7 @@ th, td {
   <tr class="tr1">
     <td>${board.no}</td>
     <td><a href='detail?no=${board.no}'>${board.title}</a></td>
-    <td>${board.member.name}</td>
+    <td>${board.member.nickname}</td>
     <td class="cdate">${board.createdDate}</td>
     <td>${board.viewCount}</td>
     <td>${board.recommendation}</td>
@@ -80,6 +75,22 @@ th, td {
 </tbody>
 </table>
 </div>
+
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src='/js/jquery-migrate-3.0.1.min.js'></script>
+<script src='/js/jquery.easing.1.3.js'></script>
+<script src='/js/jquery.waypoints.min.js'></script>
+<script src='/js/jquery.stellar.min.js'></script>
+<script src='/js/jquery.magnific-popup.min.js'></script>
+<script src='/js/jquery.animateNumber.min.js'></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/scrollax.min.js"></script>
+<script src="/js/main.js"></script>
+
 <script>
     var textareaVal = $(".cdate").text();
     $("#np").text("검색결과 [총:"+ ((textareaVal.length/10)) +"개]");
@@ -151,5 +162,3 @@ $setRows.change(function (e) {
 
 $setRows.submit();
 </script>
-<jsp:include page="../footer.jsp"/>
-

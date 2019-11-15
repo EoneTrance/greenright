@@ -5,21 +5,35 @@
   .row.content {height: auto} 
 }
 
-[readonly] {
-  background-color: #DDDDDD !important;
-}
-
-button, input, select, a, div {
-  outline:none !important;
-  text-decoration:none !important;
-}
-
 #myPageContent {
   width: 992px;
   padding-top: 10px;
   padding-bottom: 10px;
   margin: auto auto;
 }
+
+[readonly] {
+  background-color: #DDDDDD !important;
+}
+
+button, a {
+  outline:none !important;
+  text-decoration:none !important;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+img#product-photo {
+  height:100px;
+  width:80px;
+}
+
+/* .btn-danger:hover {
+  background-color: #FFFFFF;
+} */
 
 div#mypage-title-h1 {
   margin:auto auto;
@@ -51,7 +65,7 @@ h2#mypage-title-h2 {
 }
 
 .my-bg-color-gray {
-  background-color:RGBA(0,0,0,0.3);
+  background-color:RGBA(230,230,230,1);
 }
 
 .my-color {
@@ -71,6 +85,95 @@ h2#mypage-title-h2 {
   color:RGB(0,0,0);
 }
 
+.my-btn-select {
+  background: #82ae46;
+  border: 1px solid #82ae46;
+  color: #fff;
+  height: 2.063rem;
+}
+
+.my-btn-select:hover {
+  border: 1px solid #82ae46;
+  background: transparent;
+  color: #82ae46;
+}
+
+/* 버튼 오버라이드 */
+
+.btn.btn-primary {
+  background: #82ae46;
+  border: 1px solid #82ae46;
+  color: #fff;
+}
+
+.btn.btn-primary:hover {
+  border: 1px solid #82ae46;
+  background: transparent;
+  color: #82ae46;
+}
+
+.btn.btn-primary.btn-outline-primary {
+  border: 1px solid #82ae46;
+  background: transparent;
+  color: #82ae46;
+}
+
+.btn.btn-primary.btn-outline-primary:hover {
+  border: 1px solid transparent;
+  background: #82ae46;
+  color: #fff;
+}
+
+.btn.btn-danger {
+  background: #dc3545;
+  border: 1px solid #dc3545;
+  color: #fff;
+}
+
+.btn.btn-danger:hover {
+  border: 1px solid #dc3545;
+  background: transparent;
+  color: #dc3545;
+}
+
+.btn.btn-danger.btn-outline-danger {
+  border: 1px solid #dc3545;
+  background: transparent;
+  color: #dc3545;
+}
+
+.btn.btn-danger.btn-outline-danger:hover {
+  border: 1px solid transparent;
+  background: #dc3545;
+  color: #fff;
+}
+
+.btn.btn-dark {
+  background: #333333;
+  border: 1px solid #333333;
+  color: #fff;
+}
+
+.btn.btn-dark:hover {
+  border: 1px solid #333333;
+  background: transparent;
+  color: #333333;
+}
+
+.btn.btn-dark.btn-outline-dark {
+  border: 1px solid #333333;
+  background: transparent;
+  color: #333333;
+}
+
+.btn.btn-dark.btn-outline-dark:hover {
+  border: 1px solid transparent;
+  background: #333333;
+  color: #fff;
+}
+
+/* 버튼 오버라이드 */
+
 table.my-table {
   border-collapse:collapse; 
   border-spacing: 0 1em;
@@ -85,8 +188,29 @@ table.my-table th {
   background-color:RGBA(130,174,70,0.2);
 }
 
-table.my-table td {
+table.my-table-col th {
+  border-right:solid RGBA(255,255,255,0.5) 1px;
+}
+
+table.my-table-col td {
+  border-bottom:solid RGBA(130,174,70,0.5) 2px;
+  border-right:solid RGBA(130,174,70,0.2) 1px;
+}
+
+table.my-table-row th {
   border-bottom:solid RGBA(130,174,70,0.5) 1px;
+  border-right:solid RGBA(130,174,70,0.5) 1px;
+}
+
+table.my-table-row td {
+  text-align:left;
+  border-bottom:solid RGBA(130,174,70,0.5) 1px;
+  border-right:none;
+}
+
+table.my-table-modal th {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .my-menu {

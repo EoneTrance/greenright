@@ -103,7 +103,7 @@ public class UserMailSendService implements Runnable {
       htmlStr = "<h2>안녕하세요 GreenRight 입니다.</h2><br>" 
           + "<h3>" + member.getId() + "님의 회원가입을 환영합니다.</h3>"
           + "<p>아래의 인증하기를 누르시면 이메일 인증이 완료됩니다.</p>"
-          + "<a href='http://192.168.0.13:8888/greenright/member/mailAuthentication?"
+          + "<a href='http://192.168.0.13:8888/greenright/auth/mailAuthentication?"
           + "id=" + member.getId() + "&authkey=" + member.getAuthkey()
           + "'>인증하기</a>";
 //          + "<form action='http://192.168.0.13:8888/greenright/member/mailAuthentication' method='get' enctype='multipart/form-data'>"

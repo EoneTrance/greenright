@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<link rel="stylesheet" href="/css/fontawesome/css/all.css">
 <style>
  #ndp {
 display:none
@@ -188,11 +186,22 @@ h6#marginless {
   font-style: italic;
 }
 </style>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
 
-<jsp:include page="../greenheader.jsp"/>
-    
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src='/js/jquery-migrate-3.0.1.min.js'></script>
+<script src='/js/jquery.easing.1.3.js'></script>
+<script src='/js/jquery.waypoints.min.js'></script>
+<script src='/js/jquery.stellar.min.js'></script>
+<script src='/js/jquery.magnific-popup.min.js'></script>
+<script src='/js/jquery.animateNumber.min.js'></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/scrollax.min.js"></script>
+<script src="/js/main.js"></script>
+
 <div  style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
  <h1 style="text-align: center; margin-top: 40px; font-size: 40px;">Community</h1>
     <p style="text-align: center;">GreenRight 커뮤니티입니다.</p>
@@ -240,7 +249,7 @@ h6#marginless {
 <div class="form-group">
        <p style="text-align: right;">
           <button class="btn btn-primary">변경</button>
-          <button type="button" class="btn btn-primary" 
+          <button type="button" class="btn btn-primary" id="board-delete"
           onclick="location.href='delete.jsp?no=${board.no}'">삭제</button>
         </p>
  </div>
@@ -249,9 +258,8 @@ h6#marginless {
 
 </form>
 </div>
-<br>
-<br>
-<jsp:include page="../greenfooter.jsp"/>
+
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
 
 <script>
 var temp;

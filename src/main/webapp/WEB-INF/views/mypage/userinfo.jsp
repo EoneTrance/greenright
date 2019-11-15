@@ -108,8 +108,8 @@
         <li class="my-menu"><a href="#">관심상품</a></li>
         <li class="my-menu"><a href="#">업적</a></li>
         <li class="my-menu"><a href="sale">판매관리</a></li>
-        <li class="my-menu"><a href="#">개인전관리</a></li>
-        <li class="my-menu"><a href="#">판매회원 전환</a></li>
+        <li class="my-menu"><a href="exhibition">개인전 관리</a></li>
+        <li class="my-menu"><a href="memberConversion">판매회원 전환</a></li>
       </ul>
     </div>
   </div>
@@ -120,9 +120,10 @@
     <div class="my-col-20 sidenav hidden-xs px-1">
       <h2 class="text-center mt-2 font-weight-bold">MyPage</h2>
       <hr>
-      <h4 class="font-weight-bold ml-2">기본정보</h4>
-      <ul class="nav flex-column nav-pills nav-stacked text-center mb-4">
+      <h4 class="font-weight-bold ml-2">회원정보</h4>
+      <ul id="infoMenu" class="nav flex-column nav-pills nav-stacked text-center mb-4">
         <li class="my-menu active"><a href="userinfo">기본정보</a></li>
+        
       </ul>
       <h4 class="font-weight-bold ml-2">구매</h4>
       <ul class="nav flex-column nav-pills nav-stacked text-center mb-4">
@@ -131,22 +132,18 @@
         <li class="my-menu"><a href="#section3">업적</a></li>
       </ul>
       <h4 class="font-weight-bold ml-2">판매</h4>
-      <ul class="nav flex-column nav-pills nav-stacked text-center">
-        <li class="my-menu"><a href="sale">판매내역</a></li>
-        <li class="my-menu"><a href="#section3">개인전관리</a></li>
-        <li class="my-menu"><a href="#section3">판매회원 전환</a></li>
+      <ul id="sellerMenu" class="nav flex-column nav-pills nav-stacked text-center">
       </ul>
       <br>
     </div>
     <br>
     
-    <div class="col-sm-9">
+    <div class="my-col-80">
       <div id=memberInfoForm>
       <h2 id="mypage-title-h2">기본정보</h2>
       <hr>
-      <form action='update' method='post' enctype='multipart/form-data' onsubmit="return checkState()">
-        <table class="col-sm-12 table-hover my-table my-join-table" cellpadding="20" cellspacing="5">
-          <!-- <caption>기본정보</caption> -->
+      <form class="text-center" action='/member/update' method='post' enctype='multipart/form-data' onsubmit="return checkState()">
+        <table class="col-sm-12 table-hover my-table my-join-table my-table-row" cellpadding="20" cellspacing="5">
           <tbody>
           <tr>
             <th class="my-col-3 mute">아이디</th>
@@ -158,7 +155,7 @@
             <th id="passwordTh" class="my-col-3">비밀번호</th>
             <td class="my-col-9">
             <div id="my-password-form">
-              <input type="button" name="changePw" class="btn btn-md my-btn my-btn-hover d-inline-block"
+              <input type="button" name="changePw" class="btn btn-md btn-primary d-inline-block"
               value="비밀번호 변경하기" onclick='changePassword()'/>
             </div>
               <span class="inputState"></span>
@@ -192,7 +189,7 @@
               <input type="text" class="input-md my-essential my-essential-input d-inline-block"
                      id="sample3_postcode" name="postalCode" value='${loginUser.postalCode}'
                      readonly="readonly">
-              <input type="button" class="btn btn-md my-btn my-btn-hover d-inline-block ml-1" name="searchPostalCode"
+              <input type="button" class="btn btn-md btn-primary d-inline-block ml-1" name="searchPostalCode"
                      onclick="sample3_execDaumPostcode()" value="우편번호 찾기">
               <span class="inputState"></span>
               <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
@@ -225,7 +222,7 @@
             <th class="my-col-3">본인 확인 질문</th>
             <td class="my-col-9">
             <select class="selectpicker my-essential" name="question"
-                    data-style="btn btn-md my-btn my-btn-hover w-100">
+                    data-style="btn btn-md btn-primary w-100">
               <optgroup id="questionOpt" label="본인 확인 질문">
                 <option selected disabled hidden>질문 유형 선택</option>
                 <option>좋아하는 책?</option>
@@ -248,18 +245,38 @@
           </tbody>
         </table>
         <hr>
-        <button name="submitBtn" class="btn btn-lg my-btn my-btn-hover btn-inline-block signup-btn mr-1" type="submit">회원정보 수정</button>
-        <button name="cancelBtn" class="btn btn-lg my-btn-hover btn-danger btn-inline-block signup-btn ml-1" type="button">취소</button>
+        <button name="submitBtn" class="btn btn-lg btn-primary btn-inline-block signup-btn mr-1" style="width:100%;" type="submit">수정</button>
       </form>
       </div>
-      <hr>
     </div>
   </div>
 </div>
 </div>
 </section>
 
+<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+  <div class="container py-4">
+    <div class="row d-flex justify-content-center py-5">
+      <div class="col-md-6">
+        <h2 style="font-size: 22px;" class="mb-0">Subcribe to our Author</h2>
+        <span>Get e-mail updates about our latest products and special upcycling</span>
+      </div>
+      <div class="col-md-6 d-flex align-items-center">
+        <form action="#" class="subscribe-form">
+          <div class="form-group d-flex">
+            <input type="text" class="form-control" placeholder="Enter email address">
+            <input type="submit" value="Subscribe" class="submit px-3">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script src='/js/jquery-migrate-3.0.1.min.js'></script>
 <script src='/js/jquery.easing.1.3.js'></script>
 <script src='/js/jquery.waypoints.min.js'></script>
@@ -269,166 +286,192 @@
 <script src="/js/owl.carousel.min.js"></script>
 <script src="/js/aos.js"></script>
 <script src="/js/scrollax.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous">
-</script>
-<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
-<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script src="/js/main.js"></script>
 
 <script>
 "use strict"
 
-if ('${loginUser.question}' != '') {
-  $("select[name=question]").val('${loginUser.question}');
+if(${loginUser.memberClass} == 2) {
+  $("#infoMenu").append(
+      "<li class='my-menu'><a href='sellerinfo'>판매정보</a></li>");
+  $("#sellerMenu").append(
+      "<li class='my-menu'><a href='sale'>판매내역</a></li>"
+    + "<li class='my-menu'><a href='exhibition'>개인전 관리</a></li>");
+} else {
+  $("#sellerMenu").append(
+      "<li class='my-menu'><a href='conversion'>판매회원 전환</a></li>");
 }
+</script>
 
-var userId = '${loginUser.id}';
+<script>
+"use strict"
+window.onload = (function() {
 
-const checkInputMap = new Map();
-const checkPasswordInputMap = new Map();
-
-function changePassword() {
-  $("#my-password-form").children("input").remove();
-  $("#my-password-form").append(
-        "<input type='password' name='currentPassword' class='input-md mr-1'"
-      + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
-      + "<input type='button' name='checkPw' class='btn btn-md my-btn my-btn-hover ml-1'"
-      + "value='비밀번호 확인' style='display:inline-block;' onclick='checkPassword()'/>");
-};
-
-function checkPassword() {
-  $.ajax({
-    type: "POST",
-    url: "/greenright/json/member/checkAccount",
-    data: "id=" + userId + "&password=" + $("input[name=currentPassword]").val(),
-    dataType: "json",
-    async: true,
-    success: function(checkAccountJsonData) {
-      if (checkAccountJsonData.message == "exist") {
-        $("#my-password-form").children("input").remove();
-        $("#my-password-form").append(
-              "<input type='password' name='password' class='input-md mr-1 my-password-input'"
-            + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
-            + "<input type='button' name='doChangePw' class='btn btn-md my-btn my-btn-hover ml-1 mb-1'"
-            + "value='비밀번호 변경하기' style='display:inline-block;' onclick='doChangePassword()'/>"
-            + "<input type='password' name='confirmPassword' class='input-md mr-1 my-password-input'"
-            + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
-            + "<input type='button' name='cancelChangePw' class='btn btn-md my-btn-hover btn-danger ml-1'"
-            + "value='취소' style='display:inline-block;' onclick='cancelChangePassword()'/>");
-        $("#my-password-form ~ span.inputState").html("");
-        $("th#passwordTh").html("비밀번호<br><br>비밀번호 확인");
-      } else if (checkAccountJsonData.message == "notExist") {
-        $("input[name=currentPassword]").css("border", "solid red 3px");
-        $("#my-password-form ~ span.inputState").css("color", "red");
-        $("#my-password-form ~ span.inputState").css("font-size", "80%");
-        $("#my-password-form ~ span.inputState").html("비밀번호가 다릅니다.");
-      } else {
-        $("input[name=currentPassword]").css("border", "solid red 3px");
-        $("input[name=currentPassword]").css("background-color", "#FFF9F9");
-        $("#my-password-form ~ span.inputState").css("color", "red");
-        $("#my-password-form ~ span.inputState").css("font-size", "80%");
-        $("#my-password-form ~ span.inputState").html("비밀번호 검사 중 오류가 발생했습니다.");
+  if ('${loginUser.question}' != '') {
+    $("select[name=question]").val('${loginUser.question}');
+  }
+  
+  var userId = '${loginUser.id}';
+  
+  const checkInputMap = new Map();
+  const checkPasswordInputMap = new Map();
+  
+  function changePassword() {
+    $("#my-password-form").children("input").remove();
+    $("#my-password-form").append(
+          "<input type='password' name='currentPassword' class='input-md mr-1'"
+        + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
+        + "<input type='button' name='checkPw' class='btn btn-md btn-primary ml-1'"
+        + "value='비밀번호 확인' style='display:inline-block;' onclick='checkPassword()'/>");
+  };
+  
+  function checkPassword() {
+    $.ajax({
+      type: "POST",
+      url: "/greenright/json/member/checkAccount",
+      data: "id=" + userId + "&password=" + $("input[name=currentPassword]").val(),
+      dataType: "json",
+      async: true,
+      success: function(checkAccountJsonData) {
+        if (checkAccountJsonData.message == "exist") {
+          $("#my-password-form").children("input").remove();
+          $("#my-password-form").append(
+                "<input type='password' name='password' class='input-md mr-1 my-password-input'"
+              + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
+              + "<input type='button' name='doChangePw' class='btn btn-md btn-primary ml-1 mb-1'"
+              + "value='비밀번호 변경하기' style='display:inline-block;' onclick='doChangePassword()'/>"
+              + "<input type='password' name='confirmPassword' class='input-md mr-1 my-password-input'"
+              + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
+              + "<input type='button' name='cancelChangePw' class='btn btn-md my-btn-hover btn-danger ml-1'"
+              + "value='취소' style='display:inline-block;' onclick='cancelChangePassword()'/>");
+          $("#my-password-form ~ span.inputState").html("");
+          $("th#passwordTh").html("비밀번호<br><br>비밀번호 확인");
+        } else if (checkAccountJsonData.message == "notExist") {
+          $("input[name=currentPassword]").css("border", "solid red 3px");
+          $("#my-password-form ~ span.inputState").css("color", "red");
+          $("#my-password-form ~ span.inputState").css("font-size", "80%");
+          $("#my-password-form ~ span.inputState").html("비밀번호가 다릅니다.");
+        } else {
+          $("input[name=currentPassword]").css("border", "solid red 3px");
+          $("input[name=currentPassword]").css("background-color", "#FFF9F9");
+          $("#my-password-form ~ span.inputState").css("color", "red");
+          $("#my-password-form ~ span.inputState").css("font-size", "80%");
+          $("#my-password-form ~ span.inputState").html("비밀번호 검사 중 오류가 발생했습니다.");
+        }
+      }
+    });
+  };
+  
+  function doChangePassword() {
+    
+    var passwordInputs = $("#my-password-form input");
+    
+    for (var i = 0; i < passwordInputs.length; i++) {
+      passwordInputs[i].focus();
+    }
+    passwordInputs[passwordInputs.length-1].blur();
+    
+    for (var check of checkPasswordInputMap.values()) {
+      if (check == false) {
+        return;
       }
     }
-  });
-};
-
-function doChangePassword() {
-  
-  var passwordInputs = $("#my-password-form input");
-  
-  for (var i = 0; i < passwordInputs.length; i++) {
-    passwordInputs[i].focus();
-  }
-  passwordInputs[passwordInputs.length-1].blur();
-  
-  for (var check of checkPasswordInputMap.values()) {
-    if (check == false) {
-      return;
-    }
-  }
-  
-  $.ajax({
-    type: "POST",
-    url: "/greenright/json/member/passwordUpdate",
-    data: "id=" + userId + "&password=" + $("input[name=password]").val(),
-    dataType: "json",
-    async: true,
-    success: function(checkAccountJsonData) {
-      if (checkAccountJsonData.message == "success") {
-        $("#my-password-form").children("input").remove();
-        $("#my-password-form").append(
-              "<input type='button' name='changePw' class='btn btn-md my-btn my-btn-hover'"
-            + "value='비밀번호 변경하기' onclick='changePassword()'/>");
-        $("#my-password-form ~ span.inputState").css("color", "green");
-        $("#my-password-form ~ span.inputState").css("font-size", "80%");
-        $("#my-password-form ~ span.inputState").html("비밀번호가 변경되었습니다.");
-        $("th#passwordTh").html("비밀번호");
-      } else {
+    
+    $.ajax({
+      type: "POST",
+      url: "/greenright/json/member/passwordUpdate",
+      data: "id=" + userId + "&password=" + $("input[name=password]").val(),
+      dataType: "json",
+      async: true,
+      success: function(checkAccountJsonData) {
+        if (checkAccountJsonData.message == "success") {
+          $("#my-password-form").children("input").remove();
+          $("#my-password-form").append(
+                "<input type='button' name='changePw' class='btn btn-md btn-primary'"
+              + "value='비밀번호 변경하기' onclick='changePassword()'/>");
+          $("#my-password-form ~ span.inputState").css("color", "green");
+          $("#my-password-form ~ span.inputState").css("font-size", "80%");
+          $("#my-password-form ~ span.inputState").html("비밀번호가 변경되었습니다.");
+          $("th#passwordTh").html("비밀번호");
+        } else {
+          $("input[name=confirmPassword]").css("border", "solid red 3px");
+          $("input[name=confirmPassword]").css("background-color", "#FFF9F9");
+          $("#my-password-form ~ span.inputState").css("color", "red");
+          $("#my-password-form ~ span.inputState").css("font-size", "80%");
+          $("#my-password-form ~ span.inputState").html("비밀번호 변경 중 오류가 발생했습니다.");
+        }
+      },
+      error: function(checkAccountJsonData) {
         $("input[name=confirmPassword]").css("border", "solid red 3px");
         $("input[name=confirmPassword]").css("background-color", "#FFF9F9");
         $("#my-password-form ~ span.inputState").css("color", "red");
         $("#my-password-form ~ span.inputState").css("font-size", "80%");
         $("#my-password-form ~ span.inputState").html("비밀번호 변경 중 오류가 발생했습니다.");
       }
-    },
-    error: function(checkAccountJsonData) {
-      $("input[name=confirmPassword]").css("border", "solid red 3px");
-      $("input[name=confirmPassword]").css("background-color", "#FFF9F9");
-      $("#my-password-form ~ span.inputState").css("color", "red");
-      $("#my-password-form ~ span.inputState").css("font-size", "80%");
-      $("#my-password-form ~ span.inputState").html("비밀번호 변경 중 오류가 발생했습니다.");
-    }
-  });
-};
-
-function cancelChangePassword() {
-  $("#my-password-form").children("input").remove();
-  $("#my-password-form").append(
-      "<input type='button' name='changePw' class='btn btn-md my-btn my-btn-hover'"
-    + "value='비밀번호 변경하기' onclick='changePassword()'/>");
-  $("#my-password-form ~ span.inputState").html("");
-  $("th#passwordTh").html("비밀번호");
-};
-
-$("#my-cellphone-input").on("focusout", function(e) {
-  var regularNumber = /^01(?:[0-1]|[6-9])(?:[0-9]{7,8})$/;
-  var getConditionTag = $(e.target).siblings("span.inputState");
+    });
+  };
   
-  if (e.target.value == "") {
-    checkInputMap.set(e.target.name, false);
-    $(e.target).css("border", "solid #C7CED5 1px");
-    $(getConditionTag).css("color", "red");
-    $(getConditionTag).css("font-size", "80%");
-    $(getConditionTag).html("필수 입력 항목입니다.");
-    e.stopPropagation();
-  } else if (!regularNumber.test(e.target.value)) {
-    checkInputMap.set(e.target.name, false);
-    $(e.target).css("border", "solid red 3px");
-    $(e.target).css("background-color", "#FFF9F9");
-    $(getConditionTag).css("color", "red");
-    $(getConditionTag).css("font-size", "80%");
-    $(getConditionTag).html("핸드폰 번호 형식이 올바르지 않습니다.");
-    e.stopPropagation();
-  } else {
-    $.ajax({
-      type: "GET",
-      url: "/greenright/json/member/checkDuplicateCellPhone",
-      data: "cellPhone=" + e.target.value,
-      dataType: "json",
-      async: false,
-      success: function(checkCellphoneJsonData) {
-        if (checkCellphoneJsonData.message == "exist") {
-          if ('${loginUser.id}' == checkCellphoneJsonData.result.id) {
+  function cancelChangePassword() {
+    $("#my-password-form").children("input").remove();
+    $("#my-password-form").append(
+        "<input type='button' name='changePw' class='btn btn-md btn-primary'"
+      + "value='비밀번호 변경하기' onclick='changePassword()'/>");
+    $("#my-password-form ~ span.inputState").html("");
+    $("th#passwordTh").html("비밀번호");
+  };
+  
+  $("#my-cellphone-input").on("focusout", function(e) {
+    var regularNumber = /^01(?:[0-1]|[6-9])(?:[0-9]{7,8})$/;
+    var getConditionTag = $(e.target).siblings("span.inputState");
+    
+    if (e.target.value == "") {
+      checkInputMap.set(e.target.name, false);
+      $(e.target).css("border", "solid #C7CED5 1px");
+      $(getConditionTag).css("color", "red");
+      $(getConditionTag).css("font-size", "80%");
+      $(getConditionTag).html("필수 입력 항목입니다.");
+      e.stopPropagation();
+    } else if (!regularNumber.test(e.target.value)) {
+      checkInputMap.set(e.target.name, false);
+      $(e.target).css("border", "solid red 3px");
+      $(e.target).css("background-color", "#FFF9F9");
+      $(getConditionTag).css("color", "red");
+      $(getConditionTag).css("font-size", "80%");
+      $(getConditionTag).html("핸드폰 번호 형식이 올바르지 않습니다.");
+      e.stopPropagation();
+    } else {
+      $.ajax({
+        type: "GET",
+        url: "/greenright/json/member/checkDuplicateCellPhone",
+        data: "cellPhone=" + e.target.value,
+        dataType: "json",
+        async: false,
+        success: function(checkCellphoneJsonData) {
+          if (checkCellphoneJsonData.message == "exist") {
+            if ('${loginUser.id}' == checkCellphoneJsonData.result.id) {
+              checkInputMap.set(e.target.name, true);
+              $(e.target).css("border", "solid #C7CED5 1px");
+              $(e.target).css("background-color", "#FFFFFF");
+              $(getConditionTag).css("color", "gray");
+              $(getConditionTag).css("font-size", "80%");
+              $(getConditionTag).html("");
+              e.stopPropagation();
+            } else {
+              checkInputMap.set(e.target.name, false);
+              $(e.target).css("border", "solid red 3px");
+              $(e.target).css("background-color", "#FFF9F9");
+              $(getConditionTag).css("color", "red");
+              $(getConditionTag).css("font-size", "80%");
+              $(getConditionTag).html("이미 가입된 번호입니다.");
+              e.stopPropagation();
+            }
+          } else if (checkCellphoneJsonData.message == "notExist") {
             checkInputMap.set(e.target.name, true);
-            $(e.target).css("border", "solid #C7CED5 1px");
-            $(e.target).css("background-color", "#FFFFFF");
-            $(getConditionTag).css("color", "gray");
+            $(e.target).css("border", "solid green 3px");
+            $(e.target).css("background-color", "#F9FFF9");
+            $(getConditionTag).css("color", "green");
             $(getConditionTag).css("font-size", "80%");
-            $(getConditionTag).html("");
+            $(getConditionTag).html("사용 가능한 번호입니다.");
             e.stopPropagation();
           } else {
             checkInputMap.set(e.target.name, false);
@@ -436,186 +479,170 @@ $("#my-cellphone-input").on("focusout", function(e) {
             $(e.target).css("background-color", "#FFF9F9");
             $(getConditionTag).css("color", "red");
             $(getConditionTag).css("font-size", "80%");
-            $(getConditionTag).html("이미 가입된 번호입니다.");
+            $(getConditionTag).html("핸드폰 번호 중복 검사 중 오류가 발생했습니다.");
             e.stopPropagation();
           }
-        } else if (checkCellphoneJsonData.message == "notExist") {
-          checkInputMap.set(e.target.name, true);
-          $(e.target).css("border", "solid green 3px");
-          $(e.target).css("background-color", "#F9FFF9");
-          $(getConditionTag).css("color", "green");
-          $(getConditionTag).css("font-size", "80%");
-          $(getConditionTag).html("사용 가능한 번호입니다.");
-          e.stopPropagation();
-        } else {
-          checkInputMap.set(e.target.name, false);
-          $(e.target).css("border", "solid red 3px");
-          $(e.target).css("background-color", "#FFF9F9");
-          $(getConditionTag).css("color", "red");
-          $(getConditionTag).css("font-size", "80%");
-          $(getConditionTag).html("핸드폰 번호 중복 검사 중 오류가 발생했습니다.");
-          e.stopPropagation();
         }
-      }
-    });
-  }
-});
-
-$(document).on("focusout", ".my-password-input", function(e) {
-  var regularPassword = /^[A-Za-z0-9]{4,12}$/;
-  var getConditionTag = $(e.target).parent("#my-password-form").siblings("span.inputState");
+      });
+    }
+  });
   
-  if (e.target.value == "") {
-    checkPasswordInputMap.set(e.target.name, false);
-    $(e.target).css("border", "solid #C7CED5 1px");
-    $(getConditionTag).css("color", "red");
-    $(getConditionTag).css("font-size", "80%");
-    $(getConditionTag).html("필수 입력 항목입니다.");
-    e.stopPropagation();
+  $(document).on("focusout", ".my-password-input", function(e) {
+    var regularPassword = /^[A-Za-z0-9]{4,12}$/;
+    var getConditionTag = $(e.target).parent("#my-password-form").siblings("span.inputState");
     
-  } else if (e.target.name == "password") {
-    
-    if (!regularPassword.test($(e.target).val())) {
+    if (e.target.value == "") {
       checkPasswordInputMap.set(e.target.name, false);
-      $(e.target).css("border", "solid red 3px");
-      $(e.target).css("background-color", "#FFF9F9");
+      $(e.target).css("border", "solid #C7CED5 1px");
       $(getConditionTag).css("color", "red");
       $(getConditionTag).css("font-size", "80%");
-      $(getConditionTag).html("비밀번호는 4~12자의 문자 또는 숫자로 구성되어야 합니다.");
+      $(getConditionTag).html("필수 입력 항목입니다.");
       e.stopPropagation();
       
-    } else if ($("input[name=password]").val() != $("input[name=confirmPassword]").val()) {
-      checkPasswordInputMap.set(e.target.name, false);
-      $(e.target).css("border", "solid red 3px");
-      $(e.target).css("background-color", "#FFF9F9");
-      $("input[name=confirmPassword]").css("border", "solid red 3px");
-      $("input[name=confirmPassword]").css("background-color", "#FFF9F9");
+    } else if (e.target.name == "password") {
+      
+      if (!regularPassword.test($(e.target).val())) {
+        checkPasswordInputMap.set(e.target.name, false);
+        $(e.target).css("border", "solid red 3px");
+        $(e.target).css("background-color", "#FFF9F9");
+        $(getConditionTag).css("color", "red");
+        $(getConditionTag).css("font-size", "80%");
+        $(getConditionTag).html("비밀번호는 4~12자의 문자 또는 숫자로 구성되어야 합니다.");
+        e.stopPropagation();
+        
+      } else if ($("input[name=password]").val() != $("input[name=confirmPassword]").val()) {
+        checkPasswordInputMap.set(e.target.name, false);
+        $(e.target).css("border", "solid red 3px");
+        $(e.target).css("background-color", "#FFF9F9");
+        $("input[name=confirmPassword]").css("border", "solid red 3px");
+        $("input[name=confirmPassword]").css("background-color", "#FFF9F9");
+        $(getConditionTag).css("color", "red");
+        $(getConditionTag).css("font-size", "80%");
+        $(getConditionTag).html("비밀번호가 일치하지 않습니다.");
+        e.stopPropagation();
+        
+      } else {
+        checkPasswordInputMap.set(e.target.name, true);
+        $(e.target).css("border", "solid green 3px");
+        $(e.target).css("background-color", "#F9FFF9");
+        $("input[name=confirmPassword]").css("border", "solid green 3px");
+        $("input[name=confirmPassword]").css("background-color", "#F9FFF9");
+        $(getConditionTag).css("color", "green");
+        $(getConditionTag).css("font-size", "80%");
+        $(getConditionTag).html("비밀번호가 일치합니다.");
+        e.stopPropagation();
+      }
+    } else if (e.target.name == "confirmPassword") {
+      
+      if (!regularPassword.test($(e.target).val())) {
+        checkPasswordInputMap.set(e.target.name, false);
+        $(e.target).css("border", "solid red 3px");
+        $(e.target).css("background-color", "#FFF9F9");
+        $(getConditionTag).css("color", "red");
+        $(getConditionTag).css("font-size", "80%");
+        $(getConditionTag).html("비밀번호는 4~12자의 문자 또는 숫자로 구성되어야 합니다.");
+        e.stopPropagation();
+        
+      } else if ($("input[name=password]").val() != $("input[name=confirmPassword]").val()) {
+        checkPasswordInputMap.set(e.target.name, false);
+        $(e.target).css("border", "solid red 3px");
+        $("input[name=password]").css("border", "solid red 3px");
+        $(getConditionTag).css("color", "red");
+        $(getConditionTag).css("font-size", "80%");
+        $(getConditionTag).html("비밀번호가 일치하지 않습니다.");
+        e.stopPropagation();
+        
+      } else {
+        checkPasswordInputMap.set(e.target.name, true);
+        $(e.target).css("border", "solid green 3px");
+        $("input[name=password]").css("border", "solid green 3px");
+        $(getConditionTag).css("color", "green");
+        $(getConditionTag).css("font-size", "80%");
+        $(getConditionTag).html("비밀번호가 일치합니다.");
+        e.stopPropagation();
+      }
+    }
+  });
+  
+  $(".my-essential-input").on("focusout", function(e){
+    var getConditionTag = $(e.target).siblings("span.inputState");
+    if (e.target.value == "") {
+      checkInputMap.set(e.target.name, false);
+      $(e.target).css("border", "solid #C7CED5 1px");
       $(getConditionTag).css("color", "red");
       $(getConditionTag).css("font-size", "80%");
-      $(getConditionTag).html("비밀번호가 일치하지 않습니다.");
+      $(getConditionTag).html("필수 입력 항목입니다.");
       e.stopPropagation();
       
-    } else {
-      checkPasswordInputMap.set(e.target.name, true);
-      $(e.target).css("border", "solid green 3px");
-      $(e.target).css("background-color", "#F9FFF9");
-      $("input[name=confirmPassword]").css("border", "solid green 3px");
-      $("input[name=confirmPassword]").css("background-color", "#F9FFF9");
-      $(getConditionTag).css("color", "green");
+    } else if (e.target.value != "") {
+      checkInputMap.set(e.target.name, true);
+      if (e.target.readonly) {
+        $(e.target).css("border", "solid #C7CED5 1px");
+        $(e.target).css("background-color", "#FFFFFF");
+      }
+      $(getConditionTag).css("color", "gray");
       $(getConditionTag).css("font-size", "80%");
-      $(getConditionTag).html("비밀번호가 일치합니다.");
+      $(getConditionTag).html("");
       e.stopPropagation();
     }
-  } else if (e.target.name == "confirmPassword") {
+  });
+  
+  
+  /* $("#my-adress-form").on("focusout", function(e){
+    var getConditionTag = $(e.target).siblings("span.inputState");
     
-    if (!regularPassword.test($(e.target).val())) {
-      checkPasswordInputMap.set(e.target.name, false);
-      $(e.target).css("border", "solid red 3px");
-      $(e.target).css("background-color", "#FFF9F9");
+    if (e.target.value == "" && e.target.type != "button") {
+      checkInputState[0] = false;
+      $(e.target).css("border", "solid #C7CED5 1px");
       $(getConditionTag).css("color", "red");
       $(getConditionTag).css("font-size", "80%");
-      $(getConditionTag).html("비밀번호는 4~12자의 문자 또는 숫자로 구성되어야 합니다.");
+      $(getConditionTag).html("필수 입력 항목입니다.");
       e.stopPropagation();
       
-    } else if ($("input[name=password]").val() != $("input[name=confirmPassword]").val()) {
-      checkPasswordInputMap.set(e.target.name, false);
-      $(e.target).css("border", "solid red 3px");
-      $("input[name=password]").css("border", "solid red 3px");
-      $(getConditionTag).css("color", "red");
-      $(getConditionTag).css("font-size", "80%");
-      $(getConditionTag).html("비밀번호가 일치하지 않습니다.");
-      e.stopPropagation();
-      
-    } else {
-      checkPasswordInputMap.set(e.target.name, true);
-      $(e.target).css("border", "solid green 3px");
-      $("input[name=password]").css("border", "solid green 3px");
-      $(getConditionTag).css("color", "green");
-      $(getConditionTag).css("font-size", "80%");
-      $(getConditionTag).html("비밀번호가 일치합니다.");
-      e.stopPropagation();
-    }
-  }
-});
-
-$(".my-essential-input").on("focusout", function(e){
-  var getConditionTag = $(e.target).siblings("span.inputState");
-  if (e.target.value == "") {
-    checkInputMap.set(e.target.name, false);
-    $(e.target).css("border", "solid #C7CED5 1px");
-    $(getConditionTag).css("color", "red");
-    $(getConditionTag).css("font-size", "80%");
-    $(getConditionTag).html("필수 입력 항목입니다.");
-    e.stopPropagation();
-    
-  } else if (e.target.value != "") {
-    checkInputMap.set(e.target.name, true);
-    if (e.target.readonly) {
+    } else if (e.target.value != "" && e.target.type != "button") {
+      checkInputState[0] = true;
       $(e.target).css("border", "solid #C7CED5 1px");
       $(e.target).css("background-color", "#FFFFFF");
+      $(getConditionTag).css("color", "gray");
+      $(getConditionTag).css("font-size", "80%");
+      $(getConditionTag).html("");
+      e.stopPropagation();
     }
-    $(getConditionTag).css("color", "gray");
-    $(getConditionTag).css("font-size", "80%");
-    $(getConditionTag).html("");
-    e.stopPropagation();
-  }
-});
-
-
-/* $("#my-adress-form").on("focusout", function(e){
-  var getConditionTag = $(e.target).siblings("span.inputState");
+  }); */
   
-  if (e.target.value == "" && e.target.type != "button") {
-    checkInputState[0] = false;
-    $(e.target).css("border", "solid #C7CED5 1px");
-    $(getConditionTag).css("color", "red");
-    $(getConditionTag).css("font-size", "80%");
-    $(getConditionTag).html("필수 입력 항목입니다.");
-    e.stopPropagation();
+  function checkState() {
+    var essentials = $(".my-essential");
     
-  } else if (e.target.value != "" && e.target.type != "button") {
-    checkInputState[0] = true;
-    $(e.target).css("border", "solid #C7CED5 1px");
-    $(e.target).css("background-color", "#FFFFFF");
-    $(getConditionTag).css("color", "gray");
-    $(getConditionTag).css("font-size", "80%");
-    $(getConditionTag).html("");
-    e.stopPropagation();
-  }
-}); */
-
-function checkState() {
-  var essentials = $(".my-essential");
-  
-  var eventGenerator = function() {
-    for (var i = 0; i < essentials.length; i++) {
-      if (essentials[i].name != undefined){
-        essentials[i].focus();
+    var eventGenerator = function() {
+      for (var i = 0; i < essentials.length; i++) {
+        if (essentials[i].name != undefined){
+          essentials[i].focus();
+        }
+      }
+      essentials[essentials.length-1].blur();
+    };
+    
+    eventGenerator();
+    
+    for (var check of checkInputMap.values()) {
+      if (check == false) {
+        return false;
       }
     }
-    essentials[essentials.length-1].blur();
-  };
-  
-  eventGenerator();
-  
-  for (var check of checkInputMap.values()) {
-    if (check == false) {
-      return false;
-    }
+    
+    /* for (var check of checkInputState) {
+      if (check == false) {
+        return false;
+      }
+    } */
+    
+    return true;
   }
-  
-  /* for (var check of checkInputState) {
-    if (check == false) {
-      return false;
-    }
-  } */
-  
-  return true;
-};
-
+});
 </script>
 
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/js/postcode.v2.js"></script>
+
 <script>
 // 우편번호 찾기 찾기 화면을 넣을 element
 var element_wrap = document.getElementById('wrap');

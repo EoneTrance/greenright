@@ -7,6 +7,7 @@ public class Member implements Serializable {
   private static final long serialVersionUID = 1L;
   
   private int no;
+  private int memberClass;
   private Date registeredDate;
   private String id;
   private String password;
@@ -24,19 +25,24 @@ public class Member implements Serializable {
   
   @Override
   public String toString() {
-    return "Member [no=" + no + ", registeredDate=" + registeredDate + ", id=" + id + ", password="
-        + password + ", certificationFlag=" + certificationFlag + ", cellPhone=" + cellPhone
-        + ", nickname=" + nickname + ", email=" + email + ", postalCode=" + postalCode
-        + ", defaultAddress=" + defaultAddress + ", detailAddress=" + detailAddress + ", question="
-        + question + ", answer=" + answer + ", authkey=" + authkey + ", passwordAuthkey="
-        + passwordAuthkey + "]";
+    return "Member [no=" + no + ", memberClass=" + memberClass + ", registeredDate="
+        + registeredDate + ", id=" + id + ", password=" + password + ", certificationFlag="
+        + certificationFlag + ", cellPhone=" + cellPhone + ", nickname=" + nickname + ", email="
+        + email + ", postalCode=" + postalCode + ", defaultAddress=" + defaultAddress
+        + ", detailAddress=" + detailAddress + ", question=" + question + ", answer=" + answer
+        + ", authkey=" + authkey + ", passwordAuthkey=" + passwordAuthkey + "]";
   }
-  
   public int getNo() {
     return no;
   }
   public void setNo(int no) {
     this.no = no;
+  }
+  public int getMemberClass() {
+    return memberClass;
+  }
+  public void setMemberClass(int memberClass) {
+    this.memberClass = memberClass;
   }
   public Date getRegisteredDate() {
     return registeredDate;

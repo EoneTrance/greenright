@@ -86,7 +86,7 @@
       b.boards_id,
       b.title,
       b.contents,
-      m.id,
+      m.nickname,
       b.created_date,
       b.vw_count
     from
@@ -104,7 +104,7 @@
       b.boards_id,
       b.title,
       b.contents,
-      m.id,
+      m.nickname,
       b.created_date,
       b.vw_count
     from
@@ -122,13 +122,13 @@
       b.boards_id,
       b.title,
       b.contents,
-      m.id,
+      m.nickname,
       b.created_date,
       b.vw_count
     from
       boards b
         left outer join members m on b.member_id=m.member_id
-      where m.id like #{pattern}
+      where m.nickname like #{pattern}
       order by b.created_date desc
   </select>
   
@@ -139,13 +139,13 @@
       b.boards_id,
       b.title,
       b.contents,
-      m.id,
+      m.nickname,
       b.created_date,
       b.vw_count
     from
       boards b
         left outer join members m on b.member_id=m.member_id
-    order by b.created_date desc, b.boards_id desc
+    order by b.created_date desc, b.boards_id desc  limit #{offset}, #{pageSize}
   </select>
    
   <select id="findWithFilesBy" 
@@ -160,7 +160,7 @@
       b.member_id,
       p.board_photo_id,
       p.photo_path,
-      m.id
+      m.nickname
     from
       boards b
         left outer join board_photos p on b.boards_id=p.boards_id
@@ -193,5 +193,7 @@
     delete from boards
     where boards_id=#{no}
   </delete>
- 
+ <select id="countAll" resultType="int">
+    select count(*) from boards
+  </select>
 </mapper>

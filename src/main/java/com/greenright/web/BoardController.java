@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.greenright.domain.Board;
 import com.greenright.domain.Comment;
-import com.greenright.domain.PagingControl;
 import com.greenright.domain.Recommend;
 import com.greenright.service.BoardService;
 import com.greenright.service.CommentService;
@@ -33,9 +32,7 @@ public class BoardController {
   private RecommendService recommendService;
   
   @GetMapping("form")
-  public void form(Model model) {
-    model.addAttribute("title", " - 게시물 등록");
-  }
+  public void form() {}
   @GetMapping("detailedit")
   public void detailedit(Model model, int no,HttpSession session)throws Exception {
     Board board = boardService.get(no);
@@ -75,14 +72,43 @@ public class BoardController {
   }
 
   @GetMapping("list")
-  public void list(Model model,String type,String keyword,HttpSession session) throws Exception {
-    List<Board> boards = boardService.list();
+  public void list(
+      @RequestParam(defaultValue = "1") int pageNo, 
+      @RequestParam(defaultValue = "5") int pageSize, 
+      Model model,
+      String type,
+      String keyword,
+      HttpSession session) throws Exception {
+    
+    // 총 페이지 개수 알아내기
+    if (pageSize < 5 || pageSize > 20) {
+      pageSize = 5;
+    }
+    int size = boardService.size();
+    int totalPage = size / pageSize; // 13 / 5 = 2.x
+    if (size % pageSize > 0) {
+      totalPage++;
+    }
+    
+    // 요청하는 페이지 번호가 유효하지 않을 때는 기본 값으로 1페이지로 지정한다.
+    if (pageNo < 1 || pageNo > totalPage) {
+      pageNo = 1;
+    }
+    
+    List<Board> boards = boardService.list(pageNo, pageSize);
     model.addAttribute("boards", boards);
+    model.addAttribute("pageNo", pageNo);
+    model.addAttribute("pageSize", pageSize);
+    model.addAttribute("totalPage", totalPage);
+    model.addAttribute("size", size);
+    model.addAttribute("beginPage", (pageNo - 2) > 0 ? (pageNo - 2) : 1);
+    model.addAttribute("endPage", (pageNo + 2) < totalPage ? (pageNo + 2) : totalPage);
     model.addAttribute("memberName", session.getAttribute("memberName"));
     model.addAttribute("loginName", session.getAttribute("loginName"));
-    PagingControl pc = new PagingControl();
-    pc.setListCount(20);
-    model.addAttribute("Pagings",pc);
+    /*
+     * PagingControl pc = new PagingControl(); pc.setListCount(20);
+     */
+ 
   }
 
   @PostMapping("update")
