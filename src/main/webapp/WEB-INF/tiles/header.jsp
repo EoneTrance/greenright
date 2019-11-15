@@ -66,7 +66,7 @@
             <a id='my-dropdown-hover' class='dropdown-item' href='/greenright/auth/logout'>LOGOUT</a>
           </div>
         </li>
-        <li class="nav-item cta cta-colored my-login-state-y" style="display:none;"><a href="#" class="nav-link"><span class="fas fa-cart-arrow-down"></span>[0]</a></li>
+        <li class="nav-item cta cta-colored my-login-state-y" style="display:none;"><a href="/greenright/order/basket" class="nav-link"><span class="fas fa-cart-arrow-down"></span>[0]</a></li>
       </ul>
     </div>
   </div>
