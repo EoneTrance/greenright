@@ -201,7 +201,7 @@ tr:hover { background-color: lightyellow; }
 td.title {
   text-align: left;
   cursor: pointer;
-  width: 707px;
+  width: 930px;
   height: 50px;
   font-size: large;
   border-top: 0.5px solid beige;
@@ -221,8 +221,21 @@ button.qnaAdd.btn.btn-primary {
 p.starpoint {
     display: inline;
 }
-
-
+span.reviewtitle {
+    display: inline-block;
+    width: 500px;
+}
+span.reviewid {
+    display: inline-block;
+    width: 140px;
+}
+span.reviewrating {
+    display: inline-block;
+    width: 97px;
+}
+strong.reviewcotents {
+    margin-left: 34px;
+}
 </style>
 <meta name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -810,14 +823,14 @@ p.starpoint {
                         a += "<h5>리뷰</h5>"
                         a += "<table id='contents'>"
                         for (var i = 0; i < k.result.length; i++) {
-                          a += "<tr><td class='title'><strong>제목:</strong>" + k.result[i].title
-                              + "&nbsp;&nbsp;&nbsp;"
-                          a += "<strong>아이디:</strong>" + k.result[i].member.id
-                              + "&nbsp;&nbsp;&nbsp;"
-                          a += "<strong>평점:</strong>" + k.result[i].rating
-                              + "점 &nbsp;&nbsp;&nbsp;"
-                          a += "<strong>작성일:</strong>" + k.result[i].createdDate + "</td></tr>"
-                          a += "<tr><td class='conts'><strong>내용</strong>:"
+                          a += "<tr><td class='title'><span class='reviewtitle'><strong>제목:</strong>" + k.result[i].title
+                              + "</span>&nbsp;&nbsp;&nbsp;"
+                          a += "<span class='reviewid'><strong>아이디:</strong>" + k.result[i].member.id
+                              + "</span>&nbsp;&nbsp;&nbsp;"
+                          a += "<span class='reviewrating'><strong>평점:</strong>" + k.result[i].rating
+                              + "점</span> &nbsp;&nbsp;&nbsp;"
+                          a += "<span class='reviewdate'><strong>작성일:</strong>" + k.result[i].createdDate + "</span></td></tr>"
+                          a += "<tr><td class='conts'><strong class='reviewcotents'>내용</strong>:"
                               + k.result[i].contents + "</td><tr>"
                         }
                         a += "</table>"
@@ -898,7 +911,7 @@ p.starpoint {
             a += "<label class='star star-1' for='star-1'></label>"
             a += "</div>"
             a += "<input type='text' id='title' style='width :743px' placeholder='제목을입력하세요'/>"
-            a += "<br><TEXTAREA  id ='contents' cols='90' rows='10' style='resize:none;'  placeholder='내용을 입력하세요.'/><br>"
+            a += "<br><TEXTAREA  id ='rvcontents' cols='90' rows='10' style='resize:none;'  placeholder='내용을 입력하세요.'/><br>"
             a += "<button id='review-add-btn' class='btn btn-primary'>등록</button>"
             a += "<input type='file' id='filePath' name='reviewPhoto'>"
             a += "<div id='images-div'></div>"
@@ -915,7 +928,7 @@ p.starpoint {
               let memberNo = 1;
               let rating = ratingch
               let title = $("#title").val();
-              let contents = $("#contents").val();
+              let contents = $("#rvcontents").val();
               let ReviewPhoto = $("#filePath").val();
               $.post("review/check", {
                 "productNo" : productNo,
@@ -995,7 +1008,7 @@ p.starpoint {
                       "memberNo" : 1,
                       "rating" : ratingch,
                       "title" : $("#title").val(),
-                      "contents" : $("#contents").val()
+                      "contents" : $("#rvcontents").val()
                     }
                   }
                 });
