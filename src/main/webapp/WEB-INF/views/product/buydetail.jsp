@@ -209,7 +209,7 @@ tr:hover {
 td.title {
   text-align: left;
   cursor: pointer;
-  width: 930px;
+  width: 1110px;
   height: 50px;
   font-size: large;
   border-top: 0.5px solid beige;
@@ -237,7 +237,7 @@ p.starpoint {
 
 span.reviewtitle {
   display: inline-block;
-  width: 500px;
+  width: 650px;
 }
 
 span.reviewid {
@@ -279,7 +279,7 @@ input#title {
 }
 span.answertitle {
     display: inline-block;
-    width: 487px;
+    width: 667px;
     margin-left: 10px;
 }
 span.answerwriter {
@@ -296,7 +296,7 @@ span.answercontents,span.answerconts {
 span.secretbook {
     margin-left: 13px;
     display: inline-block;
-    width: 487px;
+    width: 667px;
 }
 .col-md-12.heading-section.text-center.ftco-animate.bordermaker.justify-content-center.fadeInUp.ftco-animated {
     height: 48px;
