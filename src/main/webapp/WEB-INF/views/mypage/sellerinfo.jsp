@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
   
 <link rel="stylesheet" href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
-<link rel="stylesheet" href="/css/mypage.css">
+<link rel="stylesheet" href="/css/greenright.css">
   
 <style>
 
@@ -117,7 +117,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="my-col-20 sidenav hidden-xs px-1">
+    <div class="my-col-20 sidenav mypage-sidenav hidden-xs px-1">
       <h2 class="text-center mt-2 font-weight-bold">MyPage</h2>
       <hr>
       <h4 class="font-weight-bold ml-2">회원정보</h4>

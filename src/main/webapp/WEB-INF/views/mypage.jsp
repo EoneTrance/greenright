@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" href="/css/mypage.css">
+<link rel="stylesheet" href="/css/greenright.css">
 
 <style>
   .bd-placeholder-img {
@@ -50,7 +50,7 @@
             <li>내 회원정보 관리</li>
           </ul>
           <a href="mypage/userinfo">
-          <button type="button" class="btn btn-lg btn-block my-btn">PROFILE</button>
+          <button type="button" class="searchbtn btn-primary btn-lg btn-block">PROFILE</button>
           </a>
         </div>
       </div>
@@ -64,7 +64,7 @@
             <li>구매내역 관리</li>
           </ul>
           <a href="mypage/order">
-          <button type="button" class="btn btn-lg btn-block my-btn">ORDERS</button>
+          <button type="button" class="searchbtn btn-primary btn-lg btn-block">ORDERS</button>
           </a>
         </div>
       </div>
@@ -77,7 +77,7 @@
           <ul class="list-unstyled mt-3 mb-4">
             <li>관심상품 관리</li>
           </ul>
-          <button type="button" class="btn btn-lg btn-block my-btn">WISHLIST</button>
+          <button type="button" class="searchbtn btn-primary btn-lg btn-block">WISHLIST</button>
         </div>
       </div>
     </div>
@@ -91,7 +91,7 @@
           <ul class="list-unstyled mt-3 mb-4">
             <li>내 업적 관리</li>
           </ul>
-          <button type="button" class="btn btn-lg btn-block my-btn">ACHIEVEMENT</button>
+          <button type="button" class="searchbtn btn-primary btn-lg btn-block">ACHIEVEMENT</button>
         </div>
       </div>
       <div class="card mb-4 shadow-sm">
@@ -104,7 +104,7 @@
             <li>판매내역 관리</li>
           </ul>
           <a href="mypage/sale">
-          <button type="button" class="btn btn-lg btn-block my-btn">SALES</button>
+          <button type="button" class="searchbtn btn-primary btn-lg btn-block">SALES</button>
           </a>
         </div>
       </div>
@@ -118,7 +118,7 @@
             <li>개인전 관리</li>
           </ul>
           <a href="mypage/exhibition">
-          <button type="button" class="btn btn-lg btn-block my-btn">EXHIBITION</button>
+          <button type="button" class="searchbtn btn-primary btn-lg btn-block">EXHIBITION</button>
           </a>
         </div>
       </div>

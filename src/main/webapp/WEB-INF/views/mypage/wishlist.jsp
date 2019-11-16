@@ -3,7 +3,7 @@
 
 <link rel="stylesheet" href="/node_modules/@chenfengyuan/datepicker/dist/datepicker.min.css">
 <link rel="stylesheet" href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
-<link rel="stylesheet" href="/css/mypage.css">
+<link rel="stylesheet" href="/css/greenright.css">
   
 <style>
   
@@ -117,7 +117,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="my-col-20 sidenav hidden-xs px-1">
+    <div class="my-col-20 sidenav mypage-sidenav hidden-xs px-1">
       <h2 class="text-center mt-2 font-weight-bold">MyPage</h2>
       <hr>
       <h4 class="font-weight-bold ml-2">회원정보</h4>
@@ -862,7 +862,7 @@ $(function() {
   });
   
   $('.selectpicker').selectpicker({
-    style: 'btn-sm my-btn-select'
+    style: 'btn btn-sm btn-primary'
   });
   
   $(".my-date-btn").on("click", function(e) {

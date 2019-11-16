@@ -3,15 +3,9 @@
 
 <link rel="stylesheet" href="/node_modules/@chenfengyuan/datepicker/dist/datepicker.min.css">
 <link rel="stylesheet" href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
-<link rel="stylesheet" href="/css/maincontent.css">
+<link rel="stylesheet" href="/css/greenright.css">
   
 <style>
-
-.sidenav {
-  height: 100%;
-  border: solid RGBA(130,174,70,1) 0px;
-  background-color: RGBA(130,174,70,0.2);
-}
 
 div.well {
   border: dashed #82AE46 5px;
@@ -185,11 +179,11 @@ table.my-table-col td.my-seller {
           <table class="col-sm-12 table-hover text-center my-table my-product-table my-table-col" cellpadding="20" cellspacing="1">
           <thead>
             <tr>
-              <th class="my-col-1 px-0">전체선택
-              <div class="round mx-0">
-                <input type="checkbox" id="checkbox0"/>
-                <label for="checkbox0"></label>
-              </div>
+              <th class="my-col-1 px-0">
+                <div class="round mx-0">
+                  <input type="checkbox" id="checkbox0" class="my-check-all"/>
+                  <label for="checkbox0"></label>
+                </div>
               </th>
               <th class="text-center my-col-6">상품</th>
               <th class="text-center my-col-1">수량</th>
@@ -201,7 +195,7 @@ table.my-table-col td.my-seller {
             <tr>
               <td class="my-check">
                 <div class="round">
-                <input type="checkbox" id="checkbox1" />
+                <input type="checkbox" id="checkbox1" class="my-check"/>
                 <label for="checkbox1"></label>
               </div>
               </td>
@@ -328,7 +322,7 @@ table.my-table-col td.my-seller {
             <tr>
               <td class="my-date">
                 <div class="round">
-                  <input type="checkbox" id="checkbox" />
+                  <input type="checkbox" id="checkbox" class="my-check"/>
                   <label for="checkbox"></label>
                 </div>
               </td>
@@ -471,7 +465,7 @@ table.my-table-col td.my-seller {
         </div>
       </div>
     </div>
-    <div class="col-sm-3 sidenav hidden-xs px-0">
+    <div class="col-sm-3 sidenav payment-sidenav hidden-xs px-0">
       <div style="background-color:#82AE46;padding:5px 5px;">
       <h2 class="text-center mt-2 font-weight-bold" style="color:white;">전체 합계</h2>
       </div>
@@ -495,10 +489,11 @@ table.my-table-col td.my-seller {
         <hr class="mt-0 mb-4">
         <h5 class="text-left font-weight-bold pl-2"
             style="color:black;">총 결제금액</h5>
-        <p class="text-right font-weight-bold mb-0 pr-2"
+        <p class="text-right font-weight-bold mb-2 pr-2"
             style="color:black;font-size:150%;"><span style="font-size:150%;color:#82AE46;">30000</span> 원</p>
+        <hr class="mb-2 mt-0">
       </div>
-      <button class="btn btn-lg btn-primary btn-inline-block mr-1 w-100" type="button">구매하기</button>
+      <button class="searchbtn btn-lg btn-primary btn-inline-block mr-1 w-100" type="button">구매하기</button>
     </div>
   </div>
 </div>
@@ -593,6 +588,9 @@ $(function() {
     toDateInput.datepicker("setDate", new Date());
   });
   
+  $('.my-check-all').click(function() {
+    $('.my-check').prop('checked', this.checked);
+  } );
 });
 </script>
 

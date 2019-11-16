@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
   
 <link rel="stylesheet" href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
-<link rel="stylesheet" href="/css/mypage.css">
+<link rel="stylesheet" href="/css/greenright.css">
   
 <style>
 
@@ -29,7 +29,7 @@
     color:#FFFFFF;
   }
   
-  .dropdown-menu .inner li a:hover
+  .dropdown .dropdown-menu .inner li a:hover
   {
     background-color:RGBA(130,174,70,0.5);
   }
@@ -49,7 +49,7 @@
   
   .notChange, .notChange:focus {
     border: none !important;
-    background-color: rgba( 255, 255, 255, 0) !important;
+    background-color: rgba(0,0,0,0) !important;
     outline: none !important;
   }
   
@@ -117,7 +117,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="my-col-20 sidenav hidden-xs px-1">
+    <div class="my-col-20 sidenav mypage-sidenav hidden-xs px-1">
       <h2 class="text-center mt-2 font-weight-bold">MyPage</h2>
       <hr>
       <h4 class="font-weight-bold ml-2">회원정보</h4>
@@ -142,7 +142,7 @@
       <div id=memberInfoForm>
       <h2 id="mypage-title-h2">기본정보</h2>
       <hr>
-      <form class="text-center" action='/member/update' method='post' enctype='multipart/form-data' onsubmit="return checkState()">
+      <form class="text-center" action='../member/update' method='post' enctype='multipart/form-data' onsubmit="return checkState()">
         <table class="col-sm-12 table-hover my-table my-join-table my-table-row" cellpadding="20" cellspacing="5">
           <tbody>
           <tr>
@@ -155,7 +155,7 @@
             <th id="passwordTh" class="my-col-3">비밀번호</th>
             <td class="my-col-9">
             <div id="my-password-form">
-              <input type="button" name="changePw" class="btn btn-md btn-primary d-inline-block"
+              <input type="button" name="changePw" class="searchbtn btn-md btn-primary d-inline-block"
               value="비밀번호 변경하기" onclick='changePassword()'/>
             </div>
               <span class="inputState"></span>
@@ -189,7 +189,7 @@
               <input type="text" class="input-md my-essential my-essential-input d-inline-block"
                      id="sample3_postcode" name="postalCode" value='${loginUser.postalCode}'
                      readonly="readonly">
-              <input type="button" class="btn btn-md btn-primary d-inline-block ml-1" name="searchPostalCode"
+              <input type="button" class="searchbtn btn-md btn-primary d-inline-block ml-1" name="searchPostalCode"
                      onclick="sample3_execDaumPostcode()" value="우편번호 찾기">
               <span class="inputState"></span>
               <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
@@ -298,18 +298,19 @@ if(${loginUser.memberClass} == 2) {
       "<li class='my-menu'><a href='sale'>판매내역</a></li>"
     + "<li class='my-menu'><a href='exhibition'>개인전 관리</a></li>");
 } else {
-  $("#sellerMenu").append(
-      "<li class='my-menu'><a href='conversion'>판매회원 전환</a></li>");
+$("#sellerMenu").append(
+    "<li class='my-menu'><a href='conversion'>판매회원 전환</a></li>");
 }
+
+if ('${loginUser.question}' != '') {
+  $("select[name=question]").val('${loginUser.question}');
+}
+  
 </script>
 
 <script>
 "use strict"
-window.onload = (function() {
 
-  if ('${loginUser.question}' != '') {
-    $("select[name=question]").val('${loginUser.question}');
-  }
   
   var userId = '${loginUser.id}';
   
@@ -319,10 +320,10 @@ window.onload = (function() {
   function changePassword() {
     $("#my-password-form").children("input").remove();
     $("#my-password-form").append(
-          "<input type='password' name='currentPassword' class='input-md mr-1'"
-        + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
-        + "<input type='button' name='checkPw' class='btn btn-md btn-primary ml-1'"
-        + "value='비밀번호 확인' style='display:inline-block;' onclick='checkPassword()'/>");
+          "<input type='password' name='currentPassword' class='input-md d-inline-block mr-1'"
+        + "maxlength='12' autocomplete='off'/>"
+        + "<input type='button' name='checkPw' class='searchbtn btn-md btn-primary d-inline-block ml-1'"
+        + "value='비밀번호 확인' onclick='checkPassword()'/>");
   };
   
   function checkPassword() {
@@ -336,14 +337,14 @@ window.onload = (function() {
         if (checkAccountJsonData.message == "exist") {
           $("#my-password-form").children("input").remove();
           $("#my-password-form").append(
-                "<input type='password' name='password' class='input-md mr-1 my-password-input'"
-              + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
-              + "<input type='button' name='doChangePw' class='btn btn-md btn-primary ml-1 mb-1'"
-              + "value='비밀번호 변경하기' style='display:inline-block;' onclick='doChangePassword()'/>"
-              + "<input type='password' name='confirmPassword' class='input-md mr-1 my-password-input'"
-              + "maxlength='12' autocomplete='off' style='display:inline-block;'/>"
-              + "<input type='button' name='cancelChangePw' class='btn btn-md my-btn-hover btn-danger ml-1'"
-              + "value='취소' style='display:inline-block;' onclick='cancelChangePassword()'/>");
+                "<input type='password' name='password' class='input-md d-inline-block mr-1 my-password-input'"
+              + "maxlength='12' autocomplete='off'/>"
+              + "<input type='button' name='doChangePw' class='searchbtn btn-md btn-primary d-inline-block ml-1 mb-1'"
+              + "value='비밀번호 변경하기' onclick='doChangePassword()'/>"
+              + "<input type='password' name='confirmPassword' class='input-md d-inline-block mr-1 my-password-input'"
+              + "maxlength='12' autocomplete='off'/>"
+              + "<input type='button' name='cancelChangePw' class='searchbtn btn-md btn-dark d-inline-block ml-1'"
+              + "value='취소' onclick='cancelChangePassword()'/>");
           $("#my-password-form ~ span.inputState").html("");
           $("th#passwordTh").html("비밀번호<br><br>비밀번호 확인");
         } else if (checkAccountJsonData.message == "notExist") {
@@ -387,7 +388,7 @@ window.onload = (function() {
         if (checkAccountJsonData.message == "success") {
           $("#my-password-form").children("input").remove();
           $("#my-password-form").append(
-                "<input type='button' name='changePw' class='btn btn-md btn-primary'"
+                "<input type='button' name='changePw' class='searchbtn btn-md btn-primary d-inline-block'"
               + "value='비밀번호 변경하기' onclick='changePassword()'/>");
           $("#my-password-form ~ span.inputState").css("color", "green");
           $("#my-password-form ~ span.inputState").css("font-size", "80%");
@@ -414,7 +415,7 @@ window.onload = (function() {
   function cancelChangePassword() {
     $("#my-password-form").children("input").remove();
     $("#my-password-form").append(
-        "<input type='button' name='changePw' class='btn btn-md btn-primary'"
+        "<input type='button' name='changePw' class='searchbtn btn-md btn-primary d-inline-block'"
       + "value='비밀번호 변경하기' onclick='changePassword()'/>");
     $("#my-password-form ~ span.inputState").html("");
     $("th#passwordTh").html("비밀번호");
@@ -638,7 +639,6 @@ window.onload = (function() {
     
     return true;
   }
-});
 </script>
 
 <script src="/js/postcode.v2.js"></script>

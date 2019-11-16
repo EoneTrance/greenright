@@ -51,6 +51,7 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item my-login-state-n" style="display:none;"><a href="/greenright/auth/form" class="nav-link">LOGIN</a></li>
+        <li class="nav-item my-login-state-n" style="display:none;"><a href="/greenright/member/form" class="nav-link">JOIN</a></li>
         <li class="nav-item dropdown my-login-state-y" style="display:none;">
           <a class="nav-link dropdown-toggle font-weight-bold" href="/greenright/mypage" 
                 id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 

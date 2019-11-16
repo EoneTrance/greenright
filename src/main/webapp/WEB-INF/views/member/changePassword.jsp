@@ -2,11 +2,12 @@
          pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" href="/css/common.css">
-<link rel="stylesheet" href="/css/mypage.css">
+<link rel="stylesheet" href="/css/greenright.css">
 
-<br><br><br>
+<div id="mypage-title-h1">
+<h1>비밀번호 변경</h1>
+</div>
 <div id="content">
-<h3>비밀번호 변경</h3>
 <br><br>
 <p><span style="font-size:200%">${member.id}</span> 님의 비밀번호 변경 페이지 입니다.</p>
 <br>

@@ -30,8 +30,12 @@ public class AuthController {
   UserMailSendService mailSender;
 
   @GetMapping("form")
-  public void form(Model model, HttpServletRequest request) throws Exception {
+  public String form(HttpSession session, Model model) throws Exception {
+    if (session.getAttribute("loginUser") != null) {
+      return "redirect:/greenright/main";
+    }
     model.addAttribute("title", " - 로그인");
+    return "auth/form";
   }
 
   @PostMapping("login")
@@ -73,6 +77,6 @@ public class AuthController {
   }
   
   @GetMapping("wellcome")
-  public void wellcome(Member member) {
+  public void wellcome(Model model) {
   }
 }

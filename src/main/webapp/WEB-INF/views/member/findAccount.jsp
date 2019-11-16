@@ -2,11 +2,12 @@
   pageEncoding="UTF-8"%>
   
 <link rel="stylesheet" href="/css/common.css">
-<link rel="stylesheet" href="/css/mypage.css">
+<link rel="stylesheet" href="/css/greenright.css">
 
-<br><br><br>
+<div id="mypage-title-h1">
+<h1>아이디 / 비밀번호 찾기</h1>
+</div>
 <div id="content">
-<h3 id="findH2"></h3>
 <br><br>
 <div id="findIdPassword">
 <form name="findAccount" action='../findResult/id' method='post' enctype='multipart/form-data' onsubmit="return checkEmpty()">
@@ -55,13 +56,13 @@ $(function() {
   
   if ('${path}' == "findId") {
     $("div#idDiv")[0].style.display = "none";
-    $("h3#findH2")[0].innerHTML = "아이디 찾기";
+    $("#mypage-title-h1 > h1")[0].innerHTML = "아이디 찾기";
     $("form[name=findAccount]")[0].action = "../findResult/id";
     $("button[name=submitBtn]")[0].innerHTML = "아이디 찾기";
     
   } else if ('${path}' == "findPw") {
     $("div#idDiv")[0].style.display = "inline";
-    $("h3#findH2")[0].innerHTML = "비밀번호 찾기";
+    $("#mypage-title-h1 > h1")[0].innerHTML = "비밀번호 찾기";
     $("form[name=findAccount]")[0].action = "../findResult/pw";
     $("button[name=submitBtn]")[0].innerHTML = "비밀번호 찾기";
   }

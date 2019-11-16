@@ -29,10 +29,11 @@ public class MemberController {
   }
 
   @PostMapping("join")
-  public String join(Member member) throws Exception {
+  public String join(HttpSession session, Member member) throws Exception {
     memberService.insert(member);
     mailSender.mailSendWithUserKey(member, UserMailSendService.JOIN);
-    return "auth/wellcome";
+    session.setAttribute("joinMember", member);
+    return "redirect:../auth/wellcome";
   }
 
   @GetMapping("list")
@@ -100,6 +101,6 @@ public class MemberController {
     memberService.update(member);
     Member loginUser = memberService.getUserInfo(member);
     session.setAttribute("loginUser", loginUser);
-    return "/mypage/userinfo";
+    return "redirect:../mypage/userinfo";
   }
 }

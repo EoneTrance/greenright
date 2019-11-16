@@ -2,7 +2,7 @@
   pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" href="/css/common.css">
-<link rel="stylesheet" href="/css/mypage.css">
+<link rel="stylesheet" href="/css/greenright.css">
 
 <style>
 .my-find-button{
@@ -10,8 +10,11 @@
 }
 </style>
 
-<br><br><br>
+<div id="mypage-title-h1">
+<h1>로그인</h1>
+</div>
 <div id="content">
+<br><br>
 <div id="loginForm">
   <form action="login" method="post" onsubmit="return login()">
     <input type="text" name="id" class="form-control input-lg" maxlength="12" placeholder="아이디">

@@ -2,11 +2,12 @@
     pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" href="/css/common.css">
-<link rel="stylesheet" href="/css/mypage.css">
+<link rel="stylesheet" href="/css/greenright.css">
 
-<br><br><br>
+<div id="mypage-title-h1">
+<h1>유효하지 않은 인증입니다.</h1>
+</div>
 <div id="content">
-  <h3>유효하지 않은 인증입니다.</h3>
   <br><br>
   <p>이 인증은 만료되었거나 유효하지 않습니다.</p>
 </div>

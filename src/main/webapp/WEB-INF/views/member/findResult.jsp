@@ -2,11 +2,12 @@
     pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" href="/css/common.css">
-<link rel="stylesheet" href="/css/mypage.css">
+<link rel="stylesheet" href="/css/greenright.css">
 
-<br><br><br>
+<div id="mypage-title-h1">
+<h1>아이디 / 비밀번호 찾기 결과</h1>
+</div>
 <div id="content">
-<h3 id="foundH2">아이디 / 비밀번호 찾기 결과</h3>
 <br><br>
 <div id="searchResult"></div>
 </div>
@@ -35,7 +36,7 @@ $(function() {
   var foundMemberId = '${foundMember.id}';
   var printResult;
   if (path == "findId") {
-    $("h3#foundH2")[0].innerHTML = "아이디 찾기 결과";
+    $("#mypage-title-h1 > h1")[0].innerHTML = "아이디 찾기 결과";
     if (foundMemberId == null || foundMemberId == "") {
       printResult = "<p>입력하신 내용으로 아이디를 찾을 수 없습니다.</p>";
       $("div#searchResult")[0].innerHTML = printResult;
@@ -60,7 +61,7 @@ $(function() {
       $("div#searchResult")[0].innerHTML = printResult;
     }
   } else if (path == "findPw") {
-    $("h3#foundH2")[0].innerHTML = "비밀번호 찾기 결과";
+    $("#mypage-title-h1 > h1")[0].innerHTML = "비밀번호 찾기 결과";
     if (foundMemberId == null || foundMemberId == "") {
       printResult = "<p>입력하신 내용으로 비밀번호를 찾을 수 없습니다.</p>";
       $("div#searchResult")[0].innerHTML = printResult;

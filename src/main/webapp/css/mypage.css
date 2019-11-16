@@ -31,10 +31,6 @@ img#product-photo {
   width:80px;
 }
 
-/* .btn-danger:hover {
-  background-color: #FFFFFF;
-} */
-
 div#mypage-title-h1 {
   margin:auto auto;
   witdh:auto;
@@ -64,10 +60,6 @@ h2#mypage-title-h2 {
   background-color: RGBA(130,174,70,0.2);
 }
 
-.my-bg-color-gray {
-  background-color:RGBA(230,230,230,1);
-}
-
 .my-color {
   color:#82AE46;
 }
@@ -76,100 +68,114 @@ h2#mypage-title-h2 {
   background-color:RGBA(130,174,70,0.2);
 }
 
-.my-btn {
-  background-color:#82AE46;
-  color:RGB(255,255,255);
-}
-
-.my-btn-hover:hover {
-  color:RGB(0,0,0);
-}
-
-.my-btn-select {
-  background: #82ae46;
-  border: 1px solid #82ae46;
-  color: #fff;
-  height: 2.063rem;
-}
-
-.my-btn-select:hover {
-  border: 1px solid #82ae46;
-  background: transparent;
-  color: #82ae46;
+.my-bg-color-gray {
+  background-color:RGBA(230,230,230,1);
 }
 
 /* 버튼 오버라이드 */
 
-.btn.btn-primary {
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-primary,
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-primary:hover,
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-primary:focus {
+  background-color: #82ae46;
+  border-color: #82ae46;
+  color: #fff;
+}
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-primary:active {
+  background-color: RGBA(0,0,0,0);
+  border-color: #82ae46;
+  color: #82ae46;
+}
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-danger,
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-danger:hover,
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-danger:focus {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: #fff;
+}
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-danger:active {
+  background-color: RGBA(0,0,0,0);
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-dark,
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-dark:hover,
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-dark:focus {
+  background-color: #333333;
+  border-color: #333333;
+  color: #fff;
+}
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-dark:active {
+  background-color: RGBA(0,0,0,0);
+  border-color: #333333;
+  color: #333333;
+}
+
+.bootstrap-select .dropdown-toggle:focus,
+.bootstrap-select>select.mobile-device:focus+.dropdown-toggle {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: RGBA(0,0,0,0);
+  border-color: #82ae46;
+  color: #82ae46;
+}
+
+.btn-primary, .btn.btn-primary,
+.btn-primary:hover, .btn.btn-primary:hover,
+.btn-primary:focus, .btn.btn-primary:focus {
+  outline:none !important;
+  box-shadow: none !important;
   background: #82ae46;
   border: 1px solid #82ae46;
   color: #fff;
 }
 
-.btn.btn-primary:hover {
+.btn-primary:active, .btn.btn-primary:active {
+  background: RGBA(0,0,0,0);
   border: 1px solid #82ae46;
-  background: transparent;
   color: #82ae46;
 }
 
-.btn.btn-primary.btn-outline-primary {
-  border: 1px solid #82ae46;
-  background: transparent;
-  color: #82ae46;
-}
-
-.btn.btn-primary.btn-outline-primary:hover {
-  border: 1px solid transparent;
-  background: #82ae46;
-  color: #fff;
-}
-
-.btn.btn-danger {
+.btn-danger, .btn.btn-danger,
+.btn-danger:hover, .btn.btn-danger:hover,
+.btn-danger:focus, .btn.btn-danger:focus  {
+  outline:none !important;
+  box-shadow: none !important;
   background: #dc3545;
   border: 1px solid #dc3545;
   color: #fff;
 }
 
-.btn.btn-danger:hover {
+.btn-danger:active, .btn.btn-danger:active {
+  background: RGBA(0,0,0,0);
   border: 1px solid #dc3545;
-  background: transparent;
   color: #dc3545;
 }
 
-.btn.btn-danger.btn-outline-danger {
-  border: 1px solid #dc3545;
-  background: transparent;
-  color: #dc3545;
-}
-
-.btn.btn-danger.btn-outline-danger:hover {
-  border: 1px solid transparent;
-  background: #dc3545;
-  color: #fff;
-}
-
-.btn.btn-dark {
+.btn-dark, .btn.btn-dark,
+.btn-dark:hover, .btn.btn-dark:hover,
+.btn-dark:focus, .btn.btn-dark:focus {
+  outline:none !important;
+  box-shadow: none !important;
   background: #333333;
   border: 1px solid #333333;
   color: #fff;
 }
 
-.btn.btn-dark:hover {
+.btn-dark:active, .btn.btn-dark:active {
+  background: RGBA(0,0,0,0);
   border: 1px solid #333333;
-  background: transparent;
   color: #333333;
-}
-
-.btn.btn-dark.btn-outline-dark {
-  border: 1px solid #333333;
-  background: transparent;
-  color: #333333;
-}
-
-.btn.btn-dark.btn-outline-dark:hover {
-  border: 1px solid transparent;
-  background: #333333;
-  color: #fff;
 }
 
 /* 버튼 오버라이드 */
