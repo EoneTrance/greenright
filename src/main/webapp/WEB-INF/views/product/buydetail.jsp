@@ -31,8 +31,6 @@ section.ftco-section {
 
 li.useruse {
   display: inline;
-  padding: 10px 17px;
-  margin-top: 12px;
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -76,8 +74,9 @@ div.rightcontents {
 }
 
 div.stars {
-  width: 301px;
+  width: 268px;
   display: inline-block;
+  height: 70px;
 }
 
 input.star {
@@ -114,6 +113,10 @@ label.star:hover {
 label.star:before {
   content: '\f006';
   font-family: FontAwesome;
+}
+
+.sellermdal-content {
+  height: 383px;
 }
 
 .qnamodal, .sellermodal {
@@ -156,9 +159,10 @@ input.titleholder {
   width: 100%;
 }
 
-textarea.contentholder, textarea.sellerholder {
-  height: 200px;
+textarea#contentholder, textarea#sellerholder {
+  height: 200px !important;
   width: 100%;
+  margin-bottom: 10px;
 }
 
 div.qnabody, div.sellerbody {
@@ -166,6 +170,7 @@ div.qnabody, div.sellerbody {
 }
 
 button#submitbut, button#answersubmit {
+  float: right;
 }
 
 .anqfooter, .sellerfooter {
@@ -196,7 +201,10 @@ td.conts {
   padding-bottom: 10px;
   font-size: large;
 }
-tr:hover { background-color: lightyellow; }
+
+tr:hover {
+  background-color: lightyellow;
+}
 
 td.title {
   text-align: left;
@@ -207,35 +215,103 @@ td.title {
   border-top: 0.5px solid beige;
   border-bottom: 0.5px solid beige;
 }
-#title{
-    width: 743px;
-    height: 50px;
-    margin-right: 31px;
+
+#title {
+  width: 743px;
+  height: 50px;
+  margin-right: 31px;
 }
+
 textarea#contents {
-    margin-right: 200px;
+  margin-right: 200px;
 }
+
 button.qnaAdd.btn.btn-primary {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
+  margin-top: 20px;
 }
+
 p.starpoint {
-    display: inline;
+  display: inline;
 }
+
 span.reviewtitle {
-    display: inline-block;
-    width: 500px;
+  display: inline-block;
+  width: 500px;
 }
+
 span.reviewid {
-    display: inline-block;
-    width: 140px;
+  display: inline-block;
+  width: 140px;
 }
+
 span.reviewrating {
-    display: inline-block;
-    width: 97px;
+  display: inline-block;
+  width: 97px;
 }
+
 strong.reviewcotents {
-    margin-left: 34px;
+  margin-left: 34px;
 }
+
+.productquestionwrite {
+  text-align: center;
+}
+
+span.answerquestion {
+  font-size: larger;
+}
+
+textarea#rvcontents {
+  margin-right: 234px;
+}
+
+input.titleholder.form-control {
+  margin-bottom: 10px;
+}
+
+strong.marginmk {
+  margin-right: 5px;
+}
+
+input#title {
+  margin-bottom: 15px;
+}
+span.answertitle {
+    display: inline-block;
+    width: 487px;
+    margin-left: 10px;
+}
+span.answerwriter {
+    display: inline-block;
+    width: 145px;
+}
+span.answerdate {
+    display: inline-block;
+    width: 155px;
+}
+span.answercontents,span.answerconts {
+    margin-left: 20px;
+}
+span.secretbook {
+    margin-left: 13px;
+    display: inline-block;
+    width: 487px;
+}
+.col-md-12.heading-section.text-center.ftco-animate.bordermaker.justify-content-center.fadeInUp.ftco-animated {
+    height: 48px;
+    background-color: white;
+    margin-top: 37px;
+}
+*:focus{
+  outline: none;
+}
+h5.starratin {
+    padding-top: 26px;
+    color : light-yellow ;
+}
+
+
 </style>
 <meta name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -314,7 +390,8 @@ strong.reviewcotents {
 
     <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a href="/greenright/main" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="/greenright/main"
+          class="nav-link">Home</a></li>
         <li class="nav-item active dropdown"><a
           class="nav-link dropdown-toggle" href="#" id="dropdown04"
           data-toggle="dropdown" aria-haspopup="true"
@@ -346,9 +423,9 @@ strong.reviewcotents {
       class="row no-gutters slider-text align-items-center justify-content-center">
       <div class="col-md-9 ftco-animate text-center">
         <p class="breadcrumbs">
-          <span class="mr-2"><a href="/greenright/main">Home</a></span> <span
-            class="mr-2"><a href="/greenright/main">Product</a></span> <span>Product
-            Single</span>
+          <span class="mr-2"><a href="/greenright/main">Home</a></span>
+          <span class="mr-2"><a href="/greenright/main">Product</a></span>
+          <span>Product Single</span>
         </p>
         <h1 class="mb-0 bread">Product Single</h1>
       </div>
@@ -505,13 +582,21 @@ strong.reviewcotents {
           <nav id="nav">
             <ul class="widthsizer">
               <li class="useruse" id="detaildesc" onclick="fnMove('1')"><h4
-                  id="de1" style="cursor: pointer">상세설명</h4></li>
+                  id="de1" style="cursor: pointer">
+                  <strong>상세설명</strong>
+                </h4></li>
               <li class="useruse" id="producttest" onclick="fnMove('2')"><h4
-                  id="de2" style="cursor: pointer">상품평</h4></li>
+                  id="de2" style="cursor: pointer">
+                  <strong>상품평</strong>
+                </h4></li>
               <li class="useruse" id="question" onclick="fnMove('3')"><h4
-                  id="de3" style="cursor: pointer">상품문의</h4></li>
+                  id="de3" style="cursor: pointer">
+                  <strong>상품문의</strong>
+                </h4></li>
               <li class="useruse" id="review" onclick="fnMove('4')"><h4
-                  id="de4" style="cursor: pointer">상품평작성</h4></li>
+                  id="de4" style="cursor: pointer">
+                  <strong>상품평작성</strong>
+                </h4></li>
             </ul>
           </nav>
         </div>
@@ -536,13 +621,18 @@ strong.reviewcotents {
         <br>
         <hr>
         <div class="productquestion target" id="div3">
+          <h5>
+            <strong>상품문의</strong>
+          </h5>
           <br>
           <button class='qnaAdd btn btn-primary'>상품문의작성</button>
           <div class="ProductQuestionList"></div>
         </div>
         <hr>
-        <br> <br> <br>
         <div class="review target" id="div4">
+          <h5 class="reviewrite">
+            <strong>상품평작성</strong>
+          </h5>
           <br>
         </div>
 
@@ -684,8 +774,8 @@ strong.reviewcotents {
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">리뷰</h5>
-        <button type="button" class="close btn btn-primary" data-dismiss="modal"
-          aria-label="Close">
+        <button type="button" class="close btn btn-primary"
+          data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -715,15 +805,17 @@ strong.reviewcotents {
   <div class="qnamodal-content">
     <div class="qnaheader">
       <span class="qnaclose">&times;</span>
+      <h5 class="productquestionwrite">상품 문의 작성</h5>
     </div>
     <br>
     <div class="qnabody">
-      <input type="text" class="titleholder" name="qnatitle"
-        placeholder="제목을 입력해주세요 "> <br>
-      <textarea class="contentholder" name="qnacontents"
-        placeholder="내용을 입력해주세요" maxlength=1000 style="resize: none;"></textarea>
-      <br> <input type="checkbox" name="private" class="priv"
-        value=0> 비공개
+      <input type="text" class="titleholder form-control"
+        name="qnatitle" placeholder="제목을 입력해주세요 ">
+      <textarea class="contentholder form-control" id="contentholder"
+        name="qnacontents" placeholder="내용을 입력해주세요" maxlength=1000
+        style="resize: none;"></textarea>
+      <input type="checkbox" name="private" class="priv" value=0>
+      비공개
       <button id="submitbut" class="btn btn-primary">작성</button>
     </div>
     <div class="anqfooter"></div>
@@ -733,14 +825,15 @@ strong.reviewcotents {
 <div id="sellerModal" class="sellermodal">
   <div class="sellermdal-content">
     <div class="sellerheader">
-      문의답변 <span class="sellerclose">&times;</span>
+      <span class="sellerclose">&times;</span>
+      <h5 class="productquestionwrite">문의답변</h5>
     </div>
     <div class="sellerbody">
       <div class="before">작성한 질문의 제목과 내용 출력할 자리</div>
       <div class="now">
-        <textarea class="sellerholder" name="sellercontents"
-          placeholder="답변내용을 입력해주세요" maxlength=1000
-          style="resize: none;"></textarea>
+        <textarea class="sellerholder form-control" id="sellerholder"
+          name="sellercontents" placeholder="답변내용을 입력해주세요"
+          maxlength=1000 style="resize: none;"></textarea>
       </div>
       <button id="answersubmit" class="btn btn-primary">작성</button>
     </div>
@@ -811,7 +904,7 @@ strong.reviewcotents {
                     },
                     function(k) {
                       var a = "";
-                      a += "<h5>사진/리뷰</h5>"
+                      a += "<h5><strong>사진과 리뷰</strong></h5>"
                       if (k.result != null) {
                         a += "<div class='reviewimagepresent'>"
                         for (var i = 0; i < k.result.length; i++) {
@@ -820,17 +913,20 @@ strong.reviewcotents {
                           }
                         }
                         a += "</div>"
-                        a += "<h5>리뷰</h5>"
+                        a += "<h5><strong>리뷰</strong></h5>"
                         a += "<table id='contents'>"
                         for (var i = 0; i < k.result.length; i++) {
-                          a += "<tr><td class='title'><span class='reviewtitle'><strong>제목:</strong>" + k.result[i].title
+                          a += "<tr><td class='title'><span class='reviewtitle'><strong class='marginmk'>제목:</strong>"
+                              + k.result[i].title + "</span>&nbsp;&nbsp;&nbsp;"
+                          a += "<span class='reviewid'><strong class='marginmk'>아이디:</strong>"
+                              + k.result[i].member.id
                               + "</span>&nbsp;&nbsp;&nbsp;"
-                          a += "<span class='reviewid'><strong>아이디:</strong>" + k.result[i].member.id
-                              + "</span>&nbsp;&nbsp;&nbsp;"
-                          a += "<span class='reviewrating'><strong>평점:</strong>" + k.result[i].rating
+                          a += "<span class='reviewrating'><strong class='marginmk'>평점:</strong>"
+                              + k.result[i].rating
                               + "점</span> &nbsp;&nbsp;&nbsp;"
-                          a += "<span class='reviewdate'><strong>작성일:</strong>" + k.result[i].createdDate + "</span></td></tr>"
-                          a += "<tr><td class='conts'><strong class='reviewcotents'>내용</strong>:"
+                          a += "<span class='reviewdate'><strong class='marginmk'>작성일:</strong>"
+                              + k.result[i].createdDate + "</span></td></tr>"
+                          a += "<tr><td class='conts'><strong class='reviewcotents marginmk'>내용</strong>:"
                               + k.result[i].contents + "</td><tr>"
                         }
                         a += "</table>"
@@ -838,7 +934,7 @@ strong.reviewcotents {
                         a += "상품평이 하나도없습니다";
                       }
                       $(".productrating").html(a);
-                      
+
                       $('#contents tr').hide();
                       $('#contents').find('.title').parent().show();
                       $('#contents .title').parent().click(function() {
@@ -850,7 +946,7 @@ strong.reviewcotents {
                           $(tr[rindex + 1]).hide();
                         }
                       });
-                      
+
                       $(document)
                           .on(
                               "click",
@@ -869,18 +965,18 @@ strong.reviewcotents {
 
                                           let html1 = "";
                                           html1 += "<img src='/images/member.PNG' style='width:30px; height:30px; object-fit:cover;'>"
-                                          html1 += "<strong>평점 :</strong>" + a.result.rating
-                                              + "점<br>";
-                                          html1 += "<strong>아이디:</strong>" + a.result.member.id
-                                              + "";
-                                          html1 += "<strong>작성일:</strong>"
+                                          html1 += "<strong class='marginmk'>평점 :</strong>"
+                                              + a.result.rating + "점<br>";
+                                          html1 += "<strong class='marginmk'>아이디:</strong>"
+                                              + a.result.member.id + "";
+                                          html1 += "<strong class='marginmk'>작성일:</strong>"
                                               + a.result.createdDate + "";
                                           $(".memberinfo").html(html1);
                                           let html2 = "";
-                                          html2 += "<strong>제목:</strong>" + a.result.title
-                                              + "<br>"
-                                          html2 += "<strong>내용:</strong>" + a.result.contents
-                                              + "";
+                                          html2 += "<strong class='marginmk'>제목:</strong>"
+                                              + a.result.title + "<br>"
+                                          html2 += "<strong class='marginmk'>내용:</strong>"
+                                              + a.result.contents + "";
                                           $(".tcontents").html(html2);
                                         })
 
@@ -897,8 +993,8 @@ strong.reviewcotents {
             a += "<div class='container' style='width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;'>"
             a += "<div style='width: inherit;'>"
             a += "<div class='input-group' style='width: 1000px; margin: auto;'>"
-            a += "<p class='starpoint'>별점:</p>"
-            a += "<div class='stars' style ='border: 0.1px solid azure'>"
+            a += "<h5 class='starratin'>별점</h5>"
+            a += "<div class='stars' >"
             a += "<input class='star star-5' id='star-5' type='radio' name='rating' value=5 />"
             a += "<label class='star star-5' for='star-5'></label>"
             a += "<input class='star star-4' id='star-4' type='radio' name='rating' value=4 />"
@@ -912,50 +1008,184 @@ strong.reviewcotents {
             a += "</div>"
             a += "<input type='text' id='title' style='width :743px' placeholder='제목을입력하세요'/>"
             a += "<br><TEXTAREA  id ='rvcontents' cols='90' rows='10' style='resize:none;'  placeholder='내용을 입력하세요.'/><br>"
-            a += "<button id='review-add-btn' class='btn btn-primary'>등록</button>"
-            a += "<input type='file' id='filePath' name='reviewPhoto'>"
-            a += "<div id='images-div'></div>"
+            a += "<br><button id='review-add-btn' class='btn btn-primary'>등록</button>"
+            a += "<input type='file' class='btn btn-primary' id='filePath' name='reviewPhoto'>"
+            a += "<div id='images-div'><img  class='imgpreview'src='' alt='' style='width:100px height:100px'></div>"
             a += "</div></div><br><br>";
-            $(".review").html(a);
+            $(".review").append(a);
 
             let ratingch = 5;
             $(document).on("change", ".star", function() {
               ratingch = $(this).val();
             })
 
-            $("#review-add-btn").click(function() {
-              let productNo = $("#productNo").val();
-              let memberNo = 1;
-              let rating = ratingch
-              let title = $("#title").val();
-              let contents = $("#rvcontents").val();
-              let ReviewPhoto = $("#filePath").val();
-              $.post("review/check", {
-                "productNo" : productNo,
-                "memberNo" : memberNo
-              }, function(a) {
-                if (a == 0) {
-                  $.ajax({
-                    url : "/greenright/json/Review/add",
-                    type : "post",
-                    data : {
-                      "productNo" : productNo,
-                      "memberNo" : memberNo,
-                      "rating" : rating,
-                      "title" : title,
-                      "contents" : contents,
-                    },
-                    success : function(result) {
-                      swal("상품평 등록완료")
+            $("#review-add-btn")
+                .click(
+                    function() {
+                      let productNo = $("#productNo").val();
+                      let memberNo = 1;
+                      let rating = ratingch
+                      let title = $("#title").val();
+                      let contents = $("#rvcontents").val();
+                      let ReviewPhoto = $("#filePath").val();
+                      $
+                          .post(
+                              "review/check",
+                              {
+                                "productNo" : productNo,
+                                "memberNo" : memberNo
+                              },
+                              function(a) {
+                                if (a == 0) {
+                                  $
+                                      .ajax({
+                                        url : "/greenright/json/Review/add",
+                                        type : "post",
+                                        data : {
+                                          "productNo" : productNo,
+                                          "memberNo" : memberNo,
+                                          "rating" : rating,
+                                          "title" : title,
+                                          "contents" : contents,
+                                        },
+                                        success : function(result) {
+                                          swal("상품평 등록완료")
+                                          let ratingAver = 0;
+                                          $
+                                              .get(
+                                                  "/greenright/json/Review/list",
+                                                  {
+                                                    "no" : $("#productNo")
+                                                        .val()
+                                                  },
+                                                  function(k) {
+                                                    var a = "";
+                                                    a += "<h5>사진/리뷰</h5>"
+                                                    if (k.result != null) {
+                                                      a += "<div class='reviewimagepresent'>"
+                                                      for (var i = 0; i < k.result.length; i++) {
+                                                        if (k.result[i].photos.photoPath != null) {
+                                                          a += "<img class='img-fluid modal_maker' id="+k.result[i].no+" src='/upload/review/"+k.result[i].photos.photoPath+"'  alt='' style='width:100px; height:100px; object-fit:cover; cursor:pointer;'> "
+                                                        }
+                                                      }
+                                                      a += "</div>"
+                                                      a += "<h5>리뷰</h5>"
+                                                      a += "<table id='contents'>"
+                                                      for (var i = 0; i < k.result.length; i++) {
+                                                        a += "<tr><td class='title'><span class='reviewtitle'><strong class='marginmk'>제목:</strong>"
+                                                            + k.result[i].title
+                                                            + "</span>"
+                                                        a += "<span class='reviewid'><strong class='marginmk'>아이디:</strong>"
+                                                            + k.result[i].member.id
+                                                            + "</span>"
+                                                        a += "<span class='reviewrating'><strong class='marginmk'>평점:</strong>"
+                                                            + k.result[i].rating
+                                                            + "점</span> "
+                                                        a += "<span class='reviewdate'><strong class='marginmk'>작성일:</strong>"
+                                                            + k.result[i].createdDate
+                                                            + "</span></td></tr>"
+                                                        a += "<tr><td class='conts'><strong class='reviewcotents marginmk'>내용</strong>:"
+                                                            + k.result[i].contents
+                                                            + "</td><tr>"
+                                                      }
+                                                      a += "</table>"
+                                                    } else {
+                                                      a += "상품평이 하나도없습니다";
+                                                    }
+                                                    $(".productrating").html(a);
 
-                    },
-                  });
-                } else {
-                  swal("이미 상품평을 작성하셨습니다.")
-                }
-              })
+                                                    $('#contents tr').hide();
+                                                    $('#contents').find(
+                                                        '.title').parent()
+                                                        .show();
+                                                    $('#contents .title')
+                                                        .parent()
+                                                        .click(
+                                                            function() {
+                                                              var tr = $('#contents tr');
+                                                              var rindex = $(
+                                                                  this)
+                                                                  .parent()
+                                                                  .children()
+                                                                  .index(this);
+                                                              if ($(
+                                                                  tr[rindex + 1])
+                                                                  .css(
+                                                                      "display") == "none") {
+                                                                $(
+                                                                    tr[rindex + 1])
+                                                                    .show();
+                                                              } else {
+                                                                $(
+                                                                    tr[rindex + 1])
+                                                                    .hide();
+                                                              }
+                                                            });
 
-            })
+                                                    $(document)
+                                                        .on(
+                                                            "click",
+                                                            ".modal_maker",
+                                                            function() {
+                                                              let reviewNo = $(
+                                                                  this).attr(
+                                                                  'id');
+                                                              let imagesrc = $(
+                                                                  this).attr(
+                                                                  "src");
+                                                              $(".modalimgget")
+                                                                  .attr("src",
+                                                                      imagesrc);
+                                                              $
+                                                                  .get(
+                                                                      "/greenright/json/Review/get",
+                                                                      {
+                                                                        "no" : reviewNo
+                                                                      },
+                                                                      function(
+                                                                          a) {
+
+                                                                        let html1 = "";
+                                                                        html1 += "<img src='/images/member.PNG' style='width:30px; height:30px; object-fit:cover;'>"
+                                                                        html1 += "<strong class='marginmk'>평점 :</strong>"
+                                                                            + a.result.rating
+                                                                            + "점<br>";
+                                                                        html1 += "<strong class='marginmk'>아이디:</strong>"
+                                                                            + a.result.member.id
+                                                                            + "";
+                                                                        html1 += "<strong class='marginmk'>작성일:</strong>"
+                                                                            + a.result.createdDate
+                                                                            + "";
+                                                                        $(
+                                                                            ".memberinfo")
+                                                                            .html(
+                                                                                html1);
+                                                                        let html2 = "";
+                                                                        html2 += "<strong>제목:</strong>"
+                                                                            + a.result.title
+                                                                            + "<br>"
+                                                                        html2 += "<strong>내용:</strong>"
+                                                                            + a.result.contents
+                                                                            + "";
+                                                                        $(
+                                                                            ".tcontents")
+                                                                            .html(
+                                                                                html2);
+                                                                      })
+
+                                                              $('div.modal')
+                                                                  .modal();
+                                                            })
+
+                                                  })
+                                        },
+                                      });
+                                } else {
+                                  swal("이미 상품평을 작성하셨습니다.")
+                                }
+                              })
+
+                    })
 
             $('#filePath').fileupload(
                 {
@@ -970,7 +1200,7 @@ strong.reviewcotents {
                     for (var i = 0; i < data.files.length; i++) {
                       try {
                         if (data.files[i].preview.toDataURL) {
-                          $("<img>").attr('src',
+                          $(".imgpreview").attr('src',
                               data.files[i].preview.toDataURL()).css('width',
                               '100px').appendTo(imagesDiv);
                         }
@@ -980,6 +1210,7 @@ strong.reviewcotents {
                     $('#upload-btn').unbind("click");
                     $('#upload-btn').click(function() {
                       data.submit();
+
                     });
                   },
                   add : function(e, data) {
@@ -993,7 +1224,9 @@ strong.reviewcotents {
                       }, function(a) {
                         if (a == 0) {
                           data.submit(); // submit()을 호출하면, 서버에 데이터를 보내기 전에 submit 이벤트가 발생한다.
+
                           swal("상품평 등록완료")
+
                         } else {
                           swal("이미 상품평을 작성하셨습니다.")
                         }
@@ -1010,7 +1243,9 @@ strong.reviewcotents {
                       "title" : $("#title").val(),
                       "contents" : $("#rvcontents").val()
                     }
+
                   }
+
                 });
 
             // When the user clicks on the button, open the modal 
@@ -1027,129 +1262,159 @@ strong.reviewcotents {
                     function() {
                       document.getElementById('sellerModal').style.display = "block";
                       let questionNo = $(this).prev().val()
-                      $.get("/greenright/json/ProductQuestion/getOneQuestion",
-                          {
-                            "questionNo" : questionNo
-                          }, function(a) {
-                            let before = "";
-                            before += "<strong>제목 :</strong> " + a.result.title + "<br>"
-                            before += "<strong>내용 :</strong> " + a.result.contents
-                            $(".before").html(before);
-                          })
+                      $
+                          .get(
+                              "/greenright/json/ProductQuestion/getOneQuestion",
+                              {
+                                "questionNo" : questionNo
+                              },
+                              function(a) {
+                                let before = "";
+                                before += "<span class='answerquestion'><strong>제목 :</strong> "
+                                    + a.result.title + "</span><br>"
+                                before += "<span class='answerquestion'><strong>내용 :</strong> "
+                                    + a.result.contents + "</span>"
+                                $(".before").html(before);
+                              })
                       $(document)
                           .on(
                               "click",
                               "#answersubmit",
                               function() {
-                                if($(".sellerholder").val()==""){
+                                if ($(".sellerholder").val() == "") {
                                   swal("답변 내용을 입력해주세요")
-                                }else{
-                                $.post(
-                                        "/greenright/json/ProductAnswer/add",
-                                        {
-                                          "no" : questionNo,
-                                          "answerContents" : $(".sellerholder").val()
-                                        },
-                                        function(result) {
-                                          if (result.result == "success") {
-                                            swal("등록에 성공하셨습니다 . ")
-                                            $(".sellerclose").trigger("click");
-                                          } else {
-                                            swal("등록에 실패하셨습니다 .  ")
-                                            $(".sellerclose").trigger("click");
-                                          }
+                                } else {
+                                  $
+                                      .post(
+                                          "/greenright/json/ProductAnswer/add",
+                                          {
+                                            "no" : questionNo,
+                                            "answerContents" : $(
+                                                ".sellerholder").val()
+                                          },
+                                          function(result) {
+                                            if (result.result == "success") {
+                                              swal("등록에 성공하셨습니다 . ")
+                                              $(".sellerclose")
+                                                  .trigger("click");
+                                            } else {
+                                              swal("등록에 실패하셨습니다 .  ")
+                                              $(".sellerclose")
+                                                  .trigger("click");
+                                            }
 
-                                          $.get(
-                                              "/greenright/json/ProductQuestion/getQuestion",
-                                              {
-                                                "no" : $("#productNo").val()
-                                              },
-                                              function(a) {
-                                                let qa = "";
-                                                qa += "<table id='questions'>"
-                                                for (i = 0; i < a.result.length; i++) {
+                                            $
+                                                .get(
+                                                    "/greenright/json/ProductQuestion/getQuestion",
+                                                    {
+                                                      "no" : $("#productNo")
+                                                          .val()
+                                                    },
+                                                    function(a) {
+                                                      let qa = "";
+                                                      qa += "<table id='questions'>"
+                                                      for (i = 0; i < a.result.length; i++) {
 
-                                                  if (a.result[i].secretFlag == 0) {
-                                                    if (a.result[i].productAnswer.answerContents != null) {
-                                                      qa += "<tr><td class='title'><strong>답변상태:</strong>YES 제목:"
-                                                          + a.result[i].title
-                                                          + "<strong> 작성자:</strong>"
-                                                          + a.result[i].member.id
-                                                          + "<strong> 작성일:</strong>"
-                                                          + a.result[i].createdDate
-                                                          + "</td></tr>"
-                                                      qa += "<tr><td class='conts'><strong>내용 :</strong> "
-                                                          + a.result[i].contents
-                                                          + "<input class='questionNo' value="+a.result[i].no+" hidden>"
-                                                          + "<br><strong>답변내용 :</strong> "
-                                                          + a.result[i].productAnswer.answerContents
-                                                          + "</td></tr>"
-                                                    } else {
-                                                      qa += "<tr><td class='title'><strong>답변상태:</strong>NO <strong>제목:</strong>"
-                                                          + a.result[i].title
-                                                          + "<strong> 작성자:</strong>"
-                                                          + a.result[i].member.id
-                                                          + "<strong> 작성일:</strong>"
-                                                          + a.result[i].createdDate
-                                                          + "</td></tr>"
-                                                      qa += "<tr><td class='conts'><strong>내용 :</strong> "
-                                                          + a.result[i].contents
-                                                          + "<input class='questionNo' value="+a.result[i].no+" hidden>"
-                                                          + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
-                                                    }
-                                                  } else {
-                                                    if (a.result[i].productAnswer.answerContents != null) {
-                                                      qa += "<tr><td class='title secretwrite'><strong>답변상태:</strong>YES &nbsp;&nbsp;비밀글임니다^ㅁ^</td></tr>"
-                                                      qa += "<tr><td class='conts'><strong>내용 :</strong> "
-                                                          + a.result[i].contents
-                                                          + "<input class='questionNo' value="+a.result[i].no+" hidden>"
-                                                          + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
-                                                    } else {
-                                                      qa += "<tr><td class='title secretwrite'><strong>답변상태:</strong>NO &nbsp;&nbsp;비밀글임니다^ㅁ^</td></tr>"
-                                                      qa += "<tr><td class='conts'><strong>내용 : </strong>"
-                                                          + a.result[i].contents
-                                                          + "<input class='questionNo' value="+a.result[i].no+" hidden>"
-                                                          + "<br><strong>답변내용 :</strong> "
-                                                          + a.result[i].productAnswer.answerContents
-                                                          + "</td></tr>"
-                                                    }
-
-                                                  }
-                                                }
-                                                qa += "</table>"
-                                                $(".ProductQuestionList").html(qa);
-
-                                                $('#questions tr').hide();
-                                                $('#questions').find('.title')
-                                                    .parent().show();
-                                                $('#questions .title')
-                                                    .parent()
-                                                    .click(
-                                                        function() {
-                                                          var tr = $('#questions tr');
-                                                          var rindex = $(this)
-                                                              .parent().children()
-                                                              .index(this);
-                                                          if ($(tr[rindex + 1])
-                                                              .css("display") == "none") {
-                                                            if ($(tr[rindex])
-                                                                .children()
-                                                                .hasClass(
-                                                                    "secretwrite")) {
-                                                              swal("비밀글은 작성자와 운영자만 볼수있습니다.");
-                                                            } else {
-                                                              $(tr[rindex + 1])
-                                                                  .show();
-                                                            }
+                                                        if (a.result[i].secretFlag == 0) {
+                                                          if (a.result[i].productAnswer.answerContents != null) {
+                                                            qa += "<tr><td class='title'><strong class='marginmk'>답변상태:</strong>YES<span class ='answertitle'><strong class='marginmk'> 제목:</strong>"
+                                                                + a.result[i].title
+                                                                + "</span><span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
+                                                                + a.result[i].member.id
+                                                                + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
+                                                                + a.result[i].createdDate
+                                                                + "</span></td></tr>"
+                                                            qa += "<tr><td class='conts'><span class='answercontents'><strong>내용 :</strong> "
+                                                                + a.result[i].contents
+                                                                + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                                + "<br><span class='answerconts'><strong class='marginmk'>답변내용 :</strong> "
+                                                                + a.result[i].productAnswer.answerContents
+                                                                + "</span></td></tr>"
                                                           } else {
-                                                            $(tr[rindex + 1])
-                                                                .hide();
+                                                            qa += "<tr><td class='title'><strong class='marginmk'>답변상태:</strong> NO <span class='answertitle'><strong  class='marginmk'>제목:</strong>"
+                                                                + a.result[i].title
+                                                                + "</span><span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
+                                                                + a.result[i].member.id
+                                                                + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
+                                                                + a.result[i].createdDate
+                                                                + "</span></td></tr>"
+                                                            qa += "<tr><td class='conts'><span class='answercontents'><strong class='marginmk'>내용 :</strong> "
+                                                                + a.result[i].contents
+                                                                + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                                + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
                                                           }
-                                                        });
+                                                        } else {
+                                                          if (a.result[i].productAnswer.answerContents != null) {
+                                                            qa += "<tr><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>YES <span class='secretbook'><img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
+                                                                + "<span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
+                                                                + a.result[i].member.id
+                                                                + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
+                                                                + a.result[i].createdDate
+                                                                + "</span></td></tr>"
+                                                            qa += "<tr><td class='conts'><span class='answercontents'><strong>내용 :</strong> "
+                                                                + a.result[i].contents
+                                                                + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                                + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
+                                                          } else {
+                                                            qa += "<tr><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>NO<span class='secretbook'> <img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
+                                                              + "<span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
+                                                                + a.result[i].member.id
+                                                                + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
+                                                                + a.result[i].createdDate
+                                                                + "</span></td></tr>"
+                                                            qa += "<tr><span class='answercontents'><td class='conts'><strong>내용 : </strong>"
+                                                                + a.result[i].contents
+                                                                + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                                + "<br><span class='answerconts'><strong class='marginmk'>답변내용 :</strong> "
+                                                                + a.result[i].productAnswer.answerContents
+                                                                + "</span></td></tr>"
+                                                          }
 
-                                              })
+                                                        }
+                                                      }
+                                                      qa += "</table>"
+                                                      $(".ProductQuestionList")
+                                                          .html(qa);
 
-                                        })
+                                                      $('#questions tr').hide();
+                                                      $('#questions').find(
+                                                          '.title').parent()
+                                                          .show();
+                                                      $('#questions .title')
+                                                          .parent()
+                                                          .click(
+                                                              function() {
+                                                                var tr = $('#questions tr');
+                                                                var rindex = $(
+                                                                    this)
+                                                                    .parent()
+                                                                    .children()
+                                                                    .index(this);
+                                                                if ($(
+                                                                    tr[rindex + 1])
+                                                                    .css(
+                                                                        "display") == "none") {
+                                                                  if ($(
+                                                                      tr[rindex])
+                                                                      .children()
+                                                                      .hasClass(
+                                                                          "secretwrite")) {
+                                                                    swal("비밀글은 작성자와 운영자만 볼수있습니다.");
+                                                                  } else {
+                                                                    $(
+                                                                        tr[rindex + 1])
+                                                                        .show();
+                                                                  }
+                                                                } else {
+                                                                  $(
+                                                                      tr[rindex + 1])
+                                                                      .hide();
+                                                                }
+                                                              });
+
+                                                    })
+
+                                          })
                                 }
                               })
                     })
@@ -1204,7 +1469,8 @@ strong.reviewcotents {
                                 },
                                 function(a) {
                                   $
-                                  $.get(
+                                  $
+                                      .get(
                                           "/greenright/json/ProductQuestion/getQuestion",
                                           {
                                             "no" : $("#productNo").val()
@@ -1215,51 +1481,61 @@ strong.reviewcotents {
                                             for (i = 0; i < a.result.length; i++) {
 
                                               if (a.result[i].secretFlag == 0) {
-                                                if (a.result[i].productAnswer.answerContents != null) {
-                                                  qa += "<tr><td class='title'><strong>답변상태:</strong>YES <strong>제목:</strong>"
-                                                      + a.result[i].title
-                                                      + "<strong>작성자:</strong>"
-                                                      + a.result[i].member.id
-                                                      + " <strong>작성일:</strong>"
-                                                      + a.result[i].createdDate
-                                                      + "</td></tr>"
-                                                  qa += "<tr><td class='conts'><strong>내용 :</strong> "
-                                                      + a.result[i].contents
-                                                      + "<input class='questionNo' value="+a.result[i].no+" hidden>"
-                                                      + "<br><strong>답변내용 :</strong> "
-                                                      + a.result[i].productAnswer.answerContents
-                                                      + "</td></tr>"
-                                                } else {
-                                                  qa += "<tr><td class='title'><strong>답변상태:</strong>NO <strong>제목:</strong>"
-                                                      + a.result[i].title
-                                                      + " <strong>작성자:</strong>"
-                                                      + a.result[i].member.id
-                                                      + " <strong>작성일:</strong>"
-                                                      + a.result[i].createdDate
-                                                      + "</td></tr>"
-                                                  qa += "<tr><td class='conts'><strong>내용 :</strong> "
-                                                      + a.result[i].contents
-                                                      + "<input class='questionNo' value="+a.result[i].no+" hidden>"
-                                                      + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
-                                                }
-                                              } else {
-                                                if (a.result[i].productAnswer.answerContents != null) {
-                                                  qa += "<tr><td class='title secretwrite'><strong>답변상태:</strong>YES &nbsp;&nbsp;비밀글임니다^ㅁ^</td></tr>"
-                                                  qa += "<tr><td class='conts'><strong>내용 :</strong> "
-                                                      + a.result[i].contents
-                                                      + "<input class='questionNo' value="+a.result[i].no+" hidden>"
-                                                      + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
-                                                } else {
-                                                  qa += "<tr><td class='title secretwrite'><strong>답변상태:</strong>NO &nbsp;&nbsp;비밀글임니다^ㅁ^</td></tr>"
-                                                  qa += "<tr><td class='conts'><strong>내용 :</strong> "
-                                                      + a.result[i].contents
-                                                      + "<input class='questionNo' value="+a.result[i].no+" hidden>"
-                                                      + "<br><strong>답변내용 :</strong> "
-                                                      + a.result[i].productAnswer.answerContents
-                                                      + "</td></tr>"
-                                                }
+                                                          if (a.result[i].productAnswer.answerContents != null) {
+                                                            qa += "<tr><td class='title'><strong class='marginmk'>답변상태:</strong>YES <span class ='answertitle'><strong class='marginmk'>제목:</strong>"
+                                                                + a.result[i].title
+                                                                + "</span><span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
+                                                                + a.result[i].member.id
+                                                                + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
+                                                                + a.result[i].createdDate
+                                                                + "</span></td></tr>"
+                                                            qa += "<tr><td class='conts'><span class='answercontents'><strong>내용 :</strong> "
+                                                                + a.result[i].contents
+                                                                + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                                + "<br><span class='answerconts'><strong class='marginmk'>답변내용 :</strong> "
+                                                                + a.result[i].productAnswer.answerContents
+                                                                + "</span></td></tr>"
+                                                          } else {
+                                                            qa += "<tr><td class='title'><strong class='marginmk'>답변상태:</strong>NO <span class='answertitle'><strong  class='marginmk'>제목:</strong>"
+                                                                + a.result[i].title
+                                                                + "</span><span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
+                                                                + a.result[i].member.id
+                                                                + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
+                                                                + a.result[i].createdDate
+                                                                + "</span></td></tr>"
+                                                            qa += "<tr><td class='conts'><span class='answercontents'><strong class='marginmk'>내용 :</strong> "
+                                                                + a.result[i].contents
+                                                                + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                                + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
+                                                          }
+                                                        } else {
+                                                          if (a.result[i].productAnswer.answerContents != null) {
+                                                            qa += "<tr><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>YES<span class='secretbook'> <img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
+                                                              + "<span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
+                                                                + a.result[i].member.id
+                                                                + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
+                                                                + a.result[i].createdDate
+                                                                + "</span></td></tr>"
+                                                            qa += "<tr><td class='conts'><span class='answercontents'><strong>내용 :</strong> "
+                                                                + a.result[i].contents
+                                                                + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                                + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
+                                                          } else {
+                                                            qa += "<tr><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>NO <span class='secretbook'><img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
+                                                            + "<span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
+                                                                + a.result[i].member.id
+                                                                + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
+                                                                + a.result[i].createdDate
+                                                                + "</span></td></tr>"
+                                                            qa += "<tr><span class='answercontents'><td class='conts'><strong>내용 : </strong>"
+                                                                + a.result[i].contents
+                                                                + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                                + "<br><span class='answerconts'><strong class='marginmk'>답변내용 :</strong> "
+                                                                + a.result[i].productAnswer.answerContents
+                                                                + "</span></td></tr>"
+                                                          }
 
-                                              }
+                                                        }
                                             }
                                             qa += "</table>"
                                             $(".ProductQuestionList").html(qa);
@@ -1320,68 +1596,88 @@ strong.reviewcotents {
                       for (i = 0; i < a.result.length; i++) {
 
                         if (a.result[i].secretFlag == 0) {
-                          if (a.result[i].productAnswer.answerContents != null) {
-                            qa += "<tr><td class='title'><strong>답변상태:</strong>YES <strong>제목:</strong>"
-                                + a.result[i].title + " <strong>작성자:</strong>"
-                                + a.result[i].member.id + " <strong>작성일:</strong>"
-                                + a.result[i].createdDate + "</td></tr>"
-                            qa += "<tr><td class='conts'><strong>내용 :</strong> "
-                                + a.result[i].contents
-                                + "<input class='questionNo' value="+a.result[i].no+" hidden>"
-                                + "<br><strong>답변내용 :</strong> "
-                                + a.result[i].productAnswer.answerContents
-                                + "</td></tr>"
-                          } else {
-                            qa += "<tr><td class='title'><strong>답변상태:</strong>NO <strong>제목:</strong>"
-                                + a.result[i].title + " <strong>작성자:</strong>"
-                                + a.result[i].member.id + " <strong>작성일:</strong>"
-                                + a.result[i].createdDate + "</td></tr>"
-                            qa += "<tr><td class='conts'><strong>내용 :</strong> "
-                                + a.result[i].contents
-                                + "<input class='questionNo' value="+a.result[i].no+" hidden>"
-                                + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
-                          }
-                        } else {
-                          if (a.result[i].productAnswer.answerContents != null) {
-                            qa += "<tr><td class='title secretwrite'><strong>답변상태:</strong>YES &nbsp;&nbsp;비밀글임니다^ㅁ^</td></tr>"
-                            qa += "<tr><td class='conts'><strong>내용 :</strong> "
-                                + a.result[i].contents
-                                + "<input class='questionNo' value="+a.result[i].no+" hidden>"
-                                + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
-                          } else {
-                            qa += "<tr><td class='title secretwrite'><strong>답변상태:</strong>NO &nbsp;&nbsp;비밀글임니다^ㅁ^</td></tr>"
-                            qa += "<tr><td class='conts'><strong>내용 :</strong> "
-                                + a.result[i].contents
-                                + "<input class='questionNo' value="+a.result[i].no+" hidden>"
-                                + "<br><strong>답변내용 : </strong>"
-                                + a.result[i].productAnswer.answerContents
-                                + "</td></tr>"
-                          }
+                                                          if (a.result[i].productAnswer.answerContents != null) {
+                                                            qa += "<tr><td class='title'><strong class='marginmk'>답변상태:</strong>YES <span class ='answertitle'><strong class='marginmk'>제목:</strong>"
+                                                                + a.result[i].title
+                                                                + "</span><span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
+                                                                + a.result[i].member.id
+                                                                + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
+                                                                + a.result[i].createdDate
+                                                                + "</span></td></tr>"
+                                                            qa += "<tr><td class='conts'><span class= 'answercontents'><strong>내용 :</strong> "
+                                                                + a.result[i].contents
+                                                                + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                                + "<br><span class='answerconts'><strong class='marginmk'>답변내용 :</strong> "
+                                                                + a.result[i].productAnswer.answerContents
+                                                                + "</span></td></tr>"
+                                                          } else {
+                                                            qa += "<tr><td class='title'><strong class='marginmk'>답변상태:</strong>NO <span class='answertitle'> <strong class='marginmk'>제목:</strong>"
+                                                                + a.result[i].title
+                                                                + "</span><span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
+                                                                + a.result[i].member.id
+                                                                + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
+                                                                + a.result[i].createdDate
+                                                                + "</span></td></tr>"
+                                                            qa += "<tr><td class='conts'><span class='answercontents'><strong class='marginmk'>내용 :</strong> "
+                                                                + a.result[i].contents
+                                                                + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                                + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
+                                                          }
+                                                        } else {
+                                                          if (a.result[i].productAnswer.answerContents != null) {
+                                                            qa += "<tr><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>YES <span class='secretbook'><img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
+                                                            + "<span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
+                                                                + a.result[i].member.id
+                                                                + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
+                                                                + a.result[i].createdDate
+                                                                + "</span></td></tr>"
+                                                            qa += "<tr><td class='conts'><span class='answercontents'><strong>내용 :</strong> "
+                                                                + a.result[i].contents
+                                                                + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                                + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
+                                                          } else {
+                                                            qa += "<tr><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>NO <span class='secretbook'><img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
+                                                            + "<span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
+                                                                + a.result[i].member.id
+                                                                + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
+                                                                + a.result[i].createdDate
+                                                                + "</span></td></tr>"
+                                                           
+                                                            qa += "<tr><span class='answercontents'><td class='conts'><strong>내용 : </strong>"
+                                                                + a.result[i].contents
+                                                                + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
+                                                                + "<br><span class='answerconts'><strong class='marginmk'>답변내용 :</strong> "
+                                                                + a.result[i].productAnswer.answerContents
+                                                                + "</span></td></tr>"
+                                                          }
 
-                        }
+                                                        }
                       }
                       qa += "</table>"
                       $(".ProductQuestionList").append(qa);
-                      
+
                       $('#questions tr').hide();
                       $('.answersend').hide();
                       $('#questions').find('.title').parent().show();
-                      $('#questions .title').parent().click(function() {
-                        var tr = $('#questions tr');
-                        var rindex = $(this).parent().children().index(this);
-                        if ($(tr[rindex + 1]).css("display") == "none") {
-                          if ($(tr[rindex]).children().hasClass("secretwrite")) {
-                            swal("비밀글은 작성자와 운영자만 볼수있습니다.");
-                          } else {
-                            $(tr[rindex + 1]).show();
-                            $(tr[rindex + 1]).find(".answersend").show();
-                          }
-                        } else {
-                          $(tr[rindex + 1]).hide();
-                          $(this).find(".answersend").hide();
-                        }
-                      });
-                      
+                      $('#questions .title').parent().click(
+                          function() {
+                            var tr = $('#questions tr');
+                            var rindex = $(this).parent().children()
+                                .index(this);
+                            if ($(tr[rindex + 1]).css("display") == "none") {
+                              if ($(tr[rindex]).children().hasClass(
+                                  "secretwrite")) {
+                                swal("비밀글은 작성자와 운영자만 볼수있습니다.");
+                              } else {
+                                $(tr[rindex + 1]).show();
+                                $(tr[rindex + 1]).find(".answersend").show();
+                              }
+                            } else {
+                              $(tr[rindex + 1]).hide();
+                              $(this).find(".answersend").hide();
+                            }
+                          });
+
                     })
 
           })
@@ -1405,42 +1701,6 @@ strong.reviewcotents {
     $("#clickchange").attr("src", a);
 
   })
-</script>
-
-<script>
-  $(document).ready(function() {
-
-    var quantitiy = 0;
-    $('.quantity-right-plus').click(function(e) {
-
-      // Stop acting like a button
-      e.preventDefault();
-      // Get the field name
-      var quantity = parseInt($('#quantity').val());
-
-      // If is not undefined
-
-      $('#quantity').val(quantity + 1);
-
-      // Increment
-
-    });
-
-    $('.quantity-left-minus').click(function(e) {
-      // Stop acting like a button
-      e.preventDefault();
-      // Get the field name
-      var quantity = parseInt($('#quantity').val());
-
-      // If is not undefined
-
-      // Increment
-      if (quantity > 0) {
-        $('#quantity').val(quantity - 1);
-      }
-    });
-
-  });
 </script>
 <script>
   function fnMove(seq) {
@@ -1488,7 +1748,6 @@ strong.reviewcotents {
       $('.floatMenu').removeClass("fix");
     }
   });
-
 </script>
 
 
