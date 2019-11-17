@@ -11,7 +11,11 @@
   "dependencies": {
     "blueimp-file-upload": "^10.3.0",
     "bootstrap": "^4.3.1",
+<<<<<<< HEAD
     "chart.js": "^2.9.2",
+=======
+    "handlebars": "^4.5.1",
+>>>>>>> 400f41a8987beb43867cd2b3c19428756aabd7d7
     "jquery": "^3.4.1",
     "json": "^9.0.6",
     "popper.js": "^1.16.0",

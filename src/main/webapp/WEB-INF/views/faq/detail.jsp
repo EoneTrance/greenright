@@ -48,13 +48,13 @@
       <div class="form-group">
         <label>질문유형*</label><br>
         <select id="questionType" name="questionType" class="form-control">
-          <option value="">- 질문 유형을 선택하세요 -</option>
-          <option value="배송안내">배송안내</option>
-          <option value="주문결제">주문결제</option>
-          <option value="주문취소">주문취소</option>
-          <option value="교환,환불">교환,환불</option>
-          <option value="적립금">적립금</option>
-          <option value="기타">기타</option>
+          <option value=""disabled="disabled">전체</option>
+          <option value="배송안내" disabled="disabled">배송안내</option>
+          <option value="주문결제" disabled="disabled">주문결제</option>
+          <option value="주문취소" disabled="disabled">주문취소</option>
+          <option value="교환,환불" disabled="disabled">교환,환불</option>
+          <option value="적립금" disabled="disabled">적립금</option>
+          <option value="기타" disabled="disabled">기타</option>
         </select>
       </div>
       <div class="form-group">
@@ -68,6 +68,7 @@
       </div>
       
       <div id="faq-detail-btn-wrap" class="form-group">
+        <button id="clearbtn" name="clearbtn" class="btn py-3 px-4 btn-primary" hidden="" onclick="return false;" >해제</button>
         <button id="uptbtn" name="uptbtn" class="btn py-3 px-4 btn-primary" hidden="">수정</button>
         <a href="delete?no=${faq.faqID}" class="btn py-3 px-4 btn-primary" hidden="">삭제</a>
         <button id="backbtn" name="backbtn" class="btn py-3 px-4 btn-primary" onclick="return false;">리스트로 돌아가기</button>
@@ -101,11 +102,17 @@ function upt(){
   });
   
   
+  (function(){
+    $('#questionType').val('${faq.questionType}');
+  })();
+  
+  
   /*관리자 사용버튼 미구현  */
   $(function(){
-    $("#").click(function(){
+    $("#clearbtn").click(function(){
       $("#title").removeAttr("readonly");
       $("#contents").removeAttr("readonly");
+      $("#questionType option").removeAttr("disabled");
       
     });
   });
