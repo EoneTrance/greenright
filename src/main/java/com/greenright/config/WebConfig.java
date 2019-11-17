@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.util.UrlPathHelper;
+import com.greenright.interceptor.LoginCheckInterceptor;
 
 @ComponentScan("com.greenright.web")
 @EnableWebMvc
@@ -64,5 +65,8 @@ public class WebConfig implements WebMvcConfigurer {
   
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
+
+    registry.addInterceptor(new LoginCheckInterceptor()).addPathPatterns("/mypage/*");
+
   }
 }
