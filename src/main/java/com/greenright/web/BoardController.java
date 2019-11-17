@@ -108,6 +108,7 @@ public class BoardController {
     model.addAttribute("memberName", session.getAttribute("memberName"));
     model.addAttribute("loginName", session.getAttribute("loginName"));
     model.addAttribute("today", new Date(System.currentTimeMillis()).toString());
+
     /*
      * PagingControl pc = new PagingControl(); pc.setListCount(20);
      */

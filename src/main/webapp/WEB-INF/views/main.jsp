@@ -78,7 +78,7 @@
      <!------------------------------------------------------------------------------------------------------------------->
      <section id="home-section" class="hero">
       <div class="home-slider owl-carousel">
-        <div class="slider-item" style="background-image: url(../../images/mainimg3.JPG);">
+        <div class="slider-item" style="background-image: url(../../images/bg_1.jpg);">
           <div class="overlay"></div>
           <div class="container">
             <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
@@ -482,44 +482,9 @@
       </div>
     </section>
     
-        <%--     <div class="row addto">
-                 <c:forEach items="${products}" var="product">
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod">
-                        <img class="img-fluid" src='/upload/product/${product.photos[0].photoPath}'  alt="Colorlib Template" style="width:253px; height:202px; object-fit:cover;"> 
-                            <span class="status">30%</span>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">
-                                ${product.productName}
-                            </a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                
-                                    <p class="price"><span class="mr-2 price-dc"><fmt:formatNumber value="${product.price+5000}" groupingUsed="true" /></span><span class="price-sale"><fmt:formatNumber value="${product.price}" groupingUsed="true" /></span></p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <i class="fas fa-comments"></i>
-                                    </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                        <span><i class="fas fa-cart-plus"></i></span>
-                                    </a>
-                                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                        <span><i class="far fa-heart"></i></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </c:forEach> 
-            </div> --%>
+      
             
-    <!---------------------------------------------쇼핑몰 대표소개------------------------------------------------------------->
+    <!---------------------------------------------상품평------------------------------------------------------------->
     <!--------------------------------------------------------------------------------------------------------------------> 
             
             <section class="ftco-section testimony-section">
@@ -536,7 +501,7 @@
             <div class="carousel-testimony owl-carousel">
               <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(../../images/person_1.jpg)">
+                  <div class="user-img mb-5" style="background-image: url(../../images/person1.jpg)">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
                     </span>
@@ -550,7 +515,7 @@
               </div>
               <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(../../images/person_2.jpg)">
+                  <div class="user-img mb-5" style="background-image: url(../../images/person2.jpg)">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
                     </span>
@@ -564,7 +529,7 @@
               </div>
               <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(../../images/person_3.jpg)">
+                  <div class="user-img mb-5" style="background-image: url(../../images/person4.png)">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
                     </span>
@@ -578,21 +543,7 @@
               </div>
               <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(.../../images/person_1.jpg)">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Web Developer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(../../images/person_1.jpg)">
+                  <div class="user-img mb-5" style="background-image: url(../../images/person3.png)">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
                     </span>

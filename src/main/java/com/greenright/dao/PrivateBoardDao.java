@@ -9,4 +9,6 @@ public interface PrivateBoardDao {
   void insert(PrivateBoard privateBoard) throws Exception;
   PrivateBoard findBy(int no) throws Exception;
   int countAll() throws Exception;
+  List<PrivateBoard> findByKeyword1(String answer) throws Exception;
+  void managerInsert(PrivateBoard privateBoard) throws Exception;
 }

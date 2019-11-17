@@ -76,38 +76,42 @@
              <tr class="text-center">
                 <th>No</th>
                 <th>등록일</th>
+                <th>문의유형</th>
                 <th>제목</th>
-                <th>질문</th>
+                <th>글쓴이</th>
                 <th>답변여부</th>
             </tr>
          </thead>
+            <tbody>
             <c:forEach items="${boards}" var="board">
                 <tr class="tr1">
-                <td>${board.no}</td>
-                <td>${board.date}</td>
-                <td><a href='detail?no=${board.no}'>${board.title}</a></td>
-                <td>${board.contents}</td>
-                <td>${board.answerTrueFalse}</td>
-              </tr>
+                <td class="content-value inquire">${board.no}</td>
+                <td class="content-value inquire">${board.date}</td>
+                <td class="content-value inquire">${board.type}</td>
+                <td class="content-value inquire"><a href='detail?no=${board.no}'>${board.title}</a></td>
+                <td class="content-value inquire">${board.id}</td>
+                <td class="content-value inquire">${board.answerTrueFalse}</td>
+                </tr>
             </c:forEach>
+            </tbody>
     
     </table>
 
     <p style="text-align: right;">
      <button type="button" onclick="location.href='form.jsp'"  class="btn btn-primary" >문의 작성</button>
     </p>
-        <select id = 'answeranswer' name="answer" value='${member.cell_phone.substring(0,3)}'
+       <%--  <select id = "answerselect" name="answer" value='${member.cell_phone.substring(0,3)}'
             style="width:120px;height:35px;display: inline;">
-            <option>전체</option>
-            <option>미답변</option>
-            <option>답변완료</option>
-      </select>
-      <select name="date" value='${member.cell_phone.substring(0,3)}'
+            <option value="default">전체</option>
+            <option value="미답변">미답변</option>
+            <option value="답변완료">답변완료</option>
+      </select> --%>
+      <select id ="inquireselect" name="date" value='${member.cell_phone.substring(0,3)}'
             style="width:120px;height:35px;display: inline;">
-            <option>전체</option>
-            <option>일주일</option>
-            <option>한달</option>
-            <option>세달</option>
+            <option value="default">전체</option>
+            <option value="배송문의">배송문의</option>
+            <option value="판매문의">판매문의</option>
+            <option value="상품문의">상품문의</option>
       </select>
       <%-- <select name="type" value='${member.cell_phone.substring(0,3)}'
             style="width:120px; height: 33px; display: inline;">
@@ -146,66 +150,74 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   </body>
  
-<script>
+<!-- <script>
 $(document).ready(function() {
-  var answer = $('#answeranswer').val();
-  console.log(answer)
-  
-  
-  
+  $('#select option').each(function(){
+    if($(this).val() == "${board.answerTrueFalse}") {
+      $(this).attr("selected","selected");
+    }
+  });
+     
 });
-</script>  
- <script>
+</script>   -->
+
+
+<script>
+
+  var searchQuestionType = undefined;
+
+$('#inquireselect').change(function() {
+  searchQuestionType = $('#inquireselect option:selected').val();
+  loadData(1)
+})
+
+
+function loadData(pageNo) {
+  $.ajax({
+    url: "../json/inquire/list",
+    type:"GET",
+    dataType: "json",
+    data: {
+      "type": (searchQuestionType) ? searchQuestionType : undefined
+    },
+    
+    success: function(data){
+      console.log(data);
+      console.log(data.result.privateBoards);
+      var list = data.result.privateBoards;
+      var tableTag ="";
+      
+      $("td").removeClass("content-value inquire");
+      
+       for(var i = 0 ; i < list.length; i++) {
+        tableTag += "<tr><td>" + list[i].no + "</td><td>" + list[i].date +
+        "<td>" + list[i].type + "</td><td><a href='detail?no="+ list[i].no+"'>" + list[i].title +"</a></td>"+
+        "<td>" + list[i].id +  "</td><td>" + list[i].answerTrueFalse + "</td></tr>"
+    };
+    $("#products tbody").html(tableTag);
+    $("td").addClass("content-value inquire");
+    }
+  });
+  
+}
+</script>
+
+
+<script>
 $('#my-paging').on('click','.page-item', () => {
-  /*  var currentLi = $(event.target).parent().attr('data-page'); 
-   $(event.target).parent().parent().children('.active').removeClass('active'); */ 
+ 
   $(event.target).parent().addClass('active');
   
-  //var boardNo = parseInt(document.querySelector('#jisooBoardNo').value);
-  //var param = "commentNo="+commentNo+"&boardNo="+boardNo;
+  
   
 });
 
-/* var currentPage = ${pageNo};
-
-$('.page-item').click((e) => {
-  //e.preventDefault();
- 
-  //var page = e.currentTarget.getAttribute('data-page');
-  var page = $(e.currentTarget).attr('data-page');
-
-  $.get("list",{
-  }, function(success) {
-    if (page == "prev") {
-      if (currentPage == 1)
-        return;
-      location.href = "list?pageNo=" + (currentPage - 1) + "&pageSize=" + ${pageSize};
-      
-      
-    } else if (page == "next") {
-      if (currentPage >= ${totalPage})
-        return
-      location.href = "list?pageNo=" + (currentPage + 1) + "&pageSize=" + ${pageSize};
-    
-    } else {
-      location.href = "list?pageNo=" + page + "&pageSize=" + ${pageSize};
-    
-    }
-    
-  });
-
-
-}); 
-
-*/
 
  var currentPage = ${pageNo};
 
 $('.page-item').click((e) => {
   e.preventDefault();
-  // e.currentTarget? 리스너가 호출될 때, 그 리스너가 등록된 태그를 가르킨다.
-  // e.target? 이벤트가 발생된 원천 태그이다. 
-  //var page = e.currentTarget.getAttribute('data-page');
+ 
   var page = $(e.currentTarget).attr('data-page');
   if (page == "prev") {
     if (currentPage == 1)
@@ -226,8 +238,8 @@ $('.page-item').click((e) => {
   }
 }); 
 
-
-
 </script>  
+
+
   <jsp:include page="../../greenfooter.jsp" />
 </html>

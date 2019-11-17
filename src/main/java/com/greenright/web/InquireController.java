@@ -49,7 +49,7 @@ public class InquireController {
     int no = (int)session.getAttribute("no");
     
     
-    List<PrivateBoard> privateBoards = privateBoardService.list(no,pageNo, pageSize);
+    List<PrivateBoard> privateBoards = privateBoardService.list(no,pageNo, pageSize, null);
     model.addAttribute("boards", privateBoards);
     model.addAttribute("pageNo", pageNo);
     model.addAttribute("pageSize", pageSize);
@@ -67,6 +67,8 @@ public class InquireController {
     privateBoardService.insert(privateBoard);
     return "redirect:list";
   }
+  
+  
 
   @GetMapping("detail")
   public String detail(Model model, int no, HttpSession session) throws Exception {
@@ -77,6 +79,21 @@ public class InquireController {
       return "redirect:list";
     model.addAttribute("privateBoard",privateBoard);
     return "mypage/inquire/detail";
+  }
+  
+  @GetMapping("select1")
+  public void select1(Model model, String answer) throws Exception {
+    List<PrivateBoard> privateBoards = privateBoardService.select1(answer);
+    model.addAttribute("privateBoards", privateBoards);
+    model.addAttribute("tf","미답변");
+  }
+  
+  @PostMapping("add/mamager")
+  public String managerInsert(PrivateBoard privateBoard, HttpSession session) throws Exception {
+    /* session.setAttribute("no", 1); */
+    /* privateBoard.setMemberNo((int)session.getAttribute("no")); */
+    privateBoardService.managerInsert(privateBoard);
+    return "redirect:list";
   }
 
 }
