@@ -4,6 +4,7 @@
 <title>Community Detail</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel="stylesheet" href="/css/fontawesome/css/all.css">
 <style>
 .my-comment-control {
   
@@ -27,6 +28,9 @@
   max-height: 500px;
   
 }
+.far.fa-thumbs-up.active {
+  color:#82ae46;
+}
 </style>
   <% session.setAttribute("memberName","kim");%>
   <jsp:include page="../greenheader.jsp" />
@@ -44,7 +48,7 @@
           <tr>
             <th style="width:1100px;">
               <hr id="hr1">
-              <p style="text-align: center; font-size: 25px;">${board.title}</p>
+              <p style="text-align: center; font-size: 25px; font-weight: normal;">${board.title}</p>
               <hr id="hr1">
               <div class="row" >
                 <div class="col" style="text-align: left;">
@@ -53,7 +57,9 @@
                 </div>
                 <div class="col" style="text-align: right;">
                   <span style="font-size: 13px; font-weight: normal;">조회수: ${board.viewCount}</span><br> 
-                    <span style="font-size: 13px; font-weight: normal;">추천수: ${board.recommendation }</span>
+                    
+                    <span id="rec" style="font-size: 13px; font-weight: normal;">추천수: ${board.recommendation}</span>
+                    
                 </div>
               </div>
               <hr id="hr1">
@@ -72,7 +78,11 @@
               </c:choose>
               </p>
               <span style="display: block; font-weight: normal; width: 1100px; font-size: 20px; word-break:break-all;">${board.contents}</span>
+              <br>
+         
+              <i class="far fa-thumbs-up recommend" style="font-size:35px;"></i>
               <hr id="hr1">
+              <br>
               <p style="text-align: right;">
                 <button type="button" class="btn btn-primary"
                   onclick="location.href='detailedit.jsp?no=${board.no}'">수정</button>
@@ -131,15 +141,22 @@
 
 
 
-  <!-- <script>
-var member ="${board.member.name}"
-var smember ="${memberName}"
-if(member!=smember){
-  $("#editNum").remove();
-}
-</script> -->
+  
+
 <script>
-$('.recommend').on('click',(event) =>{
+ $(document).ready(function() {
+  $('.far.fa-thumbs-up').on('click', () => {
+    if($('.far.fa-thumbs-up').hasClass('active')) {
+      $('.far.fa-thumbs-up').removeClass('active');
+    } else {
+      $('.far.fa-thumbs-up').addClass('active');
+    }
+  });  
+}); 
+</script>
+
+<script>
+$('.recommend').on('click',() =>{
   let recommendBoardNo = parseInt(document.querySelector('#jisooBoardNo').value);
   let recommendMemberNo = 1;
    $.post("recommend/checkRecommendForCheck",{
@@ -151,24 +168,49 @@ $('.recommend').on('click',(event) =>{
          "recommendBoardNo":recommendBoardNo,
          "recommendMemberNo":recommendMemberNo
        }, function(data){
-         
-       })
+         //console.log(data.result)
+         countRecommend(recommendBoardNo)
+       }, "json");
      }else{
        $.post("recommend/delete",{
          "recommendBoardNo":recommendBoardNo,
          "recommendMemberNo":recommendMemberNo
+  
        }, function(data){
-         
-       })
+         //console.log(data.result)
+         countRecommend(recommendBoardNo)
+       }, "json");
      }
-     $.post("recommend/checkNum",{
-       "recommendBoardNo":recommendBoardNo,
-     }, function(data){
-       $('#recommendCount').val(data);
-     });
    });
 });
+function countRecommend(boardNo) {
+  $.post("recommend/checkNum",{
+    "recommendBoardNo":boardNo,
+  }, function(data){
+    $('#rec').html("추천수:"+data);
+    console.log(data)
+  });
+}
 </script>
+
+<script>
+$(document).ready(function() { 
+  let recommendBoardNo = parseInt(document.querySelector('#jisooBoardNo').value);
+  let recommendMemberNo = 1;
+  $.post("recommend/checkRecommendForCheck",{
+    "recommendBoardNo":recommendBoardNo,
+    "recommendMemberNo":recommendMemberNo
+  }, function(data) {
+    if(data==0) {
+      $('.far.fa-thumbs-up').removeClass('active');
+    } else {
+      
+        $('.far.fa-thumbs-up').addClass('active');
+    }
+  });
+});
+</script>
+
   <script>
  $('#my-add-btn').on('click', (event) => {
     let boardNo = parseInt(document.querySelector('#jisooBoardNo').value);
@@ -193,7 +235,7 @@ $('.recommend').on('click',(event) =>{
           comment += "<p class='my-comment-content contents-"+result.no+"'>"+result.contents+"</p><div>";
           comment += "<textarea class='my-comment'>"+result.contents+"</textarea>";
           comment += "<div class='my-comment-control' data-member-no='"+result.memberNo+"'>";
-          comment += "<button class='my-save-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>저장</button>";
+          comment += "<button class='my-save-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>저장</button>\n";
           comment += "<button class='my-cancel-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>취소</button>";
           comment += "<button class='my-update-btn btn btn-primary'>수정</button>\n";
           comment += "<button class='my-delete-btn btn btn-primary'>삭제</button></div></div><hr></div>";
@@ -247,6 +289,8 @@ $('.recommend').on('click',(event) =>{
     commentC.style['display'] = 'none';
     commentD.style['display'] = 'inline-block';
     commentU.style['display'] = 'inline-block';
+
+    
   });
   
   $('#mymy-comment').on('click','.my-save-btn', () => {
@@ -296,6 +340,7 @@ $('#mymy-comment').on('click', '.my-update-btn', () => {
   commentD.style['display'] = 'none';
   commentU.style['display'] = 'none';
     console.log(commentDiv.getAttribute('data-no'));
+  
 });
 </script>
 
@@ -303,4 +348,3 @@ $('#mymy-comment').on('click', '.my-update-btn', () => {
 
 
   <jsp:include page="../greenfooter.jsp" />
-

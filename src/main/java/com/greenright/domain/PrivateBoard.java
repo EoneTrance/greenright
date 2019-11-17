@@ -2,19 +2,29 @@ package com.greenright.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class PrivateBoard implements Serializable{
   private static final long serialVersionUID = 1L;
   
-  int no;
-  String type;
-  int memberNo;
-  Date date;
-  String title;
-  String contents;
-  String answerTrueFalse;
-  String answer;
+  private int no;
+  private String type;
+  private int memberNo;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+  private Date date;
+  private String title;
+  private String contents;
+  private String answerTrueFalse;
+  private String answer;
+  private String id;
   
+  
+  @Override
+  public String toString() {
+    return "PrivateBoard [no=" + no + ", type=" + type + ", memberNo=" + memberNo + ", date=" + date
+        + ", title=" + title + ", contents=" + contents + ", answerTrueFalse=" + answerTrueFalse
+        + ", answer=" + answer + ", id=" + id + "]";
+  }
   public int getNo() {
     return no;
   }
@@ -63,5 +73,13 @@ public class PrivateBoard implements Serializable{
   public void setAnswer(String answer) {
     this.answer = answer;
   }
+  public String getId() {
+    return id;
+  }
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  
   
 }

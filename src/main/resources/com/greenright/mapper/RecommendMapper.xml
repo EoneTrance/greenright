@@ -5,11 +5,11 @@
 <mapper namespace="com.greenright.dao.RecommendDao">
 
   <select id="CountRecommendForCheck" parameterType="Recommend" resultType="int">
-  select count(*) from Recommends where boards_id =#{recommendBoardNo} and member_id =#{recommendMemberNo}
+  select count(*) from recommends where boards_id =#{recommendBoardNo} and member_id =#{recommendMemberNo}
   </select>
 
   <select id="CountRecommend" parameterType="int" resultType="int">
-    select count(*) from Recommends where boards_id =#{recommendBoardNo}
+    select count(*) from recommends where boards_id =#{recommendBoardNo}
   </select>
 
   <insert id="insertRecommend" parameterType="Recommend"

@@ -7,10 +7,33 @@
   <resultMap type="PrivateBoard" id="PrivateBoardMap">
     <id column="private_question_id" property="no"/>
     <result column="questIon_type" property="type"/>
-    <result column="member_no" property="memberNo"/>
+    <result column="member_id" property="memberNo"/>
     <result column="created_date" property="date"/>
+    <result column="title" property="title"/>
+    <result column="contents" property="contents"/>
     <result column="answer_tf" property="answerTrueFalse"/>
     <result column="answer" property="answer"/>
+    <result column="id" property="id" />
+  </resultMap>
+  
+  <resultMap type="Member" id="MemberMap">
+    <id column="member_id" property="no" />
+    <result column="registered_date" property="registeredDate" />
+    <result column="id" property="id" />
+    <result column="password" property="password" />
+    <result column="certification_flag" property="certification" />
+    <result column="cell_phone" property="cellPhone" />
+    <result column="tel" property="tel" />
+    <result column="nickname" property="nickname" />
+    <result column="name" property="name" />
+    <result column="email" property="email" />
+    <result column="postal_code" property="postalCode" />
+    <result column="default_address" property="defaultAddress" />
+    <result column="detail_address" property="detailAddress" />
+    <result column="question" property="question" />
+    <result column="answer" property="answer" />
+    <result column="auth_key" property="authkey"/>
+    <result column="password_authkey" property="passwordAuthkey"/>
   </resultMap>
 
   <sql id="basicColumn">
@@ -26,7 +49,7 @@
   </sql>
 
   <sql id="where">
-    where member_no=#{no}
+    where member_id=#{no}
   </sql>
   
   <select id="findBy" parameterType="int" resultMap="PrivateBoardMap">
@@ -38,7 +61,7 @@
     <insert id="insert" parameterType="PrivateBoard">
     INSERT INTO private_questions (
       questIon_type
-      , member_no
+      , member_id
       , created_date
       , title
       , contents)
@@ -52,10 +75,43 @@
   </insert>
   
   <select id="findAll" parameterType="int" resultMap="PrivateBoardMap">
-    <include refid="basicColumn"/>
-    from private_questions
-    <include refid="where"/>
-    order by private_question_id asc
+    select 
+	     p.private_question_id,
+	     p.questIon_type,
+	     p.member_id,
+	     p.created_date,
+	     p.title,
+	     p.contents,
+	     p.answer_tf,
+	     p.answer,
+	     m.id
+    from private_questions p
+      left outer join members m on p.member_id=m.member_id
+     where p.member_id=#{no}
+      <if test="type != null and type != 'default'">questIon_type like #{type}</if>
+    order by private_question_id asc 
+    limit #{offset}, #{pageSize}
   </select>
+  
 
+
+  <select id="countAll" resultType="int">
+    select count(*) from private_questions
+  </select>
+  
+   <insert id="managerInsert" parameterType="PrivateBoard">
+    INSERT INTO private_questions (
+      questIon_type
+      , member_id 
+      , created_date
+      , title
+      , contents)
+      VALUES (
+      #{type}
+      , #{memberNo}
+      , curdate()
+      , #{title}
+      , #{contents}
+ );
+  </insert>
 </mapper>

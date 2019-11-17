@@ -61,7 +61,7 @@
   
   
 
- 
+  
 
  <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
       <div class="container">
@@ -82,14 +82,15 @@
     <div id='content'
       style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
       
-      <div id="np" style="float: left;"></div>
+      <div id="np" style="float:left;"></div>
+      
       <br>
 
       <table class='table table-hover' id="products">
 
         <thead class="thead-primary">
           <tr class="text-center">
-            <th>번호</th>
+            <th>No</th>
             <th>제목</th>
             <th>글쓴이</th>
             <th>등록일</th>
@@ -101,8 +102,13 @@
           <c:forEach items="${boards}" var="board">
             <tr class="tr1">
               
-              <td>${board.no}</td>
-              <td><a href='detail?no=${board.no}'>${board.title}</a></td>
+              <td id="nono">${board.no}</td>
+              <td>
+              <a  href='detail?no=${board.no}'>${board.title}</a>
+              <c:if test="${board.createdDate == today}">
+              <img  src='/images/new.jpg'/>
+              </c:if>
+              </td>
               <td>${board.member.name}</td>
               <td class="cdate">${board.createdDate}</td>
               <td>${board.viewCount}</td>
@@ -136,76 +142,105 @@
           <div class="col text-center">
             <div class="block-27">
               <ul id="my-paging">
-                <li id='my-paging-first'><span>&lt;</span></li>
-                <li data-no="1" class="active">
-                  <span class="my-page-no">1</span></li>
-                    <c:forEach var="i" begin="2" end="5" step="1">
-                     <li data-no="${i}"><span class="my-page-no">${i}</span></li>
+                <li id='my-paging-first'>
+                 <span class="page-item" data-page="prev"  style="cursor: pointer;">&lt;</span>
+                </li>
+                <li data-page="1" class="active">
+               <!-- <span class="my-page-no">1</span> -->  
+                 </li>
+                   <c:forEach begin="${beginPage}" end="${endPage}" var="page" >
+                     <li class="page-item" data-page="${page}">
+                       <span style ="${page != pageNo ? "cursor: pointer;" : "color: white; background-color: #82ae46;"} border:1px solid #e6e6e6">${page}</span>
+                     </li>
                     </c:forEach>
-                <li id="my-paging-last"><span>&gt;</span></li>
+                    
+                      <li id="my-paging-last">
+                      <span class="page-item" data-page="next" style="cursor: pointer;">&gt;</span> 
+                      </li>
               </ul>
             </div>
           </div>
         </div>
     </div>
   </section>
+
 <script>
-var indexP=1;
-$('#my-paging').on('click','.my-page-no', () => {
-  var currentLi = $(event.target).parent().attr('data-no');
-  $(event.target).parent().parent().children('.active').removeClass('active');
+$('#my-paging').on('click','.page-item', () => {
+  /*  var currentLi = $(event.target).parent().attr('data-page'); 
+   $(event.target).parent().parent().children('.active').removeClass('active'); */ 
   $(event.target).parent().addClass('active');
+  
   //var boardNo = parseInt(document.querySelector('#jisooBoardNo').value);
   //var param = "commentNo="+commentNo+"&boardNo="+boardNo;
   
 });
-$('#my-paging-first').click(function(e){
-  var page='';
-  indexP-=5;
-  var i = indexP;
-  console.log(i)
+
+/* var currentPage = ${pageNo};
+
+$('.page-item').click((e) => {
+  //e.preventDefault();
+ 
+  //var page = e.currentTarget.getAttribute('data-page');
+  var page = $(e.currentTarget).attr('data-page');
+
+  $.get("list",{
+  }, function(success) {
+    if (page == "prev") {
+      if (currentPage == 1)
+        return;
+      location.href = "list?pageNo=" + (currentPage - 1) + "&pageSize=" + ${pageSize};
+      
+      
+    } else if (page == "next") {
+      if (currentPage >= ${totalPage})
+        return
+      location.href = "list?pageNo=" + (currentPage + 1) + "&pageSize=" + ${pageSize};
+    
+    } else {
+      location.href = "list?pageNo=" + page + "&pageSize=" + ${pageSize};
+    
+    }
+    
+  });
+
+
+}); 
+
+*/
+
+ var currentPage = ${pageNo};
+
+$('.page-item').click((e) => {
+  e.preventDefault();
+  // e.currentTarget? 리스너가 호출될 때, 그 리스너가 등록된 태그를 가르킨다.
+  // e.target? 이벤트가 발생된 원천 태그이다. 
+  //var page = e.currentTarget.getAttribute('data-page');
+  var page = $(e.currentTarget).attr('data-page');
+
+  if (page == "prev") {
+    if (currentPage == 1)
+      return;
+    location.href = "list?pageNo=" + (currentPage - 1) + "&pageSize=" + ${pageSize};
+    
+    
+  } else if (page == "next") {
+    if (currentPage >= ${totalPage})
+      return
+    location.href = "list?pageNo=" + (currentPage + 1) + "&pageSize=" + ${pageSize};
   
-  if(i <= 1) {
-    indexP=1;
-    i = indexP;
-    console.log(i);
+  } else {
+    console.log(e.currentTarget);
+    if (page != currentPage)
+      location.href = "list?pageNo=" + page + "&pageSize=" + ${pageSize};
+    
   }
+}); 
+
+
+
+</script>  
   
-  page += "\n<li class='active' data-no='"+i+"'><span class='my-page-no'>"+i+"</span></li>\n";
-  page += "<li data-no='"+(i+1)+"'><span class='my-page-no'>"+(i+1)+"</span></li>\n";
-  page += "<li data-no='"+(i+2)+"'><span class='my-page-no'>"+(i+2)+"</span></li>\n";
-  page += "<li data-no='"+(i+3)+"'><span class='my-page-no'>"+(i+3)+"</span></li>\n";
-  page += "<li data-no='"+(i+4)+"'><span class='my-page-no'>"+(i+4)+"</span></li>\n";
-  
-  
-  $('#my-paging > li[data-no]').remove();
-  $('#my-paging-first').after(page);
-  
-  
-});
-$('#my-paging-last').click(function(){
-  var page='';
-  indexP+=5;
-  var i = indexP;
-  console.log(i)
-  
- 
-  var listcount = $('#products tbody tr').length;
-  
-  console.log(count)
-  
- 
-   
-  page += "\n<li class='active' data-no='"+i+"'><span class='my-page-no'>"+i+"</span></li>\n";
-  page += "<li data-no='"+(i+1)+"'><span class='my-page-no'>"+(i+1)+"</span></li>\n";
-  page += "<li data-no='"+(i+2)+"'><span class='my-page-no'>"+(i+2)+"</span></li>\n";
-  page += "<li data-no='"+(i+3)+"'><span class='my-page-no'>"+(i+3)+"</span></li>\n";
-  page += "<li data-no='"+(i+4)+"'><span class='my-page-no'>"+(i+4)+"</span></li>\n";
-  
-  $('#my-paging > li[data-no]').remove();
-  $('#my-paging-first').after(page);
-});
-</script>
+
 <br>
 <br>
 <jsp:include page="../greenfooter.jsp" />
@@ -229,31 +264,8 @@ $('#my-paging-last').click(function(){
                 }
               });
     </script>
+
 <script>
-      var textareaVal = $(".cdate").text();
-      var count = 0;
-      var dt = new Date();
-      var day = dt.getDate();
-      var month = (dt.getMonth() + 1);
-      var year = dt.getFullYear();
-      if (month < 10) {
-        month = "0" + month;
-      }
-      if (day < 10) {
-        day = "0" + day;
-      }
-      
-      for (var i = 0; i < (textareaVal.length / 10) + 1; i++) {
-        var tday = textareaVal.substring(8 + (10 * i), (10 * (i + 1)));
-        var tyear = textareaVal.substring((10 * i), (4 + (10 * i)));
-        var tmonth = textareaVal.substring((5 + (10 * i)), (7 + (10 * i)));
-        if (tday == day && tyear == year && tmonth == (month)) {
-          count++
-        }
-      }
-      $("#np").text("새글[" + count + "/" + ((textareaVal.length / 10)) + "]");
-    </script>
-  <script>
       $(document).ready(function() {
         $("select option[value=5]").attr("selected", true);
       });
@@ -300,7 +312,7 @@ $('#my-paging-last').click(function(){
       var member = "${loginName}"
       var smember = "${memberName}"
       if (member != smember) {
-        $("#newC").remove();
+       /*  $("#newC").remove(); */
       }
     </script>
 

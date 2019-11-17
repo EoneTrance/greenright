@@ -1,5 +1,6 @@
 package com.greenright.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -54,12 +55,17 @@ public class DefaultBoardService implements BoardService {
   }
 
   @Override
-  public List<Board> list() throws Exception {
-    List<Board> boardList= boardDao.findAll();
+  public List<Board> list(int pageNo, int pageSize) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("offset", (pageNo - 1) * pageSize);
+    param.put("pageSize", pageSize);
+    
+    List<Board> boardList= boardDao.findAll(param);
       for(Board b : boardList) {
         int a = b.getNo();
         b.setRecommendation(recommendDao.CountRecommend(a));
       }
+     
     return boardList;
   }
 
@@ -83,8 +89,29 @@ public class DefaultBoardService implements BoardService {
     }
   }
   @Override
-  public List<Board> search1(String title) throws Exception {
-    List<Board> boardList = boardDao.findyByKeyword1(title);
+  public List<Board> search1(String title,int pageNo, int pageSize) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("offset", (pageNo - 1) * pageSize);
+    param.put("pageSize", pageSize);
+    param.put("title", title);
+    
+    List<Board> boardList = boardDao.findByKeyword1(param);
+    for(Board b : boardList) {
+      int a = b.getNo();
+      b.setRecommendation(recommendDao.CountRecommend(a));
+    }
+  return boardList;
+  
+  }
+
+  @Override
+  public List<Board> search2(String contents,int pageNo, int pageSize) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("offset", (pageNo - 1) * pageSize);
+    param.put("pageSize", pageSize);
+    param.put("contents", contents);
+    
+    List<Board> boardList = boardDao.findByKeyword2(param);
     for(Board b : boardList) {
       int a = b.getNo();
       b.setRecommendation(recommendDao.CountRecommend(a));
@@ -93,26 +120,37 @@ public class DefaultBoardService implements BoardService {
   }
 
   @Override
-  public List<Board> search2(String contents) throws Exception {
-    List<Board> boardList = boardDao.findyByKeyword2(contents);
+  public List<Board> search3(String name,int pageNo, int pageSize) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("offset", (pageNo - 1) * pageSize);
+    param.put("pageSize", pageSize);
+    param.put("name", name);
+    
+    List<Board> boardList = boardDao.findByKeyword3(param);
     for(Board b : boardList) {
       int a = b.getNo();
       b.setRecommendation(recommendDao.CountRecommend(a));
     }
   return boardList;
+  }
+  
+  @Override
+  public int size() throws Exception {
+    return boardDao.countAll();
   }
 
   @Override
-  public List<Board> search3(String name) throws Exception {
-    List<Board> boardList = boardDao.findyByKeyword3(name);
-    for(Board b : boardList) {
-      int a = b.getNo();
-      b.setRecommendation(recommendDao.CountRecommend(a));
-    }
-  return boardList;
+  public int search1Size(String title) throws Exception {
+    return boardDao.countAll1(title);
   }
-
-
+  @Override
+  public int search2Size(String contents) throws Exception {
+    return boardDao.countAll2(contents);
+  }
+  @Override
+  public int search3Size(String name) throws Exception {
+    return boardDao.countAll3(name);
+  }
 
 
 

@@ -78,10 +78,10 @@
     boards_id=#{value}
   </select>
   
-  <select id="findyByKeyword1"
+  <select id="findByKeyword1"
           parameterType="string"
           resultMap="BoardMap">
-  <bind name="pattern" value="'%' + _parameter + '%'"/>
+  <bind name="pattern" value="'%' + title + '%'"/>
  select
       b.boards_id,
       b.title,
@@ -93,13 +93,13 @@
       boards b
         left outer join members m on b.member_id=m.member_id
       where b.title like #{pattern}
-      order by b.created_date desc
+      order by b.created_date desc limit #{offset}, #{pageSize}
       
   </select>
-  <select id="findyByKeyword2"
+  <select id="findByKeyword2"
           parameterType="string"
           resultMap="BoardMap">
-  <bind name="pattern" value="'%' + _parameter + '%'"/>
+  <bind name="pattern" value="'%' + contents + '%'"/>
     select
       b.boards_id,
       b.title,
@@ -111,13 +111,13 @@
       boards b
         left outer join members m on b.member_id=m.member_id
       where b.contents like #{pattern}
-      order by b.created_date desc
+      order by b.created_date desc limit #{offset}, #{pageSize}
   </select>
   
-   <select id="findyByKeyword3"
+   <select id="findByKeyword3"
           parameterType="string"
           resultMap="BoardMap">
-   <bind name="pattern" value="'%' + _parameter + '%'"/>
+   <bind name="pattern" value="'%' + name + '%'"/>
      select
       b.boards_id,
       b.title,
@@ -129,7 +129,7 @@
       boards b
         left outer join members m on b.member_id=m.member_id
       where m.name like #{pattern}
-      order by b.created_date desc
+      order by b.created_date desc limit #{offset}, #{pageSize}
   </select>
   
    
@@ -145,7 +145,7 @@
     from
       boards b
         left outer join members m on b.member_id=m.member_id
-    order by b.created_date desc, b.boards_id desc
+    order by b.created_date desc, b.boards_id desc  limit #{offset}, #{pageSize}
   </select>
    
   <select id="findWithFilesBy" 
@@ -175,6 +175,8 @@
     where
     boards_id=#{value}
   </update>
+  
+  
 
   <insert id="insert" parameterType="Board"
     useGeneratedKeys="true" keyColumn="boards_id" keyProperty="no">
@@ -193,5 +195,29 @@
     delete from boards
     where boards_id=#{no}
   </delete>
- 
+  
+ <select id="countAll" resultType="int">
+    select count(*) from boards
+  </select>
+  
+  <select id="countAll1" resultType="int">
+  <bind name="pattern" value="'%' + title + '%'"/>
+     select count(*) from boards where title like #{pattern}
+   
+  </select>
+  
+   <select id="countAll2" resultType="int">
+  <bind name="pattern" value="'%' + contents + '%'"/>
+     select count(*) from boards where contents like #{pattern}
+   
+  </select>
+  
+   <select id="countAll3" resultType="int">
+  <bind name="pattern" value="'%' + name + '%'"/>
+select count(*)
+from boards
+left join members on boards.member_id = members.member_id
+where name like  #{pattern}
+   
+  </select>
 </mapper>
