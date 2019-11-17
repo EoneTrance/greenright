@@ -264,6 +264,7 @@ span.answerquestion {
 
 textarea#rvcontents {
   margin-right: 234px;
+    margin-bottom: 15px;
 }
 
 input.titleholder.form-control {
@@ -310,8 +311,15 @@ h5.starratin {
     padding-top: 26px;
     color : light-yellow ;
 }
-
-
+input.priv {
+    height: 13px;
+}
+label.custom-file-label {
+    width: 743px;
+}
+button#review-add-btn {
+    height: fit-content;
+}
 </style>
 <meta name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -814,8 +822,9 @@ h5.starratin {
       <textarea class="contentholder form-control" id="contentholder"
         name="qnacontents" placeholder="내용을 입력해주세요" maxlength=1000
         style="resize: none;"></textarea>
-      <input type="checkbox" name="private" class="priv" value=0>
-      비공개
+     
+       <input type="checkbox" name="private" class="priv" value=0>
+      비공개 
       <button id="submitbut" class="btn btn-primary">작성</button>
     </div>
     <div class="anqfooter"></div>
@@ -1008,9 +1017,14 @@ h5.starratin {
             a += "</div>"
             a += "<input type='text' id='title' style='width :743px' placeholder='제목을입력하세요'/>"
             a += "<br><TEXTAREA  id ='rvcontents' cols='90' rows='10' style='resize:none;'  placeholder='내용을 입력하세요.'/><br>"
-            a += "<br><button id='review-add-btn' class='btn btn-primary'>등록</button>"
-            a += "<input type='file' class='btn btn-primary' id='filePath' name='reviewPhoto'>"
-            a += "<div id='images-div'><img  class='imgpreview'src='' alt='' style='width:100px height:100px'></div>"
+            a += "<div class='input-group mb-3'style='width :685px'>"
+            a +=  "<div class='custom-file' style='width :685px'>"
+            a += "<input type='file' class='custom-file-input btn btn-primary' id='filePath' name='reviewPhoto' style='width :685px'>"
+            a += "<label class='custom-file-label' for='filePath' aria-describedby='inputGroupFileAddon02' style='width :685px'>Choose file</label>"
+            a += "</div></div>"
+            a += "<button id='review-add-btn' class='btn btn-primary'>등록</button>"
+/*             a += "<input type='file' class='btn btn-primary' id='filePath' name='reviewPhoto'>"
+ */            a += "<div id='images-div'><img  class='imgpreview'src='' alt='' style='width:100px height:100px'></div>"
             a += "</div></div><br><br>";
             $(".review").append(a);
 
@@ -1019,8 +1033,8 @@ h5.starratin {
               ratingch = $(this).val();
             })
 
-            $("#review-add-btn")
-                .click(
+            $(document)
+                .on("click","#review-add-btn",
                     function() {
                       let productNo = $("#productNo").val();
                       let memberNo = 1;

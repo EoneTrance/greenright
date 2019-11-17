@@ -116,7 +116,6 @@
                     <div class="product">
                         <a href="/greenright/product/buydetail?no=${product.no}" class="img-prod">
                         <img class="img-fluid" src='/upload/product/${product.photos[0].photoPath}'  alt="Colorlib Template" style="width:253px; height:202px; object-fit:cover;"> 
-                            <span class="status">30%</span>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
                             <h3><a href="#">
@@ -125,18 +124,15 @@
                             <div class="d-flex">
                                 <div class="pricing">
                                 
-                                    <p class="price"><span class="mr-2 price-dc"><fmt:formatNumber value="${product.price+5000}" groupingUsed="true" /></span><span class="price-sale"><fmt:formatNumber value="${product.price}" groupingUsed="true" /></span></p>
+                                    <p class="price"><span class="price-sale"><fmt:formatNumber value="${product.price}" groupingUsed="true" /></span></p>
                                 </div>
                             </div>
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                    <a href="/greenright/product/buydetail?no=${product.no}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                         <i class="fas fa-comments"></i>
                                     </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                        <span><i class="fas fa-cart-plus"></i></span>
-                                    </a>
-                                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                                    <a href="" class="heart d-flex justify-content-center align-items-center changewishlist" id ="${product.no}">
                                         <span><i class="far fa-heart"></i></span>
                                     </a>
                                 </div>
@@ -406,7 +402,38 @@
             });
           })
         
-        
+        $(document).on("click",".changewishlist",function(e){
+          e.preventDefault();
+          let productNo =$(this).attr("id");
+          let memberNo = 1;
+          $.post(
+              "/greenright/json/Like/checkLike",
+              {
+                productNo : productNo,
+                memberNo : memberNo
+              },
+              function(a) {
+                if(a.result ==0){
+                  $.post("/greenright/json/Like/increaseLike",{
+                    "productNo":productNo,
+                    "memberNo":memberNo
+                  }, function(data){
+                    swal("wishlist 에 추가되었습니다")
+                  });               
+                }else{
+                  $.post("/greenright/json/Like/decreaseLike",{
+                    "productNo":productNo,
+                    "memberNo":memberNo
+                  }, function(data){
+                   swal("wishlist 에서 삭제되었습니다.")
+                    
+                  });  
+                }
+              })
+          
+          
+          
+        })
      
         
           

@@ -22,11 +22,8 @@ public class ReviewController {
   @PostMapping("add")
   public JsonResult add(Review review,MultipartFile reviewPhoto)throws Exception{
     try {
-      System.out.println(review.toString());
-      System.out.println(reviewPhoto);
       if(reviewPhoto != null) {
         review.setPhotos(reviewPhotoWriter.getPhotoFile(reviewPhoto));
-        System.out.println(review.getPhotos());
       }else {
 
       }
