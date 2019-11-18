@@ -56,9 +56,10 @@
     </table><br>
      </div>
     <P align="center">
-      <button type="button" class="btn btn-primary">목록</button>
+      <button type="button" class="btn btn-primary" onclick="location.href='list.jsp'">목록</button>
       <button type="button" class="btn btn-primary" id="answer">답변작성</button>
-            <button type="button" class="btn btn-primary" id="answeranswer" style="display:none;">답변등록</button></p>
+      <button type="button" class="btn btn-primary" id="answeranswer" style="display:none;">답변등록</button>
+    </p>
    
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
