@@ -2,11 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-  <title>사진 게시물 목록</title>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
-  <link rel='stylesheet' href='/css/common.css'>
+
 <style>
 
 #my-paging-last span:hover {
@@ -27,6 +23,7 @@
 
 </style>
 
+<<<<<<< HEAD
 
 <jsp:include page="../greenheader.jsp"/>
 
@@ -51,6 +48,13 @@
        
    
           
+=======
+<div id='content'>
+<h1>게시판</h1>
+ 
+<a href='form'>새 사진게시물</a><br>
+<div id ="np"style=float:right;>검색결과개수:[개]</div>
+>>>>>>> c28f244e9d67e839ca34df71c49211e075300ec3
 <table class='table table-hover' id="products" >
 
 <thead class="thead-primary">
@@ -63,6 +67,7 @@
   <th>추천수</th>
 </tr>
 </thead>
+<<<<<<< HEAD
      <tbody id='tb1'>
           <c:forEach items="${boards}" var="board">
             <tr class="tr1">
@@ -126,6 +131,38 @@
         </div>
     </div>
   </section>     
+=======
+<tbody>
+<c:forEach items="${boards}" var="board" >
+  <tr class="tr1">
+    <td>${board.no}</td>
+    <td><a href='detail?no=${board.no}'>${board.title}</a></td>
+    <td>${board.member.nickname}</td>
+    <td class="cdate">${board.createdDate}</td>
+    <td>${board.viewCount}</td>
+    <td>${board.recommendation}</td>
+  </tr>
+</c:forEach> 
+</tbody>
+</table>
+</div>
+
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src='/js/jquery-migrate-3.0.1.min.js'></script>
+<script src='/js/jquery.easing.1.3.js'></script>
+<script src='/js/jquery.waypoints.min.js'></script>
+<script src='/js/jquery.stellar.min.js'></script>
+<script src='/js/jquery.magnific-popup.min.js'></script>
+<script src='/js/jquery.animateNumber.min.js'></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/scrollax.min.js"></script>
+<script src="/js/main.js"></script>
+
+>>>>>>> c28f244e9d67e839ca34df71c49211e075300ec3
 <script>
 $('#my-paging').on('click','.page-item', () => {
   /*  var currentLi = $(event.target).parent().attr('data-page'); 
@@ -198,6 +235,7 @@ $('.page-item').click((e) => {
 
 
 
+<<<<<<< HEAD
 </script>  
 <br>
 <br>
@@ -264,3 +302,7 @@ $('.page-item').click((e) => {
       $setRows.submit();
     </script>
 
+=======
+$setRows.submit();
+</script>
+>>>>>>> c28f244e9d67e839ca34df71c49211e075300ec3

@@ -2,9 +2,7 @@
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <title>Community Detail</title>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
-<link rel="stylesheet" href="/css/fontawesome/css/all.css">
+
 <style>
 .my-comment-control {
   
@@ -33,7 +31,6 @@
 }
 </style>
   <% session.setAttribute("memberName","kim");%>
-  <jsp:include page="../greenheader.jsp" />
 
   <!-- <div id='content'
     style="width: 1140px; margin-left: 374px; padding-right: 15px; padding-left: 15px;"> -->
@@ -53,7 +50,7 @@
               <div class="row" >
                 <div class="col" style="text-align: left;">
                   <span style="font-size: 13px; font-weight: normal;">등록일: ${board.createdDate}</span><br> 
-                  <span style="font-size: 13px; font-weight: normal;">작성자 : ${board.member.name}</span>
+                  <span style="font-size: 13px; font-weight: normal;">작성자 : ${board.member.nickname}</span>
                 </div>
                 <div class="col" style="text-align: right;">
                   <span style="font-size: 13px; font-weight: normal;">조회수: ${board.viewCount}</span><br> 
@@ -135,11 +132,24 @@
     </div>
   </div>
   <div style="margin-bottom: 50px;"></div>
-  </div>
-  
-
-
-
+ </div>
+<link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel="stylesheet" href="/css/fontawesome/css/all.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src='/js/jquery-migrate-3.0.1.min.js'></script>
+<script src='/js/jquery.easing.1.3.js'></script>
+<script src='/js/jquery.waypoints.min.js'></script>
+<script src='/js/jquery.stellar.min.js'></script>
+<script src='/js/jquery.magnific-popup.min.js'></script>
+<script src='/js/jquery.animateNumber.min.js'></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/scrollax.min.js"></script>
+<script src="/js/main.js"></script>
 
   
 

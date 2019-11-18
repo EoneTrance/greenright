@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../../css/style.css">
 <link rel="stylesheer"
   href="../../node_modules/bootstrap/css/bootstrap.min.css">
-<script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+
 <style>
 .adder {
   width: 250px;
@@ -249,23 +249,7 @@ margin :0px 10px 0px 10px;
 margin:0px 10px 0px 10.9px !important;
 }
 </style>
-<script src="../../js/jquery.min.js"></script>
-<script src="../../js/jquery-migrate-3.0.1.min.js"></script>
-<script src="../../js/popper.min.js"></script>
-<script src="../../js/jquery.easing.1.3.js"></script>
-<script src="../../js/jquery.waypoints.min.js"></script>
-<script src="../../js/jquery.stellar.min.js"></script>
-<script src="../../js/owl.carousel.min.js"></script>
-<script src="../../js/jquery.magnific-popup.min.js"></script>
-<script src="../../js/aos.js"></script>
-<script src="../../js/jquery.animateNumber.min.js"></script>
-<script src="../../js/bootstrap-datepicker.js"></script>
-<script src="../../js/scrollax.min.js"></script>
-<script src="../../js/main.js"></script>
-<link rel="stylesheet"
-  href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
 
 <%
     session.setAttribute("memberNo", "1");
@@ -374,6 +358,25 @@ margin:0px 10px 0px 10.9px !important;
     </div>
   </form>
 </div>
+
+<script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/jquery-migrate-3.0.1.min.js"></script>
+<script src="../../js/popper.min.js"></script>
+<script src="../../js/jquery.easing.1.3.js"></script>
+<script src="../../js/jquery.waypoints.min.js"></script>
+<script src="../../js/jquery.stellar.min.js"></script>
+<script src="../../js/owl.carousel.min.js"></script>
+<script src="../../js/jquery.magnific-popup.min.js"></script>
+<script src="../../js/aos.js"></script>
+<script src="../../js/jquery.animateNumber.min.js"></script>
+<script src="../../js/bootstrap-datepicker.js"></script>
+<script src="../../js/scrollax.min.js"></script>
+<script src="../../js/main.js"></script>
+<link rel="stylesheet"
+  href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script>
 $(document).on("click",".adderButton",function(){
   if(($("#pn").val)!=($(".optionsQuantity").val)) {

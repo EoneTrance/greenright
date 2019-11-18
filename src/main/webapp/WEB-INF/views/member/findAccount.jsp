@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
   
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/greenright.css">
+
+<div id="mypage-title-h1">
+<h1>아이디 / 비밀번호 찾기</h1>
+</div>
 <div id="content">
-<h2 id="findH2" style="text-align:center">아이디 / 비밀번호 찾기</h2>
+<br><br>
 <div id="findIdPassword">
 <form name="findAccount" action='../findResult/id' method='post' enctype='multipart/form-data' onsubmit="return checkEmpty()">
   <div id="idDiv">
@@ -23,24 +29,42 @@
   본인 확인 답변 <input type="text" name="answer"
     class="form-control input-lg" />
   <br>
-  <button class="btn btn-lg btn-success btn-block" name="submitBtn" type="submit"></button>
+  <button class="btn btn-lg btn-primary btn-block" name="submitBtn" type="submit"></button>
 </form>
 </div>
 </div>
+<br><br>
+
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src='/js/jquery-migrate-3.0.1.min.js'></script>
+<script src='/js/jquery.easing.1.3.js'></script>
+<script src='/js/jquery.waypoints.min.js'></script>
+<script src='/js/jquery.stellar.min.js'></script>
+<script src='/js/jquery.magnific-popup.min.js'></script>
+<script src='/js/jquery.animateNumber.min.js'></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/scrollax.min.js"></script>
+<script src="/js/main.js"></script>
 
 <script type="text/javascript">
+$(function() {
   "use strict";
   
   if ('${path}' == "findId") {
     $("div#idDiv")[0].style.display = "none";
-    $("h2#findH2")[0].innerHTML = "아이디 찾기";
+    $("#mypage-title-h1 > h1")[0].innerHTML = "아이디 찾기";
     $("form[name=findAccount]")[0].action = "../findResult/id";
     $("button[name=submitBtn]")[0].innerHTML = "아이디 찾기";
     
   } else if ('${path}' == "findPw") {
     $("div#idDiv")[0].style.display = "inline";
-    $("h2#findH2")[0].innerHTML = "비밀번호 찾기";
+    $("#mypage-title-h1 > h1")[0].innerHTML = "비밀번호 찾기";
     $("form[name=findAccount]")[0].action = "../findResult/pw";
     $("button[name=submitBtn]")[0].innerHTML = "비밀번호 찾기";
   }
+});
 </script>
