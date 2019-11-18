@@ -49,10 +49,10 @@ inpit {
 }
 
 .out {
-  text-align: center;
+  /* text-align: center; */
   width: 1000px;
   margin: auto auto;
-  border: solid 0.5px #82ae46;
+ /*  border: solid 0.5px #82ae46; */
   background: #f7f6f2 !important;
 }
 
@@ -68,14 +68,14 @@ select.custom-select {
   width: 120px;
 }
 
-.in {
+/* .in {
   padding-left: 10px;
   text-align: left;
   padding-bottom: 10px;
   border-top: 0.1px #82ae46 solid;
   padding-top: 5px;
   padding-bottom: 8px;
-}
+} */
 
 .btn {
   height: 40px;
@@ -92,10 +92,10 @@ h5 {
   font-weight: bold;
 }
 
-h6 {
+/* h6 {
   padding-bottom: 10px;
   font-weight: 600;
-}
+} */
 
 select#Aselect {
   height: 30px;
@@ -105,9 +105,9 @@ select#Aselect {
   margin-left: 10px;
 }
 
-form {
+/* form {
   padding-top: 20px;
-}
+} */
 
 h3 {
   color: #82ae46;
@@ -115,8 +115,10 @@ h3 {
 }
 
 input#pN {
+  margin: auto;
   margin-top: 5px;
-  width: 963.1px;
+  width: 910px;
+  height: 35px !important;
 }
 
 input#mN {
@@ -125,18 +127,24 @@ input#mN {
 }
 
 input#datetimepicker4 {
-  width: 963.5px;
+  margin: auto;
+  width: 910px;
   margin-top: 5px;
+  height: 35px !important;
 }
 
 input#original {
-  width: 963.5px;
+  margin: auto;
+  width: 910px;
   margin-top: 5px;
+  height: 35px !important;
 }
 
 input#sellprice {
-  width: 963.5px;
+  margin: auto;
+  width: 910px;
   margin-top: 5px;
+  height: 35px !important;
 }
 
 input#btnAdd {
@@ -248,68 +256,95 @@ margin :0px 10px 0px 10px;
 #postionsaver{
 margin:0px 10px 0px 10.9px !important;
 }
+
+/*추가  */
+h3.add-title {
+    text-align: center;
+    font-size: 35px;
+    border: solid #82ae46 2px;
+    padding: 20px;
+}
+
+h5.sub-title {
+    margin-top: 10px;
+}
+
+div#select-wrap {
+    text-align: center;
+}
+
+h6.subselect-group {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+}
+
+select#Aselect {
+    width: 220px;
+    font-weight: bold;
+}
+
+select#Bselect {
+    width: 220px;
+    font-weight: bold;
+}
+
+div#subselect {
+    display:inline-block;
+    margin-left: 20px;
+}
+
+h6.input-bar {
+    font-weight: bold;
+   /*  margin-left: 25px; */
+}
+
+h5.sub-title {
+    margin-top: 10px;
+    text-align: left;
+    margin-left: 30px;
+}
+
+span.input-name {
+    margin-left: 20px;
+    color: black;
+    display: list-item;
+    margin-left: 45px;
+    margin-top: 15px;
+}
+
+hr.line-group {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 </style>
 
 
-<%
-    session.setAttribute("memberNo", "1");
-  %>
 <div class="out">
-  <form action='add' method='post' enctype='multipart/form-data'>
-    <h3>새 상품 등록 관리</h3>
+  <form action='upcyclingadd' method='post' enctype='multipart/form-data'>
+    <h3 class="add-title">업 사이클링 제품 등록 관리</h3>
     <br>
     <div class="in">
-      <h5>I. 상품 등록</h5>
-      <h6>
-        상품 카테고리 대분류 선택 <select id="Aselect" class="custom-select">
-          <option value="clean">청소</option>
-          <option value="office">사무</option>
-          <option value="organic">유기농</option>
-          <option value="furniture">가구</option>
-        </select>
-      </h6>
-      <div id="subselect">
-        <h6>
-          상품 카테고리 소분류 선택 <select name="groupNo" id="Bselect"
-            class="custom-select">
-            <option value=1>세제류</option>
-            <option value=2>위생용품</option>
-            <option value=3>화장지</option>
-            <option value=4>티슈</option>
-          </select>
-        </h6>
-      </div>
+      <h5 class="sub-title">I. 상품 등록  &nbsp; <i class="fas fa-archive"></i> </h5>
+      <hr class="line-group">
 
-      <h6>
-        상품명 <br> <input class="adder form-control" type="text"
+      <h6 class="input-bar">
+        <span class="input-name">상품명</span> <input class="adder form-control" placeholder="상품명을 입력해주세요." type="text"
           id="pN" name="productName" required>
       </h6>
 
-      <h6>
-        수량 <input class="adder form-control fullproductNo" type="number" id="pN"
-          name="quantity" min="0" required>
-      </h6>
-
-      <h6>
-        유통기한 <br> <input class="adder datetimepicker4 form-control"
-          type='text' id='datetimepicker4' name="expirationDate"
-          required readonly />
-      </h6>
-
-
-
-      <h6>
-        원산지 <br> <input class="adder form-control" id="original"
-          type="text" name="origin" class="form-control" required>
-      </h6>
-      <h6>
-        판매가 <br> <input class="adder form-control" id="sellprice"
+      <h6 class="input-bar">
+       <span class="input-name">판매가</span>  <input class="adder form-control" id="sellprice" placeholder="가격을 입력해주세요"
           type="number" name="price" class="form-control" step=10
           required>
       </h6>
     </div>
+    <hr class="line-group">
     <div class="in">
-      <h5>II. 이미지 등록</h5>
+      <h5 class="sub-title">II. 이미지 등록  &nbsp; <i class="fas fa-images"></i> </h5>
+      <hr class="line-group">
       <div id="attachFileDiv" class="attachFileDiv">
         <h6 id="addbutton">
           <input type="button" class="btn btn-primary py-3 px-4"
@@ -317,31 +352,12 @@ margin:0px 10px 0px 10.9px !important;
         </h6>
       </div>
     </div>
+    <hr class="line-group">
     <table id="list">
     </table>
 
     <div class="in">
-      <h5>III. 옵션 관리</h5>
-      <h6>
-        <!--  옵션 이름<input class="btn btn-primary py-3 px-4" type="button"
-            id="optionN" value="옵션이름추가버튼"> -->
-
-        <input type="text" name="optionName" value="neverNo" hidden /> <input
-          type="text" name="optionContents" value="neverNo" hidden /> <input
-          type="text" name="optionprice" value="neverNo" hidden /> <input
-          type="text" name="optionquantity" value="neverNo" hidden />
-      </h6>
-      <table id="optionplus">
-       <tr><td class="dv">옵션명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<input type="text" name="optionName"  id ="postionsaver"class="margininput" placeholder="수량-색깔-성별 형태로입력" >
-    <table class="dr"><input class="btn btn-primary py-3 px-4 optionAdd" type="button" id="optionitemadd" value="옵션항목추가"/></table>
-    <input type ="text" name="optionContents" value="divide" class="fordivide">
-    <input type ="text" name="optionprice" value="divide" class="fordivide">
-    <input type ="text" name="optionquantity" value="divide" class="fordivide">
-    </td></tr>
-      </table>
-    </div>
-    <div class="in">
-      <h5>IV. 상품 설명</h5>
+      <h5>III. 상품 설명</h5>
       <textarea rows="5" cols="50" name="description"
         placeholder="내용을 입력하세요" required> </textarea>
       <br>
@@ -371,23 +387,6 @@ margin:0px 10px 0px 10.9px !important;
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script>
-$(document).on("click",".adderButton",function(){
-  let fullq = $(".fullproductNo").val() 
-  let smallq = $(".optionsquantity")
-  let smallqsum = 0 ;
-  smallqsum * 1 ; 
-  for(var i = 0; i< smallq.length; i++){
-    smallqsum += ($(smallq[i]).val())*1 ;
-  }
-  if(smallqsum != fullq){
-    swal("옵션개수의 총합과 상품개수가 다릅니다 ")
-  }else{
-  }
-  
-})
-
-</script>
-<script>
    $(function() {
     $(document)
         .on(
@@ -396,7 +395,7 @@ $(document).on("click",".adderButton",function(){
             function() {
               var oip = '<tr><td>옵션내용:<input type="text"  class="margininput" name="optionContents" placeholder="수량-색깔-성별 형태로입력" >';
               oip += '추가금액:<input type="number" name="optionprice" class="margininput" required min="0" step=10>';
-              oip += '개수:<input type="number" name="optionquantity"  class="margininput optionsquantity" required min="0">';
+              oip += '개수:<input type="number" name="optionquantity"  class="margininput" required min="0" class="optionsQuantity">';
               oip += '<input class="btn btn-primary py-3 px-4 optionAdd margininput" type="button" id="buttonDel" value="옵션항목삭제"/>';
               oip += '</td></tr>';
               $(this).parent().append(oip);
@@ -416,20 +415,24 @@ $(document).on("click",".adderButton",function(){
             if (state == 'clean') {
               $("#subselect")
                   .html(
-                      "  <h6>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=1>세제류</option><option value=2>위생용품</option><option value=3>화장지</option><option value=4>티슈</option></select></h6>");
+                      "  <h6 class='subselect-group'>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=1>세제류</option><option value=2>위생용품</option><option value=3>화장지</option><option value=4>티슈</option></select></h6>");
             } else if (state == 'office') {
               $("#subselect")
                   .html(
-                      "  <h6>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=5>복사용지</option><option value=6>화일</option><option value=7>토너</option><option value=8>기타</option></select></h6>");
+                      "  <h6 class='subselect-group'>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=5>복사용지</option><option value=6>화일</option><option value=7>토너</option><option value=8>기타</option></select></h6>");
             } else if (state == 'organic') {
               $("#subselect")
                   .html(
-                      "  <h6>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=9>과일</option><option value=10>채소</option><option value=11>간식</option><option value=12>축산품</option></select></h6>");
+                      "  <h6 class='subselect-group'>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=9>과일</option><option value=10>채소</option><option value=11>간식</option><option value=12>축산품</option></select></h6>");
             } else if (state == 'furniture') {
               $("#subselect")
                   .html(
-                      "  <h6>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=13>침대</option><option value=14>소파</option><option value=15>테이블</option><option value=16>의자</option><option value=17>파티션</option></select></h6>");
-            } 
+                      "  <h6 class='subselect-group'>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=13>침대</option><option value=14>소파</option><option value=15>테이블</option><option value=16>의자</option><option value=17>파티션</option></select></h6>");
+            } else {
+              $("#subselect")
+                  .html(
+                      "<h3>업사이클링은 소분류가없습니다.</h3><input type='hidden' name='groupNo' value=18>")
+            }
           });
 </script>
 <script>
@@ -583,5 +586,5 @@ $(document).on("click",".adderButton",function(){
 </script>
 <script>
 
-</script>
 
+</script>

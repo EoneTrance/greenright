@@ -1,5 +1,6 @@
 package com.greenright.web;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import com.greenright.domain.Member;
 import com.greenright.domain.Product;
 import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
@@ -45,6 +47,32 @@ public class ProductController {
     
     
   }
+  @GetMapping("upcyclingform")
+  public String upcyclingform(HttpSession session) {
+    Seller loginSeller = (Seller)session.getAttribute("loginSeller");
+    if(loginSeller ==null) {
+      return "redirect:/greenright/main";
+    }
+    return "product/upcyclingform";
+  }
+  @Transactional
+  @PostMapping("upcyclingadd")
+  public String upcuclcingadd(Product product,MultipartFile[] photoPath,HttpSession session) throws Exception {
+    Member member =(Member)session.getAttribute("loginUser");
+    int a= member.getNo();
+    System.out.println(a);
+    product.setGroupNo(18);
+    product.setQuantity(1);
+    product.setOrigin("한국");
+    product.setMemberNo(a);
+    product.setPhotos(productPhotoWriter.getPhotoFiles(photoPath));
+    product.setDiy(1);
+    product.setExpirationDate(new Date(20190101));
+    System.out.println(product.toString());
+    productService.insert(product);
+    return "redirect:manage";
+  }
+  
   @Transactional
   @PostMapping("add")
   public String add (MultipartFile[] photoPath,
@@ -113,10 +141,9 @@ public class ProductController {
   }
   @RequestMapping("manage")
   public void main(Model model,HttpSession session) throws Exception {
-    
-    //int no =(Integer)session.getAttribute("SellerNo");
-    //List<Product> products = productService.listBySeller(no);
-    List<Product> products = productService.listBySeller(1);
+   Member member=  (Member)session.getAttribute("loginUser");
+    int a = member.getNo();
+    List<Product> products = productService.listBySeller(a);
     model.addAttribute("products", products);
     System.out.println(products.toString());
   }

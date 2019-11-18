@@ -320,8 +320,8 @@ label.custom-file-label {
 button#review-add-btn {
     height: fit-content;
 }
-.CartBut{
-    background-color: #82ae46 !important;
+button.btn.btn-primary.CartBut {
+    background: #82ae46 !important;
 }
 
 
@@ -378,6 +378,9 @@ button#review-add-btn {
   </div>
 </div>
 
+
+<!-- 어떤거 보내야할지 정확하게 모르겠어서 일단 상품정보에대한부분은 다 폼으로 묶어놓았습니다 .  -->
+<form>
 <section class="ftco-section">
   <div class="container">
     <div class="row">
@@ -453,7 +456,7 @@ button#review-add-btn {
     </div>
   </div>
 </section>
-
+</form>
 <section class="ftco-section">
   <div class="container">
     <div class="row justify-content-center mb-3 pb-3">
@@ -470,7 +473,7 @@ button#review-add-btn {
         <c:if test="${production.no ne product.no}">
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="product">
-              <a href="#" class="img-prod"><img class="img-fluid"
+              <a href="/greenright/product/buydetail?no=${production.no}" class="img-prod"><img class="img-fluid"
                 src="/upload/product/${production.photos[0].photoPath}"
                 alt="Colorlib Template"
                 style="width: 208px; height: 208px; object-fit: cover;">
@@ -478,13 +481,13 @@ button#review-add-btn {
               <div class="overlay"></div>
               <div class="text py-3 pb-4 px-3 text-center">
                 <h3>
-                  <a href="#">"${production.productName}"</a>
+                  <a href="/greenright/product/buydetail?no=${production.no}" >${production.productName}</a>
                 </h3>
                 <div class="d-flex">
                   <div class="pricing">
                     <p class="price">
-                      <span class="mr-2 price-dc">"${production.price}"</span><span
-                        class="price-sale">"${production.price-5000}"</span>
+                      <span
+                        class="price-sale">${production.price}</span>
                     </p>
                   </div>
                 </div>
@@ -1589,6 +1592,38 @@ button#review-add-btn {
       $('.floatMenu').removeClass("fix");
     }
   });
+  
+  $(document).on("click",'.quantity-right-plus',function(e){
+    
+    // Stop acting like a button
+    e.preventDefault();
+    // Get the field name
+    var quantity = parseInt($('#quantity').val());
+    
+    // If is not undefined
+        
+        $('#quantity').val(quantity + 1);
+
+      
+        // Increment
+    
+});
+
+ $(document).on("click",'.quantity-left-minus',function(e){
+    // Stop acting like a button
+    e.preventDefault();
+    // Get the field name
+    var quantity = parseInt($('#quantity').val());
+    
+    // If is not undefined
+  
+        // Increment
+        if(quantity>0){
+        $('#quantity').val(quantity - 1);
+        }
+});
+  
+  
 </script>
 
 
