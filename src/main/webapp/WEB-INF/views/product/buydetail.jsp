@@ -416,15 +416,17 @@ button.btn.btn-primary.CartBut {
             <div class="form-group d-flex">
               <div class="select-wrap">
                 <div class="icon">
-                  <span class="ion-ios-arrow-down"></span>
                 </div>
                 <c:forEach items="${product.options}" var="option">
+                <c:if test="${option.no ne 0 }">
                   <select name="optionItemNo" id="" class="form-control">
                     <c:forEach items="${option.optionItem}" var="item">
+                  <span class="ion-ios-arrow-down"></span>
                       <option  value="${item.no}">옵션명:&nbsp;${item.optionItemMatter}&nbsp;|&nbsp;가격:&nbsp;+${item.optionsPrice}원</option>
                     </c:forEach>
                   </select>
-
+                </c:if>
+                <c:if test="${option.no eq 0 }"></c:if>
                 </c:forEach>
               </div>
             </div>

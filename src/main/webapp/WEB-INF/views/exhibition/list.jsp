@@ -29,7 +29,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
             <p class="breadcrumbs"><span class="mr-2"><a href="#">Green</a></span> <span>Right</span></p>
-            <h1 class="mb-0 bread">친환경 제품을 사용해 보세요.</h1>
+            <h1 class="mb-0 bread">업사이클링 제품을 구매해보세요</h1>
           </div>
         </div>
       </div>
@@ -38,32 +38,6 @@
     <!--------------------------------------------------------------------------------------->
     <section class="ftco-section">
         <div class="container">
-            <!------------------------------------------------------------------------------->
-            <div class="row justify-content-center">
-                <div class="col-md-10 mb-5 text-center" style=margin-bottom:0px;>
-                    <ul class="product-category big_c">
-                        <li value=0 class="searchbtn" id ="set"><a  class="vv active" id="productAll"><b>All</b></a></li>
-                        <li value=1 class="searchbtn" id ="clean"><a class="vv"  ><b>청소</b></a></li>
-                        <li value=2 class="searchbtn" id ="office"><a class="vv" ><b>사무</b></a></li>
-                        <li value=3 class="searchbtn" id ="organic"><a class="vv" ><b>유기농</b></a></li>
-                        <li value=4 class="searchbtn" id ="furniture"><a class="vv" ><b>가구</b></a></li>
-                        <li value=5 class="searchbtn" id ="upcycleing"><a class="vv" ><b>업사이클링</b></a></li>
-                    </ul>
-                    <div class="listchange">
-                    <!-- <ul class="product-category" id="groups" style=text-align: center; style=margin-top:3px; >
-                        <li><a href="#"><b>청소</b></a></li>
-                        <li><a href="#"><b>사무</b></a></li>
-                        <li><a href="#"><b>유기농</b></a></li>
-                        <li><a href="#"><b>가구</b></a></li>
-                        <li><a href="#"><b>업사이클링</b></a></li>
-                    </ul> -->
-                    </div>
-                </div >
-            </div>
-            <!-- ----------------------------------------------------------------- -->
-
-
-
             <!------------------------------------------------------------------------------->
             <div class="row addto">
                  <c:forEach items="${products}" var="product">

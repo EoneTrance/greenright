@@ -15,8 +15,8 @@ public class ExhibitionController {
   @Resource 
   ProductService productService;
   
-  @RequestMapping("/main")
-  public void main(Model model) throws Exception {
+  @RequestMapping("/list")
+  public void list(Model model) throws Exception {
     List<Product> products = productService.list();
     model.addAttribute("products", products);
   }
