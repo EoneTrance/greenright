@@ -9,4 +9,5 @@ public interface ProductOptionDao {
   int deleteAll(int no) throws Exception;
   List<ProductOption> getProductOptionItemNum(int no) throws Exception;
   int update(ProductOption productOption)throws Exception;
+  ProductOption findBy(int no);
 }

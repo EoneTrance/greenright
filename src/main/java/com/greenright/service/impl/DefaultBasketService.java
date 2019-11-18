@@ -3,7 +3,6 @@ package com.greenright.service.impl;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import com.greenright.dao.BasketDao;
 import com.greenright.domain.Basket;
 import com.greenright.service.BasketService;
@@ -28,10 +27,18 @@ public class DefaultBasketService implements BasketService {
     return foundBasket;
   }
 
-  @Transactional
   @Override
   public int insert(Basket basket) throws Exception {
-    return basketDao.insert(basket);
+    int result = 0;
+    try {
+      result = basketDao.insert(basket);
+    } catch(Exception e) {
+      String exception = e.getCause().toString();
+      if (exception.indexOf("PRIMARY") != -1) {
+        result = basketDao.update(basket);
+      }
+    }
+    return result;
   }
 
   @Override

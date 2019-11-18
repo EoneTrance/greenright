@@ -46,10 +46,10 @@
 			<result column="options_name" property="optionName" />
 			<collection property="optionItem" ofType="ProductOptionItem">
 				<id column="option_item_id" property="no" />
-				<result column="options_id" property="OptionsNo" />
-				<result column="option_item_matters" property="OptionItemMatter" />
-				<result column="options_price" property="OptionsPrice"/>
-				<result column="options_quantity" property="Optionsquantity"/>
+				<result column="options_id" property="optionsNo" />
+				<result column="option_item_matters" property="optionItemMatter" />
+				<result column="options_price" property="optionsPrice"/>
+				<result column="options_quantity" property="optionsQuantity"/>
 			</collection>
 		</collection>
 

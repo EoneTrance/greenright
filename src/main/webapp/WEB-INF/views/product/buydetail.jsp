@@ -373,7 +373,7 @@ h5.starratin {
                 <c:forEach items="${product.options}" var="option">
                   <select name="" id="" class="form-control">
                     <c:forEach items="${option.optionItem}" var="item">
-                      <option value="${item.no}">옵션명:&nbsp;${item.optionItemMatter}&nbsp;|&nbsp;가격:&nbsp;+${item.optionsPrice}원</option>
+                      <option class="my-selected-option" value="${item.no}">옵션명:&nbsp;${item.optionItemMatter}&nbsp;|&nbsp;가격:&nbsp;+${item.optionsPrice}원</option>
                     </c:forEach>
                   </select>
 
@@ -661,7 +661,7 @@ $(document).on("click", ".add-to-cart", function(e){
   $.ajax({
     type: "GET",
     url: "../json/basket/add",
-    data: "productNo=" + ${product.no},
+    data: "no=" + $(".my-selected-option").val(),
     dataType: "json",
     async: false,
     success: function(basketAddResult) {

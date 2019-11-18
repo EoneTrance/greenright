@@ -6,60 +6,60 @@ public class ProductOptionItem implements Serializable{
   private static final long serialVersionUID = 1L;
   
   private int no;
-  private int OptionsNo;
-  private int OptionsPrice;
-  private int Optionsquantity;
-  private String OptionItemMatter;
   
+  private int optionsNo;
+  
+  private String optionItemMatter;
+  
+  private int optionsPrice;
+  
+  private int optionsQuantity;
 
   public int getNo() {
     return no;
   }
-  
+
   public void setNo(int no) {
     this.no = no;
   }
-  
+
   public int getOptionsNo() {
-    return OptionsNo;
+    return optionsNo;
   }
-  
+
   public void setOptionsNo(int optionsNo) {
-    OptionsNo = optionsNo;
+    this.optionsNo = optionsNo;
   }
-  
+
   public String getOptionItemMatter() {
-    return OptionItemMatter;
+    return optionItemMatter;
   }
-  
+
   public void setOptionItemMatter(String optionItemMatter) {
-    OptionItemMatter = optionItemMatter;
+    this.optionItemMatter = optionItemMatter;
   }
 
   public int getOptionsPrice() {
-    return OptionsPrice;
+    return optionsPrice;
   }
 
   public void setOptionsPrice(int optionsPrice) {
-    OptionsPrice = optionsPrice;
+    this.optionsPrice = optionsPrice;
   }
 
-  public int getOptionsquantity() {
-    return Optionsquantity;
+  public int getOptionsQuantity() {
+    return optionsQuantity;
   }
 
-  public void setOptionsquantity(int optionsquantity) {
-    Optionsquantity = optionsquantity;
+  public void setOptionsQuantity(int optionsQuantity) {
+    this.optionsQuantity = optionsQuantity;
   }
 
   @Override
   public String toString() {
-    return "ProductOptionItem [no=" + no + ", OptionsNo=" + OptionsNo + ", OptionsPrice="
-        + OptionsPrice + ", Optionsquantity=" + Optionsquantity + ", OptionItemMatter="
-        + OptionItemMatter + "]";
+    return "ProductOptionItem [no=" + no + ", optionsNo=" + optionsNo + ", optionItemMatter="
+        + optionItemMatter + ", optionsPrice=" + optionsPrice + ", optionsQuantity="
+        + optionsQuantity + "]";
   }
-  
-  
-  
   
 }

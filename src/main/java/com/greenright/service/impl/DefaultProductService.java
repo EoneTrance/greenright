@@ -107,7 +107,7 @@ public class DefaultProductService implements ProductService{
         }else if(i%5==1) {
           productOptionItem.setOptionsPrice(Integer.parseInt(ProductOptionItemNo[i]));
         }else if(i%5==2) {
-          productOptionItem.setOptionsquantity(Integer.parseInt(ProductOptionItemNo[i]));
+          productOptionItem.setOptionsQuantity(Integer.parseInt(ProductOptionItemNo[i]));
         }else if(i%5==3) {
           productOptionItem.setNo(Integer.parseInt(ProductOptionItemNo[i]));
         }else{

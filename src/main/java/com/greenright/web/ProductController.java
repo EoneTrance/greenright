@@ -62,7 +62,7 @@ public class ProductController {
       }else {
         productOptionItem.setOptionItemMatter(optionContents[i]);
         productOptionItem.setOptionsPrice(Integer.parseInt(optionprice[i]));
-        productOptionItem.setOptionsquantity(Integer.parseInt(optionquantity[i]));
+        productOptionItem.setOptionsQuantity(Integer.parseInt(optionquantity[i]));
         poiList.add(productOptionItem);
        ProductOption pOption = pList.get(count);
        pOption.setOptionItem(poiList);

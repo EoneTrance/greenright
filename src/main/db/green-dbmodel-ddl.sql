@@ -79,6 +79,7 @@ DROP TABLE IF EXISTS comments RESTRICT;
 -- 회원
 CREATE TABLE members (
   member_id          INTEGER      NOT NULL, -- 회원번호
+  member_class       INTEGER      NOT NULL DEFAULT 1, -- 회원구분
   registered_date    DATE         NOT NULL, -- 가입일
   id                 VARCHAR(20)  NOT NULL, -- 아이디
   password           VARCHAR(255) NOT NULL, -- 비밀번호
@@ -133,10 +134,10 @@ ALTER TABLE members
 CREATE TABLE sellers (
   member_id      INTEGER     NOT NULL, -- 회원번호
   bank_name      VARCHAR(50) NOT NULL, -- 은행명
-  account_num    INTEGER     NOT NULL, -- 판매자계좌번호
+  account_num    VARCHAR(50) NOT NULL, -- 판매자계좌번호
   account_holder VARCHAR(50) NOT NULL, -- 예금주 명
   tel            VARCHAR(50) NOT NULL, -- 고객응대전화번호
-  point          INTEGER     NOT NULL  -- 판매포인트
+  point          INTEGER     NOT NULL DEFAULT 0 -- 판매포인트
 );
 
 -- 판매회원
@@ -323,7 +324,7 @@ ALTER TABLE deliverys
 -- 장바구니상품
 CREATE TABLE baskets (
   member_id       INTEGER NOT NULL, -- 회원번호
-  product_id      INTEGER NOT NULL, -- 상품번호
+  option_item_id  INTEGER NOT NULL, -- 옵션항목번호
   registered_date DATE    NOT NULL, -- 등록일
   quantity        INTEGER NOT NULL  -- 수량
 );
@@ -332,8 +333,8 @@ CREATE TABLE baskets (
 ALTER TABLE baskets
   ADD CONSTRAINT PK_baskets -- 장바구니상품 기본키
     PRIMARY KEY (
-      member_id,  -- 회원번호
-      product_id  -- 상품번호
+      member_id,      -- 회원번호
+      option_item_id  -- 옵션항목번호
     );
 
 -- 옵션
@@ -391,10 +392,8 @@ ALTER TABLE reviews
 
 -- 작가개인전시
 CREATE TABLE exhibitions (
-  member_id       INTEGER      NOT NULL, -- 회원번호
-  name            VARCHAR(50)  NOT NULL, -- 작가명
-  photo_path      VARCHAR(255) NOT NULL, -- 작가사진경로
-  main_photo_path VARCHAR(255) NOT NULL  -- 대표작품경로
+  member_id INTEGER     NOT NULL, -- 회원번호
+  name      VARCHAR(50) NOT NULL  -- 작가명
 );
 
 -- 작가개인전시
@@ -715,12 +714,12 @@ ALTER TABLE baskets
 
 -- 장바구니상품
 ALTER TABLE baskets
-  ADD CONSTRAINT FK_products_TO_baskets -- 상품 -> 장바구니상품
+  ADD CONSTRAINT FK_option_items_TO_baskets -- 옵션항목 -> 장바구니상품
     FOREIGN KEY (
-      product_id -- 상품번호
+      option_item_id -- 옵션항목번호
     )
-    REFERENCES products ( -- 상품
-      product_id -- 상품번호
+    REFERENCES option_items ( -- 옵션항목
+      option_item_id -- 옵션항목번호
     );
 
 -- 옵션
