@@ -164,7 +164,7 @@
           <tr>
             <th class="my-col-3">별명</th>
             <td class="my-col-9">
-            <input type="text" name="nickname" class="input-md" value='${loginUser.nickname}'/>
+            <input type="text" name="name" class="input-md" value='${loginUser.name}'/>
             </td>
           </tr>
           <tr>

@@ -2,18 +2,22 @@ package com.greenright.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Member implements Serializable {
   private static final long serialVersionUID = 1L;
   
   private int no;
   private int memberClass;
+  
+  @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
   private Date registeredDate;
+  
   private String id;
   private String password;
   private int certificationFlag;
   private String cellPhone;
-  private String nickname;
+  private String name;
   private String email;
   private String postalCode;
   private String defaultAddress;
@@ -27,7 +31,7 @@ public class Member implements Serializable {
   public String toString() {
     return "Member [no=" + no + ", memberClass=" + memberClass + ", registeredDate="
         + registeredDate + ", id=" + id + ", password=" + password + ", certificationFlag="
-        + certificationFlag + ", cellPhone=" + cellPhone + ", nickname=" + nickname + ", email="
+        + certificationFlag + ", cellPhone=" + cellPhone + ", name=" + name + ", email="
         + email + ", postalCode=" + postalCode + ", defaultAddress=" + defaultAddress
         + ", detailAddress=" + detailAddress + ", question=" + question + ", answer=" + answer
         + ", authkey=" + authkey + ", passwordAuthkey=" + passwordAuthkey + "]";
@@ -74,11 +78,11 @@ public class Member implements Serializable {
   public void setCellPhone(String cellPhone) {
     this.cellPhone = cellPhone;
   }
-  public String getNickname() {
-    return nickname;
+  public String getName() {
+    return name;
   }
-  public void setNickname(String nickname) {
-    this.nickname = nickname;
+  public void setName(String name) {
+    this.name = name;
   }
   public String getEmail() {
     return email;

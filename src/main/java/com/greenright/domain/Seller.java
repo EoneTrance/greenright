@@ -12,6 +12,7 @@ public class Seller implements Serializable{
   private String accountHolder;
   private String tel;
   private int point;
+  private Member member;
   
   public int getNo() {
     return no;
@@ -49,10 +50,18 @@ public class Seller implements Serializable{
   public void setPoint(int point) {
     this.point = point;
   }
+  public Member getMember() {
+    return member;
+  }
+  public void setMember(Member member) {
+    this.member = member;
+  }
   
   @Override
   public String toString() {
     return "Seller [no=" + no + ", bankName=" + bankName + ", accountNum=" + accountNum
-        + ", accountHolder=" + accountHolder + ", tel=" + tel + ", point=" + point + "]";
+        + ", accountHolder=" + accountHolder + ", tel=" + tel + ", point=" + point + ", member="
+        + member + "]";
   }
+  
 }

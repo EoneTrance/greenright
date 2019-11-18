@@ -9,7 +9,7 @@ import com.greenright.domain.Member;
 import com.greenright.service.MemberService;
 
 @RestController("json.MemberController")
-@RequestMapping("json/member")
+@RequestMapping("/json/member")
 public class MemberController {
   
   @Resource

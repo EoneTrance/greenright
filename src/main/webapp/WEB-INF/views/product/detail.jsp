@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link rel="stylesheet" href="/css/style.css">
-<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
-<link rel='stylesheet' href='/css/common.css'>
+<link rel="stylesheet" href="/css/greenright.css">
 
 <style>
  #ndp {
@@ -96,8 +94,23 @@ h6 {
   padding-top: 10px;
   padding-bottom: 8px;
 }
+input:focus {outline:2px solid #82ae46;}
+
 </style>
  
+<div class="hero-wrap hero-bread" style="background-image: url('../../images/main.jpg');">
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-center justify-content-center">
+      <div class="col-md-9 ftco-animate text-center">
+        <p class="breadcrumbs"><span class="mr-2"><a href="#">Green</a></span> <span>Right</span></p>
+        <h1 class="mb-0 bread">상품페이지</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<!--------------------------------------------------------------------------------------->
+<section class="ftco-section">
+<div class="container">
     
 <div class='bigout'>
 <h1>상품상세보기</h1>
@@ -111,9 +124,9 @@ h6 {
 <h6>소분류명  <input type='text' class="form-control" name='categoryName' value='${product.group.groupName}' readonly><br></h6>
 <h6>판매자명  <input type='text' class="form-control" name='name' value='${product.seller.member.name}' readonly><br></h6>
 <h6>상품가격  <input type='text' class="form-control" name='price' value='${product.price}' readonly><br></h6>
-<h6>상품이름  <input type='text' class="form-control" name='productName' value='${product.productName}'><br></h6>
+<h6>상품이름  <input type='text' class="form-control" name='productName' value='${product.productName}' readonly><br></h6>
 <h6>상품설명  <input type='text' class="form-control" name='description' value='${product.description}'><br></h6>
-<h6>직접제작여부  <input type='text' class="form-control" name='diy' value='${product.diy}' readonly><br></h6>
+<h6>수량  <input type='number' class="form-control" name='diy' value='${product.quantity}' ><br></h6>
 <h6>등록일  <input type='text' class="form-control" name='registeredDate' value='${product.registeredDate}' readonly><br></h6>
 <h6>유통기한  <input type='text' class="form-control" name='expirationDate' value='${product.expirationDate}' readonly><br></h6>
 <h6>원산지  <input type='text' class="form-control" name='origin' value='${product.origin}' readonly ><br></h6>
@@ -131,9 +144,11 @@ h6 {
  </div>
   <c:forEach items="${option.optionItem}"  var="item">
  <div class="${item.no}" id ="optionItems" > 
- <h6> 옵션항목명  <input type='text' name='optionItemMatter' class="form-control" value='${item.optionItemMatter}' >
-  <input type="text" name="optionItemMatter" class="form-control" value ="${item.no}" hidden>
-  <input type="text" name="optionItemMatter" value="${item.optionsNo}" hidden>
+ <h6> 옵션항목명  <input type='text' name='optionItemMatter' class="form-control" value='${item.optionItemMatter}' ></h6>
+ <h6> 추가금액  <input type='number' name='optionItemMatter' class="form-control" value='${item.optionsPrice}' step=10 ></h6>
+ <h6> 옵션당개수  <input type='number' name='optionItemMatter' class="form-control" value='${item.optionsquantity}'>
+ <input type="text" name="optionItemMatter" class="form-control" value ="${item.no}" hidden>
+ <input type="text" name="optionItemMatter" value="${item.optionsNo}" hidden>
   <img src="/images/xmark.png" class="optionItemDelete"  width="10" height="10" alt="" ></h6>
   </div>
   </c:forEach> 
@@ -170,7 +185,42 @@ class="btn btn-primary py-3 px-4">삭제</button>
 </form>
 </div>
 </div>
+</div>
+</section>
 
+<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+  <div class="container py-4">
+    <div class="row d-flex justify-content-center py-5">
+      <div class="col-md-6">
+        <h2 style="font-size: 22px;" class="mb-0">Subcribe to our Author</h2>
+        <span>Get e-mail updates about our latest products and special upcycling</span>
+      </div>
+      <div class="col-md-6 d-flex align-items-center">
+        <form action="#" class="subscribe-form">
+          <div class="form-group d-flex">
+            <input type="text" class="form-control" placeholder="Enter email address">
+            <input type="submit" value="Subscribe" class="submit px-3">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src='/js/jquery-migrate-3.0.1.min.js'></script>
+<script src='/js/jquery.easing.1.3.js'></script>
+<script src='/js/jquery.waypoints.min.js'></script>
+<script src='/js/jquery.stellar.min.js'></script>
+<script src='/js/jquery.magnific-popup.min.js'></script>
+<script src='/js/jquery.animateNumber.min.js'></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/scrollax.min.js"></script>
+<script src="/js/main.js"></script>
 
 <script>
 $(document).on("click", ".imageDelete", function() {
@@ -204,7 +254,7 @@ $(document).on("click", ".imageDelete", function() {
    $(document).on("click", ".optionItemDelete", function() {
   
   var allData = {"no" : $(this).parent().parent().attr('class')}
-  $(this).parent().remove()
+  $(this).parent().parent().remove()
   $.ajax({
     url : "/greenright/json/Product/deleteoptionitems",
     type : "GET",

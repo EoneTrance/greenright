@@ -18,7 +18,7 @@
     select
       member_id,
       id,
-      nickname,
+      name,
       email,
       cell_phone,
       registered_date
@@ -33,7 +33,7 @@
       members(
         id,
         password,
-        nickname,
+        name,
         cell_phone,
         email,
         postal_code,
@@ -94,7 +94,7 @@
       where
       id like #{bindValue} or
       email like #{bindValue} or
-      nickname like #{bindValue} or
+      name like #{bindValue} or
       cell_phone like #{bindValue}
     </if>
     order by member_id desc
@@ -153,7 +153,7 @@
     update members
     <set>
       <if test="cellPhone != null">cell_phone=#{cellPhone}</if>
-      <if test="nickname != null">,nickname=#{nickname}</if>
+      <if test="name != null">,name=#{name}</if>
       <if test="email != null">,email=#{email}</if>
       <if test="postalCode != null">,postal_code=#{postalCode}</if>
       <if test="defaultAddress != null">,default_address=#{defaultAddress}</if>
@@ -189,7 +189,7 @@
     <include refid="selectMember"/>,
     certification_flag,
     cell_phone,
-    nickname,
+    name,
     postal_code,
     default_address,
     detail_address,

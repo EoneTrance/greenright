@@ -56,7 +56,7 @@
           <a class="nav-link dropdown-toggle font-weight-bold" href="/greenright/mypage" 
                 id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
            onclick="mypage()" style="padding-top:1.188rem;padding-bottom:1.188rem;">
-            <span style="font-size:150%;color:#82AE46;">${loginUser.nickname}</span>님
+            <span style="font-size:150%;color:#82AE46;">${loginUser.name}</span>님
           </a>
           <div class="dropdown-menu my-0" aria-labelledby="dropdown04">
             <a id="my-dropdown-hover" class="dropdown-item" href="/greenright/mypage/userinfo">PROFILE</a>
@@ -67,7 +67,7 @@
             <a id='my-dropdown-hover' class='dropdown-item' href='/greenright/auth/logout'>LOGOUT</a>
           </div>
         </li>
-        <li class="nav-item cta cta-colored my-login-state-y" style="display:none;"><a href="/greenright/order/basket" class="nav-link"><span class="fas fa-cart-arrow-down"></span>[0]</a></li>
+        <li class="nav-item cta cta-colored my-login-state-y" style="display:none;"><a href="/greenright/basket/list" class="nav-link"><span class="fas fa-cart-arrow-down"></span>[0]</a></li>
       </ul>
     </div>
   </div>
@@ -108,7 +108,7 @@ if (loginUser == null || loginUser == '') {
 } else {
   $("#usermenu").append(
       "<li class='nav-item dropdown'>"
-    + "<a class='nav-link dropdown-toggle font-weight-bold' href='/greenright/mypage' id='dropdown04' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>${loginUser.nickname}님</a>"
+    + "<a class='nav-link dropdown-toggle font-weight-bold' href='/greenright/mypage' id='dropdown04' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>${loginUser.name}님</a>"
     + "<div class='dropdown-menu my-0' aria-labelledby='dropdown04'>"
     + "<a id='my-dropdown-hover' class='dropdown-item' href='/greenright/mypage/userinfo'>PROFILE</a>"
     + "<a id='my-dropdown-hover' class='dropdown-item' href='/greenright/mypage/order'>ORDER</a>"

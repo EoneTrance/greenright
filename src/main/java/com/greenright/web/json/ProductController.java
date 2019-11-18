@@ -83,5 +83,14 @@ public class ProductController {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-
+  
+  @GetMapping("addCart")
+  public JsonResult addCart(int no) throws Exception{
+    try {
+      productPhotoService.deletephotos(no);
+      return new JsonResult().setState(JsonResult.SUCCESS);
+    } catch (Exception e) {
+      return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
+    }
+  }
 }

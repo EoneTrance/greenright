@@ -1,27 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<meta name="viewport"
-  content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link
-  href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
-  rel="stylesheet">
-<link
-  href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
-  rel="stylesheet">
-<link
-  href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
-  rel="stylesheet">
-<link rel="stylesheet" href="../../css/fontawesome/css/all.css">
-<link rel="stylesheet" href="../../css/animate.css">
-<link rel="stylesheet" href="../../css/owl.carousel.min.css">
-<link rel="stylesheet" href="../../css/owl.theme.default.min.css">
-<link rel="stylesheet" href="../../css/magnific-popup.css">
-<link rel="stylesheet" href="../../css/aos.css">
-<link rel="stylesheet" href="../../css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="../../css/jquery.timepicker.css">
-<link rel="stylesheet" href="../../css/style.css">
-<link rel="stylesheer"
-  href="../../node_modules/bootstrap/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="/js/jquery-ui-1.12.1/jquery-ui.min.css" />
 
 <style>
 .adder {
@@ -31,7 +11,7 @@
   /*   resize: horizontal; // 가로크기만 조절가능  resize: vertical;  세로크기만 조절가능  */
 }
 
-inpit {
+input {
   width: 40px;
   height: 50px;
 }
@@ -42,10 +22,6 @@ inpit {
 /*datepicer input 롤오버 시 손가락 모양 표시*/
 .hasDatepicker {
   cursor: pointer;
-}
-
-.dv {
-  border: solid 0.5px #82ae46;
 }
 
 .fordivide {
@@ -226,150 +202,202 @@ h6#marginless {
   font-size: larger;
   font-style: italic;
 }
-</style>
-<script src="../../js/jquery.min.js"></script>
-<script src="../../js/jquery-migrate-3.0.1.min.js"></script>
-<script src="../../js/popper.min.js"></script>
-<script src="../../js/jquery.easing.1.3.js"></script>
-<script src="../../js/jquery.waypoints.min.js"></script>
-<script src="../../js/jquery.stellar.min.js"></script>
-<script src="../../js/owl.carousel.min.js"></script>
-<script src="../../js/jquery.magnific-popup.min.js"></script>
-<script src="../../js/aos.js"></script>
-<script src="../../js/jquery.animateNumber.min.js"></script>
-<script src="../../js/bootstrap-datepicker.js"></script>
-<script src="../../js/scrollax.min.js"></script>
-<script src="../../js/main.js"></script>
-<link rel="stylesheet"
-  href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
-  <%
+input:focus {
+  outline: 2px solid #82ae46;
+}
+input.btn.btn-primary.py-3.px-4 {
+    width: 58px;
+}
+.optionAdd {
+    width: 100px !important;
+    height:33px !important;
+}
+button#button {
+    width: 100px;
+}
+td.dv {
+    width: 980px;
+    padding-left: 22px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.margininput{
+margin :0px 10px 0px 10px;
+}
+#postionsaver{
+margin:0px 10px 0px 10.9px !important;
+}
+</style>
+
+<%
     session.setAttribute("memberNo", "1");
   %>
-  <div class="out">
-    <form action='add' method='post' enctype='multipart/form-data'>
-      <h3>새 상품 등록 관리</h3>
-      <br>
-      <div class="in">
-        <h5>I. 상품 등록</h5>
+<section class="ftco-section">
+<div class="container">
+<div class="out">
+  <form action='add' method='post' enctype='multipart/form-data'>
+    <h3>새 상품 등록 관리</h3>
+    <br>
+    <div class="in">
+      <h5>I. 상품 등록</h5>
+      <h6>
+        상품 카테고리 대분류 선택 <select id="Aselect" class="custom-select">
+          <option value="clean">청소</option>
+          <option value="office">사무</option>
+          <option value="organic">유기농</option>
+          <option value="furniture">가구</option>
+          <option value="upcycleing">업사이클링</option>
+        </select>
+      </h6>
+      <div id="subselect">
         <h6>
-          상품 카테고리 대분류 선택 <select id="Aselect" class="custom-select">
-            <option value="clean">청소</option>
-            <option value="office">사무</option>
-            <option value="organic">유기농</option>
-            <option value="furniture">가구</option>
-            <option value="upcycleing">업사이클링</option>
+          상품 카테고리 소분류 선택 <select name="groupNo" id="Bselect"
+            class="custom-select">
+            <option value=1>세제류</option>
+            <option value=2>위생용품</option>
+            <option value=3>화장지</option>
+            <option value=4>티슈</option>
           </select>
         </h6>
-        <div id="subselect">
-          <h6>
-            상품 카테고리 소분류 선택 <select name="groupNo" id="Bselect"
-              class="custom-select">
-              <option value=1>세제류</option>
-              <option value=2>위생용품</option>
-              <option value=3>화장지</option>
-              <option value=4>티슈</option>
-            </select>
-          </h6>
-        </div>
+      </div>
+      
+      <h6>
+        상품명 <br> <input class="adder form-control" type="text"
+          id="pN" name="productName" required>
+      </h6>
 
-        <h6>
-          상품명 <br> <input class="adder form-control" type="text"
-            id="pN" name="productName" required>
-        </h6>
-        <h6>
-          판매자명 <br> <input class="adder form-control" type="text"
-            id="mN" name="memberNo" required>
-        </h6>
-        <h6>
-          유통기한 <br> <input
-            class="adder datetimepicker4 form-control" type='text'
-            id='datetimepicker4' name="expirationDate" required readonly />
-        </h6>
-        <!-- <input type='radio' name='diy' value=1 />yes
-               <input type='radio' name='diy' value=0 />no -->
-        <h6 id="marginless">직접제작여부</h6>
-        <div class="checks">
-          <input type="radio" id="ex_rd2" name='diy' value=1> <label
-            for="ex_rd2" class="label">yes</label> <input type="radio"
-            id="ex_rd2" name='diy' value=0 checked> <label
-            for="ex_rd2" class="label">no</label>
-        </div>
+      <h6>
+        <!--  일단 판매자 값을 받아서 처리중 나중에 마이페이지 구현되었을경우에는 세션에서 값 빼와서 처리할수있도록 .  -->
+        판매자명 <br> <input class="adder form-control" type="text"
+          id="mN" name="memberNo" required>
+      </h6>
+
+      <h6>
+        수량 <input class="adder form-control" type="number" id="pN"
+          name="quantity" min="0" required>
+      </h6>
+
+      <h6>
+        유통기한 <br> <input class="adder datetimepicker4 form-control"
+          type='text' id='datetimepicker4' name="expirationDate"
+          required readonly />
+      </h6>
 
 
 
-        <h6>
-          원산지 <br> <input class="adder form-control" id="original"
-            type="text" name="origin" class="form-control" required>
-        </h6>
-        <h6>
-          판매가 <br> <input class="adder form-control" id="sellprice"
-            type="text" name="price" class="form-control" required>
+      <h6>
+        원산지 <br> <input class="adder form-control" id="original"
+          type="text" name="origin" class="form-control" required>
+      </h6>
+      <h6>
+        판매가 <br> <input class="adder form-control" id="sellprice"
+          type="number" name="price" class="form-control" step=10
+          required>
+      </h6>
+    </div>
+    <div class="in">
+      <h5>II. 이미지 등록</h5>
+      <div id="attachFileDiv" class="attachFileDiv">
+        <h6 id="addbutton">
+          <input type="button" class="btn btn-primary py-3 px-4"
+            value="추가" onclick="attachFile.add()">
         </h6>
       </div>
-      <div class="in">
-        <h5>II. 이미지 등록</h5>
-        <div id="attachFileDiv" class="attachFileDiv">
-          <h6 id="addbutton">
-            <input type="button" class="btn btn-primary py-3 px-4"
-              value="추가" onclick="attachFile.add()">
-          </h6>
-        </div>
-      </div>
-      <table id="list">
+    </div>
+    <table id="list">
+    </table>
+
+    <div class="in">
+      <h5>III. 옵션 관리</h5>
+      <h6>
+        <!--  옵션 이름<input class="btn btn-primary py-3 px-4" type="button"
+            id="optionN" value="옵션이름추가버튼"> -->
+
+        <input type="text" name="optionName" value="neverNo" hidden /> <input
+          type="text" name="optionContents" value="neverNo" hidden /> <input
+          type="text" name="optionprice" value="neverNo" hidden /> <input
+          type="text" name="optionquantity" value="neverNo" hidden />
+      </h6>
+      <table id="optionplus">
+       <tr><td class="dv">옵션명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<input type="text" name="optionName"  id ="postionsaver"class="margininput" placeholder="수량-색깔-성별 형태로입력" >
+    <table class="dr"><input class="btn btn-primary py-3 px-4 optionAdd" type="button" id="optionitemadd" value="옵션항목추가"/></table>
+    <input type ="text" name="optionContents" value="divide" class="fordivide">
+    <input type ="text" name="optionprice" value="divide" class="fordivide">
+    <input type ="text" name="optionquantity" value="divide" class="fordivide">
+    </td></tr>
       </table>
+    </div>
+    <div class="in">
+      <h5>IV. 상품 설명</h5>
+      <textarea rows="5" cols="50" name="description"
+        placeholder="내용을 입력하세요" required> </textarea>
+      <br>
+      <button class="btn btn-primary py-3 px-4 adderButton" id=button>등록하기</button>
+      <INPUT type="button" value="취소" class="btn btn-primary py-3 px-4"
+        onClick="location.href='/greenright/product/manage'">
+    </div>
+  </form>
+</div>
+</div>
+</section>
 
-      <div class="in">
-        <h5>III. 옵션 관리</h5>
-        <h6>
-          옵션 이름<input class="btn btn-primary py-3 px-4" type="button"
-            id="optionN" value="옵션이름추가버튼">
-        </h6>
-        <table id="optionplus"></table>
+<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+  <div class="container py-4">
+    <div class="row d-flex justify-content-center py-5">
+      <div class="col-md-6">
+        <h2 style="font-size: 22px;" class="mb-0">Subcribe to our Author</h2>
+        <span>Get e-mail updates about our latest products and special upcycling</span>
       </div>
-      <div class="in">
-        <h5>IV. 상품 설명</h5>
-        <textarea rows="5" cols="50" name="description"
-          placeholder="내용을 입력하세요" required> </textarea>
-        <br>
-        <button class="btn btn-primary py-3 px-4" id=button>등록하기</button>
-        <INPUT type="button" value="취소"
-          class="btn btn-primary py-3 px-4"
-          onClick="location.href='http://www.jasko.co.kr'">
+      <div class="col-md-6 d-flex align-items-center">
+        <form action="#" class="subscribe-form">
+          <div class="form-group d-flex">
+            <input type="text" class="form-control" placeholder="Enter email address">
+            <input type="submit" value="Subscribe" class="submit px-3">
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
+</section>
 
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src='/js/jquery-migrate-3.0.1.min.js'></script>
+<script src='/js/jquery.easing.1.3.js'></script>
+<script src='/js/jquery.waypoints.min.js'></script>
+<script src='/js/jquery.stellar.min.js'></script>
+<script src='/js/jquery.magnific-popup.min.js'></script>
+<script src='/js/jquery.animateNumber.min.js'></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/scrollax.min.js"></script>
+<script src="/js/main.js"></script>
+
+<script src="/js/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-  $(function() {
-    $("#optionN")
-        .click(
-            function() {
+$(document).on("click",".adderButton",function(){
+  if(($("#pn").val)!=($(".optionsQuantity").val)) {
+  swal("옵션수량과 총수량이 일치하지않습니다");
+}
+})
 
-              var html = '<tr><td class="dv">옵션명<input type="text" name="optionName" required>';
-              html += '<input class="btn btn-primary py-3 px-4" type="button" id="btnDel" value="옵션삭제"/>'
-              html += '<table class="dr"><input class="btn btn-primary py-3 px-4" type="button" id="optionitemadd" value="옵션항목추가"></table>'
-              html += '<input type ="text" name="optionContents" value="divide" class="fordivide">';
-              html += '</td></tr>';
-
-              $("#optionplus").append(html);
-
-            });
-
-    $("#optionplus").on("click", "#btnDel", function() {
-      $(this).parent().parent().remove();
-    });
-
+</script>
+<script>
+   $(function() {
     $(document)
         .on(
             "click",
             "#optionitemadd",
             function() {
-              var oip = '<tr><td>옵션내용<input type="text" name="optionContents" required>';
-              oip += '<input class="btn btn-primary py-3 px-4" type="button" id="buttonDel"value="옵션항목삭제"/>';
+              var oip = '<tr><td>옵션내용:<input type="text"  class="margininput" name="optionContents" placeholder="수량-색깔-성별 형태로입력" >';
+              oip += '추가금액:<input type="number" name="optionprice" class="margininput" required min="0" step=10>';
+              oip += '개수:<input type="number" name="optionquantity"  class="margininput" required min="0" class="optionsQuantity">';
+              oip += '<input class="btn btn-primary py-3 px-4 optionAdd margininput" type="button" id="buttonDel" value="옵션항목삭제"/>';
               oip += '</td></tr>';
               $(this).parent().append(oip);
             });
@@ -557,5 +585,8 @@ h6#marginless {
         });
   });
 </script>
+<script>
 
+
+</script>
 

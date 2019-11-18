@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.greenright.dao.BasketDao">
+  <resultMap type="Basket" id="BasketMap">
+    <id column="member_id" property="memberNo"/>
+    <result column="product_id" property="productNo"/>
+    <result column="registered_date" property="registeredDate"/>
+    <result column="cell_phone" property="cellPhone"/>
+    <result column="postal_code" property="postalCode"/>
+    <result column="default_address" property="defaultAddress"/>
+    <result column="detail_address" property="detailAddress"/>
+  </resultMap>
+  
+  <sql id="selectBasket">
+    select
+      basket_id,
+      member_id,
+      registered_date,
+      quantity
+  </sql>
+  
+  <sql id="whereBasket">
+    where member_id=#{memberNo}
+  </sql> 
+ 
+  <insert id="insert" parameterType="Basket">
+    insert into
+      baskets(
+        member_id,
+        product_id,
+        registered_date,
+        quantity
+      values(
+        #{basketNo},
+        #{productNo},
+        #{registeredDate},
+        #{quantity}
+  </insert>
+  
+  <select id="findBy" parameterType="Basket" resultMap="BasketMap">
+    <include refid="selectBasket"/>
+    from baskets
+    where member_id=#{memberNo} and product_id=#{productNo};
+  </select>
+  
+  <select id="findAll" parameterType="int" resultMap="BasketMap">
+    <include refid="selectBasket"/>
+    from baskets
+      where
+      member_id=#{memberNo};
+    order by member_id desc
+  </select>
+  
+<!--
+  <update id="update" parameterType="Basket">
+    update baskets
+    <set>
+      <if test="cellPhone != null">cell_phone=#{cellPhone}</if>
+      <if test="name != null">,name=#{name}</if>
+      <if test="email != null">,email=#{email}</if>
+      <if test="postalCode != null">,postal_code=#{postalCode}</if>
+      <if test="defaultAddress != null">,default_address=#{defaultAddress}</if>
+      <if test="detailAddress != null">,detail_address=#{detailAddress}</if>
+      <if test="question != null">,question=#{question}</if>
+      <if test="answer != null">,answer=#{answer}</if>
+    </set>
+    <include refid="whereBasket"></include>
+  </update>
+-->
+  
+</mapper>

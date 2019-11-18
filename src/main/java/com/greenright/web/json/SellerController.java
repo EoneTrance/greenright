@@ -8,7 +8,7 @@ import com.greenright.domain.Seller;
 import com.greenright.service.SellerService;
 
 @RestController("json.SellerController")
-@RequestMapping("json/seller")
+@RequestMapping("/json/seller")
 public class SellerController {
   
   @Resource
