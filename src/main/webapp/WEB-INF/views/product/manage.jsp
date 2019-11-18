@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<link rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<link rel="stylesheet"
-  href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
+
+<link rel="stylesheet" href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="/css/greenright.css">
 <style>
 /* On small screens, set height to 'auto' for the grid */
 @media screen and (max-width: 767px) {
@@ -250,7 +248,7 @@ div#forright {
                       <td>${product.group.category.categoryName}</td>
                       <td>${product.group.groupName}</td>
                       <td>${product.registeredDate}</td>
-                      <td><fmt:formatNumber value="${product.price}" groupingUsed="true" /></td>
+                      <td>${product.price}</td>
                     </tr>
                   </c:forEach>
                 </tbody>
@@ -261,6 +259,22 @@ div#forright {
       </div>
     </div>
   </div>
+  
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src='/js/jquery-migrate-3.0.1.min.js'></script>
+<script src='/js/jquery.easing.1.3.js'></script>
+<script src='/js/jquery.waypoints.min.js'></script>
+<script src='/js/jquery.stellar.min.js'></script>
+<script src='/js/jquery.magnific-popup.min.js'></script>
+<script src='/js/jquery.animateNumber.min.js'></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/scrollax.min.js"></script>
+<script src="/js/main.js"></script>
+  
 <script>
 $('#Aselect').change(
     function() {
@@ -330,7 +344,7 @@ $(document).on("change","#Aselect",function() {
             tableTag += "<td>"+list[i].group.category.categoryName+"</td>"
             tableTag += "<td>"+list[i].group.groupName+"</td>" 
             tableTag += "<td>"+list[i].registeredDate+"</td>"
-            tableTag += "<td>numberFormat("+list[i].price+")</td></tr>";
+            tableTag += "<td>"+list[i].price+"</td></tr>";
           };
           $("#addto").html(tableTag);  
         }

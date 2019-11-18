@@ -24,7 +24,6 @@
 
 
 
-<jsp:include page="../header.jsp"/>  
 
   
   <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
@@ -85,7 +84,6 @@
   
   
   
-  <jsp:include page="../footer.jsp"></jsp:include>
   
   
   

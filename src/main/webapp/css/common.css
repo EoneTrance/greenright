@@ -1,30 +1,7 @@
 @charset "UTF-8";
 
-#header {
-  width: 1100px;
-  margin: 0 auto;
-}
-
-#header img {
-  height: 35px;
-}
-
-#footer {
-  background-color: #524845;
-  color: #ffffff;
-  height: 40px;
-  width: 1100px;
-  text-align: center;
-  vertical-align: middle;
-  padding-top: 10px;
-  margin: auto auto;
-}
-
-#content {
-  width: 1100px;
-  padding-top: 10px;
-  margin: auto auto;
-  text-align: center;
+[readonly] {
+  background-color: #DDDDDD !important;
 }
 
 h1 {
@@ -34,23 +11,46 @@ h1 {
   margin: auto auto;
 }
 
-#signform {
+#signform, #loginForm, #findIdPassword, #passwordChangeForm {
   text-align: left;
   width: 500px;
-  padding-top: 10px;
   margin: auto auto;
   font-weight: bold;
 }
 
-#signform input {
+#loginForm *, #findIdPassword * {
+  margin: auto auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#loginForm input, #loginForm select, #findIdPassword input, #findIdPassword select {
+  height: 40px;
+}
+
+#loginForm button, #findIdPassword button {
+  height: 50px;
+}
+
+#signform input:not[type=button], #passwordChangeForm input:not[type=button] {
   display: inline-block;
   height: 50px;
-  border: solid gray 1px;
   margin-top: 5px;
 }
 
-#signform #essential {
-  border: solid gray 2px;
+div#address input {
+  height: 50px;
+  width: 500px;
+}
+
+#address input[name=postalCode] {
+  height: 50px;
+  width: 248px;
+}
+
+#address input[name=searchPostalCode] {
+  height: 50px;
+  width: 248px;
 }
 
 #signform select {
@@ -58,28 +58,3 @@ h1 {
   height: 50px;
   margin: 10px auto;
 }
-
-.photo1 {
-  height: 120px;
-}
-
-.photo2 {
-  height: 100px;
-  margin: 2px;
-}
-
-#userid {
-  margin: 10px;
-}
-
-#pwd {
-  margin-left: 14px;
-  margin-top: 1px;
-  margin-bottom: 1px;
-}
-
-
-
-/* #essential {
-  background-color: #d8d8d8;
-} */

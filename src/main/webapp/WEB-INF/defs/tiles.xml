@@ -4,15 +4,34 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 <!-- 레이아웃을 정의하는 기본 템플릿을 설정한다. -->
+  <definition name="auth" template="/WEB-INF/tiles/template.jsp">
+    <put-attribute name="header" value="/WEB-INF/tiles/authHeader.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+  </definition>
+  
+  <definition name="member" template="/WEB-INF/tiles/template.jsp">
+    <put-attribute name="header" value="/WEB-INF/tiles/authHeader.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+  </definition>
+  
   <definition name="base" template="/WEB-INF/tiles/template.jsp">
     <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
     <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
   </definition>
+  
   <!-- 페이지 컨트롤러의 요청 핸들러가 리턴한 뷰 URL이 */* 형식일 떄, 
        다음의 템플릿 설정을 사용하여 JSP를 실행한다. -->
     <definition name="*/*/*" extends="base">
     <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3].jsp" />
   </definition>
+  <definition name="auth/*" extends="auth">
+    <put-attribute name="body" value="/WEB-INF/views/auth/{1}.jsp" />
+  </definition>
+  
+  <definition name="member/*" extends="member">
+    <put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp" />
+  </definition>
+  
   <definition name="*/*" extends="base">
     <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
   </definition>

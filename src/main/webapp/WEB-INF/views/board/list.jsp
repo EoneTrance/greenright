@@ -4,34 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.sql.*,java.text.SimpleDateFormat,java.util.Date"%>
 
-<!DOCTYPE html>
-<title>Community List</title>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel='stylesheet'
-  href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
-<link rel="stylesheet" href="/css/fontawesome/css/all.css">
-<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/mypage.css">
 
-    <link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="/css/animate.css">
-    
-    <link rel="stylesheet" href="/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/css/magnific-popup.css">
-
-    <link rel="stylesheet" href="/css/aos.css">
-
-    <link rel="stylesheet" href="/css/ionicons.min.css">
-
-    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/css/jquery.timepicker.css">
-
-    
-    <link rel="stylesheet" href="/css/flaticon.css">
-    <link rel="stylesheet" href="/css/icomoon.css">
-    <link rel="stylesheet" href="/css/style.css">
 <style>
 #my-paging-last span:hover {
   background-color:#82ae46;
@@ -51,7 +25,6 @@
 
 </style>
 
-  <jsp:include page="../greenheader.jsp" />
   <%
     session.setAttribute("memberName", "choi");
   %>
@@ -63,21 +36,6 @@
 
   
 
- <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center fadeInUp ftco-animated">
-            <p class="breadcrumbs">
-              <span class="mr-2">
-                <a href="index.html"></a>
-              </span> 
-              <span>greenright</span>
-            </p>
-            <h1 class="mb-0 bread">COMMUNITY</h1>
-          </div>
-        </div>
-      </div>
-    </div>
   <section class="ftco-section">
     <div id='content'
       style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
@@ -102,14 +60,9 @@
           <c:forEach items="${boards}" var="board">
             <tr class="tr1">
               
-              <td id="nono">${board.no}</td>
-              <td>
-              <a  href='detail?no=${board.no}'>${board.title}</a>
-              <c:if test="${board.createdDate == today}">
-              <img  src='/images/new.jpg'/>
-              </c:if>
-              </td>
-              <td>${board.member.name}</td>
+              <td>${board.no}</td>
+              <td id="btitle"><a href='detail?no=${board.no}'>${board.title}</a></td>
+              <td>${board.member.nickname}</td>
               <td class="cdate">${board.createdDate}</td>
               <td>${board.viewCount}</td>
                 <td>${board.recommendation}</td>
@@ -163,6 +116,28 @@
         </div>
     </div>
   </section>
+  </div>
+</section>
+
+<br>
+<br>
+<jsp:include page="../greenfooter.jsp" />
+
+
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src='/js/jquery-migrate-3.0.1.min.js'></script>
+<script src='/js/jquery.easing.1.3.js'></script>
+<script src='/js/jquery.waypoints.min.js'></script>
+<script src='/js/jquery.stellar.min.js'></script>
+<script src='/js/jquery.magnific-popup.min.js'></script>
+<script src='/js/jquery.animateNumber.min.js'></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/scrollax.min.js"></script>
+<script src="/js/main.js"></script>
 
 <script>
 $('#my-paging').on('click','.page-item', () => {
@@ -241,9 +216,7 @@ $('.page-item').click((e) => {
 </script>  
   
 
-<br>
-<br>
-<jsp:include page="../greenfooter.jsp" />
+
 
   <script>
       $('#Aselect')
@@ -260,12 +233,27 @@ $('.page-item').click((e) => {
                   $("#forsel").remove;
                   $("#forsel")
                       .html(
-                          "<form action='search3'><input type='text' name='name'><button id='search3' class='btn btn-primary' style='height:33px;'>검색</button></form>");
+                          "<form action='search3'><input type='text' name='nickname'><button id='search3' class='btn btn-primary' style='height:33px;'>검색</button></form>");
                 }
               });
     </script>
 
 <script>
+
+
+var dt;
+dt = new Date();
+dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate();
+console.log(dt);
+var img = document.getElementById('#newimg');
+console.log(img);
+
+if($('.cdate') == dt) {
+  $('#btitle').append(imgs);
+}
+
+    </script>
+  <script>
       $(document).ready(function() {
         $("select option[value=5]").attr("selected", true);
       });

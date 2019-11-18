@@ -14,8 +14,10 @@ import com.greenright.service.WishListService;
 @Controller
 public class MainController {
   
+
   @Resource ProductService productService;
   @Resource WishListService wishListService;
+
   
   @RequestMapping("/main")
   public void main(Model model) throws Exception {

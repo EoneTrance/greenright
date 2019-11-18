@@ -96,4 +96,9 @@ public class DefaultMemberService implements MemberService {
       throw new Exception("해당 번호의 데이터가 없습니다.");
     }
   }
+  
+  @Override
+  public void updateClass(Member member) {
+    memberDao.updateClass(member);
+  }
 }

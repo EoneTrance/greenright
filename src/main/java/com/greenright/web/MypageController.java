@@ -1,3 +1,4 @@
+
 package com.greenright.web;
 
 import javax.annotation.Resource;
@@ -5,11 +6,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.greenright.domain.Member;
 import com.greenright.service.MemberService;
+import com.greenright.service.SellerService;
 
 @Controller
 @RequestMapping("/mypage")
@@ -17,49 +17,68 @@ public class MypageController {
   @Resource
   private MemberService memberService;
   
-  @GetMapping("memberinfo")
-  public void memberinfo(Model model) throws Exception {
+  @Resource
+  private SellerService sellerService;
+  
+  @GetMapping("")
+  public void mypage(Member member) throws Exception {
   }
   
   @GetMapping("userinfo")
-  public void userinfo(Model model) throws Exception {
+  public void userinfo(HttpSession session, Model model) throws Exception {
+    model.addAttribute("title", " - 기본정보");
+    
   }
   
-  @PostMapping("update")
-  public String update(Member member, HttpSession session) throws Exception {
-    memberService.update(member);
-    Member loginUser = memberService.getUserInfo(member);
-    session.setAttribute("loginUser", loginUser);
-    return "mypage/userinfo";
-  }
-  
-  @GetMapping("mypage")
-  public void mypage(Member member, HttpSession session) throws Exception {
-    Member loginUser = memberService.getUserInfo(member);
-    session.setAttribute("loginUser", loginUser);
+  @GetMapping("sellerinfo")
+  public String sellerinfo(HttpSession session, Model model) throws Exception {
+    Member loginUser = (Member)session.getAttribute("loginUser");
+    if (loginUser.getMemberClass() != 2) {
+      return "redirect:userinfo";
+    }
+    model.addAttribute("title", " - 판매회원 정보");
+    return "mypage/sellerinfo";
   }
   
   @GetMapping("order")
-  public void order(Member member, HttpSession session) throws Exception {
-//    Member loginUser = memberService.getUserInfo(member);
-//    session.setAttribute("loginUser", loginUser);
-  }
-  
-  @PostMapping("update2")
-  @ResponseBody
-  public String update2(Member member
-) throws Exception {
-    Member loginMember = memberService.login(member);
-    if(loginMember != null) {
-      return "success";
-    } else {
-      return "fail";
-    }
+  public void order(Model model) throws Exception {
+    model.addAttribute("title", " - 구매내역");
   }
   
   @GetMapping("wishlist")
-  public void wishlist() throws Exception {
+  public void wishlist(Model model) throws Exception {
+    model.addAttribute("title", " - 관심상품");
   }
-
+  
+  @GetMapping("sale")
+  public String sale(HttpSession session, Model model) throws Exception {
+    Member loginUser = (Member)session.getAttribute("loginUser");
+    if (loginUser.getMemberClass() != 2) {
+      return "redirect:userinfo";
+    }
+    model.addAttribute("title", " - 판매내역");
+    return "mypage/sale";
+  }
+  
+  @GetMapping("exhibition")
+  public String exhibition(HttpSession session, Model model) throws Exception {
+    Member loginUser = (Member)session.getAttribute("loginUser");
+    if (loginUser.getMemberClass() != 2) {
+      return "redirect:userinfo";
+    }
+    model.addAttribute("title", " - 개인전 관리");
+    return "mypage/exhibition";
+  }
+  
+  @GetMapping("conversion")
+  public String conversion(HttpSession session, Model model) throws Exception {
+    Member loginUser = (Member)session.getAttribute("loginUser");
+    if (loginUser.getMemberClass() != 1) {
+      return "redirect:sellerinfo";
+    }
+    model.addAttribute("title", " - 회원 전환");
+    return "mypage/conversion";
+  }
+  
 }
 

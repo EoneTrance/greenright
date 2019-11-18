@@ -1,5 +1,5 @@
 {
-  "name": "greenright",
+  "name": "webapp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,10 @@
   "dependencies": {
     "blueimp-file-upload": "^10.3.0",
     "bootstrap": "^4.3.1",
+    "@chenfengyuan/datepicker": "^1.0.9",
+    "bootstrap-datepicker": "^1.9.0",
     "chart.js": "^2.9.2",
+    "bootstrap-select": "^1.13.12",
     "handlebars": "^4.5.1",
     "jquery": "^3.4.1",
     "json": "^9.0.6",
