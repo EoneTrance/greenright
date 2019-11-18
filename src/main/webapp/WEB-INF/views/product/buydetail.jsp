@@ -320,6 +320,11 @@ label.custom-file-label {
 button#review-add-btn {
     height: fit-content;
 }
+.CartBut{
+    background-color: #82ae46 !important;
+}
+
+
 </style>
 <meta name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -411,9 +416,9 @@ button#review-add-btn {
                   <span class="ion-ios-arrow-down"></span>
                 </div>
                 <c:forEach items="${product.options}" var="option">
-                  <select name="" id="" class="form-control">
+                  <select name="optionItemNo" id="" class="form-control">
                     <c:forEach items="${option.optionItem}" var="item">
-                      <option value="${item.no}">옵션명:&nbsp;${item.optionItemMatter}&nbsp;|&nbsp;가격:&nbsp;+${item.optionsPrice}원</option>
+                      <option  value="${item.no}">옵션명:&nbsp;${item.optionItemMatter}&nbsp;|&nbsp;가격:&nbsp;+${item.optionsPrice}원</option>
                     </c:forEach>
                   </select>
 
@@ -441,8 +446,8 @@ button#review-add-btn {
           <div class="col-md-12"></div>
         </div>
         <p>
-          <a href="cart.html" class="btn btn-black py-3 px-5">Add to
-            Cart</a>
+          <button  class="btn btn-primary CartBut">Add to
+            Cart</button>
         </p>
       </div>
     </div>

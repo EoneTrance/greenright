@@ -306,21 +306,24 @@
     
     
   </div>  
-<script src='/js/jquery.min.js'></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script src='/js/jquery-migrate-3.0.1.min.js'></script>
 <script src='/js/jquery.easing.1.3.js'></script>
 <script src='/js/jquery.waypoints.min.js'></script>
 <script src='/js/jquery.stellar.min.js'></script>
 <script src='/js/jquery.magnific-popup.min.js'></script>
 <script src='/js/jquery.animateNumber.min.js'></script>
-<script src='/js/bootstrap-datepicker.js'></script>
-<script src="/js/popper.min.js"></script>
 <script src="/js/owl.carousel.min.js"></script>
 <script src="/js/aos.js"></script>
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
+<script src='/js/bootstrap-datepicker.js'></script>
 <script src="/js/jquery.twbsPagination.min.js"></script>
 <script src="/js/jquery.twbsPagination.min.js"></script>
+<script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script id="paginationTemplate" type="text/x-handlebars-template">
 <ul class="pagination">
   <li id="previous-page" class="page-item">
