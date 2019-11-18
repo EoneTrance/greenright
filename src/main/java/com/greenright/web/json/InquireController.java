@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,14 +23,16 @@ public class InquireController {
   public JsonResult inquire(
       @RequestParam(defaultValue = "1") int pageNo, 
       @RequestParam(defaultValue = "5") int pageSize, 
-      HttpSession session,
-      String questionType) throws Exception {
+      String questionType,
+      String answerTF,
+      HttpSession session
+     ) throws Exception {
    
     // 총 페이지 개수 알아내기
     if (pageSize < 5 || pageSize > 20) {
       pageSize = 5;
     }
-    int size = privateBoardService.size();
+    int size = privateBoardService.size(questionType);
     int totalPage = size / pageSize; // 13 / 5 = 2.x
     if (size % pageSize > 0) {
       totalPage++;
@@ -47,7 +48,7 @@ public class InquireController {
     int no = (int)session.getAttribute("no");
     
     try {
-    List<PrivateBoard> privateBoards = privateBoardService.list(no,pageNo, pageSize, questionType);
+    List<PrivateBoard> privateBoards = privateBoardService.list(no, pageNo, pageSize, questionType, answerTF);
     
     HashMap<String,Object> result = new HashMap<>();
     result.put("privateBoards", privateBoards);

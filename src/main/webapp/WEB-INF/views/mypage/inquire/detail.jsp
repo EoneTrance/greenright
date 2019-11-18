@@ -31,7 +31,7 @@
     <p style="text-align: center;">GreenRight 1 : 1 문의게시판입니다.</p>
     <br>
       <table class="table-striped table-bordered table-hover" style="width:1140px; height:200px; text-align:center;">
-        <caption>1:1답변</caption>
+      
         <tbody>
             <tr>
                 <th>제목</th>

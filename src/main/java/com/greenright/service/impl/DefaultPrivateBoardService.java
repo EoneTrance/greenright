@@ -16,14 +16,20 @@ public class DefaultPrivateBoardService implements PrivateBoardService {
  
   
   @Override
-  public List<PrivateBoard> list(int no, int pageNo, int pageSize, String questionType) throws Exception {
+  public List<PrivateBoard> list(int memberNo, int pageNo, int pageSize, String questionType, String answerTF) throws Exception {
     HashMap<String,Object> param = new HashMap<>();
     param.put("offset", (pageNo - 1) * pageSize);
     param.put("pageSize", pageSize);
-    param.put("no", no);
+    param.put("memberNo", memberNo);
     if (questionType != null) {
       param.put("questionType", questionType);
     }
+    
+    if (answerTF != null) {
+      param.put("answerTF", answerTF);
+    }
+    
+    
     return privateBoardDao.findAll(param);
   }
   
@@ -41,23 +47,15 @@ public class DefaultPrivateBoardService implements PrivateBoardService {
     return privateBoard;
   }
   
-  @Override
-  public List<PrivateBoard> select1(String answer) throws Exception {
-    List<PrivateBoard> privateBoardList = privateBoardDao.findByKeyword1(answer);
-    return privateBoardList;
-  }
+ 
   
   @Override
-  public int size() throws Exception {
-    return privateBoardDao.countAll();
+  public int size(String questionType) throws Exception {
+    HashMap<String, Object> param = new HashMap<>();
+    if(questionType != null) {
+      param.put("questionType", questionType);
+    }
+    return privateBoardDao.countAll(param);
   }
   
-  @Override
-  public void managerInsert(PrivateBoard privateBoard) throws Exception {
-    privateBoardDao.managerInsert(privateBoard);
-  }
-  
-  
-
-
 }

@@ -100,12 +100,12 @@
     <p style="text-align: right;">
      <button type="button" onclick="location.href='form.jsp'"  class="btn btn-primary" >문의 작성</button>
     </p>
-       <%--  <select id = "answerselect" name="answer" value='${member.cell_phone.substring(0,3)}'
+      <select id = "answerselect" name="answer" value='${member.cell_phone.substring(0,3)}'
             style="width:120px;height:35px;display: inline;">
             <option value="default">전체</option>
             <option value="미답변">미답변</option>
             <option value="답변완료">답변완료</option>
-      </select> --%>
+      </select> 
       <select id ="inquireselect" name="date" value='${member.cell_phone.substring(0,3)}'
             style="width:120px;height:35px;display: inline;">
             <option value="default">전체</option>
@@ -121,6 +121,8 @@
             <option>아이디</option>
             <option>닉네임</option>
       </select> --%>
+      
+      
        <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
@@ -136,7 +138,6 @@
                        <span style ="${page != pageNo ? "cursor: pointer;" : "color: white; background-color: #82ae46;"} border:1px solid #e6e6e6">${page}</span>
                      </li>
                     </c:forEach>
-                    
                       <li id="my-paging-last">
                       <span class="page-item" data-page="next" style="cursor: pointer;">&gt;</span> 
                       </li>
@@ -164,7 +165,7 @@ $(document).ready(function() {
 
 <script>
 
-  var searchQuestionType = undefined;
+var searchQuestionType = undefined;
 
 $('#inquireselect').change(function() {
   searchQuestionType = $('#inquireselect option:selected').val();
@@ -178,7 +179,7 @@ function loadData(pageNo) {
     type:"GET",
     dataType: "json",
     data: {
-      "type": (searchQuestionType) ? searchQuestionType : undefined
+      "questionType": (searchQuestionType) ? searchQuestionType : undefined
     },
     
     success: function(data){
@@ -200,8 +201,53 @@ function loadData(pageNo) {
   });
   
 }
+
+
 </script>
 
+<!-- <script>
+
+var searchQuestionType1 = undefined;
+
+$('#answerselect').change(function() {
+  searchQuestionType1 = $('#answerselect option:selected').val();
+  loadData(1)
+
+})
+
+
+function loadData(pageNo) {
+  $.ajax({
+    url: "../json/inquire/list",
+    type:"GET",
+    dataType: "json",
+    data: {
+      "answerTF": (searchQuestionType1) ? searchQuestionType1 : undefined
+    },
+    
+    success: function(data){
+      console.log(data);
+      console.log(data.result.privateBoards);
+      var list = data.result.privateBoards;
+      var tableTag ="";
+      
+      $("td").removeClass("content-value inquire");
+      
+       for(var i = 0 ; i < list.length; i++) {
+        tableTag += "<tr><td>" + list[i].no + "</td><td>" + list[i].date +
+        "<td>" + list[i].type + "</td><td><a href='detail?no="+ list[i].no+"'>" + list[i].title +"</a></td>"+
+        "<td>" + list[i].id +  "</td><td>" + list[i].answerTrueFalse + "</td></tr>"
+    };
+    $("#products tbody").html(tableTag);
+    $("td").addClass("content-value inquire");
+    }
+  });
+  
+}
+
+
+</script>
+ -->
 
 <script>
 $('#my-paging').on('click','.page-item', () => {
