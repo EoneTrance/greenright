@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenright.dao.PrivateBoardAnswersDao">
+
+<resultMap type="PrivateBoardAnswers" id="PrivateBoardAnswersMap">
+    <id column="private_question_id" property="no"/>
+    <result column="created_date" property="date"/>
+    <result column="contents" property="contents"/>
+  </resultMap>
+  
+  <insert id="insert" parameterType="PrivateBoardAnswers">
+    INSERT INTO private_answers (
+     private_question_id, created_date, contents)
+      VALUES (#{privateQuestion}, curdate(), #{contents}
+ );
+  </insert>
+
+
+
+</mapper>

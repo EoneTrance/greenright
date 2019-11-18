@@ -55,21 +55,48 @@
         </tbody>
     </table><br>
      </div>
+  
     <P align="center">
       <button type="button" class="btn btn-primary" onclick="location.href='list.jsp'">목록</button>
-      <button type="button" class="btn btn-primary" id="answer">답변작성</button>
-      <button type="button" class="btn btn-primary" id="answeranswer" style="display:none;">답변등록</button>
+        <button type="button" class="btn btn-primary" id="answer">답변작성</button>
+        <button type="submit" class="btn btn-primary" id="answeranswer" style="display:none;">답변등록</button>
     </p>
+    
+    
    
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   </body>
 <script>
 $('#answer').on('click', (event) => {
+  
+
     $('#tdtd').css('display', 'none');
     $('#answer-add').css('display', 'block');
     $('#answer').css('display', 'none');
     $('#answeranswer').css('display', 'inline-block');
+});
+
+
+  
+$('#answeranswer').on('click', () => {
+  var cont = {
+      "privateQuestion": ${privateBoard.no},
+      "contents": document.getElementById('answer-add').value
+    };
+  $.ajax({
+    url: "../json/inquire/manager/add",
+    method:"Post",
+    dataType: "json",
+    data: JSON.stringify(cont),
+    contentType: 'application/json',
+    success: function(response){
+    
+      $('#answeranswer').css('display', 'none');
+      
+      alert('됨')
+    }
+  });
 });
 
 </script>

@@ -34,6 +34,8 @@
   <mapper resource="com/greenright/mapper/ProductPhotoMapper.xml"/>
   <mapper resource="com/greenright/mapper/ProductOptionMapper.xml"/>
   <mapper resource="com/greenright/mapper/RecommendMapper.xml"/>
+  <mapper resource="com/greenright/mapper/PrivateBoardAnswersMapper.xml"/>
+   <mapper resource="com/greenright/mapper/PrivateBoardMapper.xml"/>
   </mappers>
 </configuration>
 

@@ -9,14 +9,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.greenright.domain.PrivateBoard;
+import com.greenright.domain.PrivateBoardAnswers;
+import com.greenright.service.PrivateBoardAnswersService;
 import com.greenright.service.PrivateBoardService;
 
 @Controller
 @RequestMapping("/mypage/inquire")
 public class InquireController {
-  @Resource
-  private PrivateBoardService privateBoardService;
+  @Resource private PrivateBoardService privateBoardService;
+  @Resource private PrivateBoardAnswersService privateBoardAnswersService;
 
   @GetMapping("form")
   public void form() {
@@ -83,6 +86,13 @@ public class InquireController {
     return "mypage/inquire/detail";
   }
   
+  
+  @PostMapping("manager/add")
+  @ResponseBody
+  public String manageradd(PrivateBoardAnswers privateBoardAnswers, HttpSession session) throws Exception {
+    privateBoardAnswersService.insert(privateBoardAnswers);
+    return "redirect:list";
+  }
  
   
  

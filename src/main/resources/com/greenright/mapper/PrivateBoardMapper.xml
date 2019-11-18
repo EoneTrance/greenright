@@ -35,6 +35,14 @@
     <result column="auth_key" property="authkey"/>
     <result column="password_authkey" property="passwordAuthkey"/>
   </resultMap>
+  
+  <resultMap type="PrivateBoardAnswers" id="PrivateBoardAnswersMap">
+    <id column="private_question_id" property="no"/>
+    <result column="created_date" property="date"/>
+    <result column="contents" property="contents"/>
+  </resultMap>
+  
+  
 
   <sql id="basicColumn">
   select 
@@ -53,10 +61,25 @@
   </sql>
   
   <select id="findBy" parameterType="int" resultMap="PrivateBoardMap">
+   select 
+    p.private_question_id,
+    p.questIon_type,
+    p.member_id,
+    p.created_date,
+    p.title,
+    p.contents,
+    p.answer_tf,
+    a.contents
+    from private_questions p
+      left outer join private_answers a on p.private_question_id=a.private_question_id
+    where p.private_question_id=#{no}
+  </select>
+  
+ <!--  <select id="findBy" parameterType="int" resultMap="PrivateBoardMap">
     <include refid="basicColumn"/>
     from private_questions
     where private_question_id=#{no}
-  </select>
+  </select> -->
   
     <insert id="insert" parameterType="PrivateBoard">
     INSERT INTO private_questions (

@@ -4,11 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.greenright.domain.PrivateBoard;
+import com.greenright.domain.PrivateBoardAnswers;
+import com.greenright.service.PrivateBoardAnswersService;
 import com.greenright.service.PrivateBoardService;
 
 
@@ -18,6 +24,7 @@ public class InquireController {
   
 
   @Resource private PrivateBoardService privateBoardService;
+  @Resource private PrivateBoardAnswersService privateBoardAnswersService;
 
   @GetMapping("list")
   public JsonResult inquire(
@@ -64,8 +71,16 @@ public class InquireController {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-
-
+  
+  @PostMapping("manager/add")
+  @ResponseBody
+  @Transactional
+  public JsonResult manageradd(@RequestBody PrivateBoardAnswers privateBoardAnswers, HttpSession session) throws Exception {
+    System.out.println(privateBoardAnswers);
+    privateBoardAnswersService.insert(privateBoardAnswers);
+    
+    return new JsonResult().setState(JsonResult.SUCCESS);
+  }
 
 
 }
