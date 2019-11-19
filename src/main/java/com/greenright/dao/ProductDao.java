@@ -14,5 +14,8 @@ public interface ProductDao {
   int delete (int no) throws Exception;
   int update(Product product) throws Exception;
   int getgroupNo(int no) throws Exception;
-  List<Product> getTopOnGroup(int a) throws Exception;;
+  List<Product> getTopOnGroup(int a) throws Exception;
+  List<Product> findAllUpcycling() throws Exception;
+  Product MostRecommend(int no) throws Exception;
+  List<Product> findAllByMemberNo(int memberNo) throws Exception;
 }

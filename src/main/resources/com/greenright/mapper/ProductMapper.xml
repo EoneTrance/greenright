@@ -17,6 +17,7 @@
 		<result column="origin" property="origin" />
 		<result column="quantity" property="quantity"/>
     <result column="group_id" property="groupNo"/>
+    <result column="totalRecommend" property ="totalRecommend"/>
     
 		<association property="seller" javaType="Seller">
 			<id column="member_id" property="no" />
@@ -93,7 +94,9 @@ select DISTINCT
     i.option_item_matters,
     i.options_price,
     i.options_quantity,
-    i.option_item_id
+    i.option_item_id,
+    f.product_id,
+    f.photo_path
     from products p
     left outer join product_photos f on (p.product_id = f.product_id AND
     f.main_photo_flag = 0)
@@ -263,5 +266,48 @@ select
     order by p.product_id DESC
     limit 4;
   </select>
+  <select id="findAllUpcycling" resultMap="ProductWithFilesMap" >
+   select distinct
+    p.member_id
+    from products p
+    where p.group_id=18
+    order by p.member_id DESC; 
+    
+   </select>
+  <select id="MostRecommend" parameterType="int" resultMap="ProductWithFilesMap">
+  SELECT prod.product_id,
+         prod.product_name,
+         max(prod_likes.like_cnt) as totalRecommend,
+         prod.member_id
+         FROM (SELECT product_id, product_name, member_id 
+              FROM products
+              WHERE member_id = #{no}) AS prod 
+              JOIN 
+              (SELECT product_id, COUNT(*) AS like_cnt
+              FROM upcycling_recommend
+              GROUP BY product_id) AS prod_likes 
+              ON prod.product_id = prod_likes.product_id;
+  </select>
+  
+  
+  <select id="findAllByMemberNo" parameterType="int"
+    resultMap="ProductWithFilesMap">
+select DISTINCT
+    f.product_id,
+    f.photo_path,
+    f.product_photo_id
+    from products p
+    left outer join product_photos f on (p.product_id = f.product_id AND
+    f.main_photo_flag = 0)
+    left outer join sellers s on s.member_id = p.member_id
+    left outer join members m  on m.member_id = s.member_id
+    left outer join options o on o.product_id = p.product_id
+    left outer join groups g on g.group_id = p.group_id 
+    left outer join categorys c on c.category_id = g.category_id
+    left outer join option_items i on o.options_id = i.options_id
+    where p.member_id=#{value}
+  </select>
+  
+  
 </mapper>
 

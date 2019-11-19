@@ -6,4 +6,5 @@ public interface UpcyclingRecommendService {
   int add(UpcyclingRecommend upcyclingRecommend) throws Exception;
   int delete(UpcyclingRecommend upcyclingRecommend) throws Exception;
   int checkRecommendForCheck(UpcyclingRecommend upcyclingRecommend) throws Exception;
+  int getRecommendNumbyProductNo(int productNo) throws Exception;
 }

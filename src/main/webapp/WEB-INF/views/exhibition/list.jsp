@@ -43,17 +43,17 @@
                  <c:forEach items="${products}" var="product">
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
-                        <a href="/greenright/product/buydetail?no=${product.no}" class="img-prod">
+                        <a href="/greenright/exhibition/detail?memberNo=${product.memberNo}" class="img-prod">
                         <img class="img-fluid" src='/upload/product/${product.photos[0].photoPath}'  alt="Colorlib Template" style="width:253px; height:202px; object-fit:cover;"> 
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">
-                                ${product.productName}
-                            </a></h3>
+                            <h3>
+                                ${product.seller.member.name}
+                            </h3>
                             <div class="d-flex">
                                 <div class="pricing">
                                 
-                                    <p class="price"><span class="price-sale"><fmt:formatNumber value="${product.price}" groupingUsed="true" /></span></p>
+                                    <p class="price"><span class="price-sale totalRecommendNum" id="${product.no}"> 총추천수:${product.totalRecommend}</span></p>
                                 </div>
                             </div>
                             <div class="bottom-area d-flex px-3">
@@ -72,7 +72,7 @@
                 </c:forEach> 
             </div><!-- row 클래스 종료 -->
             <!--------------------------------------------------------------------------->
-            <div class="row mt-5">
+<!--             <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
               <ul>
@@ -87,7 +87,7 @@
             </div>
           </div>
         </div>
-        <!--------------------------------------------------------------------------->
+ -->        <!--------------------------------------------------------------------------->
         </div><!--컨테이너종료-->
     </section><!--section종료-->
 
@@ -131,159 +131,43 @@
 <script src="/js/main.js"></script>
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-   // 카테고리 검새액(유기농, 가구 ... )
-      $(function(){
-        $(".searchbtn").click(function(){
-          
-          $(this).parent().find(".active").removeClass("active");
-          $(this).children(".vv").addClass("active");
-          var chkid = $(this).attr('id')
-          if(chkid=="productAll"){
-           
-          }
-          else if(chkid=="clean"){
-           var sublist = "<ul class='product-groups product-category' id='groups' style=text-align: center; style=margin-top:3px; >"
-               sublist += "<li value=1 class='subbutton'><a class='vv'  ><b>세제류</b></a></li>"
-               sublist += "<li value=2 class='subbutton'><a class='vv' ><b>위생용품</b></a></li>"
-               sublist += "<li value=3 class='subbutton'><a class='vv' ><b>화장지</b></a></li>"
-               sublist += "<li value=4 class='subbutton'><a class='vv' ><b>티슈</b></a></li>"
-                 $(".listchange").html(sublist);  
-           $(".listchange").show();
-          }else if(chkid=="office"){
-            var sublist = "<ul class='product-groups product-category' id='groups' style=text-align: center; style=margin-top:3px; >"
-              sublist += "<li value=5 class='subbutton'><a class='vv' ><b>복사용지</b></a></li>"
-              sublist += "<li value=6 class='subbutton'><a class='vv' ><b>화일</b></a></li>"
-              sublist += "<li value=7 class='subbutton'><a class='vv' ><b>토너</b></a></li>"
-              sublist += "<li value=8 class='subbutton'><a class='vv' ><b>기타</b></a></li>"
-                $(".listchange").html(sublist); 
-            $(".listchange").show();
-          }else if(chkid=="organic"){
-            var sublist = "<ul class='product-groups product-category' id='groups' style=text-align: center; style=margin-top:3px; >"
-              sublist += "<li value=9 class='subbutton'><a class='vv' ><b>과일</b></a></li>"
-              sublist += "<li value=10 class='subbutton'><a class='vv' ><b>채소</b></a></li>"
-              sublist += "<li value=11 class='subbutton'><a  class='vv'><b>간식</b></a></li>"
-              sublist += "<li value=12 class='subbutton'><a class='vv' ><b>축산품</b></a></li>"
-                $(".listchange").html(sublist); 
-            $(".listchange").show(); 
-              
-          }else if(chkid=="furniture"){
-            var sublist = "<ul class='product-groups product-category' id='groups' style=text-align: center; style=margin-top:3px; >"
-              sublist += "<li value=13 class='subbutton'><a class='vv' ><b>침대</b></a></li>"
-              sublist += "<li value=14 class='subbutton'><a class='vv' ><b>소파</b></a></li>"
-              sublist += "<li value=15 class='subbutton'><a class='vv' ><b>테이블</b></a></li>"
-              sublist += "<li value=16 class='subbutton'><a class='vv' ><b>의자</b></a></li>"
-              sublist += "<li value=17 class='subbutton'><a class='vv' ><b>파티션</b></a></li>"
-                $(".listchange").html(sublist); 
-            $(".listchange").show(); 
-              
-          }else if(chkid=="upcycleing"||chkid=="set"){
-            $(".listchange").hide();
-          }
-          var allData = {"no" : $(this).val()}
-          $.ajax({
-            url : "../greenright/json/Product/searchbyCategory",
-            type : "GET",
-            dataType : "json",
-            data : allData,
-            success : function(data) {
-               var list = data.result;
-               var tableTag ="";
-              for(var i = 0 ; i < list.length; i++) {
-                tableTag += "<div class='col-md-6 col-lg-3'>"
-                tableTag += "<div class='product'>"
-                tableTag += "<a href='/greenright/product/buydetail?no="+list[i].no+"' class='img-prod'>"
-                tableTag += "<img class='img-fluid' src='/upload/product/"+list[i].photos[0].photoPath+ "' alt='Colorlib Template' style='width:253px; height:202px; object-fit:cover;' >" 
-                tableTag += "<div class='overlay'></div></a>"
-                tableTag += "<div class='text py-3 pb-4 px-3 text-center'>"
-                tableTag += "<h3><a href='#'>"+ list[i].productName +"</a></h3>"
-                tableTag += "<div class='d-flex'>"
-                tableTag += "<div class='pricing'>"
-                var a =  list[i].price ; 
-                tableTag += "<p class='price'><span class='price-sale'>"+list[i].price+"</span></p>"
-                tableTag += "</div></div><div class='bottom-area d-flex px-3'>"
-                tableTag += "<div class='m-auto d-flex'>"
-                tableTag += "<a href='#' class='add-to-cart d-flex justify-content-center align-items-center text-center'>"
-                tableTag += "<i class='fas fa-comments'></i></a>"
-                tableTag += "<a href='#' class='buy-now d-flex justify-content-center align-items-center mx-1'>"
-                tableTag += "<span><i class='fas fa-cart-plus'></i></span></a>"
-                tableTag += "<a href='#' class='heart d-flex justify-content-center align-items-center '>"
-                tableTag += "<span><i class='far fa-heart'></i></span>"
-                tableTag += "</a></div></div></div></div></div>";
-              };
-              $(".addto").html(tableTag);  
-            }
-          });
-        })
-      
-      
-   
-      
-        
-      });
-   
-      $(document).on("click", ".subbutton", function() {
-        $(this).parent().find(".active").removeClass("active");
-        $(this).children(".vv").addClass("active");
-          var allData = {"no" : $(this).val()}
-          $.ajax({
-            url : "../greenright/json/Product/searchbyGroup",
-            type : "GET",
-            dataType : "json",
-            data : allData,
-            success : function(data) {
-              console.log(data);
-               var list = data.result;
-              var tableTag ="";
-                for(var i = 0 ; i < list.length; i++) {
-                  tableTag += "<div class='col-md-6 col-lg-3'>"
-                  tableTag += "<div class='product'>"
-                  tableTag += "<a href='/greenright/product/buydetail?no="+list[i].no+"' class='img-prod'>"
-                  tableTag += "<img class='img-fluid' src='/upload/product/"+list[i].photos[0].photoPath+ "' alt='Colorlib Template' style='width:253px; height:202px; object-fit:cover;' >" 
-                  tableTag += "<div class='overlay'></div></a>"
-                  tableTag += "<div class='text py-3 pb-4 px-3 text-center'>"
-                  tableTag += "<h3><a href='#'>"+ list[i].productName +"</a></h3>"
-                  tableTag += "<div class='d-flex'>"
-                  tableTag += "<div class='pricing'>"
-                  tableTag += "<p class='price'><span class='price-sale'>"+list[i].price+"</span></p>"
-                  tableTag += "</div></div><div class='bottom-area d-flex px-3'>"
-                  tableTag += "<div class='m-auto d-flex'>"
-                  tableTag += "<a href='#' class='add-to-cart d-flex justify-content-center align-items-center text-center'>"
-                  tableTag += "<i class='fas fa-comments'></i></a>"
-                  tableTag += "<a href='#' class='buy-now d-flex justify-content-center align-items-center mx-1'>"
-                  tableTag += "<span><i class='fas fa-cart-plus'></i></span></a>"
-                  tableTag += "<a href='#' class='heart d-flex justify-content-center align-items-center '>"
-                  tableTag += "<span><i class='far fa-heart'></i></span>"
-                  tableTag += "</a></div></div></div></div></div>";
-                };
-                $(".addto").html(tableTag);  
-              }
-            });
-          })
-        
         $(document).on("click",".changewishlist",function(e){
           e.preventDefault();
           let productNo =$(this).attr("id");
-          let memberNo = 1;
           $.post(
-              "/greenright/json/Like/checkLike",
+              "/greenright/json/UpcyclingRecommend/checkLike",
               {
-                productNo : productNo,
-                memberNo : memberNo
+                upcyclingRecommendProductNo : productNo
               },
               function(a) {
                 if(a.result ==0){
-                  $.post("/greenright/json/Like/increaseLike",{
-                    "productNo":productNo,
-                    "memberNo":memberNo
+                  $.post("/greenright/json/UpcyclingRecommend/increaseRecommend",{
+                    "upcyclingRecommendProductNo":productNo
                   }, function(data){
-                    swal("wishlist 에 추가되었습니다")
+                    swal("상품을 추천하셨습니다. ")
+                    
+                    $.post("/greenright/json/UpcyclingRecommend/getRecommendNum",{
+                      "upcyclingRecommendProductNo":productNo
+                    }, function(data){
+                      console.log(data.result)
+                        
+                      $("#"+productNo+"").text("총추천수는 : "+data.result+"")
+                    
+                    })
+                    
                   });               
                 }else{
-                  $.post("/greenright/json/Like/decreaseLike",{
-                    "productNo":productNo,
-                    "memberNo":memberNo
+                  $.post("/greenright/json/UpcyclingRecommend/decreaseRecommend",{
+                    "upcyclingRecommendProductNo":productNo
                   }, function(data){
-                   swal("wishlist 에서 삭제되었습니다.")
+                   swal("상품 추천을 취소하셨습니다.")
+                   
+                   $.post("/greenright/json/UpcyclingRecommend/getRecommendNum",{
+                     "upcyclingRecommendProductNo":productNo
+                   }, function(data){
+                     console.log(data.result)
+                     $("#"+productNo+"").text("총추천수는 : "+data.result+"")
+                   }) 
                     
                   });  
                 }

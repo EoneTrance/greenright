@@ -130,5 +130,20 @@ public class DefaultProductService implements ProductService{
     return productDao.getTopOnGroup(a);
     // 그룹번호로 최신순 4개의 상품을 추천하는 메서드 
   }
+
+  @Override
+  public List<Product> upcyclingList() throws Exception {
+    return productDao.findAllUpcycling();
+  }
+
+  @Override
+  public Product MostRecommend(int no) throws Exception {
+    return productDao.MostRecommend(no);
+  }
+
+  @Override
+  public List<Product> getByMemberNo(int memberNo) throws Exception {
+    return productDao.findAllByMemberNo(memberNo);
+  }
 }
 

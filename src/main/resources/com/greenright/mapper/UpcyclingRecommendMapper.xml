@@ -2,25 +2,25 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.greenright.dao.RecommendDao">
+<mapper namespace="com.greenright.dao.UpcyclingRecommendDao">
 
-  <select id="CountRecommendForCheck" parameterType="Recommend" resultType="int">
-  select count(*) from upcycling_recommend where product_id =#{recommendBoardNo} and member_id =#{recommendMemberNo}
+  <select id="CountRecommendForCheck" parameterType="UpcyclingRecommend" resultType="int">
+  select count(*) from upcycling_recommend where product_id =#{upcyclingRecommendProductNo} and member_id =#{upcyclingRecommendMemberNo}
   </select>
 
   <select id="CountRecommend" parameterType="int" resultType="int">
-    select count(*) from upcycling_recommend where product_id =#{recommendBoardNo}
+    select count(*) from upcycling_recommend where product_id =#{ProductNo}
   </select>
 
-  <insert id="insertRecommend" parameterType="Recommend"
+  <insert id="insertRecommend" parameterType="UpcyclingRecommend"
     useGeneratedKeys="true" keyColumn="boards_id" keyProperty="no">
     insert into upcycling_recommend(product_id,member_id)
-    values(#{recommendBoardNo}, #{recommendMemberNo})
+    values(#{upcyclingRecommendProductNo}, #{upcyclingRecommendMemberNo})
   </insert>
 
-  <delete id="deleteRecommend" parameterType="Recommend">
+  <delete id="deleteRecommend" parameterType="UpcyclingRecommend">
     delete from upcycling_recommend  
-    where product_id=#{recommendBoardNo} and member_id =#{recommendMemberNo}
+    where product_id=#{upcyclingRecommendProductNo} and member_id =#{upcyclingRecommendMemberNo}
   </delete>
   
   <delete id="deleteAllRecommend" parameterType="int">
