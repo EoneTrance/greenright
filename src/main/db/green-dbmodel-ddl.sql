@@ -546,18 +546,18 @@ ALTER TABLE recommends
 
 -- 주문상품
 CREATE TABLE order_products (
-  order_id   INTEGER NOT NULL, -- 주문번호
-  product_id INTEGER NOT NULL, -- 상품번호
-  quantity   INTEGER NOT NULL, -- 수량
-  price      INTEGER NOT NULL  -- 금액
+  order_id       INTEGER NOT NULL, -- 주문번호
+  option_item_id INTEGER NOT NULL, -- 옵션항목번호
+  quantity       INTEGER NOT NULL, -- 수량
+  price          INTEGER NOT NULL  -- 금액
 );
 
 -- 주문상품
 ALTER TABLE order_products
   ADD CONSTRAINT PK_order_products -- 주문상품 기본키
     PRIMARY KEY (
-      order_id,   -- 주문번호
-      product_id  -- 상품번호
+      order_id,       -- 주문번호
+      option_item_id  -- 옵션항목번호
     );
 
 -- 적립금
@@ -596,7 +596,9 @@ ALTER TABLE private_answers
 CREATE TABLE option_items (
   option_item_id      INTEGER      NOT NULL, -- 옵션항목번호
   options_id          INTEGER      NOT NULL, -- 옵션번호
-  option_item_matters VARCHAR(255) NOT NULL  -- 옵션항목사항
+  option_item_matters VARCHAR(255) NOT NULL, -- 옵션항목사항
+  options_price       INTEGER      NOT NULL, -- 옵션가격
+  options_quantity    INTEGER      NOT NULL  -- 옵션수량
 );
 
 -- 옵션항목
@@ -884,12 +886,12 @@ ALTER TABLE order_products
 
 -- 주문상품
 ALTER TABLE order_products
-  ADD CONSTRAINT FK_products_TO_order_products -- 상품 -> 주문상품
+  ADD CONSTRAINT FK_option_items_TO_order_products -- 옵션항목 -> 주문상품
     FOREIGN KEY (
-      product_id -- 상품번호
+      option_item_id -- 옵션항목번호
     )
-    REFERENCES products ( -- 상품
-      product_id -- 상품번호
+    REFERENCES option_items ( -- 옵션항목
+      option_item_id -- 옵션항목번호
     );
 
 -- 적립금

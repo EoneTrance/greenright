@@ -181,7 +181,7 @@ table.my-table-col td.my-seller {
             <tr>
               <th class="my-col-1 px-0">
                 <div class="round mx-0">
-                  <input type="checkbox" id="checkbox0" class="my-check-all"/>
+                  <input type="checkbox" id="checkbox0" class="my-check-all my-checkbox"/>
                   <label for="checkbox0"></label>
                 </div>
               </th>
@@ -191,6 +191,7 @@ table.my-table-col td.my-seller {
               <th class="text-center my-col-2">판매자</th>
             </tr>
           </thead>
+
           <tbody class="my-basket-list">
             <!-- <tr>
               <td class="my-check">
@@ -246,13 +247,13 @@ table.my-table-col td.my-seller {
             <th class="text-left my-col-6 pt-4 pl-3 font-weight-normal"
                 style="color:black;background-color:RGBA(130,174,70,0);">상품가격</th>
             <td class="text-right pt-4 pr-3"
-                style="color:black;"><span style="font-size:150%;color:#82AE46;">10000</span> 원</td>
+                style="color:black;"><span class="my-priceSum" style="font-size:150%;color:#82AE46;">0</span> 원</td>
           </tr>
           <tr>
             <th class="text-left my-col-6 pb-4 pl-3 font-weight-normal"
                 style="color:black;background-color:RGBA(130,174,70,0);">배송비</th>
             <td class="text-right pb-3 pr-3"
-                style="color:black;"><span style="font-size:150%;color:#82AE46;">20000</span> 원</td>
+                style="color:black;"><span class="my-deliveryChargeSum" style="font-size:150%;color:#82AE46;">0</span> 원</td>
           </tr>
         </tbody>
       </table>
@@ -261,10 +262,16 @@ table.my-table-col td.my-seller {
         <h5 class="text-left font-weight-bold pl-2"
             style="color:black;">총 결제금액</h5>
         <p class="text-right font-weight-bold mb-2 pr-2"
-            style="color:black;font-size:150%;"><span style="font-size:150%;color:#82AE46;">30000</span> 원</p>
+            style="color:black;font-size:150%;"><span class="my-sum" style="font-size:150%;color:#82AE46;">0</span> 원</p>
         <hr class="mb-2 mt-0">
       </div>
-      <button class="searchbtn btn-lg btn-primary btn-inline-block mr-1 w-100" type="button">구매하기</button>
+      <form id="my-basketForm" action="/ordder/add" method="get" style="display:none">
+        <input name="" value="">
+        <input name="" value="">
+        <input name="" value="">
+        <input name="" value="">
+      </form>
+      <button id="my-buyBtn" class="searchbtn btn-lg btn-primary btn-inline-block mr-1 w-100" type="button">구매하기</button>
     </div>
   </div>
 </div>
@@ -323,6 +330,13 @@ if(${loginUser.memberClass} == 2) {
 </script>
 
 <script>
+$("#my-buyBtn").click(function(e){
+  $("#my-basketForm").submit();
+});
+
+</script>
+
+<script>
 "use strict"
 $(function(){
   $.ajax({
@@ -337,12 +351,12 @@ $(function(){
             console.log(basket);
             var temp = basket[j];
             $(".my-basket-list").append(
-                "<tr>"
-             +  "<td class='my-check'>"
+                "<tr class='my-basket-tr'>"
+             +  "<td class='my-check-td'>"
              +  "  <div class='round'>"
-             +  "  <input type='checkbox' id='checkbox" + (i+1) + "' class='my-check'/>"
+             +  "  <input type='checkbox' id='checkbox" + (i+1) + "' class='my-check my-checkbox'/>"
              +  "  <label for='checkbox" + (i+1) + "'></label>"
-             +  "</div>"
+             +  "  </div>"
              +  "</td>"
              +  "<td class='my-product text-left py-2'>"
              +  "  <div class='row'>"
@@ -350,16 +364,16 @@ $(function(){
              +  "      <img id='product-photo' src='ddd'>"
              +  "    </div>"
              +  "    <div class='col-sm-9 px-0' style='font-size:12px'>"
-             +  "      상품번호: <span id='product-id'>" + basket[2].no + "</span><br>"
-             +  "      상품명: <span id='product-name'>" + basket[2].productName + "</span><br>"
-             +  "      옵션: <span id='product-option'>" + basket[1].optionName + " (" + basket[0].optionItemMatter + ")</span><hr class='my-1'>"
-             +  "      가격: <span id='product-price' style='font-size:120%;font-weight:bold;'>" + (basket[2].price + basket[0].optionsPrice) + "</span> 원"
+             +  "      상품번호: <span id='product-id'>" + basket.productNo + "</span><br>"
+             +  "      상품명: <span id='product-name'>" + basket.productName + "</span><br>"
+             +  "      옵션: <span id='product-option'>" + basket.optionName + " (" + basket.optionItemMatter + ")</span><hr class='my-1'>"
+             +  "      가격: <span id='product-price' style='font-size:120%;font-weight:bold;'>" + (basket.productPrice + basket.optionItemPrice) + "</span> 원"
              +  "    </div>"
              +  "  </div>"
              +  "</td>"
-             +  "<td class='my-quantity'>" + basket[3].quantity + "</td>"
-             +  "<td class='my-price'><span style='font-size:120%;font-weight:bold;color:#82AE46;'>" + ((basket[2].price + basket[0].optionsPrice) * basket[3].quantity) + "</span> 원</td>"
-             +  "<td class='my-seller'>" + basket[4].name + "</td>"
+             +  "<td class='my-quantity-td'>" + basket.basketQuantity + "</td>"
+             +  "<td class='my-price-td'><span class='my-price-span' style='font-size:120%;font-weight:bold;color:#82AE46;'>" + ((basket.productPrice + basket.optionItemPrice) * basket.basketQuantity) + "</span> 원</td>"
+             +  "<td class='my-seller-td'>" + basket.sellerName + "</td>"
              +  "</tr>"
             );
           for (var j = 0; j < basket.length; j++) {
@@ -372,7 +386,33 @@ $(function(){
     }
     
   });
+  
+  $(document).on("change", ".my-checkbox", function(e) {
+    var checks = $(".my-check");
+    var checkedList = new Array();
+    var i = 0;
+    for (var check of checks) {
+      if ($(check).prop("checked") == true) {
+        checkedList[i++] = check;
+      }
+    }
+    var sumPrice = 0;
+    for (var checked of checkedList) {
+      sumPrice +=
+        parseInt(
+            $(checked)
+            .parents(".my-basket-tr")
+            .children(".my-price-td")
+            .children(".my-price-span").html());
+    }
+    $(".my-priceSum").html(sumPrice);
+    $(".my-deliveryChargeSum").html(2500 * checkedList.length);
+    $(".my-sum").html(sumPrice + (2500 * checkedList.length));
+    e.stopImmediatePropagation();
+  });
+  
 });
+
 </script>
 
 <script>
@@ -416,7 +456,8 @@ $(function() {
   
   $('.my-check-all').click(function() {
     $('.my-check').prop('checked', this.checked);
-  } );
+  });
+  
 });
 </script>
 

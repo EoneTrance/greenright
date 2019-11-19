@@ -1,7 +1,9 @@
 package com.greenright.web.json;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
@@ -13,7 +15,6 @@ import com.greenright.domain.Member;
 import com.greenright.domain.Product;
 import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
-import com.greenright.domain.Seller;
 import com.greenright.service.BasketService;
 import com.greenright.service.MemberService;
 import com.greenright.service.ProductOptionItemService;
@@ -67,16 +68,16 @@ public class BasketController {
     
     List<Basket> baskets = basketService.list(loginUser.getNo());
     List<ProductOptionItem> optionItems = new ArrayList<>();
-    List<ProductOption> optnions = new ArrayList<>();
+    List<ProductOption> options = new ArrayList<>();
     List<Product> products = new ArrayList<>();
     List<Member> members = new ArrayList<>();
     for (Basket basket : baskets) {
       optionItems.add(productOptionItemService.get(basket.getOptionItemNo()));
     }
     for (ProductOptionItem optionItem : optionItems) {
-      optnions.add(productOptionService.get(optionItem.getOptionsNo()));
+      options.add(productOptionService.get(optionItem.getOptionsNo()));
     }
-    for (ProductOption option : optnions) {
+    for (ProductOption option : options) {
       products.add(productService.get(option.getProductNo()));
     }
     for (Product product : products) {
@@ -85,12 +86,16 @@ public class BasketController {
     
     List<Object> basketList = new ArrayList<>();
     for (int i = 0; i < baskets.size(); i++) {
-      List<Object> basket = new ArrayList<>();
-      basket.add(optionItems.get(i));
-      basket.add(optnions.get(i));
-      basket.add(products.get(i));
-      basket.add(baskets.get(i));
-      basket.add(members.get(i));
+      Map<String, Object> basket = new HashMap<>();
+      basket.put("optionItemMatter", optionItems.get(i).getOptionItemMatter());
+      basket.put("optionItemPrice", optionItems.get(i).getOptionsPrice());
+      basket.put("optionItemQuantity", optionItems.get(i).getOptionsQuantity());
+      basket.put("optionName", options.get(i).getOptionName());
+      basket.put("productNo", products.get(i).getNo());
+      basket.put("productName", products.get(i).getProductName());
+      basket.put("productPrice", products.get(i).getPrice());
+      basket.put("basketQuantity", baskets.get(i).getQuantity());
+      basket.put("sellerName", members.get(i).getName());
       basketList.add(basket);
     }
     
