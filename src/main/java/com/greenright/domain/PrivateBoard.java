@@ -15,16 +15,18 @@ public class PrivateBoard implements Serializable{
   private String title;
   private String contents;
   private String answerTrueFalse;
-  private String answer;
+  private String answers;
   private String id;
+  
   
   
   @Override
   public String toString() {
     return "PrivateBoard [no=" + no + ", type=" + type + ", memberNo=" + memberNo + ", date=" + date
         + ", title=" + title + ", contents=" + contents + ", answerTrueFalse=" + answerTrueFalse
-        + ", answer=" + answer + ", id=" + id + "]";
+        + ", answers=" + answers + ", id=" + id + "]";
   }
+  
   public int getNo() {
     return no;
   }
@@ -67,11 +69,11 @@ public class PrivateBoard implements Serializable{
   public void setAnswerTrueFalse(String answerTrueFalse) {
     this.answerTrueFalse = answerTrueFalse;
   }
-  public String getAnswer() {
-    return answer;
+  public String getAnswers() {
+    return answers;
   }
-  public void setAnswer(String answer) {
-    this.answer = answer;
+  public void setAnswers(String answers) {
+    this.answers = answers;
   }
   public String getId() {
     return id;
@@ -79,7 +81,8 @@ public class PrivateBoard implements Serializable{
   public void setId(String id) {
     this.id = id;
   }
-
   
+  
+ 
   
 }

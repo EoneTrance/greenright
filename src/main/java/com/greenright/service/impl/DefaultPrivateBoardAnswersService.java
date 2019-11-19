@@ -16,5 +16,12 @@ public class DefaultPrivateBoardAnswersService implements PrivateBoardAnswersSer
   public void insert(PrivateBoardAnswers privateBoardAnswers) throws Exception {
     privateBoardAnswersDao.insert(privateBoardAnswers);
   }
-
+  
+  @Override
+  public void delete(int no) throws Exception {
+    if(privateBoardAnswersDao.delete(no) == 0) {
+      throw new Exception ("해당데이터가 없습니다.");
+    }
+    privateBoardAnswersDao.delete(no);
+  }
 }

@@ -10,4 +10,6 @@ public interface PrivateBoardDao {
   PrivateBoard findBy(int no) throws Exception;
   int countAll(Map<String,Object> param) throws Exception;
   List<PrivateBoard> findByKeyword1(String answer) throws Exception;
+  void stateUpdate(PrivateBoard privateBoard) throws Exception;
+  
 }

@@ -58,4 +58,11 @@ public class DefaultPrivateBoardService implements PrivateBoardService {
     return privateBoardDao.countAll(param);
   }
   
+  @Override
+  public void stateUpdate(PrivateBoard privateBoard) throws Exception {
+    privateBoardDao.stateUpdate(privateBoard);
+  }
+  
+ 
+  
 }

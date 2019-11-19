@@ -94,6 +94,14 @@ public class InquireController {
     return "redirect:list";
   }
  
+  @GetMapping("delete")
+  public String delete(int no) throws Exception {
+    PrivateBoard privateBoard = privateBoardService.get(no);
+    privateBoard.setAnswerTrueFalse("미답변"); 
+    privateBoardAnswersService.delete(no);
+    return "redirect:list";
+    
+  }
   
  
   

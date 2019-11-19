@@ -8,5 +8,6 @@ public interface PrivateBoardService {
   void insert(PrivateBoard privateBoard) throws Exception;
   PrivateBoard get(int no) throws Exception;
   int size(String questionType) throws Exception;
-  
+  void stateUpdate(PrivateBoard privateBoard)throws Exception;
+ 
 }

@@ -12,7 +12,7 @@
     <result column="title" property="title"/>
     <result column="contents" property="contents"/>
     <result column="answer_tf" property="answerTrueFalse"/>
-    <result column="answer" property="answer"/>
+    <result column="answers" property="answers"/>
     <result column="id" property="id" />
   </resultMap>
   
@@ -37,9 +37,9 @@
   </resultMap>
   
   <resultMap type="PrivateBoardAnswers" id="PrivateBoardAnswersMap">
-    <id column="private_question_id" property="no"/>
-    <result column="created_date" property="date"/>
-    <result column="contents" property="contents"/>
+    <id column="private_question_id" property="privateQuestion"/>
+    <result column="created_date" property="createdDate"/>
+    <result column="answers" property="contents"/>
   </resultMap>
   
   
@@ -53,7 +53,7 @@
     title,
     contents,
     answer_tf,
-    answer
+    
   </sql>
 
   <sql id="where">
@@ -69,7 +69,7 @@
     p.title,
     p.contents,
     p.answer_tf,
-    a.contents
+    a.answers
     from private_questions p
       left outer join private_answers a on p.private_question_id=a.private_question_id
     where p.private_question_id=#{no}
@@ -106,7 +106,6 @@
 	     p.title,
 	     p.contents,
 	     p.answer_tf,
-	     p.answer,
 	     m.id
     from private_questions p
       left outer join members m on p.member_id=m.member_id
@@ -117,7 +116,11 @@
     limit #{offset}, #{pageSize}
   </select>
   
-
+  <update id="stateUpdate" parameterType="PrivateBoard">
+	  update private_questions set 
+	  answer_tf = #{answerTrueFalse}
+	  where private_question_id=#{no}
+  </update>
 
   <select id="countAll" resultType="int" parameterType="map">
     select count(*) from private_questions
