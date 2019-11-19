@@ -321,6 +321,7 @@
 <script src="/js/main.js"></script>
 <script src="/js/jquery.twbsPagination.min.js"></script>
 <script src="/js/jquery.twbsPagination.min.js"></script>
+
 <script id="paginationTemplate" type="text/x-handlebars-template">
 <ul class="pagination">
   <li id="previous-page" class="page-item">
