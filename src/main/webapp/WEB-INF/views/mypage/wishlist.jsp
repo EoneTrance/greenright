@@ -12,54 +12,43 @@ div.well {
   border: dashed #82AE46 5px;
   background-color: RGBA(130, 174, 70, 0.1);
 }
-
 /* #597B2F */
 div.well h4 {
   font-weight: bold;
 }
-
 div.well p {
   font-size: 300%;
   color: #82AE46;
 }
-
 .btn-group .dropdown-menu .inner li.active {
   background-color: #82AE46;
   color: #FFFFFF;
 }
-
 /* .btn-group button:hover {
     background-color:RGBA(130,174,70,0.5);
   } */
 .dropdown .dropdown-menu div.inner ul.inner li a:hover {
   background-color: RGBA(130, 174, 70, 0.5);
 }
-
 .dropdown .dropdown-menu div.inner ul.inner li a.selected {
   background-color: #82AE46;
 }
-
 .filter-option-inner {
   text-align: center;
 }
-
 table.my-product-table td {
   color: black;
 }
-
 table.my-table td.my-product {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
-
 table.my-table-col td.my-seller {
   border-right: none;
 }
-
 .round {
   position: relative;
 }
-
 .round label {
   background-color: #fff;
   border: 1px solid #ccc;
@@ -72,7 +61,6 @@ table.my-table-col td.my-seller {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
 .round label:after {
   border: 2px solid #fff;
   border-top: none;
@@ -86,20 +74,16 @@ table.my-table-col td.my-seller {
   transform: rotate(-45deg);
   opacity: 0;
 }
-
 .round input[type="checkbox"] {
   visibility: hidden;
 }
-
 .round input[type="checkbox"]:checked+label {
   background-color: #82AE46;
   border-color: #82AE46;
 }
-
 .round input[type="checkbox"]:checked+label:after {
   opacity: 1;
 }
-
 button#deletewishlist {
   width: 65px;
   margin-top: 7px;

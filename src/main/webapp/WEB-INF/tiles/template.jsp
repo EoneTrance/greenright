@@ -13,8 +13,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap">
 <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
-<!-- <link rel="stylesheet" href="/css/common.css">
 <script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+<!-- <link rel="stylesheet" href="/css/common.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src='/node_modules/sweetalert/dist/sweetalert.min.js'></script> -->
 <link rel="stylesheet" href="/css/animate.css">

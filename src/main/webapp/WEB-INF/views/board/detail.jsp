@@ -29,9 +29,12 @@
 .far.fa-thumbs-up.active {
   color:#82ae46;
 }
+.far.fa-thumbs-up.recommend{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
-  <% session.setAttribute("memberName","kim");%>
-
   <!-- <div id='content'
     style="width: 1140px; margin-left: 374px; padding-right: 15px; padding-left: 15px;"> -->
     <div id='content'
@@ -50,7 +53,7 @@
               <div class="row" >
                 <div class="col" style="text-align: left;">
                   <span style="font-size: 13px; font-weight: normal;">등록일: ${board.createdDate}</span><br> 
-                  <span style="font-size: 13px; font-weight: normal;">작성자 : ${board.member.nickname}</span>
+                  <span style="font-size: 13px; font-weight: normal;">작성자 : ${board.member.name}</span>
                 </div>
                 <div class="col" style="text-align: right;">
                   <span style="font-size: 13px; font-weight: normal;">조회수: ${board.viewCount}</span><br> 
@@ -74,16 +77,18 @@
                 </c:otherwise>
               </c:choose>
               </p>
-              <span style="display: block; font-weight: normal; width: 1100px; font-size: 20px; word-break:break-all;">${board.contents}</span>
+              <span style="display: block; text-align:center; font-weight: normal; width: 1100px; font-size: 20px; word-break:break-all;">${board.contents}</span>
               <br>
          
               <i class="far fa-thumbs-up recommend" style="font-size:35px;"></i>
               <hr id="hr1">
               <br>
+              <c:if test="${board.memberNo == loginUser.no}">
               <p style="text-align: right;">
                 <button type="button" class="btn btn-primary"
                   onclick="location.href='detailedit.jsp?no=${board.no}'">수정</button>
               </p>
+              </c:if>
             </th>
           </tr>
         </thead>
@@ -114,7 +119,7 @@
           <p class='my-comment-content contents-${comment.no}'>${comment.contents}</p>
           <div>
             <textarea class="my-comment">${comment.contents}</textarea>
-            <c:if test="${comment.memberNo == 1}">
+            <c:if test="${comment.memberNo == loginUser.no}">
               <div class="my-comment-control"
                 data-member-no='${comment.memberNo}'>
                 <button class='my-save-btn btn btn-primary' style="display: none"
@@ -168,7 +173,7 @@
 <script>
 $('.recommend').on('click',() =>{
   let recommendBoardNo = parseInt(document.querySelector('#jisooBoardNo').value);
-  let recommendMemberNo = 1;
+  let recommendMemberNo = ${loginUser.no};
    $.post("recommend/checkRecommendForCheck",{
      "recommendBoardNo":recommendBoardNo,
      "recommendMemberNo":recommendMemberNo
@@ -178,7 +183,7 @@ $('.recommend').on('click',() =>{
          "recommendBoardNo":recommendBoardNo,
          "recommendMemberNo":recommendMemberNo
        }, function(data){
-         //console.log(data.result)
+         console.log(data.result)
          countRecommend(recommendBoardNo)
        }, "json");
      }else{
@@ -224,20 +229,13 @@ $(document).ready(function() {
   <script>
  $('#my-add-btn').on('click', (event) => {
     let boardNo = parseInt(document.querySelector('#jisooBoardNo').value);
-    let memberNo = 1; // 1번 멤버 : jisoo
-    let id = 'jisoo';
     let contents = document.querySelector('.my-comment-form').value;
     
     
     $.post("detail/add", {
         "boardNo": boardNo,
-        "memberNo": memberNo,
-        "id": id,
         "contents": contents
       }, function(result) {
-        console.log(result);
-        console.log(result.no);
-        console.log(result.id);
         
         var comment = "<div class='my-comment-div comment-"+result.no+"' data-no='"+result.no+"'>"; 
           comment += "<span class='id-"+result.no+"'>"+result.id+"</span>" 
@@ -299,7 +297,6 @@ $(document).ready(function() {
     commentC.style['display'] = 'none';
     commentD.style['display'] = 'inline-block';
     commentU.style['display'] = 'inline-block';
-
     
   });
   

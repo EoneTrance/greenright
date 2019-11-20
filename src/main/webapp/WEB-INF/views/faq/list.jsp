@@ -177,6 +177,10 @@
       </div>
     </div>
 
+<%--   <%
+    session.setAttribute("memberNo", "1");
+  %> --%>
+
   <div id="entire">
     
       <!-- faq 배경  -->
@@ -323,7 +327,6 @@
 <script src='/js/bootstrap-datepicker.js'></script>
 <script src="/js/jquery.twbsPagination.min.js"></script>
 <script src="/js/jquery.twbsPagination.min.js"></script>
-<script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script id="paginationTemplate" type="text/x-handlebars-template">
 <ul class="pagination">
   <li id="previous-page" class="page-item">

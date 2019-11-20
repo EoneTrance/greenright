@@ -38,7 +38,7 @@ public class ProductController {
   
   
   @GetMapping("form")
-  public String form(HttpSession session) {
+  public String form(HttpSession session) { 
     Seller loginSeller = (Seller)session.getAttribute("loginSeller");
     if(loginSeller ==null) {
       return "redirect:/greenright/main";
