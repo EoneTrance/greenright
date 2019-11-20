@@ -5,16 +5,14 @@ import org.springframework.stereotype.Service;
 import com.greenright.dao.UpcyclingRecommendDao;
 import com.greenright.domain.UpcyclingRecommend;
 import com.greenright.service.UpcyclingRecommendService;
-
 @Service
 public class DefaultUpcyclingRecommendService implements UpcyclingRecommendService{
 
-  @Resource
-  private UpcyclingRecommendDao upcyclingRecommendDao;
+  @Resource private UpcyclingRecommendDao upcyclingRecommendDao;
   
-  public int insert(UpcyclingRecommend upcyclingRecommend) throws Exception {
-    upcyclingRecommendDao.insertRecommend(upcyclingRecommend);
-    return upcyclingRecommendDao.CountRecommend(upcyclingRecommend.getProductNo());
+  @Override
+  public int add(UpcyclingRecommend upcyclingRecommend) throws Exception {
+    return upcyclingRecommendDao.insertRecommend(upcyclingRecommend);
   }
 
   @Override
