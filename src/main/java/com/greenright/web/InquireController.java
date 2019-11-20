@@ -97,9 +97,10 @@ public class InquireController {
   @GetMapping("delete")
   public String delete(int no) throws Exception {
     PrivateBoard privateBoard = privateBoardService.get(no);
-    privateBoard.setAnswerTrueFalse("미답변"); 
+    privateBoard.setAnswerTrueFalse("미답변");
+    privateBoardService.stateUpdate(privateBoard);
     privateBoardAnswersService.delete(no);
-    return "redirect:list";
+    return "redirect:detail?no="+no;
     
   }
   

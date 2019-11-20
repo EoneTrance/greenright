@@ -49,13 +49,11 @@
             </tr>
             <tr>
               <th>답변내용</th>
-              <td colspan="3" id="tdtd">${privateBoard.answers}
-              <p style="text-align:right; display:none;" id="delete">
-                 <a href='delete?no=${privateBoard.no}'>삭제</a>
-              </p>  
+              <td colspan="3" id="tdtd">
+                  <textarea id='answer-add' style="display:none; width:500px;"></textarea>
+                  <p id="real-answer">${privateBoard.answers}</p>
               </td>
               
-              <td colspan="3"><textarea id='answer-add' style="display:none; width:500px;"></textarea></td>
             </tr>
         </tbody>
     </table><br>
@@ -64,7 +62,11 @@
     <P align="center">
       <button type="button" class="btn btn-primary" onclick="location.href='list.jsp'">목록</button>
         <button type="button" class="btn btn-primary" id="answer">답변작성</button>
-        <button type="submit" class="btn btn-primary" id="answeranswer" style="display:none;">답변등록</button>
+        <button type="button" class="btn btn-primary" id="answeranswer" style="display:none;">답변등록</button>
+        <button type="button" class="btn btn-primary" id="answer-update" style="display:none;">답변수정</button>
+        <button type="button" class="btn btn-primary" id="answer-delete" style="display:none;">
+          <a href='delete?no=${privateBoard.no}' style="color: white;">답변삭제</a>
+        </button>
     </p>
     
     
@@ -81,7 +83,8 @@ $(function(){
   console.log(answers);
   
   if (!(answers == null || answers == "")) {
-    $('#delete').css('display', 'inline-block')
+    $('#answer-delete').css('display', 'inline-block');
+    $('#answer-update').css('display', 'inline-block');
     $('#answer').css('display', 'none');
   }
 });
@@ -89,9 +92,8 @@ $(function(){
 $('#answer').on('click', (event) => {
   
 
-    $('#tdtd').css('display', 'none');
+    $('#answer-add').css('display', 'inline-block');
     $('#answer').css('display', 'none');
-    $('#answer-add').css('display', 'block');
     $('#answeranswer').css('display', 'inline-block');
     
 });
@@ -113,11 +115,11 @@ $('#delete').on('click', () => {
 
   
 $('#answeranswer').on('click', () => {
+  var answerAdd = $('#answer-add').val();
   var cont = {
       "privateQuestion": ${privateBoard.no},
-      "contents": document.getElementById('answer-add').value
+      "contents": answerAdd
     };
-
   $.ajax({
     url: "../json/inquire/manager/add",
     method:"Post",
@@ -127,28 +129,10 @@ $('#answeranswer').on('click', () => {
     success: function(response){
       
       $('#answeranswer').css('display', 'none');
-      var inquire =  "<div style='width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;'>"; 
-      inquire += "<h1 style='text-align: center; margin-top: 40px; font-size: 40px;'>1:1 문의게시판</h1>"; 
-      inquire += "<p style='text-align: center;''>GreenRight 1 : 1 문의게시판입니다.</p><br>"; 
-      inquire += "<table class='table-striped table-bordered table-hover' style='width:1140px; height:200px; text-align:center;'>"; 
-      inquire += "<tbody><tr><th>제목</th><td colspan='3'>"+'${privateBoard.title}'+"</td></tr>"; 
-      inquire += "<tr><th>문의일</th><td>"+'${privateBoard.date}'+"</td><th>문의상태</th>"; 
-      inquire += "<td id='tf'>"+'${privateBoard.answerTrueFalse}'+"</td></tr><tr>"; 
-      inquire += "<th>문의하신내용</th>"; 
-      inquire += "<td colspan='3'>"+'${privateBoard.contents}'+"</td>"; 
-      inquire += "</tr><tr>"; 
-      inquire += "<th>답변내용</th>"; 
-      inquire += "<td colspan='3' id='tdtd'>"+$('#answer-add').val()+"<p style='text-align:right; display:inline-block;' id='delete'>";
-      inquire += "<a href='delete?no="+'${privateBoard.no}'+"'>삭제</a></p></td>";
-      inquire += "<td colspan='3'><textarea id='answer-add' style='display:none; width:500px;'></textarea></td>"; 
-      inquire += "</tr>"; 
-      inquire += "</tbody>"; 
-      inquire += "</table><br>"; 
-      inquire += "</div>"; 
-
       $('#answer-add').css('display', 'none');
-    
-      $(".inquire-form").html(inquire);
+      $('#answer-update').css('display', 'inline-block');
+      $('#answer-delete').css('display', 'inline-block');
+      $('#real-answer').text(answerAdd);
     
     }
   });

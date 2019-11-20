@@ -78,11 +78,8 @@ public class InquireController {
   public JsonResult manageradd(@RequestBody PrivateBoardAnswers privateBoardAnswers, HttpSession session) throws Exception {
     PrivateBoard privateBoard = privateBoardService.get(privateBoardAnswers.getPrivateQuestion());
     privateBoard.setAnswerTrueFalse("답변완료");
-  
-    System.out.println(privateBoardAnswers);
     privateBoardAnswersService.insert(privateBoardAnswers);
     privateBoardService.stateUpdate(privateBoard);
-    
     
     return new JsonResult().setState(JsonResult.SUCCESS);
   }

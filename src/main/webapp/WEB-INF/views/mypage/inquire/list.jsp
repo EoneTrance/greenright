@@ -169,11 +169,12 @@ var searchQuestionType = undefined;
 
 $('#inquireselect').change(function() {
   searchQuestionType = $('#inquireselect option:selected').val();
-  loadData(1)
+  answerSelectType = $('#answerselect option:selected').val();
+  loadData(1,answerSelectType);
 })
 
 
-function loadData(pageNo) {
+function loadData(pageNo,answerSelectType) {
   $.ajax({
     url: "../json/inquire/list",
     type:"GET",
@@ -187,13 +188,27 @@ function loadData(pageNo) {
       console.log(data.result.privateBoards);
       var list = data.result.privateBoards;
       var tableTag ="";
-      
+      console.log(answerSelectType);
       $("td").removeClass("content-value inquire");
       
        for(var i = 0 ; i < list.length; i++) {
+        if(answerSelectType=="default"){
         tableTag += "<tr><td>" + list[i].no + "</td><td>" + list[i].date +
         "<td>" + list[i].type + "</td><td><a href='detail?no="+ list[i].no+"'>" + list[i].title +"</a></td>"+
         "<td>" + list[i].id +  "</td><td>" + list[i].answerTrueFalse + "</td></tr>"
+        } else if(answerSelectType=="미답변"){
+          if(list[i].answerTrueFalse == "미답변"){
+            tableTag += "<tr><td>" + list[i].no + "</td><td>" + list[i].date +
+            "<td>" + list[i].type + "</td><td><a href='detail?no="+ list[i].no+"'>" + list[i].title +"</a></td>"+
+            "<td>" + list[i].id +  "</td><td>" + list[i].answerTrueFalse + "</td></tr>"
+          }
+        } else {
+          if(list[i].answerTrueFalse != "미답변"){
+            tableTag += "<tr><td>" + list[i].no + "</td><td>" + list[i].date +
+            "<td>" + list[i].type + "</td><td><a href='detail?no="+ list[i].no+"'>" + list[i].title +"</a></td>"+
+            "<td>" + list[i].id +  "</td><td>" + list[i].answerTrueFalse + "</td></tr>"
+          }
+        }
     };
     $("#products tbody").html(tableTag);
     $("td").addClass("content-value inquire");
