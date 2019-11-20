@@ -164,5 +164,11 @@ public class ProductController {
   public int ReviewCheck(Review review) throws Exception{
     return reviewService.checkReview(review);
   }
+  
+  @RequestMapping("/main")
+  public void main(Model model) throws Exception {
+    List<Product> products = productService.list();
+    model.addAttribute("products", products);
+  }
 
 }

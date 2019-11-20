@@ -97,7 +97,9 @@ h6 {
   padding-bottom: 8px;
 }
 input:focus {outline:2px solid #82ae46;}
-
+label.star:before {
+    cursor: pointer;
+}
 </style>
  
     

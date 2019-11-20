@@ -1,5 +1,6 @@
 package com.greenright.web;
 
+import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.greenright.domain.Member;
+import com.greenright.domain.Product;
+import com.greenright.service.LikeService;
 import com.greenright.service.MemberService;
 import com.greenright.service.SellerService;
 
@@ -18,6 +21,9 @@ public class MypageController {
   
   @Resource
   private SellerService sellerService;
+  
+  @Resource
+  private LikeService likeService;
   
   @GetMapping("")
   public void mypage(Member member) throws Exception {
@@ -45,8 +51,14 @@ public class MypageController {
   }
   
   @GetMapping("wishlist")
-  public void wishlist(Model model) throws Exception {
+  public void wishlist(Model model,HttpSession session) throws Exception {
     model.addAttribute("title", " - 관심상품");
+    Member member = (Member)session.getAttribute("loginUser");
+    List<Product> productList = likeService.findAll(member.getNo());
+    for(Product a : productList) {
+      System.out.println(a.toString());
+    }
+    model.addAttribute("productList",productList);
   }
   
   @GetMapping("sale")

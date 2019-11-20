@@ -293,9 +293,12 @@ select
   <select id="findAllByMemberNo" parameterType="int"
     resultMap="ProductWithFilesMap">
 select DISTINCT
+    p.product_name,
+    p.description,
     f.product_id,
     f.photo_path,
-    f.product_photo_id
+    f.product_photo_id,
+    m.name
     from products p
     left outer join product_photos f on (p.product_id = f.product_id AND
     f.main_photo_flag = 0)
@@ -305,7 +308,7 @@ select DISTINCT
     left outer join groups g on g.group_id = p.group_id 
     left outer join categorys c on c.category_id = g.category_id
     left outer join option_items i on o.options_id = i.options_id
-    where p.member_id=#{value}
+    where p.member_id=#{value} and p.group_id = 18
   </select>
   
   
