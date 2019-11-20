@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../../css/style.css">
 <link rel="stylesheer"
   href="../../node_modules/bootstrap/css/bootstrap.min.css">
-<script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+
 <style>
 .adder {
   width: 250px;
@@ -42,10 +42,6 @@ inpit {
 /*datepicer input 롤오버 시 손가락 모양 표시*/
 .hasDatepicker {
   cursor: pointer;
-}
-
-.dv {
-  border: solid 0.5px #82ae46;
 }
 
 .fordivide {
@@ -230,24 +226,30 @@ h6#marginless {
 input:focus {
   outline: 2px solid #82ae46;
 }
+input.btn.btn-primary.py-3.px-4 {
+    width: 58px;
+}
+.optionAdd {
+    width: 100px !important;
+    height:33px !important;
+}
+button#button {
+    width: 100px;
+}
+td.dv {
+    width: 980px;
+    padding-left: 22px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.margininput{
+margin :0px 10px 0px 10px;
+}
+#postionsaver{
+margin:0px 10px 0px 10.9px !important;
+}
 </style>
-<script src="../../js/jquery.min.js"></script>
-<script src="../../js/jquery-migrate-3.0.1.min.js"></script>
-<script src="../../js/popper.min.js"></script>
-<script src="../../js/jquery.easing.1.3.js"></script>
-<script src="../../js/jquery.waypoints.min.js"></script>
-<script src="../../js/jquery.stellar.min.js"></script>
-<script src="../../js/owl.carousel.min.js"></script>
-<script src="../../js/jquery.magnific-popup.min.js"></script>
-<script src="../../js/aos.js"></script>
-<script src="../../js/jquery.animateNumber.min.js"></script>
-<script src="../../js/bootstrap-datepicker.js"></script>
-<script src="../../js/scrollax.min.js"></script>
-<script src="../../js/main.js"></script>
-<link rel="stylesheet"
-  href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
 
 <%
     session.setAttribute("memberNo", "1");
@@ -264,7 +266,6 @@ input:focus {
           <option value="office">사무</option>
           <option value="organic">유기농</option>
           <option value="furniture">가구</option>
-          <option value="upcycleing">업사이클링</option>
         </select>
       </h6>
       <div id="subselect">
@@ -285,13 +286,7 @@ input:focus {
       </h6>
 
       <h6>
-        <!--  일단 판매자 값을 받아서 처리중 나중에 마이페이지 구현되었을경우에는 세션에서 값 빼와서 처리할수있도록 .  -->
-        판매자명 <br> <input class="adder form-control" type="text"
-          id="mN" name="memberNo" required>
-      </h6>
-
-      <h6>
-        수량 <input class="adder form-control" type="number" id="pN"
+        수량 <input class="adder form-control fullproductNo" type="number" id="pN"
           name="quantity" min="0" required>
       </h6>
 
@@ -337,8 +332,8 @@ input:focus {
           type="text" name="optionquantity" value="neverNo" hidden />
       </h6>
       <table id="optionplus">
-       <tr><td class="dv">옵션명<input type="text" name="optionName" required>
-    <table class="dr"><input class="btn btn-primary py-3 px-4" type="button" id="optionitemadd" value="옵션항목추가"/></table>
+       <tr><td class="dv">옵션명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<input type="text" name="optionName"  id ="postionsaver"class="margininput" placeholder="수량-색깔-성별 형태로입력" >
+    <table class="dr"><input class="btn btn-primary py-3 px-4 optionAdd" type="button" id="optionitemadd" value="옵션항목추가"/></table>
     <input type ="text" name="optionContents" value="divide" class="fordivide">
     <input type ="text" name="optionprice" value="divide" class="fordivide">
     <input type ="text" name="optionquantity" value="divide" class="fordivide">
@@ -356,11 +351,39 @@ input:focus {
     </div>
   </form>
 </div>
+
+<script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/jquery-migrate-3.0.1.min.js"></script>
+<script src="../../js/popper.min.js"></script>
+<script src="../../js/jquery.easing.1.3.js"></script>
+<script src="../../js/jquery.waypoints.min.js"></script>
+<script src="../../js/jquery.stellar.min.js"></script>
+<script src="../../js/owl.carousel.min.js"></script>
+<script src="../../js/jquery.magnific-popup.min.js"></script>
+<script src="../../js/aos.js"></script>
+<script src="../../js/jquery.animateNumber.min.js"></script>
+<script src="../../js/bootstrap-datepicker.js"></script>
+<script src="../../js/scrollax.min.js"></script>
+<script src="../../js/main.js"></script>
+<link rel="stylesheet"
+  href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script>
 $(document).on("click",".adderButton",function(){
-  if(($("#pn").val)!=($(".optionsQuantity").val)) {
-  swal("옵션수량과 총수량이 일치하지않습니다");
-}
+  let fullq = $(".fullproductNo").val() 
+  let smallq = $(".optionsquantity")
+  let smallqsum = 0 ;
+  smallqsum * 1 ; 
+  for(var i = 0; i< smallq.length; i++){
+    smallqsum += ($(smallq[i]).val())*1 ;
+  }
+  if(smallqsum != fullq){
+    swal("옵션개수의 총합과 상품개수가 다릅니다 ")
+  }else{
+  }
+  
 })
 
 </script>
@@ -371,10 +394,10 @@ $(document).on("click",".adderButton",function(){
             "click",
             "#optionitemadd",
             function() {
-              var oip = '<tr><td>옵션내용<input type="text" name="optionContents" required>';
-              oip += '추가금액<input type="number" name="optionprice" required min="0" step=10>';
-              oip += '개수<input type="number" name="optionquantity" required min="0" class="optionsQuantity">';
-              oip += '<input class="btn btn-primary py-3 px-4" type="button" id="buttonDel"value="옵션항목삭제"/>';
+              var oip = '<tr><td>옵션내용:<input type="text"  class="margininput" name="optionContents" placeholder="수량-색깔-성별 형태로입력" >';
+              oip += '추가금액:<input type="number" name="optionprice" class="margininput" required min="0" step=10>';
+              oip += '개수:<input type="number" name="optionquantity"  class="margininput optionsquantity" required min="0">';
+              oip += '<input class="btn btn-primary py-3 px-4 optionAdd margininput" type="button" id="buttonDel" value="옵션항목삭제"/>';
               oip += '</td></tr>';
               $(this).parent().append(oip);
             });
@@ -406,11 +429,7 @@ $(document).on("click",".adderButton",function(){
               $("#subselect")
                   .html(
                       "  <h6>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=13>침대</option><option value=14>소파</option><option value=15>테이블</option><option value=16>의자</option><option value=17>파티션</option></select></h6>");
-            } else {
-              $("#subselect")
-                  .html(
-                      "<h3>업사이클링은 소분류가없습니다.</h3><input type='hidden' name='groupNo' value=18>")
-            }
+            } 
           });
 </script>
 <script>
@@ -564,9 +583,5 @@ $(document).on("click",".adderButton",function(){
 </script>
 <script>
 
-
 </script>
-<<<<<<< HEAD
 
-=======
->>>>>>> master

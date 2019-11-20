@@ -22,4 +22,5 @@ public interface MemberDao {
   int setFlag(Member member) throws Exception;
   int setPasswordKey(Member member);
   Member compareKey(Member member);
+  int updateClass(Member member);
 }

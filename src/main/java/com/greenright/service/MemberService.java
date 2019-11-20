@@ -17,4 +17,5 @@ public interface MemberService {
   void insert(Member member) throws Exception;
   void update(Member member) throws Exception;
   void delete(int no) throws Exception;
+  void updateClass(Member member);
 }

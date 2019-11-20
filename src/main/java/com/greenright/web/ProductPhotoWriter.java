@@ -31,6 +31,9 @@ public class ProductPhotoWriter {
       productPhoto.setPhotoPath(filename);
       photoFiles.add(productPhoto);
     }
+    ProductPhoto pp = photoFiles.get(0);
+    pp.setMainPhoto(1);
+    photoFiles.set(0, pp);
     return photoFiles;
   }
 }

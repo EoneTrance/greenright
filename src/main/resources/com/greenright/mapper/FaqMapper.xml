@@ -36,10 +36,18 @@
     )
    </insert>
    
-   <select id="findAll" resultMap="FaqMap">
+   <select id="findAll" resultMap="FaqMap" parameterType="map">
+    <if test="keyword != null and keyword !=''">
+      <bind name="pattern" value="'%' + keyword + '%'"/>
+    </if>
     <include refid="basicColumn"/>
       from faqs
-      order by faq_id asc
+    <where>
+      <if test="questionType != null and questionType != 'default'">question_type like #{questionType}</if>
+      <if test="pattern != null">and title like #{pattern}</if>
+    </where>
+      order by faq_id desc
+      limit #{offset}, #{pageSize}
    </select>
    
    <select id="findBy" parameterType="int" resultMap="FaqMap">
@@ -59,42 +67,21 @@
    </update>
    
    <delete id="delete" parameterType="int">
-    delete from faqs
-    <include refid="where1"/>
+	    delete from faqs
+	    <include refid="where1"/>
    </delete>
    
-   
-  <!--  <select id ="findByKeyword" resultType="FAQ">
-    select * 
-      from faqs
-     <if test="searchType != null">
-        <if test="searchType == 'shipping-information'.toString()">
-          and shipping-information like CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="searchType == 'order-payment'.toString()">
-          and order-payment like CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="searchType == 'order-cancel'.toString()">
-          and order-cancel like CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="searchType == 'exchange'.toString()">
-          and exchange like CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="searchType == 'refund'.toString()">
-          and refund like CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="searchType == 'point'.toString()">
-          and point like CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="searchType == 'etc'.toString()">
-          and etc like CONCAT('%', #{keyword}, '%')
-        </if>
-     </if>   
-     order by question_type
-   </select> -->
-   
-   
-   
+  <select id="countAll" resultType="int" parameterType="map">
+    <if test="keyword != null and keyword !=''">
+      <bind name="pattern" value="'%' + keyword + '%'"/>
+    </if>
+    select count(*) 
+    from faqs
+    <where>
+      <if test="questionType != null and questionType != 'default'">question_type like #{questionType}</if>
+      <if test="pattern != null">and title like #{pattern}</if>
+    </where>
+  </select>
   <!--  
   
    <select id="findByKeyword"
@@ -128,22 +115,5 @@
  
  
  
- <select id="findByKeyword"
-          parameterType="map"
-          resultMap="FaqMap">
- <bind name="pattern" value="'%' + keyword + '%'"/>
- <include refid="basicColumn"/>
- from faqs
- <where>
-   <if test="questionType != null and questionType != 'default'">question_type like #{questionType}</if>
-   <if test="keyword != null and keyword !=''">and title like #{pattern}</if>
- <!-- <if test="keyword !=null and keyword !=''">
-  and keyword like #{pattern}
- </if> 
- <if test="questionType != default and keyword !='' ">and (questionType like {#pattern} and  </if> -->
- </where>
-  order by question_type
- 
- </select>
- 
+
   </mapper>

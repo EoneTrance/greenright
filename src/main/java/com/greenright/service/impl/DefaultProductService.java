@@ -32,16 +32,17 @@ public class DefaultProductService implements ProductService{
       photo.setProductNo(product.getNo());
       productPhotoDao.insert(photo);
     }
-    for(ProductOption option: product.getOptions()) {
-      option.setProductNo(product.getNo());
-      optionDao.insert(option);
-      for(ProductOptionItem optionItem : option.getOptionItem()) {
-        System.out.println(option.getNo());
-        optionItem.setOptionsNo(option.getNo());
-        optionItemDao.insert(optionItem);
+    if(product.getOptions()!=null) {
+      for(ProductOption option: product.getOptions()) {
+        option.setProductNo(product.getNo());
+        optionDao.insert(option);
+        for(ProductOptionItem optionItem : option.getOptionItem()) {
+          System.out.println(option.getNo());
+          optionItem.setOptionsNo(option.getNo());
+          optionItemDao.insert(optionItem);
+        }
       }
     }
-
   }
 
   @Override
@@ -120,6 +121,29 @@ public class DefaultProductService implements ProductService{
       photo.setProductNo(product.getNo()); 
       productPhotoDao.insert(photo);
     }
+  }
+
+  @Override
+  public List<Product> gettopbyCategoryNum(int no) throws Exception {
+    int a =productDao.getgroupNo(no); 
+    // 상품번호로 그룹 번호를 알아내는 메서드
+    return productDao.getTopOnGroup(a);
+    // 그룹번호로 최신순 4개의 상품을 추천하는 메서드 
+  }
+
+  @Override
+  public List<Product> upcyclingList() throws Exception {
+    return productDao.findAllUpcycling();
+  }
+
+  @Override
+  public Product MostRecommend(int no) throws Exception {
+    return productDao.MostRecommend(no);
+  }
+
+  @Override
+  public List<Product> getByMemberNo(int memberNo) throws Exception {
+    return productDao.findAllByMemberNo(memberNo);
   }
 }
 

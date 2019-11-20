@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel='stylesheet'
-  href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
-<link rel="stylesheet" href="/css/fontawesome/css/all.css">
 <style>
 .btn.btn-primary {
   width: 58px;
@@ -188,7 +183,6 @@ h6#marginless {
 }
 </style>
 
-  <jsp:include page="../greenheader.jsp" />
 
     <form action="add" method='post' enctype='multipart/form-data' id="my-form">
   <div
@@ -229,6 +223,20 @@ h6#marginless {
       
    <table id="list"></table> 
        
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src='/js/jquery-migrate-3.0.1.min.js'></script>
+<script src='/js/jquery.easing.1.3.js'></script>
+<script src='/js/jquery.waypoints.min.js'></script>
+<script src='/js/jquery.stellar.min.js'></script>
+<script src='/js/jquery.magnific-popup.min.js'></script>
+<script src='/js/jquery.animateNumber.min.js'></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/scrollax.min.js"></script>
+<script src="/js/main.js"></script>
             
 <script>
 $('#my-add').click(function(){
@@ -268,9 +276,6 @@ $(function(){
   session.setAttribute("userNo", 1);
 %>
     </form>
-  <br>
-  <br>
-  <jsp:include page="../greenfooter.jsp" />
 <script>
 var temp;
   attachFile = {

@@ -1,5 +1,6 @@
 package com.greenright.web;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
@@ -11,11 +12,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import com.greenright.domain.Member;
 import com.greenright.domain.Product;
 import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
+import com.greenright.domain.Review;
+import com.greenright.domain.Seller;
+import com.greenright.service.ProductQuestionService;
 import com.greenright.service.ProductService;
+import com.greenright.service.ReviewService;
 
 @Controller
 @RequestMapping("/product")
@@ -24,9 +31,48 @@ public class ProductController {
   private ProductService productService;
   @Resource
   private ProductPhotoWriter productPhotoWriter;
+  @Resource
+  private ReviewService reviewService;
+  @Resource
+  private ProductQuestionService productQuestionService;
+  
   
   @GetMapping("form")
-  public void form() { }
+  public String form(HttpSession session) {
+    Seller loginSeller = (Seller)session.getAttribute("loginSeller");
+    if(loginSeller ==null) {
+      return "redirect:/greenright/main";
+    }
+    return "product/form";
+    
+    
+  }
+  @GetMapping("upcyclingform")
+  public String upcyclingform(HttpSession session) {
+    Seller loginSeller = (Seller)session.getAttribute("loginSeller");
+    if(loginSeller ==null) {
+      return "redirect:/greenright/main";
+    }
+    return "product/upcyclingform";
+  }
+  @Transactional
+  @PostMapping("upcyclingadd")
+  public String upcuclcingadd(Product product,MultipartFile[] photoPath,HttpSession session) throws Exception {
+    Member member =(Member)session.getAttribute("loginUser");
+    int a= member.getNo();
+    System.out.println(a);
+    product.setGroupNo(18);
+    product.setQuantity(1);
+    product.setOrigin("한국");
+    product.setMemberNo(a);
+    product.setPhotos(productPhotoWriter.getPhotoFiles(photoPath));
+    product.setDiy(1);
+    product.setExpirationDate(new Date(20190101));
+    System.out.println(product.toString());
+    productService.insert(product);
+    return "redirect:manage";
+  }
+  
   @Transactional
   @PostMapping("add")
   public String add (MultipartFile[] photoPath,
@@ -72,6 +118,21 @@ public class ProductController {
     model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);
   }
+  
+  @GetMapping("buydetail")
+  public void buydetail(Model model, int no) throws Exception {
+    Product product = productService.get(no);
+    Product productPhoto = productService.getforPhoto(no);
+    List<Product>productLiST = productService.gettopbyCategoryNum(no);
+    
+    
+    model.addAttribute("productPhoto", productPhoto);
+    model.addAttribute("product", product);
+    model.addAttribute("productLiST",productLiST);
+  }
+  
+  
+  
   @GetMapping("delete")
   public String delete(int no) throws Exception {
     productService.delete(no);
@@ -80,10 +141,9 @@ public class ProductController {
   }
   @RequestMapping("manage")
   public void main(Model model,HttpSession session) throws Exception {
-    
-    //int no =(Integer)session.getAttribute("SellerNo");
-    //List<Product> products = productService.listBySeller(no);
-    List<Product> products = productService.listBySeller(1);
+   Member member=  (Member)session.getAttribute("loginUser");
+    int a = member.getNo();
+    List<Product> products = productService.listBySeller(a);
     model.addAttribute("products", products);
     System.out.println(products.toString());
   }
@@ -98,6 +158,11 @@ public class ProductController {
 
     return "redirect:manage";
   
-}
+}   
+  @PostMapping("review/check")
+  @ResponseBody
+  public int ReviewCheck(Review review) throws Exception{
+    return reviewService.checkReview(review);
+  }
 
 }

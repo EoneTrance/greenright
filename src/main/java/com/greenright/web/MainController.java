@@ -11,10 +11,12 @@ import com.greenright.service.ProductService;
 @Controller
 public class MainController {
   
-  @Resource ProductService productService;
+  @Resource 
+  ProductService productService;
   
   @RequestMapping("/main")
   public void main(Model model) throws Exception {
-    
+    List<Product> products = productService.list();
+    model.addAttribute("products", products);
   }
 }
