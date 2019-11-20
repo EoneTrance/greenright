@@ -265,11 +265,10 @@ table.my-table-col td.my-seller {
             style="color:black;font-size:150%;"><span class="my-sum" style="font-size:150%;color:#82AE46;">0</span> 원</p>
         <hr class="mb-2 mt-0">
       </div>
-      <form id="my-basketForm" action="/ordder/add" method="get" style="display:none">
-        <input name="" value="">
-        <input name="" value="">
-        <input name="" value="">
-        <input name="" value="">
+      <form id='my-basketForm' action='../order/form' method='post' style='display:none'>
+        <!-- <input id='my-order-optionItemNo' name='optionItemNo'>
+        <input id='my-order-quantity' name='quantity'> -->
+        <input id='my-orderListJson' name='orderListJson'>
       </form>
       <button id="my-buyBtn" class="searchbtn btn-lg btn-primary btn-inline-block mr-1 w-100" type="button">구매하기</button>
     </div>
@@ -330,15 +329,11 @@ if(${loginUser.memberClass} == 2) {
 </script>
 
 <script>
-$("#my-buyBtn").click(function(e){
-  $("#my-basketForm").submit();
-});
-
-</script>
-
-<script>
 "use strict"
 $(function(){
+  
+  let orderList = new Array();
+  
   $.ajax({
     type: "GET",
     url: "../json/basket/list",
@@ -348,67 +343,124 @@ $(function(){
       if (basketList.state == "success") {
         for (var i = 0; i < basketList.result.length; i++) {
           var basket = basketList.result[i];
-            console.log(basket);
-            var temp = basket[j];
-            $(".my-basket-list").append(
-                "<tr class='my-basket-tr'>"
-             +  "<td class='my-check-td'>"
-             +  "  <div class='round'>"
-             +  "  <input type='checkbox' id='checkbox" + (i+1) + "' class='my-check my-checkbox'/>"
-             +  "  <label for='checkbox" + (i+1) + "'></label>"
-             +  "  </div>"
-             +  "</td>"
-             +  "<td class='my-product text-left py-2'>"
-             +  "  <div class='row'>"
-             +  "    <div class='col-sm-3 px-0'>"
-             +  "      <img id='product-photo' src='ddd'>"
-             +  "    </div>"
-             +  "    <div class='col-sm-9 px-0' style='font-size:12px'>"
-             +  "      상품번호: <span id='product-id'>" + basket.productNo + "</span><br>"
-             +  "      상품명: <span id='product-name'>" + basket.productName + "</span><br>"
-             +  "      옵션: <span id='product-option'>" + basket.optionName + " (" + basket.optionItemMatter + ")</span><hr class='my-1'>"
-             +  "      가격: <span id='product-price' style='font-size:120%;font-weight:bold;'>" + (basket.productPrice + basket.optionItemPrice) + "</span> 원"
-             +  "    </div>"
-             +  "  </div>"
-             +  "</td>"
-             +  "<td class='my-quantity-td'>" + basket.basketQuantity + "</td>"
-             +  "<td class='my-price-td'><span class='my-price-span' style='font-size:120%;font-weight:bold;color:#82AE46;'>" + ((basket.productPrice + basket.optionItemPrice) * basket.basketQuantity) + "</span> 원</td>"
-             +  "<td class='my-seller-td'>" + basket.sellerName + "</td>"
-             +  "</tr>"
-            );
-          for (var j = 0; j < basket.length; j++) {
-          }
+          $(".my-basket-list").append(
+              "<tr class='my-basket-tr'>"
+           +  "<td class='my-check-td'>"
+           +  "  <div class='round'>"
+           +  "  <input type='checkbox' id='checkbox" + (i+1) + "' class='my-check my-checkbox'/>"
+           +  "  <label for='checkbox" + (i+1) + "'></label>"
+           +  "  </div>"
+           +  "</td>"
+           +  "<td class='my-product text-left py-2'>"
+           +  "  <div class='row'>"
+           +  "    <div class='col-sm-3 px-0'>"
+           +  "      <img id='product-photo' src='ddd'>"
+           +  "    </div>"
+           +  "    <div class='col-sm-9 px-0' style='font-size:12px'>"
+           +  "      상품번호: <span id='product-id'>" + basket.productNo + "</span><br>"
+           +  "      상품명: <span id='product-name'>" + basket.productName + "</span><br>"
+           +  "      옵션: <span id='product-option'>" + basket.optionName + " (" + basket.optionItemMatter + ")</span><hr class='my-1'>"
+           +  "      가격: <span id='product-price' style='font-size:120%;font-weight:bold;'>" + (basket.productPrice + basket.optionItemPrice) + "</span> 원"
+           +  "    </div>"
+           +  "  </div>"
+           +  "</td>"
+           +  "<td class='my-quantity-td'>" + basket.basketQuantity + "</td>"
+           +  "<td class='my-price-td'><span class='my-price-span' style='font-size:120%;font-weight:bold;color:#82AE46;'>" + ((basket.productPrice + basket.optionItemPrice) * basket.basketQuantity) + "</span> 원</td>"
+           +  "<td class='my-seller-td'>" + basket.sellerName + "</td>"
+           +  "<td class='my-optionItemNo-td' style='display:none;'>" + basket.optionItemNo + "</td>"
+           +  "<td class='my-quantity-td' style='display:none;'>" + basket.basketQuantity + "</td>"
+           +  "</tr>"
+          );
         }
       } else if (basketList.state == "failure") {
       }
     },
-    error: function(basketAddResult) {
+    error: function(basketList) {
     }
-    
   });
   
   $(document).on("change", ".my-checkbox", function(e) {
+    orderList = new Array();
     var checks = $(".my-check");
-    var checkedList = new Array();
+    var sumPrice = 0;
     var i = 0;
     for (var check of checks) {
       if ($(check).prop("checked") == true) {
-        checkedList[i++] = check;
+        var optionItemNumber = $(check).parents(".my-basket-tr").children(".my-optionItemNo-td").html();
+        var basketQuantity = $(check).parents(".my-basket-tr").children(".my-quantity-td").html();
+        /* var orderMap = new Map();
+        orderMap.set("optionItemNo",
+            $(check).parents(".my-basket-tr").children(".my-optionItemNo-td").html());
+        orderMap.set("quantity",
+            $(check).parents(".my-basket-tr").children(".my-quantity-td").html());
+        orderList[i] = orderMap; */
+        var jsonData = 
+        {optionItemNo:optionItemNumber,
+        quantity:basketQuantity};
+        
+        orderList[i] = jsonData;
+        
+        sumPrice +=
+          parseInt(
+              $(check)
+              .parents(".my-basket-tr")
+              .children(".my-price-td")
+              .children(".my-price-span").html());
+        i++;
       }
     }
-    var sumPrice = 0;
-    for (var checked of checkedList) {
-      sumPrice +=
+ /* var checkedList = new Array();
+     for (var checked of checkedList) {
         parseInt(
             $(checked)
             .parents(".my-basket-tr")
             .children(".my-price-td")
             .children(".my-price-span").html());
-    }
+    } */
     $(".my-priceSum").html(sumPrice);
-    $(".my-deliveryChargeSum").html(2500 * checkedList.length);
-    $(".my-sum").html(sumPrice + (2500 * checkedList.length));
+    $(".my-deliveryChargeSum").html(2500 * i);
+    $(".my-sum").html(sumPrice + (2500 * i));
     e.stopImmediatePropagation();
+  });
+  
+  /* function doPage(thisForm, url) {
+    var form = thisForm;
+    console.log(form);
+    var optionItemNoList = new Array();
+    var quantityList = new Array();
+
+    for (var i = 0; i < orderList.length; i++){
+    console.log(form.optionItemNo);
+    console.log(form.quantity);
+      form.elements.value = orderList[i];
+      form.quantity.value = orderList[i];
+    }
+    form.method = "POST";
+    form.action = url;
+    form.submit();
+  }; */
+  
+  $("#my-buyBtn").click(function(e) {
+    var form = $("#my-basketForm");
+    /* var optionItemNoList = new Array();
+    var quantityList = new Array(); */
+    
+    var jsonArray = "[";
+    for (var i = 0; i < orderList.length; i++){
+      jsonArray += JSON.stringify(orderList[i]);
+      if (i != orderList.length - 1){
+        jsonArray += ",";
+      }
+      
+      /* form.children("#my-order-optionItemNo").val(orderList[i]);
+      form.children("#my-order-quantity").val(orderList[i]); */
+    }
+    jsonArray += "]";
+    form.children("#my-orderListJson").val(jsonArray);
+    
+    /* form.method = "POST";
+    form.action = url; */
+    form.submit();
   });
   
 });

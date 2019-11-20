@@ -87,6 +87,7 @@ public class BasketController {
     List<Object> basketList = new ArrayList<>();
     for (int i = 0; i < baskets.size(); i++) {
       Map<String, Object> basket = new HashMap<>();
+      basket.put("optionItemNo", optionItems.get(i).getNo());
       basket.put("optionItemMatter", optionItems.get(i).getOptionItemMatter());
       basket.put("optionItemPrice", optionItems.get(i).getOptionsPrice());
       basket.put("optionItemQuantity", optionItems.get(i).getOptionsQuantity());

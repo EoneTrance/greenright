@@ -49,9 +49,11 @@ public class AuthController {
     Member loginUser = memberService.login(member);
     session.setAttribute("loginUser", loginUser);
     
-    Seller loginSeller = sellerService.get(loginUser.getNo());
-    if (loginSeller != null) {
-      session.setAttribute("loginSeller", loginSeller);
+    if (loginUser.getMemberClass() == 2) {
+      Seller loginSeller = sellerService.get(loginUser.getNo());
+      if (loginSeller != null) {
+        session.setAttribute("loginSeller", loginSeller);
+      }
     }
     
     String redirectURI = (String)request.getSession().getAttribute("redirectURI");

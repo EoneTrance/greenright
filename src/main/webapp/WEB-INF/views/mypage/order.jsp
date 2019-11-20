@@ -316,7 +316,7 @@
                               <tr>
                                 <th class="text-center my-col-2">이름</th>
                                 <td class="my-col-10">
-                                  <input type="text" name="nickname" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.nickname}'/>
+                                  <input type="text" name="name" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.name}'/>
                                 </td>
                               </tr>
                               <tr>
@@ -437,7 +437,7 @@
                               <tr>
                                 <th class="text-center my-col-2">이름</th>
                                 <td class="my-col-10">
-                                  <input type="text" name="nickname" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.nickname}'/>
+                                  <input type="text" name="name" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.name}'/>
                                 </td>
                               </tr>
                               <tr>
@@ -557,7 +557,7 @@
                               <tr>
                                 <th class="text-center my-col-2">이름</th>
                                 <td class="my-col-10">
-                                  <input type="text" name="nickname" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.nickname}'/>
+                                  <input type="text" name="name" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.name}'/>
                                 </td>
                               </tr>
                               <tr>
@@ -677,7 +677,7 @@
                               <tr>
                                 <th class="text-center my-col-2">이름</th>
                                 <td class="my-col-10">
-                                  <input type="text" name="nickname" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.nickname}'/>
+                                  <input type="text" name="name" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.name}'/>
                                 </td>
                               </tr>
                               <tr>
@@ -797,7 +797,7 @@
                               <tr>
                                 <th class="text-center my-col-2">이름</th>
                                 <td class="my-col-10">
-                                  <input type="text" name="nickname" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.nickname}'/>
+                                  <input type="text" name="name" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.name}'/>
                                 </td>
                               </tr>
                               <tr>
