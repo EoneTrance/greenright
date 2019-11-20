@@ -45,7 +45,6 @@
     <result column="cell_phone" property="cellPhone" />
     <result column="tel" property="tel" />
     <result column="name" property="name" />
-    <result column="name" property="name" />
     <result column="email" property="email" />
     <result column="postal_code" property="postalCode" />
     <result column="default_address" property="defaultAddress" />

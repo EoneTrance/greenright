@@ -43,7 +43,6 @@
 </style>
   </head>
   <body>
-   <jsp:include page="../../greenheader.jsp" />  
 
   <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
       <div class="container">
@@ -300,7 +299,4 @@ $('.page-item').click((e) => {
 }); 
 
 </script>  
-
-
-  <jsp:include page="../../greenfooter.jsp" />
 </html>

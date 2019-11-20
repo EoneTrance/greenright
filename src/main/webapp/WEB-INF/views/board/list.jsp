@@ -32,7 +32,21 @@
     session.setAttribute("loginName", "choi");
   %>
   
-  
+  <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center fadeInUp ftco-animated">
+            <p class="breadcrumbs">
+              <span class="mr-2">
+                <a href="index.html"></a>
+              </span> 
+              <span>greenright</span>
+            </p>
+            <h1 class="mb-0 bread">COMMUNITY</h1>
+          </div>
+        </div>
+      </div>
+    </div>
 
   
 
@@ -62,7 +76,7 @@
               
               <td>${board.no}</td>
               <td id="btitle"><a href='detail?no=${board.no}'>${board.title}</a></td>
-              <td>${board.member.nickname}</td>
+              <td>${board.member.name}</td>
               <td class="cdate">${board.createdDate}</td>
               <td>${board.viewCount}</td>
                 <td>${board.recommendation}</td>
@@ -76,13 +90,13 @@
        
  
    
-    <select id="Aselect" name="Aselect" style="height:33px;">
+     <select id="Aselect" name="Aselect" style="height:33px; margin-left:400px;">
       <option value="Aoption1">제목</option>
       <option value="Aoption2">내용</option>
       <option value="Aoption3">글쓴이</option>
     </select>
  
-    <div id="forsel" style="display:inline-block; width:auto;">
+    <div class= id="forsel" style="display:inline-block; width:auto; margin-right: 330px;">
       <form action='search1'>
         <input type='text' name='title' style= "width:auto;">
         <button id='search1' class="btn btn-primary" style="height:33px;">검색</button>
@@ -116,12 +130,11 @@
         </div>
     </div>
   </section>
-  </div>
-</section>
+ 
+
 
 <br>
 <br>
-<jsp:include page="../greenfooter.jsp" />
 
 
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
