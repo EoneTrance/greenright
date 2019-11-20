@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="ko">
-<head>
 <link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <script src='/node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
 <script src='/node_modules/jquery/dist/jquery.min.js'></script>
@@ -22,9 +20,6 @@
 
   
 </style>
-  </head>
-  <body>
- <jsp:include page="../../greenheader.jsp" />  
   <div
     style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
      <h1 style="text-align: center; margin-top: 40px; font-size: 40px;">1:1 문의게시판</h1>
@@ -74,5 +69,3 @@ $('#answer').on('click', (event) => {
 </script>
 <br>
 <br>
-<jsp:include page="../../greenfooter.jsp" />
-</html>

@@ -13,7 +13,7 @@ import com.greenright.domain.PrivateBoard;
 import com.greenright.service.PrivateBoardService;
 
 @Controller
-@RequestMapping("/mypage/inquire")
+@RequestMapping("/inquire")
 public class InquireController {
   @Resource
   private PrivateBoardService privateBoardService;

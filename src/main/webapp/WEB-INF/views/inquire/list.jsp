@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="ko">
-<head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel='stylesheet'
   href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
@@ -41,9 +39,6 @@
   font-size: 14px; 
 }
 </style>
-  </head>
-  <body>
-   <jsp:include page="../../greenheader.jsp" />  
 
   <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
       <div class="container">
@@ -148,7 +143,6 @@
 </section>
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  </body>
  
 <!-- <script>
 $(document).ready(function() {
@@ -241,5 +235,3 @@ $('.page-item').click((e) => {
 </script>  
 
 
-  <jsp:include page="../../greenfooter.jsp" />
-</html>

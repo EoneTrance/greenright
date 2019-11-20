@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
 <link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <script src='/node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
 <script src='/node_modules/jquery/dist/jquery.min.js'></script>
@@ -18,9 +16,6 @@
    border-bottom-left-radius: 2px;
 }
 </style>
-</head>
-<body>
-<jsp:include page="../../greenheader.jsp" />  
 <form action='add' method='post'>
  <div
     style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
@@ -50,5 +45,3 @@
 </body>
 <br>
 <br>
-  <jsp:include page="../../greenfooter.jsp" />
-</html>
