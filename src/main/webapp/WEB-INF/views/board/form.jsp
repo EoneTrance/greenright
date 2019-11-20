@@ -240,7 +240,6 @@ h6#marginless {
             
 <script>
 $('#my-add').click(function(){
-  console.log("123");
   if($('#my-title').val() == ""){
     swal ( "No" ,  "제목을 입력해주세요!" ,  "error" )
   } else if ($('#my-contents').val() == "") {
@@ -272,9 +271,6 @@ $(function(){
 })
 </script>
       </div>
-<%--       <%
-  session.setAttribute("userNo", 1);
-%> --%>
     </form>
 <script>
 var temp;

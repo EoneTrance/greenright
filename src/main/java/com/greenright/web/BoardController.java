@@ -35,26 +35,18 @@ public class BoardController {
   private RecommendService recommendService;
   
   @GetMapping("form")
-  public String form(HttpSession session, Model model) throws Exception {
-      
-    Member loginMember = (Member)session.getAttribute("loginUser");
-    if(loginMember != null) {
-      return "board/form";
-    }
-    return "redirect:../auth/form";
+  public void form() {
   }
   @GetMapping("detailedit")
   public void detailedit(Model model, int no,HttpSession session)throws Exception {
-    
-    Member loginMember = (Member)session.getAttribute("loginUser");
     Board board = boardService.get(no);
     model.addAttribute("board", board);
+    
   }
   @PostMapping("add")
   public String add(HttpServletRequest request, HttpSession session, Board board,
       MultipartFile[] filePath) throws Exception {
-    int no = (int) session.getAttribute("userNo");
-
+    int no = ((Member)session.getAttribute("loginUser")).getNo();
     board.setMemberNo(no);
     board.setPhotos(boardPhotoWriter.getPhotoFiles(filePath));
 
@@ -91,7 +83,6 @@ public class BoardController {
       String type,
       String keyword,
       HttpSession session) throws Exception {
-    
     // 총 페이지 개수 알아내기
     if (pageSize < 5 || pageSize > 20) {
       pageSize = 5;
@@ -231,7 +222,11 @@ public class BoardController {
   @PostMapping("detail/add")
   
   @ResponseBody
-  public Object commentadd(Comment comment) throws Exception {
+  public Object commentadd(Comment comment, HttpSession session) throws Exception {
+    
+    comment.setMemberNo(((Member)session.getAttribute("loginUser")).getNo());
+    comment.setId(((Member)session.getAttribute("loginUser")).getId());
+    System.out.println(comment);
     commentService.insert(comment);
     return comment;
     
@@ -278,5 +273,4 @@ public class BoardController {
   }
 
 }
-
 
