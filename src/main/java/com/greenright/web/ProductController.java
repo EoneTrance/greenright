@@ -17,6 +17,7 @@ import com.greenright.domain.Product;
 import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
 import com.greenright.domain.Review;
+import com.greenright.domain.Seller;
 import com.greenright.service.ProductQuestionService;
 import com.greenright.service.ProductService;
 import com.greenright.service.ReviewService;
@@ -35,7 +36,16 @@ public class ProductController {
   
   
   @GetMapping("form")
-  public void form() { }
+  public String form(HttpSession session) { 
+    Seller loginSeller = (Seller)session.getAttribute("loginSeller");
+    if(loginSeller ==null) {
+      return "redirect:/greenright/main";
+    }
+    return "product/form";
+  }
+  
+  
+  
   @Transactional
   @PostMapping("add")
   public String add (MultipartFile[] photoPath,

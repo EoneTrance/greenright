@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.greenright.domain.Board;
 import com.greenright.domain.Comment;
+import com.greenright.domain.Member;
 import com.greenright.domain.Recommend;
 import com.greenright.service.BoardService;
 import com.greenright.service.CommentService;
@@ -34,9 +35,18 @@ public class BoardController {
   private RecommendService recommendService;
   
   @GetMapping("form")
-  public void form() {}
+  public String form(HttpSession session, Model model) throws Exception {
+      
+    Member loginMember = (Member)session.getAttribute("loginUser");
+    if(loginMember != null) {
+      return "board/form";
+    }
+    return "redirect:../auth/form";
+  }
   @GetMapping("detailedit")
   public void detailedit(Model model, int no,HttpSession session)throws Exception {
+    
+    Member loginMember = (Member)session.getAttribute("loginUser");
     Board board = boardService.get(no);
     model.addAttribute("board", board);
   }

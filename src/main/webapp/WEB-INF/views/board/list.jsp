@@ -25,12 +25,12 @@
 
 </style>
 
-  <%
+ <%--  <%
     session.setAttribute("memberName", "choi");
   %>
   <%
     session.setAttribute("loginName", "choi");
-  %>
+  %> --%>
   
   
 

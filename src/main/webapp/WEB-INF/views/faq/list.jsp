@@ -177,6 +177,10 @@
       </div>
     </div>
 
+<%--   <%
+    session.setAttribute("memberNo", "1");
+  %> --%>
+
   <div id="entire">
     
       <!-- faq 배경  -->

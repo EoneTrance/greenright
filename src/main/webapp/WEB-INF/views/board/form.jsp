@@ -272,9 +272,9 @@ $(function(){
 })
 </script>
       </div>
-      <%
+<%--       <%
   session.setAttribute("userNo", 1);
-%>
+%> --%>
     </form>
 <script>
 var temp;
