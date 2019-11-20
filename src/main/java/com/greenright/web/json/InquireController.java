@@ -19,7 +19,7 @@ import com.greenright.service.PrivateBoardService;
 
 
 @RestController("json.InquireController")
-@RequestMapping("/mypage/json/inquire")
+@RequestMapping("/json/inquire")
 public class InquireController {
   
 

@@ -24,7 +24,6 @@ public class DefaultPrivateBoardService implements PrivateBoardService {
     if (questionType != null) {
       param.put("questionType", questionType);
     }
-    
     if (answerTF != null) {
       param.put("answerTF", answerTF);
     }
@@ -63,6 +62,5 @@ public class DefaultPrivateBoardService implements PrivateBoardService {
     privateBoardDao.stateUpdate(privateBoard);
   }
   
- 
   
 }

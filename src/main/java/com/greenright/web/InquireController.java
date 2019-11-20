@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.greenright.domain.Member;
 import com.greenright.domain.PrivateBoard;
 import com.greenright.domain.PrivateBoardAnswers;
 import com.greenright.service.PrivateBoardAnswersService;
 import com.greenright.service.PrivateBoardService;
 
 @Controller
-@RequestMapping("/mypage/inquire")
+@RequestMapping("/inquire")
 public class InquireController {
   @Resource private PrivateBoardService privateBoardService;
   @Resource private PrivateBoardAnswersService privateBoardAnswersService;
@@ -25,8 +26,7 @@ public class InquireController {
   public void form() {
   }
 
-  @GetMapping("list")
-  public void inquire(
+  @GetMapping("list") public void inquire(
       @RequestParam(defaultValue = "1") int pageNo, 
       @RequestParam(defaultValue = "5") int pageSize, 
       String questionType,
@@ -48,13 +48,17 @@ public class InquireController {
     if (pageNo < 1 || pageNo > totalPage) {
       pageNo = 1;
     }
-      
+    
+    Member member = (Member)session.getAttribute("loginUser");
+    int no = member.getNo();
+    
    
-    session.setAttribute("no", 1);
-    int no = (int)session.getAttribute("no");
+  
+ 
+    List<PrivateBoard> privateBoards = privateBoardService.list(no, pageNo, pageSize, null, null);
     
     
-    List<PrivateBoard> privateBoards = privateBoardService.list(no,pageNo, pageSize, null, null);
+    
     model.addAttribute("boards", privateBoards);
     model.addAttribute("pageNo", pageNo);
     model.addAttribute("pageSize", pageSize);
@@ -62,28 +66,30 @@ public class InquireController {
     model.addAttribute("size", size);
     model.addAttribute("beginPage", (pageNo - 2) > 0 ? (pageNo - 2) : 1);
     model.addAttribute("endPage", (pageNo + 2) < totalPage ? (pageNo + 2) : totalPage);
-
+    
   }
 
   @PostMapping("add")
   public String add(PrivateBoard privateBoard, HttpSession session) throws Exception {
-    session.setAttribute("no", 1);
-    privateBoard.setMemberNo((int)session.getAttribute("no"));
+    int no = ((Member)session.getAttribute("loginUser")).getNo();
+    privateBoard.setMemberNo(no);
     privateBoardService.insert(privateBoard);
     return "redirect:list";
+    
   }
   
   
 
   @GetMapping("detail")
   public String detail(Model model, int no, HttpSession session) throws Exception {
-    session.setAttribute("no", 1);
-    PrivateBoard privateBoard = privateBoardService.get(no);
-    int memberNo = (int)session.getAttribute("no");
-    if(memberNo!=privateBoard.getMemberNo())
+    int memberNo = ((Member)session.getAttribute("loginUser")).getNo();
+    PrivateBoard privateBoard = privateBoardService.get(no); 
+  
+    if(memberNo!=privateBoard.getMemberNo()) {
       return "redirect:list";
+    }
     model.addAttribute("privateBoard",privateBoard);
-    return "mypage/inquire/detail";
+    return "inquire/detail";
   }
   
   
@@ -105,8 +111,5 @@ public class InquireController {
   }
   
  
-  
-  
 
 }
-

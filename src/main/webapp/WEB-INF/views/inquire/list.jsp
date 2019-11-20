@@ -1,35 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel='stylesheet'
-  href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
-<link rel="stylesheet" href="/css/fontawesome/css/all.css">
-<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="/css/animate.css">
-    
-    <link rel="stylesheet" href="/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/css/magnific-popup.css">
-
-    <link rel="stylesheet" href="/css/aos.css">
-
-    <link rel="stylesheet" href="/css/ionicons.min.css">
-
-    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/css/jquery.timepicker.css">
-
-    
-    <link rel="stylesheet" href="/css/flaticon.css">
-    <link rel="stylesheet" href="/css/icomoon.css">
-    <link rel="stylesheet" href="/css/style.css">
 <style>
 .btn.btn-primary {
   width: 90px;
@@ -41,8 +13,7 @@
   font-size: 14px; 
 }
 </style>
-  </head>
-  <body>
+
 
   <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
       <div class="container">
@@ -100,7 +71,7 @@
      <button type="button" onclick="location.href='form.jsp'"  class="btn btn-primary" >문의 작성</button>
     </p>
       <select id = "answerselect" name="answer" value='${member.cell_phone.substring(0,3)}'
-            style="width:120px;height:35px;display: inline;">
+            style="width:120px;height:35px;display: inline; margin-left:450px;">
             <option value="default">전체</option>
             <option value="미답변">미답변</option>
             <option value="답변완료">답변완료</option>
@@ -148,7 +119,6 @@
 </section>
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  </body>
  
 <!-- <script>
 $(document).ready(function() {
@@ -163,16 +133,12 @@ $(document).ready(function() {
 
 
 <script>
-
 var searchQuestionType = undefined;
-
 $('#inquireselect').change(function() {
   searchQuestionType = $('#inquireselect option:selected').val();
   answerSelectType = $('#answerselect option:selected').val();
   loadData(1,answerSelectType);
 })
-
-
 function loadData(pageNo,answerSelectType) {
   $.ajax({
     url: "../json/inquire/list",
@@ -215,21 +181,14 @@ function loadData(pageNo,answerSelectType) {
   });
   
 }
-
-
 </script>
 
 <!-- <script>
-
 var searchQuestionType1 = undefined;
-
 $('#answerselect').change(function() {
   searchQuestionType1 = $('#answerselect option:selected').val();
   loadData(1)
-
 })
-
-
 function loadData(pageNo) {
   $.ajax({
     url: "../json/inquire/list",
@@ -258,8 +217,6 @@ function loadData(pageNo) {
   });
   
 }
-
-
 </script>
  -->
 
@@ -271,10 +228,7 @@ $('#my-paging').on('click','.page-item', () => {
   
   
 });
-
-
  var currentPage = ${pageNo};
-
 $('.page-item').click((e) => {
   e.preventDefault();
  
@@ -297,6 +251,6 @@ $('.page-item').click((e) => {
     
   }
 }); 
-
 </script>  
-</html>
+
+

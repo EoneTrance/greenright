@@ -24,13 +24,13 @@
     <definition name="*/*/*" extends="base">
     <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3].jsp" />
   </definition>
-  <definition name="auth/*" extends="auth">
+  <!-- <definition name="auth/*" extends="auth">
     <put-attribute name="body" value="/WEB-INF/views/auth/{1}.jsp" />
   </definition>
   
   <definition name="member/*" extends="member">
     <put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp" />
-  </definition>
+  </definition> -->
   
   <definition name="*/*" extends="base">
     <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />

@@ -25,12 +25,7 @@
 
 </style>
 
-  <%
-    session.setAttribute("memberName", "choi");
-  %>
-  <%
-    session.setAttribute("loginName", "choi");
-  %>
+
   
   <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
       <div class="container">
@@ -57,7 +52,7 @@
       <div id="np" style="float:left;"></div>
       
       <br>
-
+      <c:if test="${board.memberNo == loginUser.no || loginUser.memberClass == 0}">
       <table class='table table-hover' id="products">
 
         <thead class="thead-primary">
@@ -87,6 +82,7 @@
       <p style="text-align: right;">
        <button type="button" onclick="location.href='form.jsp'" id='newC' class="btn btn-primary" >글쓰기</button>
        </p>
+       </c:if>
        
  
    

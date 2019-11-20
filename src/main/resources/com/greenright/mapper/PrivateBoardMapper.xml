@@ -52,7 +52,7 @@
     created_date,
     title,
     contents,
-    answer_tf,
+    answer_tf
     
   </sql>
 
@@ -99,14 +99,14 @@
   
   <select id="findAll" parameterType="map" resultMap="PrivateBoardMap">
     select 
-	     p.private_question_id,
-	     p.questIon_type,
-	     p.member_id,
-	     p.created_date,
-	     p.title,
-	     p.contents,
-	     p.answer_tf,
-	     m.id
+       p.private_question_id,
+       p.questIon_type,
+       p.member_id,
+       p.created_date,
+       p.title,
+       p.contents,
+       p.answer_tf,
+       m.id
     from private_questions p
       left outer join members m on p.member_id=m.member_id
      where p.member_id=#{memberNo}
@@ -117,9 +117,9 @@
   </select>
   
   <update id="stateUpdate" parameterType="PrivateBoard">
-	  update private_questions set 
-	  answer_tf = #{answerTrueFalse}
-	  where private_question_id=#{no}
+    update private_questions set 
+    answer_tf = #{answerTrueFalse}
+    where private_question_id=#{no}
   </update>
 
   <select id="countAll" resultType="int" parameterType="map">
