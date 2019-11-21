@@ -4,6 +4,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.greenright.domain.Member;
@@ -110,4 +111,14 @@ public class ProductController {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
+  @PostMapping("deleteProduct")
+  public JsonResult deleteProduct(int productNo) throws Exception{
+    try {
+      productService.delete(productNo);
+      return new JsonResult().setState(JsonResult.SUCCESS);
+    }catch(Exception e) {
+      return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage()); 
+    }
+  }
+  
 }

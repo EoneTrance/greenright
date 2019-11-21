@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet"
+  href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
 <link rel="stylesheet" href="/css/greenright.css">
 <style>
 /* On small screens, set height to 'auto' for the grid */
@@ -11,16 +12,18 @@
     height: auto;
   }
 }
+
 .col-sm-3.sidenav.hidden-xs {
-    height: 605px;
+  height: 605px;
 }
+
 #myPageContent {
   width: 960px;
   padding-top: 10px;
   padding-bottom: 10px;
+  margin-bottom: 100px !important;
   margin: auto auto;
-  height: 1830px;
-  
+  height: auto;
 }
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {
@@ -112,108 +115,163 @@ a {
   background-color: #77A43E;
   color: #FFFFFF;
 }
+
 .btn-group>.btn:first-child {
-    margin-left: 0 !important;
+  margin-left: 0 !important;
 }
+
 select#Aselect {
-    height: 30px;
-    font-size: medium;
+  height: 30px;
+  font-size: medium;
 }
+
 select#subSelect {
-    height: 30px;
-    font-size: medium;
+  height: 30px;
+  font-size: medium;
 }
 
 }
 td {
-    font-weight: 500;
+  font-weight: 500;
 }
+
 div#forright {
-    padding: 3.75px 17.5px 3.75px 7.5px;
+  padding: 3.75px 17.5px 3.75px 7.5px;
 }
+
 div#forright {
-    width: 83%!important;
+  width: 83% !important;
+}
+
+.round {
+  position: relative;
+}
+
+.round label {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  height: 28px;
+  width: 28px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.round label:after {
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  content: "";
+  position: absolute;
+  height: 6px;
+  width: 12px;
+  top: 8px;
+  left: 7px;
+  transform: rotate(-45deg);
+  opacity: 0;
+}
+
+.round input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.round input[type="checkbox"]:checked+label {
+  background-color: #82AE46;
+  border-color: #82AE46;
+}
+
+.round input[type="checkbox"]:checked+label:after {
+  opacity: 1;
+}
+
+button#deletewishlist {
+  width: 58px;
+  margin-top: 10px;
 }
 </style>
 <meta charset="UTF-8">
 <title>물품관리</title>
-  <% session.setAttribute("SellerNo", 1); %>
-  <div id="myPageContent">
-    <nav class="navbar navbar-inverse visible-xs">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle"
-            data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span> <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="" >MyPage</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav">
-            <li class="my-menu active"><a href="/greenright/mypage/userinfo">기본정보</a></li>
-            <li class="my-menu"><a href="order">주문내역</a></li>
-            <li class="my-menu"><a href="#">관심상품</a></li>
-            <li class="my-menu"><a href="#">업적</a></li>
-            <li class="my-menu"><a href="#">판매내역</a></li>
-            <li class="my-menu"><a href="#">개인전</a></li>
-            <li class="my-menu"><a href="#">판매회원 전환</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
+<% session.setAttribute("SellerNo", 1); %>
+<div id="myPageContent">
+  <nav class="navbar navbar-inverse visible-xs">
     <div class="container-fluid">
-      <div class="row content">
-        <div class="col-sm-3 sidenav hidden-xs">
-          <h2 class="text-center">MyPage</h2>
-          <hr>
-          <h4 class="font-weight-bold text-center">기본정보</h4>
-          <ul class="nav flex-column nav-pills nav-stacked">
-            <li class="my-menu"><a href="/greenright/mypage/userinfo">기본정보</a></li>
-          </ul>
-          <h4 class="font-weight-bold text-center">구매</h4>
-          <ul class="nav flex-column nav-pills nav-stacked">
-            <li class="my-menu"><a href="/greenright/mypage/order">주문내역</a></li>
-            <li class="my-menu"><a href="#section3">관심상품</a></li>
-            <li class="my-menu"><a href="#section3">업적</a></li>
-          </ul>
-          <h4 class="font-weight-bold text-center">판매</h4>
-          <ul class="nav flex-column nav-pills nav-stacked">
-            <li class="my-menu"><a href="#section3">판매내역</a></li>
-            <li class="my-menu"><a href="#section3">개인전</a></li>
-            <li class="my-menu"><a href="#section3">판매회원 전환</a></li>
-          </ul>
-           <h4 class="font-weight-bold text-center">상품</h4>
-          <ul class="nav flex-column nav-pills nav-stacked">
-            <li class="my-menu active"><a href="/greenright/product/manage">상품관리</a></li>
-          </ul>
-          <br>
-        </div>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle"
+          data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span> <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="">MyPage</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="my-menu active"><a
+            href="/greenright/mypage/userinfo">기본정보</a></li>
+          <li class="my-menu"><a href="order">주문내역</a></li>
+          <li class="my-menu"><a href="#">관심상품</a></li>
+          <li class="my-menu"><a href="#">업적</a></li>
+          <li class="my-menu"><a href="#">판매내역</a></li>
+          <li class="my-menu"><a href="#">개인전</a></li>
+          <li class="my-menu"><a href="#">판매회원 전환</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row content">
+      <div class="col-sm-3 sidenav hidden-xs">
+        <h2 class="text-center">MyPage</h2>
+        <hr>
+        <h4 class="font-weight-bold text-center">기본정보</h4>
+        <ul class="nav flex-column nav-pills nav-stacked">
+          <li class="my-menu"><a href="/greenright/mypage/userinfo">기본정보</a></li>
+        </ul>
+        <h4 class="font-weight-bold text-center">구매</h4>
+        <ul class="nav flex-column nav-pills nav-stacked">
+          <li class="my-menu"><a href="/greenright/mypage/order">주문내역</a></li>
+          <li class="my-menu"><a href="#section3">관심상품</a></li>
+          <li class="my-menu"><a href="#section3">업적</a></li>
+        </ul>
+        <h4 class="font-weight-bold text-center">판매</h4>
+        <ul class="nav flex-column nav-pills nav-stacked">
+          <li class="my-menu"><a href="#section3">판매내역</a></li>
+          <li class="my-menu"><a href="#section3">개인전</a></li>
+          <li class="my-menu"><a href="#section3">판매회원 전환</a></li>
+        </ul>
+        <h4 class="font-weight-bold text-center">상품</h4>
+        <ul class="nav flex-column nav-pills nav-stacked">
+          <li class="my-menu active"><a
+            href="/greenright/product/manage">상품관리</a></li>
+        </ul>
         <br>
+      </div>
+      <br>
 
-        <div class="col-sm-9">
+      <div class="col-sm-9">
 
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="btn-toolbar mb-2" role="toolbar"
-                style="width:100%;">
-                <div class="btn-group" role="group"
-                 style="width: 15%">
-                  <select class="selectpicker bigselect custom-select"
-                    data-style="btn btn-sm w-180" id ="Aselect">
-                    <optgroup label="대분류명">
-                      <option value= 23 selected>전체</option>
-                      <option value= 19 >청소</option>
-                      <option value= 20 >사무</option>
-                      <option value= 21 >유기농</option>
-                      <option value= 22>가구</option>
-                      <option value= 18>업사이클링</option>
-                    </optgroup>
-                  </select>
-                  
-                </div>
-                  &nbsp;&nbsp;&nbsp;
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="btn-toolbar mb-2" role="toolbar"
+              style="width: 100%;">
+              <div class="btn-group" role="group" style="width: 15%">
+                <select class="selectpicker bigselect custom-select"
+                  data-style="btn btn-sm w-180" id="Aselect">
+                  <optgroup label="대분류명">
+                    <option value=23 selected>전체</option>
+                    <option value=19>청소</option>
+                    <option value=20>사무</option>
+                    <option value=21>유기농</option>
+                    <option value=22>가구</option>
+                    <option value=18>업사이클링</option>
+                  </optgroup>
+                </select>
+
+              </div>
+              &nbsp;&nbsp;&nbsp;
               <!--   <div class="btn-group" role="group"
                   aria-label="Third group" style="width: 15%">
                   <select class="selectpicker subselect custom-select"
@@ -223,53 +281,85 @@ div#forright {
                     </optgroup>
                   </select>
                 </div> -->
-                <div id = forright class="active" style= "text-align:right;float:right;width: 66%;">
-                <a href="/greenright/product/form" id="formlink" >상품 등록</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="/greenright/product/upcyclingform" id ="formlink">업사이클링상품등록</a>
-              </div>
+              <div id=forright class="active"
+                style="text-align: right; float: right; width: 66%;">
+                <a href="/greenright/product/form" id="formlink">상품
+                  등록</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+                  href="/greenright/product/upcyclingform" id="formlink">업사이클링상품등록</a>
               </div>
             </div>
           </div>
+        </div>
 
-          <div id=memberInfoForm>
-            <div>
-              <table
-                class="col-sm-12 table-hover my-table my-table-row text-center" cellpadding="20" >
-                <thead>
+        <div id="memberInfoForm" class="row">
+          <div class="col">
+            <table
+              class="col-sm-12 table-hover my-table my-table-row text-center"
+              cellpadding="20">
+              <thead>
+                <tr>
+                  <th class="my-col-1 px-0">
+                    <div class="round mx-0">
+                      <input type="checkbox" id="checkbox0"
+                        class="my-check-all my-checkbox" /> <label
+                        for="checkbox0"></label>
+                    </div>
+                  </th>
+                  <th class="text-center my-col-1">상품</th>
+                  <th class="text-center my-col-5">상품정보</th>
+                  <th class="text-center my-col-2">가격</th>
+                  <th class="text-center my-col-2">판매자</th>
+                </tr>
+              </thead>
+              <tbody id="addto">
+                <c:forEach items="${products}" var="product"
+                  varStatus="status">
+
                   <tr>
-                    <th class="my-col-2 text-center">상품번호</th>
-                    <th class="my-col-2 text-center">상품이름</th>
-                    <th class="my-col-2 text-center">대분류명</th>
-                    <th class="my-col-2 text-center">소분류명</th>
-                    <th class="my-col-2 text-center">등록일</th>
-                    <th class="my-col-2 text-center">가격</th>
-                  </tr>
-                </thead>
-                <tbody id ="addto">
-                  <c:forEach items="${products}" var="product">
+                    <td class=""><div class="round">
+                        <input type='checkbox'
+                          id="checkbox${status.count}"
+                          class='my-check my-checkbox'
+                          value="${product.no }" /> <label
+                          for='checkbox${status.count}'></label>
+                      </div></td>
+                    <td class="my-product text-left py-2">
+                      <div class="row">
+                        <div class="col-sm-3 px-0">
+                          <img id="product-photo"
+                            src="/upload/product/${product.photos[0].photoPath}"
+                            style="weight: 80px; height: 100px; object-fit: cover;">
+                        </div>
+                      </div>
+                    </td>
+                    <td class="">
+                      <div class="col-sm-9 text-left px-0"
+                        style="font-size: 12px">
+                        상품명: <span id="product-name">${product.productName}</span><br>
+                        상품설명 :<span id="product-name">${product.description}</span>
+                      </div>
 
-                    <tr >
-                      <td>${product.no}</td>
-                      <td><a href='detail?no=${product.no}'>${product.productName}</a></td>
-                      <td>${product.group.category.categoryName}</td>
-                      <td>${product.group.groupName}</td>
-                      <td>${product.registeredDate}</td>
-                      <td>${product.price}</td>
-                    </tr>
-                  </c:forEach>
-                </tbody>
-              </table>
-            </div>
+                    </td>
+                    <td class="my-state">${product.price}원</td>
+                    <td class="my-seller">${product.seller.member.name }</td>
+                  </tr>
+                </c:forEach>
+              </tbody>
+            </table>
+            <button id="deletewishlist" class="btn btn-primary"
+              style="border-radius: 2px 2px 2px 2px;">삭제</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
+
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script
+  src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script src='/js/jquery-migrate-3.0.1.min.js'></script>
 <script src='/js/jquery.easing.1.3.js'></script>
 <script src='/js/jquery.waypoints.min.js'></script>
@@ -280,7 +370,24 @@ div#forright {
 <script src="/js/aos.js"></script>
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
-  
+<script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  $("#deletewishlist").click(function(){
+    var k = $(".my-check").length;
+    for(let i =1; i<k+1; i++) {
+      if(($("#checkbox"+i+"")).is(":checked")==true){
+        let thisNode = $('#checkbox'+i).parent().parent().parent();
+        $.post("/greenright/json/Product/deleteProduct",{
+          "productNo":($("#checkbox"+i+"")).val()
+        }, function(data){
+          console.log(data)
+         swal("상품이 삭제되었습니다!")
+          thisNode.remove();
+        }); 
+      }
+    }
+  })
+  </script>
 <script>
     
 $(document).on("change","#Aselect",function() {
@@ -295,14 +402,19 @@ $(document).on("change","#Aselect",function() {
        var list = data.result;
        var tableTag ="";
        for(var i = 0 ; i < list.length; i++) {
-        tableTag += "<tr><td>"+list[i].no+"</td>"
-        tableTag += "<td><a href='detail?no="+list[i].no+"'>"+list[i].productName+"</a></td>"
-        tableTag += "<td>" +list[i].group.category.categoryName+"</td>"
-        tableTag += "<td>" +list[i].group.groupName+"</td>" 
-        tableTag += "<td>" +list[i].registeredDate+"</td>"
-        tableTag += "<td>" +list[i].price + "</td></tr>";
-   };
-      $("#addto").html(tableTag);  
+         tableTag += "<tr><td><div class='round'>"
+         tableTag += "<input type='checkbox' id='checkbox"+(i+1)+"'  class='my-check my-checkbox' value="+list[i].no+" />" 
+         tableTag += "<label for='checkbox"+(i+1)+"'></label></div></td>"
+         tableTag += "<td class='my-product text-left py-2'><div class='row'><div class='col-sm-3 px-0'>" 
+         tableTag += "<img id='product-photo' src='/upload/product/"+list[i].photos[0].photoPath+"' style='weight: 80px; height: 100px; object-fit: cover;'>"
+         tableTag += "</div></div></td><td >"
+         tableTag += "<div class='col-sm-9 text-left px-0'  style='font-size: 12px'>"
+         tableTag += "상품명: <span id='product-name'>"+list[i].productName+"</span><br>"
+         tableTag += "상품설명 :<span id='product-name'>"+list[i].description+"</span></div>"
+         tableTag += "</td><td class='my-state'>"+list[i].price+"원</td><td class='my-seller'>"
+         tableTag += ""+list[i].seller.member.name+"</td></tr>"
+        };
+       $("#addto").html(tableTag);  
     }
   });
 })
@@ -319,13 +431,18 @@ $(document).on("change","#Aselect",function() {
            var list = data.result;
            var tableTag ="";
            for(var i = 0 ; i < list.length; i++) {
-            tableTag += "<tr><td>"+list[i].no+"</td>"
-            tableTag += "<td><a href='detail?no="+list[i].no+"'>"+list[i].productName+"</a></td>"
-            tableTag += "<td>"+list[i].group.category.categoryName+"</td>"
-            tableTag += "<td>"+list[i].group.groupName+"</td>" 
-            tableTag += "<td>"+list[i].registeredDate+"</td>"
-            tableTag += "<td>"+list[i].price+"</td></tr>";
-          };
+            tableTag += "<tr><td><div class='round'>"
+            tableTag += "<input type='checkbox' id='checkbox"+(i+1)+"'  class='my-check my-checkbox' value="+list[i].no+" />" 
+            tableTag += "<label for='checkbox"+(i+1)+"'></label></div></td>"
+            tableTag += "<td class='my-product text-left py-2'><div class='row'><div class='col-sm-3 px-0'>" 
+            tableTag += "<img id='product-photo' src='/upload/product/"+list[i].photos[0].photoPath+"' style='weight: 80px; height: 100px; object-fit: cover;'>"
+            tableTag += "</div></div></td><td >"
+            tableTag += "<div class='col-sm-9 text-left px-0'  style='font-size: 12px'>"
+            tableTag += "상품명: <span id='product-name'>"+list[i].productName+"</span><br>"
+            tableTag += "상품설명 :<span id='product-name'>"+list[i].description+"</span></div>"
+            tableTag += "</td><td class='my-state'>"+list[i].price+"원</td><td class='my-seller'>"
+            tableTag += ""+list[i].seller.member.name+"</td></tr>"
+           };
           $("#addto").html(tableTag);  
         }
       });
@@ -337,4 +454,12 @@ $(document).on("change","#Aselect",function() {
 }
     
 </script>
-
+<script>
+"use strict"
+$(function() {
+  $('.my-check-all').click(function() {
+    $('.my-check').prop('checked', this.checked);
+  });
+  
+});
+</script>

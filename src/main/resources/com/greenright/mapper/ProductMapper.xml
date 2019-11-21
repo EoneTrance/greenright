@@ -182,6 +182,7 @@ select
     p.product_name,
     p.registered_date,
     p.quantity,
+    m.name,
     p.description,
     g.group_name, 
     g.category_id,
@@ -193,6 +194,8 @@ select
     f.main_photo_flag = 0)
     left outer join groups g on g.group_id = p.group_id 
     left outer join categorys c on c.category_id = g.category_id
+    left outer join sellers s on s.member_id = p.member_id
+    left outer join members m  on m.member_id = s.member_id
     where p.group_id=#{groupNo} and p.member_id=#{memberNo}
     order by p.product_id DESC
 	</select>
@@ -206,6 +209,7 @@ select
     p.group_id,
     p.member_id,
     p.price,
+    m.name,
     p.product_name,
     p.registered_date,
     p.quantity,
@@ -220,8 +224,10 @@ select
     f.main_photo_flag = 0)
     left outer join groups g on g.group_id = p.group_id
     left outer join categorys c on c.category_id = g.category_id
+    left outer join sellers s on s.member_id = p.member_id
+    left outer join members m  on m.member_id = s.member_id
     <if test="no != 0"> 
-    where g.category_id=#{groupNo} and member_id = ${memberNo}
+    where g.category_id=#{groupNo} and p.member_id = ${memberNo}
     </if>
     <if test="no == 0">
     </if>

@@ -297,13 +297,7 @@ $("#deletewishlist").click(function(){
       $.post("/greenright/json/Like/decreaseLike",{
         "productNo":($("#checkbox"+i+"")).val()
       }, function(data){
-//        swal("wishlist 에서 삭제되었습니다!!!!")
-  //      var wwwww = $("#checkbox"+i+"").parent().parent().parent();
-  //      $("#checkbox"+i+"").parent().parent().parent().remove();
-  //      console.log(wwwww);
-  //      console.log(wwwww.parent());
-  //      wwwww.parent().remove(wwwww);
-        console.log(thisNode);
+       swal("wishlist 에서 삭제되었습니다!")
         thisNode.remove();
       }); 
     }
