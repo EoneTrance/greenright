@@ -1,5 +1,6 @@
 package com.greenright.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import com.greenright.domain.Product;
 
@@ -8,8 +9,8 @@ public interface ProductDao {
   Product findWithFilesBy(int no) throws Exception;
   Product findForPhoto(int no) throws Exception;
   List<Product> findAllWithFile() throws Exception;
-  List<Product> findByGroupNo(int no) throws Exception;
-  List<Product> findByCategoryNo(int no) throws Exception;
+  List<Product> findByGroupNo(HashMap<String, Object> param) throws Exception;
+  List<Product> findByCategoryNo(HashMap<String, Object> param) throws Exception;
   List<Product> findAllBySeller(int no) throws Exception;
   int delete (int no) throws Exception;
   int update(Product product) throws Exception;
@@ -18,4 +19,8 @@ public interface ProductDao {
   List<Product> findAllUpcycling() throws Exception;
   Product MostRecommend(int no) throws Exception;
   List<Product> findAllByMemberNo(int memberNo) throws Exception;
+  int increseRecommendCount (int productNo) throws Exception;
+  int decreseRecommendCount (int productNo) throws Exception;
+  List<Product> searchbyCategoryForMain(int no) throws Exception;
+  List<Product> searchbyGroupForMain(int no) throws Exception;
 }

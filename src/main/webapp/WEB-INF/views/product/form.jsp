@@ -499,17 +499,17 @@ form#product-form {
         <!--  옵션 이름<input class="btn btn-primary py-3 px-4" type="button"
             id="optionN" value="옵션이름추가버튼"> -->
 
-        <input type="text" name="optionName" value="neverNo" hidden /> <input
+       <!--  <input type="text" name="optionName" value="neverNo" hidden /> <input
           type="text" name="optionContents" value="neverNo" hidden /> <input
           type="text" name="optionprice" value="neverNo" hidden /> <input
-          type="text" name="optionquantity" value="neverNo" hidden />
+          type="text" name="optionquantity" value="neverNo" hidden /> -->
       </h6>
       <table id="optionplus">
        <tr><td class="dv">옵션명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<input type="text" name="optionName"  id ="postionsaver"class="margininput" placeholder="수량-색깔-성별 형태로입력" >
-    <table class="dr"><!-- <input class="btn btn-primary py-3 px-4 optionAdd" type="button" id="optionitemadd" value="옵션항목추가"/> --> <a href="javascript:void(0)"><i  id="optionitemadd" class="fas fa-plus-square"></i></a></table>
-    <input type ="text" name="optionContents" value="divide" class="fordivide">
+    <table class="dr"><a href="javascript:void(0)"><i  id="optionitemadd" class="fas fa-plus-square"></i></a></table>
+   <!--  <input type ="text" name="optionContents" value="divide" class="fordivide">
     <input type ="text" name="optionprice" value="divide" class="fordivide">
-    <input type ="text" name="optionquantity" value="divide" class="fordivide">
+    <input type ="text" name="optionquantity" value="divide" class="fordivide"> -->
     </td></tr>
       </table>
     </div>

@@ -210,7 +210,7 @@ b {
           }
           var allData = {"no" : $(this).val()}
           $.ajax({
-            url : "../greenright/json/Product/searchbyCategory",
+            url : "/greenright/json/Product/searchbyCategoryForMain",
             type : "GET",
             dataType : "json",
             data : allData,
@@ -255,12 +255,11 @@ b {
         $(this).children(".vv").addClass("active");
           var allData = {"no" : $(this).val()}
           $.ajax({
-            url : "../greenright/json/Product/searchbyGroup",
+            url : "/greenright/json/Product/searchbyGroupForMain",
             type : "GET",
             dataType : "json",
             data : allData,
             success : function(data) {
-              console.log(data);
                var list = data.result;
               var tableTag ="";
                 for(var i = 0 ; i < list.length; i++) {

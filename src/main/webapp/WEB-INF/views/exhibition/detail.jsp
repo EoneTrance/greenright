@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <style>
+    .pages .content.show {
+    height: 1300px!important;
+    }
+    </style>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -13,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="/exhibition/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="/exhibition/css/dragdealer.css" />
     <link rel="stylesheet" type="text/css" href="/exhibition/css/component.css" />
-      <script src="/exhibition/js/modernizr.custom.js"></script>
+      
     <div class="container">
        <header id="header" class="codrops-header">
         <button class="slider-switch">Switch view</button>
@@ -58,7 +63,7 @@
       </div>
     </div>
     
-    
+    <script src="/exhibition/js/modernizr.custom.js"></script>
     <script src="/exhibition/js/dragdealer.js"></script>
     <script src="/exhibition/js/classie.js"></script>
     <script src="/exhibition/js/dragslideshow.js"></script>

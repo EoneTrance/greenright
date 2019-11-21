@@ -9,12 +9,14 @@ public interface ProductService {
   Product getforPhoto(int no) throws Exception;
   List<Product> list() throws Exception;
   List<Product> listBySeller(int no) throws Exception;
-  List<Product> searchbyGroup(int no) throws Exception;
-  List<Product> searchbyCategory(int no) throws Exception;
+  List<Product> searchbyGroup(int no, int memberNo) throws Exception;
+  List<Product> searchbyCategory(int no, int memberNo) throws Exception;
   void delete (int no)throws Exception;
   void update(Product product,String optionName[],String optionItemMatter[]) throws Exception;
   List<Product> gettopbyCategoryNum(int no) throws Exception;
   List<Product> upcyclingList() throws Exception;
   Product MostRecommend (int no) throws Exception;
   List<Product> getByMemberNo(int memberNo) throws Exception;
+  List<Product> searchbyCategoryForMain(int no) throws Exception;
+  List<Product> searchbyGroupForMain(int no) throws Exception;
 }

@@ -53,7 +53,7 @@
                             <div class="d-flex">
                                 <div class="pricing">
                                 
-                                    <p class="price"><span class="price-sale totalRecommendNum" id="${product.no}"> 총추천수:${product.totalRecommend}</span></p>
+                                    <p class="price"><span class="price-sale totalRecommendNum" id="${product.no}"> 총추천수:${product.recommendCount}</span></p>
                                 </div>
                             </div>
                             <div class="bottom-area d-flex px-3">

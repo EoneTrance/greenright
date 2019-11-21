@@ -2,11 +2,9 @@ package com.greenright.web;
 
 import java.util.List;
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.greenright.domain.Product;
 import com.greenright.service.ProductService;
 import com.greenright.service.WishListService;

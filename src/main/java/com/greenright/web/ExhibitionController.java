@@ -26,12 +26,10 @@ public class ExhibitionController {
         for(Product a : products) {
           // 회원번호만 불러오는 부분 
       int memberNo = a.getMemberNo();
-          //1. 회원정보별로 상품을 불러온다  
-          //2. 회원정보별로 불러온 상품을 추천수에 따라 나열한다 . 
       Product product =  productService.MostRecommend(memberNo);
       int no =  product.getNo();
       Product pprroo = productService.get(no);
-      pprroo.setTotalRecommend(product.getTotalRecommend());
+      pprroo.setRecommendCount(product.getRecommendCount());
       System.out.println(pprroo.toString());
       pro.add(pprroo);
       }
