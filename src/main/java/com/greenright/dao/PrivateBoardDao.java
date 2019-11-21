@@ -6,6 +6,7 @@ import com.greenright.domain.PrivateBoard;
 
 public interface PrivateBoardDao {
   List<PrivateBoard> findAll(Map<String,Object> param) throws Exception;
+  List<PrivateBoard> managerFindAll(Map<String,Object> param) throws Exception;
   void insert(PrivateBoard privateBoard) throws Exception;
   PrivateBoard findBy(int no) throws Exception;
   int countAll(Map<String,Object> param) throws Exception;

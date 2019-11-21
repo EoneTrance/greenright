@@ -9,5 +9,5 @@ public interface PrivateBoardService {
   PrivateBoard get(int no) throws Exception;
   int size(String questionType) throws Exception;
   void stateUpdate(PrivateBoard privateBoard)throws Exception;
- 
+  List<PrivateBoard> managerList(int pageNo, int pageSize, String questionType, String answerTF) throws Exception;
 }

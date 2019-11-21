@@ -116,6 +116,24 @@
     limit #{offset}, #{pageSize}
   </select>
   
+    <select id="managerFindAll" parameterType="map" resultMap="PrivateBoardMap">
+    select 
+       p.private_question_id,
+       p.questIon_type,
+       p.member_id,
+       p.created_date,
+       p.title,
+       p.contents,
+       p.answer_tf,
+       m.id
+    from private_questions p
+      left outer join members m on p.member_id=m.member_id
+      <if test="questionType != null and questionType != 'default'"> and questIon_type like #{questionType}</if>
+      <if test="answerTF != null and answerTF != 'default'"> and answer_tf like #{answerTF}</if>
+    order by private_question_id asc 
+    limit #{offset}, #{pageSize}
+  </select>
+  
   <update id="stateUpdate" parameterType="PrivateBoard">
     update private_questions set 
     answer_tf = #{answerTrueFalse}

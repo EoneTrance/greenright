@@ -69,7 +69,8 @@ public class WebConfig implements WebMvcConfigurer {
     registry.addInterceptor(new LoginCheckInterceptor()).addPathPatterns("/mypage/*");
     registry.addInterceptor(new LoginCheckInterceptor())
     .addPathPatterns("/board/*")
-    .excludePathPatterns("/board/list");
+    .excludePathPatterns("/board/list")
+    .addPathPatterns("/inquire/*");
 
   }
 }

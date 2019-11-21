@@ -62,6 +62,7 @@
             <a id="my-dropdown-hover" class="dropdown-item" href="/greenright/mypage/order">ORDER</a>
             <a id="my-dropdown-hover" class="dropdown-item" href="/greenright/mypage/sale">SALE</a>
             <a id="my-dropdown-hover" class="dropdown-item" href="/greenright/mypage/exhibition">MY EXHIBITION</a>
+            <a id="my-dropdown-hover" class="dropdown-item" href="/greenright/inquire/list">1:1문의</a>
             <hr>
             <a id='my-dropdown-hover' class='dropdown-item' href='/greenright/auth/logout'>LOGOUT</a>
           </div>

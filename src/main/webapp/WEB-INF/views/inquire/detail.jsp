@@ -27,7 +27,7 @@
                 <th>문의일</th>
                 <td>${privateBoard.date}</td>
                 <th>문의상태</th>
-                <td id="tf">${privateBoard.answerTrueFalse}</td>
+                <td><span id="tf">${privateBoard.answerTrueFalse}</span></td>
             </tr>
             <tr>
               <th>문의하신내용</th>
@@ -47,7 +47,9 @@
   
     <P align="center">
       <button type="button" class="btn btn-primary" onclick="location.href='list.jsp'">목록</button>
+        <c:if test="${loginUser.memberClass == 0}">
         <button type="button" class="btn btn-primary" id="answer">답변작성</button>
+        </c:if>
         <button type="button" class="btn btn-primary" id="answeranswer" style="display:none;">답변등록</button>
         <button type="button" class="btn btn-primary" id="answer-update" style="display:none;">답변수정</button>
         <button type="button" class="btn btn-primary" id="answer-delete" style="display:none;">
@@ -118,6 +120,7 @@ $('#answeranswer').on('click', () => {
       $('#answer-update').css('display', 'inline-block');
       $('#answer-delete').css('display', 'inline-block');
       $('#real-answer').text(answerAdd);
+      $('#tf').text("답변완료");
     
     }
   });

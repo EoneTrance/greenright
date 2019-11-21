@@ -27,38 +27,33 @@ public class InquireController {
   }
 
   @GetMapping("list") public void inquire(
-      @RequestParam(defaultValue = "1") int pageNo, 
-      @RequestParam(defaultValue = "5") int pageSize, 
-      String questionType,
-      String answerTF,
-      Model model, HttpSession session) throws Exception {
-   
-    // 총 페이지 개수 알아내기
-    if (pageSize < 5 || pageSize > 20) {
+    @RequestParam(defaultValue = "1") int pageNo, 
+    @RequestParam(defaultValue = "5") int pageSize, 
+    String questionType,
+    String answerTF,
+    Model model, HttpSession session) throws Exception {
+    if (pageSize < 5 || pageSize > 20)
       pageSize = 5;
-    }
+    
     int size = privateBoardService.size(questionType);
     int totalPage = size / pageSize; // 13 / 5 = 2.x
-    if (size % pageSize > 0) {
+    if (size % pageSize > 0)
       totalPage++;
-      
-    }
     
-    // 요청하는 페이지 번호가 유효하지 않을 때는 기본 값으로 1페이지로 지정한다.
-    if (pageNo < 1 || pageNo > totalPage) {
+    if (pageNo < 1 || pageNo > totalPage)
       pageNo = 1;
-    }
     
     Member member = (Member)session.getAttribute("loginUser");
+    if(member != null) {
     int no = member.getNo();
-    
-   
-  
- 
-    List<PrivateBoard> privateBoards = privateBoardService.list(no, pageNo, pageSize, null, null);
-    
-    
-    
+    int manager = member.getMemberClass();
+    List<PrivateBoard> privateBoards = null;
+    if(manager == 0) {
+      privateBoards = privateBoardService.managerList(pageNo, pageSize, null, null);
+    } else {
+      privateBoards = privateBoardService.list(no, pageNo, pageSize, null, null);
+    }
+     
     model.addAttribute("boards", privateBoards);
     model.addAttribute("pageNo", pageNo);
     model.addAttribute("pageSize", pageSize);
@@ -66,7 +61,7 @@ public class InquireController {
     model.addAttribute("size", size);
     model.addAttribute("beginPage", (pageNo - 2) > 0 ? (pageNo - 2) : 1);
     model.addAttribute("endPage", (pageNo + 2) < totalPage ? (pageNo + 2) : totalPage);
-    
+    }
   }
 
   @PostMapping("add")
@@ -83,13 +78,15 @@ public class InquireController {
   @GetMapping("detail")
   public String detail(Model model, int no, HttpSession session) throws Exception {
     int memberNo = ((Member)session.getAttribute("loginUser")).getNo();
+    int manager = ((Member)session.getAttribute("loginUser")).getMemberClass();
     PrivateBoard privateBoard = privateBoardService.get(no); 
   
-    if(memberNo!=privateBoard.getMemberNo()) {
+    if(memberNo==privateBoard.getMemberNo() || manager == 0 ) {
+      model.addAttribute("privateBoard",privateBoard);
+      return "inquire/detail";
+    } else {
       return "redirect:list";
     }
-    model.addAttribute("privateBoard",privateBoard);
-    return "inquire/detail";
   }
   
   

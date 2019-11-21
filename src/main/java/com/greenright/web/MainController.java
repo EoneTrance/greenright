@@ -14,7 +14,7 @@ public class MainController {
   @Resource 
   ProductService productService;
   
-  @RequestMapping("/main")
+  @RequestMapping("/jisoomain")
   public void main(Model model) throws Exception {
     List<Product> products = productService.list();
     model.addAttribute("products", products);

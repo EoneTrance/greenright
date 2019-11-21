@@ -27,9 +27,21 @@ public class DefaultPrivateBoardService implements PrivateBoardService {
     if (answerTF != null) {
       param.put("answerTF", answerTF);
     }
-    
-    
     return privateBoardDao.findAll(param);
+  }
+  
+  @Override
+  public List<PrivateBoard> managerList(int pageNo, int pageSize, String questionType, String answerTF) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("offset", (pageNo - 1) * pageSize);
+    param.put("pageSize", pageSize);
+    if (questionType != null) {
+      param.put("questionType", questionType);
+    }
+    if (answerTF != null) {
+      param.put("answerTF", answerTF);
+    }
+    return privateBoardDao.managerFindAll(param);
   }
   
   @Override
@@ -61,6 +73,8 @@ public class DefaultPrivateBoardService implements PrivateBoardService {
   public void stateUpdate(PrivateBoard privateBoard) throws Exception {
     privateBoardDao.stateUpdate(privateBoard);
   }
+  
+ 
   
   
 }

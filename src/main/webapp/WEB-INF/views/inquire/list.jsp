@@ -117,21 +117,8 @@
         </div>
     </div>
 </section>
-    <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
- 
-<!-- <script>
-$(document).ready(function() {
-  $('#select option').each(function(){
-    if($(this).val() == "${board.answerTrueFalse}") {
-      $(this).attr("selected","selected");
-    }
-  });
-     
-});
-</script>   -->
-
-
+<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
 var searchQuestionType = undefined;
 $('#inquireselect').change(function() {
@@ -149,8 +136,6 @@ function loadData(pageNo,answerSelectType) {
     },
     
     success: function(data){
-      console.log(data);
-      console.log(data.result.privateBoards);
       var list = data.result.privateBoards;
       var tableTag ="";
       console.log(answerSelectType);
@@ -182,51 +167,9 @@ function loadData(pageNo,answerSelectType) {
   
 }
 </script>
-
-<!-- <script>
-var searchQuestionType1 = undefined;
-$('#answerselect').change(function() {
-  searchQuestionType1 = $('#answerselect option:selected').val();
-  loadData(1)
-})
-function loadData(pageNo) {
-  $.ajax({
-    url: "../json/inquire/list",
-    type:"GET",
-    dataType: "json",
-    data: {
-      "answerTF": (searchQuestionType1) ? searchQuestionType1 : undefined
-    },
-    
-    success: function(data){
-      console.log(data);
-      console.log(data.result.privateBoards);
-      var list = data.result.privateBoards;
-      var tableTag ="";
-      
-      $("td").removeClass("content-value inquire");
-      
-       for(var i = 0 ; i < list.length; i++) {
-        tableTag += "<tr><td>" + list[i].no + "</td><td>" + list[i].date +
-        "<td>" + list[i].type + "</td><td><a href='detail?no="+ list[i].no+"'>" + list[i].title +"</a></td>"+
-        "<td>" + list[i].id +  "</td><td>" + list[i].answerTrueFalse + "</td></tr>"
-    };
-    $("#products tbody").html(tableTag);
-    $("td").addClass("content-value inquire");
-    }
-  });
-  
-}
-</script>
- -->
-
 <script>
 $('#my-paging').on('click','.page-item', () => {
- 
   $(event.target).parent().addClass('active');
-  
-  
-  
 });
  var currentPage = ${pageNo};
 $('.page-item').click((e) => {
