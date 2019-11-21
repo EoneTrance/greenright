@@ -173,5 +173,10 @@ public class DefaultProductService implements ProductService{
   public List<Product> searchbyGroupForMain(int no) throws Exception {
     return productDao.searchbyGroupForMain(no);
   }
+
+  @Override
+  public List<Product> getUpcyclingByMemberNo(int no) throws Exception {
+    return productDao.getUpcyclingByMemberNo(no);
+  }
 }
 

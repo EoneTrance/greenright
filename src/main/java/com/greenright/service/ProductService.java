@@ -19,4 +19,5 @@ public interface ProductService {
   List<Product> getByMemberNo(int memberNo) throws Exception;
   List<Product> searchbyCategoryForMain(int no) throws Exception;
   List<Product> searchbyGroupForMain(int no) throws Exception;
+  List<Product> getUpcyclingByMemberNo(int no) throws Exception;
 }

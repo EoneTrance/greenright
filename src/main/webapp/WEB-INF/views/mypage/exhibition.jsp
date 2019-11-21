@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="/node_modules/@chenfengyuan/datepicker/dist/datepicker.min.css">
 <link rel="stylesheet" href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
 <link rel="stylesheet" href="/css/greenright.css">
@@ -201,17 +201,16 @@
             </thead>
             <tbody>
               <tr>
-                <td class="my-date">2019-09-09</td>
+                <td class="my-date">${productList[0].registeredDate}</td>
                 <td class="my-product text-left py-2">
                   <div class="row">
                     <div class="col-sm-3 px-0">
                       <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
                     </div>
                     <div class="col-sm-9 px-0" style="font-size:12px">
-                      주문번호: <span id="product-id" >10238374</span><br>
-                      상품명: <span id="product-name">코트</span><br>
-                      옵션: <span id="product-option">95</span><hr class="my-1">
-                      가격: <span id="product-price" style="font-size:15px;font-weight:bold;">200,200</span> 원
+                      상품명: <span id="product-name">${productList[0].productName}</span><br>
+                     <hr class="my-1">
+                      가격: <span id="product-price" style="font-size:15px;font-weight:bold;">${productList[0].price }</span> 원
                     </div>
                   </div>
                 </td>
@@ -246,6 +245,7 @@
           
           
           <tbody>
+            <c:forEach items="${productList}" var="product" varStatus="status">
             <tr>
               
               <td class="my-date">2019-09-09</td>
@@ -256,16 +256,16 @@
                     <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
                   </div>
                   <div class="col-sm-9 px-0" style="font-size:12px">
-                    주문번호: <span id="product-id" >10238374</span><br>
-                    상품명: <span id="product-name">코트</span><br>
-                    옵션: <span id="product-option">95</span><hr class="my-1">
-                    가격: <span id="product-price" style="font-size:15px;font-weight:bold;">200,200</span> 원
+                    상품명: <span id="product-name">${product.productName }</span><br>
+                    <hr class="my-1">
+                    가격: <span id="product-price" style="font-size:15px;font-weight:bold;">${product.price }</span> 원
                   </div>
                 </div>
               </td>
               
-              <td class="my-like">1</td>
+              <td class="my-like">${product.recommendCount }</td>
             </tr>
+            </c:forEach>
 	      </tbody>
 	      </table>
                             

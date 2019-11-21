@@ -11,6 +11,7 @@ import com.greenright.domain.Member;
 import com.greenright.domain.Product;
 import com.greenright.service.LikeService;
 import com.greenright.service.MemberService;
+import com.greenright.service.ProductService;
 import com.greenright.service.SellerService;
 
 @Controller
@@ -24,6 +25,9 @@ public class MypageController {
   
   @Resource
   private LikeService likeService;
+  
+  @Resource
+  private ProductService productService;
   
   @GetMapping("")
   public void mypage(Member member) throws Exception {
@@ -78,6 +82,8 @@ public class MypageController {
       return "redirect:userinfo";
     }
     model.addAttribute("title", " - 개인전 관리");
+    List<Product> productList= productService.getUpcyclingByMemberNo(((Member)session.getAttribute("loginUser")).getNo());
+    model.addAttribute("productList",productList);
     return "mypage/exhibition";
   }
   
