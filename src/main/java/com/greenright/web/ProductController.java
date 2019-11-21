@@ -78,7 +78,13 @@ public class ProductController {
   public String add (MultipartFile[] photoPath,HttpSession session,
       Product product,String optionName, String[] optionContents,String[] optionprice
       ,String[] optionquantity)throws Exception {
+    if(photoPath !=null) {
+    // 사진 처리하는 부분 
     product.setPhotos(productPhotoWriter.getPhotoFiles(photoPath));
+    }
+    
+    if(optionName!=null && optionContents !=null && optionprice !=null) {
+    //옵션 처리하는 부분
     ArrayList<ProductOption> pList = new ArrayList<>();
     ProductOption productOption = new ProductOption();
     productOption.setOptionName(optionName);
@@ -92,9 +98,12 @@ public class ProductController {
     }
     productOption.setOptionItem(poiList);
     pList.add(productOption);
+    product.setOptions(pList);
+    }
+    
+    //상품 등록하는 부분 
     Member member =(Member) session.getAttribute("loginUser");
     product.setMemberNo(member.getNo());
-    product.setOptions(pList);
     productService.insert(product);
     return "redirect:manage";
   }

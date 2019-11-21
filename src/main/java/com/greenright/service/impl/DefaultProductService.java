@@ -25,14 +25,13 @@ public class DefaultProductService implements ProductService{
   @Transactional
   @Override
   public void insert(Product product) throws Exception {
-    if(product.getPhotos().size()==0) {
-      throw new Exception("사진파일없음");
-    }
     productDao.insert(product);
+   if(product.getPhotos()!=null) {
     for(ProductPhoto photo: product.getPhotos()) {
       photo.setProductNo(product.getNo());
       productPhotoDao.insert(photo);
     }
+   }
     if(product.getOptions()!=null) {
       for(ProductOption option: product.getOptions()) {
         option.setProductNo(product.getNo());
@@ -96,7 +95,7 @@ public class DefaultProductService implements ProductService{
   public void update(Product product
       ,String ProductOptionNo[],String ProductOptionItemNo[]) throws Exception {
     ProductOption productOption = new ProductOption();
-    if(ProductOptionNo.length!=0) {
+    if(ProductOptionNo!=null) {
       for(int i = 0 ; i<ProductOptionNo.length; i++) {
         if(i%2==0) {
           productOption.setOptionName(ProductOptionNo[i]);
@@ -106,7 +105,7 @@ public class DefaultProductService implements ProductService{
         }
       }
     }
-    if(ProductOptionItemNo.length!=0) {
+    if(ProductOptionItemNo!=null) {
       ProductOptionItem productOptionItem = new ProductOptionItem();
       for(int i =0 ; i<ProductOptionItemNo.length; i++) {
         if(i%5==0) {

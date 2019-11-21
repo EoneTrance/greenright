@@ -154,7 +154,7 @@ label.star:before {
 <c:forEach items="${productPhoto.photos}" var="file">
 <%-- ${file.no} --%>
 <div class="${file.no}" id ="photos"> 
-  <img src='/upload/product/${file.photoPath}' class='photo2' alt="">
+  <img src='/upload/product/${file.photoPath}' class='photo2' alt="" style="width:100px; height:100px; object-fit:cover;">
 <img src="/images/xmark.png" class="imageDelete" width="10" height="10" alt="" ><br>
 </div>
 </c:forEach>
