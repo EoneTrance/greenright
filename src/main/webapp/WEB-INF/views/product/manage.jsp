@@ -19,6 +19,8 @@
   padding-top: 10px;
   padding-bottom: 10px;
   margin: auto auto;
+  height: 1830px;
+  
 }
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {
@@ -129,6 +131,9 @@ td {
 div#forright {
     padding: 3.75px 17.5px 3.75px 7.5px;
 }
+div#forright {
+    width: 83%!important;
+}
 </style>
 <meta charset="UTF-8">
 <title>물품관리</title>
@@ -142,7 +147,7 @@ div#forright {
             <span class="icon-bar"></span> <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">MyPage</a>
+          <a class="navbar-brand" href="" >MyPage</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
@@ -192,11 +197,11 @@ div#forright {
           <div class="row">
             <div class="col-sm-12">
               <div class="btn-toolbar mb-2" role="toolbar"
-                aria-label="Toolbar with button groups"  style="width:100%;">
+                style="width:100%;">
                 <div class="btn-group" role="group"
-                  aria-label="Third group" style="width: 15%">
+                 style="width: 15%">
                   <select class="selectpicker bigselect custom-select"
-                    data-style="btn btn-sm w-50" id ="Aselect">
+                    data-style="btn btn-sm w-180" id ="Aselect">
                     <optgroup label="대분류명">
                       <option value= 23 selected>전체</option>
                       <option value= 19 >청소</option>
@@ -209,7 +214,7 @@ div#forright {
                   
                 </div>
                   &nbsp;&nbsp;&nbsp;
-                <div class="btn-group" role="group"
+              <!--   <div class="btn-group" role="group"
                   aria-label="Third group" style="width: 15%">
                   <select class="selectpicker subselect custom-select"
                     data-style="btn btn-sm w-50" id="subSelect">
@@ -217,9 +222,10 @@ div#forright {
                       <option selected value=23 >전체</option>
                     </optgroup>
                   </select>
-                </div>
+                </div> -->
                 <div id = forright class="active" style= "text-align:right;float:right;width: 66%;">
-                <a href="/greenright/product/form" id="formlink" >상품 등록</a>
+                <a href="/greenright/product/form" id="formlink" >상품 등록</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/greenright/product/upcyclingform" id ="formlink">업사이클링상품등록</a>
               </div>
               </div>
             </div>
@@ -228,15 +234,15 @@ div#forright {
           <div id=memberInfoForm>
             <div>
               <table
-                class="table table-hover text-center my-product-table">
+                class="col-sm-12 table-hover my-table my-table-row text-center" cellpadding="20" >
                 <thead>
                   <tr>
-                    <th class="col-sm-2 text-center">상품번호</th>
-                    <th class="col-sm-2 text-center">상품이름</th>
-                    <th class="col-sm-2 text-center">대분류명</th>
-                    <th class="col-sm-2 text-center">소분류명</th>
-                    <th class="col-sm-2 text-center">등록일</th>
-                    <th class="col-sm-2 text-center">가격</th>
+                    <th class="my-col-2 text-center">상품번호</th>
+                    <th class="my-col-2 text-center">상품이름</th>
+                    <th class="my-col-2 text-center">대분류명</th>
+                    <th class="my-col-2 text-center">소분류명</th>
+                    <th class="my-col-2 text-center">등록일</th>
+                    <th class="my-col-2 text-center">가격</th>
                   </tr>
                 </thead>
                 <tbody id ="addto">
@@ -260,7 +266,7 @@ div#forright {
     </div>
   </div>
   
-  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
@@ -276,32 +282,6 @@ div#forright {
 <script src="/js/main.js"></script>
   
 <script>
-$('#Aselect').change(
-    function() {
-      var state = $('#Aselect option:selected').val();
-      if (state == 19) {
-        $("#subSelect")
-            .html("<optgroup label='소분류명'><option selected value=19>전체</option><option value=1>세제류</option><option value=2>위생용품</option><option value=3>화장지</option><option  value=4>티슈</option></optgroup>");
-      } else if (state == 20) {
-        $("#subSelect")
-            .html("<optgroup label='소분류명'><option selected value=20>전체</option><option value=5>복사용지</option><option value=6>화일</option><option value=7>토너</option><option value=8>기타</option></optgroup>");
-      } else if (state == 21) {
-        $("#subSelect")
-        .html("<optgroup label='소분류명'><option selected  value=21>전체</option><option value=9>과일</option><option value=10>채소</option><option value=11>간식</option><option value=12>축산품</option></optgroup>");
-      } else if (state == 22) {
-        $("#subSelect")
-        .html("<optgroup label='소분류명'><option selected  value=22>전체</option><option value=13>침대</option><option value=14>소파</option><option value=15>테이블</option><option value=16>의자</option><option value=17>파티션</option></optgroup>");
-
-      } else if(state == 18 ){
-        $("#subSelect")
-                .html("<optgroup label='소분류명'><option selected value=18>전체</option></optgroup>");
-      }else if(state == 23 ){
-        $("#subSelect")
-        .html(
-            "<optgroup label='소분류명'><option selected  value =23>전체</option>")
-  
-      }
-    });
     
 $(document).on("change","#Aselect",function() {
   var allData ={"no" : $('#Aselect option:selected').val() }

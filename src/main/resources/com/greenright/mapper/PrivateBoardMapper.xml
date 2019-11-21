@@ -44,8 +44,7 @@
     created_date,
     title,
     contents,
-    answer_tf,
-    answer
+    answer_tf
   </sql>
 
   <sql id="where">
@@ -83,7 +82,6 @@
 	     p.title,
 	     p.contents,
 	     p.answer_tf,
-	     p.answer,
 	     m.id
     from private_questions p
       left outer join members m on p.member_id=m.member_id

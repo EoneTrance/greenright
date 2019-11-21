@@ -2,40 +2,25 @@ package com.greenright.service.impl;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import com.greenright.dao.ProductDao;
 import com.greenright.dao.UpcyclingRecommendDao;
 import com.greenright.domain.UpcyclingRecommend;
 import com.greenright.service.UpcyclingRecommendService;
-
 @Service
 public class DefaultUpcyclingRecommendService implements UpcyclingRecommendService{
 
-  @Resource
-  private UpcyclingRecommendDao upcyclingRecommendDao;
-  
-  public int insert(UpcyclingRecommend upcyclingRecommend) throws Exception {
-    upcyclingRecommendDao.insertRecommend(upcyclingRecommend);
-    return upcyclingRecommendDao.CountRecommend(upcyclingRecommend.getProductNo());
+  @Resource private UpcyclingRecommendDao upcyclingRecommendDao;
+  @Resource private ProductDao productDao;
+  @Override
+  public int add(UpcyclingRecommend upcyclingRecommend) throws Exception {
+    productDao.increseRecommendCount(upcyclingRecommend.getUpcyclingRecommendProductNo());
+    return upcyclingRecommendDao.insertRecommend(upcyclingRecommend);
   }
 
   @Override
   public int delete(UpcyclingRecommend upcyclingRecommend) throws Exception {
-    upcyclingRecommendDao.deleteRecommend(upcyclingRecommend);
-    return upcyclingRecommendDao.CountRecommend(upcyclingRecommend.getProductNo());
-  }
-
-  
-  
-  
-  @Override
-  public int deleteAll(int memberNo) throws Exception {
-    return upcyclingRecommendDao.deleteAllRecommend(memberNo);
-  }
-  
-  
-  
-  @Override
-  public int checkNum(int productNo) throws Exception {
-    return upcyclingRecommendDao.CountRecommend(productNo);
+    productDao.decreseRecommendCount(upcyclingRecommend.getUpcyclingRecommendProductNo());
+    return upcyclingRecommendDao.deleteRecommend(upcyclingRecommend);
   }
 
   @Override
@@ -43,6 +28,9 @@ public class DefaultUpcyclingRecommendService implements UpcyclingRecommendServi
     return upcyclingRecommendDao.CountRecommendForCheck(upcyclingRecommend);
   }
 
- 
-  
+  @Override
+  public int getRecommendNumbyProductNo(int productNo) throws Exception {
+    return upcyclingRecommendDao.CountRecommend(productNo);
+  }
+
 }

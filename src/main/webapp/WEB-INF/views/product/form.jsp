@@ -432,7 +432,6 @@ form#product-form {
             <option value="office">사무</option>
             <option value="organic">유기농</option>
             <option value="furniture">가구</option>
-            <option value="upcycleing">업사이클링</option>
           </select>
         </h6>
         <div id="subselect">
@@ -497,20 +496,10 @@ form#product-form {
       <h5 class="sub-title">III. 옵션 관리 &nbsp; <i class="far fa-list-alt"></i></h5>
       <hr class="line-group">
       <h6>
-        <!--  옵션 이름<input class="btn btn-primary py-3 px-4" type="button"
-            id="optionN" value="옵션이름추가버튼"> -->
-
-        <input type="text" name="optionName" value="neverNo" hidden /> <input
-          type="text" name="optionContents" value="neverNo" hidden /> <input
-          type="text" name="optionprice" value="neverNo" hidden /> <input
-          type="text" name="optionquantity" value="neverNo" hidden />
       </h6>
       <table id="optionplus">
        <tr><td class="dv">옵션명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<input type="text" name="optionName"  id ="postionsaver"class="margininput" placeholder="수량-색깔-성별 형태로입력" >
-    <table class="dr"><!-- <input class="btn btn-primary py-3 px-4 optionAdd" type="button" id="optionitemadd" value="옵션항목추가"/> --> <a href="javascript:void(0)"><i  id="optionitemadd" class="fas fa-plus-square"></i></a></table>
-    <input type ="text" name="optionContents" value="divide" class="fordivide">
-    <input type ="text" name="optionprice" value="divide" class="fordivide">
-    <input type ="text" name="optionquantity" value="divide" class="fordivide">
+    <table class="dr"><a href="javascript:void(0)"><i  id="optionitemadd" class="fas fa-plus-square"></i></a></table>
     </td></tr>
       </table>
     </div>
@@ -550,9 +539,18 @@ form#product-form {
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script>
 $(document).on("click",".adderButton",function(){
-  if(($("#pn").val)!=($(".optionsQuantity").val)) {
-  swal("옵션수량과 총수량이 일치하지않습니다");
-}
+  let fullq = $(".fullproductNo").val() 
+  let smallq = $(".optionsquantity")
+  let smallqsum = 0 ;
+  smallqsum * 1 ; 
+  for(var i = 0; i< smallq.length; i++){
+    smallqsum += ($(smallq[i]).val())*1 ;
+  }
+  if(smallqsum != fullq){
+    swal("옵션개수의 총합과 상품개수가 다릅니다 ")
+  }else{
+  }
+  
 })
 
 </script>
@@ -598,12 +596,8 @@ $(document).on("click",".adderButton",function(){
             } else if (state == 'furniture') {
               $("#subselect")
                   .html(
-                      "  <h6 class='subselect-group'>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=13>침대</option><option value=14>소파</option><option value=15>테이블</option><option value=16>의자</option><option value=17>파티션</option></select></h6>");
-            } else {
-              $("#subselect")
-                  .html(
-                      "<h3>업사이클링은 소분류가없습니다.</h3><input type='hidden' name='groupNo' value=18>")
-            }
+                      "  <h6>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=13>침대</option><option value=14>소파</option><option value=15>테이블</option><option value=16>의자</option><option value=17>파티션</option></select></h6>");
+            } 
           });
 </script>
 <script>
@@ -772,7 +766,6 @@ $(document).on("click",".adderButton",function(){
   });
 </script>
 <script>
-
 
 </script>
 

@@ -2,9 +2,11 @@ package com.greenright.web.json;
 
 import java.util.List;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.greenright.domain.Member;
 import com.greenright.domain.Product;
 import com.greenright.service.ProductOptionItemService;
 import com.greenright.service.ProductOptionService;
@@ -20,18 +22,22 @@ public class ProductController {
   @Resource private ProductOptionItemService productOptionItemService;
   @Resource private ProductPhotoService productPhotoService;
   @GetMapping("searchbyGroup")
-  public JsonResult searchbyGroup(int no) throws Exception{
+  public JsonResult searchbyGroup(int no,HttpSession session) throws Exception{
     try {
-      List<Product> products = productService.searchbyGroup(no);
+      Member member= (Member)session.getAttribute("loginUser");
+      int memberNo =member.getNo();
+      List<Product> products = productService.searchbyGroup(no,memberNo);
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(products);
     } catch (Exception e) {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
   @GetMapping("searchbyCategory")
-  public JsonResult searchbyCategory(int no) throws Exception{
+  public JsonResult searchbyCategory(int no,HttpSession session) throws Exception{
     try {
-      List<Product> products = productService.searchbyCategory(no);
+      Member member= (Member)session.getAttribute("loginUser");
+      int memberNo =member.getNo();
+      List<Product> products = productService.searchbyCategory(no,memberNo);
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(products);
     } catch (Exception e) {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
@@ -39,15 +45,17 @@ public class ProductController {
   }
 
   @GetMapping("search")
-  public JsonResult search(int no)throws Exception{
+  public JsonResult search(int no,HttpSession session)throws Exception{
     try {
+      Member member = (Member)session.getAttribute("loginUser");
+      int memberNo =member.getNo();
       List<Product> products;
       if(no<19) {
-        products = productService.searchbyGroup(no);
+        products = productService.searchbyGroup(18,memberNo);
       }else if(no==23){
-        products = productService.listBySeller(1);
+        products = productService.listBySeller(memberNo);
       } else {
-        products = productService.searchbyCategory(no-18);
+        products = productService.searchbyCategory(no-18,memberNo);
       }
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(products);
     } catch (Exception e) {
@@ -83,5 +91,23 @@ public class ProductController {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-
+  @GetMapping("searchbyCategoryForMain")
+  public JsonResult searchbyCategoryForMain(int no,HttpSession session) throws Exception{
+    try {
+      List<Product> products = productService.searchbyCategoryForMain(no);
+      return new JsonResult().setState(JsonResult.SUCCESS).setResult(products);
+    } catch (Exception e) {
+      return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
+    }
+  }
+  
+  @GetMapping("searchbyGroupForMain")
+  public JsonResult searchbyGroupForMain(int no,HttpSession session) throws Exception{
+    try {
+      List<Product> products = productService.searchbyGroupForMain(no);
+      return new JsonResult().setState(JsonResult.SUCCESS).setResult(products);
+    } catch (Exception e) {
+      return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
+    }
+  }
 }

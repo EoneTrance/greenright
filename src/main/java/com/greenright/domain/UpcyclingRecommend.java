@@ -1,35 +1,25 @@
 package com.greenright.domain;
 
-import java.io.Serializable;
-
-public class UpcyclingRecommend implements Serializable {
-
-  private static final long serialVersionUID = 1L;
-  
-  private int memberNo;
-  private int productNo;
-  
-  public int getMemberNo() {
-    return memberNo;
+public class UpcyclingRecommend {
+  private int upcyclingRecommendMemberNo;
+  private int upcyclingRecommendProductNo;
+  public int getUpcyclingRecommendMemberNo() {
+    return upcyclingRecommendMemberNo;
   }
-  public void setMemberNo(int memberNo) {
-    this.memberNo = memberNo;
+  public void setUpcyclingRecommendMemberNo(int upcyclingRecommendMemberNo) {
+    this.upcyclingRecommendMemberNo = upcyclingRecommendMemberNo;
   }
-  public int getProductNo() {
-    return productNo;
+  public int getUpcyclingRecommendProductNo() {
+    return upcyclingRecommendProductNo;
   }
-  public void setProductNo(int productNo) {
-    this.productNo = productNo;
+  public void setUpcyclingRecommendProductNo(int upcyclingRecommendProductNo) {
+    this.upcyclingRecommendProductNo = upcyclingRecommendProductNo;
   }
-  
   @Override
   public String toString() {
-    return "UpcyclingRecommend [memberNo=" + memberNo + ", productNo=" + productNo + "]";
+    return "UpcyclingRecommend [upcyclingRecommendMemberNo=" + upcyclingRecommendMemberNo
+        + ", upcyclingRecommendProductNo=" + upcyclingRecommendProductNo + "]";
   }
-
-  
-  
-  
   
   
 }

@@ -1,5 +1,6 @@
 package com.greenright.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -24,14 +25,13 @@ public class DefaultProductService implements ProductService{
   @Transactional
   @Override
   public void insert(Product product) throws Exception {
-    if(product.getPhotos().size()==0) {
-      throw new Exception("사진파일없음");
-    }
     productDao.insert(product);
+   if(product.getPhotos()!=null) {
     for(ProductPhoto photo: product.getPhotos()) {
       photo.setProductNo(product.getNo());
       productPhotoDao.insert(photo);
     }
+   }
     if(product.getOptions()!=null) {
       for(ProductOption option: product.getOptions()) {
         option.setProductNo(product.getNo());
@@ -60,13 +60,19 @@ public class DefaultProductService implements ProductService{
   }
 
   @Override
-  public List<Product> searchbyGroup(int no) throws Exception {
-    return productDao.findByGroupNo(no);
+  public List<Product> searchbyGroup(int no,int memberNo) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("groupNo", no);
+    param.put("memberNo", memberNo);
+    return productDao.findByGroupNo(param);
   }
 
   @Override
-  public List<Product> searchbyCategory(int no) throws Exception{
-    return productDao.findByCategoryNo(no);
+  public List<Product> searchbyCategory(int no,int memberNo) throws Exception{
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("groupNo", no);
+    param.put("memberNo", memberNo);
+    return productDao.findByCategoryNo(param);
   }
 
   @Override
@@ -89,7 +95,7 @@ public class DefaultProductService implements ProductService{
   public void update(Product product
       ,String ProductOptionNo[],String ProductOptionItemNo[]) throws Exception {
     ProductOption productOption = new ProductOption();
-    if(ProductOptionNo.length!=0) {
+    if(ProductOptionNo!=null) {
       for(int i = 0 ; i<ProductOptionNo.length; i++) {
         if(i%2==0) {
           productOption.setOptionName(ProductOptionNo[i]);
@@ -99,7 +105,7 @@ public class DefaultProductService implements ProductService{
         }
       }
     }
-    if(ProductOptionItemNo.length!=0) {
+    if(ProductOptionItemNo!=null) {
       ProductOptionItem productOptionItem = new ProductOptionItem();
       for(int i =0 ; i<ProductOptionItemNo.length; i++) {
         if(i%5==0) {
@@ -129,6 +135,31 @@ public class DefaultProductService implements ProductService{
     // 상품번호로 그룹 번호를 알아내는 메서드
     return productDao.getTopOnGroup(a);
     // 그룹번호로 최신순 4개의 상품을 추천하는 메서드 
+  }
+
+  @Override
+  public List<Product> upcyclingList() throws Exception {
+    return productDao.findAllUpcycling();
+  }
+
+  @Override
+  public Product MostRecommend(int no) throws Exception {
+    return productDao.MostRecommend(no);
+  }
+
+  @Override
+  public List<Product> getByMemberNo(int memberNo) throws Exception {
+    return productDao.findAllByMemberNo(memberNo);
+  }
+
+  @Override
+  public List<Product> searchbyCategoryForMain(int no) throws Exception {
+    return productDao.searchbyCategoryForMain(no);
+  }
+
+  @Override
+  public List<Product> searchbyGroupForMain(int no) throws Exception {
+    return productDao.searchbyGroupForMain(no);
   }
 }
 

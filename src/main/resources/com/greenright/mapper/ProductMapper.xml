@@ -18,18 +18,18 @@
     <result column="quantity" property="quantity"/>
     <result column="group_id" property="groupNo"/>
     <result column="totalRecommend" property ="totalRecommend"/>
-    
-    <association property="seller" javaType="Seller">
-      <id column="member_id" property="no" />
-      <result column="account_num" property="accountNum" />
-      <result column="account_holder" property="accountHolder" />
-      <result column="tel" property="tel" />
-      <result column="point" property="point" />
-      <association property="member" javaType="Member">
-        <id column="member_id" property="no" />
-        <result column="name" property="name"/>
-      </association>
-    </association>
+    <result column="recommend_count" property ="recommendCount"/>
+		<association property="seller" javaType="Seller">
+			<id column="member_id" property="no" />
+			<result column="account_num" property="accountNum" />
+			<result column="account_holder" property="accountHolder" />
+			<result column="tel" property="tel" />
+			<result column="point" property="point" />
+			<association property="member" javaType="Member">
+				<id column="member_id" property="no" />
+				<result column="name" property="name"/>
+			</association>
+		</association>
 
     <association property="group" javaType="Group">
       <id column="group_id" property="no"></id>
@@ -169,13 +169,12 @@ select
     left outer join options o on o.product_id = p.product_id
     left outer join groups g on g.group_id = p.group_id 
     left outer join categorys c on c.category_id = g.category_id
-    where p.member_id=1
+    where p.member_id=#{memberNo}
     order by p.product_id DESC;
   </select>
-  
-  <select id="findByGroupNo" resultMap="ProductWithFilesMap"
-    parameterType="int">
-    select
+	
+	<select id="findByGroupNo" resultMap="ProductWithFilesMap">
+		select
     p.product_id,
     p.group_id,
     p.member_id,
@@ -194,15 +193,14 @@ select
     f.main_photo_flag = 0)
     left outer join groups g on g.group_id = p.group_id 
     left outer join categorys c on c.category_id = g.category_id
-    where p.group_id=#{no} and p.member_id=1
+    where p.group_id=#{groupNo} and p.member_id=#{memberNo}
     order by p.product_id DESC
   </select>
 <delete id="delete"  parameterType="int">
   delete from products 
   where product_id = #{value}
 </delete>
-<select id="findByCategoryNo" resultMap="ProductWithFilesMap"
-    parameterType="int">
+<select id="findByCategoryNo" resultMap="ProductWithFilesMap">
     select
     p.product_id,
     p.group_id,
@@ -223,7 +221,7 @@ select
     left outer join groups g on g.group_id = p.group_id
     left outer join categorys c on c.category_id = g.category_id
     <if test="no != 0"> 
-    where g.category_id=#{no}
+    where g.category_id=#{groupNo} and member_id = ${memberNo}
     </if>
     <if test="no == 0">
     </if>
@@ -275,20 +273,26 @@ select
     
    </select>
   <select id="MostRecommend" parameterType="int" resultMap="ProductWithFilesMap">
-  SELECT prod.product_id,
-         prod.product_name,
-         max(prod_likes.like_cnt) as totalRecommend,
-         prod.member_id
-         FROM (SELECT product_id, product_name, member_id 
-              FROM products
-              WHERE member_id = #{no}) AS prod 
-              JOIN 
-              (SELECT product_id, COUNT(*) AS like_cnt
-              FROM upcycling_recommend
-              GROUP BY product_id) AS prod_likes 
-              ON prod.product_id = prod_likes.product_id;
+  SELECT 
+  product_id,product_name,recommend_count FROM products
+  WHERE group_id = 18 and member_id = #{value} 
+  ORDER BY recommend_count AND registered_date
+  LIMIT 1 
   </select>
+  <update id ="increseRecommendCount" parameterType="int">
+  update products set
+  recommend_count = recommend_count +1
+  where product_id = #{value}
+  </update>
   
+  <update id ="decreseRecommendCount" parameterType="int">
+  update products set
+  recommend_count = recommend_count -1
+  where product_id = #{value}
+  </update>
+
+
+
   
   <select id="findAllByMemberNo" parameterType="int"
     resultMap="ProductWithFilesMap">
@@ -310,6 +314,58 @@ select DISTINCT
     left outer join option_items i on o.options_id = i.options_id
     where p.member_id=#{value} and p.group_id = 18
   </select>
-  
+  <select id="searchbyGroupForMain" resultMap="ProductWithFilesMap"
+    parameterType="int">
+    select
+    p.product_id,
+    p.group_id,
+    p.member_id,
+    p.price,
+    p.product_name,
+    p.registered_date,
+    p.quantity,
+    p.description,
+    g.group_name, 
+    g.category_id,
+    c.category_name,
+    f.product_id,
+    f.photo_path
+    from products p
+    left outer join product_photos f on (p.product_id = f.product_id AND
+    f.main_photo_flag = 0)
+    left outer join groups g on g.group_id = p.group_id 
+    left outer join categorys c on c.category_id = g.category_id
+    where p.group_id=#{no} 
+    order by p.product_id DESC
+  </select>
+<select id="searchbyCategoryForMain" resultMap="ProductWithFilesMap"
+    parameterType="int">
+    select
+    p.product_id,
+    p.group_id,
+    p.member_id,
+    p.price,
+    p.product_name,
+    p.registered_date,
+    p.quantity,
+    p.description,
+    g.group_name, 
+    g.category_id,
+    c.category_name,
+    f.product_id,
+    f.photo_path
+    from products p
+    left outer join product_photos f on (p.product_id = f.product_id AND
+    f.main_photo_flag = 0)
+    left outer join groups g on g.group_id = p.group_id
+    left outer join categorys c on c.category_id = g.category_id
+    <if test="no != 0"> 
+    where g.category_id=#{no}
+    </if>
+    <if test="no == 0">
+    </if>
+    order by p.product_id DESC
+  </select>
   
 </mapper>
+
