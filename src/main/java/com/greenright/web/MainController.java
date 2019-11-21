@@ -14,8 +14,14 @@ public class MainController {
   @Resource 
   ProductService productService;
   
-  @RequestMapping("/jisoomain")
+  @RequestMapping("/main")
   public void main(Model model) throws Exception {
+    List<Product> products = productService.list();
+    model.addAttribute("products", products);
+  }
+  
+  @RequestMapping("/shop")
+  public void shop(Model model) throws Exception {
     List<Product> products = productService.list();
     model.addAttribute("products", products);
   }
