@@ -8,6 +8,7 @@ public interface ProductService {
   Product get(int no) throws Exception;
   Product getforPhoto(int no) throws Exception;
   List<Product> list() throws Exception;
+  List<Product> bestProductList() throws Exception;
   List<Product> listBySeller(int no) throws Exception;
   List<Product> searchbyGroup(int no, int memberNo) throws Exception;
   List<Product> searchbyCategory(int no, int memberNo) throws Exception;
@@ -19,4 +20,6 @@ public interface ProductService {
   List<Product> getByMemberNo(int memberNo) throws Exception;
   List<Product> searchbyCategoryForMain(int no) throws Exception;
   List<Product> searchbyGroupForMain(int no) throws Exception;
+  void addProductRecommend(int productNo) throws Exception;
+  void decreaseProductRecommend(int productNo) throws Exception;
 }

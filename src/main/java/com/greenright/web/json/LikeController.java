@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.greenright.domain.Like;
 import com.greenright.domain.Member;
 import com.greenright.service.LikeService;
+import com.greenright.service.ProductService;
 
 @RestController("json.LikeController")
 @RequestMapping("/json/Like")
 public class LikeController {
   @Resource private LikeService likeservice;
+  @Resource private ProductService productService;
   
   @PostMapping("increaseLike")
   public JsonResult increaseLike(HttpSession session,Like like)throws Exception{
@@ -20,6 +22,7 @@ public class LikeController {
       Member member = (Member) session.getAttribute("loginUser");
       like.setMemberNo(member.getNo());
       likeservice.add(like);
+      productService.addProductRecommend(like.getProductNo());
       return new JsonResult().setResult(JsonResult.SUCCESS);
     }catch (Exception e) {
       return new JsonResult().setResult(JsonResult.FAILURE);
@@ -31,6 +34,7 @@ public class LikeController {
      Member member = (Member) session.getAttribute("loginUser");
      like.setMemberNo(member.getNo());
       likeservice.delete(like);
+      productService.decreaseProductRecommend(like.getProductNo());
       return new JsonResult().setResult(JsonResult.SUCCESS);
     }catch (Exception e) {
       return new JsonResult().setResult(JsonResult.FAILURE);

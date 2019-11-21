@@ -19,7 +19,7 @@ public class MainController {
   
   @RequestMapping("/main")
   public void main(Model model) throws Exception {
-    List<Product> products = productService.list();
+    List<Product> products = productService.bestProductList();
     model.addAttribute("products", products);
   }
   

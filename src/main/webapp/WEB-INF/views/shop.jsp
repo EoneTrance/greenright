@@ -95,7 +95,7 @@
                         </div>
                     </div>
                 </div>
-                </c:forEach> 
+                </c:forEach>
             </div><!-- row 클래스 종료 -->
             <!--------------------------------------------------------------------------->
       <!--       <div class="row mt-5">
@@ -289,25 +289,21 @@
         $(document).on("click",".changewishlist",function(e){
           e.preventDefault();
           let productNo =$(this).attr("id");
-          let memberNo = 1;
           $.post(
               "/greenright/json/Like/checkLike",
               {
                 productNo : productNo,
-                memberNo : memberNo
               },
               function(a) {
                 if(a.result ==0){
                   $.post("/greenright/json/Like/increaseLike",{
                     "productNo":productNo,
-                    "memberNo":memberNo
                   }, function(data){
                     swal("wishlist 에 추가되었습니다")
                   });               
                 }else{
                   $.post("/greenright/json/Like/decreaseLike",{
                     "productNo":productNo,
-                    "memberNo":memberNo
                   }, function(data){
                    swal("wishlist 에서 삭제되었습니다.")
                     

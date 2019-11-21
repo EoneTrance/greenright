@@ -162,5 +162,20 @@ public class DefaultProductService implements ProductService{
   public List<Product> searchbyGroupForMain(int no) throws Exception {
     return productDao.searchbyGroupForMain(no);
   }
+
+  @Override
+  public void addProductRecommend(int productNo) throws Exception {
+    productDao.addProductRecommend(productNo);
+  }
+  
+  @Override
+  public void decreaseProductRecommend(int productNo) throws Exception {
+    productDao.decreaseProductRecommend(productNo);
+  }
+
+  @Override
+  public List<Product> bestProductList() throws Exception {
+    return productDao.bestProductList();
+  }
 }
 
