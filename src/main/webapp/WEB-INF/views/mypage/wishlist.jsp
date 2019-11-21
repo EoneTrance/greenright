@@ -106,10 +106,10 @@
                   <font style="font-size: 20pt;">주문총액</font>
                 </td>
                 <td colspan="2" style="padding: 10px 10px;">
-                  <font style="font-size: 12pt;"><span id="tempTotal">600,000</span>원</font><br>
-                  <font style="font-size: 12pt;"><span id="product-countall">3</span>개</font><br>
-                  <font style="font-size: 12pt;"><span id="delivery-fee">5,000</span>원</font><br>
-                  <font style="font-size: 24pt; font-weight: bold;"><span id="real-total">605,000</span>원</font>
+                  <font style="font-size: 12pt;"><span id="tempTotal">0</span>원</font><br>
+                  <font style="font-size: 12pt;"><span id="product-countall">0</span>개</font><br>
+                  <font style="font-size: 12pt;"><span id="delivery-fee">0</span>원</font><br>
+                  <font style="font-size: 24pt; font-weight: bold;"><span id="real-total">0</span>원</font>
                 </td>
               </tr>
             </tbody> 
@@ -245,8 +245,8 @@ $(document).ready( function() {
   <c:forEach items="${wishLists}" var="wishList">
     totalPrice+=${(wishList.product.price+wishList.optionPrice)*wishList.quantity}
     totalQuantity+=${wishList.quantity}
-    <c:if test="${(wishList.product.price+wishList.optionPrice)*wishList.quantity}<=50000">
-    feeCount+=1;
+    <c:if test="${(wishList.product.price+wishList.optionPrice)*wishList.quantity<50000}">
+    feeCount++;
     </c:if>
   </c:forEach>
   realtotal=feeCount*2500+totalPrice;
@@ -290,25 +290,72 @@ $('#my-wishbody').on('click','.my-product-remove', (e) => {
 $('#my-wishbody').on('click','.quantity-right-plus', (e) => {
   var target = $(e.currentTarget).prev();
   var price = $(e.currentTarget).parent().parent().next().children().first();
+  var deleveryTF = $(e.currentTarget).parent().parent().next().find('span.delevery-tf');
   var currentNum = target.val();
   if(currentNum<1000){
-    var a = target.attr('data-price-option');
-    var b = target.attr('data-price-product');
-    price.text(price.text()*1+a*1+b*1);
+    var priceOption = target.attr('data-price-option');
+    var priceProduct = target.attr('data-price-product');
+    totalPrice+=priceOption*1+priceProduct*1;
+    totalQuantity++;
+    price.text(price.text()*1+priceOption*1+priceProduct*1);
+    if(price.text()*1 == 0){
+      deleveryTF.text("0￦");
+    } else if (price.text()*1 >= 50000){
+      deleveryTF.text("무료배송");
+    } else {
+      deleveryTF.text("배송비 2,500￦");
+    }
+    $('#tempTotal').text(totalPrice);
+    $('#product-countall').text(totalQuantity);
     target.val(currentNum*1+1);
   }
-  var dd= $('#product-countall').text();
+  var totalDeleveryFee = document.querySelectorAll(".delevery-tf");
+  var tempFeeCount=0;
+  for(var i=0;i<totalDeleveryFee.length;i++){
+    if(totalDeleveryFee[i].innerHTML.startsWith('배송비')){
+      console.log(totalDeleveryFee[i].innerHTML);
+      tempFeeCount++;
+    }
+  }
+  $('#delivery-fee').text(tempFeeCount*2500);
+  var tempA = $('#tempTotal').text();
+  var tempB = $('#delivery-fee').text();
+  $('#real-total').text(tempA*1+tempB*1);
 });
 $('#my-wishbody').on('click','.quantity-left-minus', (e) => {
   var target = $(e.currentTarget).next(); 
   var price = $(e.currentTarget).parent().parent().next().children().first();
+  var deleveryTF = $(e.currentTarget).parent().parent().next().find('span.delevery-tf');
   var currentNum = target.val();
   if(currentNum >0 ){
-    var a = target.attr('data-price-option');
-    var b = target.attr('data-price-product');
+    var priceOption = target.attr('data-price-option');
+    var priceProduct = target.attr('data-price-product');
+    totalPrice-=priceOption*1+priceProduct*1;
+    totalQuantity--;
     var tempPrice = price.text();
-    price.text(tempPrice*1-a-b);
+    price.text(tempPrice*1-priceOption-priceProduct);
+    if(tempPrice*1-priceOption-priceProduct == 0){
+      deleveryTF.text("0￦");
+    } else if (tempPrice*1-priceOption-priceProduct <50000){
+      deleveryTF.text("배송비 2,500￦");
+    } else {
+      
+    }
+    $('#tempTotal').text(totalPrice);
+    $('#product-countall').text(totalQuantity);
     target.val(currentNum*1-1);
   }
+  var totalDeleveryFee = document.querySelectorAll(".delevery-tf");
+  var tempFeeCount=0;
+  for(var i=0;i<totalDeleveryFee.length;i++){
+    if(totalDeleveryFee[i].innerHTML.startsWith('배송비')){
+      console.log(totalDeleveryFee[i].innerHTML);
+      tempFeeCount++;
+    }
+  }
+  $('#delivery-fee').text(tempFeeCount*2500);
+  var tempA = $('#tempTotal').text();
+  var tempB = $('#delivery-fee').text();
+  $('#real-total').text(tempA*1+tempB*1);
 });
 </script>
