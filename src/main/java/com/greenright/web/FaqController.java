@@ -23,7 +23,6 @@ public class FaqController {
   
   @GetMapping("form")
   public void form() {
-    
   }
   
   @PostMapping("add")
@@ -32,7 +31,7 @@ public class FaqController {
     if(loginUser.getMemberClass() != 0) {
       return "redirect:list";
     }
-    
+    faq.setMemberNo(loginUser.getNo());
     faqService.insert(faq);
     return "redirect:list";
   }

@@ -10,25 +10,6 @@
     <result column="question_type" property="questionType"/>
     <result column="contents" property="contents"/>
     <result column="title" property="title"/>
-    
-    <collection property="member" ofType="Member" >
-      <id column="member_id" property="no" />
-	    <result column="registered_date" property="registeredDate" />
-	    <result column="id" property="id" />
-	    <result column="password" property="password" />
-	    <result column="certification_flag" property="certification" />
-	    <result column="cell_phone" property="cellPhone" />
-	    <result column="name" property="name" />
-	    <result column="email" property="email" />
-	    <result column="postal_code" property="postalCode" />
-	    <result column="default_address" property="defaultAddress" />
-	    <result column="detail_address" property="detailAddress" />
-	    <result column="question" property="question" />
-	    <result column="answer" property="answer" />
-	    <result column="auth_key" property="authkey"/>
-	    <result column="password_authkey" property="passwordAuthkey"/>
-	    <result column="member_class" property="memberClass"/>
-    </collection>
   </resultMap>
 
   <sql id="basicColumn">

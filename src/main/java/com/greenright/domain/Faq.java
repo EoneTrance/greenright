@@ -10,16 +10,7 @@ public class Faq implements Serializable {
   private String questionType;
   private String title;
   private String contents;
-  private Member member;
   
-  
-  
-  public Member getMember() {
-    return member;
-  }
-  public void setMember(Member member) {
-    this.member = member;
-  }
   public int getFaqID() {
     return faqID;
   }
@@ -54,8 +45,10 @@ public class Faq implements Serializable {
   @Override
   public String toString() {
     return "Faq [faqID=" + faqID + ", memberNo=" + memberNo + ", questionType=" + questionType
-        + ", title=" + title + ", contents=" + contents + ", member=" + member + "]";
+        + ", title=" + title + ", contents=" + contents + "]";
   }
+  
+  
   
   
   
