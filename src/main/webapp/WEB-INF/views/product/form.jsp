@@ -453,7 +453,7 @@ form#product-form {
       </h6>
 
       <h6 class="input-bar">
-        <span class="input-name">수량</span> <input class="adder form-control" placeholder="수량을 입력해주세요." type="number" id="pN"
+        <span class="input-name">수량</span> <input class="adder form-control fullproductNo" placeholder="수량을 입력해주세요." type="number" id="pN"
           name="quantity" min="0" required>
       </h6>
       
@@ -538,7 +538,7 @@ form#product-form {
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script>
-$(document).on("click",".adderButton",function(){
+/* $(document).on("click",".adderButton",function(e){
   let fullq = $(".fullproductNo").val() 
   let smallq = $(".optionsquantity")
   let smallqsum = 0 ;
@@ -547,11 +547,12 @@ $(document).on("click",".adderButton",function(){
     smallqsum += ($(smallq[i]).val())*1 ;
   }
   if(smallqsum != fullq){
+    e.preventDefault();
     swal("옵션개수의 총합과 상품개수가 다릅니다 ")
   }else{
   }
   
-})
+}) */
 
 </script>
 <script>
@@ -563,11 +564,27 @@ $(document).on("click",".adderButton",function(){
             function() {
               var oip = '<tr><td class="add-option-contents">옵션내용:<input type="text"  class="margininput" name="optionContents" placeholder="수량-색깔-성별 형태로입력" >';
               oip += '추가금액:<input type="number" name="optionprice" class="margininput" required min="0" step=10>';
-              oip += '개수:<input type="number" name="optionquantity"  class="margininput" required min="0" class="optionsQuantity">';
+              oip += '개수:<input type="number" name="optionquantity"  class="margininput optionsQuantity" required min="0">';
               /* oip += '<input class="btn btn-primary py-3 px-4 optionAdd margininput" type="button" id="buttonDel" value="옵션항목삭제"/>'; */
               oip += '<a href=javascript:void(0)><i id="buttonDel" class="fas fa-minus-square"></i></a>';
               oip += '</td></tr>';
               $(this).parent().append(oip);
+              
+              $(document).on("click",".adderButton",function(e){
+                let fullq = $(".fullproductNo").val() 
+                var smallq =document.getElementsByClassName("optionsQuantity") /* $(".optionsQuantity") */
+                let smallqsum = 0 ;
+                for(var i = 0; i< smallq.length; i++){
+                  smallqsum += (smallq[i].value)*1 ;
+                }
+                if(smallqsum*1 != fullq){
+                e.preventDefault();
+                swal("옵션개수의 총합과 상품개수가 다릅니다 ")
+                }else{
+                }
+                
+              })
+              
             });
 
     $(document).on("click", "#buttonDel", function() {
