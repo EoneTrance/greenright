@@ -296,7 +296,6 @@ $(document).ready(function() {
     commentC.style['display'] = 'none';
     commentD.style['display'] = 'inline-block';
     commentU.style['display'] = 'inline-block';
-
     
   });
   

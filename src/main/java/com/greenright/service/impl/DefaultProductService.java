@@ -1,5 +1,6 @@
 package com.greenright.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -60,13 +61,19 @@ public class DefaultProductService implements ProductService{
   }
 
   @Override
-  public List<Product> searchbyGroup(int no) throws Exception {
-    return productDao.findByGroupNo(no);
+  public List<Product> searchbyGroup(int no,int memberNo) throws Exception {
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("groupNo", no);
+    param.put("memberNo", memberNo);
+    return productDao.findByGroupNo(param);
   }
 
   @Override
-  public List<Product> searchbyCategory(int no) throws Exception{
-    return productDao.findByCategoryNo(no);
+  public List<Product> searchbyCategory(int no,int memberNo) throws Exception{
+    HashMap<String,Object> param = new HashMap<>();
+    param.put("groupNo", no);
+    param.put("memberNo", memberNo);
+    return productDao.findByCategoryNo(param);
   }
 
   @Override
@@ -144,6 +151,16 @@ public class DefaultProductService implements ProductService{
   @Override
   public List<Product> getByMemberNo(int memberNo) throws Exception {
     return productDao.findAllByMemberNo(memberNo);
+  }
+
+  @Override
+  public List<Product> searchbyCategoryForMain(int no) throws Exception {
+    return productDao.searchbyCategoryForMain(no);
+  }
+
+  @Override
+  public List<Product> searchbyGroupForMain(int no) throws Exception {
+    return productDao.searchbyGroupForMain(no);
   }
 }
 

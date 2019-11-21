@@ -42,8 +42,8 @@
 
     <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a href="#" class="nav-link">SHOP</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">EXHIBITION</a></li>
+        <li class="nav-item"><a href="/greenright/product/main" class="nav-link">SHOP</a></li>
+        <li class="nav-item"><a href="/greenright/exhibition/list" class="nav-link">EXHIBITION</a></li>
         <li class="nav-item"><a href="/greenright/board/list" class="nav-link">COMMUNITY</a></li>
         <li class="nav-item"><a href="/greenright/faq/list" class="nav-link">SUPPORT</a></li>
         <li class="nav-item"><a href="#" class="nav-link">CONTACT</a></li>

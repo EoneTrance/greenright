@@ -25,7 +25,7 @@ public class Product  implements Serializable {
   private Seller seller;
   private Group group;
   private Like like;
-  private int totalRecommend;
+  private int RecommendCount;
   public int getNo() {
     return no;
   }
@@ -123,11 +123,11 @@ public class Product  implements Serializable {
   public void setLike(Like like) {
     this.like = like;
   }
-  public int getTotalRecommend() {
-    return totalRecommend;
+  public int getRecommendCount() {
+    return RecommendCount;
   }
-  public void setTotalRecommend(int totalRecommend) {
-    this.totalRecommend = totalRecommend;
+  public void setRecommendCount(int recommendCount) {
+    RecommendCount = recommendCount;
   }
   @Override
   public String toString() {
@@ -136,7 +136,7 @@ public class Product  implements Serializable {
         + quantity + ", productName=" + productName + ", description=" + description
         + ", expirationDate=" + expirationDate + ", origin=" + origin + ", photos=" + photos
         + ", options=" + options + ", seller=" + seller + ", group=" + group + ", like=" + like
-        + ", totalRecommend=" + totalRecommend + "]";
+        + ", RecommendCount=" + RecommendCount + "]";
   }
   
   

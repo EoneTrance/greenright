@@ -23,13 +23,13 @@ public class ExhibitionController {
   public void list(Model model) throws Exception {
     List<Product> products = productService.upcyclingList();
     List<Product> pro = new ArrayList<>();
-    // 회원번호만 불러오는 부분 
         for(Product a : products) {
+          // 회원번호만 불러오는 부분 
       int memberNo = a.getMemberNo();
       Product product =  productService.MostRecommend(memberNo);
       int no =  product.getNo();
       Product pprroo = productService.get(no);
-      pprroo.setTotalRecommend(product.getTotalRecommend());
+      pprroo.setRecommendCount(product.getRecommendCount());
       System.out.println(pprroo.toString());
       pro.add(pprroo);
       }

@@ -166,7 +166,7 @@ body.goto-here {
 }
 
 .attachFileDiv label {
-  -webkit-appearance: button;
+  -/* webkit-appearance: button; */
   display: inline-block;
   text-align: center;
   vertical-align: middle;
@@ -206,9 +206,9 @@ body.goto-here {
   padding: 0px;
 }
 
-td.dv {
+/* td.dv {
   font-weight: bolder;
-}
+} */
 
 label {
   font-weight: 400;
@@ -236,7 +236,19 @@ input:focus {
 }
 input.btn.btn-primary.py-3.px-4 {
     width: 58px;
+    margin-left:5px;
 }
+
+input.btn.btn-primary.py-3.px-4.add-btn {
+    vertical-align: super;
+    margin-left: 30px;
+}
+
+
+input.btn.btn-primary.py-3.px-4.delete-btn {
+    margin-left: 10px !important;
+}
+
 .optionAdd {
     width: 100px !important;
     height:33px !important;
@@ -244,12 +256,21 @@ input.btn.btn-primary.py-3.px-4 {
 button#button {
     width: 100px;
 }
-td.dv {
+
+/* td.dv {
     width: 980px;
     padding-left: 22px;
     padding-top: 5px;
     padding-bottom: 5px;
+} */
+
+td.dv {
+    display: list-item;
+    margin-left: 45px;
+    color: black;
+    font-weight: bold;
 }
+
 .margininput{
 margin :0px 10px 0px 10px;
 }
@@ -257,17 +278,22 @@ margin :0px 10px 0px 10px;
 margin:0px 10px 0px 10.9px !important;
 }
 
+td.add-option-contents {
+    display: list-item;
+    margin-top: 10px;
+    color: black;
+}
+
 /*추가  */
 h3.add-title {
     text-align: center;
     font-size: 35px;
     border: solid #82ae46 2px;
+    background-color: #82ae46;
     padding: 20px;
+    color: white;
 }
 
-h5.sub-title {
-    margin-top: 10px;
-}
 
 div#select-wrap {
     text-align: center;
@@ -304,19 +330,75 @@ h5.sub-title {
     margin-top: 10px;
     text-align: left;
     margin-left: 30px;
+    display: inline-block;
+    font-size: 25px;
 }
 
 span.input-name {
-    margin-left: 20px;
     color: black;
     display: list-item;
-    margin-left: 45px;
-    margin-top: 15px;
+    margin: 15px 0px 15px 45px; 
 }
 
 hr.line-group {
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+label#filelabel {
+    margin-left: 25px;
+}
+
+img.img-box {
+    margin-left: 25px;
+    margin-top: 10px;
+}
+
+h5.sub-title.none-inline-block {
+    display: block !important;
+}
+
+.fa-plus-square:before {
+    color: black;
+    content: "\f0fe";
+    margin-left: 5px;
+}
+
+.fa-minus-square:before {
+    color: black;
+    content: "\f146";
+}
+
+a#icon-wrap {
+    color: black;
+    font-size: 25px;
+    vertical-align: middle;
+}
+
+#item-specification-textarea {
+    width: 910px;
+    margin-top: 10px;
+}
+
+.item-specification-wrap {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.btn-wrap {
+    padding: 40px;
+}
+
+form#product-form {
+    margin-top: 30px;
+}
+
+.hero-wrap.hero-bread.product-form-page {
+    background-position: top;
+}
+
+form#product-form {
+    border: solid;
 }
 
 </style>
@@ -342,13 +424,16 @@ hr.line-group {
       </h6>
     </div>
     <hr class="line-group">
-    <div class="in">
+   <div class="image-wrap">
       <h5 class="sub-title">II. 이미지 등록  &nbsp; <i class="fas fa-images"></i> </h5>
+      <!-- <input type="button" class="btn btn-primary py-3 px-4 add-btn"
+            value="추가" onclick="attachFile.add()"> -->
+       <a id=" imgbar-add-btn" href="javascript:void(0)"><i onclick="attachFile.add()" class="fas fa-plus-square"></i></a>
       <hr class="line-group">
       <div id="attachFileDiv" class="attachFileDiv">
         <h6 id="addbutton">
-          <input type="button" class="btn btn-primary py-3 px-4"
-            value="추가" onclick="attachFile.add()">
+          <!-- <input type="button" class="btn btn-primary py-3 px-4"
+            value="추가" onclick="attachFile.add()"> -->
         </h6>
       </div>
     </div>
@@ -356,14 +441,17 @@ hr.line-group {
     <table id="list">
     </table>
 
-    <div class="in">
-      <h5>III. 상품 설명</h5>
-      <textarea rows="5" cols="50" name="description"
+   <div class="item-specification-wrap">
+      <h5 class="sub-title  none-inline-block">IV. 상품 설명  &nbsp; <i class="fas fa-edit"></i> </h5>
+      <hr class="line-group">
+      <textarea id="item-specification-textarea" rows="5" cols="50" name="description"
         placeholder="내용을 입력하세요" required> </textarea>
       <br>
-      <button class="btn btn-primary py-3 px-4 adderButton" id=button>등록하기</button>
-      <INPUT type="button" value="취소" class="btn btn-primary py-3 px-4"
-        onClick="location.href='/greenright/product/manage'">
+      <div class="btn-wrap">
+        <button class="btn btn-primary py-3 px-4 adderButton" id=button>등록하기</button>
+        <INPUT type="button" value="취소" class="btn btn-primary py-3 px-4"
+          onClick="location.href='/greenright/product/manage'">
+      </div>
     </div>
   </form>
 </div>
@@ -449,7 +537,8 @@ hr.line-group {
       var label = document.createElement('label');
       label.setAttribute("for", 'fileField' + o.idx);
       label.innerHTML = "파일선택";
-
+      label.id ="filelabel";
+      
       var dv = document.createElement('dv');
       dv.style.marginTop = '3px';
       dv.id = 'dv' + o.idx;
@@ -465,18 +554,31 @@ hr.line-group {
         o.prev(this, 'dv' + idx)
       };
 
-      var btn = document.createElement('input');
+      var atag = document.createElement('a');
+      atag.setAttribute('href', "javascript:void(0)");
+      atag.id = 'icon-wrap';
+      
+      var ibtn = document.createElement('i'); 
+      ibtn.className = 'fas fa-trash-alt';
+      ibtn.onclick =function() {
+        o.del(idx)
+      }
+      ibtn.style.marginLeft= '10px';
+      
+     /*  var btn = document.createElement('input');
       btn.type = 'button';
       btn.className = 'btn btn-primary py-3 px-4';
       btn.value = '삭제';
       btn.onclick = function() {
         o.del(idx)
       };
-      btn.style.marginLeft = '5px';
+      btn.style.marginLeft = '5px'; */
 
       div.appendChild(label);
       div.appendChild(file);
-      div.appendChild(btn);
+      /* div.appendChild(btn); */
+      div.appendChild(atag);
+      atag.appendChild(ibtn);
       document.getElementById('attachFileDiv').appendChild(div);
       document.getElementById('attachFileDiv').appendChild(dv);
 

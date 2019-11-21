@@ -224,7 +224,7 @@ div#forright {
                   </select>
                 </div> -->
                 <div id = forright class="active" style= "text-align:right;float:right;width: 66%;">
-                <a href="/greenright/product/form" id="formlink" >상품 등록</a>&nbsp;&nbsp;&nbsp;
+                <a href="/greenright/product/form" id="formlink" >상품 등록</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="/greenright/product/upcyclingform" id ="formlink">업사이클링상품등록</a>
               </div>
               </div>
@@ -282,32 +282,6 @@ div#forright {
 <script src="/js/main.js"></script>
   
 <script>
-$('#Aselect').change(
-    function() {
-      var state = $('#Aselect option:selected').val();
-      if (state == 19) {
-        $("#subSelect")
-            .html("<optgroup label='소분류명'><option selected value=19>전체</option><option value=1>세제류</option><option value=2>위생용품</option><option value=3>화장지</option><option  value=4>티슈</option></optgroup>");
-      } else if (state == 20) {
-        $("#subSelect")
-            .html("<optgroup label='소분류명'><option selected value=20>전체</option><option value=5>복사용지</option><option value=6>화일</option><option value=7>토너</option><option value=8>기타</option></optgroup>");
-      } else if (state == 21) {
-        $("#subSelect")
-        .html("<optgroup label='소분류명'><option selected  value=21>전체</option><option value=9>과일</option><option value=10>채소</option><option value=11>간식</option><option value=12>축산품</option></optgroup>");
-      } else if (state == 22) {
-        $("#subSelect")
-        .html("<optgroup label='소분류명'><option selected  value=22>전체</option><option value=13>침대</option><option value=14>소파</option><option value=15>테이블</option><option value=16>의자</option><option value=17>파티션</option></optgroup>");
-
-      } else if(state == 18 ){
-        $("#subSelect")
-                .html("<optgroup label='소분류명'><option selected value=18>전체</option></optgroup>");
-      }else if(state == 23 ){
-        $("#subSelect")
-        .html(
-            "<optgroup label='소분류명'><option selected  value =23>전체</option>")
-  
-      }
-    });
     
 $(document).on("change","#Aselect",function() {
   var allData ={"no" : $('#Aselect option:selected').val() }

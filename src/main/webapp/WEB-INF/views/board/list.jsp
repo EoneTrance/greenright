@@ -22,9 +22,7 @@
    border-bottom-left-radius: 2px;
    font-size: 14px; 
 }
-
 </style>
-
 
   
   <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
@@ -158,15 +156,12 @@ $('#my-paging').on('click','.page-item', () => {
   //var param = "commentNo="+commentNo+"&boardNo="+boardNo;
   
 });
-
 /* var currentPage = ${pageNo};
-
 $('.page-item').click((e) => {
   //e.preventDefault();
  
   //var page = e.currentTarget.getAttribute('data-page');
   var page = $(e.currentTarget).attr('data-page');
-
   $.get("list",{
   }, function(success) {
     if (page == "prev") {
@@ -186,21 +181,15 @@ $('.page-item').click((e) => {
     }
     
   });
-
-
 }); 
-
 */
-
  var currentPage = ${pageNo};
-
 $('.page-item').click((e) => {
   e.preventDefault();
   // e.currentTarget? 리스너가 호출될 때, 그 리스너가 등록된 태그를 가르킨다.
   // e.target? 이벤트가 발생된 원천 태그이다. 
   //var page = e.currentTarget.getAttribute('data-page');
   var page = $(e.currentTarget).attr('data-page');
-
   if (page == "prev") {
     if (currentPage == 1)
       return;
@@ -219,9 +208,6 @@ $('.page-item').click((e) => {
     
   }
 }); 
-
-
-
 </script>  
   
 
@@ -248,19 +234,15 @@ $('.page-item').click((e) => {
     </script>
 
 <script>
-
-
 var dt;
 dt = new Date();
 dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate();
 console.log(dt);
 var img = document.getElementById('#newimg');
 console.log(img);
-
 if($('.cdate') == dt) {
   $('#btitle').append(imgs);
 }
-
     </script>
   <script>
       $(document).ready(function() {
@@ -312,4 +294,3 @@ if($('.cdate') == dt) {
        /*  $("#newC").remove(); */
       }
     </script>
-
