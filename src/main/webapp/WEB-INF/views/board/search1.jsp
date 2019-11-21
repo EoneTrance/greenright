@@ -187,7 +187,6 @@ $('.page-item').click((e) => {
     location.href = "search1?title=" +"${title}" + "&pageNo="+ (currentPage + 1) + "&pageSize=" + ${pageSize};
   
   } else {
-    console.log(e.currentTarget);
     if (page != currentPage)
       location.href = "search1?title="+ "${title}" +"&pageNo=" + page + "&pageSize=" + ${pageSize};
     

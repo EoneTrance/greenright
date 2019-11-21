@@ -71,7 +71,6 @@
     </div>
   </div>
 </nav>
-
 <script>
 function mypage() {
   location.href="/greenright/mypage";

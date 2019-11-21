@@ -24,12 +24,6 @@
 }
 </style>
 
-  <%
-    session.setAttribute("memberName", "choi");
-  %>
-  <%
-    session.setAttribute("loginName", "choi");
-  %>
   
   <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
       <div class="container">
@@ -207,7 +201,6 @@ $('.page-item').click((e) => {
     location.href = "list?pageNo=" + (currentPage + 1) + "&pageSize=" + ${pageSize};
   
   } else {
-    console.log(e.currentTarget);
     if (page != currentPage)
       location.href = "list?pageNo=" + page + "&pageSize=" + ${pageSize};
     
@@ -242,9 +235,7 @@ $('.page-item').click((e) => {
 var dt;
 dt = new Date();
 dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate();
-console.log(dt);
 var img = document.getElementById('#newimg');
-console.log(img);
 if($('.cdate') == dt) {
   $('#btitle').append(imgs);
 }

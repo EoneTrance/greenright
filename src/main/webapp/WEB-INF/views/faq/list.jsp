@@ -435,7 +435,6 @@ function moveActivePage(currentPage, direction) {
     return false;
   }
   currentPage += direction;
-  console.log(currentPage, direction);
   $(".pagination li").removeClass("active");
   $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass("active");
 }

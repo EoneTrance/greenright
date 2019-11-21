@@ -163,9 +163,10 @@ button#deletewishlist {
                       <td class="my-product text-left py-2">
                         <div class="row">
                           <div class="col-sm-3 px-0">
-                            <img id="product-photo"
+                            <a href="/greenright/product/buydetail?no=${product.no}"><img id="product-photo"
                               src="/upload/product/${product.photos[0].photoPath}"
                               style="weight: 80px; height: 100px; object-fit: cover;">
+                            </a>
                           </div>
                         </div>
                       </td>
@@ -185,21 +186,7 @@ button#deletewishlist {
               </table>
               <button id="deletewishlist" class="btn btn-primary"
                 style="border-radius: 2px 2px 2px 2px;">삭제</button>
-            </div>
-          </div>
-          <div class="row mt-5">
-            <div class="col text-center">
-              <div class="block-27">
-                <ul>
-                  <li><a href="#">&lt;</a></li>
-                  <li class="active"><span>1</span></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li><a href="#">&gt;</a></li>
-                </ul>
-              </div>
+            //끝
             </div>
           </div>
         </div>

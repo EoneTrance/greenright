@@ -68,7 +68,6 @@ public class ProductController {
     product.setPhotos(productPhotoWriter.getPhotoFiles(photoPath));
     product.setDiy(1);
     product.setExpirationDate(new Date(20190101));
-    System.out.println(product.toString());
     productService.insert(product);
     return "redirect:manage";
   }

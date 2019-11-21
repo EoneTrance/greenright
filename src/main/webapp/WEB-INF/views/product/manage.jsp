@@ -30,6 +30,8 @@
   height: 550px
 }
 
+
+
 /* Set gray background color and 100% height */
 .sidenav {
   height: 100%;
@@ -121,7 +123,9 @@ a {
 }
 
 select#Aselect {
-  height: 30px;
+  height: 38px !important;
+  margin-bottom: 10px;
+  width: 124px;
   font-size: medium;
 }
 
@@ -136,7 +140,7 @@ td {
 }
 
 div#forright {
-  padding: 3.75px 17.5px 3.75px 7.5px;
+  padding: 3.75px 0px 3.75px 7.5px;
 }
 
 div#forright {
@@ -191,110 +195,103 @@ button#deletewishlist {
   width: 58px;
   margin-top: 10px;
 }
+a#formlink {
+    font-weight: 900;
+}
+div.well h4 {
+  font-weight: bold;
+}
+div.well p {
+  font-size: 300%;
+  color: #82AE46;
+}
+.btn-group .dropdown-menu .inner li.active {
+  background-color: #82AE46;
+  color: #FFFFFF;
+}
+/* .btn-group button:hover {
+    background-color:RGBA(130,174,70,0.5);
+  } */
+.dropdown .dropdown-menu div.inner ul.inner li a:hover {
+  background-color: RGBA(130, 174, 70, 0.5);
+}
+.dropdown .dropdown-menu div.inner ul.inner li a.selected {
+  background-color: #82AE46;
+}
+.filter-option-inner {
+  text-align: center;
+}
+table.my-product-table td {
+  color: black;
+}
+table.my-table td.my-product {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+table.my-table-col td.my-seller {
+  border-right: none;
+}
+
+
 </style>
 <meta charset="UTF-8">
-<title>물품관리</title>
-<% session.setAttribute("SellerNo", 1); %>
-<div id="myPageContent">
-  <nav class="navbar navbar-inverse visible-xs">
+<div id="mypage-title-h1">
+  <h1>WISHLIST</h1>
+</div>
+
+<section class="ftco-section py-5">
+  <div id="myPageContent">
+
     <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle"
-          data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span> <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="">MyPage</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li class="my-menu active"><a
-            href="/greenright/mypage/userinfo">기본정보</a></li>
-          <li class="my-menu"><a href="order">주문내역</a></li>
-          <li class="my-menu"><a href="#">관심상품</a></li>
-          <li class="my-menu"><a href="#">업적</a></li>
-          <li class="my-menu"><a href="#">판매내역</a></li>
-          <li class="my-menu"><a href="#">개인전</a></li>
-          <li class="my-menu"><a href="#">판매회원 전환</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container-fluid">
-    <div class="row content">
-      <div class="col-sm-3 sidenav hidden-xs">
-        <h2 class="text-center">MyPage</h2>
-        <hr>
-        <h4 class="font-weight-bold text-center">기본정보</h4>
-        <ul class="nav flex-column nav-pills nav-stacked">
-          <li class="my-menu"><a href="/greenright/mypage/userinfo">기본정보</a></li>
-        </ul>
-        <h4 class="font-weight-bold text-center">구매</h4>
-        <ul class="nav flex-column nav-pills nav-stacked">
-          <li class="my-menu"><a href="/greenright/mypage/order">주문내역</a></li>
-          <li class="my-menu"><a href="#section3">관심상품</a></li>
-          <li class="my-menu"><a href="#section3">업적</a></li>
-        </ul>
-        <h4 class="font-weight-bold text-center">판매</h4>
-        <ul class="nav flex-column nav-pills nav-stacked">
-          <li class="my-menu"><a href="#section3">판매내역</a></li>
-          <li class="my-menu"><a href="#section3">개인전</a></li>
-          <li class="my-menu"><a href="#section3">판매회원 전환</a></li>
-        </ul>
-        <h4 class="font-weight-bold text-center">상품</h4>
-        <ul class="nav flex-column nav-pills nav-stacked">
-          <li class="my-menu active"><a
-            href="/greenright/product/manage">상품관리</a></li>
-        </ul>
-        <br>
-      </div>
-      <br>
-
-      <div class="col-sm-9">
-
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="btn-toolbar mb-2" role="toolbar"
-              style="width: 100%;">
-              <div class="btn-group" role="group" style="width: 15%">
-                <select class="selectpicker bigselect custom-select"
-                  data-style="btn btn-sm w-180" id="Aselect">
-                  <optgroup label="대분류명">
-                    <option value=23 selected>전체</option>
-                    <option value=19>청소</option>
-                    <option value=20>사무</option>
-                    <option value=21>유기농</option>
-                    <option value=22>가구</option>
-                    <option value=18>업사이클링</option>
-                  </optgroup>
-                </select>
-
-              </div>
-              &nbsp;&nbsp;&nbsp;
-              <!--   <div class="btn-group" role="group"
-                  aria-label="Third group" style="width: 15%">
-                  <select class="selectpicker subselect custom-select"
-                    data-style="btn btn-sm w-50" id="subSelect">
-                    <optgroup label="소분류명">
-                      <option selected value=23 >전체</option>
-                    </optgroup>
-                  </select>
-                </div> -->
-              <div id=forright class="active"
-                style="text-align: right; float: right; width: 66%;">
-                <a href="/greenright/product/form" id="formlink">상품
-                  등록</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
-                  href="/greenright/product/upcyclingform" id="formlink">업사이클링상품등록</a>
-              </div>
-            </div>
-          </div>
+      <div class="row">
+        <div class="my-col-20 sidenav mypage-sidenav hidden-xs px-1">
+          <h2 class="text-center mt-2 font-weight-bold">MyPage</h2>
+          <hr>
+          <h4 class="font-weight-bold ml-2">회원정보</h4>
+          <ul id="infoMenu"
+            class="nav flex-column nav-pills nav-stacked text-center mb-4">
+            <li class="my-menu"><a href="userinfo">기본정보</a></li>
+          </ul>
+          <h4 class="font-weight-bold ml-2">구매</h4>
+          <ul
+            class="nav flex-column nav-pills nav-stacked text-center mb-4">
+            <li class="my-menu"><a href="order">구매내역</a></li>
+            <li class="my-menu active"><a href="#section3">관심상품</a></li>
+            <li class="my-menu"><a href="#section3">업적</a></li>
+          </ul>
+          <h4 class="font-weight-bold ml-2">판매</h4>
+          <ul id="sellerMenu"
+            class="nav flex-column nav-pills nav-stacked text-center">
+          </ul>
+          <br>
         </div>
+        <br>
 
-        <div id="memberInfoForm" class="row">
-          <div class="col">
+        <div class="my-col-80">
+          <h2 id="mypage-title-h2">관심상품</h2>
+          <hr>
+
+
+      <div class="btn-group" role="group" style="width: 15%">
+                      <select class=" bigselect custom-select"
+                        data-style="btn btn-sm w-180" id="Aselect">
+                        <optgroup label="대분류명">
+                          <option value=23 selected>전체</option>
+                          <option value=19>청소</option>
+                          <option value=20>사무</option>
+                          <option value=21>유기농</option>
+                          <option value=22>가구</option>
+                          <option value=18>업사이클링</option>
+                        </optgroup>
+                      </select>
+      
+                    </div>
+          <div class="row">
+            <div class="col">
+
+
             <table
-              class="col-sm-12 table-hover my-table my-table-row text-center"
+              class="col-sm-12 table-hover text-center my-table my-product-table my-table-col"
               cellpadding="20">
               <thead>
                 <tr>
@@ -311,7 +308,7 @@ button#deletewishlist {
                   <th class="text-center my-col-2">판매자</th>
                 </tr>
               </thead>
-              <tbody id="addto">
+              <tbody id="addto" class="my-basket-list">
                 <c:forEach items="${products}" var="product"
                   varStatus="status">
 
@@ -326,9 +323,9 @@ button#deletewishlist {
                     <td class="my-product text-left py-2">
                       <div class="row">
                         <div class="col-sm-3 px-0">
-                          <img id="product-photo"
+                          <a href="/greenright/product/buydetail?no=${product.no}"><img id="product-photo"
                             src="/upload/product/${product.photos[0].photoPath}"
-                            style="weight: 80px; height: 100px; object-fit: cover;">
+                            style="weight: 80px; height: 100px; object-fit: cover;"></a>
                         </div>
                       </div>
                     </td>
@@ -348,12 +345,38 @@ button#deletewishlist {
             </table>
             <button id="deletewishlist" class="btn btn-primary"
               style="border-radius: 2px 2px 2px 2px;">삭제</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+  <div class="container py-4">
+    <div class="row d-flex justify-content-center py-5">
+      <div class="col-md-6">
+        <h2 style="font-size: 22px;" class="mb-0">Subcribe to our
+          Author</h2>
+        <span>Get e-mail updates about our latest products and
+          special upcycling</span>
+      </div>
+      <div class="col-md-6 d-flex align-items-center">
+        <form action="#" class="subscribe-form">
+          <div class="form-group d-flex">
+            <input type="text" class="form-control"
+              placeholder="Enter email address"> <input
+              type="submit" value="Subscribe" class="submit px-3">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/js/popper.min.js"></script>
@@ -380,8 +403,7 @@ button#deletewishlist {
         $.post("/greenright/json/Product/deleteProduct",{
           "productNo":($("#checkbox"+i+"")).val()
         }, function(data){
-          console.log(data)
-         swal("상품이 삭제되었습니다!")
+          swal("상품이 삭제되었습니다!")
           thisNode.remove();
         }); 
       }
@@ -398,7 +420,6 @@ $(document).on("change","#Aselect",function() {
     dataType : "json",
     data : allData,
     success : function(data) {
-      console.log(data);
        var list = data.result;
        var tableTag ="";
        for(var i = 0 ; i < list.length; i++) {
@@ -427,7 +448,6 @@ $(document).on("change","#Aselect",function() {
         dataType : "json",
         data : allData,
         success : function(data) {
-          console.log(data);
            var list = data.result;
            var tableTag ="";
            for(var i = 0 ; i < list.length; i++) {

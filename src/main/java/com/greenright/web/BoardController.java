@@ -35,14 +35,25 @@ public class BoardController {
   private RecommendService recommendService;
   
   @GetMapping("form")
-  public void form() {
+  public String form(HttpSession session) {
+    Member loginMember = (Member)session.getAttribute("loginUser");
+    if(loginMember ==null) {
+      return "redirect:/greenright/main";
+    }
+    return "product/form";
   }
   @GetMapping("detailedit")
-  public void detailedit(Model model, int no,HttpSession session)throws Exception {
+  public String detailedit(Model model, int no,HttpSession session)throws Exception {
+    Member loginMember = (Member)session.getAttribute("loginUser");
+    if(loginMember ==null) {
+      return "redirect:/greenright/main";
+    }
     Board board = boardService.get(no);
     model.addAttribute("board", board);
-    
+    return null;
   }
+    
+    
   @PostMapping("add")
   public String add(HttpServletRequest request, HttpSession session, Board board,
       MultipartFile[] filePath) throws Exception {
@@ -226,7 +237,6 @@ public class BoardController {
     
     comment.setMemberNo(((Member)session.getAttribute("loginUser")).getNo());
     comment.setId(((Member)session.getAttribute("loginUser")).getId());
-    System.out.println(comment);
     commentService.insert(comment);
     return comment;
     

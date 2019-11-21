@@ -32,7 +32,7 @@
 		</association>
 
 		<association property="group" javaType="Group">
-			<id column="group_id" property="no"></id>
+			<id column="group_id" property="no"/>
 			<result column="category_id" property="categoryNo" />
 		  <result column="group_name" property="groupName"/>
 		  <association property="category" javaType="Category">
@@ -282,7 +282,7 @@ select
   SELECT 
   product_id,product_name,recommend_count FROM products
   WHERE group_id = 18 and member_id = #{value} 
-  ORDER BY recommend_count AND registered_date
+  ORDER BY recommend_count desc 
   LIMIT 1 
   </select>
   <update id ="increseRecommendCount" parameterType="int">

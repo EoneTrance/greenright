@@ -183,7 +183,6 @@ $('.recommend').on('click',() =>{
          "recommendBoardNo":recommendBoardNo,
          "recommendMemberNo":recommendMemberNo
        }, function(data){
-         console.log(data.result)
          countRecommend(recommendBoardNo)
        }, "json");
      }else{
@@ -192,7 +191,6 @@ $('.recommend').on('click',() =>{
          "recommendMemberNo":recommendMemberNo
   
        }, function(data){
-         //console.log(data.result)
          countRecommend(recommendBoardNo)
        }, "json");
      }
@@ -203,7 +201,6 @@ function countRecommend(boardNo) {
     "recommendBoardNo":boardNo,
   }, function(data){
     $('#rec').html("추천수:"+data);
-    console.log(data)
   });
 }
 </script>
@@ -306,7 +303,6 @@ $(document).ready(function() {
     var str = commentDiv.querySelector('textarea').value;
     var commentNo = commentDiv.getAttribute('data-no');
     var boardNo = ${board.no};
-    console.log(commentDiv);
     
     
     $.post("detail/update", {
@@ -346,7 +342,6 @@ $('#mymy-comment').on('click', '.my-update-btn', () => {
   commentC.style['display'] = 'inline-block';
   commentD.style['display'] = 'none';
   commentU.style['display'] = 'none';
-    console.log(commentDiv.getAttribute('data-no'));
   
 });
 </script>

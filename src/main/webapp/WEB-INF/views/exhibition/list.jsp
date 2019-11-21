@@ -149,7 +149,6 @@
                     $.post("/greenright/json/UpcyclingRecommend/getRecommendNum",{
                       "upcyclingRecommendProductNo":productNo
                     }, function(data){
-                      console.log(data.result)
                         
                       $("#"+productNo+"").text("총추천수는 : "+data.result+"")
                     
@@ -165,7 +164,6 @@
                    $.post("/greenright/json/UpcyclingRecommend/getRecommendNum",{
                      "upcyclingRecommendProductNo":productNo
                    }, function(data){
-                     console.log(data.result)
                      $("#"+productNo+"").text("총추천수는 : "+data.result+"")
                    }) 
                     

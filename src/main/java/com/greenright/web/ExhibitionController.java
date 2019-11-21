@@ -35,7 +35,6 @@ public class ExhibitionController {
       }
       model.addAttribute("products",pro);
 
-    //model.addAttribute("products", products);
   }
  @GetMapping("/detail")
  public void detail (Model model,int memberNo) throws Exception{

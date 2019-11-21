@@ -3,8 +3,30 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <style>
     .pages .content.show {
-    height: 1300px!important;
+    height: 1000px!important;
     }
+     .overlay {
+    width: 65% !important;
+    height: 50% !important;
+    }
+    h2{
+    font-family: serif;
+    }
+    #htu{
+    color:white;
+    }
+    h2#smaller {
+    padding-top: 119px;
+    padding-bottom: 15px;
+    }
+    /*
+    .img-wrap img {
+    opacity: unset !important;
+    }*/
+    #beforedes{
+    margin-bottom:100px;
+    } 
+
     </style>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
@@ -26,7 +48,7 @@
       
       <div id="overlay" class="overlay">
         <div class="info">
-          <h2>Demo interactions</h2>
+          <h2 id="htu">How to use</h2>
           <span class="info-drag">Drag Sliders</span>
           <span class="info-keys">Use Arrows</span>
           <span class="info-switch">Switch view</span>
@@ -41,7 +63,8 @@
             <c:forEach items="${productList}" var="product" varStatus="status">
               <div class="slide" data-content="content-${status.index}">
               <div class="img-wrap"><img src="/upload/product/${product.photos[0].photoPath}" alt="img${status.index}"/></div>
-              <h2>${product.productName} <span>${product.seller.member.name}</span></h2>
+               <h2>${product.productName} <span>${product.seller.member.name}</span></h2> 
+              <%--<h2>productName <span style="margin-top:30px;">choiTaehoon</span></h2>--%> 
               <button class="content-switch">Read more</button>
             </div>
             </c:forEach>
@@ -52,10 +75,16 @@
         <section class="pages">
           <c:forEach items="${productList}" var="PRO" varStatus="stat">
           <div class="content" data-content="content-${stat.index}">
-            <h2>${PRO.productName }<span>${PRO.seller.member.name }</span></h2>
-            <P>${PRO.description}</P>
+             <h2 id="smaller"><span><a href="/greenright/product/buydetail?no=${PRO.no}"><img src='/upload/product/${PRO.photos[0].photoPath}'
+              id="/upload/product/${photo.photoPath}"
+              class="changesaver"
+              style="width: 500px; height: 375px; object-fit: cover; "></a></span></h2> 
+            <!-- <h2 id="beforedes"><span></span></h2> -->
+            <P id="des"><strong>상품설명:</strong>${PRO.description}</P>
           <c:forEach items="${PRO.photos}" var="file" >
-            <img alt="" src="/upload/product/${file.photoPath}" style="width:100px;height:100px;object-fit:cover;margin-left:3px;margin-right:3px;">
+            <img alt="" src="/upload/product/${file.photoPath}" 
+            id ="/upload/product/${file.photoPath}" class="changer" 
+            style="width:100px;height:100px;object-fit:cover;margin-left:3px;margin-right:3px; cursor: pointer;">
           </c:forEach>
           </div>
           </c:forEach>
@@ -67,6 +96,30 @@
     <script src="/exhibition/js/dragdealer.js"></script>
     <script src="/exhibition/js/classie.js"></script>
     <script src="/exhibition/js/dragslideshow.js"></script>
+    
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/jquery.easing.1.3.js"></script>
+    <script src="/js/jquery.waypoints.min.js"></script>
+    <script src="/js/jquery.stellar.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/jquery.magnific-popup.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/jquery.animateNumber.min.js"></script>
+    <script src="/js/bootstrap-datepicker.js"></script>
+    <script src="/js/scrollax.min.js"></script>
+    <script src="/js/main.js"></script>
+    
+    
+    
+    <script>
+    $(document).on("mouseenter", ".changer", function() {
+      var a = $(this).attr("id");
+      $(".changesaver").attr("src", a);
+
+    })
+    </script>
     <script>
       (function() {
 

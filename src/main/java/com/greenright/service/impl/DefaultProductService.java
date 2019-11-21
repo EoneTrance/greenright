@@ -37,11 +37,23 @@ public class DefaultProductService implements ProductService{
         option.setProductNo(product.getNo());
         optionDao.insert(option);
         for(ProductOptionItem optionItem : option.getOptionItem()) {
-          System.out.println(option.getNo());
           optionItem.setOptionsNo(option.getNo());
           optionItemDao.insert(optionItem);
         }
       }
+    }else {
+      ProductOption productOption = new ProductOption();
+      productOption.setOptionName("기본옵션");
+      productOption.setProductNo(product.getNo());
+      optionDao.insert(productOption);
+      
+      ProductOptionItem productOptionItem = new ProductOptionItem();
+      productOptionItem.setOptionsNo(productOption.getNo());
+      productOptionItem.setOptionsquantity(product.getQuantity());
+      productOptionItem.setOptionsPrice(0);
+      productOptionItem.setOptionItemMatter("기본옵션입니다");
+      optionItemDao.insert(productOptionItem);
+      
     }
   }
 
