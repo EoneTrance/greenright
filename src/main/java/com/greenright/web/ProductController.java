@@ -89,7 +89,6 @@ public class ProductController {
     Product productPhoto = productService.getforPhoto(no);
     List<Product>productLiST = productService.gettopbyCategoryNum(no);
     
-    
     model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);
     model.addAttribute("productLiST",productLiST);

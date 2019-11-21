@@ -10,13 +10,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
+import com.greenright.domain.Delivery;
 import com.greenright.domain.Member;
+import com.greenright.domain.Order;
 import com.greenright.domain.Product;
 import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
 import com.greenright.service.BasketService;
+import com.greenright.service.DeliveryService;
 import com.greenright.service.MemberService;
+import com.greenright.service.OrderService;
 import com.greenright.service.ProductOptionItemService;
 import com.greenright.service.ProductOptionService;
 import com.greenright.service.ProductService;
@@ -24,6 +29,12 @@ import com.greenright.service.ProductService;
 @Controller
 @RequestMapping("order")
 public class OrderController {
+  
+  @Resource
+  private OrderService orderService;
+  
+  @Resource
+  private DeliveryService deliveryService;
   
   @Resource
   private BasketService basketService;
@@ -53,7 +64,8 @@ public class OrderController {
     List<ProductOptionItem> optionItems = new ArrayList<>();
     List<ProductOption> options = new ArrayList<>();
     List<Product> products = new ArrayList<>();
-    List<Member> members = new ArrayList<>();
+    List<Member> sellers = new ArrayList<>();
+    
     for (Map<String,String> order : orderListmap) {
       ProductOptionItem optionItem = productOptionItemService.get(Integer.parseInt(order.get("optionItemNo")));
       optionItem.setOptionsQuantity(Integer.parseInt(order.get("quantity")));
@@ -66,7 +78,7 @@ public class OrderController {
       products.add(productService.get(option.getProductNo()));
     }
     for (Product product : products) {
-      members.add(memberService.get(product.getMemberNo()));
+      sellers.add(memberService.get(product.getMemberNo()));
     }
     
     List<Object> orderList = new ArrayList<>();
@@ -80,11 +92,26 @@ public class OrderController {
       order.put("productNo", products.get(i).getNo());
       order.put("productName", products.get(i).getProductName());
       order.put("productPrice", products.get(i).getPrice());
-      order.put("sellerName", members.get(i).getName());
+      order.put("sellerName", sellers.get(i).getName());
       orderList.add(order);
     }
     
+    model.addAttribute("orderList", gson.toJson(orderList));
     model.addAttribute("title", " - 주문하기");
+  }
+  
+  @ResponseBody
+  @PostMapping("add")
+  public void form (HttpSession session, Order order, Delivery delivery) throws Exception {
+    System.out.println(order);
+    Member member = (Member)session.getAttribute("loginUser");
+    order.setMemberNo(member.getNo());
+    order.setPaymentFlag(1);
+    if (order.getPaymentWay().equals("vbank")) {
+      order.setPaymentFlag(0);
+    }
+    orderService.insert(order);
+    deliveryService.insert(delivery);
   }
   
 }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.greenright.dao.DeliveryDao">
+
+  <resultMap type="Delivery" id="DeliveryMap">
+    <id column="delivery_id" property="no"/>
+    <result column="order_id" property="orderNo"/>
+    <result column="invoice_num" property="invoiceNum"/>
+    <result column="delivery_date" property="deliveryDate"/>
+    <result column="delivery_flag" property="deliveryFlag"/>
+    <result column="courier_name" property="courierName"/>
+    <result column="reciever_name" property="recieverName"/>
+    <result column="delivery_address" property="deliveryAddress"/>
+    <result column="reciever_cell_phone" property="recieverCellPhone"/>
+    <result column="reciever_email" property="recieverEmail"/>
+  </resultMap>
+  
+  <sql id="selectDelivery">
+    select
+      delivery_id,
+      order_id,
+      invoice_num,
+      delivery_date,
+      delivery_flag,
+      courier_name,
+      reciever_name,
+      delivery_address,
+      reciever_cell_phone,
+      reciever_email
+  </sql>
+  
+  <sql id="whereDelivery">
+    where delivery_id=#{no}
+  </sql> 
+ 
+  <insert id="insert" parameterType="Delivery">
+    insert into
+    orders(
+      order_id,
+      invoice_num,
+      delivery_date,
+      delivery_flag,
+      courier_name,
+      reciever_name,
+      delivery_address,
+      reciever_cell_phone,
+      reciever_email)
+    values(
+      #{orderNo},
+      #{invoiceNum},
+      now(),
+      #{deliveryFlag},
+      #{courierName},
+      #{recieverName},
+      #{deliveryAddress},
+      #{recieverCellPhone},
+      #{recieverEmail})
+  </insert>
+  
+</mapper>

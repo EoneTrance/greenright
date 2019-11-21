@@ -5,18 +5,27 @@ import java.sql.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Order implements Serializable {
+  
   private static final long serialVersionUID = 1L;
+  
+  private int no;
   
   private int memberNo;
   
-  private int optionItemNo;
-  
   @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
-  private Date registeredDate;
+  private Date paymentDate;
   
-  private String quantity;
+  private int paymentFlag;
+  
+  private String paymentWay;
 
-  private ProductOptionItem productOptionItem;
+  public int getNo() {
+    return no;
+  }
+
+  public void setNo(int no) {
+    this.no = no;
+  }
 
   public int getMemberNo() {
     return memberNo;
@@ -26,43 +35,34 @@ public class Order implements Serializable {
     this.memberNo = memberNo;
   }
 
-  public int getOptionItemNo() {
-    return optionItemNo;
+  public Date getPaymentDate() {
+    return paymentDate;
   }
 
-  public void setOptionItemNo(int optionItemNo) {
-    this.optionItemNo = optionItemNo;
+  public void setPaymentDate(Date paymentDate) {
+    this.paymentDate = paymentDate;
   }
 
-  public Date getRegisteredDate() {
-    return registeredDate;
+  public int isPaymentFlag() {
+    return paymentFlag;
   }
 
-  public void setRegisteredDate(Date registeredDate) {
-    this.registeredDate = registeredDate;
+  public void setPaymentFlag(int paymentFlag) {
+    this.paymentFlag = paymentFlag;
   }
 
-  public String getQuantity() {
-    return quantity;
+  public String getPaymentWay() {
+    return paymentWay;
   }
 
-  public void setQuantity(String quantity) {
-    this.quantity = quantity;
-  }
-
-  public ProductOptionItem getProductOptionItem() {
-    return productOptionItem;
-  }
-
-  public void setProductOptionItem(ProductOptionItem productOptionItem) {
-    this.productOptionItem = productOptionItem;
+  public void setPaymentWay(String paymentWay) {
+    this.paymentWay = paymentWay;
   }
 
   @Override
   public String toString() {
-    return "Basket [memberNo=" + memberNo + ", optionItemNo=" + optionItemNo + ", registeredDate="
-        + registeredDate + ", quantity=" + quantity + ", productOptionItem=" + productOptionItem
-        + "]";
+    return "Order [no=" + no + ", memberNo=" + memberNo + ", paymentDate=" + paymentDate
+        + ", paymentFlag=" + paymentFlag + ", paymentWay=" + paymentWay + "]";
   }
   
 }

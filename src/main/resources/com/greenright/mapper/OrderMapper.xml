@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.greenright.dao.OrderDao">
+
+  <resultMap type="Order" id="OrderMap">
+    <id column="order_id" property="no"/>
+    <result column="member_id" property="memberNo"/>
+    <result column="payment_date" property="paymentDate"/>
+    <result column="payment_flag" property="paymentFlag"/>
+    <result column="payment_way" property="paymentWay"/>
+  </resultMap>
+  
+  <sql id="selectOrder">
+    select
+      order_id,
+      member_id,
+      payment_date,
+      payment_flag,
+      payment_way
+  </sql>
+  
+  <sql id="whereOrder">
+    where order_id=#{no}
+  </sql> 
+ 
+  <insert id="insert" parameterType="Order">
+    insert into
+    orders(
+      member_id,
+      payment_date,
+      payment_flag,
+      payment_way)
+    values(
+      #{memberNo},
+      now(),
+      #{paymentFlag},
+      #{paymentWay})
+  </insert>
+  
+</mapper>

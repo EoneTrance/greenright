@@ -41,15 +41,15 @@ public class BasketController {
   private MemberService memberService;
   
   @GetMapping("add")
-  public JsonResult add(HttpSession session, int no) throws Exception {
+  public JsonResult add(HttpSession session, int no, int quantity) throws Exception {
     Member loginUser = (Member)session.getAttribute("loginUser");
     ProductOptionItem optionItem = productOptionItemService.get(no);
-    optionItem.setOptionsQuantity(1);
+    optionItem.setOptionsQuantity(quantity);
     Basket basket = new Basket();
     
     basket.setMemberNo(loginUser.getNo());
     basket.setOptionItemNo(optionItem.getNo());
-    basket.setQuantity("1");
+    basket.setQuantity(optionItem.getOptionsQuantity());
     basket.setProductOptionItem(optionItem);
     try {
       if (basketService.insert(basket) == 1) {

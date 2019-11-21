@@ -47,12 +47,6 @@
     border-bottom:solid RGBA(130,174,70,0.5) 1px;
   }
   
-  .notChange, .notChange:focus {
-    border: none !important;
-    background-color: rgba(0,0,0,0) !important;
-    outline: none !important;
-  }
-  
   #memberInfoForm input, #memberInfoForm button, #memberInfoForm select {
     width:49%;
     padding-left: 5px;

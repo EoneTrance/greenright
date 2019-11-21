@@ -82,50 +82,10 @@ table.my-table-col td.my-seller {
   padding:0rem 0.25rem;
 }
 
-.round {
-  position: relative;
+.payment-sidenav {
+  height: 100%;
 }
 
-.round label {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  cursor: pointer;
-  position: absolute;
-  height: 28px;
-  width: 28px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.round label:after {
-  border: 2px solid #fff;
-  border-top: none;
-  border-right: none;
-  content: "";
-  position: absolute;
-  height: 6px;
-  width: 12px;
-  top: 8px;
-  left: 7px;
-  transform: rotate(-45deg);
-  opacity: 0;
-}
-
-.round input[type="checkbox"] {
-  visibility: hidden;
-}
-
-.round input[type="checkbox"]:checked + label {
-  background-color: #82AE46;
-  border-color: #82AE46;
-}
-
-.round input[type="checkbox"]:checked + label:after {
-  opacity: 1;
-}
-  
 </style>
 
 <div id="mypage-title-h1">
@@ -159,10 +119,10 @@ table.my-table-col td.my-seller {
 </nav> -->
 
 <div class="container-fluid">
+<h2 id="mypage-title-h2">장바구니</h2>
+<hr>
   <div class="row">
     <div class="col-sm-9">
-      <h2 id="mypage-title-h2">장바구니</h2>
-      <hr>
       
       <!-- <div class="well">
         h4>주문관리</h4>
@@ -388,12 +348,6 @@ $(function(){
       if ($(check).prop("checked") == true) {
         var optionItemNumber = $(check).parents(".my-basket-tr").children(".my-optionItemNo-td").html();
         var basketQuantity = $(check).parents(".my-basket-tr").children(".my-quantity-td").html();
-        /* var orderMap = new Map();
-        orderMap.set("optionItemNo",
-            $(check).parents(".my-basket-tr").children(".my-optionItemNo-td").html());
-        orderMap.set("quantity",
-            $(check).parents(".my-basket-tr").children(".my-quantity-td").html());
-        orderList[i] = orderMap; */
         var jsonData = 
         {optionItemNo:optionItemNumber,
         quantity:basketQuantity};
@@ -409,41 +363,15 @@ $(function(){
         i++;
       }
     }
- /* var checkedList = new Array();
-     for (var checked of checkedList) {
-        parseInt(
-            $(checked)
-            .parents(".my-basket-tr")
-            .children(".my-price-td")
-            .children(".my-price-span").html());
-    } */
+    
     $(".my-priceSum").html(sumPrice);
     $(".my-deliveryChargeSum").html(2500 * i);
     $(".my-sum").html(sumPrice + (2500 * i));
     e.stopImmediatePropagation();
   });
   
-  /* function doPage(thisForm, url) {
-    var form = thisForm;
-    console.log(form);
-    var optionItemNoList = new Array();
-    var quantityList = new Array();
-
-    for (var i = 0; i < orderList.length; i++){
-    console.log(form.optionItemNo);
-    console.log(form.quantity);
-      form.elements.value = orderList[i];
-      form.quantity.value = orderList[i];
-    }
-    form.method = "POST";
-    form.action = url;
-    form.submit();
-  }; */
-  
   $("#my-buyBtn").click(function(e) {
     var form = $("#my-basketForm");
-    /* var optionItemNoList = new Array();
-    var quantityList = new Array(); */
     
     var jsonArray = "[";
     for (var i = 0; i < orderList.length; i++){
@@ -452,14 +380,10 @@ $(function(){
         jsonArray += ",";
       }
       
-      /* form.children("#my-order-optionItemNo").val(orderList[i]);
-      form.children("#my-order-quantity").val(orderList[i]); */
     }
     jsonArray += "]";
     form.children("#my-orderListJson").val(jsonArray);
     
-    /* form.method = "POST";
-    form.action = url; */
     form.submit();
   });
   

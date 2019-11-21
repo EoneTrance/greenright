@@ -32,10 +32,20 @@
   background-color: #DDDDDD !important;
 }
 
+.notChange {
+  border: solid 2px rgba(0,0,0,0) !important;
+  background-color: rgba(0,0,0,0) !important;
+  outline: none !important;
+}
+
 button, a, input {
   outline:none !important;
   box-shadow:none !important;
   text-decoration:none !important;
+}
+
+p {
+  color:black;
 }
 
 /* input[type="number"]::-webkit-outer-spin-button,
@@ -55,6 +65,8 @@ img#product-photo {
   text-align:center;
   font-weight:bold;
   background-color:RGBA(230,230,230,1);
+  border-top:solid 1px RGBA(0,0,0,0.3);
+  border-bottom:solid 1px RGBA(0,0,0,0.3);
 }
 
 #mypage-title-h1 h1 {
@@ -65,13 +77,6 @@ img#product-photo {
 #mypage-title-h2 {
   font-weight:bold;
   color:#82AE46;
-}
-
-#order-title-h2 {
-  background-color: RGBA(130,174,70,0.2);
-  font-weight:bold;
-  color:#82AE46;
-  padding-left: 10px;
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -86,7 +91,6 @@ img#product-photo {
 }
 
 .payment-sidenav {
-  height: 100%;
   border: solid RGBA(130,174,70,0) 15px;
   background-color: RGBA(130,174,70,0.2);
 }
@@ -101,6 +105,50 @@ img#product-photo {
 
 .my-bg-color-gray {
   background-color:RGBA(230,230,230,1);
+}
+
+.round {
+  position: relative;
+}
+
+.round label {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  height: 28px;
+  width: 28px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.round label:after {
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  content: "";
+  position: absolute;
+  height: 6px;
+  width: 12px;
+  top: 8px;
+  left: 7px;
+  transform: rotate(-45deg);
+  opacity: 0;
+}
+
+.round input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.round input[type="checkbox"]:checked + label {
+  background-color: #82AE46;
+  border-color: #82AE46;
+}
+
+.round input[type="checkbox"]:checked + label:after {
+  opacity: 1;
 }
 
 /* 버튼 오버라이드 */
@@ -246,7 +294,7 @@ table.my-table-col th {
 }
 
 table.my-table-col td {
-  border-bottom:solid RGBA(130,174,70,0.5) 2px;
+  border-bottom:solid RGBA(130,174,70,0.5) 1px;
   border-right:solid RGBA(130,174,70,0.2) 1px;
 }
 

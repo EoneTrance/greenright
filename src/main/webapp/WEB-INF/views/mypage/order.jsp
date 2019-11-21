@@ -48,6 +48,22 @@
     text-align:center;
   }
   
+  .bootstrap-select .dropdown-menu li a.opt {
+    position: relative;
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+  
+  .bootstrap-select .dropdown-menu.show {
+    padding:0px;
+    margin:0px;
+  }
+  
+  .bootstrap-select .dropdown-header {
+    padding:0px;
+    margin:0px;
+  }
+  
   table.my-product-table td {
     color:black;
   }
@@ -81,6 +97,8 @@
     background-color: RGBA(0,0,0,0.2);
     padding:0rem 0.25rem;
   }
+  
+  
   
 </style>
 
@@ -209,10 +227,10 @@
                   </span>
                 </span>
               </div>
-              <div class="btn-group" role="group" aria-label="Third group" style="width:15%">
-                <select class="selectpicker">
-                  <optgroup label="주문상태">
-                    <option disable hidden>주문상태</option>
+              <div class="btn-group" role="group" aria-label="Third group"
+                   style="width:12%;margin-right:0px;">
+                <select class="selectpicker" data-style="btn btn-sm btn-primary h-100">
+                  <optgroup>
                     <option selected>전체</option>
                     <option>입금확인중</option>
                     <option>배송준비중</option>
@@ -221,10 +239,11 @@
                   </optgroup>
                 </select>
               </div>
-              <span class="btn-group" role="group">
-                <button type="button" class="btn searchbtn btn-sm btn-primary ml-4"
-                style="padding-left:1.7rem;padding-right:1.7rem;">조회</button>
-              </span>
+              <div class="btn-group" role="group" aria-label="Fourth group" 
+                   style="width:12%;margin-left:20px;margin-right:0px;">
+                <button type="button" class="btn searchbtn btn-sm btn-primary">조회</button>
+              </div>
+                
             </div>
         </div>
       </div>

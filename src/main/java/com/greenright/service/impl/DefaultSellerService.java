@@ -10,8 +10,6 @@ import com.greenright.service.SellerService;
 @Service
 public class DefaultSellerService implements SellerService {
 
-  public static final String COMPLETE = "COMPLETE";
-  
   @Resource
   private SellerDao sellerDao;
 

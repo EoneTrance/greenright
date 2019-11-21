@@ -14,7 +14,7 @@ public class Basket implements Serializable {
   @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
   private Date registeredDate;
   
-  private String quantity;
+  private int quantity;
 
   private ProductOptionItem productOptionItem;
 
@@ -42,11 +42,11 @@ public class Basket implements Serializable {
     this.registeredDate = registeredDate;
   }
 
-  public String getQuantity() {
+  public int getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(String quantity) {
+  public void setQuantity(int quantity) {
     this.quantity = quantity;
   }
 

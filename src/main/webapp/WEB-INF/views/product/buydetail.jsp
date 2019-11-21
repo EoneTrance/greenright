@@ -371,7 +371,7 @@ h5.starratin {
                   <span class="ion-ios-arrow-down"></span>
                 </div>
                 <c:forEach items="${product.options}" var="option">
-                  <select name="" id="" class="form-control">
+                  <select name="" id="my-select-option" class="form-control">
                     <c:forEach items="${option.optionItem}" var="item">
                       <option class="my-selected-option" value="${item.no}">옵션명:&nbsp;${item.optionItemMatter}&nbsp;|&nbsp;가격:&nbsp;+${item.optionsPrice}원</option>
                     </c:forEach>
@@ -401,7 +401,7 @@ h5.starratin {
           <div class="col-md-12"></div>
         </div>
         <p>
-          <a href="#" class="add-to-cart btn btn-black py-3 px-5">Add to
+          <a href="#" id="add-to-cart" class="btn btn-black py-3 px-5">Add to
             Cart</a>
         </p>
       </div>
@@ -657,11 +657,11 @@ h5.starratin {
 <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
 
 <script>
-$(document).on("click", ".add-to-cart", function(e){
+$(document).on("click", "#add-to-cart", function(e){
   $.ajax({
     type: "GET",
     url: "../json/basket/add",
-    data: "no=" + $(".my-selected-option").val(),
+    data: "no=" + $("#my-select-option").select().val() + "&quantity=" + $("#quantity").val(),
     dataType: "json",
     async: false,
     success: function(basketAddResult) {
