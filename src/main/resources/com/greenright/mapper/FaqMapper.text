@@ -96,6 +96,7 @@
         <if test="questionType != null"> question_type=#{questionType},</if>
         <if test="title != null"> title=#{title},</if>
         <if test="contents !=null"> contents=#{contents},</if>
+        member_id=#{memberNo}
       </set>
       
       <include refid="where1"/>  

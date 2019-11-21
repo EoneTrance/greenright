@@ -302,9 +302,10 @@
       
       <div id="btn-wrap" style="text-align: center;">
         <!-- <input id="faq-insert-btn" class="btn btn-primary submit px-3 faq faqbtn" type="button" value="새글"> -->      
-        
-        <a href="form" class="btn btn-primary">새글</a>
-        <a href="#" class="btn btn-primary">1대1 문의</a>
+        <c:if test="${loginUser.memberClass == 0}">
+          <a href="form" class="btn btn-primary">새글</a>
+        </c:if>
+        <a href="../inquire/list" class="btn btn-primary">1대1 문의</a>
       </div>
       
     

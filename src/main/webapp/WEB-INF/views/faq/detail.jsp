@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <meta charset="UTF-8">
 <title>FAQ DETAIL</title>
 <link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
@@ -108,9 +109,11 @@
       </div>
       
       <div id="faq-detail-btn-wrap" class="form-group">
-        <button id="clearbtn" name="clearbtn" class="btn py-3 px-4 btn-primary" hidden="" onclick="return false;" >해제</button>
-        <button id="uptbtn" name="uptbtn" class="btn py-3 px-4 btn-primary" hidden="">수정</button>
-        <a href="delete?no=${faq.faqID}" class="btn py-3 px-4 btn-primary" hidden="">삭제</a>
+        <c:if test="${loginUser.memberClass == 0}">
+          <button id="clearbtn" name="clearbtn" class="btn py-3 px-4 btn-primary"  onclick="return false;" >해제</button>
+          <button id="uptbtn" name="uptbtn" class="btn py-3 px-4 btn-primary">수정</button>
+          <a href="delete?no=${faq.faqID}" class="btn py-3 px-4 btn-primary" >삭제</a>
+        </c:if>
         <button id="backbtn" name="backbtn" class="btn py-3 px-4 btn-primary" onclick="return false;">리스트로 돌아가기</button>
       </div>
   
