@@ -60,7 +60,11 @@
 			<result column="photo_path" property="photoPath" />
 			<result column="main_photo_flag" property="mainPhoto" />
 		</collection>
-
+    <collection property="detailPhotos" ofType="ProductDetailPhoto">
+    <id column ="product_detail_photos_id" property="no"/>
+    <result column="product_id" property="productNo"/>
+    <result column="product_detail_photopath" property="photoPath"/>
+    </collection>
 	</resultMap>
 
 	<insert id="insert" parameterType="Product"
@@ -96,10 +100,13 @@ select DISTINCT
     i.options_quantity,
     i.option_item_id,
     f.product_id,
-    f.photo_path
+    f.photo_path,
+    d.product_id,
+    d.product_detail_photopath
     from products p
     left outer join product_photos f on (p.product_id = f.product_id AND
     f.main_photo_flag = 0)
+    left outer join product_detail_photos d on p.product_id = d.product_id
     left outer join sellers s on s.member_id = p.member_id
     left outer join members m  on m.member_id = s.member_id
     left outer join options o on o.product_id = p.product_id
@@ -268,7 +275,7 @@ select
     left outer join categorys c on c.category_id = g.category_id
     where p.group_id=#{no}
     order by p.product_id DESC
-    limit 4;
+    limit 5;
   </select>
   <select id="findAllUpcycling" resultMap="ProductWithFilesMap" >
    select distinct
@@ -382,6 +389,7 @@ select DISTINCT
     p.description,
     p.registered_date,
     p.quantity,
+    p.recommend_count,
     m.name,
     g.group_name, 
     g.category_id,

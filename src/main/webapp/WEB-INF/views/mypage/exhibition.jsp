@@ -205,7 +205,7 @@
                 <td class="my-product text-left py-2">
                   <div class="row">
                     <div class="col-sm-3 px-0">
-                      <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
+                      <img id="product-photo" src='/upload/product/${productList[0].photos[0].photoPath}' data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
                     </div>
                     <div class="col-sm-9 px-0" style="font-size:12px">
                       상품명: <span id="product-name">${productList[0].productName}</span><br>
@@ -214,7 +214,7 @@
                     </div>
                   </div>
                 </td>
-                <td class="my-date">2</td>
+                <td class="my-date">${productList[0].recommendCount }</td>
               </tr>
             </tbody>
             </table>
@@ -253,7 +253,7 @@
               <td class="my-product text-left py-2">
                 <div class="row">
                   <div class="col-sm-3 px-0">
-                    <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
+                    <img id="product-photo" src="/upload/product/${product.photos[0].photoPath}" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
                   </div>
                   <div class="col-sm-9 px-0" style="font-size:12px">
                     상품명: <span id="product-name">${product.productName }</span><br>

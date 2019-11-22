@@ -400,6 +400,17 @@ form#product-form {
 form#product-form {
     border: solid;
 }
+.marginer{
+margin-left : 25px;
+}
+.fa-trash-alt:before {
+    FONT-SIZE: X-LARGE;
+    color: black;
+    TEXT-ALIGN: CENTER;
+    content: "\f2ed";
+    /* MARGIN-TOP: 59PX; */
+}
+
 
 </style>
 
@@ -491,6 +502,30 @@ form#product-form {
     <hr class="line-group">
     <table id="list">
     </table>
+    
+    
+    <div class="image-wrap">
+      <h5 class="sub-title">III. 상세이미지 등록  &nbsp; <i class="fas fa-images"></i> </h5>
+      <!-- <input type="button" class="btn btn-primary py-3 px-4 add-btn"
+            value="추가" onclick="attachFile.add()"> -->
+       <a id=" imgbar-add-btn2" href="javascript:void(0)"><i onclick="attachFile2.add()" class="fas fa-plus-square"></i></a>
+      <hr class="line-group">
+      <div id="attachFileDiv2" class="attachFileDiv marginer">
+        <h6 id="addbutton2">
+          <!-- <input type="button" class="btn btn-primary py-3 px-4"
+            value="추가" onclick="attachFile.add()"> -->
+        </h6>
+      </div>
+    </div>
+    
+    
+    <hr class="line-group">
+    <table id="list">
+    </table>
+    
+    
+    
+    
 
     <div class="in">
       <h5 class="sub-title">III. 옵션 관리 &nbsp; <i class="far fa-list-alt"></i></h5>
@@ -537,8 +572,138 @@ form#product-form {
   href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript">
+attachFile2 = {
+    idx : 0,
+    add : function() { // 파일필드 추가
+      var o = this;
+      var idx = o.idx;
+      var div2 = document.createElement('div');
+      div2.style.marginTop = '3px';
+      div2.id = 'file2' + o.idx;
+      var label2 = document.createElement('label');
+      label2.setAttribute("for", 'fileField2' + o.idx);
+      label2.innerHTML = "파일선택";
+      label2.id ="filelabel2";
+      
+      var dv2 = document.createElement('dv');
+      dv2.style.marginTop = '3px';
+      dv2.id = 'dv2' + o.idx;
+      var file2 = document.all ? document.createElement('<input name="files">')
+          : document.createElement('input');
+      file2.type = 'file';
+      file2.name = 'productDetailPhoto';
+      file2.size = '40';
+      file2.className = 'btn btn-primary py-3 px-4';
+      file2.id = 'fileField2' + o.idx;
+      file2.onchange = function() {
+        o.prev(this, 'dv2' + idx)
+      };
+      var atag2 = document.createElement('a');
+      atag2.setAttribute('href', "javascript:void(0)");
+      atag2.id = 'icon-wrap2';
+      
+      var ibtn2 = document.createElement('i'); 
+      ibtn2.className = 'fas fa-trash-alt';
+      ibtn2.onclick =function() {
+        o.del(idx)
+      }
+      ibtn2.style.marginLeft= '10px';
+      
+     /*  var btn = document.createElement('input');
+      btn.type = 'button';
+      btn.className = 'btn btn-primary py-3 px-4';
+      btn.value = '삭제';
+      btn.onclick = function() {
+        o.del(idx)
+      };
+      btn.style.marginLeft = '5px'; */
+      div2.appendChild(label2);
+      div2.appendChild(file2);
+      /* div.appendChild(btn); */
+      div2.appendChild(atag2);
+      atag2.appendChild(ibtn2);
+      document.getElementById('attachFileDiv2').appendChild(div2);
+      document.getElementById('attachFileDiv2').appendChild(dv2);
+      o.idx++;
+    },
+    del : function(idx) { // 파일필드 삭제
+      document.getElementById('attachFileDiv2').removeChild(
+          document.getElementById('file2' + idx));
+      document.getElementById('attachFileDiv2').removeChild(
+          document.getElementById('dv2' + idx));
+    },
+    prev : function(targetObj, View_area) { // 이미지 미리보기
+      var preview2 = document.getElementById(View_area); //div id
+      var ua = window.navigator.userAgent;
+      //ie일때(IE8 이하에서만 작동)
+      if (ua.indexOf("MSIE") > -1) {
+        targetObj.select();
+        try {
+          var src = document.selection.createRange().text; // get file full path(IE9, IE10에서 사용 불가)
+          var ie_preview_error = document.getElementById("ie_preview_error_"
+              + View_area);
+          if (ie_preview_error) {
+            preview.removeChild(ie_preview_error); //error가 있으면 delete
+          }
+          var img = document.getElementById(View_area); //이미지가 뿌려질 곳
+          //이미지 로딩, sizingMethod는 div에 맞춰서 사이즈를 자동조절 하는 역할
+          img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"
+              + src + "', sizingMethod='scale')";
+        } catch (e) {
+          if (!document.getElementById("ie_preview_error_" + View_area)) {
+            var info = document.createElement("<p>");
+            info.id = "ie_preview_error_" + View_area;
+            info.innerHTML = e.name;
+            preview.insertBefore(info, null);
+          }
+        }
+        //ie가 아닐때(크롬, 사파리, FF)
+      } else {
+        var files2 = targetObj.files;
+        for (var i = 0; i < files2.length; i++) {
+          var file2 = files2[i];
+          var imageType2 = /image.*/; //이미지 파일일경우만.. 뿌려준다.
+          var prevImg2 = document.getElementById("prev_2" + View_area);
+          if (!file2.type.match(imageType2)) {
+            preview2.removeChild(prevImg2);
+            continue;
+          }
+          //이전에 미리보기가 있다면 삭제
+          if (prevImg2) {
+            preview2.removeChild(prevImg2);
+          }
+          var img2 = document.createElement("img");
+          img2.id = "prev_2" + View_area;
+          img2.classList.add("obj");
+          img2.file = file2;
+          img2.style.width = '100px';
+          img2.style.height = '100px';
+          preview2.appendChild(img2);
+          if (window.FileReader) { // FireFox, Chrome, Opera 확인.
+            var reader = new FileReader();
+            reader.onloadend = (function(aImg2) {
+              return function(e) {
+                aImg2.src = e.target.result;
+              };
+            })(img2);
+            reader.readAsDataURL(file2);
+          } else { // safari is not supported FileReader
+            //alert('not supported FileReader');
+            if (!document.getElementById("sfr_preview_error_2" + View_area)) {
+              var info2 = document.createElement("p");
+              info2.id = "sfr_preview_error_2" + View_area;
+              info2.innerHTML = "not supported FileReader";
+              preview.insertBefore(info2, null);
+            }
+          }
+        }
+      }
+    }
+  }
+</script>
 <script>
-/* $(document).on("click",".adderButton",function(e){
+/*  $(document).on("click",".adderButton",function(e){
   let fullq = $(".fullproductNo").val() 
   let smallq = $(".optionsquantity")
   let smallqsum = 0 ;
@@ -552,7 +717,7 @@ form#product-form {
   }else{
   }
   
-}) */
+})  */
 
 </script>
 <script>
@@ -565,14 +730,13 @@ form#product-form {
               var oip = '<tr><td class="add-option-contents">옵션내용:<input type="text"  class="margininput" name="optionContents" placeholder="수량-색깔-성별 형태로입력" >';
               oip += '추가금액:<input type="number" name="optionprice" class="margininput" required min="0" step=10>';
               oip += '개수:<input type="number" name="optionquantity"  class="margininput optionsQuantity" required min="0">';
-              /* oip += '<input class="btn btn-primary py-3 px-4 optionAdd margininput" type="button" id="buttonDel" value="옵션항목삭제"/>'; */
               oip += '<a href=javascript:void(0)><i id="buttonDel" class="fas fa-minus-square"></i></a>';
               oip += '</td></tr>';
               $(this).parent().append(oip);
               
-              $(document).on("click",".adderButton",function(e){
+              /* $(document).on("click",".adderButton",function(e){
                 let fullq = $(".fullproductNo").val() 
-                var smallq =document.getElementsByClassName("optionsQuantity") /* $(".optionsQuantity") */
+                var smallq =document.getElementsByClassName("optionsQuantity") 
                 let smallqsum = 0 ;
                 for(var i = 0; i< smallq.length; i++){
                   smallqsum += (smallq[i].value)*1 ;
@@ -583,7 +747,7 @@ form#product-form {
                 }else{
                 }
                 
-              })
+              }) */
               
             });
 
@@ -668,6 +832,8 @@ form#product-form {
         o.del(idx)
       };
       btn.style.marginLeft = '5px'; */
+      
+      
       
       div.appendChild(label);
       div.appendChild(file);

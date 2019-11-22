@@ -35,7 +35,8 @@ public class ProductController {
   private ReviewService reviewService;
   @Resource
   private ProductQuestionService productQuestionService;
-  
+  @Resource
+  private ProductDetailPhotoWriter productDetailPhotoWriter;
   
   @GetMapping("form")
   public String form(HttpSession session) { 
@@ -57,17 +58,18 @@ public class ProductController {
   }
   @Transactional
   @PostMapping("upcyclingadd")
-  public String upcuclcingadd(Product product,MultipartFile[] photoPath,HttpSession session) throws Exception {
+  public String upcuclcingadd(Product product,MultipartFile[] photoPath,HttpSession session,MultipartFile[] productDetailPhoto) throws Exception {
     Member member =(Member)session.getAttribute("loginUser");
     int a= member.getNo();
-    System.out.println(a);
     product.setGroupNo(18);
     product.setQuantity(1);
     product.setOrigin("한국");
     product.setMemberNo(a);
+    product.setDetailPhotos(productDetailPhotoWriter.getPhotoFiles(productDetailPhoto));
     product.setPhotos(productPhotoWriter.getPhotoFiles(photoPath));
     product.setDiy(1);
     product.setExpirationDate(new Date(20190101));
+    System.out.println(product.toString());
     productService.insert(product);
     return "redirect:manage";
   }
@@ -76,10 +78,13 @@ public class ProductController {
   @PostMapping("add")
   public String add (MultipartFile[] photoPath,HttpSession session,
       Product product,String optionName, String[] optionContents,String[] optionprice
-      ,String[] optionquantity)throws Exception {
+      ,String[] optionquantity,MultipartFile[] productDetailPhoto)throws Exception {
     if(photoPath !=null) {
     // 사진 처리하는 부분 
     product.setPhotos(productPhotoWriter.getPhotoFiles(photoPath));
+    }
+    if(productDetailPhoto != null) {
+      product.setDetailPhotos(productDetailPhotoWriter.getPhotoFiles(productDetailPhoto));
     }
     
     if(optionName!=null && optionContents !=null && optionprice !=null) {

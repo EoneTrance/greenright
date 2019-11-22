@@ -231,12 +231,14 @@ table.my-table td.my-product {
 table.my-table-col td.my-seller {
   border-right: none;
 }
-
+span.productadderm {
+    margin-left: 406px;
+}
 
 </style>
 <meta charset="UTF-8">
 <div id="mypage-title-h1">
-  <h1>WISHLIST</h1>
+  <h1>product Manage</h1>
 </div>
 
 <section class="ftco-section py-5">
@@ -256,7 +258,7 @@ table.my-table-col td.my-seller {
           <ul
             class="nav flex-column nav-pills nav-stacked text-center mb-4">
             <li class="my-menu"><a href="order">구매내역</a></li>
-            <li class="my-menu active"><a href="#section3">관심상품</a></li>
+            <li class="my-menu"><a href="#section3">관심상품</a></li>
             <li class="my-menu"><a href="#section3">업적</a></li>
           </ul>
           <h4 class="font-weight-bold ml-2">판매</h4>
@@ -268,7 +270,7 @@ table.my-table-col td.my-seller {
         <br>
 
         <div class="my-col-80">
-          <h2 id="mypage-title-h2">관심상품</h2>
+          <h2 id="mypage-title-h2">상품관리</h2>
           <hr>
 
 
@@ -286,6 +288,9 @@ table.my-table-col td.my-seller {
                       </select>
       
                     </div>
+                    <span class="productadderm"><a href="/greenright/product/form">상품 등록</a>
+                    &nbsp;&nbsp;<a href="/greenright/product/upcyclingform">업사이클링 상품 등록</a>
+            </span>
           <div class="row">
             <div class="col">
 
@@ -332,7 +337,7 @@ table.my-table-col td.my-seller {
                     <td class="">
                       <div class="col-sm-9 text-left px-0"
                         style="font-size: 12px">
-                        상품명: <span id="product-name">${product.productName}</span><br>
+                        상품명: <span id="product-name"><a href="/greenright/product/detail?no=${product.no}">${product.productName}</a></span><br>
                         상품설명 :<span id="product-name">${product.description}</span>
                       </div>
 

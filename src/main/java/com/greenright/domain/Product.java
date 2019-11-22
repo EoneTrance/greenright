@@ -22,6 +22,7 @@ public class Product  implements Serializable {
   private String origin;
   private List<ProductPhoto> photos;
   private List<ProductOption> options;
+  private List<ProductDetailPhoto> detailPhotos;
   private Seller seller;
   private Group group;
   private Like like;
@@ -129,14 +130,20 @@ public class Product  implements Serializable {
   public void setRecommendCount(int recommendCount) {
     RecommendCount = recommendCount;
   }
+  public List<ProductDetailPhoto> getDetailPhotos() {
+    return detailPhotos;
+  }
+  public void setDetailPhotos(List<ProductDetailPhoto> detailPhotos) {
+    this.detailPhotos = detailPhotos;
+  }
   @Override
   public String toString() {
     return "Product [no=" + no + ", groupNo=" + groupNo + ", memberNo=" + memberNo
         + ", registeredDate=" + registeredDate + ", diy=" + diy + ", price=" + price + ", quantity="
         + quantity + ", productName=" + productName + ", description=" + description
         + ", expirationDate=" + expirationDate + ", origin=" + origin + ", photos=" + photos
-        + ", options=" + options + ", seller=" + seller + ", group=" + group + ", like=" + like
-        + ", RecommendCount=" + RecommendCount + "]";
+        + ", options=" + options + ", detailPhotos=" + detailPhotos + ", seller=" + seller
+        + ", group=" + group + ", like=" + like + ", RecommendCount=" + RecommendCount + "]";
   }
   
   

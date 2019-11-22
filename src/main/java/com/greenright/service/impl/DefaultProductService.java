@@ -6,10 +6,12 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.greenright.dao.ProductDao;
+import com.greenright.dao.ProductDetailPhotoDao;
 import com.greenright.dao.ProductOptionDao;
 import com.greenright.dao.ProductOptionItemDao;
 import com.greenright.dao.ProductPhotoDao;
 import com.greenright.domain.Product;
+import com.greenright.domain.ProductDetailPhoto;
 import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
 import com.greenright.domain.ProductPhoto;
@@ -20,7 +22,7 @@ public class DefaultProductService implements ProductService{
   @Resource private ProductPhotoDao productPhotoDao;
   @Resource private ProductOptionDao optionDao;
   @Resource private ProductOptionItemDao optionItemDao;
-
+  @Resource private ProductDetailPhotoDao productDeatilPhotoDao;
 
   @Transactional
   @Override
@@ -32,6 +34,13 @@ public class DefaultProductService implements ProductService{
       productPhotoDao.insert(photo);
     }
    }
+     if(product.getDetailPhotos()!=null) {
+       for(ProductDetailPhoto photo :product.getDetailPhotos()) {
+         photo.setProductNo(product.getNo());
+         productDeatilPhotoDao.insert(photo);
+       }
+     }
+   
     if(product.getOptions()!=null) {
       for(ProductOption option: product.getOptions()) {
         option.setProductNo(product.getNo());
