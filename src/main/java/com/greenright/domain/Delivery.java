@@ -12,12 +12,12 @@ public class Delivery implements Serializable {
   
   private int orderNo;
   
-  private int invoiceNum;
+  private String invoiceNum;
   
   @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
   private Date deliveryDate;
   
-  private String deliveryFlag;
+  private int deliveryFlag;
   
   private String courierName;
   
@@ -28,6 +28,8 @@ public class Delivery implements Serializable {
   private String recieverCellPhone;
   
   private String recieverEmail;
+  
+  private String recieverRequest;
 
   public int getNo() {
     return no;
@@ -45,11 +47,11 @@ public class Delivery implements Serializable {
     this.orderNo = orderNo;
   }
 
-  public int getInvoiceNum() {
+  public String getInvoiceNum() {
     return invoiceNum;
   }
 
-  public void setInvoiceNum(int invoiceNum) {
+  public void setInvoiceNum(String invoiceNum) {
     this.invoiceNum = invoiceNum;
   }
 
@@ -61,11 +63,11 @@ public class Delivery implements Serializable {
     this.deliveryDate = deliveryDate;
   }
 
-  public String getDeliveryFlag() {
+  public int getDeliveryFlag() {
     return deliveryFlag;
   }
 
-  public void setDeliveryFlag(String deliveryFlag) {
+  public void setDeliveryFlag(int deliveryFlag) {
     this.deliveryFlag = deliveryFlag;
   }
 
@@ -109,12 +111,21 @@ public class Delivery implements Serializable {
     this.recieverEmail = recieverEmail;
   }
 
+  public String getRecieverRequest() {
+    return recieverRequest;
+  }
+
+  public void setRecieverRequest(String recieverRequest) {
+    this.recieverRequest = recieverRequest;
+  }
+
   @Override
   public String toString() {
     return "Delivery [no=" + no + ", orderNo=" + orderNo + ", invoiceNum=" + invoiceNum
         + ", deliveryDate=" + deliveryDate + ", deliveryFlag=" + deliveryFlag + ", courierName="
         + courierName + ", recieverName=" + recieverName + ", deliveryAddress=" + deliveryAddress
-        + ", recieverCellPhone=" + recieverCellPhone + ", recieverEmail=" + recieverEmail + "]";
+        + ", recieverCellPhone=" + recieverCellPhone + ", recieverEmail=" + recieverEmail
+        + ", recieverRequest=" + recieverRequest + "]";
   }
   
 }

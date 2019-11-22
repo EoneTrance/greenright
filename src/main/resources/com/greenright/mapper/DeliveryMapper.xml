@@ -16,6 +16,7 @@
     <result column="delivery_address" property="deliveryAddress"/>
     <result column="reciever_cell_phone" property="recieverCellPhone"/>
     <result column="reciever_email" property="recieverEmail"/>
+    <result column="delivery_request" property="deliveryRequest"/>
   </resultMap>
   
   <sql id="selectDelivery">
@@ -29,7 +30,8 @@
       reciever_name,
       delivery_address,
       reciever_cell_phone,
-      reciever_email
+      reciever_email,
+      reciever_request
   </sql>
   
   <sql id="whereDelivery">
@@ -38,7 +40,7 @@
  
   <insert id="insert" parameterType="Delivery">
     insert into
-    orders(
+    deliverys(
       order_id,
       invoice_num,
       delivery_date,
@@ -47,7 +49,8 @@
       reciever_name,
       delivery_address,
       reciever_cell_phone,
-      reciever_email)
+      reciever_email,
+      reciever_request)
     values(
       #{orderNo},
       #{invoiceNum},
@@ -57,7 +60,8 @@
       #{recieverName},
       #{deliveryAddress},
       #{recieverCellPhone},
-      #{recieverEmail})
+      #{recieverEmail},
+      #{recieverRequest})
   </insert>
   
 </mapper>

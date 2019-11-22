@@ -8,18 +8,18 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
-import com.greenright.domain.Delivery;
 import com.greenright.domain.Member;
 import com.greenright.domain.Order;
+import com.greenright.domain.OrderProduct;
 import com.greenright.domain.Product;
 import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
 import com.greenright.service.BasketService;
-import com.greenright.service.DeliveryService;
 import com.greenright.service.MemberService;
 import com.greenright.service.OrderService;
 import com.greenright.service.ProductOptionItemService;
@@ -32,9 +32,6 @@ public class OrderController {
   
   @Resource
   private OrderService orderService;
-  
-  @Resource
-  private DeliveryService deliveryService;
   
   @Resource
   private BasketService basketService;
@@ -56,10 +53,6 @@ public class OrderController {
   public void form(HttpSession session, Model model, String orderListJson) throws Exception {
     Gson gson = new Gson();
     ArrayList<Map<String, String>> orderListmap = gson.fromJson(orderListJson, ArrayList.class);
-    for (Map<String,String> order : orderListmap) {
-      System.out.println("optionItemNo = " + order.get("optionItemNo"));
-      System.out.println("quantity= " + order.get("quantity"));
-    }
     
     List<ProductOptionItem> optionItems = new ArrayList<>();
     List<ProductOption> options = new ArrayList<>();
@@ -102,16 +95,40 @@ public class OrderController {
   
   @ResponseBody
   @PostMapping("add")
-  public void form (HttpSession session, Order order, Delivery delivery) throws Exception {
-    System.out.println(order);
+  public void add (HttpSession session, Model model, Order order, String optionItemList) throws Exception {
+    
+    Gson gson = new Gson();
+    
     Member member = (Member)session.getAttribute("loginUser");
+    
+    ProductOptionItem[] ItemList = gson.fromJson(optionItemList, ProductOptionItem[].class);
+    
     order.setMemberNo(member.getNo());
-    order.setPaymentFlag(1);
-    if (order.getPaymentWay().equals("vbank")) {
-      order.setPaymentFlag(0);
+    order.setPaymentFlag(order.getPaymentWay().equals("vbank") ? 0 : 1);
+    
+    List<OrderProduct> orderProducts = new ArrayList<>();
+    for (ProductOptionItem item : ItemList) {
+      OrderProduct orderProduct = new OrderProduct();
+      ProductOptionItem optionItem = new ProductOptionItem();
+      
+      optionItem = productOptionItemService.get(item.getNo());
+      orderProduct.setOrderNo(order.getNo());
+      orderProduct.setOptionItemNo(optionItem.getNo());
+      orderProduct.setPrice(item.getOptionsPrice());
+      orderProduct.setQuantity(item.getOptionsQuantity());
+      orderProducts.add(orderProduct);
     }
+    order.setOrderProducts(orderProducts);
+    
     orderService.insert(order);
-    deliveryService.insert(delivery);
+    
+    Order getOrderDate = orderService.findBy(order.getNo());
+    order.setPaymentDate(getOrderDate.getPaymentDate());
+    
+    session.setAttribute("order", order);
   }
   
+  @GetMapping("result")
+  public void result () throws Exception {
+  }
 }

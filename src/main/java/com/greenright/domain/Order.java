@@ -2,6 +2,7 @@ package com.greenright.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Order implements Serializable {
@@ -18,6 +19,10 @@ public class Order implements Serializable {
   private int paymentFlag;
   
   private String paymentWay;
+  
+  private Delivery delivery;
+  
+  private List<OrderProduct> orderProducts;
 
   public int getNo() {
     return no;
@@ -43,7 +48,7 @@ public class Order implements Serializable {
     this.paymentDate = paymentDate;
   }
 
-  public int isPaymentFlag() {
+  public int getPaymentFlag() {
     return paymentFlag;
   }
 
@@ -59,10 +64,27 @@ public class Order implements Serializable {
     this.paymentWay = paymentWay;
   }
 
+  public Delivery getDelivery() {
+    return delivery;
+  }
+
+  public void setDelivery(Delivery delivery) {
+    this.delivery = delivery;
+  }
+
+  public List<OrderProduct> getOrderProducts() {
+    return orderProducts;
+  }
+
+  public void setOrderProducts(List<OrderProduct> orderProducts) {
+    this.orderProducts = orderProducts;
+  }
+
   @Override
   public String toString() {
     return "Order [no=" + no + ", memberNo=" + memberNo + ", paymentDate=" + paymentDate
-        + ", paymentFlag=" + paymentFlag + ", paymentWay=" + paymentWay + "]";
+        + ", paymentFlag=" + paymentFlag + ", paymentWay=" + paymentWay + ", delivery=" + delivery
+        + ", orderProducts=" + orderProducts + "]";
   }
   
 }

@@ -226,7 +226,7 @@ width:16px;height:16px;background:#f1ef79;}
               <tr>
                 <th class="my-col-3">배송시 요청사항</th>
                 <td class="my-col-9">
-                <input type="text" id="sample3_detailAddress" name="deliveryRequest"
+                <input type="text" id="recieverRequest" name="recieverRequest"
                        class="input-md w-100"
                        style="text-align:left;">
                 <span class="inputState"></span>
@@ -290,7 +290,7 @@ width:16px;height:16px;background:#f1ef79;}
               <tr>
                 <th class="my-col-3">배송시 요청사항</th>
                 <td class="my-col-9">
-                <input type="text" id="sample3_detailAddress" name="deliveryRequest"
+                <input type="text" id="recieverRequest" name="recieverRequest"
                        class="input-md w-100"
                        style="text-align:left;">
                 <span class="inputState"></span>
@@ -497,7 +497,9 @@ width:16px;height:16px;background:#f1ef79;}
 /* $(".fa-money-check-alt").css("font-size", $(".fa-money-check-alt").css("width")); */
 
 let orderList = ${orderList};
+let productPrice = 0;
 let paymentPrice = 0;
+let deliveryPrice = 0;
 let productName = orderList[0].productName + " 외 " + (orderList.length - 1) + "건";
 let sellerName = orderList[0].sellerName;
 let paymentMethod = 'card';
@@ -506,13 +508,16 @@ let buyerEmail = '${loginUser.email}';
 let buyerCellPhone;
 let buyerAddress;
 let buyerPostalCode;
+let buyerRequest;
+let optionItemList = new Array();
 
 $(function() {
   
   $("#my-capacity").text(orderList.length);
   
   for (var i = 0; i < orderList.length; i++) {
-    var basket = orderList[i];
+    var order = orderList[i];
+    var optionItem = {};
     $(".my-order-list").append(
         "<tr class='my-basket-tr'>"
      +  "<td class='my-productPhoto-td text-center my-col-3'>"
@@ -522,22 +527,31 @@ $(function() {
      +  "</td>"
      +  "<td class='my-product text-left my-col-9 pl-0'>"
      +  "  <div class='px-0' style='font-size:12px'>"
-     +  "    판매자: <span id='product-seller'>" + basket.sellerName + "</span><br>"
-     +  "    상품명: <span id='product-name'>" + basket.productName + " [" + basket.productPrice + "원]" + "</span><br>"
-     +  "    옵션: <span id='product-option'>" + basket.optionName + " (" + basket.optionItemMatter + ") [+" + basket.optionItemPrice + "원]" + "</span><br>"
-     +  "    선택옵션 가격: <span id='product-price'> [" + basket.productPrice + "+" + basket.optionItemPrice + "] = <span style='font-weight:bold;'>" + (basket.productPrice + basket.optionItemPrice) + "</span>원</span><br>"
-     +  "    수량: <span id='product-quantity'><span style='font-weight:bold;'>" + basket.optionItemQuantity + "</span>개</span><hr class='my-1'>"
-     +  "    가격: <span id='product-sumPrice' style='font-size:120%;font-weight:bold;'>" + ((basket.productPrice + basket.optionItemPrice) * basket.optionItemQuantity) + "</span>원"
+     +  "    판매자: <span id='product-seller'>" + order.sellerName + "</span><br>"
+     +  "    상품명: <span id='product-name'>" + order.productName + " [" + order.productPrice + "원]" + "</span><br>"
+     +  "    옵션: <span id='product-option'>" + order.optionName + " (" + order.optionItemMatter + ") [+" + order.optionItemPrice + "원]" + "</span><br>"
+     +  "    선택옵션 가격: <span id='product-price'> [" + order.productPrice + "+" + order.optionItemPrice + "] = <span style='font-weight:bold;'>" + (order.productPrice + order.optionItemPrice) + "</span>원</span><br>"
+     +  "    수량: <span id='product-quantity'><span style='font-weight:bold;'>" + order.optionItemQuantity + "</span>개</span><hr class='my-1'>"
+     +  "    가격: <span id='product-sumPrice' style='font-size:120%;font-weight:bold;'>" + ((order.productPrice + order.optionItemPrice) * order.optionItemQuantity) + "</span>원"
      +  "  </div>"
      +  "</td>"
-     +  "<td class='my-optionItemNo-td' style='display:none;'>" + basket.optionItemNo + "</td>"
-     +  "<td class='my-quantity-td' style='display:none;'>" + basket.optionItemQuantity + "</td>"
+     +  "<td class='my-optionItemNo-td' style='display:none;'>" + order.optionItemNo + "</td>"
+     +  "<td class='my-quantity-td' style='display:none;'>" + order.optionItemQuantity + "</td>"
      +  "</tr>"
     );
-    paymentPrice += ((basket.productPrice + basket.optionItemPrice + 2500) * basket.optionItemQuantity);
+    
+    optionItem["optionsPrice"] = (order.productPrice + order.optionItemPrice);
+    productPrice += (optionItem["optionsPrice"] * order.optionItemQuantity);
+    
+    optionItem["no"] = order.optionItemNo;
+    optionItem["optionsQuantity"] = order.optionItemQuantity;
+    
+    optionItemList.push(optionItem);
   }
+  deliveryPrice = (2500 * orderList.length);
+  paymentPrice = (productPrice + deliveryPrice);
 
-  $(".my-priceSum").html(paymentPrice);
+  $(".my-priceSum").html(productPrice);
   $(".my-deliveryChargeSum").html(2500 * i);
   $(".my-sum").html(paymentPrice);
   
@@ -565,7 +579,6 @@ var IMP = window.IMP; // 생략가능
 IMP.init('imp16585618');
   
 $("#my-paymentBtn").click(function(){
-  
   var count = 0;
   var checkList = $("input[type='checkbox']");
   
@@ -589,6 +602,7 @@ $("#my-paymentBtn").click(function(){
   buyerAddress = $(deliveryAddress + "[name=defaultAddress]").val() + " "
                + $(deliveryAddress + "[name=detailAddress]").val();
   buyerPostalCode = $(deliveryAddress + "[name=postalCode]").val();
+  buyerRequest = $(deliveryAddress + "[name=recieverRequest]").val();
   
   IMP.request_pay({
     pg : 'inicis', // version 1.1.0부터 지원.
@@ -610,18 +624,23 @@ $("#my-paymentBtn").click(function(){
         msg += '결제 금액 : ' + rsp.paid_amount + "\n";
         msg += '카드 승인번호 : ' + rsp.apply_num;
         
-        var paymentFlag = 1;
-        
-        if (paymentMethod == 'vbank'){
-          paymentFlag = 0;
-        }
-        
         $.ajax({
           type: "POST",
           url: "add",
-          data: "paymentWay=" + paymentMethod,
-          async: false
+          dataType: "json",
+          data: "paymentWay=" + paymentMethod
+          + "&delivery.recieverName=" + buyerName
+          + "&delivery.deliveryAddress=" + buyerAddress
+          + "&delivery.recieverCellPhone=" + buyerCellPhone
+          + "&delivery.recieverEmail=" + buyerEmail
+          + "&delivery.deliveryRequest=" + buyerRequest
+          + "&optionItemList=" + JSON.stringify(optionItemList),
+          async: false,
+          success: function() {
+          }
         });
+        
+        window.location.href = 'result';
         
     } else {
         var msg = '결제에 실패하였습니다.\n\n';
@@ -630,11 +649,21 @@ $("#my-paymentBtn").click(function(){
         $.ajax({
           type: "POST",
           url: "add",
-          data: "paymentWay=" + paymentMethod,
-          async: false
+          dataType: "json",
+          data: "paymentWay=" + paymentMethod
+          + "&delivery.recieverName=" + buyerName
+          + "&delivery.deliveryAddress=" + buyerAddress
+          + "&delivery.recieverCellPhone=" + buyerCellPhone
+          + "&delivery.recieverEmail=" + buyerEmail
+          + "&optionItemList=" + JSON.stringify(optionItemList),
+          async: false,
+          success: function() {
+          }
         });
+        
+        window.location.href = 'result';
     }
-    swal(msg);
+    /* swal(msg); */
   });
 });
 

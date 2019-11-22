@@ -38,6 +38,15 @@
       now(),
       #{paymentFlag},
       #{paymentWay})
+  <selectKey resultType="int" keyProperty="no" order="AFTER">
+    SELECT LAST_INSERT_ID()
+  </selectKey>
   </insert>
+  
+  <select id="findBy" parameterType="int" resultMap="OrderMap">
+    <include refid="selectOrder"/>
+    from orders
+    <include refid="whereOrder"/>
+  </select>
   
 </mapper>

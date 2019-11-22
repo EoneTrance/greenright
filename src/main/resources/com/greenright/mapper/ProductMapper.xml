@@ -85,7 +85,7 @@ select DISTINCT
     p.quantity,
     m.name,
     m.member_id,
-    g.group_name, 
+    g.group_name,
     g.category_id,
     c.category_name,
     o.options_id,

@@ -1,7 +1,6 @@
 package com.greenright.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 public class OrderProduct implements Serializable {
   
@@ -11,7 +10,7 @@ public class OrderProduct implements Serializable {
   
   private int optionItemNo;
   
-  private Date quantity;
+  private int quantity;
   
   private int price;
 
@@ -31,11 +30,11 @@ public class OrderProduct implements Serializable {
     this.optionItemNo = optionItemNo;
   }
 
-  public Date getQuantity() {
+  public int getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(Date quantity) {
+  public void setQuantity(int quantity) {
     this.quantity = quantity;
   }
 
