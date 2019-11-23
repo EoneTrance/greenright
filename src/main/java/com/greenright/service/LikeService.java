@@ -14,4 +14,6 @@ public interface LikeService {
   
   List<Product>findAll(int memberNo)throws Exception;
   
+  List<Like> findLikeProduct(int memberNo) throws Exception;
+  
 }

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="utf-8">
@@ -29,6 +30,9 @@
   width: 253px;
   height:202.39px;
  }
+ .my-heart {
+ color: red;
+ }
   </style>
       <!---------------------------------------------------main 뒷배경 이미지 --------------------------------------------->
      <!------------------------------------------------------------------------------------------------------------------->
@@ -42,7 +46,7 @@
               <div class="col-md-12 ftco-animate text-center">
                 <h1 class="mb-2">We serve Eco &amp; Upcycling Products</h1>
                 <h2 class="subheading mb-4">We deliver Eco &amp; Upcycling Products</h2>
-                <p><a href="#" class="btn btn-primary">View Details</a></p>
+                <p><a href="shop" class="btn btn-primary">View Details</a></p>
               </div>
 
             </div>
@@ -57,7 +61,7 @@
               <div class="col-sm-12 ftco-animate text-center">
                 <h1 class="mb-2">Very Eco friendly &amp; Organic</h1>
                 <h2 class="subheading mb-4">We deliver organic foods</h2>
-                <p><a href="#" class="btn btn-primary">View Details</a></p>
+                <p><a href="shop" class="btn btn-primary">View Details</a></p>
               </div>
 
             </div>
@@ -177,7 +181,6 @@
           <div class="col-md-12 heading-section text-center ftco-animate">
             <span class="subheading">Featured Products</span>
             <h2 class="mb-4">Our Products</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
           </div>
         </div>      
       </div>
@@ -188,7 +191,15 @@
               <div class="col-md-6 col-lg-3 ftco-animate">
                   <div class="product">
                       <a href="/greenright/product/buydetail?no=${product.no}" class="img-prod">
-                      <img class="img-fluid" src='/upload/product/${product.photos[0].photoPath}'  alt="Colorlib Template" style="width:253px; height:202px; object-fit:cover;"> 
+                      <img class="img-fluid" src='/upload/product/${product.photos[0].photoPath}'  alt="Colorlib Template" style="width:253px; height:202px; object-fit:cover;">
+                      <c:choose>
+                      <c:when test="${product.likeCheck == 1}">
+                        <span class="status right-heart" data-no="${product.no}"><i class="fas fa-heart my-heart"></i></span>
+                      </c:when>
+                      <c:otherwise>
+                        <span class="status right-heart" data-no="${product.no}" style="display: none;"><i class="fas fa-heart my-heart"></i></span>
+                      </c:otherwise>
+                      </c:choose>
                       </a>
                       <div class="text py-3 pb-4 px-3 text-center">
                           <h3><a href="#">
@@ -205,7 +216,14 @@
                                       <i class="fas fa-comments"></i>
                                   </a>
                                   <a href="" class="heart d-flex justify-content-center align-items-center changewishlist" id ="${product.no}">
-                                      <span><i class="far fa-heart"></i></span>
+                                  <c:choose>
+                                    <c:when test="${product.likeCheck == 1}">
+                                      <span><i class="fas fa-heart my-heart"></i></span>
+                                    </c:when>
+                                    <c:otherwise>
+                                      <span><i class="fas fa-heart"></i></span>
+                                    </c:otherwise>
+                                  </c:choose>
                                   </a>
                               </div>
                           </div>
@@ -249,9 +267,8 @@
       <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section ftco-animate text-center">
-            <span class="subheading">Testimony</span>
-            <h2 class="mb-4">Our satisfied customer says</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+            <span class="subheading">Artists</span>
+            <h2 class="mb-4">Our artists introduce</h2>
           </div>
         </div>
         <div class="row ftco-animate">
@@ -265,9 +282,9 @@
                     </span>
                   </div>
                   <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Marketing Manager</span>
+                    <p class="mb-5 pl-4 line">1984년 제주에서 태어났으며,현재 경북 경산에서 살고 있다. 2014년 재활용 상품 디자인 대회 수상 경험이 있다</p>
+                    <p class="name">Dean</p>
+                    <span class="position">Upcycling Artist</span>
                   </div>
                 </div>
               </div>
@@ -279,9 +296,9 @@
                     </span>
                   </div>
                   <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Interface Designer</span>
+                    <p class="mb-5 pl-4 line">1994년 성남에서 태어났으며,현재 전북에서 살고 있다. 2017년 아이디어 상품 대회 수상 경험이 있다.</p>
+                    <p class="name">동백</p>
+                    <span class="position">Upcycling Artist</span>
                   </div>
                 </div>
               </div>
@@ -293,9 +310,9 @@
                     </span>
                   </div>
                   <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">UI Designer</span>
+                    <p class="mb-5 pl-4 line">1994년 성남에서 태어났으며,현재 전북에서 살고 있다. 2017년 아이디어 상품 대회 수상 경험이 있다.</p>
+                    <p class="name">Ys</p>
+                    <span class="position">Upcycling Artist</span>
                   </div>
                 </div>
               </div>
@@ -307,9 +324,9 @@
                     </span>
                   </div>
                   <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">System Analyst</span>
+                    <p class="mb-5 pl-4 line">1994년 성남에서 태어났으며,현재 전북에서 살고 있다. 2017년 아이디어 상품 대회 수상 경험이 있다.</p>
+                    <p class="name">미소</p>
+                    <span class="position">Upcycling Artist</span>
                   </div>
                 </div>
               </div>
@@ -348,6 +365,8 @@
 $(document).on("click",".changewishlist",function(e){
   e.preventDefault();
   let productNo =$(this).attr("id");
+  let heart = $(e.currentTarget).children().first().children().first();
+  let rightHeart = $(e.currentTarget).parent().parent().parent().parent().children().first().children().eq(1);
   $.post(
       "/greenright/json/Like/checkLike",
       {
@@ -358,13 +377,15 @@ $(document).on("click",".changewishlist",function(e){
           $.post("/greenright/json/Like/increaseLike",{
             "productNo":productNo,
           }, function(data){
-            swal("wishlist 에 추가되었습니다")
+            heart.addClass('my-heart');
+            rightHeart.css('display','inline');
           });               
         }else{
           $.post("/greenright/json/Like/decreaseLike",{
             "productNo":productNo,
           }, function(data){
-           swal("wishlist 에서 삭제되었습니다.")
+            heart.removeClass('my-heart');
+            rightHeart.css('display','none');
           });  
         }
       })

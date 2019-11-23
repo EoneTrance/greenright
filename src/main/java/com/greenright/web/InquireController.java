@@ -80,7 +80,6 @@ public class InquireController {
     int memberNo = ((Member)session.getAttribute("loginUser")).getNo();
     int manager = ((Member)session.getAttribute("loginUser")).getMemberClass();
     PrivateBoard privateBoard = privateBoardService.get(no); 
-  
     if(memberNo==privateBoard.getMemberNo() || manager == 0 ) {
       model.addAttribute("privateBoard",privateBoard);
       return "inquire/detail";

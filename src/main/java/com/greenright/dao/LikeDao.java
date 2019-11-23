@@ -10,4 +10,5 @@ public interface LikeDao {
   int getCountByProduct (int productNo) throws Exception;
   int deleteAllLikes (int productNo) throws Exception;
   List<Like>getByMember(int memberNo) throws Exception;
+  List<Like> findLikeProduct (int memberNo) throws Exception;
 }

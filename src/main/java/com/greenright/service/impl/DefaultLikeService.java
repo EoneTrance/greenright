@@ -43,4 +43,9 @@ public class DefaultLikeService implements LikeService {
    return productList;
   }
 
+  @Override
+  public List<Like> findLikeProduct(int memberNo) throws Exception {
+    return likeDao.findLikeProduct(memberNo);
+  }
+
 }
