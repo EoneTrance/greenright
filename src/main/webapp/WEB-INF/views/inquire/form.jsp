@@ -1,13 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
-<script src='/node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
-<script src='/node_modules/jquery/dist/jquery.min.js'></script>
-<script src='/node_modules/sweetalert/dist/sweetalert.min.js'></script>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>1:1문의 등록폼</title>
 <style>
   .btn.btn-primary {
    border-top-left-radius: 2px;
@@ -16,6 +8,8 @@
    border-bottom-left-radius: 2px;
 }
 </style>
+
+
 <form action='add' method='post'>
  <div
     style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
@@ -42,6 +36,6 @@
 </div>
 
 </form>
-</body>
+
 <br>
 <br>

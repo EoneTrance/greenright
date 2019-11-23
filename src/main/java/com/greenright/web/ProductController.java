@@ -125,7 +125,7 @@ public class ProductController {
     Product product = productService.get(no);
     Product productPhoto = productService.getforPhoto(no);
     List<Product>productLiST = productService.gettopbyCategoryNum(no);
-    
+   System.out.println(product.toString());
     
     model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);

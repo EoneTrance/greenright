@@ -1,33 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel='stylesheet'
-  href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
-<link rel="stylesheet" href="/css/fontawesome/css/all.css">
-<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="/css/animate.css">
-    
-    <link rel="stylesheet" href="/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/css/magnific-popup.css">
-
-    <link rel="stylesheet" href="/css/aos.css">
-
-    <link rel="stylesheet" href="/css/ionicons.min.css">
-
-    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/css/jquery.timepicker.css">
-
-    
-    <link rel="stylesheet" href="/css/flaticon.css">
-    <link rel="stylesheet" href="/css/icomoon.css">
-    <link rel="stylesheet" href="/css/style.css">
 <style>
 .btn.btn-primary {
   width: 90px;
@@ -95,12 +69,12 @@
     <p style="text-align: right;">
      <button type="button" onclick="location.href='form.jsp'"  class="btn btn-primary" >문의 작성</button>
     </p>
-       <%--  <select id = "answerselect" name="answer" value='${member.cell_phone.substring(0,3)}'
-            style="width:120px;height:35px;display: inline;">
+      <select id = "answerselect" name="answer" value='${member.cell_phone.substring(0,3)}'
+            style="width:120px;height:35px;display: inline; margin-left:450px;">
             <option value="default">전체</option>
             <option value="미답변">미답변</option>
             <option value="답변완료">답변완료</option>
-      </select> --%>
+      </select> 
       <select id ="inquireselect" name="date" value='${member.cell_phone.substring(0,3)}'
             style="width:120px;height:35px;display: inline;">
             <option value="default">전체</option>
@@ -116,6 +90,8 @@
             <option>아이디</option>
             <option>닉네임</option>
       </select> --%>
+      
+      
        <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
@@ -131,7 +107,6 @@
                        <span style ="${page != pageNo ? "cursor: pointer;" : "color: white; background-color: #82ae46;"} border:1px solid #e6e6e6">${page}</span>
                      </li>
                     </c:forEach>
-                    
                       <li id="my-paging-last">
                       <span class="page-item" data-page="next" style="cursor: pointer;">&gt;</span> 
                       </li>
@@ -141,52 +116,48 @@
         </div>
     </div>
 </section>
-    <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
- 
-<!-- <script>
-$(document).ready(function() {
-  $('#select option').each(function(){
-    if($(this).val() == "${board.answerTrueFalse}") {
-      $(this).attr("selected","selected");
-    }
-  });
-     
-});
-</script>   -->
-
-
+<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
-
-  var searchQuestionType = undefined;
-
+var searchQuestionType = undefined;
 $('#inquireselect').change(function() {
   searchQuestionType = $('#inquireselect option:selected').val();
-  loadData(1)
+  answerSelectType = $('#answerselect option:selected').val();
+  loadData(1,answerSelectType);
 })
-
-
-function loadData(pageNo) {
+function loadData(pageNo,answerSelectType) {
   $.ajax({
     url: "../json/inquire/list",
     type:"GET",
     dataType: "json",
     data: {
-      "type": (searchQuestionType) ? searchQuestionType : undefined
+      "questionType": (searchQuestionType) ? searchQuestionType : undefined
     },
     
     success: function(data){
-      console.log(data);
-      console.log(data.result.privateBoards);
       var list = data.result.privateBoards;
       var tableTag ="";
-      
+      console.log(answerSelectType);
       $("td").removeClass("content-value inquire");
       
        for(var i = 0 ; i < list.length; i++) {
+        if(answerSelectType=="default"){
         tableTag += "<tr><td>" + list[i].no + "</td><td>" + list[i].date +
         "<td>" + list[i].type + "</td><td><a href='detail?no="+ list[i].no+"'>" + list[i].title +"</a></td>"+
         "<td>" + list[i].id +  "</td><td>" + list[i].answerTrueFalse + "</td></tr>"
+        } else if(answerSelectType=="미답변"){
+          if(list[i].answerTrueFalse == "미답변"){
+            tableTag += "<tr><td>" + list[i].no + "</td><td>" + list[i].date +
+            "<td>" + list[i].type + "</td><td><a href='detail?no="+ list[i].no+"'>" + list[i].title +"</a></td>"+
+            "<td>" + list[i].id +  "</td><td>" + list[i].answerTrueFalse + "</td></tr>"
+          }
+        } else {
+          if(list[i].answerTrueFalse != "미답변"){
+            tableTag += "<tr><td>" + list[i].no + "</td><td>" + list[i].date +
+            "<td>" + list[i].type + "</td><td><a href='detail?no="+ list[i].no+"'>" + list[i].title +"</a></td>"+
+            "<td>" + list[i].id +  "</td><td>" + list[i].answerTrueFalse + "</td></tr>"
+          }
+        }
     };
     $("#products tbody").html(tableTag);
     $("td").addClass("content-value inquire");
@@ -195,20 +166,11 @@ function loadData(pageNo) {
   
 }
 </script>
-
-
 <script>
 $('#my-paging').on('click','.page-item', () => {
- 
   $(event.target).parent().addClass('active');
-  
-  
-  
 });
-
-
  var currentPage = ${pageNo};
-
 $('.page-item').click((e) => {
   e.preventDefault();
  
@@ -231,7 +193,6 @@ $('.page-item').click((e) => {
     
   }
 }); 
-
 </script>  
 
 

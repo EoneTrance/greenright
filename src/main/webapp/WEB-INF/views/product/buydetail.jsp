@@ -555,12 +555,21 @@ button.btn.btn-primary.CartBut {
   </section>
 </div>
 <!--  상품평 누를시 상품평 나오고 딴거 누를시 딴거 나오게 할부분  -->
+  
 <Section class="ftco-section">
   <div class="container">
+    <hr>
     <div class="row justify-content-center mb-3 pb-3">
       <div
         class="col-md-12 heading-section text-center ftco-animate userusechanage">
         <div class="productscore target" id="div1">
+          <h5>
+            <strong>상품상세</strong>
+          </h5>
+          <c:forEach items="${product.detailPhotos}"  var="ProductDetailPhoto">
+        <img alt="" src="/upload/productDetail/${ProductDetailPhoto.photoPath}" style="width:1000px; object-fit:cover;height:600px;margin-top:20px; margin-bottom:20px;">      
+          
+          </c:forEach>
           <br> <br> <br>
         </div>
         <br>
