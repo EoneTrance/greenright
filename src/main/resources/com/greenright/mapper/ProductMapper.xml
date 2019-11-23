@@ -28,6 +28,7 @@
 			<association property="member" javaType="Member">
 				<id column="member_id" property="no" />
 				<result column="name" property="name"/>
+				<result column="member_class" property="memberClass"/>
 			</association>
 		</association>
 

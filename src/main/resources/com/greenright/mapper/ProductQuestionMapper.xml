@@ -37,6 +37,7 @@
     <result column="answer" property="answer" />
     <result column="auth_key" property="authkey"/>
     <result column="password_authkey" property="passwordAuthkey"/>
+    <result column="member_class" property="memberClass"/>
   </association>
   </resultMap>
 
@@ -58,7 +59,8 @@
   q.contents,
   q.product_question_id,
   a.answer_contents,
-  m.id
+  m.id,
+  m.member_class
   from product_questions q
   left outer join members m on m.member_id = q.member_id
   left outer join product_answers a on a.product_question_id = q.product_question_id

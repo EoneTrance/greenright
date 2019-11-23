@@ -142,12 +142,12 @@
               <div class="col-md-6">
                 <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url(../../images/fufu.jpg);">
                   <div class="text px-3 py-1">
-                    <h2 class="mb-0"><a href="#">Furniture</a></h2>
+                    <h2 class="mb-0"><a href="" class="prevnetMove">Furniture</a></h2>
                   </div>
                 </div>
                 <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(../../images/clean.jpg);">
                   <div class="text px-3 py-1">
-                    <h2 class="mb-0"><a href="#">Cleaning</a></h2>
+                    <h2 class="mb-0"><a href="" class="prevnetMove">Cleaning</a></h2>
                   </div>
                 </div>
               </div>
@@ -157,12 +157,12 @@
           <div class="col-md-4">
             <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url(../../images/sasa.jpg);">
               <div class="text px-3 py-1">
-                <h2 class="mb-0"><a href="#">Office Supplies</a></h2>
+                <h2 class="mb-0"><a href="" class="prevnetMove">Office Supplies</a></h2>
               </div>    
             </div>
             <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(../../images/yuyu.jpg);">
               <div class="text px-3 py-1">
-                <h2 class="mb-0"><a href="#">Organic</a></h2>
+                <h2 class="mb-0"><a href="" class="prevnetMove">Organic</a></h2>
               </div>
             </div>
           </div>
@@ -362,6 +362,12 @@
 <script src="/js/main.js"></script>
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 <script>
+$(document).on("click",".prevnetMove",function(e){
+  e.preventDefault();
+})
+
+
+
 $(document).on("click",".changewishlist",function(e){
   e.preventDefault();
   let productNo =$(this).attr("id");

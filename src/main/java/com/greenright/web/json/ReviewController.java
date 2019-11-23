@@ -2,12 +2,14 @@ package com.greenright.web.json;
 
 import java.util.List;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import com.greenright.domain.Member;
 import com.greenright.domain.Review;
 import com.greenright.service.ReviewService;
 import com.greenright.web.ReviewPhotoWriter;
@@ -20,13 +22,15 @@ public class ReviewController {
 
   @Transactional
   @PostMapping("add")
-  public JsonResult add(Review review,MultipartFile reviewPhoto)throws Exception{
+  public JsonResult add(Review review,MultipartFile reviewPhoto, HttpSession session)throws Exception{
     try {
       if(reviewPhoto != null) {
         review.setPhotos(reviewPhotoWriter.getPhotoFile(reviewPhoto));
       }else {
 
       }
+      Member member = (Member)session.getAttribute("loginUser");
+      review.setMemberNo(member.getNo());
       reviewService.insert(review);
       return new JsonResult().setResult(JsonResult.SUCCESS);
     }catch(Exception e) {
@@ -34,9 +38,12 @@ public class ReviewController {
     }
   }
   @GetMapping("get")
-  public JsonResult get(int no) throws Exception{
+  public JsonResult get(int no, HttpSession session) throws Exception{
     try {
       Review review = reviewService.findByReviewNo(no);
+      Member member = (Member)session.getAttribute("loginUser");
+      
+      review.setMemberNo(member.getNo());
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(review);
     }catch(Exception e) {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());

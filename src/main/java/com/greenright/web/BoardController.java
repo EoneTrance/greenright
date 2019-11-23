@@ -40,7 +40,7 @@ public class BoardController {
     if(loginMember ==null) {
       return "redirect:/greenright/main";
     }
-    return "product/form";
+    return "board/form";
   }
   @GetMapping("detailedit")
   public String detailedit(Model model, int no,HttpSession session)throws Exception {

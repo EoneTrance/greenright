@@ -62,7 +62,7 @@
                                         <i class="fas fa-comments"></i>
                                     </a>
                                     <a href="" class="heart d-flex justify-content-center align-items-center changewishlist" id ="${product.no}">
-                                        <span><i class="far fa-heart"></i></span>
+                                        <span><i class="far fa-thumbs-up"></i></span>
                                     </a>
                                 </div>
                             </div>

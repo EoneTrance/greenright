@@ -22,6 +22,7 @@ import com.greenright.domain.ProductOptionItem;
 import com.greenright.domain.Review;
 import com.greenright.domain.Seller;
 import com.greenright.service.LikeService;
+import com.greenright.service.MemberService;
 import com.greenright.service.ProductQuestionService;
 import com.greenright.service.ProductService;
 import com.greenright.service.ReviewService;
@@ -41,7 +42,8 @@ public class ProductController {
   private ProductDetailPhotoWriter productDetailPhotoWriter;
   @Resource
   private LikeService likeService;
-  
+  @Resource
+  private MemberService memberService;
   
   @GetMapping("form")
   public String form(HttpSession session) { 
@@ -126,12 +128,17 @@ public class ProductController {
   }
   
   @GetMapping("buydetail")
-  public void buydetail(Model model, int no) throws Exception {
+  public void buydetail(Model model, int no,HttpSession session) throws Exception {
     Product product = productService.get(no);
     Product productPhoto = productService.getforPhoto(no);
     List<Product>productLiST = productService.gettopbyCategoryNum(no);
-   System.out.println(product.toString());
+    Member member = (Member) session.getAttribute("loginUser");
+    String memberNo = member.getId();
+    System.out.println(memberNo);
+    int memberClass = member.getMemberClass();
     
+    model.addAttribute("memberNo",memberNo);
+    model.addAttribute("memberClass",memberClass);
     model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);
     model.addAttribute("productLiST",productLiST);

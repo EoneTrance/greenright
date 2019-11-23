@@ -21,7 +21,6 @@
   <style>
   a.active {
     margin-left: 3px;
-<<<<<<< HEAD
   }
   b {
     cursor: pointer;
@@ -29,13 +28,6 @@
   a.buy-now.d-flex.justify-content-center.align-items-center.mx-1 {
     margin-left: 0px!important;
   }
-
-=======
-}
- .my-heart {
- color: red;
- }
->>>>>>> a14bf3ca130c3794670187a1f0e827d8e9d419b4
   </style>
     <!--------------------------------------------------------------------------------------->
     <div class="hero-wrap hero-bread" style="background-image: url('../../images/main.jpg');">
@@ -113,50 +105,6 @@
                     </div>
                 </div>
                 </c:forEach> 
-           <c:forEach items="${products}" var="product">
-              <div class="col-md-6 col-lg-3 ftco-animate">
-                  <div class="product">
-                      <a href="/greenright/product/buydetail?no=${product.no}" class="img-prod">
-                      <img class="img-fluid" src='/upload/product/${product.photos[0].photoPath}'  alt="Colorlib Template" style="width:253px; height:202px; object-fit:cover;">
-                      <c:choose>
-                      <c:when test="${product.likeCheck == 1}">
-                        <span class="status right-heart" data-no="${product.no}"><i class="fas fa-heart my-heart"></i></span>
-                      </c:when>
-                      <c:otherwise>
-                        <span class="status right-heart" data-no="${product.no}" style="display: none;"><i class="fas fa-heart my-heart"></i></span>
-                      </c:otherwise>
-                      </c:choose>
-                      </a>
-                      <div class="text py-3 pb-4 px-3 text-center">
-                          <h3><a href="#">
-                              ${product.productName}
-                          </a></h3>
-                          <div class="d-flex">
-                              <div class="pricing">
-                                  <p class="price"><span class="price-sale"><fmt:formatNumber value="${product.price}" groupingUsed="true" /></span></p>
-                              </div>
-                          </div>
-                          <div class="bottom-area d-flex px-3">
-                              <div class="m-auto d-flex">
-                                  <a href="/greenright/product/buydetail?no=${product.no}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                      <i class="fas fa-comments"></i>
-                                  </a>
-                                  <a href="" class="heart d-flex justify-content-center align-items-center changewishlist" id ="${product.no}">
-                                  <c:choose>
-                                    <c:when test="${product.likeCheck == 1}">
-                                      <span><i class="fas fa-heart my-heart"></i></span>
-                                    </c:when>
-                                    <c:otherwise>
-                                      <span><i class="fas fa-heart"></i></span>
-                                    </c:otherwise>
-                                  </c:choose>
-                                  </a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </c:forEach>
             </div><!-- row 클래스 종료 -->
             <!--------------------------------------------------------------------------->
       <!--       <div class="row mt-5">
@@ -311,7 +259,7 @@ $(document).on("click",".recommendchange",function(e){
           }
           var allData = {"no" : $(this).val()}
           $.ajax({
-            url : "../greenright/json/Product/searchbyCategory",
+            url : "/greenright/json/Product/searchbyCategoryForMain",
             type : "GET",
             dataType : "json",
             data : allData,
@@ -356,12 +304,11 @@ $(document).on("click",".recommendchange",function(e){
         $(this).children(".vv").addClass("active");
           var allData = {"no" : $(this).val()}
           $.ajax({
-            url : "../greenright/json/Product/searchbyGroup",
+            url : "/greenright/json/Product/searchbyGroupForMain",
             type : "GET",
             dataType : "json",
             data : allData,
             success : function(data) {
-              console.log(data);
                var list = data.result;
               var tableTag ="";
                 for(var i = 0 ; i < list.length; i++) {
@@ -390,32 +337,36 @@ $(document).on("click",".recommendchange",function(e){
             });
           })
         
-$(document).on("click",".changewishlist",function(e){
-  e.preventDefault();
-  let productNo =$(this).attr("id");
-  let heart = $(e.currentTarget).children().first().children().first();
-  let rightHeart = $(e.currentTarget).parent().parent().parent().parent().children().first().children().eq(1);
-  $.post(
-      "/greenright/json/Like/checkLike",
-      {
-        productNo : productNo,
-      },
-      function(a) {
-        if(a.result ==0){
-          $.post("/greenright/json/Like/increaseLike",{
-            "productNo":productNo,
-          }, function(data){
-            heart.addClass('my-heart');
-            rightHeart.css('display','inline');
-          });               
-        }else{
-          $.post("/greenright/json/Like/decreaseLike",{
-            "productNo":productNo,
-          }, function(data){
-            heart.removeClass('my-heart');
-            rightHeart.css('display','none');
-          });  
-        }
-      })
-})
-</script>
+        $(document).on("click",".changewishlist",function(e){
+          e.preventDefault();
+          let productNo =$(this).attr("id");
+          let memberNo = 1;
+          $.post(
+              "/greenright/json/Like/checkLike",
+              {
+                productNo : productNo,
+                memberNo : memberNo
+              },
+              function(a) {
+                if(a.result ==0){
+                  $.post("/greenright/json/Like/increaseLike",{
+                    "productNo":productNo,
+                    "memberNo":memberNo
+                  }, function(data){
+                    swal("wishlist 에 추가되었습니다")
+                  });               
+                }else{
+                  $.post("/greenright/json/Like/decreaseLike",{
+                    "productNo":productNo,
+                    "memberNo":memberNo
+                  }, function(data){
+                   swal("wishlist 에서 삭제되었습니다.")
+                    
+                  });  
+                }
+              })
+          
+          
+          
+        })
+     </script>
