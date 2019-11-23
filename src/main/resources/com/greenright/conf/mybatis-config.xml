@@ -34,10 +34,10 @@
   <mapper resource="com/greenright/mapper/ProductPhotoMapper.xml"/>
   <mapper resource="com/greenright/mapper/ProductOptionMapper.xml"/>
   <mapper resource="com/greenright/mapper/RecommendMapper.xml"/>
+  <mapper resource="com/greenright/mapper/PrivateBoardAnswersMapper.xml"/>
+   <mapper resource="com/greenright/mapper/PrivateBoardMapper.xml"/>
   <mapper resource="com/greenright/mapper/ReviewMapper.xmL"/>
   <mapper resource="com/greenright/mapper/ReviewPhotoMapper.xml"/>
-  <mapper resource="com/greenright/mapper/ProductQuestionMapper.xml"/>
-  <mapper resource="com/greenright/mapper/ProductAnswerMapper.xml"/>
   <mapper resource="com/greenright/mapper/LikeMapper.xml"/>
   </mappers>
 </configuration>

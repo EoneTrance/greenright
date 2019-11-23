@@ -9,6 +9,7 @@ public interface ProductDao {
   Product findWithFilesBy(int no) throws Exception;
   Product findForPhoto(int no) throws Exception;
   List<Product> findAllWithFile() throws Exception;
+  List<Product> bestProductList() throws Exception;
   List<Product> findByGroupNo(HashMap<String, Object> param) throws Exception;
   List<Product> findByCategoryNo(HashMap<String, Object> param) throws Exception;
   List<Product> findAllBySeller(int no) throws Exception;
@@ -24,4 +25,6 @@ public interface ProductDao {
   List<Product> searchbyCategoryForMain(int no) throws Exception;
   List<Product> searchbyGroupForMain(int no) throws Exception;
   List<Product> getUpcyclingByMemberNo(int no) throws Exception;
+  void addProductRecommend(int productNo) throws Exception;
+  void decreaseProductRecommend(int productNo) throws Exception;
 }

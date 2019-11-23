@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="utf-8">
@@ -29,9 +30,10 @@
   width: 253px;
   height:202.39px;
  }
+ .my-heart {
+ color: red;
+ }
   </style>
-    <!--------------------------------------------------------------------------------------->
-    <!--------------------------------------------------------------------------------------->
       <!---------------------------------------------------main 뒷배경 이미지 --------------------------------------------->
      <!------------------------------------------------------------------------------------------------------------------->
      <section id="home-section" class="hero">
@@ -44,7 +46,7 @@
               <div class="col-md-12 ftco-animate text-center">
                 <h1 class="mb-2">We serve Eco &amp; Upcycling Products</h1>
                 <h2 class="subheading mb-4">We deliver Eco &amp; Upcycling Products</h2>
-                <p><a href="#" class="btn btn-primary">View Details</a></p>
+                <p><a href="shop" class="btn btn-primary">View Details</a></p>
               </div>
 
             </div>
@@ -59,7 +61,7 @@
               <div class="col-sm-12 ftco-animate text-center">
                 <h1 class="mb-2">Very Eco friendly &amp; Organic</h1>
                 <h2 class="subheading mb-4">We deliver organic foods</h2>
-                <p><a href="#" class="btn btn-primary">View Details</a></p>
+                <p><a href="shop" class="btn btn-primary">View Details</a></p>
               </div>
 
             </div>
@@ -133,7 +135,7 @@
                   <div class="text text-center">
                     <h2>GreenRight</h2>
                     <p>Let's protect the environment</p>
-                    <p><a href="#" class="btn btn-primary">Shop now</a></p>
+                    <p><a href="shop" class="btn btn-primary" >Shop now</a></p>
                   </div>
                 </div>
               </div>
@@ -171,7 +173,7 @@
       
            
             <!--------------------------------------------------- Our Products 부분--------------------------------------------->
-            <!---------------------------------------------------------------------------------------------------------------->
+            <!----------------------------------------------------------------------------------------------------------------->
             
             <section class="ftco-section">
       <div class="container">
@@ -179,240 +181,56 @@
           <div class="col-md-12 heading-section text-center ftco-animate">
             <span class="subheading">Featured Products</span>
             <h2 class="mb-4">Our Products</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
           </div>
         </div>      
       </div>
+      <!----------------------------------------------------인기상품---------------------------------------------------------->
       <div class="container">
         <div class="row">
-          <div class="col-md-6 col-lg-3 ftco-animate">
-            <div class="product" >
-              <a href="#" class="img-prod"><img class="aa" src="../../images/pr1.jpg" alt="Colorlib Template">
-                <span class="status">30%</span>
-                <div class="overlay"></div>
-              </a>
-              <div class="text py-3 pb-4 px-3 text-center">
-                <h3><a href="#">Bell Pepper</a></h3>
-                <div class="d-flex">
-                  <div class="pricing">
-                    <p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
+           <c:forEach var="product" items="${products}" varStatus="status" begin="0" end="7">
+              <div class="col-md-6 col-lg-3 ftco-animate">
+                  <div class="product">
+                      <a href="/greenright/product/buydetail?no=${product.no}" class="img-prod">
+                      <img class="img-fluid" src='/upload/product/${product.photos[0].photoPath}'  alt="Colorlib Template" style="width:253px; height:202px; object-fit:cover;">
+                      <c:choose>
+                      <c:when test="${product.likeCheck == 1}">
+                        <span class="status right-heart" data-no="${product.no}"><i class="fas fa-heart my-heart"></i></span>
+                      </c:when>
+                      <c:otherwise>
+                        <span class="status right-heart" data-no="${product.no}" style="display: none;"><i class="fas fa-heart my-heart"></i></span>
+                      </c:otherwise>
+                      </c:choose>
+                      </a>
+                      <div class="text py-3 pb-4 px-3 text-center">
+                          <h3><a href="#">
+                              ${product.productName}
+                          </a></h3>
+                          <div class="d-flex">
+                              <div class="pricing">
+                                  <p class="price"><span class="price-sale"><fmt:formatNumber value="${product.price}" groupingUsed="true" /></span></p>
+                              </div>
+                          </div>
+                          <div class="bottom-area d-flex px-3">
+                              <div class="m-auto d-flex">
+                                  <a href="/greenright/product/buydetail?no=${product.no}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                      <i class="fas fa-comments"></i>
+                                  </a>
+                                  <a href="" class="heart d-flex justify-content-center align-items-center changewishlist" id ="${product.no}">
+                                  <c:choose>
+                                    <c:when test="${product.likeCheck == 1}">
+                                      <span><i class="fas fa-heart my-heart"></i></span>
+                                    </c:when>
+                                    <c:otherwise>
+                                      <span><i class="fas fa-heart"></i></span>
+                                    </c:otherwise>
+                                  </c:choose>
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
                   </div>
-                </div>
-                <div class="bottom-area d-flex px-3">
-                  <div class="m-auto d-flex">
-                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                      <span><i class="ion-ios-menu"></i></span>
-                    </a>
-                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                      <span><i class="ion-ios-cart"></i></span>
-                    </a>
-                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                      <span><i class="ion-ios-heart"></i></span>
-                    </a>
-                  </div>
-                </div>
               </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 ftco-animate">
-            <div class="product " >
-              <a href="#" class="img-prod"><img class="aa" src="../../images/pr2.jpg" alt="Colorlib Template">
-                <div class="overlay"></div>
-              </a>
-              <div class="text py-3 pb-4 px-3 text-center">
-                <h3><a href="#">Strawberry</a></h3>
-                <div class="d-flex">
-                  <div class="pricing">
-                    <p class="price"><span>$120.00</span></p>
-                  </div>
-                </div>
-                <div class="bottom-area d-flex px-3">
-                  <div class="m-auto d-flex">
-                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                      <span><i class="ion-ios-menu"></i></span>
-                    </a>
-                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                      <span><i class="ion-ios-cart"></i></span>
-                    </a>
-                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                      <span><i class="ion-ios-heart"></i></span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 ftco-animate">
-            <div class="product">
-              <a href="#" class="img-prod"><img class="aa" src="../../images/pr3.jpg" alt="Colorlib Template">
-                <div class="overlay"></div>
-              </a>
-              <div class="text py-3 pb-4 px-3 text-center">
-                <h3><a href="#">Green Beans</a></h3>
-                <div class="d-flex">
-                  <div class="pricing">
-                    <p class="price"><span>$120.00</span></p>
-                  </div>
-                </div>
-                <div class="bottom-area d-flex px-3">
-                  <div class="m-auto d-flex">
-                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                      <span><i class="ion-ios-menu"></i></span>
-                    </a>
-                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                      <span><i class="ion-ios-cart"></i></span>
-                    </a>
-                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                      <span><i class="ion-ios-heart"></i></span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 ftco-animate">
-            <div class="product">
-              <a href="#" class="img-prod"><img class="aa" src="../../images/pr4.jpg" alt="Colorlib Template">
-                <div class="overlay"></div>
-              </a>
-              <div class="text py-3 pb-4 px-3 text-center">
-                <h3><a href="#">Purple Cabbage</a></h3>
-                <div class="d-flex">
-                  <div class="pricing">
-                    <p class="price"><span>$120.00</span></p>
-                  </div>
-                </div>
-                <div class="bottom-area d-flex px-3">
-                  <div class="m-auto d-flex">
-                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                      <span><i class="ion-ios-menu"></i></span>
-                    </a>
-                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                      <span><i class="ion-ios-cart"></i></span>
-                    </a>
-                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                      <span><i class="ion-ios-heart"></i></span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-md-6 col-lg-3 ftco-animate">
-            <div class="product">
-              <a href="#" class="img-prod"><img class="aa" src="../../images/pr5.jpg" alt="Colorlib Template">
-                <span class="status">30%</span>
-                <div class="overlay"></div>
-              </a>
-              <div class="text py-3 pb-4 px-3 text-center">
-                <h3><a href="#">Tomatoe</a></h3>
-                <div class="d-flex">
-                  <div class="pricing">
-                    <p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
-                  </div>
-                </div>
-                <div class="bottom-area d-flex px-3">
-                  <div class="m-auto d-flex">
-                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                      <span><i class="ion-ios-menu"></i></span>
-                    </a>
-                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                      <span><i class="ion-ios-cart"></i></span>
-                    </a>
-                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                      <span><i class="ion-ios-heart"></i></span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 ftco-animate">
-            <div class="product">
-              <a href="#" class="img-prod"><img class="aa" src="../../images/product-6.jpg" alt="Colorlib Template">
-                <div class="overlay"></div>
-              </a>
-              <div class="text py-3 pb-4 px-3 text-center">
-                <h3><a href="#">Brocolli</a></h3>
-                <div class="d-flex">
-                  <div class="pricing">
-                    <p class="price"><span>$120.00</span></p>
-                  </div>
-                </div>
-                <div class="bottom-area d-flex px-3">
-                  <div class="m-auto d-flex">
-                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                      <span><i class="ion-ios-menu"></i></span>
-                    </a>
-                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                      <span><i class="ion-ios-cart"></i></span>
-                    </a>
-                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                      <span><i class="ion-ios-heart"></i></span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 ftco-animate">
-            <div class="product">
-              <a href="#" class="img-prod"><img class="aa" src="../../images/product-7.jpg" alt="Colorlib Template">
-                <div class="overlay"></div>
-              </a>
-              <div class="text py-3 pb-4 px-3 text-center">
-                <h3><a href="#">Carrots</a></h3>
-                <div class="d-flex">
-                  <div class="pricing">
-                    <p class="price"><span>$120.00</span></p>
-                  </div>
-                </div>
-                <div class="bottom-area d-flex px-3">
-                  <div class="m-auto d-flex">
-                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                      <span><i class="ion-ios-menu"></i></span>
-                    </a>
-                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                      <span><i class="ion-ios-cart"></i></span>
-                    </a>
-                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                      <span><i class="ion-ios-heart"></i></span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 ftco-animate">
-            <div class="product">
-              <a href="#" class="img-prod"><img class="aa" src="../../images/product-8.jpg" alt="Colorlib Template">
-                <div class="overlay"></div>
-              </a>
-              <div class="text py-3 pb-4 px-3 text-center">
-                <h3><a href="#">Fruit Juice</a></h3>
-                <div class="d-flex">
-                  <div class="pricing">
-                    <p class="price"><span>$120.00</span></p>
-                  </div>
-                </div>
-                <div class="bottom-area d-flex px-3">
-                  <div class="m-auto d-flex">
-                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                      <span><i class="ion-ios-menu"></i></span>
-                    </a>
-                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                      <span><i class="ion-ios-cart"></i></span>
-                    </a>
-                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                      <span><i class="ion-ios-heart"></i></span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          </c:forEach>
         </div>
       </div>
     </section>
@@ -449,9 +267,8 @@
       <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section ftco-animate text-center">
-            <span class="subheading">Testimony</span>
-            <h2 class="mb-4">Our satisfied customer says</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+            <span class="subheading">Artists</span>
+            <h2 class="mb-4">Our artists introduce</h2>
           </div>
         </div>
         <div class="row ftco-animate">
@@ -465,9 +282,9 @@
                     </span>
                   </div>
                   <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Marketing Manager</span>
+                    <p class="mb-5 pl-4 line">1984년 제주에서 태어났으며,현재 경북 경산에서 살고 있다. 2014년 재활용 상품 디자인 대회 수상 경험이 있다</p>
+                    <p class="name">Dean</p>
+                    <span class="position">Upcycling Artist</span>
                   </div>
                 </div>
               </div>
@@ -479,9 +296,9 @@
                     </span>
                   </div>
                   <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Interface Designer</span>
+                    <p class="mb-5 pl-4 line">1994년 성남에서 태어났으며,현재 전북에서 살고 있다. 2017년 아이디어 상품 대회 수상 경험이 있다.</p>
+                    <p class="name">동백</p>
+                    <span class="position">Upcycling Artist</span>
                   </div>
                 </div>
               </div>
@@ -493,9 +310,9 @@
                     </span>
                   </div>
                   <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">UI Designer</span>
+                    <p class="mb-5 pl-4 line">1994년 성남에서 태어났으며,현재 전북에서 살고 있다. 2017년 아이디어 상품 대회 수상 경험이 있다.</p>
+                    <p class="name">Ys</p>
+                    <span class="position">Upcycling Artist</span>
                   </div>
                 </div>
               </div>
@@ -507,9 +324,9 @@
                     </span>
                   </div>
                   <div class="text text-center">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">System Analyst</span>
+                    <p class="mb-5 pl-4 line">1994년 성남에서 태어났으며,현재 전북에서 살고 있다. 2017년 아이디어 상품 대회 수상 경험이 있다.</p>
+                    <p class="name">미소</p>
+                    <span class="position">Upcycling Artist</span>
                   </div>
                 </div>
               </div>
@@ -520,50 +337,16 @@
     </section>
             
      <!-------------------------------------------쇼핑몰 파트너------------------------------------------------------------->
-    <!--------------------------------------------------------------------------------------------------------------------> 
     
-    <section class="ftco-section ftco-partner">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm ftco-animate">
-            <a href="#" class="partner"><img src="../../images/partner-1.png" class="img-fluid" alt="Colorlib Template"></a>
-          </div>
-          <div class="col-sm ftco-animate">
-            <a href="#" class="partner"><img src="../../images/partner-2.png" class="img-fluid" alt="Colorlib Template"></a>
-          </div>
-          <div class="col-sm ftco-animate">
-            <a href="#" class="partner"><img src="../../images/partner-3.png" class="img-fluid" alt="Colorlib Template"></a>
-          </div>
-          <div class="col-sm ftco-animate">
-            <a href="#" class="partner"><img src="../../images/partner-4.png" class="img-fluid" alt="Colorlib Template"></a>
-          </div>
-          <div class="col-sm ftco-animate">
-            <a href="#" class="partner"><img src="../../images/partner-5.png" class="img-fluid" alt="Colorlib Template"></a>
-          </div>
-        </div>
-      </div>
-    </section>
-       
-    <!------------------------------------------구독부분------------------------------------------------------------->
-    <!--------------------------------------------------------------------------------------------------------------------> 
-        <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-      <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-6">
-            <h2 style="font-size: 22px;" class="mb-0">Subcribe to our Author</h2>
-            <span>Get e-mail updates about our latest products and special upcycling</span>
-          </div>
-          <div class="col-md-6 d-flex align-items-center">
-            <form action="#" class="subscribe-form">
-              <div class="form-group d-flex">
-                <input type="text" class="form-control" placeholder="Enter email address">
-                <input type="submit" value="Subscribe" class="submit px-3">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!--------------------------------------------footer------------------------------------------>
+   
+    <!--------------------------------------------footer-end--------------------------------------->
+<!-- loader -->
+ <div id="ftco-loader" class="show fullscreen">
+<svg class="circular" width="48px" height="48px">
+<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg> 
+</div>
 <script src='/js/jquery.min.js'></script>
 <script src='/js/jquery-migrate-3.0.1.min.js'></script>
 <script src='/js/jquery.easing.1.3.js'></script>
@@ -577,4 +360,34 @@
 <script src="/js/aos.js"></script>
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
-  
+<script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+$(document).on("click",".changewishlist",function(e){
+  e.preventDefault();
+  let productNo =$(this).attr("id");
+  let heart = $(e.currentTarget).children().first().children().first();
+  let rightHeart = $(e.currentTarget).parent().parent().parent().parent().children().first().children().eq(1);
+  $.post(
+      "/greenright/json/Like/checkLike",
+      {
+        productNo : productNo,
+      },
+      function(a) {
+        if(a.result ==0){
+          $.post("/greenright/json/Like/increaseLike",{
+            "productNo":productNo,
+          }, function(data){
+            heart.addClass('my-heart');
+            rightHeart.css('display','inline');
+          });               
+        }else{
+          $.post("/greenright/json/Like/decreaseLike",{
+            "productNo":productNo,
+          }, function(data){
+            heart.removeClass('my-heart');
+            rightHeart.css('display','none');
+          });  
+        }
+      })
+})
+</script>

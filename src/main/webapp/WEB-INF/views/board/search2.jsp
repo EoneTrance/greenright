@@ -24,7 +24,6 @@
 
 <<<<<<< HEAD
 
-<jsp:include page="../greenheader.jsp"/>
 
  <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
       <div class="container">
@@ -103,13 +102,13 @@
        <button type="button" onclick="location.href='form.jsp'" id='newC' class="btn btn-primary" >글쓰기</button>
        </p>
        
-  <select id="Aselect" name="Aselect" style="height:33px;">
+  <select id="Aselect" name="Aselect" style="height:33px; margin-left:400px;">
       <option value="Aoption1">제목</option>
       <option value="Aoption2">내용</option>
       <option value="Aoption3">글쓴이</option>
     </select>
  
-    <div id="forsel" style="display:inline-block; width:auto;">
+    <div id="forsel" style="display:inline-block; width:auto; margin-right: 330px;">
       <form action='search1'>
         <input type='text' name='title' id="searchtitle" style= "width:auto;">
         <button id='search1' class="btn btn-primary" style="height:33px;">검색</button>
@@ -143,7 +142,7 @@
         </div>
     </div>
   </section>     
-=======
+
 <tbody>
 <c:forEach items="${boards}" var="board" >
   <tr class="tr1">
@@ -174,7 +173,7 @@
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
 
->>>>>>> c28f244e9d67e839ca34df71c49211e075300ec3
+
 <script>
 $('#my-paging').on('click','.page-item', () => {
   /*  var currentLi = $(event.target).parent().attr('data-page'); 
@@ -249,7 +248,6 @@ $('.page-item').click((e) => {
 </script>  
 <br>
 <br>
-<jsp:include page="../greenfooter.jsp"/>
 <script>
       $('#Aselect')
           .change(

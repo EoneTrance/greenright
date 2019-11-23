@@ -12,7 +12,7 @@
     <result column="title" property="title"/>
     <result column="contents" property="contents"/>
     <result column="answer_tf" property="answerTrueFalse"/>
-    <result column="answer" property="answer"/>
+    <result column="answers" property="answers"/>
     <result column="id" property="id" />
   </resultMap>
   
@@ -35,6 +35,14 @@
     <result column="auth_key" property="authkey"/>
     <result column="password_authkey" property="passwordAuthkey"/>
   </resultMap>
+  
+  <resultMap type="PrivateBoardAnswers" id="PrivateBoardAnswersMap">
+    <id column="private_question_id" property="privateQuestion"/>
+    <result column="created_date" property="createdDate"/>
+    <result column="answers" property="contents"/>
+  </resultMap>
+  
+  
 
   <sql id="basicColumn">
   select 
@@ -45,6 +53,7 @@
     title,
     contents,
     answer_tf
+    
   </sql>
 
   <sql id="where">
@@ -52,10 +61,25 @@
   </sql>
   
   <select id="findBy" parameterType="int" resultMap="PrivateBoardMap">
+   select 
+    p.private_question_id,
+    p.questIon_type,
+    p.member_id,
+    p.created_date,
+    p.title,
+    p.contents,
+    p.answer_tf,
+    a.answers
+    from private_questions p
+      left outer join private_answers a on p.private_question_id=a.private_question_id
+    where p.private_question_id=#{no}
+  </select>
+  
+ <!--  <select id="findBy" parameterType="int" resultMap="PrivateBoardMap">
     <include refid="basicColumn"/>
     from private_questions
     where private_question_id=#{no}
-  </select>
+  </select> -->
   
     <insert id="insert" parameterType="PrivateBoard">
     INSERT INTO private_questions (
@@ -73,43 +97,55 @@
  );
   </insert>
   
-  <select id="findAll" parameterType="int" resultMap="PrivateBoardMap">
+  <select id="findAll" parameterType="map" resultMap="PrivateBoardMap">
     select 
-	     p.private_question_id,
-	     p.questIon_type,
-	     p.member_id,
-	     p.created_date,
-	     p.title,
-	     p.contents,
-	     p.answer_tf,
-	     m.id
+       p.private_question_id,
+       p.questIon_type,
+       p.member_id,
+       p.created_date,
+       p.title,
+       p.contents,
+       p.answer_tf,
+       m.id
     from private_questions p
       left outer join members m on p.member_id=m.member_id
-     where p.member_id=#{no}
-      <if test="type != null and type != 'default'">questIon_type like #{type}</if>
+     where p.member_id=#{memberNo}
+      <if test="questionType != null and questionType != 'default'"> and questIon_type like #{questionType}</if>
+      <if test="answerTF != null and answerTF != 'default'"> and answer_tf like #{answerTF}</if>
     order by private_question_id asc 
     limit #{offset}, #{pageSize}
   </select>
   
-
-
-  <select id="countAll" resultType="int">
-    select count(*) from private_questions
+    <select id="managerFindAll" parameterType="map" resultMap="PrivateBoardMap">
+    select 
+       p.private_question_id,
+       p.questIon_type,
+       p.member_id,
+       p.created_date,
+       p.title,
+       p.contents,
+       p.answer_tf,
+       m.id
+    from private_questions p
+      left outer join members m on p.member_id=m.member_id
+      <if test="questionType != null and questionType != 'default'"> and questIon_type like #{questionType}</if>
+      <if test="answerTF != null and answerTF != 'default'"> and answer_tf like #{answerTF}</if>
+    order by private_question_id asc 
+    limit #{offset}, #{pageSize}
   </select>
   
-   <insert id="managerInsert" parameterType="PrivateBoard">
-    INSERT INTO private_questions (
-      questIon_type
-      , member_id 
-      , created_date
-      , title
-      , contents)
-      VALUES (
-      #{type}
-      , #{memberNo}
-      , curdate()
-      , #{title}
-      , #{contents}
- );
-  </insert>
+  <update id="stateUpdate" parameterType="PrivateBoard">
+    update private_questions set 
+    answer_tf = #{answerTrueFalse}
+    where private_question_id=#{no}
+  </update>
+
+  <select id="countAll" resultType="int" parameterType="map">
+    select count(*) from private_questions
+    <where>
+    <if test="questionType != null and questionType != 'default'"> and questIon_type like #{questionType}</if>
+    </where>
+  </select>
+  
+ 
 </mapper>

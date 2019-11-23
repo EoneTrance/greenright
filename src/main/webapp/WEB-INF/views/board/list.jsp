@@ -50,7 +50,6 @@
       <div id="np" style="float:left;"></div>
       
       <br>
-
       <table class='table table-hover' id="products">
 
         <thead class="thead-primary">

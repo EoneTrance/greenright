@@ -27,6 +27,7 @@ public class Product  implements Serializable {
   private Group group;
   private Like like;
   private int RecommendCount;
+  private int likeCheck;
   public int getNo() {
     return no;
   }
@@ -51,7 +52,6 @@ public class Product  implements Serializable {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-  
   public int getDiy() {
     return diy;
   }
@@ -63,6 +63,12 @@ public class Product  implements Serializable {
   }
   public void setPrice(int price) {
     this.price = price;
+  }
+  public int getQuantity() {
+    return quantity;
+  }
+  public void setQuantity(int quantity) {
+    this.quantity = quantity;
   }
   public String getProductName() {
     return productName;
@@ -112,12 +118,6 @@ public class Product  implements Serializable {
   public void setGroup(Group group) {
     this.group = group;
   }
-  public int getQuantity() {
-    return quantity;
-  }
-  public void setQuantity(int quantity) {
-    this.quantity = quantity;
-  }
   public Like getLike() {
     return like;
   }
@@ -136,6 +136,12 @@ public class Product  implements Serializable {
   public void setDetailPhotos(List<ProductDetailPhoto> detailPhotos) {
     this.detailPhotos = detailPhotos;
   }
+  public int getLikeCheck() {
+    return likeCheck;
+  }
+  public void setLikeCheck(int likeCheck) {
+    this.likeCheck = likeCheck;
+  }
   @Override
   public String toString() {
     return "Product [no=" + no + ", groupNo=" + groupNo + ", memberNo=" + memberNo
@@ -143,10 +149,8 @@ public class Product  implements Serializable {
         + quantity + ", productName=" + productName + ", description=" + description
         + ", expirationDate=" + expirationDate + ", origin=" + origin + ", photos=" + photos
         + ", options=" + options + ", detailPhotos=" + detailPhotos + ", seller=" + seller
-        + ", group=" + group + ", like=" + like + ", RecommendCount=" + RecommendCount + "]";
+        + ", group=" + group + ", like=" + like + ", RecommendCount=" + RecommendCount
+        + ", likeCheck=" + likeCheck + "]";
   }
-  
-  
-
   
 }

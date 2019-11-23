@@ -23,9 +23,8 @@
 
 </style>
 
-<<<<<<< HEAD
 
-<jsp:include page="../greenheader.jsp"/>
+
 
  <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
       <div class="container">
@@ -48,7 +47,7 @@
        
    
           
-=======
+
 <div id='content'>
 <h1>게시판</h1>
  
@@ -67,7 +66,7 @@
   <th>추천수</th>
 </tr>
 </thead>
-<<<<<<< HEAD
+
      <tbody id='tb1'>
           <c:forEach items="${boards}" var="board">
             <tr class="tr1">
@@ -91,7 +90,7 @@
        <button type="button" onclick="location.href='form.jsp'" id='newC' class="btn btn-primary" >글쓰기</button>
        </p>
        
-  <select id="Aselect" name="Aselect" style="height:33px;">
+  <select id="Aselect" name="Aselect" style="height:33px; margin-left:400px;">
       <option value="Aoption1">제목</option>
       <option value="Aoption2">내용</option>
       <option value="Aoption3">글쓴이</option>
@@ -99,7 +98,7 @@
  
     <div id="forsel" style="display:inline-block; width:auto;">
       <form action='search1'>
-        <input type='text' name='title' id="searchtitle" style= "width:auto;">
+        <input type='text' name='title' id="searchtitle" style= "width:auto; margin-right: 330px;">
         <button id='search1' class="btn btn-primary" style="height:33px;">검색</button>
       </form>
     </div>
@@ -131,7 +130,7 @@
         </div>
     </div>
   </section>     
-=======
+
 <tbody>
 <c:forEach items="${boards}" var="board" >
   <tr class="tr1">
@@ -162,7 +161,6 @@
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
 
->>>>>>> c28f244e9d67e839ca34df71c49211e075300ec3
 <script>
 $('#my-paging').on('click','.page-item', () => {
   /*  var currentLi = $(event.target).parent().attr('data-page'); 
@@ -234,11 +232,9 @@ $('.page-item').click((e) => {
 
 
 
-<<<<<<< HEAD
 </script>  
 <br>
 <br>
-<jsp:include page="../greenfooter.jsp"/>
 <script>
       $('#Aselect')
           .change(
@@ -301,7 +297,4 @@ $('.page-item').click((e) => {
       $setRows.submit();
     </script>
 
-=======
-$setRows.submit();
 </script>
->>>>>>> c28f244e9d67e839ca34df71c49211e075300ec3

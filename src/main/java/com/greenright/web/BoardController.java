@@ -70,9 +70,12 @@ public class BoardController {
   
   
   @GetMapping("delete")
-  public String delete(int no) throws Exception {
-    boardService.delete(no);
-
+  public String delete(int no, HttpSession session) throws Exception {
+    
+    Board board = boardService.get(no);
+    if(board.getMemberNo() == ((Member)session.getAttribute("loginUser")).getNo() || ((Member)session.getAttribute("loginUser")).getMemberClass() == 0) {
+      boardService.delete(no);
+    } 
     return "redirect:list";
   }
   

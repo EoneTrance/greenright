@@ -83,7 +83,7 @@
               <i class="far fa-thumbs-up recommend" style="font-size:35px;"></i>
               <hr id="hr1">
               <br>
-              <c:if test="${board.memberNo == loginUser.no}">
+              <c:if test="${board.memberNo == loginUser.no || loginUser.memberClass == 0}">
               <p style="text-align: right;">
                 <button type="button" class="btn btn-primary"
                   onclick="location.href='detailedit.jsp?no=${board.no}'">수정</button>
@@ -233,7 +233,6 @@ $(document).ready(function() {
         "boardNo": boardNo,
         "contents": contents
       }, function(result) {
-        
         var comment = "<div class='my-comment-div comment-"+result.no+"' data-no='"+result.no+"'>"; 
           comment += "<span class='id-"+result.no+"'>"+result.id+"</span>" 
           comment += "<span class='createdDate-"+result.no+"'>"+result.createdDate+"</span>";

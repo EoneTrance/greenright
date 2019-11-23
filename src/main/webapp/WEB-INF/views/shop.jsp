@@ -21,21 +21,10 @@
   <style>
   a.active {
     margin-left: 3px;
-<<<<<<< HEAD
-  }
-  b {
-    cursor: pointer;
-  }
-  a.buy-now.d-flex.justify-content-center.align-items-center.mx-1 {
-    margin-left: 0px!important;
-  }
-
-=======
 }
  .my-heart {
  color: red;
  }
->>>>>>> a14bf3ca130c3794670187a1f0e827d8e9d419b4
   </style>
     <!--------------------------------------------------------------------------------------->
     <div class="hero-wrap hero-bread" style="background-image: url('../../images/main.jpg');">
@@ -80,39 +69,6 @@
 
             <!------------------------------------------------------------------------------->
             <div class="row addto">
-                 <c:forEach items="${products}" var="product">
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="/greenright/product/buydetail?no=${product.no}" class="img-prod">
-                        <img class="img-fluid" src='/upload/product/${product.photos[0].photoPath}'  alt="Colorlib Template" style="width:253px; height:202px; object-fit:cover;"> 
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">
-                                ${product.productName}
-                            </a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                
-                                    <p class="price"><span class="price-sale"><fmt:formatNumber value="${product.price}" groupingUsed="true" /></span></p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="/greenright/product/buydetail?no=${product.no}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <i class="fas fa-comments"></i>
-                                    </a>
-                                    <a href="" class="heart d-flex justify-content-center align-items-center changewishlist" id ="${product.no}">
-                                        <span><i class="far fa-heart"></i></span>
-                                    </a>
-                                    <a href="" id=${product.no } class="buy-now d-flex justify-content-center align-items-center mx-1 recommendchange">
-                                        <span><i class="far fa-thumbs-up"></i></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </c:forEach> 
            <c:forEach items="${products}" var="product">
               <div class="col-md-6 col-lg-3 ftco-animate">
                   <div class="product">
@@ -218,49 +174,6 @@
 <script src="/js/main.js"></script>
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-$(document).on("click",".recommendchange",function(e){
-  e.preventDefault();
-  let productNo =$(this).attr("id");
-  $.post(
-      "/greenright/json/UpcyclingRecommend/checkLike",
-      {
-        upcyclingRecommendProductNo : productNo
-      },
-      function(a) {
-        if(a.result ==0){
-          $.post("/greenright/json/UpcyclingRecommend/increaseRecommend",{
-            "upcyclingRecommendProductNo":productNo
-          }, function(data){
-            swal("상품을 추천하셨습니다. ")
-            
-            $.post("/greenright/json/UpcyclingRecommend/getRecommendNum",{
-              "upcyclingRecommendProductNo":productNo
-            }, function(data){
-            })
-            
-          });               
-        }else{
-          $.post("/greenright/json/UpcyclingRecommend/decreaseRecommend",{
-            "upcyclingRecommendProductNo":productNo
-          }, function(data){
-           swal("상품 추천을 취소하셨습니다.")
-           
-           $.post("/greenright/json/UpcyclingRecommend/getRecommendNum",{
-             "upcyclingRecommendProductNo":productNo
-           }, function(data){
-           }) 
-            
-          });  
-        }
-      })
-  
-})
-</script>
-
-
-
-
-<script>
    // 카테고리 검새액(유기농, 가구 ... )
       $(function(){
         $(".searchbtn").click(function(){
@@ -332,12 +245,12 @@ $(document).on("click",".recommendchange",function(e){
                 tableTag += "<p class='price'><span class='price-sale'>"+list[i].price+"</span></p>"
                 tableTag += "</div></div><div class='bottom-area d-flex px-3'>"
                 tableTag += "<div class='m-auto d-flex'>"
-                tableTag += "<a href='/greenright/product/buydetail?no="+list[i].no+"' class='add-to-cart d-flex justify-content-center align-items-center text-center'>"
+                tableTag += "<a href='#' class='add-to-cart d-flex justify-content-center align-items-center text-center'>"
                 tableTag += "<i class='fas fa-comments'></i></a>"
-                tableTag += "<a href='' class='heart d-flex justify-content-center align-items-center changewishlist' id="+list[i].no+">"
-                tableTag += "<span><i class='far fa-heart'></i></span></a>"
-                tableTag += "<a href='' id="+list[i].no+" class='buy-now d-flex justify-content-center align-items-center mx-1 recommendchange'>"
-                tableTag += "<span><i class='far fa-thumbs-up'></i></span>"
+                tableTag += "<a href='#' class='buy-now d-flex justify-content-center align-items-center mx-1'>"
+                tableTag += "<span><i class='fas fa-cart-plus'></i></span></a>"
+                tableTag += "<a href='#' class='heart d-flex justify-content-center align-items-center '>"
+                tableTag += "<span><i class='far fa-heart'></i></span>"
                 tableTag += "</a></div></div></div></div></div>";
               };
               $(".addto").html(tableTag);  
@@ -377,12 +290,12 @@ $(document).on("click",".recommendchange",function(e){
                   tableTag += "<p class='price'><span class='price-sale'>"+list[i].price+"</span></p>"
                   tableTag += "</div></div><div class='bottom-area d-flex px-3'>"
                   tableTag += "<div class='m-auto d-flex'>"
-                  tableTag += "<a href='/greenright/product/buydetail?no="+list[i].no+"' class='add-to-cart d-flex justify-content-center align-items-center text-center'>"
+                  tableTag += "<a href='#' class='add-to-cart d-flex justify-content-center align-items-center text-center'>"
                   tableTag += "<i class='fas fa-comments'></i></a>"
-                  tableTag += "<a href='' class='heart d-flex justify-content-center align-items-center changewishlist' id="+list[i].no+">"
-                  tableTag += "<span><i class='far fa-heart'></i></span></a>"
-                  tableTag += "<a href='' id="+list[i].no+" class='buy-now d-flex justify-content-center align-items-center mx-1 recommendchange'>"
-                  tableTag += "<span><i class='far fa-thumbs-up'></i></span>"
+                  tableTag += "<a href='#' class='buy-now d-flex justify-content-center align-items-center mx-1'>"
+                  tableTag += "<span><i class='fas fa-cart-plus'></i></span></a>"
+                  tableTag += "<a href='#' class='heart d-flex justify-content-center align-items-center '>"
+                  tableTag += "<span><i class='far fa-heart'></i></span>"
                   tableTag += "</a></div></div></div></div></div>";
                 };
                 $(".addto").html(tableTag);  

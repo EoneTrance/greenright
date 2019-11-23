@@ -187,5 +187,18 @@ public class DefaultProductService implements ProductService{
   public List<Product> getUpcyclingByMemberNo(int no) throws Exception {
     return productDao.getUpcyclingByMemberNo(no);
   }
+  public void addProductRecommend(int productNo) throws Exception {
+    productDao.addProductRecommend(productNo);
+  }
+  
+  @Override
+  public void decreaseProductRecommend(int productNo) throws Exception {
+    productDao.decreaseProductRecommend(productNo);
+  }
+
+  @Override
+  public List<Product> bestProductList() throws Exception {
+    return productDao.bestProductList();
+  }
 }
 

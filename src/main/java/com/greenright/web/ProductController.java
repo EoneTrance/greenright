@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import com.greenright.domain.Like;
 import com.greenright.domain.Member;
 import com.greenright.domain.Product;
 import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
 import com.greenright.domain.Review;
 import com.greenright.domain.Seller;
+import com.greenright.service.LikeService;
 import com.greenright.service.ProductQuestionService;
 import com.greenright.service.ProductService;
 import com.greenright.service.ReviewService;
@@ -37,6 +39,9 @@ public class ProductController {
   private ProductQuestionService productQuestionService;
   @Resource
   private ProductDetailPhotoWriter productDetailPhotoWriter;
+  @Resource
+  private LikeService likeService;
+  
   
   @GetMapping("form")
   public String form(HttpSession session) { 
@@ -167,8 +172,20 @@ public class ProductController {
   }
   
   @RequestMapping("/main")
-  public void main(Model model) throws Exception {
+  public void shop(Model model, HttpSession session) throws Exception {
     List<Product> products = productService.list();
+    if(session.getAttribute("loginUser") == null) {
+      
+    } else {
+      List<Like> likeList = likeService.findLikeProduct(((Member)session.getAttribute("loginUser")).getNo());
+      for(int i=0;i<products.size();i++) {
+        for(int j=0;j<likeList.size();j++) {
+          if(products.get(i).getNo() == likeList.get(j).getProductNo()) {
+            products.get(i).setLikeCheck(1);
+          }
+        }
+      }
+    }
     model.addAttribute("products", products);
   }
 

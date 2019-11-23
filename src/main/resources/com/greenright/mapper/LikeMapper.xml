@@ -8,6 +8,14 @@
     <id column ="member_id" property="memberNo"/>
   </resultMap>
   
+  <select id="findLikeProduct" parameterType="int" resultMap="LikeMap">
+    select
+      product_id,
+      member_id
+    from likes
+    where member_id=#{no}
+  </select>
+  
 <insert id="insertLike" parameterType="Like"
     useGeneratedKeys="true" keyColumn="boards_id" keyProperty="no">
     insert into likes(product_id,member_id)

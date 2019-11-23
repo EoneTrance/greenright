@@ -66,6 +66,14 @@
     <result column="product_detail_photopath" property="photoPath"/>
     </collection>
 	</resultMap>
+ 
+  <update id="addProductRecommend" parameterType="int">
+    update products set recommend_count = recommend_count + 1 where product_id = #{productNo}
+  </update>
+
+  <update id="decreaseProductRecommend" parameterType="int">
+    update products set recommend_count = recommend_count - 1 where product_id = #{productNo}
+  </update>
 
   <insert id="insert" parameterType="Product"
     useGeneratedKeys="true" keyColumn="product_id" keyProperty="no">
@@ -135,25 +143,43 @@ select DISTINCT
   </select>
   
   
-  <select id="findAllWithFile" resultMap="ProductWithFilesMap">
+	<select id="findAllWithFile" resultMap="ProductWithFilesMap">
+		select
+		p.product_id,
+		p.quantity,
+		p.group_id,
+		p.member_id,
+		p.price,
+		p.product_name,
+		p.description,
+		f.product_id,
+		f.photo_path
+		from products p
+		left outer join product_photos f on (p.product_id = f.product_id AND
+		f.main_photo_flag = 0)
+		order by p.product_id DESC
+	</select>
+	
+	 <select id="bestProductList" resultMap="ProductWithFilesMap">
     select
-    p.product_id,
-    p.quantity,
-    p.group_id,
-    p.member_id,
-    p.price,
-    p.product_name,
-    p.description,
-    f.product_id,
-    f.photo_path
-    from products p
-    left outer join product_photos f on (p.product_id = f.product_id AND
-    f.main_photo_flag = 0)
-    order by p.product_id DESC
+	    p.product_id,
+	    p.recommend_count,
+	    p.quantity,
+	    p.group_id,
+	    p.member_id,
+	    p.price,
+	    p.product_name,
+	    p.description,
+	    f.product_id,
+	    f.photo_path
+	  from products p
+	    left outer join product_photos f on (p.product_id = f.product_id AND
+	    f.main_photo_flag = 0) 
+    order by p.recommend_count DESC
   </select>
-  
-  <select id="findAllBySeller" resultMap="ProductWithFilesMap"
-    parameterType="int">
+	
+ 	<select id="findAllBySeller" resultMap="ProductWithFilesMap"
+ 	  parameterType="int">
 select
     p.product_id,
     p.group_id,
