@@ -69,7 +69,6 @@
     <script src="/exhibition/js/dragslideshow.js"></script>
     <script>
       (function() {
-
         var overlay = document.getElementById( 'overlay' ),
           overlayClose = overlay.querySelector( 'button' ),
           header = document.getElementById( 'header' )
@@ -107,11 +106,9 @@
           closeOverlay = function() {
             classie.add( overlay, 'hide' );
           };
-
         // toggle between fullscreen and small slideshow
         switchBtnn.addEventListener( 'click', toggleSlideshow );
         // close overlay
         overlayClose.addEventListener( 'click', closeOverlay );
-
       }());
     </script>
