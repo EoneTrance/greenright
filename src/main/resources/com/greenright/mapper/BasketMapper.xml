@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.greenright.dao.BasketDao">
+
+  <resultMap type="Basket" id="BasketMap">
+    <id column="member_id" property="memberNo"/>
+    <result column="option_item_id" property="optionItemNo"/>
+    <result column="registered_date" property="registeredDate"/>
+  </resultMap>
+  
+  <resultMap type="Basket" id="BasketWithAllMap">
+    <id column="member_id" property="memberNo"/>
+    <result column="option_item_id" property="optionItemNo"/>
+    <result column="registered_date" property="registeredDate"/>
+  
+    <collection property="productOptionItem" ofType="ProductOptionItem">
+      <id column="option_item_id" property="no"/>
+      <result column="options_id" property="optionsNo"/>
+      <result column="option_item_matters" property="optionItemMatter"/>
+      <result column="options_price" property="optionsPrice"/>
+      <result column="options_quantity" property="optionsQuantity"/>
+    </collection>
+  </resultMap>
+  
+  <sql id="selectBasket">
+    select
+      member_id,
+      option_item_id,
+      registered_date,
+      quantity
+  </sql>
+  
+  <sql id="whereBasket">
+    where member_id=#{memberNo}
+  </sql> 
+ 
+  <insert id="insert" parameterType="Basket">
+    insert into
+      baskets(
+        member_id,
+        option_item_id,
+        registered_date,
+        quantity)
+      values(
+        #{memberNo},
+        #{optionItemNo},
+        now(),
+        #{quantity})
+  </insert>
+  
+  <select id="findBy" parameterType="Basket" resultMap="BasketMap">
+    <include refid="selectBasket"/>
+    from baskets
+    where member_id=#{memberNo} and option_item_id=#{optionItemNo}
+  </select>
+  
+  <select id="findAll" parameterType="int" resultMap="BasketMap">
+    <include refid="selectBasket"/>
+    from baskets
+    <include refid="whereBasket"/>
+    order by registered_date desc
+  </select>
+  
+  
+  <select id="findWithAll"
+          parameterType="int"
+          resultMap="BasketWithAllMap">
+    select
+      b.member_id,
+      b.option_item_id,
+      b.registered_date,
+      b.quantity,
+      o.options_id,
+      o.option_item_matters,
+      o.options_price
+    from 
+      baskets b
+        left outer join option_items o on b.option_item_id=o.option_item_id
+    where
+      b.member_id=#{memberNo}
+  </select>
+  
+  <update id="update" parameterType="Basket">
+    update baskets
+    <set>
+      <if test="quantity != null">quantity= quantity + #{quantity}</if>
+    </set>
+    where member_id=#{memberNo} and option_item_id=#{optionItemNo}
+  </update>
+  
+</mapper>

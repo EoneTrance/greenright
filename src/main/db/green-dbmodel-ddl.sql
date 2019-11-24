@@ -79,6 +79,7 @@ DROP TABLE IF EXISTS comments RESTRICT;
 -- 회원
 CREATE TABLE members (
   member_id          INTEGER      NOT NULL, -- 회원번호
+  member_class       INTEGER      NOT NULL DEFAULT 1, -- 회원구분
   registered_date    DATE         NOT NULL, -- 가입일
   id                 VARCHAR(20)  NOT NULL, -- 아이디
   password           VARCHAR(255) NOT NULL, -- 비밀번호
@@ -133,10 +134,10 @@ ALTER TABLE members
 CREATE TABLE sellers (
   member_id      INTEGER     NOT NULL, -- 회원번호
   bank_name      VARCHAR(50) NOT NULL, -- 은행명
-  account_num    INTEGER     NOT NULL, -- 판매자계좌번호
+  account_num    VARCHAR(50) NOT NULL, -- 판매자계좌번호
   account_holder VARCHAR(50) NOT NULL, -- 예금주 명
   tel            VARCHAR(50) NOT NULL, -- 고객응대전화번호
-  point          INTEGER     NOT NULL  -- 판매포인트
+  point          INTEGER     NOT NULL DEFAULT 0 -- 판매포인트
 );
 
 -- 판매회원
@@ -295,13 +296,14 @@ CREATE TABLE deliverys (
   order_id            INTEGER      NULL,     -- 주문번호
   invoice_num         VARCHAR(255) NOT NULL, -- 송장번호
   delivery_date       DATE         NOT NULL, -- 배송일자
-  delivery_flag       BOOLEAN      NOT NULL, -- 배송상태
+  delivery_flag       BOOLEAN      NOT NULL DEFAULT 0, -- 배송상태
   courier_name        VARCHAR(50)  NOT NULL, -- 택배사명
   reciever_name       VARCHAR(50)  NOT NULL, -- 수취인명
   delivery_address    VARCHAR(255) NOT NULL, -- 배송지주소
   reciever_cell_phone VARCHAR(50)  NOT NULL, -- 수취인휴대전화
   reciever_tel        VARCHAR(50)  NULL,     -- 수취인일반전화
-  reciever_email      VARCHAR(40)  NULL      -- 수취인이메일
+  reciever_email      VARCHAR(40)  NULL,     -- 수취인이메일
+  reciever_request    VARCHAR(255) NULL      -- 배송시요청사항
 );
 
 -- 배송
@@ -323,7 +325,7 @@ ALTER TABLE deliverys
 -- 장바구니상품
 CREATE TABLE baskets (
   member_id       INTEGER NOT NULL, -- 회원번호
-  product_id      INTEGER NOT NULL, -- 상품번호
+  option_item_id  INTEGER NOT NULL, -- 옵션항목번호
   registered_date DATE    NOT NULL, -- 등록일
   quantity        INTEGER NOT NULL  -- 수량
 );
@@ -332,8 +334,8 @@ CREATE TABLE baskets (
 ALTER TABLE baskets
   ADD CONSTRAINT PK_baskets -- 장바구니상품 기본키
     PRIMARY KEY (
-      member_id,  -- 회원번호
-      product_id  -- 상품번호
+      member_id,      -- 회원번호
+      option_item_id  -- 옵션항목번호
     );
 
 -- 옵션
@@ -391,10 +393,8 @@ ALTER TABLE reviews
 
 -- 작가개인전시
 CREATE TABLE exhibitions (
-  member_id       INTEGER      NOT NULL, -- 회원번호
-  name            VARCHAR(50)  NOT NULL, -- 작가명
-  photo_path      VARCHAR(255) NOT NULL, -- 작가사진경로
-  main_photo_path VARCHAR(255) NOT NULL  -- 대표작품경로
+  member_id INTEGER     NOT NULL, -- 회원번호
+  name      VARCHAR(50) NOT NULL  -- 작가명
 );
 
 -- 작가개인전시
@@ -547,18 +547,18 @@ ALTER TABLE recommends
 
 -- 주문상품
 CREATE TABLE order_products (
-  order_id   INTEGER NOT NULL, -- 주문번호
-  product_id INTEGER NOT NULL, -- 상품번호
-  quantity   INTEGER NOT NULL, -- 수량
-  price      INTEGER NOT NULL  -- 금액
+  order_id       INTEGER NOT NULL, -- 주문번호
+  option_item_id INTEGER NOT NULL, -- 옵션항목번호
+  quantity       INTEGER NOT NULL, -- 수량
+  price          INTEGER NOT NULL  -- 금액
 );
 
 -- 주문상품
 ALTER TABLE order_products
   ADD CONSTRAINT PK_order_products -- 주문상품 기본키
     PRIMARY KEY (
-      order_id,   -- 주문번호
-      product_id  -- 상품번호
+      order_id,       -- 주문번호
+      option_item_id  -- 옵션항목번호
     );
 
 -- 적립금
@@ -597,7 +597,9 @@ ALTER TABLE private_answers
 CREATE TABLE option_items (
   option_item_id      INTEGER      NOT NULL, -- 옵션항목번호
   options_id          INTEGER      NOT NULL, -- 옵션번호
-  option_item_matters VARCHAR(255) NOT NULL  -- 옵션항목사항
+  option_item_matters VARCHAR(255) NOT NULL, -- 옵션항목사항
+  options_price       INTEGER      NOT NULL, -- 옵션가격
+  options_quantity    INTEGER      NOT NULL  -- 옵션수량
 );
 
 -- 옵션항목
@@ -715,12 +717,12 @@ ALTER TABLE baskets
 
 -- 장바구니상품
 ALTER TABLE baskets
-  ADD CONSTRAINT FK_products_TO_baskets -- 상품 -> 장바구니상품
+  ADD CONSTRAINT FK_option_items_TO_baskets -- 옵션항목 -> 장바구니상품
     FOREIGN KEY (
-      product_id -- 상품번호
+      option_item_id -- 옵션항목번호
     )
-    REFERENCES products ( -- 상품
-      product_id -- 상품번호
+    REFERENCES option_items ( -- 옵션항목
+      option_item_id -- 옵션항목번호
     );
 
 -- 옵션
@@ -885,12 +887,12 @@ ALTER TABLE order_products
 
 -- 주문상품
 ALTER TABLE order_products
-  ADD CONSTRAINT FK_products_TO_order_products -- 상품 -> 주문상품
+  ADD CONSTRAINT FK_option_items_TO_order_products -- 옵션항목 -> 주문상품
     FOREIGN KEY (
-      product_id -- 상품번호
+      option_item_id -- 옵션항목번호
     )
-    REFERENCES products ( -- 상품
-      product_id -- 상품번호
+    REFERENCES option_items ( -- 옵션항목
+      option_item_id -- 옵션항목번호
     );
 
 -- 적립금

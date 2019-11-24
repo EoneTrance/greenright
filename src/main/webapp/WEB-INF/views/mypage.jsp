@@ -31,6 +31,10 @@
   </div>
 </div>
     
+<!-- <div class="pricing-header px-3 py-3 pt-md-1 pb-md-4 mx-auto text-center">
+  <h1 class="display-4 font-weight-bold">My Page</h1>
+  <p class="lead">마이페이지</p>
+</div> -->
 
 <section class="ftco-section py-5">
 <div id="myPageContent">
@@ -73,9 +77,7 @@
           <ul class="list-unstyled mt-3 mb-4">
             <li>관심상품 관리</li>
           </ul>
-          <a href="mypage/wishlist">
           <button type="button" class="searchbtn btn-primary btn-lg btn-block">WISHLIST</button>
-          </a>
         </div>
       </div>
     </div>

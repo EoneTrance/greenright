@@ -9,25 +9,25 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @PropertySource("classpath:com/greenright/conf/mailsender.properties")
 public class MailSenderConfig {
-  
+
   @Value("${mail.host}")
   String host;
 
   @Value("${mail.port}")
   int port;
-  
+
   @Value("${mail.username}")
   String username;
-  
+
   @Value("${mail.password}")
   String password;
-  
+
   @Value("${mail.properties.mail.smtp.auth}")
   String smtpAuth;
-  
+
   @Value("${mail.properties.mail.smtp.starttls.enable}")
   String smtpStarttlsEnable;
-  
+
   @Bean
   public JavaMailSender mailSource() {
     JavaMailSenderImpl jms = new JavaMailSenderImpl();
@@ -42,7 +42,7 @@ public class MailSenderConfig {
     props.setProperty("mail.debug", "true");
     props.setProperty("mail.smtp.auth", "true");
     props.setProperty("mail.smtp.starttls.enable", "true");
-    
+
     return jms;
   }
 }

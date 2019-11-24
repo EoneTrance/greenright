@@ -4,49 +4,49 @@ import java.io.Serializable;
 
 public class ProductPhoto implements Serializable {
   private static final long serialVersionUID = 1L;
-private int no ;
- private int productNo;
- private String photoPath;
- private int mainPhoto;
- 
- public int getNo() {
-  return no;
-}
+  private int no;
+  private int productNo;
+  private String photoPath;
+  private int mainPhoto;
 
-public void setNo(int no) {
-  this.no = no;
-}
+  public int getNo() {
+    return no;
+  }
 
-public int getProductNo() {
-  return productNo;
-}
+  public void setNo(int no) {
+    this.no = no;
+  }
 
-public void setProductNo(int productNo) {
-  this.productNo = productNo;
-}
+  public int getProductNo() {
+    return productNo;
+  }
 
-public String getPhotoPath() {
-  return photoPath;
-}
+  public void setProductNo(int productNo) {
+    this.productNo = productNo;
+  }
 
-public void setPhotoPath(String photoPath) {
-  this.photoPath = photoPath;
-}
+  public String getPhotoPath() {
+    return photoPath;
+  }
 
-public int getMainPhoto() {
-  return mainPhoto;
-}
+  public void setPhotoPath(String photoPath) {
+    this.photoPath = photoPath;
+  }
 
-public void setMainPhoto(int mainPhoto) {
-  this.mainPhoto = mainPhoto;
-}
+  public int getMainPhoto() {
+    return mainPhoto;
+  }
 
-@Override
-public String toString() {
-  return "ProductPhoto [no=" + no + ", productNo=" + productNo + ", photoPath=" + photoPath
-      + ", mainPhoto=" + mainPhoto + "]";
-}
+  public void setMainPhoto(int mainPhoto) {
+    this.mainPhoto = mainPhoto;
+  }
 
- 
- 
+  @Override
+  public String toString() {
+    return "ProductPhoto [no=" + no + ", productNo=" + productNo + ", photoPath=" + photoPath
+        + ", mainPhoto=" + mainPhoto + "]";
+  }
+
+
+
 }

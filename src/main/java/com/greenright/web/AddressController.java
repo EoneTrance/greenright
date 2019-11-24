@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/address")
 public class AddressController {
-  
+
   @GetMapping("/daumJuso")
-  public void jusoPopup() {
-  }
+  public void jusoPopup() {}
 }

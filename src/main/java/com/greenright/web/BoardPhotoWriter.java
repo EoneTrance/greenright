@@ -11,13 +11,13 @@ import com.greenright.domain.BoardPhoto;
 
 @Component
 public class BoardPhotoWriter {
-  
+
   String uploadDir;
-  
+
   public BoardPhotoWriter(ServletContext sc) {
     uploadDir = sc.getRealPath("/upload/board");
   }
-  
+
   public List<BoardPhoto> getPhotoFiles(MultipartFile[] filePath) throws Exception {
     List<BoardPhoto> photoFiles = new ArrayList<>();
     for (MultipartFile file : filePath) {

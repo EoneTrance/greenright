@@ -10,8 +10,6 @@ import com.greenright.service.SellerService;
 @Service
 public class DefaultSellerService implements SellerService {
 
-  public static final String COMPLETE = "COMPLETE";
-  
   @Resource
   private SellerDao sellerDao;
 
@@ -30,12 +28,12 @@ public class DefaultSellerService implements SellerService {
   public Seller getInfoAll(Seller seller) throws Exception {
     return sellerDao.findInfoAll(seller);
   }
-  
+
   @Override
   public Seller getTel(String tel) throws Exception {
     return sellerDao.findTel(tel);
   }
-  
+
   @Override
   public Seller getAccount(String accountNum) {
     return sellerDao.findAccount(accountNum);

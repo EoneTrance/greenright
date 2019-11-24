@@ -664,7 +664,29 @@ button.btn.btn-primary.CartBut {
   src="/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
 <script src="/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
-
+<scrip></scrip>
+$(document).on("click", "#add-to-cart", function(e){
+  $.ajax({
+    type: "GET",
+    url: "../json/basket/add",
+    data: "no=" + $("#my-select-option").select().val() + "&quantity=" + $("#quantity").val(),
+    dataType: "json",
+    async: false,
+    success: function(basketAddResult) {
+      if (basketAddResult.state == "success") {
+        swal("장바구니에 상품이 담겼습니다.");
+      } else if (basketAddResult.state == "failure") {
+        swal("장바구니에 상품을 담는 중 오류가 발생했습니다.");
+      }
+    },
+    error: function(basketAddResult) {
+      swal("장바구니에 상품을 담는 중 오류가 발생했습니다.");
+    }
+    
+  });
+  
+});
+</script>
 <script>
   $(document)
       .ready(

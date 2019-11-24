@@ -47,39 +47,11 @@
     border-bottom:solid RGBA(130,174,70,0.5) 1px;
   }
   
-  .notChange, .notChange:focus {
-    border: none !important;
-    background-color: rgba(0,0,0,0) !important;
-    outline: none !important;
-  }
-  
   #memberInfoForm input, #memberInfoForm button, #memberInfoForm select {
     width:49%;
     padding-left: 5px;
     padding-right: 5px;
   }
-  
-  /* #memberInfoForm form .my-btn {
-    background-color:#82AE46;
-    color:#FFFFFF;
-  } */
-  
-  /* .hr-sect {
-    display: flex;
-    flex-basis: 100%;
-    align-items: center;
-  }
-  
-  .hr-sect::before,
-  .hr-sect::after {
-    content: "";
-    flex-grow: 1;
-    background: rgba(0, 0, 0, 0.2);
-    height: 1px;
-    font-size: 0px;
-    line-height: 0px;
-    margin: 0px 10px;
-  } */
   
 </style>
 
@@ -90,30 +62,6 @@
 
 <section class="ftco-section py-5">
 <div id="myPageContent">
-
-<!-- <nav class="navbar navbar-inverse visible-xs">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">MyPage</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="my-menu active"><a href="userinfo">기본정보</a></li>
-        <li class="my-menu"><a href="order">주문관리</a></li>
-        <li class="my-menu"><a href="#">관심상품</a></li>
-        <li class="my-menu"><a href="#">업적</a></li>
-        <li class="my-menu"><a href="sale">판매관리</a></li>
-        <li class="my-menu"><a href="exhibition">개인전 관리</a></li>
-        <li class="my-menu"><a href="memberConversion">판매회원 전환</a></li>
-      </ul>
-    </div>
-  </div>
-</nav> -->
 
 <div class="container-fluid">
   <div class="row">
@@ -164,7 +112,7 @@
           <tr>
             <th class="my-col-3">별명</th>
             <td class="my-col-9">
-            <input type="text" name="nickname" class="input-md" value='${loginUser.nickname}'/>
+            <input type="text" name="name" class="input-md" value='${loginUser.name}'/>
             </td>
           </tr>
           <tr>
@@ -588,29 +536,6 @@ if ('${loginUser.question}' != '') {
     }
   });
   
-  
-  /* $("#my-adress-form").on("focusout", function(e){
-    var getConditionTag = $(e.target).siblings("span.inputState");
-    
-    if (e.target.value == "" && e.target.type != "button") {
-      checkInputState[0] = false;
-      $(e.target).css("border", "solid #C7CED5 1px");
-      $(getConditionTag).css("color", "red");
-      $(getConditionTag).css("font-size", "80%");
-      $(getConditionTag).html("필수 입력 항목입니다.");
-      e.stopPropagation();
-      
-    } else if (e.target.value != "" && e.target.type != "button") {
-      checkInputState[0] = true;
-      $(e.target).css("border", "solid #C7CED5 1px");
-      $(e.target).css("background-color", "#FFFFFF");
-      $(getConditionTag).css("color", "gray");
-      $(getConditionTag).css("font-size", "80%");
-      $(getConditionTag).html("");
-      e.stopPropagation();
-    }
-  }); */
-  
   function checkState() {
     var essentials = $(".my-essential");
     
@@ -630,12 +555,6 @@ if ('${loginUser.question}' != '') {
         return false;
       }
     }
-    
-    /* for (var check of checkInputState) {
-      if (check == false) {
-        return false;
-      }
-    } */
     
     return true;
   }

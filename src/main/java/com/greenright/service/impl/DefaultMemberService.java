@@ -12,7 +12,7 @@ import com.greenright.service.MemberService;
 public class DefaultMemberService implements MemberService {
 
   public static final String COMPLETE = "COMPLETE";
-  
+
   @Resource
   private MemberDao memberDao;
 
@@ -21,10 +21,10 @@ public class DefaultMemberService implements MemberService {
     return memberDao.findAll(keyword);
   }
 
-  //  @Override
-  //  public List<Member> search(String keyword) throws Exception {
-  //    return memberDao.findByKeyword(keyword);
-  //  }
+  // @Override
+  // public List<Member> search(String keyword) throws Exception {
+  // return memberDao.findByKeyword(keyword);
+  // }
 
   @Override
   public Member get(int no) throws Exception {
@@ -58,17 +58,17 @@ public class DefaultMemberService implements MemberService {
   public Member getAccount(Member member) throws Exception {
     return memberDao.findByQuestionAnswer(member);
   }
-  
+
   @Override
   public Member getAccountWithId(Member member) throws Exception {
     return memberDao.findByQuestionAnswerWithId(member);
   }
-  
+
   @Override
   public Member getUserInfo(Member member) throws Exception {
     return memberDao.findUserInfo(member);
   }
-  
+
   @Override
   public Member getPhone(String value) throws Exception {
     return memberDao.findByCellPhone(value);
@@ -78,7 +78,7 @@ public class DefaultMemberService implements MemberService {
   public int passwordUpdate(Member member) throws Exception {
     return memberDao.passwordUpdate(member);
   }
-  
+
   @Transactional
   @Override
   public void insert(Member member) throws Exception {
@@ -96,7 +96,7 @@ public class DefaultMemberService implements MemberService {
       throw new Exception("해당 번호의 데이터가 없습니다.");
     }
   }
-  
+
   @Override
   public void updateClass(Member member) {
     memberDao.updateClass(member);

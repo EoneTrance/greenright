@@ -19,7 +19,7 @@ import com.greenright.service.SellerService;
 public class MypageController {
   @Resource
   private MemberService memberService;
-  
+
   @Resource
   private SellerService sellerService;
   
@@ -33,27 +33,39 @@ public class MypageController {
   public void mypage(Member member) throws Exception {
   }
   
+  @Resource
+  private OrderService orderService;
+
+  @GetMapping("")
+  public void mypage(Member member) throws Exception {}
+
   @GetMapping("userinfo")
   public void userinfo(HttpSession session, Model model) throws Exception {
     model.addAttribute("title", " - 기본정보");
-    
+
   }
-  
+
   @GetMapping("sellerinfo")
   public String sellerinfo(HttpSession session, Model model) throws Exception {
-    Member loginUser = (Member)session.getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     if (loginUser.getMemberClass() != 2) {
       return "redirect:userinfo";
     }
     model.addAttribute("title", " - 판매회원 정보");
     return "mypage/sellerinfo";
   }
-  
+
   @GetMapping("order")
-  public void order(Model model) throws Exception {
+  public void order(HttpSession session, Model model) throws Exception {
+    Member member = (Member)session.getAttribute("loginUser");
+    List<OrderProduct> orderProductList = orderProductService.getByMember(member.getNo());
+    for (OrderProduct or : orderProductList) {
+      System.out.println(or.getOrder().getPaymentPrice());
+    }
+    model.addAttribute("orderProductList", orderProductList);
     model.addAttribute("title", " - 구매내역");
   }
-  
+
   @GetMapping("wishlist")
   public void wishlist(Model model,HttpSession session) throws Exception {
     model.addAttribute("title", " - 관심상품");
@@ -64,20 +76,20 @@ public class MypageController {
     }
     model.addAttribute("productList",productList);
   }
-  
+
   @GetMapping("sale")
   public String sale(HttpSession session, Model model) throws Exception {
-    Member loginUser = (Member)session.getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     if (loginUser.getMemberClass() != 2) {
       return "redirect:userinfo";
     }
     model.addAttribute("title", " - 판매내역");
     return "mypage/sale";
   }
-  
+
   @GetMapping("exhibition")
   public String exhibition(HttpSession session, Model model) throws Exception {
-    Member loginUser = (Member)session.getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     if (loginUser.getMemberClass() != 2) {
       return "redirect:userinfo";
     }
@@ -86,16 +98,16 @@ public class MypageController {
     model.addAttribute("productList",productList);
     return "mypage/exhibition";
   }
-  
+
   @GetMapping("conversion")
   public String conversion(HttpSession session, Model model) throws Exception {
-    Member loginUser = (Member)session.getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     if (loginUser.getMemberClass() != 1) {
       return "redirect:sellerinfo";
     }
     model.addAttribute("title", " - 회원 전환");
     return "mypage/conversion";
   }
-  
+
 }
 

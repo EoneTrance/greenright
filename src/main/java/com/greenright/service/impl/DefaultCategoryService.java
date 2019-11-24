@@ -7,7 +7,7 @@ import com.greenright.dao.CategoryDao;
 import com.greenright.domain.Category;
 import com.greenright.service.CategoryService;
 
-// BoardService 기본 구현체 
+// BoardService 기본 구현체
 //
 @Service
 public class DefaultCategoryService implements CategoryService {

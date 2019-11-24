@@ -14,15 +14,19 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @PropertySource("classpath:com/greenright/conf/jdbc.properties")
 public class DatabaseConfig {
-  
-  @Value("${jdbc.driver}") String jdbcDriver;
 
-  @Value("${jdbc.url}") String jdbcUrl;
-  
-  @Value("${jdbc.username}") String jdbcUsername;
-  
-  @Value("${jdbc.password}") String jdbcPassword;
-  
+  @Value("${jdbc.driver}")
+  String jdbcDriver;
+
+  @Value("${jdbc.url}")
+  String jdbcUrl;
+
+  @Value("${jdbc.username}")
+  String jdbcUsername;
+
+  @Value("${jdbc.password}")
+  String jdbcPassword;
+
   @Bean
   public DataSource dataSource() {
     DriverManagerDataSource ds = new DriverManagerDataSource();
@@ -32,11 +36,11 @@ public class DatabaseConfig {
     ds.setPassword(this.jdbcPassword);
     return ds;
   }
-  
+
   @Bean
   public PlatformTransactionManager transctionManager(DataSource dataSource) {
     return new DataSourceTransactionManager(dataSource);
   }
-  
-  
+
+
 }

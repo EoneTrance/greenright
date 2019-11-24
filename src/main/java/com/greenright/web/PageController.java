@@ -8,7 +8,5 @@ import javax.servlet.http.HttpServletResponse;
 // => 프론트 컨트롤러는 이 규칙에 따라 메서드를 호출한다.
 //
 public interface PageController {
-  public String execute(
-      HttpServletRequest request, 
-      HttpServletResponse response) throws Exception;
+  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

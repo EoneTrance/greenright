@@ -32,6 +32,10 @@
   options_name=#{optionName}
   where options_id =#{no}
   </update>
+  
+  <select id="findBy" parameterType="int" resultMap="options">
+    select * from options where options_id=#{no}
+  </select>
 </mapper>
 
 

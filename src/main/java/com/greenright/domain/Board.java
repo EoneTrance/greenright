@@ -7,11 +7,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Board implements Serializable {
   private static final long serialVersionUID = 1L;
-  
+
   private int no;
   private String title;
   private String contents;
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private Date createdDate;
   private int memberNo;
   private int viewCount;

@@ -25,8 +25,7 @@ public class MemberController {
   private UserMailSendService mailSender;
 
   @GetMapping("form")
-  public void form() {
-  }
+  public void form() {}
 
   @PostMapping("join")
   public String join(HttpSession session, Member member) throws Exception {
@@ -61,19 +60,20 @@ public class MemberController {
   }
 
   @PostMapping("findResult/*")
-  public String findResult(Model model, Member member, HttpServletRequest request) throws Exception {
+  public String findResult(Model model, Member member, HttpServletRequest request)
+      throws Exception {
     Member foundMember;
     if (request.getRequestURI().endsWith("id")) {
       foundMember = memberService.getAccount(member);
       model.addAttribute("path", "findId");
       if (foundMember != null) {
-        model.addAttribute("foundMember",foundMember);
+        model.addAttribute("foundMember", foundMember);
       }
     } else if (request.getRequestURI().endsWith("pw")) {
       foundMember = memberService.getAccountWithId(member);
       model.addAttribute("path", "findPw");
       if (foundMember != null) {
-        model.addAttribute("foundMember",foundMember);
+        model.addAttribute("foundMember", foundMember);
         mailSender.mailSendWithUserKey(foundMember, UserMailSendService.FINDACCOUNT);
       }
     }
