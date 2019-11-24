@@ -110,30 +110,6 @@
 <section class="ftco-section py-5">
 <div id="myPageContent">
 
-<!-- <nav class="navbar navbar-inverse visible-xs">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">MyPage</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="my-menu"><a href="userinfo">기본정보</a></li>
-        <li class="my-menu active"><a href="order">주문관리</a></li>
-        <li class="my-menu"><a href="#">관심상품</a></li>
-        <li class="my-menu"><a href="#">업적</a></li>
-        <li class="my-menu"><a href="sale">판매관리</a></li>
-        <li class="my-menu"><a href="exhibition">개인전관리</a></li>
-        <li class="my-menu"><a href="memberConversion">판매회원 전환</a></li>
-      </ul>
-    </div>
-  </div>
-</nav> -->
-
 <div class="container-fluid">
   <div class="row">
     <div class="my-col-20 sidenav mypage-sidenav hidden-xs px-1">
@@ -147,8 +123,7 @@
       <h4 class="font-weight-bold ml-2">구매</h4>
       <ul class="nav flex-column nav-pills nav-stacked text-center mb-4">
         <li class="my-menu active"><a href="order">구매내역</a></li>
-        <li class="my-menu"><a href="#section3">관심상품</a></li>
-        <li class="my-menu"><a href="#section3">업적</a></li>
+        <li class="my-menu"><a href="wishlist">관심상품</a></li>
       </ul>
       <h4 class="font-weight-bold ml-2">판매</h4>
       <ul id="sellerMenu" class="nav flex-column nav-pills nav-stacked text-center">
@@ -256,7 +231,7 @@
               <td class="my-product text-left py-2">
                 <div class="row">
                   <div class="col-sm-3 px-0">
-                    <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal${status.index}" data-whatever="@getbootstrap">
+                    <img id="product-photo" src="/upload/product/${saleProduct.productOptionItem.productOption.product.photos[0]}" data-toggle="modal" data-target="#exampleModal${status.index}" data-toggle="modal" data-target="#exampleModal${status.index}" data-whatever="@getbootstrap">
                     <div class="modal fade bd-example-modal-lg" id="exampleModal${status.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -283,13 +258,13 @@
                                 <td class="my-product text-left py-2">
                                   <div class="row">
                                     <div class="col-sm-3 px-0">
-                                      <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
+                                      <img id="product-photo" src="/upload/product/${saleProduct.productOptionItem.productOption.product.photos[0]}" data-toggle="modal" data-target="#exampleModal${status.index}" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
                                     </div>
                                     <div class="col-sm-9 px-0" style="font-size:12px">
                                       주문번호: <span id="product-id" >${orderProduct.order.no}</span><br>
                                       상품명: <span id="product-name">${orderProduct.productOptionItem.productOption.product.productName}</span><br>
                                       옵션: <span id="product-option">${orderProduct.productOptionItem.optionItemMatter}</span><hr class="my-1">
-                                      가격: <span id="product-price"><span style="font-size:15px;font-weight:bold;">${orderProduct.price}</span><c:if test="${orderProduct.quantity != 0}">원 x ${orderProduct.quantity}개</c:if>
+                                      가격: <span id="product-price"><span style="font-size:15px;font-weight:bold;">${orderProduct.price}</span>원<c:if test="${orderProduct.quantity > 1}"> x ${orderProduct.quantity}개</c:if>
                                       </span>
                                     </div>
                                   </div>
@@ -315,7 +290,8 @@
                               <tr>
                                 <td class="my-payment-date">${orderProduct.order.paymentDate}</td>
                                 <td class="my-payment-way">${orderProduct.order.paymentWay}</td>
-                                <td class="my-price" style="border-right:none;"><span class="font-weight-bold">${orderProduct.order.paymentPrice}</span>원 (배송비 포함)</td>
+                                <td class="my-price" style="border-right:none;"><span id="product-price"><span style="font-size:15px;font-weight:bold;">${(orderProduct.price * orderProduct.quantity) + 2500}</span>원
+                                      </span>(배송비 포함)</td>
                               </tr>
                             </tbody>
                             </table>
@@ -368,7 +344,7 @@
                     주문번호: <span id="product-id" >${orderProduct.order.no}</span><br>
                     상품명: <span id="product-name">${orderProduct.productOptionItem.productOption.product.productName}</span><br>
                     옵션: <span id="product-option">${orderProduct.productOptionItem.optionItemMatter}</span><hr class="my-1">
-                    가격: <span id="product-price" style="font-size:15px;font-weight:bold;">${orderProduct.order.paymentPrice}</span>원
+                    가격: <span id="product-price"><span style="font-size:15px;font-weight:bold;">${orderProduct.price}</span>원<c:if test="${orderProduct.quantity > 1}"> x ${orderProduct.quantity}개</c:if></span>
                   </div>
                 </div>
               </td>
@@ -386,10 +362,10 @@
             <ul>
               <li><a href="#">&lt;</a></li>
               <li class="active"><span>1</span></li>
-              <li><a href="#">2</a></li>
+              <!-- <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
+              <li><a href="#">5</a></li> -->
               <li><a href="#">&gt;</a></li>
             </ul>
           </div>
@@ -442,9 +418,10 @@
 
 if(${loginUser.memberClass} == 2) {
   $("#infoMenu").append(
-      "<li class='my-menu'><a href='sellerinfo'>판매정보</a></li>");
+      "<li class='my-menu'><a href='sellerinfo'>판매자 정보</a></li>");
   $("#sellerMenu").append(
-      "<li class='my-menu'><a href='sale'>판매내역</a></li>"
+      "<li class='my-menu'><a href='manage'>판매물품 관리</a></li>"
+    + "<li class='my-menu'><a href='sale'>판매내역</a></li>"
     + "<li class='my-menu'><a href='exhibition'>개인전 관리</a></li>");
 } else {
   $("#sellerMenu").append(

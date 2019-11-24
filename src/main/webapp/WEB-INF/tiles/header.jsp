@@ -60,9 +60,13 @@
           </a>
           <div class="dropdown-menu my-0" aria-labelledby="dropdown04">
             <a id="my-dropdown-hover" class="dropdown-item" href="/greenright/mypage/userinfo">PROFILE</a>
+            <a id="my-dropdown-hover" class="dropdown-item my-sellerinfo" href="/greenright/mypage/sellerinfo" style="display:none">SELLERINFO</a>
             <a id="my-dropdown-hover" class="dropdown-item" href="/greenright/mypage/order">ORDER</a>
-            <a id="my-dropdown-hover" class="dropdown-item" href="/greenright/mypage/sale">SALE</a>
-            <a id="my-dropdown-hover" class="dropdown-item" href="/greenright/mypage/exhibition">MY EXHIBITION</a>
+            <a id="my-dropdown-hover" class="dropdown-item" href="/greenright/mypage/wishlist">WISHLIST</a>
+            <a id="my-dropdown-hover" class="dropdown-item my-conversion" href="/greenright/mypage/conversion" style="display:none">CONVERSION</a>
+            <a id="my-dropdown-hover" class="dropdown-item my-manage" href="/greenright/mypage/manage" style="display:none">PRODUCT MANAGE</a>
+            <a id="my-dropdown-hover" class="dropdown-item my-sale" href="/greenright/mypage/sale" style="display:none">SALE</a>
+            <a id="my-dropdown-hover" class="dropdown-item my-exhibition" href="/greenright/mypage/exhibition" style="display:none">MY EXHIBITION</a>
             <hr>
             <a id='my-dropdown-hover' class='dropdown-item' href='/greenright/auth/logout'>LOGOUT</a>
           </div>
@@ -77,26 +81,34 @@
 function mypage() {
   location.href="/greenright/mypage";
 }
-
-var loginUser = '${loginUser.id}';
-var loginStateY = document.querySelectorAll(".my-login-state-y");
-var loginStateN = document.querySelectorAll(".my-login-state-n");
-if (loginUser == null || loginUser == '') {
-  for (var stateY of loginStateY) {
-    stateY.style.display = 'none';
+window.onload = (function(){
+  var loginUser = '${loginUser.id}';
+  var loginStateY = document.querySelectorAll(".my-login-state-y");
+  var loginStateN = document.querySelectorAll(".my-login-state-n");
+  if (loginUser == null || loginUser == '') {
+    for (var stateY of loginStateY) {
+      stateY.style.display = 'none';
+    }
+    for (var stateN of loginStateN) {
+      stateN.style.display = 'inline-block';
+    }
+  } else {
+    for (var stateN of loginStateN) {
+      stateN.style.display = 'none';
+    }
+    for (var stateY of loginStateY) {
+      stateY.style.display = 'inline-block';
+    }
+    if (${loginUser.memberClass} == 2) {
+      $(".my-sellerinfo").css("display", "inline-block");
+      $(".my-manage").css("display", "inline-block");
+      $(".my-sale").css("display", "inline-block");
+      $(".my-exhibition").css("display", "inline-block");
+    } else {
+      $(".my-conversion").css("display", "inline-block");
+    }
   }
-  for (var stateN of loginStateN) {
-    stateN.style.display = 'inline-block';
-  }
-} else {
-  for (var stateN of loginStateN) {
-    stateN.style.display = 'none';
-  }
-  for (var stateY of loginStateY) {
-    stateY.style.display = 'inline-block';
-  }
-}
-
+});
 </script>
 
 <!-- <script>

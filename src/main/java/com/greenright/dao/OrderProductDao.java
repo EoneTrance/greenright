@@ -7,4 +7,5 @@ public interface OrderProductDao {
   int insert(OrderProduct orderProduct) throws Exception;
   List<OrderProduct> findBy(int no) throws Exception;
   List<OrderProduct> findByMember(int no) throws Exception;
+  List<OrderProduct> findBySeller(int no) throws Exception;
 }

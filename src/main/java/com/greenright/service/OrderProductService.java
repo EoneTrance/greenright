@@ -7,4 +7,5 @@ public interface OrderProductService {
   int insert(OrderProduct orderproduct) throws Exception;
   List<OrderProduct> get(int no) throws Exception;
   List<OrderProduct> getByMember(int no) throws Exception;
+  List<OrderProduct> getBySeller(int no) throws Exception;
 }

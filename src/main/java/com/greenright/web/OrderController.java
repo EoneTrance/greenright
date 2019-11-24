@@ -112,12 +112,12 @@ public class OrderController {
     
     String paymentWay;
     switch (order.getPaymentWay()) {
-      case "samsung" : paymentWay = "삼성페이";
-      case "card" : paymentWay = "카드";
-      case "trans" : paymentWay = "실시간 계좌이체";
-      case "vbank" : paymentWay = "무통장 입금 (가상계좌)";
-      case "phone" : paymentWay = "휴대폰 소액결제";
-      default : paymentWay = "카드";
+      case "samsung" : paymentWay = "삼성페이"; break;
+      case "card" : paymentWay = "카드"; break;
+      case "trans" : paymentWay = "실시간 계좌이체"; break;
+      case "vbank" : paymentWay = "무통장 입금 (가상계좌)"; break;
+      case "phone" : paymentWay = "휴대폰 소액결제"; break;
+      default: paymentWay = "카드"; break;
     }
     order.setPaymentWay(paymentWay);
     

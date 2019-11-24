@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" href="/node_modules/@chenfengyuan/datepicker/dist/datepicker.min.css">
 <link rel="stylesheet" href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
@@ -128,8 +129,7 @@
       <h4 class="font-weight-bold ml-2">구매</h4>
       <ul class="nav flex-column nav-pills nav-stacked text-center mb-4">
         <li class="my-menu"><a href="order">구매내역</a></li>
-        <li class="my-menu"><a href="#section3">관심상품</a></li>
-        <li class="my-menu"><a href="#section3">업적</a></li>
+        <li class="my-menu"><a href="wishlist">관심상품</a></li>
       </ul>
       <h4 class="font-weight-bold ml-2">판매</h4>
       <ul id="sellerMenu" class="nav flex-column nav-pills nav-stacked text-center">
@@ -213,14 +213,15 @@
               <th class="text-center my-col-2">구매자</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="my-SaleList">
+          <c:forEach items="${saleProductList}" var="saleProduct" varStatus="status">
             <tr>
-              <td class="my-date">2019-09-09</td>
+              <td class="my-date">${saleProduct.order.paymentDate}</td>
               <td class="my-product text-left py-2">
                 <div class="row">
                   <div class="col-sm-3 px-0">
-                    <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
-                    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <img id="product-photo" src="/upload/product/${saleProduct.productOptionItem.productOption.product.photos[0]}" data-toggle="modal" data-target="#exampleModal${status.index}" data-whatever="@getbootstrap">
+                    <div class="modal fade bd-example-modal-lg" id="exampleModal${status.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -234,30 +235,31 @@
                             <table class="col-sm-12 table-hover text-center my-table my-product-table" cellpadding="20" cellspacing="1">
                             <thead>
                               <tr>
-                                <th class="text-center my-col-2">날짜</th>
+                                <th class="text-center my-col-2">구매일</th>
                                 <th class="text-center my-col-6">상품</th>
-                                <th class="text-center my-col-2">상태</th>
+                                <th class="text-center my-col-2">배송상태</th>
                                 <th class="text-center my-col-2">구매자</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
-                                <td class="my-date">2019-09-09</td>
+                                <td class="my-date">${saleProduct.order.paymentDate}</td>
                                 <td class="my-product text-left py-2">
                                   <div class="row">
                                     <div class="col-sm-3 px-0">
-                                      <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
+                                      <img id="product-photo" src="/upload/product/${saleProduct.productOptionItem.productOption.product.photos[0]}" data-toggle="modal" data-target="#exampleModal${status.index}" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
                                     </div>
                                     <div class="col-sm-9 px-0" style="font-size:12px">
-                                      주문번호: <span id="product-id" >10238374</span><br>
-                                      상품명: <span id="product-name">코트</span><br>
-                                      옵션: <span id="product-option">95</span><hr class="my-1">
-                                      가격: <span id="product-price" style="font-size:15px;font-weight:bold;">200,200</span> 원
+                                      주문번호: <span id="product-id" >${saleProduct.order.no}</span><br>
+                                      상품명: <span id="product-name">${saleProduct.productOptionItem.productOption.product.productName}</span><br>
+                                      옵션: <span id="product-option">${saleProduct.productOptionItem.optionItemMatter}</span><hr class="my-1">
+                                      가격: <span id="product-price"><span style="font-size:15px;font-weight:bold;">${saleProduct.price}</span>원<c:if test="${saleProduct.quantity > 1}"> x ${saleProduct.quantity}개</c:if>
+                                      </span>
                                     </div>
                                   </div>
                                 </td>
-                                <td class="my-state">배송완료</td>
-                               <td class="my-seller">이원주</td>
+                                <td class="my-state">배송준비중</td>
+                               <td class="my-buyer">${saleProduct.order.delivery.recieverName}</td>
                               </tr>
                             </tbody>
                             </table>
@@ -275,9 +277,10 @@
                             </thead>
                             <tbody>
                               <tr>
-                                <td class="my-payment-date">2019-09-09</td>
-                                <td class="my-payment-way">무통장입금</td>
-                                <td class="my-price font-weight-bold" style="border-right:none;">200,200</td>
+                                <td class="my-payment-date">${saleProduct.order.paymentDate}</td>
+                                <td class="my-payment-way">${saleProduct.order.paymentWay}</td>
+                                <td class="my-price" style="border-right:none;"><span id="product-price"><span style="font-size:15px;font-weight:bold;">${(saleProduct.price * saleProduct.quantity) + 2500}</span>원
+                                      </span>(배송비 포함)</td>
                               </tr>
                             </tbody>
                             </table>
@@ -290,530 +293,54 @@
                               <tr>
                                 <th class="text-center my-col-2">이름</th>
                                 <td class="my-col-10">
-                                  <input type="text" name="name" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.name}' readonly/>
+                                  <input type="text" name="name" class="input-md notChange" maxlength="8"  style="width:20%;" readonly
+                                  value='${saleProduct.order.delivery.recieverName}'/>
                                 </td>
                               </tr>
                               <tr>
                                 <th class="text-center my-col-2">연락처</th>
                                 <td class="my-col-10">
-                                  <input type="text" name="cellphone" class="input-md" maxlength="8" style="width:20%;" value='${loginUser.cellPhone}' readonly/>
+                                  <input type="text" name="cellphone" class="input-md notChange" maxlength="8" style="width:20%;" readonly
+                                  value='${saleProduct.order.delivery.recieverCellPhone}'/>
                                 </td>
                               </tr>
                               <tr>
-                                <th class="text-center my-col-2">주소</th>
+                                <th class="text-center my-col-2">배송지</th>
                                 <td class="my-col-10">
-                                  <input type="text" name="address" class="input-md" style="width:10%;" value='${loginUser.postalCode}' readonly/>
-                                  <input type="text" name="address" class="input-md" style="width:44%;margin-right:2px" value='${loginUser.defaultAddress}' readonly/>
-                                  <input type="text" name="address" class="input-md" style="width:44%;" value='${loginUser.detailAddress}' readonly/>
+                                  <input type="text" name="address" class="input-md notChange" style="width:100%" readonly
+                                  value='${saleProduct.order.delivery.deliveryAddress}'/>
                                 </td>
                               </tr>
                               <tr>
                                 <th class="text-center my-col-2">요청사항</th>
                                 <td class="my-col-10">
-                                  <input type="text" name="name" class="input-md" style="width:99.6%" value='${loginUser.id}' readonly/>
+                                  <input type="text" name="name" class="input-md notChange" style="width:100%" readonly
+                                  value='${saleProduct.order.delivery.recieverRequest}'/>
                                 </td>
                               </tr>
                             </tbody>
                             </table>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">CLOSE</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">배송정보 수정</button>
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="col-sm-9 px-0" style="font-size:12px">
-                    주문번호: <span id="product-id" >10238374</span><br>
-                    상품명: <span id="product-name">코트</span><br>
-                    옵션: <span id="product-option">95</span><hr class="my-1">
-                    가격: <span id="product-price" style="font-size:15px;font-weight:bold;">200,200</span> 원
+                    주문번호: <span id="product-id" >${saleProduct.order.no}</span><br>
+                    상품명: <span id="product-name">${saleProduct.productOptionItem.productOption.product.productName}</span><br>
+                    옵션: <span id="product-option">${saleProduct.productOptionItem.optionItemMatter}</span><hr class="my-1">
+                    가격: <span id="product-price"><span style="font-size:15px;font-weight:bold;">${saleProduct.price}</span>원<c:if test="${saleProduct.quantity > 1}"> x ${saleProduct.quantity}개</c:if></span>
                   </div>
                 </div>
               </td>
-              <td class="my-state">배송완료</td>
-              <td class="my-seller">이원주</td>
+              <td class="my-state">배송준비중</td>
+              <td class="my-buyer">${saleProduct.order.delivery.recieverName}</td>
             </tr>
-            <tr>
-              <td class="my-date">2019-09-09</td>
-              <td class="my-product text-left py-2">
-                <div class="row">
-                  <div class="col-sm-3 px-0">
-                    <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
-                    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h3 class="modal-title" id="exampleModalLabel">주문 상세정보</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <h5 class="my-modal-h5">주문정보</h5>
-                            <table class="col-sm-12 table-hover text-center my-table my-product-table" cellpadding="20" cellspacing="1">
-                            <thead>
-                              <tr>
-                                <th class="text-center my-col-2">날짜</th>
-                                <th class="text-center my-col-6">상품</th>
-                                <th class="text-center my-col-2">상태</th>
-                                <th class="text-center my-col-2">구매자</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td class="my-date">2019-09-09</td>
-                                <td class="my-product text-left py-2">
-                                  <div class="row">
-                                    <div class="col-sm-3 px-0">
-                                      <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
-                                    </div>
-                                    <div class="col-sm-9 px-0" style="font-size:12px">
-                                      주문번호: <span id="product-id" >10238374</span><br>
-                                      상품명: <span id="product-name">코트</span><br>
-                                      옵션: <span id="product-option">95</span><hr class="my-1">
-                                      가격: <span id="product-price" style="font-size:15px;font-weight:bold;">200,200</span> 원
-                                    </div>
-                                  </div>
-                                </td>
-                                <td class="my-state">배송완료</td>
-                               <td class="my-seller">이원주</td>
-                              </tr>
-                            </tbody>
-                            </table>
-                            <hr>
-                            <br>
-                            
-                            <h5 class="my-modal-h5">결제정보</h5>
-                            <table class="col-sm-12 table-hover text-center my-table my-product-table" cellpadding="20" cellspacing="1">
-                            <thead>
-                              <tr>
-                                <th class="text-center my-col-4">결제일</th>
-                                <th class="text-center my-col-4">결제방법</th>
-                                <th class="text-center my-col-4">결제금액</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td class="my-payment-date">2019-09-09</td>
-                                <td class="my-payment-way">무통장입금</td>
-                                <td class="my-price font-weight-bold" style="border-right:none;">200,200</td>
-                              </tr>
-                            </tbody>
-                            </table>
-                            <hr>
-                            <br>
-                            
-                            <h5 class="my-modal-h5">배송정보</h5>
-                            <table class="col-sm-12 table-hover text-center my-table my-table-row my-product-table my-table-modal">
-                            <tbody>
-                              <tr>
-                                <th class="text-center my-col-2">이름</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="name" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.name}' readonly/>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th class="text-center my-col-2">연락처</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="cellphone" class="input-md" maxlength="8" style="width:20%;" value='${loginUser.cellPhone}' readonly/>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th class="text-center my-col-2">주소</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="address" class="input-md" style="width:10%;" value='${loginUser.postalCode}' readonly/>
-                                  <input type="text" name="address" class="input-md" style="width:44%;margin-right:2px" value='${loginUser.defaultAddress}' readonly/>
-                                  <input type="text" name="address" class="input-md" style="width:44%;" value='${loginUser.detailAddress}' readonly/>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th class="text-center my-col-2">요청사항</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="name" class="input-md" style="width:99.6%" value='${loginUser.id}' readonly/>
-                                </td>
-                              </tr>
-                            </tbody>
-                            </table>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">CLOSE</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-9 px-0" style="font-size:12px">
-                    주문번호: <span id="product-id" >10238374</span><br>
-                    상품명: <span id="product-name">코트</span><br>
-                    옵션: <span id="product-option">95</span><hr class="my-1">
-                    가격: <span id="product-price" style="font-size:15px;font-weight:bold;">200,200</span> 원
-                  </div>
-                </div>
-              </td>
-              <td class="my-state">배송완료</td>
-              <td class="my-seller">이원주</td>
-            </tr>
-            <tr>
-              <td class="my-date">2019-09-09</td>
-              <td class="my-product text-left py-2">
-                <div class="row">
-                  <div class="col-sm-3 px-0">
-                    <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
-                    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h3 class="modal-title" id="exampleModalLabel">주문 상세정보</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <h5 class="my-modal-h5">주문정보</h5>
-                            <table class="col-sm-12 table-hover text-center my-table my-product-table" cellpadding="20" cellspacing="1">
-                            <thead>
-                              <tr>
-                                <th class="text-center my-col-2">날짜</th>
-                                <th class="text-center my-col-6">상품</th>
-                                <th class="text-center my-col-2">상태</th>
-                                <th class="text-center my-col-2">구매자</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td class="my-date">2019-09-09</td>
-                                <td class="my-product text-left py-2">
-                                  <div class="row">
-                                    <div class="col-sm-3 px-0">
-                                      <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
-                                    </div>
-                                    <div class="col-sm-9 px-0" style="font-size:12px">
-                                      주문번호: <span id="product-id" >10238374</span><br>
-                                      상품명: <span id="product-name">코트</span><br>
-                                      옵션: <span id="product-option">95</span><hr class="my-1">
-                                      가격: <span id="product-price" style="font-size:15px;font-weight:bold;">200,200</span> 원
-                                    </div>
-                                  </div>
-                                </td>
-                                <td class="my-state">배송완료</td>
-                               <td class="my-seller">이원주</td>
-                              </tr>
-                            </tbody>
-                            </table>
-                            <hr>
-                            <br>
-                            
-                            <h5 class="my-modal-h5">결제정보</h5>
-                            <table class="col-sm-12 table-hover text-center my-table my-product-table" cellpadding="20" cellspacing="1">
-                            <thead>
-                              <tr>
-                                <th class="text-center my-col-4">결제일</th>
-                                <th class="text-center my-col-4">결제방법</th>
-                                <th class="text-center my-col-4">결제금액</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td class="my-payment-date">2019-09-09</td>
-                                <td class="my-payment-way">무통장입금</td>
-                                <td class="my-price font-weight-bold" style="border-right:none;">200,200</td>
-                              </tr>
-                            </tbody>
-                            </table>
-                            <hr>
-                            <br>
-                            
-                            <h5 class="my-modal-h5">배송정보</h5>
-                            <table class="col-sm-12 table-hover text-center my-table my-table-row my-product-table my-table-modal">
-                            <tbody>
-                              <tr>
-                                <th class="text-center my-col-2">이름</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="name" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.name}' readonly/>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th class="text-center my-col-2">연락처</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="cellphone" class="input-md" maxlength="8" style="width:20%;" value='${loginUser.cellPhone}' readonly/>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th class="text-center my-col-2">주소</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="address" class="input-md" style="width:10%;" value='${loginUser.postalCode}' readonly/>
-                                  <input type="text" name="address" class="input-md" style="width:44%;margin-right:2px" value='${loginUser.defaultAddress}' readonly/>
-                                  <input type="text" name="address" class="input-md" style="width:44%;" value='${loginUser.detailAddress}' readonly/>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th class="text-center my-col-2">요청사항</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="name" class="input-md" style="width:99.6%" value='${loginUser.id}' readonly/>
-                                </td>
-                              </tr>
-                            </tbody>
-                            </table>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">CLOSE</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-9 px-0" style="font-size:12px">
-                    주문번호: <span id="product-id" >10238374</span><br>
-                    상품명: <span id="product-name">코트</span><br>
-                    옵션: <span id="product-option">95</span><hr class="my-1">
-                    가격: <span id="product-price" style="font-size:15px;font-weight:bold;">200,200</span> 원
-                  </div>
-                </div>
-              </td>
-              <td class="my-state">배송완료</td>
-              <td class="my-seller">이원주</td>
-            </tr>
-            <tr>
-              <td class="my-date">2019-09-09</td>
-              <td class="my-product text-left py-2">
-                <div class="row">
-                  <div class="col-sm-3 px-0">
-                    <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
-                    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h3 class="modal-title" id="exampleModalLabel">주문 상세정보</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <h5 class="my-modal-h5">주문정보</h5>
-                            <table class="col-sm-12 table-hover text-center my-table my-product-table" cellpadding="20" cellspacing="1">
-                            <thead>
-                              <tr>
-                                <th class="text-center my-col-2">날짜</th>
-                                <th class="text-center my-col-6">상품</th>
-                                <th class="text-center my-col-2">상태</th>
-                                <th class="text-center my-col-2">구매자</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td class="my-date">2019-09-09</td>
-                                <td class="my-product text-left py-2">
-                                  <div class="row">
-                                    <div class="col-sm-3 px-0">
-                                      <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
-                                    </div>
-                                    <div class="col-sm-9 px-0" style="font-size:12px">
-                                      주문번호: <span id="product-id" >10238374</span><br>
-                                      상품명: <span id="product-name">코트</span><br>
-                                      옵션: <span id="product-option">95</span><hr class="my-1">
-                                      가격: <span id="product-price" style="font-size:15px;font-weight:bold;">200,200</span> 원
-                                    </div>
-                                  </div>
-                                </td>
-                                <td class="my-state">배송완료</td>
-                               <td class="my-seller">이원주</td>
-                              </tr>
-                            </tbody>
-                            </table>
-                            <hr>
-                            <br>
-                            
-                            <h5 class="my-modal-h5">결제정보</h5>
-                            <table class="col-sm-12 table-hover text-center my-table my-product-table" cellpadding="20" cellspacing="1">
-                            <thead>
-                              <tr>
-                                <th class="text-center my-col-4">결제일</th>
-                                <th class="text-center my-col-4">결제방법</th>
-                                <th class="text-center my-col-4">결제금액</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td class="my-payment-date">2019-09-09</td>
-                                <td class="my-payment-way">무통장입금</td>
-                                <td class="my-price font-weight-bold" style="border-right:none;">200,200</td>
-                              </tr>
-                            </tbody>
-                            </table>
-                            <hr>
-                            <br>
-                            
-                            <h5 class="my-modal-h5">배송정보</h5>
-                            <table class="col-sm-12 table-hover text-center my-table my-table-row my-product-table my-table-modal">
-                            <tbody>
-                              <tr>
-                                <th class="text-center my-col-2">이름</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="name" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.name}' readonly/>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th class="text-center my-col-2">연락처</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="cellphone" class="input-md" maxlength="8" style="width:20%;" value='${loginUser.cellPhone}' readonly/>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th class="text-center my-col-2">주소</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="address" class="input-md" style="width:10%;" value='${loginUser.postalCode}' readonly/>
-                                  <input type="text" name="address" class="input-md" style="width:44%;margin-right:2px" value='${loginUser.defaultAddress}' readonly/>
-                                  <input type="text" name="address" class="input-md" style="width:44%;" value='${loginUser.detailAddress}' readonly/>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th class="text-center my-col-2">요청사항</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="name" class="input-md" style="width:99.6%" value='${loginUser.id}' readonly/>
-                                </td>
-                              </tr>
-                            </tbody>
-                            </table>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">CLOSE</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-9 px-0" style="font-size:12px">
-                    주문번호: <span id="product-id" >10238374</span><br>
-                    상품명: <span id="product-name">코트</span><br>
-                    옵션: <span id="product-option">95</span><hr class="my-1">
-                    가격: <span id="product-price" style="font-size:15px;font-weight:bold;">200,200</span> 원
-                  </div>
-                </div>
-              </td>
-              <td class="my-state">배송완료</td>
-              <td class="my-seller">이원주</td>
-            </tr>
-            <tr>
-              <td class="my-date">2019-09-09</td>
-              <td class="my-product text-left py-2">
-                <div class="row">
-                  <div class="col-sm-3 px-0">
-                    <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
-                    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h3 class="modal-title" id="exampleModalLabel">주문 상세정보</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <h5 class="my-modal-h5">주문정보</h5>
-                            <table class="col-sm-12 table-hover text-center my-table my-product-table" cellpadding="20" cellspacing="1">
-                            <thead>
-                              <tr>
-                                <th class="text-center my-col-2">날짜</th>
-                                <th class="text-center my-col-6">상품</th>
-                                <th class="text-center my-col-2">상태</th>
-                                <th class="text-center my-col-2">구매자</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td class="my-date">2019-09-09</td>
-                                <td class="my-product text-left py-2">
-                                  <div class="row">
-                                    <div class="col-sm-3 px-0">
-                                      <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
-                                    </div>
-                                    <div class="col-sm-9 px-0" style="font-size:12px">
-                                      주문번호: <span id="product-id" >10238374</span><br>
-                                      상품명: <span id="product-name">코트</span><br>
-                                      옵션: <span id="product-option">95</span><hr class="my-1">
-                                      가격: <span id="product-price" style="font-size:15px;font-weight:bold;">200,200</span> 원
-                                    </div>
-                                  </div>
-                                </td>
-                                <td class="my-state">배송완료</td>
-                               <td class="my-seller">이원주</td>
-                              </tr>
-                            </tbody>
-                            </table>
-                            <hr>
-                            <br>
-                            
-                            <h5 class="my-modal-h5">결제정보</h5>
-                            <table class="col-sm-12 table-hover text-center my-table my-product-table" cellpadding="20" cellspacing="1">
-                            <thead>
-                              <tr>
-                                <th class="text-center my-col-4">결제일</th>
-                                <th class="text-center my-col-4">결제방법</th>
-                                <th class="text-center my-col-4">결제금액</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td class="my-payment-date">2019-09-09</td>
-                                <td class="my-payment-way">무통장입금</td>
-                                <td class="my-price font-weight-bold" style="border-right:none;">200,200</td>
-                              </tr>
-                            </tbody>
-                            </table>
-                            <hr>
-                            <br>
-                            
-                            <h5 class="my-modal-h5">배송정보</h5>
-                            <table class="col-sm-12 table-hover text-center my-table my-table-row my-product-table my-table-modal">
-                            <tbody>
-                              <tr>
-                                <th class="text-center my-col-2">이름</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="name" class="input-md" maxlength="8"  style="width:20%;" value='${loginUser.name}' readonly/>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th class="text-center my-col-2">연락처</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="cellphone" class="input-md" maxlength="8" style="width:20%;" value='${loginUser.cellPhone}' readonly/>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th class="text-center my-col-2">주소</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="address" class="input-md" style="width:10%;" value='${loginUser.postalCode}' readonly/>
-                                  <input type="text" name="address" class="input-md" style="width:44%;margin-right:2px" value='${loginUser.defaultAddress}' readonly/>
-                                  <input type="text" name="address" class="input-md" style="width:44%;" value='${loginUser.detailAddress}' readonly/>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th class="text-center my-col-2">요청사항</th>
-                                <td class="my-col-10">
-                                  <input type="text" name="name" class="input-md" style="width:99.6%" value='${loginUser.id}' readonly/>
-                                </td>
-                              </tr>
-                            </tbody>
-                            </table>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">CLOSE</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-9 px-0" style="font-size:12px">
-                    주문번호: <span id="product-id" >10238374</span><br>
-                    상품명: <span id="product-name">코트</span><br>
-                    옵션: <span id="product-option">95</span><hr class="my-1">
-                    가격: <span id="product-price" style="font-size:15px;font-weight:bold;">200,200</span> 원
-                  </div>
-                </div>
-              </td>
-              <td class="my-state">배송완료</td>
-              <td class="my-seller">이원주</td>
-            </tr>
+            </c:forEach>
           </tbody>
           </table>
         </div>
@@ -824,10 +351,10 @@
             <ul>
               <li><a href="#">&lt;</a></li>
               <li class="active"><span>1</span></li>
-              <li><a href="#">2</a></li>
+              <!-- <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
+              <li><a href="#">5</a></li> -->
               <li><a href="#">&gt;</a></li>
             </ul>
           </div>
@@ -880,9 +407,10 @@
 
 if(${loginUser.memberClass} == 2) {
   $("#infoMenu").append(
-      "<li class='my-menu'><a href='sellerinfo'>판매정보</a></li>");
+      "<li class='my-menu'><a href='sellerinfo'>판매자 정보</a></li>");
   $("#sellerMenu").append(
-      "<li class='my-menu active'><a href='sale'>판매내역</a></li>"
+      "<li class='my-menu'><a href='manage'>판매물품 관리</a></li>"
+    + "<li class='my-menu active'><a href='sale'>판매내역</a></li>"
     + "<li class='my-menu'><a href='exhibition'>개인전 관리</a></li>");
 } else {
   $("#sellerMenu").append(
