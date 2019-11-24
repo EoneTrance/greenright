@@ -14,7 +14,7 @@
   
   <insert id="insert" parameterType="ProductOptionItem">
     insert into option_items(options_id,option_item_matters,options_price,options_quantity)
-    values(#{OptionsNo},#{OptionItemMatter},#{OptionsPrice},#{OptionsQuantity})
+    values(#{optionsNo},#{optionItemMatter},#{optionsPrice},#{optionsQuantity})
   </insert>
    <delete id="delete" parameterType="int">
     delete from option_items
@@ -29,7 +29,7 @@
   update option_items set
   option_item_matters = #{optionItemMatter},
   options_price =#{optionsPrice},
-  options_quantity =#{OptionsQuantity}
+  options_quantity =#{optionsQuantity}
   where option_item_id =#{no}
   </update>
   

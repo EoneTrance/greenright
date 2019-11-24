@@ -161,6 +161,29 @@
 <section class="ftco-section py-5">
 <div id="myPageContent">
 
+<!-- <nav class="navbar navbar-inverse visible-xs">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">MyPage</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="my-menu"><a href="userinfo">기본정보</a></li>
+        <li class="my-menu"><a href="order">주문관리</a></li>
+        <li class="my-menu"><a href="#">관심상품</a></li>
+        <li class="my-menu"><a href="#">업적</a></li>
+        <li class="my-menu"><a href="sale">판매관리</a></li>
+        <li class="my-menu active"><a href="exhibition">개인전 관리</a></li>
+        <li class="my-menu"><a href="memberConversion">판매회원 전환</a></li>
+      </ul>
+    </div>
+  </div>
+</nav> -->
 
 <div class="container-fluid">
   <div class="row">
@@ -175,8 +198,7 @@
       <h4 class="font-weight-bold ml-2">구매</h4>
       <ul class="nav flex-column nav-pills nav-stacked text-center mb-4">
         <li class="my-menu"><a href="order">구매내역</a></li>
-        <li class="my-menu"><a href="#section3">관심상품</a></li>
-        <li class="my-menu"><a href="#section3">업적</a></li>
+        <li class="my-menu"><a href="wishlist">관심상품</a></li>
       </ul>
       <h4 class="font-weight-bold ml-2">판매</h4>
       <ul id="sellerMenu" class="nav flex-column nav-pills nav-stacked text-center">
@@ -266,8 +288,8 @@
               <td class="my-like">${product.recommendCount }</td>
             </tr>
             </c:forEach>
-	      </tbody>
-	      </table>
+        </tbody>
+        </table>
                             
                             
    <!--    <div class="row mt-5">
@@ -286,6 +308,8 @@
         </div>
       </div> -->
     </div>
+  </div>
+</div>
   </div>
 </div>
 </div>
@@ -332,9 +356,10 @@
 
 if(${loginUser.memberClass} == 2) {
   $("#infoMenu").append(
-      "<li class='my-menu'><a href='sellerinfo'>판매정보</a></li>");
+      "<li class='my-menu'><a href='sellerinfo'>판매자 정보</a></li>");
   $("#sellerMenu").append(
-      "<li class='my-menu'><a href='sale'>판매내역</a></li>"
+      "<li class='my-menu'><a href='manage'>판매물품 관리</a></li>"
+    + "<li class='my-menu'><a href='sale'>판매내역</a></li>"
     + "<li class='my-menu active'><a href='exhibition'>개인전 관리</a></li>");
 } else {
   $("#sellerMenu").append(

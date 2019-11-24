@@ -43,6 +43,7 @@
   <select id="getByMember" parameterType="int" resultMap="LikeMap">
   select product_id from likes where
   member_id =#{memberNo}
+  order by product_id desc
   </select>
  
 </mapper>

@@ -314,7 +314,7 @@ $(function(){
            +  "<td class='my-product text-left py-2'>"
            +  "  <div class='row'>"
            +  "    <div class='col-sm-3 px-0'>"
-           +  "      <img id='product-photo' src='ddd'>"
+           +  "      <img id='product-photo' src='/upload/product/"${basket.productOptionItem.productOption.product.photos[0].photoPath}"'>"
            +  "    </div>"
            +  "    <div class='col-sm-9 px-0' style='font-size:12px'>"
            +  "      상품번호: <span id='product-id'>" + basket.productNo + "</span><br>"

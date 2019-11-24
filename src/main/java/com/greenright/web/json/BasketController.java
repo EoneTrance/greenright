@@ -15,6 +15,7 @@ import com.greenright.domain.Member;
 import com.greenright.domain.Product;
 import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
+import com.greenright.domain.ProductPhoto;
 import com.greenright.service.BasketService;
 import com.greenright.service.MemberService;
 import com.greenright.service.ProductOptionItemService;

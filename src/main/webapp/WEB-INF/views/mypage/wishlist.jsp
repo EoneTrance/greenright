@@ -24,9 +24,6 @@ div.well p {
   background-color: #82AE46;
   color: #FFFFFF;
 }
-/* .btn-group button:hover {
-    background-color:RGBA(130,174,70,0.5);
-  } */
 .dropdown .dropdown-menu div.inner ul.inner li a:hover {
   background-color: RGBA(130, 174, 70, 0.5);
 }
@@ -103,20 +100,17 @@ button#deletewishlist {
           <h2 class="text-center mt-2 font-weight-bold">MyPage</h2>
           <hr>
           <h4 class="font-weight-bold ml-2">회원정보</h4>
-          <ul id="infoMenu"
-            class="nav flex-column nav-pills nav-stacked text-center mb-4">
+          <ul id="infoMenu" class="nav flex-column nav-pills nav-stacked text-center mb-4">
             <li class="my-menu"><a href="userinfo">기본정보</a></li>
+            
           </ul>
           <h4 class="font-weight-bold ml-2">구매</h4>
-          <ul
-            class="nav flex-column nav-pills nav-stacked text-center mb-4">
+          <ul class="nav flex-column nav-pills nav-stacked text-center mb-4">
             <li class="my-menu"><a href="order">구매내역</a></li>
-            <li class="my-menu active"><a href="#section3">관심상품</a></li>
-            <li class="my-menu"><a href="#section3">업적</a></li>
+            <li class="my-menu active"><a href="wishlist">관심상품</a></li>
           </ul>
           <h4 class="font-weight-bold ml-2">판매</h4>
-          <ul id="sellerMenu"
-            class="nav flex-column nav-pills nav-stacked text-center">
+          <ul id="sellerMenu" class="nav flex-column nav-pills nav-stacked text-center">
           </ul>
           <br>
         </div>
@@ -186,7 +180,6 @@ button#deletewishlist {
               </table>
               <button id="deletewishlist" class="btn btn-primary"
                 style="border-radius: 2px 2px 2px 2px;">삭제</button>
-            //끝
             </div>
           </div>
         </div>
@@ -240,6 +233,19 @@ button#deletewishlist {
 
 <script>
 "use strict"
+
+if(${loginUser.memberClass} == 2) {
+  $("#infoMenu").append(
+      "<li class='my-menu'><a href='sellerinfo'>판매자 정보</a></li>");
+  $("#sellerMenu").append(
+      "<li class='my-menu'><a href='manage'>판매물품 관리</a></li>"
+    + "<li class='my-menu'><a href='sale'>판매내역</a></li>"
+    + "<li class='my-menu'><a href='exhibition'>개인전 관리</a></li>");
+} else {
+  $("#sellerMenu").append(
+      "<li class='my-menu'><a href='conversion'>판매회원 전환</a></li>");
+}
+
 $(function(){
   
   $(document).on("change", ".my-checkbox", function(e) {

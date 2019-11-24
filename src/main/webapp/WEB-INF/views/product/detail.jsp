@@ -137,7 +137,7 @@ label.star:before {
  <div class="${item.no}" id ="optionItems" > 
  <h6> 옵션항목명  <input type='text' name='optionItemMatter' class="form-control" value='${item.optionItemMatter}' ></h6>
  <h6> 추가금액  <input type='number' name='optionItemMatter' class="form-control" value='${item.optionsPrice}' step=10 ></h6>
- <h6> 옵션당개수  <input type='number' name='optionItemMatter' class="form-control" value='${item.optionsquantity}'>
+ <h6> 옵션당개수  <input type='number' name='optionItemMatter' class="form-control" value='${item.optionsQuantity}'>
  <input type="text" name="optionItemMatter" class="form-control" value ="${item.no}" hidden>
  <input type="text" name="optionItemMatter" value="${item.optionsNo}" hidden>
   <img src="/images/xmark.png" class="optionItemDelete"  width="10" height="10" alt="" ></h6>
@@ -193,6 +193,7 @@ class="btn btn-primary py-3 px-4">삭제</button>
 <script src="/js/main.js"></script>
 
 <script>
+$(function(){
 $(document).on("click", ".imageDelete", function() {
   
   var allData = {"no" : $(this).parent().attr('class')}
@@ -234,7 +235,7 @@ $(document).on("click", ".imageDelete", function() {
       }
     });
   })
-  
+});
 </script>
 <script>
   attachFile = {

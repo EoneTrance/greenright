@@ -27,4 +27,9 @@ public class DefaultOrderProductService implements OrderProductService {
   public List<OrderProduct> getByMember(int no) throws Exception {
     return orderProductDao.findByMember(no);
   }
+  
+  @Override
+  public List<OrderProduct> getBySeller(int no) throws Exception {
+    return orderProductDao.findBySeller(no);
+  }
 }

@@ -128,8 +128,7 @@
       <h4 class="font-weight-bold ml-2">구매</h4>
       <ul class="nav flex-column nav-pills nav-stacked text-center mb-4">
         <li class="my-menu"><a href="order">구매내역</a></li>
-        <li class="my-menu"><a href="#section3">관심상품</a></li>
-        <li class="my-menu"><a href="#section3">업적</a></li>
+        <li class="my-menu"><a href="wishlist">관심상품</a></li>
       </ul>
       <h4 class="font-weight-bold ml-2">판매</h4>
       <ul id="sellerMenu" class="nav flex-column nav-pills nav-stacked text-center">
@@ -234,9 +233,10 @@
 
 if(${loginUser.memberClass} == 2) {
   $("#infoMenu").append(
-      "<li class='my-menu active'><a href='sellerinfo'>판매정보</a></li>");
+      "<li class='my-menu active'><a href='sellerinfo'>판매자 정보</a></li>");
   $("#sellerMenu").append(
-      "<li class='my-menu'><a href='sale'>판매내역</a></li>"
+      "<li class='my-menu'><a href='manage'>판매물품 관리</a></li>"
+    + "<li class='my-menu'><a href='sale'>판매내역</a></li>"
     + "<li class='my-menu'><a href='exhibition'>개인전 관리</a></li>");
 } else {
   $("#sellerMenu").append(

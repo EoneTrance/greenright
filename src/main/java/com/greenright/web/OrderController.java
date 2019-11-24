@@ -148,8 +148,8 @@ public class OrderController {
     Order order = orderService.get(no);
     
     String orderProduct = 
-        orderProductList.get(0).getProductOptionItem().getOptionItemMatter() + "["
-      + orderProductList.get(0).getProductOptionItem().getProductOption().getProduct().getProductName() + "]";
+        orderProductList.get(0).getProductOptionItem().getProductOption().getProduct().getProductName() + "["
+      + orderProductList.get(0).getProductOptionItem().getOptionItemMatter() + "]";
     if (orderProductList.size() > 1) {
       orderProduct += " 외 " + (orderProductList.size() - 1) + "건";
     }

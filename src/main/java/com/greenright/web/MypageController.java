@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.greenright.domain.Member;
 import com.greenright.domain.OrderProduct;
 import com.greenright.domain.Product;
+import com.greenright.domain.Seller;
 import com.greenright.service.LikeService;
 import com.greenright.service.MemberService;
 import com.greenright.service.OrderProductService;
@@ -27,22 +28,19 @@ public class MypageController {
   private SellerService sellerService;
   
   @Resource
-  private LikeService likeService;
-  
-  @Resource
-  private ProductService productService;
+  private OrderProductService orderProductService;
   
   @Resource
   private OrderService orderService;
   
   @Resource
-  private OrderProductService orderProductService;
-
-  @GetMapping("")
-  public void mypage(Member member) throws Exception {
-  }
+  private ProductService productService;
   
-
+  @Resource
+  private LikeService likeService;
+  
+  @GetMapping("")
+  public void mypage(Member member) throws Exception {}
 
   @GetMapping("userinfo")
   public void userinfo(HttpSession session, Model model) throws Exception {
@@ -64,22 +62,8 @@ public class MypageController {
   public void order(HttpSession session, Model model) throws Exception {
     Member member = (Member)session.getAttribute("loginUser");
     List<OrderProduct> orderProductList = orderProductService.getByMember(member.getNo());
-    for (OrderProduct or : orderProductList) {
-      System.out.println(or.getOrder().getPaymentPrice());
-    }
     model.addAttribute("orderProductList", orderProductList);
     model.addAttribute("title", " - 구매내역");
-  }
-
-  @GetMapping("wishlist")
-  public void wishlist(Model model,HttpSession session) throws Exception {
-    model.addAttribute("title", " - 관심상품");
-    Member member = (Member)session.getAttribute("loginUser");
-    List<Product> productList = likeService.findAll(member.getNo());
-    for(Product a : productList) {
-      System.out.println(a.toString());
-    }
-    model.addAttribute("productList",productList);
   }
 
   @GetMapping("sale")
@@ -88,20 +72,20 @@ public class MypageController {
     if (loginUser.getMemberClass() != 2) {
       return "redirect:userinfo";
     }
+    Member member = (Member)session.getAttribute("loginUser");
+    List<OrderProduct> saleProductList = orderProductService.getBySeller(member.getNo());
+    model.addAttribute("saleProductList", saleProductList);
     model.addAttribute("title", " - 판매내역");
     return "mypage/sale";
   }
-
-  @GetMapping("exhibition")
-  public String exhibition(HttpSession session, Model model) throws Exception {
-    Member loginUser = (Member) session.getAttribute("loginUser");
-    if (loginUser.getMemberClass() != 2) {
-      return "redirect:userinfo";
-    }
-    model.addAttribute("title", " - 개인전 관리");
-    List<Product> productList= productService.getUpcyclingByMemberNo(((Member)session.getAttribute("loginUser")).getNo());
+  
+  @GetMapping("wishlist")
+  public void wishlist(HttpSession session,Model model) throws Exception {
+    model.addAttribute("title", " - 관심상품");
+    Member member = (Member)session.getAttribute("loginUser");
+    List<Product> productList = likeService.findAll(member.getNo());
     model.addAttribute("productList",productList);
-    return "mypage/exhibition";
+    
   }
 
   @GetMapping("conversion")
@@ -112,6 +96,30 @@ public class MypageController {
     }
     model.addAttribute("title", " - 회원 전환");
     return "mypage/conversion";
+  }
+  
+  @GetMapping("exhibition")
+  public String exhibition(HttpSession session, Model model) throws Exception {
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    if (loginUser.getMemberClass() != 2) {
+      return "redirect:userinfo";
+    }
+    model.addAttribute("title", " - 개인전 관리");
+    List<Product> productList= productService.getUpcyclingByMemberNo((loginUser).getNo());
+    model.addAttribute("productList",productList);
+    return "mypage/exhibition";
+  }
+  
+  @GetMapping("manage")
+  public String main(Model model,HttpSession session) throws Exception {
+    Seller loginSeller = (Seller)session.getAttribute("loginSeller");
+    if(loginSeller ==null) {
+      return "redirect:/greenright/main";
+    }
+    Member member=  (Member)session.getAttribute("loginUser");
+    List<Product> products = productService.listBySeller(member.getNo());
+    model.addAttribute("products", products);
+    return "mypage/manage";
   }
 
 }

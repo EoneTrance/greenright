@@ -74,6 +74,12 @@
 			        <result column="name" property="name"/>
 			      </association>
 			    </association>
+          <collection property="photos" ofType="ProductPhoto">
+            <id column="product_photo_id" property="no" />
+            <result column="product_id" property="productNo" />
+            <result column="photo_path" property="photoPath" />
+            <result column="main_photo_flag" property="mainPhoto" />
+          </collection>
         </association>
       </association>
     </association>
@@ -200,6 +206,10 @@
     p.expiration_date,
     p.origin,
     p.quantity,
+    f.product_photo_id,
+    f.product_id,
+    f.photo_path,
+    f.main_photo_flag,
     s.tel,
     m.name
     
@@ -210,10 +220,74 @@
     left outer join option_items i on i.option_item_id = op.option_item_id
     left outer join options o on o.options_id = i.options_id
     left outer join products p on p.product_id = o.product_id
+    left outer join product_photos f on (p.product_id = f.product_id AND
+    f.main_photo_flag = 0)
     left outer join sellers s on s.member_id = p.member_id
     left outer join members m on m.member_id = s.member_id
     
     where od.member_id=#{no}
+    order by od.order_id desc
+  </select>
+  
+  <select id="findBySeller" parameterType="int" resultMap="OrderProductWithAllMap">
+    select
+    op.quantity,
+    op.price,
+    od.order_id,
+    od.member_id,
+    od.payment_price,
+    od.payment_date,
+    od.payment_flag,
+    od.payment_way,
+    d.delivery_id,
+    d.order_id,
+    d.invoice_num,
+    d.delivery_date,
+    d.delivery_flag,
+    d.courier_name,
+    d.reciever_name,
+    d.delivery_address,
+    d.reciever_cell_phone,
+    d.reciever_email,
+    d.reciever_request,
+    i.option_item_id,
+    i.option_item_matters,
+    i.options_price,
+    i.options_quantity,
+    o.options_id,
+    o.product_id,
+    o.options_name,
+    p.product_id,
+    p.group_id,
+    p.member_id,
+    p.registered_date,
+    p.diy_flag,
+    p.price,
+    p.product_name,
+    p.expiration_date,
+    p.origin,
+    p.quantity,
+    f.product_photo_id,
+    f.product_id,
+    f.photo_path,
+    f.main_photo_flag,
+    s.tel,
+    m.name
+    
+    from order_products op
+    
+    left outer join orders od on od.order_id = op.order_id
+    left outer join deliverys d on d.order_id = od.order_id
+    left outer join option_items i on i.option_item_id = op.option_item_id
+    left outer join options o on o.options_id = i.options_id
+    left outer join products p on p.product_id = o.product_id
+    left outer join product_photos f on (p.product_id = f.product_id AND
+    f.main_photo_flag = 0)
+    left outer join sellers s on s.member_id = p.member_id
+    left outer join members m on m.member_id = s.member_id
+    
+    where p.member_id=#{no}
+    order by od.order_id desc
   </select>
   
 </mapper>

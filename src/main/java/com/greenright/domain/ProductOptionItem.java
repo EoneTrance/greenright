@@ -6,10 +6,10 @@ public class ProductOptionItem implements Serializable{
   private static final long serialVersionUID = 1L;
   
   private int no;
-  private int OptionsNo;
-  private int OptionsPrice;
-  private int OptionsQuantity;
-  private String OptionItemMatter;
+  private int optionsNo;
+  private int optionsPrice;
+  private int optionsQuantity;
+  private String optionItemMatter;
   private ProductOption productOption;
 
   public int getNo() {
@@ -20,36 +20,15 @@ public class ProductOptionItem implements Serializable{
     this.no = no;
   }
   
-  public int getOptionsNo() {
-    return OptionsNo;
-  }
   
-  public void setOptionsNo(int optionsNo) {
-    OptionsNo = optionsNo;
-  }
-  
+
+
   public String getOptionItemMatter() {
-    return OptionItemMatter;
+    return optionItemMatter;
   }
-  
+
   public void setOptionItemMatter(String optionItemMatter) {
-    OptionItemMatter = optionItemMatter;
-  }
-
-  public int getOptionsPrice() {
-    return OptionsPrice;
-  }
-
-  public void setOptionsPrice(int optionsPrice) {
-    OptionsPrice = optionsPrice;
-  }
-
-  public int getOptionsQuantity() {
-    return OptionsQuantity;
-  }
-
-  public void setOptionsQuantity(int optionsQuantity) {
-    OptionsQuantity = optionsQuantity;
+    this.optionItemMatter = optionItemMatter;
   }
 
   public ProductOption getProductOption() {
@@ -60,13 +39,39 @@ public class ProductOptionItem implements Serializable{
     this.productOption = productOption;
   }
 
-  @Override
-  public String toString() {
-    return "ProductOptionItem [no=" + no + ", OptionsNo=" + OptionsNo + ", OptionsPrice="
-        + OptionsPrice + ", OptionsQuantity=" + OptionsQuantity + ", OptionItemMatter="
-        + OptionItemMatter + ", productOption=" + productOption + "]";
+  public int getOptionsNo() {
+    return optionsNo;
   }
 
+  public void setOptionsNo(int optionsNo) {
+    this.optionsNo = optionsNo;
+  }
+
+  public int getOptionsPrice() {
+    return optionsPrice;
+  }
+
+  public void setOptionsPrice(int optionsPrice) {
+    this.optionsPrice = optionsPrice;
+  }
+
+  public int getOptionsQuantity() {
+    return optionsQuantity;
+  }
+
+  public void setOptionsQuantity(int optionsQuantity) {
+    this.optionsQuantity = optionsQuantity;
+  }
+
+  @Override
+  public String toString() {
+    return "ProductOptionItem [no=" + no + ", optionsNo=" + optionsNo + ", optionsPrice="
+        + optionsPrice + ", optionsQuantity=" + optionsQuantity + ", optionItemMatter="
+        + optionItemMatter + ", productOption=" + productOption + "]";
+  }
+
+
+  
 
   
   
