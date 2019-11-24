@@ -132,13 +132,7 @@ public class ProductController {
     Product product = productService.get(no);
     Product productPhoto = productService.getforPhoto(no);
     List<Product>productLiST = productService.gettopbyCategoryNum(no);
-    Member member = (Member) session.getAttribute("loginUser");
-    String memberNo = member.getId();
-    System.out.println(memberNo);
-    int memberClass = member.getMemberClass();
     
-    model.addAttribute("memberNo",memberNo);
-    model.addAttribute("memberClass",memberClass);
     model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);
     model.addAttribute("productLiST",productLiST);
@@ -153,12 +147,17 @@ public class ProductController {
     return "redirect:manage";
   }
   @RequestMapping("manage")
-  public void main(Model model,HttpSession session) throws Exception {
-   Member member=  (Member)session.getAttribute("loginUser");
+  public String main(Model model,HttpSession session) throws Exception {
+    Seller loginSeller = (Seller)session.getAttribute("loginSeller");
+    if(loginSeller ==null) {
+      return "redirect:/greenright/main";
+    }
+    Member member=  (Member)session.getAttribute("loginUser");
     int a = member.getNo();
     List<Product> products = productService.listBySeller(a);
     model.addAttribute("products", products);
     System.out.println(products.toString());
+    return "product/manage";
   }
   @Transactional
   @PostMapping("update")

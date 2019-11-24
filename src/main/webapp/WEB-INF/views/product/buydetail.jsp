@@ -645,10 +645,6 @@ button.btn.btn-primary.CartBut {
   </div>
 </div>
 
-
-
-
-
 <script src="/js/jquery.min.js"></script>
 <script src="/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
@@ -702,7 +698,6 @@ button.btn.btn-primary.CartBut {
                     },
                     function(k) {
                       var a = "";
-                      a += "<h5><strong>사진과 리뷰</strong></h5>"
                       if (k.result != null) {
                         a += "<div class='reviewimagepresent'>"
                         for (var i = 0; i < k.result.length; i++) {
@@ -1167,13 +1162,7 @@ button.btn.btn-primary.CartBut {
                                                                       .hasClass(
                                                                           "secretwrite")) {
                                                                     
-                                                                    if(${memberClass}=="0"){
-                                                                      $(tr[rindex + 1]).show();
-                                                                    }else if(${memberNo}==$(this).attr("id")){
-                                                                      $(tr[rindex + 1]).show();
-                                                                    }else{
                                                                     swal("비밀글은 작성자와 운영자만 볼수있습니다.");
-                                                                    }
                                                                     
                                                                   } else {
                                                                     $(
@@ -1327,13 +1316,7 @@ button.btn.btn-primary.CartBut {
                                                                 "secretwrite")) {
                                                           
                                                           
-                                                          if(${memberClass}=="0"){
-                                                            $(tr[rindex + 1]).show();
-                                                          }else if(${memberNo}==$(this).attr("id")){
-                                                            $(tr[rindex + 1]).show();
-                                                          }else{
                                                           swal("비밀글은 작성자와 운영자만 볼수있습니다.");
-                                                          }
                                                         } else {
                                                           $(tr[rindex + 1])
                                                               .show();
@@ -1443,13 +1426,7 @@ button.btn.btn-primary.CartBut {
                                   "secretwrite")) {
                                 
                                 
-                                if(${memberClass}==0){
-                                  $(tr[rindex + 1]).show();
-                                }else if(${memberNo}==$(this).attr("id")){
-                                  $(tr[rindex + 1]).show();
-                                }else{
                                 swal("비밀글은 작성자와 운영자만 볼수있습니다.");
-                                }
                               } else {
                                 $(tr[rindex + 1]).show();
                                 $(tr[rindex + 1]).find(".answersend").show();
