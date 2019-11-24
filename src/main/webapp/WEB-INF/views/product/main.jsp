@@ -115,43 +115,9 @@
           </c:forEach>
             </div><!-- row 클래스 종료 -->
             <!--------------------------------------------------------------------------->
-      <!--       <div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-              <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
-              </ul>
-            </div>
-          </div>
-        </div> -->
         <!--------------------------------------------------------------------------->
         </div><!--컨테이너종료-->
     </section><!--section종료-->
-
-        <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-      <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-6">
-            <h2 style="font-size: 22px;" class="mb-0">Subcribe to our Author</h2>
-            <span>Get e-mail updates about our latest products and special upcycling</span>
-          </div>
-          <div class="col-md-6 d-flex align-items-center">
-            <form action="#" class="subscribe-form">
-              <div class="form-group d-flex">
-                <input type="text" class="form-control" placeholder="Enter email address">
-                <input type="submit" value="Subscribe" class="submit px-3">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
     <!--------------------------------------------footer------------------------------------------>
 <!-- loader -->
  <!-- <div id="ftco-loader" class="show fullscreen">
@@ -173,6 +139,51 @@
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+<script id="entry-template" type="text/x-handlebars-template">
+<table>
+    <thead> 
+        <th>이름</th> 
+        <th>아이디</th> 
+        <th>메일주소</th> 
+    </thead> 
+    <tbody> 
+        {{#users}} 
+        <tr> 
+            <td>{{name}}</td> 
+            <td>{{id}}</td> 
+            <td><a href="mailto:{{email}}">{{email}}</a></td> 
+        </tr> 
+        {{/users}} 
+    </tbody> 
+</table>
+</script>
+<<script>
+$(window).on("scroll", function() {
+  var scrollHeight = $(document).height();
+  var scrollPosition = $(window).height() + $(window).scrollTop();    
+  $("#scrollHeight").text(scrollHeight);
+  $("#scrollPosition").text(scrollPosition);
+  $("#bottom").text(scrollHeight - scrollPosition);
+  if (scrollPosition > scrollHeight - 500) {      
+  //핸들바 템플릿 가져오기
+    var source = $("#entry-template").html(); 
+    //핸들바 템플릿 컴파일
+    var template = Handlebars.compile(source); 
+    //핸들바 템플릿에 바인딩할 데이터
+    var data = {
+          users: [
+                { name: "홍길동1", id: "aaa1", email: "aaa1@gmail.com" },
+                { name: "홍길동2", id: "aaa2", email: "aaa2@gmail.com" },
+                { name: "홍길동3", id: "aaa3", email: "aaa3@gmail.com" },
+                { name: "홍길동4", id: "aaa4", email: "aaa4@gmail.com" },
+                { name: "홍길동5", id: "aaa5", email: "aaa5@gmail.com" }
+            ]
+    }; 
+    var html = template(data);
+    $('.addto').append(html);
+  }
+});
+</script>
 <script>
    // 카테고리 검새액(유기농, 가구 ... )
       $(function(){
@@ -256,12 +267,7 @@
               $(".addto").html(tableTag);  
             }
           });
-        })
-      
-      
-   
-      
-        
+        }) 
       });
    
       $(document).on("click", ".subbutton", function() {

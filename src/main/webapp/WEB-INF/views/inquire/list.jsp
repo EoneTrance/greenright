@@ -194,5 +194,3 @@ $('.page-item').click((e) => {
   }
 }); 
 </script>  
-
-
