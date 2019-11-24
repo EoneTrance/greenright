@@ -126,6 +126,36 @@
     inline-size: fit-content;
     }
     
+    .page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #82ae46 !important;
+    border-color: #82ae46 !important;
+    }
+    
+    a.page-link {
+    color: black;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 50%;
+    margin: 2px;
+    }
+    
+    .page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: 50% !important; 
+    border-bottom-left-radius: 50% !important;
+    }
+    
+    .page-item:last-child .page-link {
+    border-top-right-radius: 50% !important;
+    border-bottom-right-radius: 50% !important;
+    }
+    
+
+    
    /* #pagination .page-item.active .page-link {
     z-index: 1;
     color: #fff;
