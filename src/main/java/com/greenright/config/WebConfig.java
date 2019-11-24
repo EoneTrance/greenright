@@ -18,7 +18,7 @@ import org.springframework.web.util.UrlPathHelper;
 @ComponentScan("com.greenright.web")
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
-  
+
   @Bean
   public MultipartResolver multipartResolver() {
     CommonsMultipartResolver mr = new CommonsMultipartResolver();
@@ -27,15 +27,16 @@ public class WebConfig implements WebMvcConfigurer {
     mr.setMaxUploadSize(10000000);
     mr.setMaxInMemorySize(2000000);
     mr.setMaxUploadSizePerFile(5000000);
-    return mr; 
+    return mr;
   }
+
   @Bean
   public ViewResolver viewResolver() {
     InternalResourceViewResolver vr = new InternalResourceViewResolver("/WEB-INF/jsp/", ".jsp");
     vr.setOrder(2);
     return vr;
   }
-  
+
   // Tiles 뷰 템플릿 처리기 등록
   @Bean
   public ViewResolver tilesViewResolver() {
@@ -46,7 +47,7 @@ public class WebConfig implements WebMvcConfigurer {
     vr.setOrder(1);
     return vr;
   }
-  
+
   // Tiles 설정 정보를 다루는 객체
   @Bean
   public TilesConfigurer tilesConfigurer() {
@@ -54,15 +55,14 @@ public class WebConfig implements WebMvcConfigurer {
     configurer.setDefinitions("/WEB-INF/defs/tiles.xml");
     return configurer;
   }
-  
+
   @Override
   public void configurePathMatch(PathMatchConfigurer configurer) {
     UrlPathHelper helper = new UrlPathHelper();
     helper.setRemoveSemicolonContent(false);
     configurer.setUrlPathHelper(helper);
   }
-  
+
   @Override
-  public void addInterceptors(InterceptorRegistry registry) {
-  }
+  public void addInterceptors(InterceptorRegistry registry) {}
 }

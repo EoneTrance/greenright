@@ -1,5 +1,6 @@
 package com.greenright.service.impl;
 
+import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.greenright.dao.OrderProductDao;
@@ -15,5 +16,15 @@ public class DefaultOrderProductService implements OrderProductService {
   @Override
   public int insert(OrderProduct orderProduct) throws Exception {
     return orderProductDao.insert(orderProduct);
+  }
+  
+  @Override
+  public List<OrderProduct> get(int no) throws Exception {
+    return orderProductDao.findBy(no);
+  }
+  
+  @Override
+  public List<OrderProduct> getByMember(int no) throws Exception {
+    return orderProductDao.findByMember(no);
   }
 }

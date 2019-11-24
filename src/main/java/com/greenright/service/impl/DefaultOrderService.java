@@ -18,10 +18,10 @@ public class DefaultOrderService implements OrderService {
 
   @Resource
   private OrderDao orderDao;
-  
+
   @Resource
   private DeliveryDao deliveryDao;
-  
+
   @Resource
   private OrderProductDao orderProductDao;
 
@@ -32,8 +32,8 @@ public class DefaultOrderService implements OrderService {
     if (result == 1) {
       Delivery delivery = DeliveryUtils.createDummyDelivery(order);
       deliveryDao.insert(delivery);
-      
-      List<OrderProduct> orderProducts = order.getOrderProducts();
+
+      List<OrderProduct> orderProducts = order.getOrderProductList();
       for (OrderProduct orderProduct : orderProducts) {
         orderProduct.setOrderNo(order.getNo());
         orderProductDao.insert(orderProduct);
@@ -43,7 +43,12 @@ public class DefaultOrderService implements OrderService {
   }
 
   @Override
-  public Order findBy(int no) throws Exception {
+  public Order get(int no) throws Exception {
     return orderDao.findBy(no);
+  }
+  
+  @Override
+  public List<Order> getByMember(int no) throws Exception {
+    return orderDao.findByMember(no);
   }
 }

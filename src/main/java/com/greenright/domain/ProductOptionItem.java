@@ -2,18 +2,20 @@ package com.greenright.domain;
 
 import java.io.Serializable;
 
-public class ProductOptionItem implements Serializable{
+public class ProductOptionItem implements Serializable {
   private static final long serialVersionUID = 1L;
-  
+
   private int no;
-  
+
   private int optionsNo;
-  
+
   private String optionItemMatter;
-  
+
   private int optionsPrice;
-  
+
   private int optionsQuantity;
+  
+  private ProductOption productOption;
 
   public int getNo() {
     return no;
@@ -55,11 +57,19 @@ public class ProductOptionItem implements Serializable{
     this.optionsQuantity = optionsQuantity;
   }
 
+  public ProductOption getProductOption() {
+    return productOption;
+  }
+
+  public void setProductOption(ProductOption productOption) {
+    this.productOption = productOption;
+  }
+
   @Override
   public String toString() {
     return "ProductOptionItem [no=" + no + ", optionsNo=" + optionsNo + ", optionItemMatter="
         + optionItemMatter + ", optionsPrice=" + optionsPrice + ", optionsQuantity="
-        + optionsQuantity + "]";
+        + optionsQuantity + ", productOption=" + productOption + "]";
   }
-  
+
 }

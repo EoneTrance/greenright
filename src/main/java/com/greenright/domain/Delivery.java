@@ -5,30 +5,30 @@ import java.sql.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Delivery implements Serializable {
-  
+
   private static final long serialVersionUID = 1L;
-  
+
   private int no;
-  
+
   private int orderNo;
-  
+
   private String invoiceNum;
-  
-  @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
+
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private Date deliveryDate;
-  
+
   private int deliveryFlag;
-  
+
   private String courierName;
-  
+
   private String recieverName;
-  
+
   private String deliveryAddress;
-  
+
   private String recieverCellPhone;
-  
+
   private String recieverEmail;
-  
+
   private String recieverRequest;
 
   public int getNo() {
@@ -127,5 +127,5 @@ public class Delivery implements Serializable {
         + ", recieverCellPhone=" + recieverCellPhone + ", recieverEmail=" + recieverEmail
         + ", recieverRequest=" + recieverRequest + "]";
   }
-  
+
 }

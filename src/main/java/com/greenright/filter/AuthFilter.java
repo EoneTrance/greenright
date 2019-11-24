@@ -16,22 +16,22 @@ public class AuthFilter implements Filter {
 
   String path[];
   String noRedirectPath[];
-  
+
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
-    path = new String[] {"add","update","delete","mypage"};
-    noRedirectPath = new String[] {"add","update","delete","auth"};
+    path = new String[] {"add", "update", "delete", "mypage"};
+    noRedirectPath = new String[] {"add", "update", "delete", "auth"};
   }
-  
+
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
       throws IOException, ServletException {
-    HttpServletRequest req = (HttpServletRequest)request;
-    HttpServletResponse res = (HttpServletResponse)response;
+    HttpServletRequest req = (HttpServletRequest) request;
+    HttpServletResponse res = (HttpServletResponse) response;
     HttpSession session = req.getSession();
-    Member loginUser = (Member)session.getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     String servletPath = req.getRequestURI();
-    
+
     if (req.getHeader("referer") != null && checkRedirectPath(req.getHeader("referer"))) {
       session.setAttribute("redirectURI", req.getHeader("referer"));
     } else if (req.getHeader("referer") == null || checkRedirectPath(req.getHeader("referer"))) {
@@ -39,7 +39,7 @@ public class AuthFilter implements Filter {
         session.setAttribute("redirectURI", servletPath);
       }
     }
-    
+
     for (String p : path) {
       if (servletPath.indexOf(p) != -1) {
         if (loginUser == null) {
@@ -52,7 +52,7 @@ public class AuthFilter implements Filter {
     }
     chain.doFilter(request, response);
   }
-  
+
   private boolean checkRedirectPath(String path) {
     for (String p : noRedirectPath) {
       if (path.indexOf(p) != -1) {

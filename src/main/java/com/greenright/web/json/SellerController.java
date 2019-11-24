@@ -10,10 +10,10 @@ import com.greenright.service.SellerService;
 @RestController("json.SellerController")
 @RequestMapping("/json/seller")
 public class SellerController {
-  
+
   @Resource
   SellerService sellerService;
-  
+
   @GetMapping("checkDuplicateTel")
   public JsonResult checkDuplicateTel(String tel) throws Exception {
     Seller result = sellerService.getTel(tel);
@@ -27,7 +27,7 @@ public class SellerController {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-  
+
   @GetMapping("checkDuplicateAccount")
   public JsonResult checkDuplicateAccount(String accountNum) throws Exception {
     Seller result = sellerService.getAccount(accountNum);
@@ -41,5 +41,5 @@ public class SellerController {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-  
+
 }

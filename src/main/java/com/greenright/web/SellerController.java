@@ -20,11 +20,11 @@ public class SellerController {
 
   @Resource
   private MemberService memberService;
-  
+
   @Transactional
   @PostMapping("conversion")
   public String conversion(HttpSession session, Seller seller) throws Exception {
-    Member member = (Member)session.getAttribute("loginUser");
+    Member member = (Member) session.getAttribute("loginUser");
     seller.setNo(member.getNo());
     if (sellerService.insert(seller) == 1) {
       member.setMemberClass(2);
@@ -34,10 +34,10 @@ public class SellerController {
     }
     return "redirect:../mypage/sellerinfo";
   }
-  
+
   @PostMapping("update")
   public String update(HttpSession session, Seller seller) throws Exception {
-    Member loginUser = (Member)session.getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     seller.setNo(loginUser.getNo());
     if (sellerService.update(seller) == 1) {
       Seller loginSeller = sellerService.get(loginUser.getNo());

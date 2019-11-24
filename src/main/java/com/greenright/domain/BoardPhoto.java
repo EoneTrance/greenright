@@ -5,13 +5,13 @@ import java.io.Serializable;
 public class BoardPhoto implements Serializable {
   private static final long serialVersionUID = 1L;
 
-private int no;
-  
+  private int no;
+
   private String filePath;
-  
+
   private int boardNo;
 
-  
+
   @Override
   public String toString() {
     return "BoardPhoto [no=" + no + ", filePath=" + filePath + ", boardNo=" + boardNo + "]";
@@ -40,6 +40,6 @@ private int no;
   public void setBoardNo(int boardNo) {
     this.boardNo = boardNo;
   }
-  
-  
+
+
 }

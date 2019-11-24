@@ -6,38 +6,38 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Member implements Serializable {
   private static final long serialVersionUID = 1L;
-  
+
   private int no;
-  
+
   private int memberClass;
-  
-  @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
+
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private Date registeredDate;
-  
+
   private String id;
-  
+
   private String password;
-  
+
   private int certificationFlag;
-  
+
   private String cellPhone;
-  
+
   private String name;
-  
+
   private String email;
-  
+
   private String postalCode;
-  
+
   private String defaultAddress;
-  
+
   private String detailAddress;
-  
+
   private String question;
-  
+
   private String answer;
-  
+
   private String authkey;
-  
+
   private String passwordAuthkey;
 
   public int getNo() {
@@ -177,5 +177,5 @@ public class Member implements Serializable {
         + detailAddress + ", question=" + question + ", answer=" + answer + ", authkey=" + authkey
         + ", passwordAuthkey=" + passwordAuthkey + "]";
   }
-  
+
 }

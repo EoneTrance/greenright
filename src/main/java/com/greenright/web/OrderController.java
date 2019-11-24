@@ -21,6 +21,7 @@ import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
 import com.greenright.service.BasketService;
 import com.greenright.service.MemberService;
+import com.greenright.service.OrderProductService;
 import com.greenright.service.OrderService;
 import com.greenright.service.ProductOptionItemService;
 import com.greenright.service.ProductOptionService;
@@ -29,38 +30,42 @@ import com.greenright.service.ProductService;
 @Controller
 @RequestMapping("order")
 public class OrderController {
-  
+
   @Resource
   private OrderService orderService;
   
   @Resource
-  private BasketService basketService;
+  private OrderProductService orderProductService;
   
+  @Resource
+  private BasketService basketService;
+
   @Resource
   private ProductOptionItemService productOptionItemService;
-  
+
   @Resource
   private ProductOptionService productOptionService;
-  
+
   @Resource
   private ProductService productService;
-  
+
   @Resource
   private MemberService memberService;
-  
+
   @SuppressWarnings("unchecked")
   @PostMapping("form")
   public void form(HttpSession session, Model model, String orderListJson) throws Exception {
     Gson gson = new Gson();
     ArrayList<Map<String, String>> orderListmap = gson.fromJson(orderListJson, ArrayList.class);
-    
+
     List<ProductOptionItem> optionItems = new ArrayList<>();
     List<ProductOption> options = new ArrayList<>();
     List<Product> products = new ArrayList<>();
     List<Member> sellers = new ArrayList<>();
-    
-    for (Map<String,String> order : orderListmap) {
-      ProductOptionItem optionItem = productOptionItemService.get(Integer.parseInt(order.get("optionItemNo")));
+
+    for (Map<String, String> order : orderListmap) {
+      ProductOptionItem optionItem =
+          productOptionItemService.get(Integer.parseInt(order.get("optionItemNo")));
       optionItem.setOptionsQuantity(Integer.parseInt(order.get("quantity")));
       optionItems.add(optionItem);
     }
@@ -73,7 +78,7 @@ public class OrderController {
     for (Product product : products) {
       sellers.add(memberService.get(product.getMemberNo()));
     }
-    
+
     List<Object> orderList = new ArrayList<>();
     for (int i = 0; i < orderListmap.size(); i++) {
       Map<String, Object> order = new HashMap<>();
@@ -88,47 +93,68 @@ public class OrderController {
       order.put("sellerName", sellers.get(i).getName());
       orderList.add(order);
     }
-    
+
     model.addAttribute("orderList", gson.toJson(orderList));
     model.addAttribute("title", " - 주문하기");
   }
-  
+
   @ResponseBody
   @PostMapping("add")
-  public void add (HttpSession session, Model model, Order order, String optionItemList) throws Exception {
-    
+  public void add(HttpSession session, Model model, Order order, String optionItemList)
+      throws Exception {
+
     Gson gson = new Gson();
-    
-    Member member = (Member)session.getAttribute("loginUser");
-    
     ProductOptionItem[] ItemList = gson.fromJson(optionItemList, ProductOptionItem[].class);
-    
+
+    Member member = (Member) session.getAttribute("loginUser");
     order.setMemberNo(member.getNo());
     order.setPaymentFlag(order.getPaymentWay().equals("vbank") ? 0 : 1);
     
-    List<OrderProduct> orderProducts = new ArrayList<>();
+    String paymentWay;
+    switch (order.getPaymentWay()) {
+      case "samsung" : paymentWay = "삼성페이";
+      case "card" : paymentWay = "카드";
+      case "trans" : paymentWay = "실시간 계좌이체";
+      case "vbank" : paymentWay = "무통장 입금 (가상계좌)";
+      case "phone" : paymentWay = "휴대폰 소액결제";
+      default : paymentWay = "카드";
+    }
+    order.setPaymentWay(paymentWay);
+    
+    List<OrderProduct> orderProductList = new ArrayList<>();
     for (ProductOptionItem item : ItemList) {
       OrderProduct orderProduct = new OrderProduct();
-      ProductOptionItem optionItem = new ProductOptionItem();
-      
-      optionItem = productOptionItemService.get(item.getNo());
+
       orderProduct.setOrderNo(order.getNo());
-      orderProduct.setOptionItemNo(optionItem.getNo());
+      orderProduct.setOptionItemNo(item.getNo());
       orderProduct.setPrice(item.getOptionsPrice());
       orderProduct.setQuantity(item.getOptionsQuantity());
-      orderProducts.add(orderProduct);
+      orderProductList.add(orderProduct);
     }
-    order.setOrderProducts(orderProducts);
+    order.setOrderProductList(orderProductList);
     
     orderService.insert(order);
     
-    Order getOrderDate = orderService.findBy(order.getNo());
-    order.setPaymentDate(getOrderDate.getPaymentDate());
-    
-    session.setAttribute("order", order);
+    session.setAttribute("orderNo", order.getNo());
   }
-  
+
   @GetMapping("result")
-  public void result () throws Exception {
+  public void result(HttpSession session, Model model) throws Exception {
+    model.addAttribute("title"," - 주문 완료");
+    session.getAttribute("orderNo");
+    int no = (Integer)session.getAttribute("orderNo");
+    
+    List<OrderProduct> orderProductList = orderProductService.get(no);
+    Order order = orderService.get(no);
+    
+    String orderProduct = 
+        orderProductList.get(0).getProductOptionItem().getOptionItemMatter() + "["
+      + orderProductList.get(0).getProductOptionItem().getProductOption().getProduct().getProductName() + "]";
+    if (orderProductList.size() > 1) {
+      orderProduct += " 외 " + (orderProductList.size() - 1) + "건";
+    }
+    model.addAttribute("order", order);
+    model.addAttribute("orderProduct", orderProduct);
+    model.addAttribute("numberOfOrders", orderProductList.size());
   }
 }

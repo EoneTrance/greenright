@@ -10,6 +10,6 @@ public class PagingControl {
   public void setListCount(int listCount) {
     this.listCount = listCount;
   }
-  
-  
+
+
 }

@@ -12,6 +12,76 @@
     <result column="price" property="price"/>
   </resultMap>
   
+  <resultMap type="OrderProduct" id="OrderProductWithAllMap">
+  
+    <id column="order_id" property="orderNo"/>
+    <id column="option_item_id" property="optionItemNo"/>
+    <result column="quantity" property="quantity"/>
+    <result column="price" property="price"/>
+    
+    <association property="order" javaType="Order">
+      <id column="order_id" property="no"/>
+      <result column="member_id" property="memberNo"/>
+      <result column="payment_price" property="paymentPrice"/>
+      <result column="payment_date" property="paymentDate"/>
+      <result column="payment_flag" property="paymentFlag"/>
+      <result column="payment_way" property="paymentWay"/>
+      <association property="delivery" javaType="Delivery">
+	      <id column="delivery_id" property="no"/>
+	      <result column="invoice_num" property="invoiceNum"/>
+	      <result column="delivery_date" property="deliveryDate"/>
+	      <result column="delivery_flag" property="deliveryFlag"/>
+	      <result column="courier_name" property="courierName"/>
+	      <result column="reciever_name" property="recieverName"/>
+	      <result column="delivery_address" property="deliveryAddress"/>
+	      <result column="reciever_cell_phone" property="recieverCellPhone"/>
+	      <result column="reciever_email" property="recieverEmail"/>
+	      <result column="reciever_request" property="recieverRequest"/>
+	    </association>
+    </association>
+    
+    <association property="productOptionItem" javaType="ProductOptionItem">
+      <id column="option_item_id" property="no"/>
+      <result column="options_id" property="optionsNo"/>
+      <result column="option_item_matters" property="optionItemMatter"/>
+      <result column="options_price" property="optionsPrice"/>
+      <result column="options_quantity" property="optionsQuantity"/>
+      <association property="productOption" javaType="ProductOption">
+        <id column="options_id" property="no" />
+        <result column="product_id" property="productNo" />
+        <result column="options_name" property="optionName" />
+        <association property="product" javaType="Product">
+          <id column="product_id" property="no" />
+          <result column="group_id" property="groupNo" />
+          <result column="member_id" property="memberNo" />
+          <result column="registered_date" property="registeredDate" />
+          <result column="diy_flag" property="diy" />
+          <result column="price" property="price" />
+          <result column="product_name" property="productName" />
+          <result column="description" property="description" />
+          <result column="expiration_date" property="expirationDate" />
+          <result column="origin" property="origin" />
+          <result column="quantity" property="quantity"/>
+          <result column="group_id" property="groupNo"/>
+          <association property="seller" javaType="Seller">
+			      <id column="member_id" property="no" />
+			      <result column="account_num" property="accountNum" />
+			      <result column="account_holder" property="accountHolder" />
+			      <result column="tel" property="tel" />
+			      <result column="point" property="point" />
+			      <association property="member" javaType="Member">
+			        <id column="member_id" property="no" />
+			        <result column="name" property="name"/>
+			      </association>
+			    </association>
+        </association>
+      </association>
+    </association>
+    
+    
+  </resultMap>
+  
+  
   <sql id="selectOrderProduct">
     select
       order_id,
@@ -37,5 +107,113 @@
       #{quantity},
       #{price})
   </insert>
+  
+  <select id="findBy" parameterType="int"  resultMap="OrderProductWithAllMap">
+    select
+    op.quantity,
+    op.price,
+    od.order_id,
+    od.member_id,
+    od.payment_price,
+    od.payment_date,
+    od.payment_flag,
+    od.payment_way,
+    d.delivery_id,
+    d.order_id,
+    d.invoice_num,
+    d.delivery_date,
+    d.delivery_flag,
+    d.courier_name,
+    d.reciever_name,
+    d.delivery_address,
+    d.reciever_cell_phone,
+    d.reciever_email,
+    d.reciever_request,
+    i.option_item_id,
+    i.option_item_matters,
+    i.options_price,
+    i.options_quantity,
+    o.options_id,
+    o.product_id,
+    o.options_name,
+    p.product_id,
+    p.group_id,
+    p.member_id,
+    p.registered_date,
+    p.diy_flag,
+    p.price,
+    p.product_name,
+    p.expiration_date,
+    p.origin,
+    p.quantity,
+    s.tel,
+    m.name
+    
+    from order_products op
+    
+    left outer join orders od on od.order_id = op.order_id
+    left outer join deliverys d on d.order_id = od.order_id
+    left outer join option_items i on i.option_item_id = op.option_item_id
+    left outer join options o on o.options_id = i.options_id
+    left outer join products p on p.product_id = o.product_id
+    left outer join sellers s on s.member_id = p.member_id
+    left outer join members m on m.member_id = s.member_id
+    
+    where op.order_id=#{no}
+  </select>
+  
+  <select id="findByMember" parameterType="int" resultMap="OrderProductWithAllMap">
+    select
+    op.quantity,
+    op.price,
+    od.order_id,
+    od.member_id,
+    od.payment_price,
+    od.payment_date,
+    od.payment_flag,
+    od.payment_way,
+    d.delivery_id,
+    d.order_id,
+    d.invoice_num,
+    d.delivery_date,
+    d.delivery_flag,
+    d.courier_name,
+    d.reciever_name,
+    d.delivery_address,
+    d.reciever_cell_phone,
+    d.reciever_email,
+    d.reciever_request,
+    i.option_item_id,
+    i.option_item_matters,
+    i.options_price,
+    i.options_quantity,
+    o.options_id,
+    o.product_id,
+    o.options_name,
+    p.product_id,
+    p.group_id,
+    p.member_id,
+    p.registered_date,
+    p.diy_flag,
+    p.price,
+    p.product_name,
+    p.expiration_date,
+    p.origin,
+    p.quantity,
+    s.tel,
+    m.name
+    
+    from order_products op
+    
+    left outer join orders od on od.order_id = op.order_id
+    left outer join deliverys d on d.order_id = od.order_id
+    left outer join option_items i on i.option_item_id = op.option_item_id
+    left outer join options o on o.options_id = i.options_id
+    left outer join products p on p.product_id = o.product_id
+    left outer join sellers s on s.member_id = p.member_id
+    left outer join members m on m.member_id = s.member_id
+    
+    where od.member_id=#{no}
+  </select>
   
 </mapper>

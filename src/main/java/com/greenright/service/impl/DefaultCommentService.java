@@ -12,15 +12,15 @@ import com.greenright.service.CommentService;
 
 @Service
 public class DefaultCommentService implements CommentService {
-  
+
   @Resource
   private CommentDao commentDao;
-  
+
   @Override
   public int insert(Comment comment) throws Exception {
     comment.setCreatedDate(new Date(System.currentTimeMillis()));
-    
-   return commentDao.insert(comment);
+
+    return commentDao.insert(comment);
   }
 
   @Override
@@ -31,7 +31,7 @@ public class DefaultCommentService implements CommentService {
   }
 
 
-  
+
   @Override
   public List<Comment> list(int no) throws Exception {
     return commentDao.findAll(no);
@@ -39,7 +39,7 @@ public class DefaultCommentService implements CommentService {
 
   @Override
   public int update(String contents, String commentNo) throws Exception {
-    Map<String,String> map = new HashMap<>();
+    Map<String, String> map = new HashMap<>();
     map.put("contents", contents);
     map.put("commentNo", commentNo);
     return commentDao.update(map);

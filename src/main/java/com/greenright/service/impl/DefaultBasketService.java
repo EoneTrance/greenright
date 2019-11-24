@@ -17,7 +17,7 @@ public class DefaultBasketService implements BasketService {
   public List<Basket> list(int no) throws Exception {
     return basketDao.findAll(no);
   }
-  
+
   @Override
   public Basket get(Basket basket) throws Exception {
     Basket foundBasket = basketDao.findBy(basket);
@@ -32,7 +32,7 @@ public class DefaultBasketService implements BasketService {
     int result = 0;
     try {
       result = basketDao.insert(basket);
-    } catch(Exception e) {
+    } catch (Exception e) {
       String exception = e.getCause().toString();
       if (exception.indexOf("PRIMARY") != -1) {
         result = basketDao.update(basket);
@@ -50,5 +50,5 @@ public class DefaultBasketService implements BasketService {
   public int delete(Basket basket) throws Exception {
     return basketDao.delete(basket);
   }
-  
+
 }

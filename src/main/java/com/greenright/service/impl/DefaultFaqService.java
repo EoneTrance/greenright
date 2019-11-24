@@ -9,7 +9,7 @@ import com.greenright.domain.Faq;
 import com.greenright.service.FaqService;
 
 @Service
-public class DefaultFaqService implements FaqService{
+public class DefaultFaqService implements FaqService {
 
   @Autowired
   private FaqDao faqDao;
@@ -21,7 +21,7 @@ public class DefaultFaqService implements FaqService{
 
   @Override
   public Faq get(int no) throws Exception {
-    if(faqDao ==null ) {
+    if (faqDao == null) {
       throw new Exception("해당 번호의 데이터가 없습니다.");
     }
     return faqDao.findBy(no);
@@ -39,8 +39,8 @@ public class DefaultFaqService implements FaqService{
 
   @Override
   public void delete(int no) throws Exception {
-    if(faqDao.delete(no) == 0) {
-      throw new Exception ("해당데이터가 없습니다.");
+    if (faqDao.delete(no) == 0) {
+      throw new Exception("해당데이터가 없습니다.");
     }
   }
 
@@ -49,13 +49,13 @@ public class DefaultFaqService implements FaqService{
     HashMap<String, String> param = new HashMap<>();
     param.put("keyword", keyword);
     param.put("questionType", questionType);
-  
+
     return faqDao.findByKeyword(param);
   }
-  
-  
-//  @Override
-//  public List<Faq> search(String keyword) throws Exception {
-//    return faqDao.findByKeyword(keyword);
-//  }
+
+
+  // @Override
+  // public List<Faq> search(String keyword) throws Exception {
+  // return faqDao.findByKeyword(keyword);
+  // }
 }

@@ -540,11 +540,11 @@ $(function() {
      +  "</tr>"
     );
     
-    optionItem["optionsPrice"] = (order.productPrice + order.optionItemPrice);
-    productPrice += (optionItem["optionsPrice"] * order.optionItemQuantity);
-    
     optionItem["no"] = order.optionItemNo;
+    optionItem["optionsPrice"] = (order.productPrice + order.optionItemPrice);
     optionItem["optionsQuantity"] = order.optionItemQuantity;
+    
+    productPrice += (optionItem["optionsPrice"] * order.optionItemQuantity);
     
     optionItemList.push(optionItem);
   }
@@ -633,7 +633,7 @@ $("#my-paymentBtn").click(function(){
           + "&delivery.deliveryAddress=" + buyerAddress
           + "&delivery.recieverCellPhone=" + buyerCellPhone
           + "&delivery.recieverEmail=" + buyerEmail
-          + "&delivery.deliveryRequest=" + buyerRequest
+          + "&delivery.recieverRequest=" + buyerRequest
           + "&optionItemList=" + JSON.stringify(optionItemList),
           async: false,
           success: function() {
@@ -651,10 +651,12 @@ $("#my-paymentBtn").click(function(){
           url: "add",
           dataType: "json",
           data: "paymentWay=" + paymentMethod
+          + "&paymentPrice=" + paymentPrice
           + "&delivery.recieverName=" + buyerName
           + "&delivery.deliveryAddress=" + buyerAddress
           + "&delivery.recieverCellPhone=" + buyerCellPhone
           + "&delivery.recieverEmail=" + buyerEmail
+          + "&delivery.recieverRequest=" + buyerRequest
           + "&optionItemList=" + JSON.stringify(optionItemList),
           async: false,
           success: function() {

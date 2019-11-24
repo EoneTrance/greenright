@@ -7,7 +7,6 @@
 
 #mainContent {
   width: 1200px;
-  text-align:center;
   padding-top: 10px;
   padding-bottom: 10px;
   margin: auto auto;
@@ -16,7 +15,6 @@
 
 #myPageContent {
   width: 992px;
-  text-align:center;
   padding-top: 10px;
   padding-bottom: 10px;
   margin: auto auto;

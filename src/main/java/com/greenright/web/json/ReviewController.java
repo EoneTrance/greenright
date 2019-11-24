@@ -15,51 +15,56 @@ import com.greenright.web.ReviewPhotoWriter;
 @RestController("json.ReviewController")
 @RequestMapping("/json/Review")
 public class ReviewController {
-  @Resource private ReviewService reviewService;
-  @Resource private ReviewPhotoWriter reviewPhotoWriter;
+  @Resource
+  private ReviewService reviewService;
+  @Resource
+  private ReviewPhotoWriter reviewPhotoWriter;
 
   @Transactional
   @PostMapping("add")
-  public JsonResult add(Review review,MultipartFile reviewPhoto)throws Exception{
+  public JsonResult add(Review review, MultipartFile reviewPhoto) throws Exception {
     try {
       System.out.println(review.toString());
       System.out.println(reviewPhoto);
-      if(reviewPhoto != null) {
+      if (reviewPhoto != null) {
         review.setPhotos(reviewPhotoWriter.getPhotoFile(reviewPhoto));
         System.out.println(review.getPhotos());
-      }else {
+      } else {
 
       }
       reviewService.insert(review);
       return new JsonResult().setResult(JsonResult.SUCCESS);
-    }catch(Exception e) {
+    } catch (Exception e) {
       return new JsonResult().setResult(JsonResult.FAILURE);
     }
   }
+
   @GetMapping("get")
-  public JsonResult get(int no) throws Exception{
+  public JsonResult get(int no) throws Exception {
     try {
       Review review = reviewService.findByReviewNo(no);
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(review);
-    }catch(Exception e) {
+    } catch (Exception e) {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
+
   @GetMapping("list")
-  public JsonResult list(int no) throws Exception{
+  public JsonResult list(int no) throws Exception {
     try {
-    List<Review> reviews = reviewService.list(no);
+      List<Review> reviews = reviewService.list(no);
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(reviews);
     } catch (Exception e) {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
+
   @GetMapping("getRatingAVer")
-  public JsonResult getRatingAver(int no) throws Exception{
+  public JsonResult getRatingAver(int no) throws Exception {
     try {
       double RatingAver = reviewService.getRatingAver(no);
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(RatingAver);
-    }catch (Exception e) {
+    } catch (Exception e) {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }

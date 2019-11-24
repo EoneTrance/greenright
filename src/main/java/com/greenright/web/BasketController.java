@@ -11,10 +11,10 @@ import com.greenright.service.BasketService;
 @Controller
 @RequestMapping("basket")
 public class BasketController {
-  
+
   @Resource
   BasketService basketService;
-  
+
   @GetMapping("list")
   public void list(HttpSession session, Model model) throws Exception {
     model.addAttribute("title", " - 장바구니");

@@ -11,13 +11,13 @@ import com.greenright.domain.ProductPhoto;
 
 @Component
 public class ProductPhotoWriter {
-  
+
   String uploadDir;
-  
+
   public ProductPhotoWriter(ServletContext sc) {
     uploadDir = sc.getRealPath("/upload/product");
   }
-  
+
   public List<ProductPhoto> getPhotoFiles(MultipartFile[] filePath) throws Exception {
     List<ProductPhoto> photoFiles = new ArrayList<>();
     for (MultipartFile file : filePath) {

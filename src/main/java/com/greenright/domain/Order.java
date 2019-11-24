@@ -6,23 +6,25 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Order implements Serializable {
-  
+
   private static final long serialVersionUID = 1L;
-  
+
   private int no;
-  
+
   private int memberNo;
+
+  private int paymentPrice;
   
-  @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private Date paymentDate;
-  
+
   private int paymentFlag;
-  
+
   private String paymentWay;
-  
+
   private Delivery delivery;
-  
-  private List<OrderProduct> orderProducts;
+
+  private List<OrderProduct> orderProductList;
 
   public int getNo() {
     return no;
@@ -38,6 +40,14 @@ public class Order implements Serializable {
 
   public void setMemberNo(int memberNo) {
     this.memberNo = memberNo;
+  }
+  
+  public int getPaymentPrice() {
+    return paymentPrice;
+  }
+
+  public void setPaymentPrice(int paymentPrice) {
+    this.paymentPrice = paymentPrice;
   }
 
   public Date getPaymentDate() {
@@ -72,19 +82,19 @@ public class Order implements Serializable {
     this.delivery = delivery;
   }
 
-  public List<OrderProduct> getOrderProducts() {
-    return orderProducts;
+  public List<OrderProduct> getOrderProductList() {
+    return orderProductList;
   }
 
-  public void setOrderProducts(List<OrderProduct> orderProducts) {
-    this.orderProducts = orderProducts;
+  public void setOrderProductList(List<OrderProduct> orderProductList) {
+    this.orderProductList = orderProductList;
   }
 
   @Override
   public String toString() {
-    return "Order [no=" + no + ", memberNo=" + memberNo + ", paymentDate=" + paymentDate
-        + ", paymentFlag=" + paymentFlag + ", paymentWay=" + paymentWay + ", delivery=" + delivery
-        + ", orderProducts=" + orderProducts + "]";
+    return "Order [no=" + no + ", memberNo=" + memberNo + ", paymentPrice=" + paymentPrice
+        + ", paymentDate=" + paymentDate + ", paymentFlag=" + paymentFlag + ", paymentWay="
+        + paymentWay + ", delivery=" + delivery + ", orderProductList=" + orderProductList + "]";
   }
-  
+
 }

@@ -4,74 +4,74 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.greenright.dao.ProductDao">
 
-	<resultMap type="Product" id="ProductWithFilesMap">
-		<id column="product_id" property="no" />
-		<result column="group_id" property="groupNo" />
-		<result column="member_id" property="memberNo" />
-		<result column="registered_date" property="registeredDate" />
-		<result column="diy_flag" property="diy" />
-		<result column="price" property="price" />
-		<result column="product_name" property="productName" />
-		<result column="description" property="description" />
-		<result column="expiration_date" property="expirationDate" />
-		<result column="origin" property="origin" />
-		<result column="quantity" property="quantity"/>
+  <resultMap type="Product" id="ProductWithFilesMap">
+    <id column="product_id" property="no" />
+    <result column="group_id" property="groupNo" />
+    <result column="member_id" property="memberNo" />
+    <result column="registered_date" property="registeredDate" />
+    <result column="diy_flag" property="diy" />
+    <result column="price" property="price" />
+    <result column="product_name" property="productName" />
+    <result column="description" property="description" />
+    <result column="expiration_date" property="expirationDate" />
+    <result column="origin" property="origin" />
+    <result column="quantity" property="quantity"/>
     <result column="group_id" property="groupNo"/>
     
-		<association property="seller" javaType="Seller">
-			<id column="member_id" property="no" />
-			<result column="account_num" property="accountNum" />
-			<result column="account_holder" property="accountHolder" />
-			<result column="tel" property="tel" />
-			<result column="point" property="point" />
-			<association property="member" javaType="Member">
-				<id column="member_id" property="no" />
-				<result column="name" property="name"/>
-			</association>
-		</association>
+    <association property="seller" javaType="Seller">
+      <id column="member_id" property="no" />
+      <result column="account_num" property="accountNum" />
+      <result column="account_holder" property="accountHolder" />
+      <result column="tel" property="tel" />
+      <result column="point" property="point" />
+      <association property="member" javaType="Member">
+        <id column="member_id" property="no" />
+        <result column="name" property="name"/>
+      </association>
+    </association>
 
-		<association property="group" javaType="Group">
-			<id column="group_id" property="no"></id>
-			<result column="category_id" property="categoryNo" />
-		  <result column="group_name" property="groupName"/>
-		  <association property="category" javaType="Category">
+    <association property="group" javaType="Group">
+      <id column="group_id" property="no"></id>
+    <result column="category_id" property="categoryNo" />
+    <result column="group_name" property="groupName"/>
+    <association property="category" javaType="Category">
         <id column="category_id" property="no" />
         <result column="category_name" property="categoryName"/>
       </association>
-		</association>
+  </association>
 
-		<collection property="options" ofType="ProductOption">
-			<id column="options_id" property="no" />
-			<result column="product_id" property="productNo" />
-			<result column="options_name" property="optionName" />
-			<collection property="optionItem" ofType="ProductOptionItem">
-				<id column="option_item_id" property="no" />
-				<result column="options_id" property="optionsNo" />
-				<result column="option_item_matters" property="optionItemMatter" />
-				<result column="options_price" property="optionsPrice"/>
-				<result column="options_quantity" property="optionsQuantity"/>
-			</collection>
-		</collection>
+  <collection property="options" ofType="ProductOption">
+    <id column="options_id" property="no" />
+    <result column="product_id" property="productNo" />
+    <result column="options_name" property="optionName" />
+    <collection property="optionItem" ofType="ProductOptionItem">
+      <id column="option_item_id" property="no" />
+      <result column="options_id" property="optionsNo" />
+      <result column="option_item_matters" property="optionItemMatter" />
+      <result column="options_price" property="optionsPrice"/>
+      <result column="options_quantity" property="optionsQuantity"/>
+    </collection>
+  </collection>
 
-		<collection property="photos" ofType="ProductPhoto">
-			<id column="product_photo_id" property="no" />
-			<result column="product_id" property="productNo" />
-			<result column="photo_path" property="photoPath" />
-			<result column="main_photo_flag" property="mainPhoto" />
-		</collection>
+  <collection property="photos" ofType="ProductPhoto">
+    <id column="product_photo_id" property="no" />
+    <result column="product_id" property="productNo" />
+    <result column="photo_path" property="photoPath" />
+    <result column="main_photo_flag" property="mainPhoto" />
+  </collection>
 
-	</resultMap>
+  </resultMap>
 
-	<insert id="insert" parameterType="Product"
-		useGeneratedKeys="true" keyColumn="product_id" keyProperty="no">
-		insert into
-		products(group_id,member_id,registered_date,diy_flag,price,product_name,description,expiration_date,origin,quantity)
-		values(#{groupNo},#{memberNo},now(),#{diy},#{price},#{productName},#{description},#{expirationDate},#{origin},#{quantity})
-	</insert>
+  <insert id="insert" parameterType="Product"
+  useGeneratedKeys="true" keyColumn="product_id" keyProperty="no">
+  insert into
+  products(group_id,member_id,registered_date,diy_flag,price,product_name,description,expiration_date,origin,quantity)
+  values(#{groupNo},#{memberNo},now(),#{diy},#{price},#{productName},#{description},#{expirationDate},#{origin},#{quantity})
+  </insert>
 
 
-	<select id="findWithFilesBy" parameterType="int"
-		resultMap="ProductWithFilesMap">
+  <select id="findWithFilesBy" parameterType="int"
+    resultMap="ProductWithFilesMap">
 select DISTINCT
     p.product_id,
     p.group_id,
@@ -104,7 +104,7 @@ select DISTINCT
     left outer join categorys c on c.category_id = g.category_id
     left outer join option_items i on o.options_id = i.options_id
     where p.product_id=#{value}
-	</select>
+  </select>
 
     <select id="findForPhoto" parameterType="int"
     resultMap="ProductWithFilesMap">
@@ -125,25 +125,25 @@ select DISTINCT
   </select>
   
   
-	<select id="findAllWithFile" resultMap="ProductWithFilesMap">
-		select
-		p.product_id,
-		p.quantity,
-		p.group_id,
-		p.member_id,
-		p.price,
-		p.product_name,
-		p.description,
-		f.product_id,
-		f.photo_path
-		from products p
-		left outer join product_photos f on (p.product_id = f.product_id AND
-		f.main_photo_flag = 0)
-		order by p.product_id DESC
-	</select>
-	
- 	<select id="findAllBySeller" resultMap="ProductWithFilesMap"
- 	  parameterType="int">
+  <select id="findAllWithFile" resultMap="ProductWithFilesMap">
+    select
+    p.product_id,
+    p.quantity,
+    p.group_id,
+    p.member_id,
+    p.price,
+    p.product_name,
+    p.description,
+    f.product_id,
+    f.photo_path
+    from products p
+    left outer join product_photos f on (p.product_id = f.product_id AND
+    f.main_photo_flag = 0)
+    order by p.product_id DESC
+  </select>
+  
+   <select id="findAllBySeller" resultMap="ProductWithFilesMap"
+     parameterType="int">
 select
     p.product_id,
     p.group_id,
@@ -169,10 +169,10 @@ select
     where p.member_id=1
     order by p.product_id DESC;
   </select>
-	
-	<select id="findByGroupNo" resultMap="ProductWithFilesMap"
-		parameterType="int">
-		select
+  
+  <select id="findByGroupNo" resultMap="ProductWithFilesMap"
+    parameterType="int">
+    select
     p.product_id,
     p.group_id,
     p.member_id,
@@ -193,7 +193,7 @@ select
     left outer join categorys c on c.category_id = g.category_id
     where p.group_id=#{no} and p.member_id=1
     order by p.product_id DESC
-	</select>
+  </select>
 <delete id="delete"  parameterType="int">
   delete from products 
   where product_id = #{value}

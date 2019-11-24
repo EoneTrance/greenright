@@ -58,7 +58,7 @@ table.my-join-table tbody th {
 </div>
 
 <section class="ftco-section py-5 text-center">
-  <h3><span style="font-size:200%;color:#82AE46">${loginUser.name}</span> 님의 주문이 정상적으로 접수되었습니다.</h3>
+  <h3><span style="font-size:200%;color:#82AE46">${loginUser.name}</span> 님의 주문이 접수되었습니다.</h3>
   <br>
 <div id="smallContent">
   <p>자세한 내용은 마이페이지 > 구매내역에서 확인하실 수 있습니다.</p>
@@ -69,7 +69,6 @@ table.my-join-table tbody th {
     <div class="col-sm-12">
       <div id=memberInfoForm>
       <h2 id="mypage-title-h2">주문정보</h2>
-      <hr>
       <div style="border:solid 1px #82AE46;border-radius:10px;">
         <table class="col-sm-12 table-hover my-table my-join-table my-table-row" cellpadding="10">
           <tbody>
@@ -94,31 +93,30 @@ table.my-join-table tbody th {
           <tr>
             <th class="my-col-3">주문상품</th>
             <td class="my-col-9">
-            <span id="orderProduct" style="color:black"></span>
+            <span id="orderProduct" style="color:black">${orderProduct}</span>
             </td>
           </tr>
           <tr>
             <th class="my-col-3">결제금액</th>
             <td class="my-col-9">
-            <span style="color:black">${loginUser.id}</span>
+            <span style="color:black">${order.paymentPrice}</span>
             </td>
           </tr>
           <tr>
             <th class="my-col-3">결제수단</th>
             <td class="my-col-9">
-            <span style="color:black">${loginUser.id}</span>
+            <span style="color:black">${order.paymentWay}</span>
             </td>
           </tr>
           <tr>
             <th class="my-col-3">배송지</th>
             <td class="my-col-9">
-            <span style="color:black">${loginUser.id}</span>
+            <span style="color:black">${order.delivery.deliveryAddress}</span>
             </td>
           </tr>
           </tbody>
         </table>
         </div>
-        <hr>
       </div>
     </div>
   </div>
@@ -163,7 +161,7 @@ table.my-join-table tbody th {
 <script>
 "use strict";
 $(function(){
-  var orderProducts = ${order.orderProducts};
-  $("#orderProduct").html(orderProducts[0].name + "외 ");
+  var orderProductList = ${orderProductList};
+  $("#orderProduct").html(orderProductList[0] + "외 ");
 });
 </script>

@@ -9,23 +9,25 @@ import com.greenright.dao.ReviewPhotoDao;
 import com.greenright.domain.Review;
 import com.greenright.domain.ReviewPhoto;
 import com.greenright.service.ReviewService;
-@Service
-public class DefaultReviewService implements ReviewService{
 
-  @Resource private ReviewDao reviewDao;
-  @Resource private ReviewPhotoDao reviewPhotoDao;
+@Service
+public class DefaultReviewService implements ReviewService {
+
+  @Resource
+  private ReviewDao reviewDao;
+  @Resource
+  private ReviewPhotoDao reviewPhotoDao;
 
 
   @Transactional
   @Override
   public void insert(Review review) throws Exception {
     reviewDao.insertReview(review);
-    ReviewPhoto reviewphoto =review.getPhotos();
-    if(reviewphoto!=null) {
+    ReviewPhoto reviewphoto = review.getPhotos();
+    if (reviewphoto != null) {
       reviewphoto.setReviewNo(review.getNo());
       reviewPhotoDao.insertReviewPhoto(reviewphoto);
-    }
-    else {
+    } else {
 
     }
   }
@@ -53,7 +55,7 @@ public class DefaultReviewService implements ReviewService{
   public double getRatingAver(int no) throws Exception {
     return reviewDao.getRatingAver(no);
   }
-  
-  
-  
+
+
+
 }

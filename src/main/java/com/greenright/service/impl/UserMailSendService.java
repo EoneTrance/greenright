@@ -18,7 +18,7 @@ public class UserMailSendService implements Runnable {
 
   public static final String JOIN = "join";
   public static final String FINDACCOUNT = "findAccount";
-  
+
   @Resource
   private JavaMailSender mailSender;
 
@@ -27,10 +27,10 @@ public class UserMailSendService implements Runnable {
 
   private Member member;
   private String mailType;
-  
+
   private boolean lowerCheck;
   private int size;
-  
+
   // 이메일 난수 만드는 메서드
   private String init() {
     Random ran = new Random();
@@ -52,7 +52,7 @@ public class UserMailSendService implements Runnable {
     return sb.toString();
   }
 
-  //난수를 이용한 키 생성
+  // 난수를 이용한 키 생성
   public String generateKey(boolean lowerCheck, int size) {
     this.lowerCheck = lowerCheck;
     this.size = size;
@@ -64,7 +64,7 @@ public class UserMailSendService implements Runnable {
 
     this.member = member;
     this.mailType = mailType;
-    
+
     ExecutorService executorService = Executors.newCachedThreadPool();
     executorService.submit(this);
   }
@@ -100,37 +100,40 @@ public class UserMailSendService implements Runnable {
     MimeMessage message = mailSender.createMimeMessage();
     if (mailType.equals(JOIN)) {
       subject = "[메일인증] GreenRight 이메일 인증 안내";
-      htmlStr = "<h2>안녕하세요 GreenRight 입니다.</h2><br>" 
-          + "<h3>" + member.getId() + "님의 회원가입을 환영합니다.</h3>"
-          + "<p>아래의 인증하기를 누르시면 이메일 인증이 완료됩니다.</p>"
-          + "<a href='http://192.168.0.13:8888/greenright/auth/mailAuthentication?"
-          + "id=" + member.getId() + "&authkey=" + member.getAuthkey()
-          + "'>인증하기</a>";
-//          + "<form action='http://192.168.0.13:8888/greenright/member/mailAuthentication' method='get' enctype='multipart/form-data'>"
-//            + "<input type='text' name='id' autocomplete='off' style='display:none;' value='"+member.getId()+"'/>"
-//            + "<input type='text' name='authkey' autocomplete='off' style='display:none;' value='"+member.getAuthkey()+"'/>"
-//            + "<br>"
-//            + "<button type='submit' style='width:70px;height:20px;font-weight:bold;font-size:150%;"
-//            + "border-width:0px;text-align:left;margin:0px;padding:0px;outline:0px;'>인증하기</button>"
-//          + "</form>";
-      
+      htmlStr = "<h2>안녕하세요 GreenRight 입니다.</h2><br>" + "<h3>" + member.getId()
+          + "님의 회원가입을 환영합니다.</h3>" + "<p>아래의 인증하기를 누르시면 이메일 인증이 완료됩니다.</p>"
+          + "<a href='http://192.168.0.13:8888/greenright/auth/mailAuthentication?" + "id="
+          + member.getId() + "&authkey=" + member.getAuthkey() + "'>인증하기</a>";
+      // + "<form action='http://192.168.0.13:8888/greenright/member/mailAuthentication'
+      // method='get' enctype='multipart/form-data'>"
+      // + "<input type='text' name='id' autocomplete='off' style='display:none;'
+      // value='"+member.getId()+"'/>"
+      // + "<input type='text' name='authkey' autocomplete='off' style='display:none;'
+      // value='"+member.getAuthkey()+"'/>"
+      // + "<br>"
+      // + "<button type='submit' style='width:70px;height:20px;font-weight:bold;font-size:150%;"
+      // + "border-width:0px;text-align:left;margin:0px;padding:0px;outline:0px;'>인증하기</button>"
+      // + "</form>";
+
     } else if (mailType.equals(FINDACCOUNT)) {
       subject = "[비밀번호찾기] GreenRight 비밀번호 찾기 안내";
-      htmlStr = "<h2>안녕하세요 GreenRight 입니다.</h2><br>" 
-          + "<h3>" + member.getId() + "님.</h3>"
+      htmlStr = "<h2>안녕하세요 GreenRight 입니다.</h2><br>" + "<h3>" + member.getId() + "님.</h3>"
           + "<p>아래의 비밀번호 변경하기를 누르시면 비밀번호를 재설정하실수 있는 페이지로 연결됩니다.</p>"
-          + "<a href='http://192.168.0.13:8888/greenright/member/changePassword?"
-          + "id=" + member.getId() + "&passwordAuthkey=" + member.getPasswordAuthkey()
-          + "'>인증하기</a>";
-//          + "<form action='http://192.168.0.13:8888/greenright/member/changePassword' method='get' enctype='multipart/form-data'>"
-//            + "<input type='text' name='id' autocomplete='off' style='display:none;' value='"+member.getId()+"'/>"
-//            + "<input type='text' name='passwordAuthkey' autocomplete='off' style='display:none;' value='"+member.getPasswordAuthkey()+"'/>"
-//            + "<br>"
-//            + "<button type='submit' style='width:150px;height:20px;font-weight:bold;font-size:150%;"
-//            + "border-width:0px;text-align:left;margin:0px;padding:0px;outline:0px;'>비밀번호 변경하기</button>"
-//          + "</form>";
+          + "<a href='http://192.168.0.13:8888/greenright/member/changePassword?" + "id="
+          + member.getId() + "&passwordAuthkey=" + member.getPasswordAuthkey() + "'>인증하기</a>";
+      // + "<form action='http://192.168.0.13:8888/greenright/member/changePassword' method='get'
+      // enctype='multipart/form-data'>"
+      // + "<input type='text' name='id' autocomplete='off' style='display:none;'
+      // value='"+member.getId()+"'/>"
+      // + "<input type='text' name='passwordAuthkey' autocomplete='off' style='display:none;'
+      // value='"+member.getPasswordAuthkey()+"'/>"
+      // + "<br>"
+      // + "<button type='submit' style='width:150px;height:20px;font-weight:bold;font-size:150%;"
+      // + "border-width:0px;text-align:left;margin:0px;padding:0px;outline:0px;'>비밀번호
+      // 변경하기</button>"
+      // + "</form>";
     }
-    
+
     try {
       message.setSubject(subject, "utf-8");
       message.setText(htmlStr, "utf-8", "html");

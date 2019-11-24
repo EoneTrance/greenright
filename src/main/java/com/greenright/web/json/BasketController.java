@@ -24,29 +24,29 @@ import com.greenright.service.ProductService;
 @RestController("json.BasketController")
 @RequestMapping("/json/basket")
 public class BasketController {
-  
+
   @Resource
   private BasketService basketService;
-  
+
   @Resource
   private ProductOptionItemService productOptionItemService;
-  
+
   @Resource
   private ProductOptionService productOptionService;
-  
+
   @Resource
   private ProductService productService;
-  
+
   @Resource
   private MemberService memberService;
-  
+
   @GetMapping("add")
   public JsonResult add(HttpSession session, int no, int quantity) throws Exception {
-    Member loginUser = (Member)session.getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     ProductOptionItem optionItem = productOptionItemService.get(no);
     optionItem.setOptionsQuantity(quantity);
     Basket basket = new Basket();
-    
+
     basket.setMemberNo(loginUser.getNo());
     basket.setOptionItemNo(optionItem.getNo());
     basket.setQuantity(optionItem.getOptionsQuantity());
@@ -61,11 +61,11 @@ public class BasketController {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-  
+
   @GetMapping("list")
   public JsonResult list(HttpSession session, Model model) throws Exception {
-    Member loginUser = (Member)session.getAttribute("loginUser");
-    
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
     List<Basket> baskets = basketService.list(loginUser.getNo());
     List<ProductOptionItem> optionItems = new ArrayList<>();
     List<ProductOption> options = new ArrayList<>();
@@ -83,7 +83,7 @@ public class BasketController {
     for (Product product : products) {
       members.add(memberService.get(product.getMemberNo()));
     }
-    
+
     List<Object> basketList = new ArrayList<>();
     for (int i = 0; i < baskets.size(); i++) {
       Map<String, Object> basket = new HashMap<>();
@@ -99,7 +99,7 @@ public class BasketController {
       basket.put("sellerName", members.get(i).getName());
       basketList.add(basket);
     }
-    
+
     try {
       if (basketList.size() != 0) {
         return new JsonResult().setState(JsonResult.SUCCESS).setResult(basketList);

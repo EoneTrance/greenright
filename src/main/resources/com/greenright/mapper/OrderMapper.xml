@@ -8,15 +8,39 @@
   <resultMap type="Order" id="OrderMap">
     <id column="order_id" property="no"/>
     <result column="member_id" property="memberNo"/>
+    <result column="payment_price" property="paymentPrice"/>
     <result column="payment_date" property="paymentDate"/>
     <result column="payment_flag" property="paymentFlag"/>
     <result column="payment_way" property="paymentWay"/>
   </resultMap>
   
+  <resultMap type="order" id="OrderWithDeliveryMap">
+      <id column="order_id" property="no"/>
+      <result column="member_id" property="memberNo"/>
+      <result column="payment_price" property="paymentPrice"/>
+      <result column="payment_date" property="paymentDate"/>
+      <result column="payment_flag" property="paymentFlag"/>
+      <result column="payment_way" property="paymentWay"/>
+      <association property="delivery" javaType="Delivery">
+        <id column="delivery_id" property="no"/>
+        <result column="order_id" property="orderNo"/>
+        <result column="invoice_num" property="invoiceNum"/>
+        <result column="delivery_date" property="deliveryDate"/>
+        <result column="delivery_flag" property="deliveryFlag"/>
+        <result column="courier_name" property="courierName"/>
+        <result column="reciever_name" property="recieverName"/>
+        <result column="delivery_address" property="deliveryAddress"/>
+        <result column="reciever_cell_phone" property="recieverCellPhone"/>
+        <result column="reciever_email" property="recieverEmail"/>
+        <result column="reciever_request" property="recieverRequest"/>
+      </association>
+    </resultMap>
+  
   <sql id="selectOrder">
     select
       order_id,
       member_id,
+      payment_price,
       payment_date,
       payment_flag,
       payment_way
@@ -30,11 +54,13 @@
     insert into
     orders(
       member_id,
+      payment_price,
       payment_date,
       payment_flag,
       payment_way)
     values(
       #{memberNo},
+      #{paymentPrice},
       now(),
       #{paymentFlag},
       #{paymentWay})
@@ -43,10 +69,50 @@
   </selectKey>
   </insert>
   
-  <select id="findBy" parameterType="int" resultMap="OrderMap">
-    <include refid="selectOrder"/>
-    from orders
-    <include refid="whereOrder"/>
+  <select id="findBy" parameterType="int" resultMap="OrderWithDeliveryMap">
+    select
+      o.order_id,
+      o.member_id,
+      o.payment_price,
+      o.payment_date,
+      o.payment_flag,
+      o.payment_way,
+      d.delivery_id,
+      d.invoice_num,
+      d.delivery_date,
+      d.delivery_flag,
+      d.courier_name,
+      d.reciever_name,
+      d.delivery_address,
+      d.reciever_cell_phone,
+      d.reciever_email,
+      d.reciever_request
+    from orders o
+    inner join deliverys d on d.order_id = o.order_id
+    where o.order_id=#{no}
+  </select>
+  
+  <select id="findByMember" parameterType="int" resultMap="OrderWithDeliveryMap">
+    select
+      o.order_id,
+      o.member_id,
+      o.payment_price,
+      o.payment_date,
+      o.payment_flag,
+      o.payment_way,
+      d.delivery_id,
+      d.invoice_num,
+      d.delivery_date,
+      d.delivery_flag,
+      d.courier_name,
+      d.reciever_name,
+      d.delivery_address,
+      d.reciever_cell_phone,
+      d.reciever_email,
+      d.reciever_request
+    from orders o
+    inner join deliverys d on d.order_id = o.order_id
+    where o.member_id=#{no}
   </select>
   
 </mapper>

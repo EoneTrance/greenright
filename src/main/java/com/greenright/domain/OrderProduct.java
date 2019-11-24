@@ -3,17 +3,21 @@ package com.greenright.domain;
 import java.io.Serializable;
 
 public class OrderProduct implements Serializable {
-  
-  private static final long serialVersionUID = 1L;
-  
-  private int orderNo;
-  
-  private int optionItemNo;
-  
-  private int quantity;
-  
-  private int price;
 
+  private static final long serialVersionUID = 1L;
+
+  private int orderNo;
+
+  private int optionItemNo;
+
+  private int quantity;
+
+  private int price;
+  
+  private Order order;
+  
+  private ProductOptionItem productOptionItem;
+  
   public int getOrderNo() {
     return orderNo;
   }
@@ -46,10 +50,27 @@ public class OrderProduct implements Serializable {
     this.price = price;
   }
 
+  public Order getOrder() {
+    return order;
+  }
+
+  public void setOrder(Order order) {
+    this.order = order;
+  }
+
+  public ProductOptionItem getProductOptionItem() {
+    return productOptionItem;
+  }
+
+  public void setProductOptionItem(ProductOptionItem productOptionItem) {
+    this.productOptionItem = productOptionItem;
+  }
+
   @Override
   public String toString() {
     return "OrderProduct [orderNo=" + orderNo + ", optionItemNo=" + optionItemNo + ", quantity="
-        + quantity + ", price=" + price + "]";
+        + quantity + ", price=" + price + ", order=" + order + ", productOptionItem="
+        + productOptionItem + "]";
   }
   
 }

@@ -32,49 +32,48 @@ public class ProductController {
   private ReviewService reviewService;
   @Resource
   private ProductQuestionService productQuestionService;
-  
-  
+
+
   @GetMapping("form")
-  public void form() { }
-  
+  public void form() {}
+
   @Transactional
   @PostMapping("add")
-  public String add (MultipartFile[] photoPath,
-      Product product,String[] optionName, String[] optionContents,String[] optionprice
-      ,String[] optionquantity)throws Exception {
+  public String add(MultipartFile[] photoPath, Product product, String[] optionName,
+      String[] optionContents, String[] optionprice, String[] optionquantity) throws Exception {
     product.setPhotos(productPhotoWriter.getPhotoFiles(photoPath));
     ArrayList<ProductOption> pList = new ArrayList<>();
-    if(optionName.length!=1) {
-    for(int i =1 ; i<optionName.length ; i++) {
-      ProductOption productOption = new ProductOption();
-      productOption.setOptionName(optionName[i]);
-      pList.add(productOption);
-    }
-    }
-    int count =-1;
-    ArrayList<ProductOptionItem> poiList = null;
-    if(optionContents.length!=1) {
-    for(int i =1; i<optionContents.length; i++) {
-      ProductOptionItem  productOptionItem = new ProductOptionItem();
-      if(optionContents[i].equals("divide")) {
-        poiList = new ArrayList<>();
-        count++;
-      }else {
-        productOptionItem.setOptionItemMatter(optionContents[i]);
-        productOptionItem.setOptionsPrice(Integer.parseInt(optionprice[i]));
-        productOptionItem.setOptionsQuantity(Integer.parseInt(optionquantity[i]));
-        poiList.add(productOptionItem);
-       ProductOption pOption = pList.get(count);
-       pOption.setOptionItem(poiList);
-       pList.set(count, pOption);
+    if (optionName.length != 1) {
+      for (int i = 1; i < optionName.length; i++) {
+        ProductOption productOption = new ProductOption();
+        productOption.setOptionName(optionName[i]);
+        pList.add(productOption);
       }
     }
+    int count = -1;
+    ArrayList<ProductOptionItem> poiList = null;
+    if (optionContents.length != 1) {
+      for (int i = 1; i < optionContents.length; i++) {
+        ProductOptionItem productOptionItem = new ProductOptionItem();
+        if (optionContents[i].equals("divide")) {
+          poiList = new ArrayList<>();
+          count++;
+        } else {
+          productOptionItem.setOptionItemMatter(optionContents[i]);
+          productOptionItem.setOptionsPrice(Integer.parseInt(optionprice[i]));
+          productOptionItem.setOptionsQuantity(Integer.parseInt(optionquantity[i]));
+          poiList.add(productOptionItem);
+          ProductOption pOption = pList.get(count);
+          pOption.setOptionItem(poiList);
+          pList.set(count, pOption);
+        }
+      }
     }
     product.setOptions(pList);
     productService.insert(product);
     return "redirect:manage";
   }
-  
+
   @GetMapping("detail")
   public void detail(Model model, int no) throws Exception {
     Product product = productService.get(no);
@@ -82,50 +81,52 @@ public class ProductController {
     model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);
   }
-  
+
   @GetMapping("buydetail")
   public void buydetail(Model model, int no) throws Exception {
     Product product = productService.get(no);
     Product productPhoto = productService.getforPhoto(no);
-    List<Product>productLiST = productService.gettopbyCategoryNum(no);
-    
+    List<Product> productLiST = productService.gettopbyCategoryNum(no);
+
     model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);
-    model.addAttribute("productLiST",productLiST);
+    model.addAttribute("productLiST", productLiST);
   }
-  
-  
-  
+
+
+
   @GetMapping("delete")
   public String delete(int no) throws Exception {
     productService.delete(no);
 
     return "redirect:manage";
   }
+
   @RequestMapping("manage")
-  public void main(Model model,HttpSession session) throws Exception {
-    
-    //int no =(Integer)session.getAttribute("SellerNo");
-    //List<Product> products = productService.listBySeller(no);
+  public void main(Model model, HttpSession session) throws Exception {
+
+    // int no =(Integer)session.getAttribute("SellerNo");
+    // List<Product> products = productService.listBySeller(no);
     List<Product> products = productService.listBySeller(1);
     model.addAttribute("products", products);
     System.out.println(products.toString());
   }
+
   @Transactional
   @PostMapping("update")
-  public String update(HttpServletRequest request, Product product, MultipartFile[] photoPath
-      ,String optionName[],String optionItemMatter[])
-      throws Exception {
+  public String update(HttpServletRequest request, Product product, MultipartFile[] photoPath,
+      String optionName[], String optionItemMatter[]) throws Exception {
     product.setPhotos(productPhotoWriter.getPhotoFiles(photoPath));
-    
-    productService.update(product,optionName,optionItemMatter);
+
+    productService.update(product, optionName, optionItemMatter);
 
     return "redirect:manage";
-  
-}   
+
+  }
+
   @PostMapping("review/check")
   @ResponseBody
-  public int ReviewCheck(Review review) throws Exception{
+  public int ReviewCheck(Review review) throws Exception {
     return reviewService.checkReview(review);
   }
 

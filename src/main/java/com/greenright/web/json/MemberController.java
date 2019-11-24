@@ -11,10 +11,10 @@ import com.greenright.service.MemberService;
 @RestController("json.MemberController")
 @RequestMapping("/json/member")
 public class MemberController {
-  
+
   @Resource
   MemberService memberService;
-  
+
   @GetMapping("checkDuplicate")
   public JsonResult checkDuplicate(String value) throws Exception {
     try {
@@ -27,7 +27,7 @@ public class MemberController {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-  
+
   @PostMapping("checkAccount")
   public JsonResult checkAccount(Member member) throws Exception {
     try {
@@ -40,7 +40,7 @@ public class MemberController {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-  
+
   @PostMapping("passwordUpdate")
   public JsonResult passwordUpdate(Member member) throws Exception {
     try {
@@ -53,7 +53,7 @@ public class MemberController {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-  
+
   @GetMapping("checkDuplicateCellPhone")
   public JsonResult checkDuplicateCellPhone(String cellPhone) throws Exception {
     Member result = memberService.getPhone(cellPhone);
@@ -67,14 +67,15 @@ public class MemberController {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-  
+
   @PostMapping("searchByQuestionAnswer")
   public JsonResult searchByQuestionAnswer(Member member) throws Exception {
-    
+
     Member foundMember = memberService.getAccount(member);
     try {
       if (foundMember.getId() != null) {
-        return new JsonResult().setState(JsonResult.SUCCESS).setMessage("exist").setResult(foundMember.getId());
+        return new JsonResult().setState(JsonResult.SUCCESS).setMessage("exist")
+            .setResult(foundMember.getId());
       } else {
         return new JsonResult().setState(JsonResult.SUCCESS).setMessage("notExist");
       }

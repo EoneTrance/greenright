@@ -6,14 +6,16 @@ import org.springframework.stereotype.Service;
 import com.greenright.dao.ProductQuestionDao;
 import com.greenright.domain.ProductQuestion;
 import com.greenright.service.ProductQuestionService;
+
 @Service
 public class DefaultProductQuestionService implements ProductQuestionService {
 
-  @Resource ProductQuestionDao productQuestionDao;
-  
+  @Resource
+  ProductQuestionDao productQuestionDao;
+
   @Override
   public void insert(ProductQuestion productQuestion) throws Exception {
-    productQuestionDao.add(productQuestion);    
+    productQuestionDao.add(productQuestion);
   }
 
   @Override

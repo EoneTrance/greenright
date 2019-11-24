@@ -296,13 +296,14 @@ CREATE TABLE deliverys (
   order_id            INTEGER      NULL,     -- 주문번호
   invoice_num         VARCHAR(255) NOT NULL, -- 송장번호
   delivery_date       DATE         NOT NULL, -- 배송일자
-  delivery_flag       BOOLEAN      NOT NULL, -- 배송상태
+  delivery_flag       BOOLEAN      NOT NULL DEFAULT 0, -- 배송상태
   courier_name        VARCHAR(50)  NOT NULL, -- 택배사명
   reciever_name       VARCHAR(50)  NOT NULL, -- 수취인명
   delivery_address    VARCHAR(255) NOT NULL, -- 배송지주소
   reciever_cell_phone VARCHAR(50)  NOT NULL, -- 수취인휴대전화
   reciever_tel        VARCHAR(50)  NULL,     -- 수취인일반전화
-  reciever_email      VARCHAR(40)  NULL      -- 수취인이메일
+  reciever_email      VARCHAR(40)  NULL,     -- 수취인이메일
+  reciever_request    VARCHAR(255) NULL      -- 배송시요청사항
 );
 
 -- 배송

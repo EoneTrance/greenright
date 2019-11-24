@@ -15,45 +15,43 @@ import com.greenright.service.FaqService;
 @RequestMapping("/json/faq")
 public class FAQController {
 
-  @Resource private FaqService faqService;
-  
-  
+  @Resource
+  private FaqService faqService;
+
+
   @PostMapping("add")
   public JsonResult add(Faq faq) throws Exception {
     try {
       faqService.insert(faq);
       return new JsonResult().setState(JsonResult.SUCCESS);
-    
+
     } catch (Exception e) {
-      return new JsonResult().setState(JsonResult.FAILURE)
-          .setMessage(e.getMessage());
+      return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-  
+
   @GetMapping("delete")
   public JsonResult delete(int no) throws Exception {
     try {
       faqService.delete(no);
       return new JsonResult().setState(JsonResult.SUCCESS);
-    
+
     } catch (Exception e) {
-      return new JsonResult()
-          .setState(JsonResult.FAILURE)
-          .setMessage(e.getMessage());
+      return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-  
+
   @GetMapping("detail")
   public JsonResult detail(int no) throws Exception {
     try {
       Faq faq = faqService.get(no);
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(faq);
-      
+
     } catch (Exception e) {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-  
+
   @GetMapping("list")
   public JsonResult list(@RequestParam(defaultValue = "5") int pageSize) throws Exception {
     try {
@@ -63,9 +61,9 @@ public class FAQController {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-  
+
   @GetMapping("search")
-  public JsonResult searach(String keyword, String questionType) throws Exception{
+  public JsonResult searach(String keyword, String questionType) throws Exception {
     try {
       List<Faq> faqs = faqService.search(keyword, questionType);
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(faqs);
@@ -73,7 +71,7 @@ public class FAQController {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-  
+
   @PostMapping("update")
   public JsonResult update(Faq faq) throws Exception {
     try {
@@ -83,5 +81,5 @@ public class FAQController {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
   }
-  
- }
+
+}

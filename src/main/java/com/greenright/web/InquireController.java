@@ -18,13 +18,12 @@ public class InquireController {
   private PrivateBoardService privateBoardService;
 
   @GetMapping("form")
-  public void form() {
-  }
+  public void form() {}
 
   @GetMapping("list")
   public void inquire(Model model, HttpSession session) throws Exception {
     session.setAttribute("no", 1);
-    int no = (int)session.getAttribute("no");
+    int no = (int) session.getAttribute("no");
     List<PrivateBoard> privateBoards = privateBoardService.list(no);
     model.addAttribute("boards", privateBoards);
 
@@ -33,7 +32,7 @@ public class InquireController {
   @PostMapping("add")
   public String add(PrivateBoard privateBoard, HttpSession session) throws Exception {
     session.setAttribute("no", 1);
-    privateBoard.setMemberNo((int)session.getAttribute("no"));
+    privateBoard.setMemberNo((int) session.getAttribute("no"));
     privateBoardService.insert(privateBoard);
     return "redirect:list";
   }
@@ -42,10 +41,10 @@ public class InquireController {
   public String detail(Model model, int no, HttpSession session) throws Exception {
     session.setAttribute("no", 1);
     PrivateBoard privateBoard = privateBoardService.get(no);
-    int memberNo = (int)session.getAttribute("no");
-    if(memberNo!=privateBoard.getMemberNo())
+    int memberNo = (int) session.getAttribute("no");
+    if (memberNo != privateBoard.getMemberNo())
       return "redirect:list";
-    model.addAttribute("privateBoard",privateBoard);
+    model.addAttribute("privateBoard", privateBoard);
     return "mypage/inquire/detail";
   }
 
