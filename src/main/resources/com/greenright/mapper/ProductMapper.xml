@@ -51,7 +51,7 @@
         <result column="options_id" property="OptionsNo" />
         <result column="option_item_matters" property="OptionItemMatter" />
         <result column="options_price" property="OptionsPrice"/>
-        <result column="options_quantity" property="Optionsquantity"/>
+        <result column="options_quantity" property="OptionsQuantity"/>
       </collection>
     </collection>
 
@@ -106,7 +106,7 @@ select DISTINCT
     o.options_name,
     i.option_item_matters,
     i.options_price,
-    i.options_quantity,
+    i.options_Quantity,
     i.option_item_id,
     f.product_id,
     f.photo_path,

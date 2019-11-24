@@ -8,9 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.greenright.domain.Member;
+import com.greenright.domain.OrderProduct;
 import com.greenright.domain.Product;
 import com.greenright.service.LikeService;
 import com.greenright.service.MemberService;
+import com.greenright.service.OrderProductService;
+import com.greenright.service.OrderService;
 import com.greenright.service.ProductService;
 import com.greenright.service.SellerService;
 
@@ -29,15 +32,17 @@ public class MypageController {
   @Resource
   private ProductService productService;
   
+  @Resource
+  private OrderService orderService;
+  
+  @Resource
+  private OrderProductService orderProductService;
+
   @GetMapping("")
   public void mypage(Member member) throws Exception {
   }
   
-  @Resource
-  private OrderService orderService;
 
-  @GetMapping("")
-  public void mypage(Member member) throws Exception {}
 
   @GetMapping("userinfo")
   public void userinfo(HttpSession session, Model model) throws Exception {

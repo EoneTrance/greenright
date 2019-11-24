@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.greenright.dao;
 
 import java.util.List;
@@ -15,17 +14,3 @@ public interface PrivateBoardDao {
   void stateUpdate(PrivateBoard privateBoard) throws Exception;
   
 }
-=======
-package com.greenright.dao;
-
-import java.util.List;
-import com.greenright.domain.PrivateBoard;
-
-public interface PrivateBoardDao {
-  List<PrivateBoard> findAll(int no) throws Exception;
-
-  void insert(PrivateBoard privateBoard) throws Exception;
-
-  PrivateBoard findBy(int no) throws Exception;
-}
->>>>>>> f786826130ce28732ecc9270edafeb41088f606f

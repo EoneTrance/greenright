@@ -58,7 +58,7 @@ public class DefaultProductService implements ProductService{
       
       ProductOptionItem productOptionItem = new ProductOptionItem();
       productOptionItem.setOptionsNo(productOption.getNo());
-      productOptionItem.setOptionsquantity(product.getQuantity());
+      productOptionItem.setOptionsQuantity(product.getQuantity());
       productOptionItem.setOptionsPrice(0);
       productOptionItem.setOptionItemMatter("기본옵션입니다");
       optionItemDao.insert(productOptionItem);
@@ -134,7 +134,7 @@ public class DefaultProductService implements ProductService{
         }else if(i%5==1) {
           productOptionItem.setOptionsPrice(Integer.parseInt(ProductOptionItemNo[i]));
         }else if(i%5==2) {
-          productOptionItem.setOptionsquantity(Integer.parseInt(ProductOptionItemNo[i]));
+          productOptionItem.setOptionsQuantity(Integer.parseInt(ProductOptionItemNo[i]));
         }else if(i%5==3) {
           productOptionItem.setNo(Integer.parseInt(ProductOptionItemNo[i]));
         }else{

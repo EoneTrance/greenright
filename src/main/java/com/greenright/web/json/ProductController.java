@@ -121,7 +121,6 @@ public class ProductController {
     }
   }
   
-} 
  @GetMapping("addCart")
 public JsonResult addCart(int no) throws Exception {
   try {

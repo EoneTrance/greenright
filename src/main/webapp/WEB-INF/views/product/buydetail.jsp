@@ -329,7 +329,6 @@ button.btn.btn-primary.CartBut {
 
 
 <!-- 어떤거 보내야할지 정확하게 모르겠어서 일단 상품정보에대한부분은 다 폼으로 묶어놓았습니다 .  -->
-<form>
 <section class="ftco-section">
   <div class="container">
     <div class="row">
@@ -368,7 +367,7 @@ button.btn.btn-primary.CartBut {
                 </div>
                 <c:forEach items="${product.options}" var="option">
                 <c:if test="${option.no ne 0 }">
-                  <select name="optionItemNo" id="" class="form-control">
+                  <select name="optionItemNo"  class="form-control" id="my-select-option">
                     <c:forEach items="${option.optionItem}" var="item">
                   <span class="ion-ios-arrow-down"></span>
                       <option  value="${item.no}">옵션명:&nbsp;${item.optionItemMatter}&nbsp;|&nbsp;가격:&nbsp;+${item.optionsPrice}원</option>
@@ -400,14 +399,13 @@ button.btn.btn-primary.CartBut {
           <div class="col-md-12"></div>
         </div>
         <p>
-          <button  class="btn btn-primary CartBut">Add to
+          <button  class="btn btn-primary CartBut" id="add-to-cart">Add to
             Cart</button>
         </p>
       </div>
     </div>
   </div>
 </section>
-</form>
 <section class="ftco-section">
   <div class="container">
     <div class="row justify-content-center mb-3 pb-3">
@@ -664,8 +662,10 @@ button.btn.btn-primary.CartBut {
   src="/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
 <script src="/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
-<scrip></scrip>
+<script>
 $(document).on("click", "#add-to-cart", function(e){
+  console.log($("#my-select-option").select().val())
+  console.log($("#quantity").val())
   $.ajax({
     type: "GET",
     url: "../json/basket/add",

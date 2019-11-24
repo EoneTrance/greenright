@@ -8,9 +8,9 @@ public class ProductOptionItem implements Serializable{
   private int no;
   private int OptionsNo;
   private int OptionsPrice;
-  private int Optionsquantity;
+  private int OptionsQuantity;
   private String OptionItemMatter;
-  
+  private ProductOption productOption;
 
   public int getNo() {
     return no;
@@ -44,20 +44,31 @@ public class ProductOptionItem implements Serializable{
     OptionsPrice = optionsPrice;
   }
 
-  public int getOptionsquantity() {
-    return Optionsquantity;
+  public int getOptionsQuantity() {
+    return OptionsQuantity;
   }
 
-  public void setOptionsquantity(int optionsquantity) {
-    Optionsquantity = optionsquantity;
+  public void setOptionsQuantity(int optionsQuantity) {
+    OptionsQuantity = optionsQuantity;
+  }
+
+  public ProductOption getProductOption() {
+    return productOption;
+  }
+
+  public void setProductOption(ProductOption productOption) {
+    this.productOption = productOption;
   }
 
   @Override
   public String toString() {
     return "ProductOptionItem [no=" + no + ", OptionsNo=" + OptionsNo + ", OptionsPrice="
-        + OptionsPrice + ", Optionsquantity=" + Optionsquantity + ", OptionItemMatter="
-        + OptionItemMatter + "]";
+        + OptionsPrice + ", OptionsQuantity=" + OptionsQuantity + ", OptionItemMatter="
+        + OptionItemMatter + ", productOption=" + productOption + "]";
   }
+
+
+  
   
   
   
