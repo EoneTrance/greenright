@@ -47,6 +47,4 @@ public class ProductPhoto implements Serializable {
         + ", mainPhoto=" + mainPhoto + "]";
   }
 
-
-
 }

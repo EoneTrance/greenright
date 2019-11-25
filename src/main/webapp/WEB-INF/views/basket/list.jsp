@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" href="/node_modules/@chenfengyuan/datepicker/dist/datepicker.min.css">
-<link rel="stylesheet" href="/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
 <link rel="stylesheet" href="/css/greenright.css">
   
 <style>
@@ -119,21 +117,22 @@ table.my-table-col td.my-seller {
             </tr>
           </thead>
 
-          <tbody class="my-basket-list"> <!-- 상품 등록 테이블 -->
+          <tbody class="my-basket-list"> <!-- 상품 테이블 -->
           </tbody>
           </table>
         </div>
       </div>
+      <button type="button" id=my-delete class="searchbtn btn-primary btn-md btn-block w-25 mt-2">선택상품 삭제</button>
       <div class="row mt-5">
         <div class="col text-center">
           <div class="block-27">
             <ul>
               <li><a href="#">&lt;</a></li>
               <li class="active"><span>1</span></li>
-              <li><a href="#">2</a></li>
+              <!-- <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
+              <li><a href="#">5</a></li> -->
               <li><a href="#">&gt;</a></li>
             </ul>
           </div>
@@ -200,7 +199,6 @@ table.my-table-col td.my-seller {
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script src='/js/jquery-migrate-3.0.1.min.js'></script>
 <script src='/js/jquery.easing.1.3.js'></script>
 <script src='/js/jquery.waypoints.min.js'></script>
@@ -211,26 +209,11 @@ table.my-table-col td.my-seller {
 <script src="/js/aos.js"></script>
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
-<script src="/node_modules/@chenfengyuan/datepicker/dist/datepicker.min.js"></script>
-<script src="/node_modules/@chenfengyuan/datepicker/i18n/datepicker.ko-KR.js"></script>
+<script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
 "use strict"
 
-if(${loginUser.memberClass} == 2) {
-  $("#infoMenu").append(
-      "<li class='my-menu'><a href='sellerinfo'>판매정보</a></li>");
-  $("#sellerMenu").append(
-      "<li class='my-menu'><a href='sale'>판매내역</a></li>"
-    + "<li class='my-menu'><a href='exhibition'>개인전 관리</a></li>");
-} else {
-  $("#sellerMenu").append(
-      "<li class='my-menu'><a href='conversion'>판매회원 전환</a></li>");
-}
-</script>
-
-<script>
-"use strict"
 $(function(){
   
   let orderList = new Array();
@@ -245,6 +228,7 @@ $(function(){
     	  console.log(basketList.result.length);
         for (var i = 0; i < basketList.result.length; i++) {
           var basket = basketList.result[i];
+          var photoPath = '${basket.productOptionItem.productOption.product.photos[0].photoPath}';
           $(".my-basket-list").append(
               "<tr class='my-basket-tr'>"
            +  "<td class='my-check-td'>"
@@ -256,7 +240,7 @@ $(function(){
            +  "<td class='my-product text-left py-2'>"
            +  "  <div class='row'>"
            +  "    <div class='col-sm-3 px-0'>"
-           +  "      <img id='product-photo' src='/upload/product/${basket.productOptionItem.productOption.product.photos[0].photoPath}'>"
+           +  "      <img id='product-photo' src='/upload/product/" + photoPath + "'>"
            +  "    </div>"
            +  "    <div class='col-sm-9 px-0' style='font-size:12px'>"
            +  "      상품번호: <span id='product-id'>" + basket.productOptionItem.productOption.product.no + "</span><br>"
@@ -267,10 +251,10 @@ $(function(){
            +  "  </div>"
            +  "</td>"
            +  "<td class='my-quantity-td'>" + basket.quantity + "</td>"
-           +  "<td class='my-price-td'><span class='my-price-span' style='font-size:120%;font-weight:bold;color:#82AE46;'>" + ((basket.productPrice + basket.optionItemPrice) * basket.basketQuantity) + "</span> 원</td>"
-           +  "<td class='my-seller-td'>" + basket.sellerName + "</td>"
+           +  "<td class='my-price-td'><span class='my-price-span' style='font-size:120%;font-weight:bold;color:#82AE46;'>" + ((basket.productOptionItem.productOption.product.price + basket.productOptionItem.optionsPrice) * basket.quantity) + "</span> 원</td>"
+           +  "<td class='my-seller-td'>" + basket.productOptionItem.productOption.product.seller.member.name + "</td>"
            +  "<td class='my-optionItemNo-td' style='display:none;'>" + basket.optionItemNo + "</td>"
-           +  "<td class='my-quantity-td' style='display:none;'>" + basket.basketQuantity + "</td>"
+           +  "<td class='my-quantity-td' style='display:none;'>" + basket.quantity + "</td>"
            +  "</tr>"
           );
         }
@@ -338,42 +322,44 @@ $(function(){
 
 $(function() {
   
-  const fromDateInput = $('[data-trigger="#from-datepicker"]').datepicker({
-    language: 'ko-KR',
-    format: "yyyy-mm-dd",
-    endDate : "today",
-    autoHide : true,
-    autoPick : true,
-    trigger : "#from-datepicker"
-  });
-  
-  const toDateInput = $('[data-trigger="#to-datepicker"]').datepicker({
-    language: 'ko-KR',
-    format: "yyyy-mm-dd",
-    endDate : "today",
-    autoHide : true,
-    autoPick : true,
-    trigger : "#to-datepicker"
-  });
-  
-  $('.selectpicker').selectpicker({
-    style: 'btn-sm my-btn-select'
-  });
-  
-  $(".my-date-btn").on("click", function(e) {
-    var today = new Date();
-    var fromDate = new Date();
-    if (e.target.value == 7) {
-      fromDate = new Date(today.setDate(today.getDate() - e.target.value));
-    } else {
-      fromDate = new Date(today.setMonth(today.getMonth() - e.target.value));
-    }
-    fromDateInput.datepicker("setDate", fromDate);
-    toDateInput.datepicker("setDate", new Date());
-  });
-  
   $('.my-check-all').click(function() {
     $('.my-check').prop('checked', this.checked);
+  });
+  
+  $('#my-delete').click(function() {
+    var checks = $(".my-check");
+    var sumPrice = 0;
+    var optionItemNoList = new Array();
+    var i = 0;
+      
+    for (var check of checks) {
+      if ($(check).prop("checked") == true) {
+        i++;
+        optionItemNoList.push($(check).parents(".my-basket-tr").children(".my-optionItemNo-td").html());
+      }
+    }
+    
+    if (i <= 0) {
+      swal("삭제할 상품을 선택해 주세요");
+      return;
+    }
+    
+    $.ajax({
+      type: "GET",
+      url: "delete",
+      data: "&optionItemNoList=" + optionItemNoList,
+      async: true,
+      success: function() {
+        swal("삭제하였습니다.").then((value) => {
+          window.location.href = "list";
+          }
+        );
+      },
+      error: function() {
+        swal("장바구니 상품 삭제중 오류 발생.");
+      }
+    });
+    
   });
   
 });

@@ -7,14 +7,16 @@
 
   <resultMap type="Basket" id="BasketMap">
     <id column="member_id" property="memberNo"/>
-    <result column="option_item_id" property="optionItemNo"/>
+    <id column="option_item_id" property="optionItemNo"/>
+    <result column="quantity" property="quantity"/>
     <result column="registered_date" property="registeredDate"/>
   </resultMap>
   
   <resultMap type="Basket" id="BasketWithAllMap">
   
     <id column="member_id" property="memberNo"/>
-    <result column="option_item_id" property="optionItemNo"/>
+    <id column="option_item_id" property="optionItemNo"/>
+    <result column="quantity" property="quantity"/>
     <result column="registered_date" property="registeredDate"/>
   
     <association property="productOptionItem" javaType="ProductOptionItem">
@@ -40,8 +42,10 @@
             <id column="member_id" property="no" />
             <result column="account_num" property="accountNum" />
             <result column="account_holder" property="accountHolder" />
+            <result column="tel" property="tel" />
             <association property="member" javaType="Member">
               <id column="member_id" property="no" />
+              <result column="name" property="name" />
             </association>
           </association>
           <collection property="photos" ofType="ProductPhoto">
@@ -133,7 +137,6 @@
       
     where
       b.member_id=#{no}
-      order by b.registered_date desc
   </select>
   
   <update id="update" parameterType="Basket">
@@ -141,7 +144,12 @@
     <set>
       <if test="quantity != null">quantity = quantity + #{quantity}</if>
     </set>
-    where member_id=#{memberNo} and option_item_id=#{optionItemNo}
+    where member_id=#{memberNo} AND option_item_id=#{optionItemNo}
   </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from baskets
+    where member_id = #{memberNo} AND option_item_id = #{optionItemNo}
+</delete>
   
 </mapper>

@@ -64,5 +64,5 @@ public class Basket implements Serializable {
         + registeredDate + ", quantity=" + quantity + ", productOptionItem=" + productOptionItem
         + "]";
   }
-  
+
 }

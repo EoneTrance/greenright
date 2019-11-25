@@ -664,12 +664,10 @@ button.btn.btn-primary.CartBut {
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 $(document).on("click", "#add-to-cart", function(e){
-  console.log($("#my-select-option").select().val())
-  console.log($("#quantity").val())
   $.ajax({
     type: "GET",
     url: "../json/basket/add",
-    data: "no=" + $("#my-select-option").select().val() + "&quantity=" + $("#quantity").val(),
+    data: "optionItemNo=" + $("#my-select-option").select().val() + "&quantity=" + $("#quantity").val(),
     dataType: "json",
     async: false,
     success: function(basketAddResult) {

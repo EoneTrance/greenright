@@ -415,30 +415,30 @@ width:16px;height:16px;background:#f1ef79;}
     <div class="col-sm-5 px-0">
       <h4 id="order-title-h4">결제 금액</h4>
       <hr style="margin-top:0px;">
-      <div class="sidenav payment-sidenav hidden-xs" style="border-radius:5px;border:solid 1px RGBA(130,174,70,0.5);">
-      <table class="col-sm-12 table-hover text-center my-table">
-        <tbody>
-          <tr style="border:solid 1px RGBA(130,174,70,0);">
-            <th class="text-left my-col-6 pt-4 pl-3 font-weight-normal"
-                style="color:black;background-color:RGBA(130,174,70,0);">상품가격</th>
-            <td class="text-right pt-4 pr-3"
-                style="color:black;"><span class="my-priceSum" style="font-size:150%;color:#82AE46;">0</span> 원</td>
-          </tr>
-          <tr style="border:solid 1px RGBA(130,174,70,0);">
-            <th class="text-left my-col-6 pb-4 pl-3 font-weight-normal"
-                style="color:black;background-color:RGBA(130,174,70,0);">배송비</th>
-            <td class="text-right pb-3 pr-3"
-                style="color:black;"><span class="my-deliveryChargeSum" style="font-size:150%;color:#82AE46;">0</span> 원</td>
-          </tr>
-        </tbody>
-      </table>
-      <div style="background-color:RGBA(130,174,70,0.1);">
-        <hr class="mt-0 mb-4">
-        <h5 class="text-left font-weight-bold pl-2"
+      <div class="sidenav payment-sidenav hidden-xs" style="border-radius:5px;border:solid 10px RGBA(130,174,70,0);">
+      <div style="background-color:RGBA(130,174,70,0);border:solid 10px #82AE46;border-radius:10px;">
+        <table class="col-sm-12 table-hover text-center my-table">
+          <tbody>
+            <tr style="border:solid 1px RGBA(130,174,70,0);">
+              <th class="text-left my-col-6 py-2 pl-3 font-weight-normal"
+                  style="color:black;background-color:RGBA(130,174,70,0);">상품가격</th>
+              <td class="text-right py-2 pr-3"
+                  style="color:black;"><span class="my-priceSum" style="font-size:150%;font-weight:bold;color:#82AE46;">0</span> 원</td>
+            </tr>
+            <tr style="border:solid 1px RGBA(130,174,70,0);">
+              <th class="text-left my-col-6 py-2 pl-3 font-weight-normal"
+                  style="color:black;background-color:RGBA(130,174,70,0);">배송비</th>
+              <td class="text-right py-2 pr-3"
+                  style="color:black;"><span class="my-deliveryChargeSum" style="font-size:150%;font-weight:bold;color:#82AE46;">0</span> 원</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin:10px 0px;background-color:RGBA(130,174,70,0);border:solid 10px #82AE46;border-radius:10px;padding-top:10px;padding-bottom:10px;">
+        <h5 class="text-left font-weight-bold mt-2 pl-2"
             style="color:black;">총 결제금액</h5>
-        <p class="text-right font-weight-bold mb-2 pr-2"
+        <p class="text-right font-weight-bold mb-0 pr-2"
             style="color:black;font-size:150%;"><span class="my-sum" style="font-size:150%;color:#82AE46;">0</span> 원</p>
-        <hr class="mb-0 mt-0">
       </div>
       <form id='my-basketForm' action='../order/form' method='post' style='display:none'>
         <!-- <input id='my-order-optionItemNo' name='optionItemNo'>
