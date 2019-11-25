@@ -131,20 +131,20 @@ table.my-table-col td.my-seller {
             <th class="text-left my-col-6 pt-4 pl-3 font-weight-normal"
                 style="color:black;background-color:RGBA(130,174,70,0);">상품가격</th>
             <td class="text-right pt-4 pr-3"
-                style="color:black;"><span class="my-priceSum" style="font-size:150%;color:#82AE46;">0</span> 원</td>
+                style="color:black;"><span class="my-priceSum" style="font-size:150%;color:#82AE46;font-weight:bold;">0</span> 원</td>
           </tr>
           <tr>
             <th class="text-left my-col-6 pb-4 pl-3 font-weight-normal"
                 style="color:black;background-color:RGBA(130,174,70,0);">배송비</th>
             <td class="text-right pb-3 pr-3"
-                style="color:black;"><span class="my-deliveryChargeSum" style="font-size:150%;color:#82AE46;">0</span> 원</td>
+                style="color:black;"><span class="my-deliveryChargeSum" style="font-size:150%;color:#82AE46;font-weight:bold;">0</span> 원</td>
           </tr>
         </tbody>
       </table>
       <div style="background-color:RGBA(130,174,70,0.1);">
         <hr class="mt-0 mb-4">
         <h5 class="text-left font-weight-bold pl-2"
-            style="color:black;">총 결제금액</h5>
+            style="color:black;">예상 결제금액</h5>
         <p class="text-right font-weight-bold mb-2 pr-2"
             style="color:black;font-size:150%;"><span class="my-sum" style="font-size:150%;color:#82AE46;">0</span> 원</p>
         <hr class="mb-2 mt-0">
@@ -210,7 +210,6 @@ $(function(){
     	  console.log(basketList.result.length);
         for (var i = 0; i < basketList.result.length; i++) {
           var basket = basketList.result[i];
-          var photoPath = '${basket.productOptionItem.productOption.product.photos[0].photoPath}';
           $(".my-basket-list").append(
               "<tr class='my-basket-tr'>"
            +  "<td class='my-check-td'>"
@@ -222,7 +221,7 @@ $(function(){
            +  "<td class='my-product text-left py-2'>"
            +  "  <div class='row'>"
            +  "    <div class='col-sm-3 px-0'>"
-           +  "      <img id='product-photo' src='/upload/product/" + photoPath + "'>"
+           +  "      <img id='product-photo' src='/upload/product/" + basket.productOptionItem.productOption.product.photos[0].photoPath + "'>"
            +  "    </div>"
            +  "    <div class='col-sm-9 px-0' style='font-size:12px'>"
            +  "      상품번호: <span id='product-id'>" + basket.productOptionItem.productOption.product.no + "</span><br>"

@@ -91,10 +91,8 @@
         <select id="questionType" name="questionType" class="form-control faq-detail-form-control">
           <option value=""disabled="disabled">전체</option>
           <option value="배송안내" disabled="disabled">배송안내</option>
-          <option value="주문결제" disabled="disabled">주문결제</option>
-          <option value="주문취소" disabled="disabled">주문취소</option>
-          <option value="교환,환불" disabled="disabled">교환,환불</option>
-          <option value="적립금" disabled="disabled">적립금</option>
+          <option value="주문" disabled="disabled">주문</option>
+          <option value="교환,환불" disabled="disabled">교환,&nbsp;환불</option>
           <option value="기타" disabled="disabled">기타</option>
         </select>
       </div>

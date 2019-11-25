@@ -9,7 +9,7 @@ li {
   border: 0;
   float: left;
 }
-ul {
+ul:not(.navbar-nav) {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -30,8 +30,12 @@ li.useruse {
   margin-right: 20px;
 }
 ul.widthsizer {
-  width: 1110px;
-  padding-left: 203px;
+  width: 100%;
+  padding-left:25.5%;
+  background-color:grey;
+}
+#my-floatMenu {
+  background-color:#82AE46;
 }
 .btn.btn-primary {
   border-top-left-radius: 2px;
@@ -274,6 +278,7 @@ button#review-add-btn {
 button.btn.btn-primary.CartBut {
     background: #82ae46 !important;
 }
+
 </style>
 <meta name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -336,7 +341,7 @@ button.btn.btn-primary.CartBut {
         <img src='/upload/product/${productPhoto.photos[0].photoPath}'
           id="clickchange" class="img-fluid" alt="Colorlib Template"
           style="width: 450px; height: 450px; object-fit: cover;">
-        <ul>
+        <ul id="my-ul">
           <c:forEach items="${productPhoto.photos}" var="photo">
             <li><img src='/upload/product/${photo.photoPath}'
               id="/upload/product/${photo.photoPath}"
@@ -474,12 +479,12 @@ button.btn.btn-primary.CartBut {
   <section class="ftco-section">
     <div class="container">
       <div class="row justify-content-center mb-3 pb-3">
-        <div
+        <div id="my-floatMenu"
           class="col-md-12 heading-section text-center ftco-animate bordermaker justify-content-center">
           <nav id="nav">
             <ul class="widthsizer">
               <li class="useruse" id="detaildesc" onclick="fnMove('1')"><h4
-                  id="de1" style="cursor: pointer">
+                  id="de1" style="cursor: pointer;">
                   <strong>상세설명</strong>
                 </h4></li>
               <li class="useruse" id="producttest" onclick="fnMove('2')"><h4
@@ -663,12 +668,10 @@ button.btn.btn-primary.CartBut {
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 $(document).on("click", "#add-to-cart", function(e){
-  console.log($("#my-select-option").select().val())
-  console.log($("#quantity").val())
   $.ajax({
     type: "GET",
     url: "../json/basket/add",
-    data: "no=" + $("#my-select-option").select().val() + "&quantity=" + $("#quantity").val(),
+    data: "optionItemNo=" + $("#my-select-option").select().val() + "&quantity=" + $("#quantity").val(),
     dataType: "json",
     async: false,
     success: function(basketAddResult) {

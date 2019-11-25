@@ -53,6 +53,7 @@
           <result column="registered_date" property="registeredDate" />
           <result column="diy_flag" property="diy" />
           <result column="product_name" property="productName" />
+          <result column="price" property="price" />
           <result column="expiration_date" property="expirationDate" />
           <result column="group_id" property="groupNo"/>
           <association property="seller" javaType="Seller">

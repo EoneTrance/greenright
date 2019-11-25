@@ -55,10 +55,18 @@ public class InquireController {
     if(member != null) {
     int no = member.getNo();
     int manager = member.getMemberClass();
+    List<PrivateBoard> privateBoards2 = null;
     List<PrivateBoard> privateBoards = null;
     if(manager == 0) {
-      privateBoards = privateBoardService.managerList(pageNo, pageSize, null, null);
+      privateBoards2 = privateBoardService.managerList(pageNo, pageSize, null, null);
+      for(int i=0;i<privateBoards2.size();i++) {
+        if(privateBoards2.get(i).getType() == questionType) {
+          privateBoards.add(privateBoards2.get(i));
+        }
+        
+      }
     } else {
+      System.out.println("@@"+privateBoards);
       privateBoards = privateBoardService.list(no, pageNo, pageSize, null, null);
     }
     try {
