@@ -145,42 +145,6 @@
 <script src="/js/main.js"></script>
 
 <script>
-$('#my-paging').on('click','.page-item', () => {
-  /*  var currentLi = $(event.target).parent().attr('data-page'); 
-   $(event.target).parent().parent().children('.active').removeClass('active'); */ 
-  $(event.target).parent().addClass('active');
-  
-  //var boardNo = parseInt(document.querySelector('#jisooBoardNo').value);
-  //var param = "commentNo="+commentNo+"&boardNo="+boardNo;
-  
-});
-/* var currentPage = ${pageNo};
-$('.page-item').click((e) => {
-  //e.preventDefault();
- 
-  //var page = e.currentTarget.getAttribute('data-page');
-  var page = $(e.currentTarget).attr('data-page');
-  $.get("list",{
-  }, function(success) {
-    if (page == "prev") {
-      if (currentPage == 1)
-        return;
-      location.href = "list?pageNo=" + (currentPage - 1) + "&pageSize=" + ${pageSize};
-      
-      
-    } else if (page == "next") {
-      if (currentPage >= ${totalPage})
-        return
-      location.href = "list?pageNo=" + (currentPage + 1) + "&pageSize=" + ${pageSize};
-    
-    } else {
-      location.href = "list?pageNo=" + page + "&pageSize=" + ${pageSize};
-    
-    }
-    
-  });
-}); 
-*/
  var currentPage = ${pageNo};
 $('.page-item').click((e) => {
   e.preventDefault();

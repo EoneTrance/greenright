@@ -97,7 +97,7 @@
             <div class="block-27">
               <ul id="my-paging">
                 <li id='my-paging-first'>
-                 <span class="page-item" data-page="prev"  style="cursor: pointer;">&lt;</span>
+                 <span class="page-item pageControl" data-page="prev"  style="cursor: pointer;">&lt;</span>
                 </li>
                 <li data-page="1" class="active">
                <!-- <span class="my-page-no">1</span> -->  
@@ -108,7 +108,7 @@
                      </li>
                     </c:forEach>
                       <li id="my-paging-last">
-                      <span class="page-item" data-page="next" style="cursor: pointer;">&gt;</span> 
+                      <span id="next" class="page-item pageControl" data-page="next" style="cursor: pointer;">&gt;</span> 
                       </li>
               </ul>
             </div>
@@ -137,9 +137,7 @@ function loadData(pageNo,answerSelectType) {
     success: function(data){
       var list = data.result.privateBoards;
       var tableTag ="";
-      console.log(answerSelectType);
       $("td").removeClass("content-value inquire");
-      
        for(var i = 0 ; i < list.length; i++) {
         if(answerSelectType=="default"){
         tableTag += "<tr><td>" + list[i].no + "</td><td>" + list[i].date +
@@ -167,9 +165,6 @@ function loadData(pageNo,answerSelectType) {
 }
 </script>
 <script>
-$('#my-paging').on('click','.page-item', () => {
-  $(event.target).parent().addClass('active');
-});
  var currentPage = ${pageNo};
 $('.page-item').click((e) => {
   e.preventDefault();

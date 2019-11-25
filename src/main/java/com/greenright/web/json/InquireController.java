@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.greenright.domain.Member;
 import com.greenright.domain.PrivateBoard;
 import com.greenright.domain.PrivateBoardAnswers;
 import com.greenright.service.PrivateBoardAnswersService;
@@ -50,13 +51,17 @@ public class InquireController {
       pageNo = 1;
     }
       
-   
-    session.setAttribute("no", 1);
-    int no = (int)session.getAttribute("no");
-    
+    Member member = (Member)session.getAttribute("loginUser");
+    if(member != null) {
+    int no = member.getNo();
+    int manager = member.getMemberClass();
+    List<PrivateBoard> privateBoards = null;
+    if(manager == 0) {
+      privateBoards = privateBoardService.managerList(pageNo, pageSize, null, null);
+    } else {
+      privateBoards = privateBoardService.list(no, pageNo, pageSize, null, null);
+    }
     try {
-    List<PrivateBoard> privateBoards = privateBoardService.list(no, pageNo, pageSize, questionType, answerTF);
-    
     HashMap<String,Object> result = new HashMap<>();
     result.put("privateBoards", privateBoards);
     result.put("pageNo", pageNo);
@@ -70,6 +75,8 @@ public class InquireController {
     } catch (Exception e) {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
     }
+   }
+    return null;
   }
   
   @PostMapping("manager/add")
