@@ -2,12 +2,10 @@
     pageEncoding="UTF-8"%>
 
 <style>
-
 #my-dropdown-hover:hover
 {
   background-color: RGBA(130,174,70,0.5);
 }
-
 </style>
 
 <!--------------------------------------------header------------------------------------------>
@@ -49,6 +47,7 @@
         <li class="nav-item"><a href="/greenright/faq/list" class="nav-link">SUPPORT</a></li>
       </ul>
       <ul class="navbar-nav ml-auto">
+        <li class="nav-item cta cta-colored my-login-state-y" style="display:none;"><a href="/greenright/basket/list" class="nav-link"><span class="fas fa-cart-arrow-down" style="font-size:100%"> CART</span></a></li>
         <li class="nav-item my-login-state-n" style="display:none;"><a href="/greenright/auth/form" class="nav-link">LOGIN</a></li>
         <li class="nav-item my-login-state-n" style="display:none;"><a href="/greenright/member/form" class="nav-link">JOIN</a></li>
         <li class="nav-item dropdown my-login-state-y" style="display:none;">
@@ -70,7 +69,6 @@
             <a id='my-dropdown-hover' class='dropdown-item' href='/greenright/auth/logout'>LOGOUT</a>
           </div>
         </li>
-        <li class="nav-item cta cta-colored my-login-state-y" style="display:none;"><a href="/greenright/basket/list" class="nav-link"><span class="fas fa-cart-arrow-down"></span>[0]</a></li>
       </ul>
     </div>
   </div>
@@ -80,8 +78,10 @@
 function mypage() {
   location.href="/greenright/mypage";
 }
- window.onload = (function(){
+// window.onload = (function() {
+   
   var loginUser = '${loginUser.id}';
+  var loginUserClass = '${loginUser.memberClass}';
   var loginStateY = document.querySelectorAll(".my-login-state-y");
   var loginStateN = document.querySelectorAll(".my-login-state-n");
   if (loginUser == null || loginUser == '') {
@@ -98,7 +98,7 @@ function mypage() {
     for (var stateY of loginStateY) {
       stateY.style.display = 'inline-block';
     }
-    if (${loginUser.memberClass} == 2) {
+    if (loginUserClass == 2) {
       document.querySelector(".my-sellerinfo").style = ("display:inline-block;");
       document.querySelector(".my-manage").style = ("display:inline-block;");
       document.querySelector(".my-sale").style = ("display:inline-block;");
@@ -107,11 +107,11 @@ function mypage() {
       document.querySelector(".my-conversion").style = ("display:inline-block;");
     }
   }
- });
+// });
 </script>
 
- <!-- <script>
- window.onload = function(){
+<!-- <script>
+window.onload = function(){
 var loginUser = '${loginUser.id}';
 if (loginUser == null || loginUser == '') {
   $("#usermenu").append(
@@ -130,5 +130,5 @@ if (loginUser == null || loginUser == '') {
     + "</li>"
     + "<li class='nav-item cta cta-colored'><a href='#' class='nav-link'><span class='fas fa-cart-arrow-down'></span>[0]</a></li>");
 }
-}; 
-</script> --> 
+};
+</script> -->

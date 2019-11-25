@@ -28,6 +28,9 @@
   a.buy-now.d-flex.justify-content-center.align-items-center.mx-1 {
     margin-left: 0px!important;
   }
+  .my-heart {
+ color: red;
+ }
   </style>
     <!--------------------------------------------------------------------------------------->
     <div class="hero-wrap hero-bread" style="background-image: url('../../images/main.jpg');">
@@ -76,7 +79,15 @@
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
                         <a href="/greenright/product/buydetail?no=${product.no}" class="img-prod">
-                        <img class="img-fluid" src='/upload/product/${product.photos[0].photoPath}'  alt="Colorlib Template" style="width:253px; height:202px; object-fit:cover;"> 
+                        <img class="img-fluid" src='/upload/product/${product.photos[0].photoPath}'  alt="Colorlib Template" style="width:253px; height:202px; object-fit:cover;">
+                        <c:choose>
+                        <c:when test="${product.likeCheck == 1}">
+                          <span class="status right-heart" data-no="${product.no}"><i class="fas fa-heart my-heart"></i></span>
+                        </c:when>
+                        <c:otherwise>
+                          <span class="status right-heart" data-no="${product.no}" style="display: none;"><i class="fas fa-heart my-heart"></i></span>
+                        </c:otherwise>
+                        </c:choose> 
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
                             <h3><a href="#">
@@ -94,7 +105,14 @@
                                         <i class="fas fa-comments"></i>
                                     </a>
                                     <a href="" class="heart d-flex justify-content-center align-items-center changewishlist" id ="${product.no}">
-                                        <span><i class="far fa-heart"></i></span>
+                                      <c:choose>
+                                        <c:when test="${product.likeCheck == 1}">
+                                          <span><i class="fas fa-heart my-heart"></i></span>
+                                        </c:when>
+                                        <c:otherwise>
+                                          <span><i class="fas fa-heart"></i></span>
+                                        </c:otherwise>
+                                      </c:choose>
                                     </a>
                                     <a href="" id=${product.no } class="buy-now d-flex justify-content-center align-items-center mx-1 recommendchange">
                                         <span><i class="far fa-thumbs-up"></i></span>
@@ -209,6 +227,19 @@ $(document).on("click",".recommendchange",function(e){
 
 
 <script>
+function comma(num){
+  var len, point, str; 
+  num = num + ""; 
+  point = num.length % 3 ;
+  len = num.length; 
+  str = num.substring(0, point); 
+  while (point < len) { 
+    if (str != "") str += ","; 
+    str += num.substring(point, point + 3); 
+    point += 3; 
+  } 
+  return str;
+}
    // 카테고리 검새액(유기농, 가구 ... )
       $(function(){
         $(".searchbtn").click(function(){
@@ -270,20 +301,29 @@ $(document).on("click",".recommendchange",function(e){
                 tableTag += "<div class='col-md-6 col-lg-3'>"
                 tableTag += "<div class='product'>"
                 tableTag += "<a href='/greenright/product/buydetail?no="+list[i].no+"' class='img-prod'>"
-                tableTag += "<img class='img-fluid' src='/upload/product/"+list[i].photos[0].photoPath+ "' alt='Colorlib Template' style='width:253px; height:202px; object-fit:cover;' >" 
+                tableTag += "<img class='img-fluid' src='/upload/product/"+list[i].photos[0].photoPath+ "' alt='Colorlib Template' style='width:253px; height:202px; object-fit:cover;' >"
+                if(list[i].likeCheck == 1){
+                  tableTag += "<span class='status right-heart' data-no='"+list[i].no+"'><i class='fas fa-heart my-heart'></i></span>"
+                } else {
+                  tableTag += "<span class='status right-heart' data-no='"+list[i].no+"' style='display: none;'><i class='fas fa-heart my-heart'></i></span>"
+                }
                 tableTag += "<div class='overlay'></div></a>"
                 tableTag += "<div class='text py-3 pb-4 px-3 text-center'>"
                 tableTag += "<h3><a href='#'>"+ list[i].productName +"</a></h3>"
                 tableTag += "<div class='d-flex'>"
                 tableTag += "<div class='pricing'>"
                 var a =  list[i].price ; 
-                tableTag += "<p class='price'><span class='price-sale'>"+list[i].price+"</span></p>"
+                tableTag += "<p class='price'><span class='price-sale'>"+comma(list[i].price)+"</span></p>"
                 tableTag += "</div></div><div class='bottom-area d-flex px-3'>"
                 tableTag += "<div class='m-auto d-flex'>"
                 tableTag += "<a href='/greenright/product/buydetail?no="+list[i].no+"' class='add-to-cart d-flex justify-content-center align-items-center text-center'>"
                 tableTag += "<i class='fas fa-comments'></i></a>"
                 tableTag += "<a href='' class='heart d-flex justify-content-center align-items-center changewishlist' id="+list[i].no+">"
-                tableTag += "<span><i class='far fa-heart'></i></span></a>"
+                if(list[i].likeCheck == 1){
+                tableTag += "<span><i class='fas fa-heart my-heart'></i></span></a>"
+                } else {
+                tableTag += "<span><i class='fas fa-heart'></i></span></a>"
+                }
                 tableTag += "<a href='' id="+list[i].no+" class='buy-now d-flex justify-content-center align-items-center mx-1 recommendchange'>"
                 tableTag += "<span><i class='far fa-thumbs-up'></i></span>"
                 tableTag += "</a></div></div></div></div></div>";
@@ -315,19 +355,28 @@ $(document).on("click",".recommendchange",function(e){
                   tableTag += "<div class='col-md-6 col-lg-3'>"
                   tableTag += "<div class='product'>"
                   tableTag += "<a href='/greenright/product/buydetail?no="+list[i].no+"' class='img-prod'>"
-                  tableTag += "<img class='img-fluid' src='/upload/product/"+list[i].photos[0].photoPath+ "' alt='Colorlib Template' style='width:253px; height:202px; object-fit:cover;' >" 
+                  tableTag += "<img class='img-fluid' src='/upload/product/"+list[i].photos[0].photoPath+ "' alt='Colorlib Template' style='width:253px; height:202px; object-fit:cover;' >"
+                  if(list[i].likeCheck == 1){
+                    tableTag += "<span class='status right-heart' data-no='"+list[i].no+"'><i class='fas fa-heart my-heart'></i></span>"
+                  } else {
+                    tableTag += "<span class='status right-heart' data-no='"+list[i].no+"' style='display: none;'><i class='fas fa-heart my-heart'></i></span>"
+                  }
                   tableTag += "<div class='overlay'></div></a>"
                   tableTag += "<div class='text py-3 pb-4 px-3 text-center'>"
                   tableTag += "<h3><a href='#'>"+ list[i].productName +"</a></h3>"
                   tableTag += "<div class='d-flex'>"
                   tableTag += "<div class='pricing'>"
-                  tableTag += "<p class='price'><span class='price-sale'>"+list[i].price+"</span></p>"
+                  tableTag += "<p class='price'><span class='price-sale'>"+comma(list[i].price)+"</span></p>"
                   tableTag += "</div></div><div class='bottom-area d-flex px-3'>"
                   tableTag += "<div class='m-auto d-flex'>"
                   tableTag += "<a href='/greenright/product/buydetail?no="+list[i].no+"' class='add-to-cart d-flex justify-content-center align-items-center text-center'>"
                   tableTag += "<i class='fas fa-comments'></i></a>"
                   tableTag += "<a href='' class='heart d-flex justify-content-center align-items-center changewishlist' id="+list[i].no+">"
-                  tableTag += "<span><i class='far fa-heart'></i></span></a>"
+                  if(list[i].likeCheck == 1){
+                    tableTag += "<span><i class='fas fa-heart my-heart'></i></span></a>"
+                    } else {
+                    tableTag += "<span><i class='fas fa-heart'></i></span></a>"
+                    }
                   tableTag += "<a href='' id="+list[i].no+" class='buy-now d-flex justify-content-center align-items-center mx-1 recommendchange'>"
                   tableTag += "<span><i class='far fa-thumbs-up'></i></span>"
                   tableTag += "</a></div></div></div></div></div>";
@@ -341,6 +390,8 @@ $(document).on("click",".recommendchange",function(e){
           e.preventDefault();
           let productNo =$(this).attr("id");
           let memberNo = 1;
+          let heart = $(e.currentTarget).children().first().children().first();
+          let rightHeart = $(e.currentTarget).parent().parent().parent().parent().children().first().children().eq(1);
           $.post(
               "/greenright/json/Like/checkLike",
               {
@@ -353,15 +404,16 @@ $(document).on("click",".recommendchange",function(e){
                     "productNo":productNo,
                     "memberNo":memberNo
                   }, function(data){
-                    swal("wishlist 에 추가되었습니다")
+                    heart.addClass('my-heart');
+                    rightHeart.css('display','inline');
                   });               
                 }else{
                   $.post("/greenright/json/Like/decreaseLike",{
                     "productNo":productNo,
                     "memberNo":memberNo
                   }, function(data){
-                   swal("wishlist 에서 삭제되었습니다.")
-                    
+                    heart.removeClass('my-heart');
+                    rightHeart.css('display','none');
                   });  
                 }
               })

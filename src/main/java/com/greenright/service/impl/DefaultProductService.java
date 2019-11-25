@@ -200,5 +200,10 @@ public class DefaultProductService implements ProductService{
   public List<Product> bestProductList() throws Exception {
     return productDao.bestProductList();
   }
+
+  @Override
+  public List<Product> getallDetailPhoto(int no) throws Exception {
+    return productDao.getallDetailPhoto(no);
+  }
 }
 
