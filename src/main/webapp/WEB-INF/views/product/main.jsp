@@ -69,7 +69,7 @@
 
             <!------------------------------------------------------------------------------->
             <div class="row addto">
-           <c:forEach items="${products}" var="product">
+           <c:forEach items="${products}" var="product" varStatus="status" begin="0" end="7">
               <div class="col-md-6 col-lg-3 ftco-animate">
                   <div class="product">
                       <a href="/greenright/product/buydetail?no=${product.no}" class="img-prod">
@@ -139,48 +139,117 @@
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
-<script id="entry-template" type="text/x-handlebars-template">
-<table>
-    <thead> 
-        <th>이름</th> 
-        <th>아이디</th> 
-        <th>메일주소</th> 
-    </thead> 
-    <tbody> 
-        {{#users}} 
-        <tr> 
-            <td>{{name}}</td> 
-            <td>{{id}}</td> 
-            <td><a href="mailto:{{email}}">{{email}}</a></td> 
-        </tr> 
-        {{/users}} 
-    </tbody> 
-</table>
-</script>
-<<script>
+<script>
+window.onload = function() {
+  
+};
+function comma(num){
+    var len, point, str; 
+    num = num + ""; 
+    point = num.length % 3 ;
+    len = num.length; 
+    str = num.substring(0, point); 
+    while (point < len) { 
+      if (str != "") str += ","; 
+      str += num.substring(point, point + 3); 
+      point += 3; 
+    } 
+    return str;
+}
+   var productList = new Array();
+   var index = 8;
+   var end = 12;
+  <c:forEach items="${products}" var="product">
+    var temp = new Object();
+    temp.no=${product.no};
+    temp.photoPath="${product.photos[0].photoPath}";
+    temp.productName="${product.productName}";
+    temp.price=${product.price},
+    temp.likeCheck=${product.likeCheck};
+    productList.push(temp); 
+  </c:forEach>
 $(window).on("scroll", function() {
-  var scrollHeight = $(document).height();
-  var scrollPosition = $(window).height() + $(window).scrollTop();    
-  $("#scrollHeight").text(scrollHeight);
-  $("#scrollPosition").text(scrollPosition);
-  $("#bottom").text(scrollHeight - scrollPosition);
-  if (scrollPosition > scrollHeight - 500) {      
-  //핸들바 템플릿 가져오기
-    var source = $("#entry-template").html(); 
-    //핸들바 템플릿 컴파일
-    var template = Handlebars.compile(source); 
-    //핸들바 템플릿에 바인딩할 데이터
-    var data = {
-          users: [
-                { name: "홍길동1", id: "aaa1", email: "aaa1@gmail.com" },
-                { name: "홍길동2", id: "aaa2", email: "aaa2@gmail.com" },
-                { name: "홍길동3", id: "aaa3", email: "aaa3@gmail.com" },
-                { name: "홍길동4", id: "aaa4", email: "aaa4@gmail.com" },
-                { name: "홍길동5", id: "aaa5", email: "aaa5@gmail.com" }
-            ]
-    }; 
-    var html = template(data);
-    $('.addto').append(html);
+     var scrollHeight = $(document).height();
+     var scrollPosition = $(window).height() + $(window).scrollTop();
+     var selectAll = $('#productAll').attr('class');
+     $("#scrollHeight").text(scrollHeight);
+     $("#scrollPosition").text(scrollPosition);
+     $("#bottom").text(scrollHeight - scrollPosition);
+   if(productList.length <= 8 ){
+   } else {
+  if(index+4 > productList.length){
+     if (scrollPosition > scrollHeight - 1 && selectAll.indexOf('active') != -1) {
+         var tableTag ="";
+         for(index ; index < productList.length; index++) {
+           tableTag += "<div class='col-md-6 col-lg-3'>"
+           tableTag += "<div class='product'>"
+           tableTag += "<a href='/greenright/product/buydetail?no="+productList[index].no+"' class='img-prod'>"
+           tableTag += "<img class='img-fluid' src='/upload/product/"+productList[index].photoPath+ "' alt='' style='width:253px; height:202px; object-fit:cover;' >"
+           if(productList[index].likeCheck == 1){
+             tableTag += "<span class='status right-heart' data-no='"+productList[index].no+"'><i class='fas fa-heart my-heart'></i></span>"
+           } else {
+             tableTag += "<span class='status right-heart' data-no='"+productList[index].no+"' style='display: none;'><i class='fas fa-heart my-heart'></i></span>"
+           }
+           tableTag += "<div class='overlay'></div></a>"
+           tableTag += "<div class='text py-3 pb-4 px-3 text-center'>"
+           tableTag += "<h3><a href='#'>"+ productList[index].productName +"</a></h3>"
+           tableTag += "<div class='d-flex'>"
+           tableTag += "<div class='pricing'>"
+           var a =  productList[index].price ;
+           tableTag += "<p class='price'><span class='price-sale'>"+comma(productList[index].price)+"</span></p>"
+           tableTag += "</div></div><div class='bottom-area d-flex px-3'>"
+           tableTag += "<div class='m-auto d-flex'>"
+           tableTag += "<a href='#' class='add-to-cart d-flex justify-content-center align-items-center text-center'>"
+           tableTag += "<i class='fas fa-comments'></i></a>"
+           tableTag += "<a href='#' class='heart d-flex justify-content-center align-items-center changewishlist' id ='"+productList[index].no+"'>"
+           if(productList[index].likeCheck == 1){
+             tableTag += "<span><i class='fas fa-heart my-heart'></i></span>"
+           } else {
+           tableTag += "<span><i class='fas fa-heart'></i></span>"
+           }
+           tableTag += "</a></div></div></div></div></div>";
+         };
+         $(".addto").append(tableTag);
+       }
+  } else {
+  index += 4;
+  if (scrollPosition > scrollHeight - 1 && selectAll.indexOf('active') != -1) {
+      var tableTag ="";
+      for(index ; index < index+4; index++) {
+        if(productList[index] ==null){
+          break;
+        }
+        tableTag += "<div class='col-md-6 col-lg-3'>"
+        tableTag += "<div class='product'>"
+        tableTag += "<a href='/greenright/product/buydetail?no="+productList[index].no+"' class='img-prod'>"
+        tableTag += "<img class='img-fluid' src='/upload/product/"+productList[index].photoPath+ "' alt='' style='width:253px; height:202px; object-fit:cover;' >"
+        if(productList[index].likeCheck == 1){
+          tableTag += "<span class='status right-heart' data-no='"+productList[index].no+"'><i class='fas fa-heart my-heart'></i></span>"
+        } else {
+          tableTag += "<span class='status right-heart' data-no='"+productList[index].no+"' style='display: none;'><i class='fas fa-heart my-heart'></i></span>"
+        }
+        tableTag += "<div class='overlay'></div></a>"
+        tableTag += "<div class='text py-3 pb-4 px-3 text-center'>"
+        tableTag += "<h3><a href='#'>"+ productList[index].productName +"</a></h3>"
+        tableTag += "<div class='d-flex'>"
+        tableTag += "<div class='pricing'>"
+        var a =  productList[index].price ;
+        tableTag += "<p class='price'><span class='price-sale'>"+comma(productList[index].price)+"</span></p>"
+        tableTag += "</div></div><div class='bottom-area d-flex px-3'>"
+        tableTag += "<div class='m-auto d-flex'>"
+        tableTag += "<a href='#' class='add-to-cart d-flex justify-content-center align-items-center text-center'>"
+        tableTag += "<i class='fas fa-comments'></i></a>"
+        tableTag += "<a href='#' class='heart d-flex justify-content-center align-items-center changewishlist' id ='"+productList[index].no+"'>"
+        if(productList[index].likeCheck == 1){
+          tableTag += "<span><i class='fas fa-heart my-heart'></i></span>"
+        } else {
+        tableTag += "<span><i class='fas fa-heart'></i></span>"
+        }
+        tableTag += "</a></div></div></div></div></div>";
+      };
+      $(".addto").append(tableTag);
+    }
+  }
   }
 });
 </script>
