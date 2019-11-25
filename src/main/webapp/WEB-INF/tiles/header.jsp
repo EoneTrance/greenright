@@ -80,7 +80,7 @@
 function mypage() {
   location.href="/greenright/mypage";
 }
-// window.onload = (function(){
+ window.onload = (function(){
   var loginUser = '${loginUser.id}';
   var loginStateY = document.querySelectorAll(".my-login-state-y");
   var loginStateN = document.querySelectorAll(".my-login-state-n");
@@ -107,11 +107,11 @@ function mypage() {
       document.querySelector(".my-conversion").style = ("display:inline-block;");
     }
   }
-// });
+ });
 </script>
 
-<!-- <script>
-window.onload = function(){
+ <!-- <script>
+ window.onload = function(){
 var loginUser = '${loginUser.id}';
 if (loginUser == null || loginUser == '') {
   $("#usermenu").append(
@@ -130,5 +130,5 @@ if (loginUser == null || loginUser == '') {
     + "</li>"
     + "<li class='nav-item cta cta-colored'><a href='#' class='nav-link'><span class='fas fa-cart-arrow-down'></span>[0]</a></li>");
 }
-};
-</script> -->
+}; 
+</script> --> 

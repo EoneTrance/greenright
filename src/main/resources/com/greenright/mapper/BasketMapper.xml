@@ -12,17 +12,47 @@
   </resultMap>
   
   <resultMap type="Basket" id="BasketWithAllMap">
+  
     <id column="member_id" property="memberNo"/>
     <result column="option_item_id" property="optionItemNo"/>
     <result column="registered_date" property="registeredDate"/>
   
-    <collection property="productOptionItem" ofType="ProductOptionItem">
+    <association property="productOptionItem" javaType="ProductOptionItem">
       <id column="option_item_id" property="no"/>
       <result column="options_id" property="optionsNo"/>
       <result column="option_item_matters" property="optionItemMatter"/>
       <result column="options_price" property="optionsPrice"/>
       <result column="options_quantity" property="optionsQuantity"/>
-    </collection>
+      <association property="productOption" javaType="ProductOption">
+        <id column="options_id" property="no" />
+        <result column="product_id" property="productNo" />
+        <result column="options_name" property="optionName" />
+        <association property="product" javaType="Product">
+          <id column="product_id" property="no" />
+          <result column="group_id" property="groupNo" />
+          <result column="member_id" property="memberNo" />
+          <result column="registered_date" property="registeredDate" />
+          <result column="diy_flag" property="diy" />
+          <result column="product_name" property="productName" />
+          <result column="expiration_date" property="expirationDate" />
+          <result column="group_id" property="groupNo"/>
+          <association property="seller" javaType="Seller">
+            <id column="member_id" property="no" />
+            <result column="account_num" property="accountNum" />
+            <result column="account_holder" property="accountHolder" />
+            <association property="member" javaType="Member">
+              <id column="member_id" property="no" />
+            </association>
+          </association>
+          <collection property="photos" ofType="ProductPhoto">
+            <id column="product_photo_id" property="no" />
+            <result column="product_id" property="productNo" />
+            <result column="photo_path" property="photoPath" />
+            <result column="main_photo_flag" property="mainPhoto" />
+          </collection>
+        </association>
+      </association>
+    </association>
   </resultMap>
   
   <sql id="selectBasket">
@@ -64,29 +94,52 @@
     order by registered_date desc
   </select>
   
-  
-  <select id="findWithAll"
-          parameterType="int"
-          resultMap="BasketWithAllMap">
+  <select id="findWithAll" parameterType="int" resultMap="BasketWithAllMap">
     select
       b.member_id,
       b.option_item_id,
       b.registered_date,
       b.quantity,
+      i.options_id,
+      i.option_item_matters,
+      i.options_price,
       o.options_id,
-      o.option_item_matters,
-      o.options_price
-    from 
-      baskets b
-        left outer join option_items o on b.option_item_id=o.option_item_id
+      o.product_id,
+      o.options_name,
+      p.product_id,
+      p.group_id,
+      p.member_id,
+      p.registered_date,
+      p.diy_flag,
+      p.price,
+      p.product_name,
+      p.expiration_date,
+      p.origin,
+      p.quantity,
+      f.product_photo_id,
+      f.product_id,
+      f.photo_path,
+      f.main_photo_flag,
+      s.tel,
+      m.name
+      
+    from baskets b
+      left outer join option_items i on i.option_item_id = b.option_item_id
+      left outer join options o on o.options_id = i.options_id
+      left outer join products p on p.product_id = o.product_id
+      left outer join product_photos f on (p.product_id = f.product_id AND f.main_photo_flag = 0)
+      left outer join sellers s on s.member_id = p.member_id
+      left outer join members m on m.member_id = s.member_id
+      
     where
-      b.member_id=#{memberNo}
+      b.member_id=#{no}
+      order by b.registered_date desc
   </select>
   
   <update id="update" parameterType="Basket">
     update baskets
     <set>
-      <if test="quantity != null">quantity= quantity + #{quantity}</if>
+      <if test="quantity != null">quantity = quantity + #{quantity}</if>
     </set>
     where member_id=#{memberNo} and option_item_id=#{optionItemNo}
   </update>
