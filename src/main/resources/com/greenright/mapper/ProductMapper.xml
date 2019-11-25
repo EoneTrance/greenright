@@ -142,7 +142,15 @@ select DISTINCT
     left outer join option_items i on o.options_id = i.options_id
     where p.product_id=#{value}
   </select>
-  
+  <select id="getallDetailPhoto" resultMap="ProductWithFilesMap" parameterType="int">
+select DISTINCT
+    p.product_id,
+    d.product_id,
+    d.product_detail_photopath
+    from products p
+    left outer join product_detail_photos d on p.product_id = d.product_id
+    where p.product_id=#{value}
+  </select>
   
 	<select id="findAllWithFile" resultMap="ProductWithFilesMap">
 		select

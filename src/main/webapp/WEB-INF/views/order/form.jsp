@@ -415,8 +415,8 @@ width:16px;height:16px;background:#f1ef79;}
     <div class="col-sm-5 px-0">
       <h4 id="order-title-h4">결제 금액</h4>
       <hr style="margin-top:0px;">
-      <div class="sidenav payment-sidenav hidden-xs" style="border-radius:5px;border:solid 10px RGBA(130,174,70,0);">
-      <div style="background-color:RGBA(130,174,70,0);border:solid 10px #82AE46;border-radius:10px;">
+      <div class="sidenav payment-sidenav hidden-xs" style="border-radius:5px;border:solid 1px RGBA(130,174,70,0);">
+      <div style="background-color:RGBA(130,174,70,0);border:solid 10px #82AE46;border-radius:5px;">
         <table class="col-sm-12 table-hover text-center my-table">
           <tbody>
             <tr style="border:solid 1px RGBA(130,174,70,0);">
@@ -434,7 +434,7 @@ width:16px;height:16px;background:#f1ef79;}
           </tbody>
         </table>
       </div>
-      <div style="margin:10px 0px;background-color:RGBA(130,174,70,0);border:solid 10px #82AE46;border-radius:10px;padding-top:10px;padding-bottom:10px;">
+      <div style="margin:10px 0px;background-color:RGBA(130,174,70,0);border:solid 10px #82AE46;border-radius:5px;padding-top:10px;padding-bottom:10px;">
         <h5 class="text-left font-weight-bold mt-2 pl-2"
             style="color:black;">총 결제금액</h5>
         <p class="text-right font-weight-bold mb-0 pr-2"
@@ -522,7 +522,7 @@ $(function() {
         "<tr class='my-basket-tr'>"
      +  "<td class='my-productPhoto-td text-center my-col-3'>"
      +  "  <div class='px-0'>"
-     +  "    <img id='product-photo' src='ddd'>"
+     +  "    <img id='product-photo' src='/upload/product/"+  order.productPhoto +"'>"
      +  "  </div>"
      +  "</td>"
      +  "<td class='my-product text-left my-col-9 pl-0'>"

@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.greenright.domain.Like;
 import com.greenright.domain.Member;
 import com.greenright.domain.Product;
+import com.greenright.domain.ProductDetailPhoto;
 import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
 import com.greenright.domain.Review;
@@ -132,10 +133,15 @@ public class ProductController {
     Product product = productService.get(no);
     Product productPhoto = productService.getforPhoto(no);
     List<Product>productLiST = productService.gettopbyCategoryNum(no);
-    
+    List<Product>ProductDetailPhotoList = productService.getallDetailPhoto(no);
+    List<ProductDetailPhoto> pdp =null;
+    for (Product product2 : ProductDetailPhotoList) {
+     pdp =product2.getDetailPhotos();
+    }
     model.addAttribute("productPhoto", productPhoto);
     model.addAttribute("product", product);
     model.addAttribute("productLiST",productLiST);
+    model.addAttribute("productDetailPhoto",pdp);
   }
   
   
@@ -173,7 +179,10 @@ public class ProductController {
 }   
   @PostMapping("review/check")
   @ResponseBody
-  public int ReviewCheck(Review review) throws Exception{
+  public int ReviewCheck(Review review,HttpSession session) throws Exception{
+    Member member = (Member)session.getAttribute("loginUser");
+    int no = member.getNo();
+    review.setMemberNo(no);
     return reviewService.checkReview(review);
   }
   

@@ -88,7 +88,7 @@ button#deletewishlist {
 </style>
 
 <div id="mypage-title-h1">
-  <h1>WISHLIST</h1>
+  <h1>MYPAGE</h1>
 </div>
 
 <section class="ftco-section py-5">
@@ -178,7 +178,7 @@ button#deletewishlist {
                   </c:forEach>
                 </tbody>
               </table>
-              <button type="button" id=my-delete class="searchbtn btn-primary btn-md btn-block w-25 mt-2">선택상품 삭제</button>
+              <button type="button" id="deletewishlist" class="searchbtn btn-primary btn-md btn-block w-25 mt-2">선택상품 삭제</button>
             </div>
           </div>
         </div>

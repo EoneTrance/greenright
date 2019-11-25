@@ -20,7 +20,7 @@ public class AuthFilter implements Filter {
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
     path = new String[] {"add", "update", "delete", "mypage"};
-    noRedirectPath = new String[] {"add", "update", "delete", "auth"};
+    noRedirectPath = new String[] {"add", "update", "delete", "auth", "member"};
   }
 
   @Override

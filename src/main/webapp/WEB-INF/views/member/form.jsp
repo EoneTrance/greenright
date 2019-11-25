@@ -44,7 +44,7 @@
              id="sample3_postcode" name="postalCode"
              readonly style="background-color:#E1E1E1;
              text-align:left;">
-      <input type="button" class="searchbtn btn-lg my-btn my-btn-hover" name="searchPostalCode"
+      <input type="button" class="searchbtn btn-primary btn-lg d-inline-block" name="searchPostalCode"
              onclick="sample3_execDaumPostcode()" value="우편번호 찾기"
              style="font-size:120%;border:none;">
       <div class="inputState"></div><br>
@@ -79,7 +79,7 @@
     <span class="my-essential-input-text">본인 확인 답변 *</span>
     <input type="text" name="answer" class="form-control input-lg my-essential" />
     <div class="inputState"></div><br><br>
-  <button class="searchbtn btn-lg my-btn my-btn-hover btn-block signup-btn" type="submit">회원가입</button>
+  <button class="searchbtn btn-lg btn-primary btn-block signup-btn" type="submit">회원가입</button>
   <br>
 </form>
 </div>

@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.greenright.domain.Like;
 import com.greenright.domain.Member;
 import com.greenright.domain.Product;
+import com.greenright.service.LikeService;
 import com.greenright.service.ProductOptionItemService;
 import com.greenright.service.ProductOptionService;
 import com.greenright.service.ProductPhotoService;
@@ -22,6 +24,7 @@ public class ProductController {
   @Resource private ProductOptionService productOptionService;
   @Resource private ProductOptionItemService productOptionItemService;
   @Resource private ProductPhotoService productPhotoService;
+  @Resource private LikeService likeService;
   @GetMapping("searchbyGroup")
   public JsonResult searchbyGroup(int no,HttpSession session) throws Exception{
     try {
@@ -96,6 +99,19 @@ public class ProductController {
   public JsonResult searchbyCategoryForMain(int no,HttpSession session) throws Exception{
     try {
       List<Product> products = productService.searchbyCategoryForMain(no);
+      
+      if(session.getAttribute("loginUser") == null) {
+      } else {
+        List<Like> likeList = likeService.findLikeProduct(((Member)session.getAttribute("loginUser")).getNo());
+        for(int i=0;i<products.size();i++) {
+          for(int j=0;j<likeList.size();j++) {
+            if(products.get(i).getNo() == likeList.get(j).getProductNo()) {
+              products.get(i).setLikeCheck(1);
+            }
+          }
+        }
+      }
+      
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(products);
     } catch (Exception e) {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());
@@ -106,6 +122,17 @@ public class ProductController {
   public JsonResult searchbyGroupForMain(int no,HttpSession session) throws Exception{
     try {
       List<Product> products = productService.searchbyGroupForMain(no);
+      if(session.getAttribute("loginUser") == null) {
+      } else {
+        List<Like> likeList = likeService.findLikeProduct(((Member)session.getAttribute("loginUser")).getNo());
+        for(int i=0;i<products.size();i++) {
+          for(int j=0;j<likeList.size();j++) {
+            if(products.get(i).getNo() == likeList.get(j).getProductNo()) {
+              products.get(i).setLikeCheck(1);
+            }
+          }
+        }
+      }
       return new JsonResult().setState(JsonResult.SUCCESS).setResult(products);
     } catch (Exception e) {
       return new JsonResult().setState(JsonResult.FAILURE).setMessage(e.getMessage());

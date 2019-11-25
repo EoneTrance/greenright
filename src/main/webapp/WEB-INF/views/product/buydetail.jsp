@@ -9,7 +9,7 @@ li {
   border: 0;
   float: left;
 }
-ul {
+ul:not(.navbar-nav) {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -30,8 +30,11 @@ li.useruse {
   margin-right: 20px;
 }
 ul.widthsizer {
-  width: 1110px;
-  padding-left: 203px;
+  width: 100%;
+  padding-left:25.5%;
+}
+#my-floatMenu {
+  background-color: #FFFFFF;
 }
 .btn.btn-primary {
   border-top-left-radius: 2px;
@@ -274,6 +277,7 @@ button#review-add-btn {
 button.btn.btn-primary.CartBut {
     background: #82ae46 !important;
 }
+
 </style>
 <meta name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -336,7 +340,7 @@ button.btn.btn-primary.CartBut {
         <img src='/upload/product/${productPhoto.photos[0].photoPath}'
           id="clickchange" class="img-fluid" alt="Colorlib Template"
           style="width: 450px; height: 450px; object-fit: cover;">
-        <ul>
+        <ul id="my-ul">
           <c:forEach items="${productPhoto.photos}" var="photo">
             <li><img src='/upload/product/${photo.photoPath}'
               id="/upload/product/${photo.photoPath}"
@@ -474,12 +478,12 @@ button.btn.btn-primary.CartBut {
   <section class="ftco-section">
     <div class="container">
       <div class="row justify-content-center mb-3 pb-3">
-        <div
+        <div id="my-floatMenu"
           class="col-md-12 heading-section text-center ftco-animate bordermaker justify-content-center">
           <nav id="nav">
             <ul class="widthsizer">
               <li class="useruse" id="detaildesc" onclick="fnMove('1')"><h4
-                  id="de1" style="cursor: pointer">
+                  id="de1" style="cursor: pointer;">
                   <strong>상세설명</strong>
                 </h4></li>
               <li class="useruse" id="producttest" onclick="fnMove('2')"><h4
@@ -513,9 +517,8 @@ button.btn.btn-primary.CartBut {
           <h5>
             <strong>상품상세</strong>
           </h5>
-          <c:forEach items="${product.detailPhotos}"  var="ProductDetailPhoto">
-        <img alt="" src="/upload/productDetail/${ProductDetailPhoto.photoPath}" style="width:1000px; object-fit:cover;height:600px;margin-top:20px; margin-bottom:20px;">      
-          
+          <c:forEach items="${productDetailPhoto}"  var="ProductDetailPhoto">
+        <img alt="" src="/upload/productDetail/${ProductDetailPhoto.photoPath}" style="width:1000px; object-fit:cover;margin-top:20px; margin-bottom:20px;">      
           </c:forEach>
           <br> <br> <br>
         </div>
@@ -814,11 +817,6 @@ $(document).on("click", "#add-to-cart", function(e){
             a += "</div>"
             a += "<input type='text' id='title' style='width :743px' placeholder='제목을입력하세요'/>"
             a += "<br><TEXTAREA  id ='rvcontents' cols='90' rows='10' style='resize:none;'  placeholder='내용을 입력하세요.'/><br>"
-            a += "<div class='input-group mb-3'style='width :685px'>"
-            a +=  "<div class='custom-file' style='width :685px'>"
-            a += "<input type='file' class='custom-file-input btn btn-primary' id='filePath' name='reviewPhoto' style='width :685px'>"
-            a += "<label class='custom-file-label' for='filePath' aria-describedby='inputGroupFileAddon02' style='width :685px'>Choose file</label>"
-            a += "</div></div>"
             a += "<button id='review-add-btn' class='btn btn-primary'>등록</button>"
             a += "<div id='images-div'><img  class='imgpreview'src='' alt='' style='width:100px height:100px'></div>"
             a += "</div></div><br><br>";
@@ -842,6 +840,7 @@ $(document).on("click", "#add-to-cart", function(e){
                                 "productNo" : productNo,
                               },
                               function(a) {
+                               console.log(a)
                                 if (a == 0) {
                                   $
                                       .ajax({
@@ -854,6 +853,8 @@ $(document).on("click", "#add-to-cart", function(e){
                                           "contents" : contents,
                                         },
                                         success : function(result) {
+                                          $("#title").val("");
+                                          $("#rvcontents").val("");
                                           swal("상품평 등록완료")
                                           let ratingAver = 0;
                                           $

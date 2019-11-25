@@ -14,7 +14,6 @@
 }
 </style>
 
-
   <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -98,7 +97,7 @@
             <div class="block-27">
               <ul id="my-paging">
                 <li id='my-paging-first'>
-                 <span class="page-item" data-page="prev"  style="cursor: pointer;">&lt;</span>
+                 <span class="page-item pageControl" data-page="prev"  style="cursor: pointer;">&lt;</span>
                 </li>
                 <li data-page="1" class="active">
                <!-- <span class="my-page-no">1</span> -->  
@@ -109,7 +108,7 @@
                      </li>
                     </c:forEach>
                       <li id="my-paging-last">
-                      <span class="page-item" data-page="next" style="cursor: pointer;">&gt;</span> 
+                      <span id="next" class="page-item pageControl" data-page="next" style="cursor: pointer;">&gt;</span> 
                       </li>
               </ul>
             </div>
@@ -122,8 +121,8 @@
 <script>
 var searchQuestionType = undefined;
 $('#inquireselect').change(function() {
-  searchQuestionType = $('#inquireselect option:selected').val();
   answerSelectType = $('#answerselect option:selected').val();
+  searchQuestionType = $('#inquireselect option:selected').val();
   loadData(1,answerSelectType);
 })
 function loadData(pageNo,answerSelectType) {
@@ -138,22 +137,15 @@ function loadData(pageNo,answerSelectType) {
     success: function(data){
       var list = data.result.privateBoards;
       var tableTag ="";
-      console.log(answerSelectType);
       $("td").removeClass("content-value inquire");
-      
        for(var i = 0 ; i < list.length; i++) {
+         
         if(answerSelectType=="default"){
-        tableTag += "<tr><td>" + list[i].no + "</td><td>" + list[i].date +
-        "<td>" + list[i].type + "</td><td><a href='detail?no="+ list[i].no+"'>" + list[i].title +"</a></td>"+
-        "<td>" + list[i].id +  "</td><td>" + list[i].answerTrueFalse + "</td></tr>"
-        } else if(answerSelectType=="미답변"){
-          if(list[i].answerTrueFalse == "미답변"){
             tableTag += "<tr><td>" + list[i].no + "</td><td>" + list[i].date +
             "<td>" + list[i].type + "</td><td><a href='detail?no="+ list[i].no+"'>" + list[i].title +"</a></td>"+
             "<td>" + list[i].id +  "</td><td>" + list[i].answerTrueFalse + "</td></tr>"
-          }
         } else {
-          if(list[i].answerTrueFalse != "미답변"){
+          if(answerSelectType == list[i].answerTrueFalse && searchQuestionType == list[i].type){
             tableTag += "<tr><td>" + list[i].no + "</td><td>" + list[i].date +
             "<td>" + list[i].type + "</td><td><a href='detail?no="+ list[i].no+"'>" + list[i].title +"</a></td>"+
             "<td>" + list[i].id +  "</td><td>" + list[i].answerTrueFalse + "</td></tr>"
@@ -168,9 +160,6 @@ function loadData(pageNo,answerSelectType) {
 }
 </script>
 <script>
-$('#my-paging').on('click','.page-item', () => {
-  $(event.target).parent().addClass('active');
-});
  var currentPage = ${pageNo};
 $('.page-item').click((e) => {
   e.preventDefault();

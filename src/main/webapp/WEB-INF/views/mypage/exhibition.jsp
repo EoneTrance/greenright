@@ -107,83 +107,14 @@
     border-image-width: 30px;
   }
   
-  /* input[type='radio'] {
-        -webkit-appearance: none;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        outline: none;
-        box-shadow: box-shadow: 0 0 0 2px #f00;
-        border: 1px solid gray;
-    }
-
-    input[type='radio']:before {
-        content: '';
-        display: block;
-        width: 60%;
-        height: 60%;
-        margin: 20% auto;
-        border-radius: 50%;
-        box-shadow: box-shadow: 0 0 0 2px #f00;
-    }
-
- input[type="radio"]:checked:before {
-        background: green;
-        box-shadow: box-shadow: 0 0 0 2px #f00;
-        
-    }
-    
-    input[type="radio"]:checked {
-      border-color:green;
-      box-shadow: box-shadow: 0 0 0 2px #f00;
-    }
-
-    .my-radio-input {
-        margin-right: 80px;
-        margin-left: 20px;
-        font-weight: normal;
-    }
-
-    .my-radio-label label {
-        margin-bottom: 20px !important;
-    }
-
-    .my-radio-div {
-        margin-bottom: 40px;
-    } */
-  
 </style>
 
 <div id="mypage-title-h1">
-<h1>MY EXHIBITION</h1>
+<h1>MYPAGE</h1>
 </div>
 
 <section class="ftco-section py-5">
 <div id="myPageContent">
-
-<!-- <nav class="navbar navbar-inverse visible-xs">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">MyPage</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="my-menu"><a href="userinfo">기본정보</a></li>
-        <li class="my-menu"><a href="order">주문관리</a></li>
-        <li class="my-menu"><a href="#">관심상품</a></li>
-        <li class="my-menu"><a href="#">업적</a></li>
-        <li class="my-menu"><a href="sale">판매관리</a></li>
-        <li class="my-menu active"><a href="exhibition">개인전 관리</a></li>
-        <li class="my-menu"><a href="memberConversion">판매회원 전환</a></li>
-      </ul>
-    </div>
-  </div>
-</nav> -->
 
 <div class="container-fluid">
   <div class="row">
@@ -292,21 +223,21 @@
         </table>
                             
                             
-   <!--    <div class="row mt-5">
+      <div class="row mt-5">
         <div class="col text-center">
           <div class="block-27">
             <ul>
               <li><a href="#">&lt;</a></li>
               <li class="active"><span>1</span></li>
-              <li><a href="#">2</a></li>
+              <!-- <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
+              <li><a href="#">5</a></li> -->
               <li><a href="#">&gt;</a></li>
             </ul>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </div>

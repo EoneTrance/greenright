@@ -23,4 +23,5 @@ public interface ProductService {
   List<Product> getUpcyclingByMemberNo(int no) throws Exception;
   void addProductRecommend(int productNo) throws Exception;
   void decreaseProductRecommend(int productNo) throws Exception;
+  List<Product> getallDetailPhoto(int no) throws Exception;
 }

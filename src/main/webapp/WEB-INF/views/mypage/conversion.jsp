@@ -59,61 +59,15 @@
     padding-right: 5px;
   }
   
-  /* #memberInfoForm form .my-btn {
-    background-color:#82AE46;
-    color:#FFFFFF;
-  } */
-  
-  /* .hr-sect {
-    display: flex;
-    flex-basis: 100%;
-    align-items: center;
-  }
-  
-  .hr-sect::before,
-  .hr-sect::after {
-    content: "";
-    flex-grow: 1;
-    background: rgba(0, 0, 0, 0.2);
-    height: 1px;
-    font-size: 0px;
-    line-height: 0px;
-    margin: 0px 10px;
-  } */
-  
 </style>
 
 
 <div id="mypage-title-h1">
-<h1>MEMBER CONVERSION</h1>
+<h1>MYPAGE</h1>
 </div>
 
 <section class="ftco-section py-5">
 <div id="myPageContent">
-
-<!-- <nav class="navbar navbar-inverse visible-xs">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">MyPage</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="my-menu active"><a href="userinfo">기본정보</a></li>
-        <li class="my-menu"><a href="order">주문관리</a></li>
-        <li class="my-menu"><a href="#">관심상품</a></li>
-        <li class="my-menu"><a href="#">업적</a></li>
-        <li class="my-menu"><a href="sale">판매관리</a></li>
-        <li class="my-menu"><a href="exhibition">개인전 관리</a></li>
-        <li class="my-menu"><a href="memberConversion">판매회원 전환</a></li>
-      </ul>
-    </div>
-  </div>
-</nav> -->
 
 <div class="container-fluid">
   <div class="row">
@@ -181,8 +135,7 @@
           </tbody>
         </table>
         <hr>
-        <button class="btn btn-lg btn-primary btn-inline-block signup-btn mr-1" type="submit">판매회원 전환</button>
-        <button class="btn btn-lg btn-danger btn-inline-block signup-btn ml-1" type="button">취소</button>
+        <button class="sarchbtn btn-lg btn-primary btn-block signup-btn mr-1 w-100" type="submit">판매회원 전환</button>
       </form>
       </div>
       <hr>
@@ -234,7 +187,7 @@ if(${loginUser.memberClass} == 2) {
       "<li class='my-menu'><a href='sellerinfo'>판매자 정보</a></li>");
   $("#sellerMenu").append(
       "<li class='my-menu'><a href='manage'>판매물품 관리</a></li>"
-      "<li class='my-menu'><a href='sale'>판매내역</a></li>"
+    + "<li class='my-menu'><a href='sale'>판매내역</a></li>"
     + "<li class='my-menu'><a href='exhibition'>개인전 관리</a></li>");
 } else {
   $("#sellerMenu").append(

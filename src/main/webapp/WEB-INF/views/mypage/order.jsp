@@ -104,7 +104,7 @@
 </style>
 
 <div id="mypage-title-h1">
-<h1>ORDERS</h1>
+<h1>MYPAGE</h1>
 </div>
 
 <section class="ftco-section py-5">
@@ -140,19 +140,19 @@
         <div class="col-sm-3">
           <div class="well text-center">
             <h4 class="mt-3 mb-0">입금대기중</h4>
-            <p class="mb-1">3</p>
+            <p class="mb-1">0</p>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="well text-center">
             <h4 class="mt-3 mb-0">배송준비중</h4>
-            <p class="mb-1">3</p>
+            <p class="mb-1">1</p>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="well text-center">
             <h4 class="mt-3 mb-0">배송진행중</h4>
-            <p class="mb-1">3</p>
+            <p class="mb-1">0</p>
           </div>
         </div>
         <div class="col-sm-3">
@@ -264,7 +264,7 @@
                                       주문번호: <span id="product-id" >${orderProduct.order.no}</span><br>
                                       상품명: <span id="product-name">${orderProduct.productOptionItem.productOption.product.productName}</span><br>
                                       옵션: <span id="product-option">${orderProduct.productOptionItem.optionItemMatter}</span><hr class="my-1">
-                                      가격: <span id="product-price"><span style="font-size:15px;font-weight:bold;">${orderProduct.price}</span>원<c:if test="${orderProduct.quantity > 1}"> x ${orderProduct.quantity}개</c:if>
+                                      가격: <span id="product-price"><span style="font-size:15px;font-weight:bold;">${orderProduct.productOptionItem.productOption.product.price}</span>원 [+${orderProduct.productOptionItem.optionsPrice}]<c:if test="${orderProduct.quantity > 1}"> x ${orderProduct.quantity}개</c:if>
                                       </span>
                                     </div>
                                   </div>
@@ -290,8 +290,9 @@
                               <tr>
                                 <td class="my-payment-date">${orderProduct.order.paymentDate}</td>
                                 <td class="my-payment-way">${orderProduct.order.paymentWay}</td>
-                                <td class="my-price" style="border-right:none;"><span id="product-price"><span style="font-size:15px;font-weight:bold;">${(orderProduct.price * orderProduct.quantity) + 2500}</span>원
-                                      </span>(배송비 포함)</td>
+                                <td class="my-price" style="border-right:none;"><span id="product-price"><span style="font-size:15px;font-weight:bold;">${((orderProduct.productOptionItem.productOption.product.price + orderProduct.productOptionItem.optionsPrice) * orderProduct.quantity) + 2500}</span>원
+                                      </span>(배송비 포함)
+                                 </td>
                               </tr>
                             </tbody>
                             </table>
@@ -344,7 +345,7 @@
                     주문번호: <span id="product-id" >${orderProduct.order.no}</span><br>
                     상품명: <span id="product-name">${orderProduct.productOptionItem.productOption.product.productName}</span><br>
                     옵션: <span id="product-option">${orderProduct.productOptionItem.optionItemMatter}</span><hr class="my-1">
-                    가격: <span id="product-price"><span style="font-size:15px;font-weight:bold;">${orderProduct.price}</span>원<c:if test="${orderProduct.quantity > 1}"> x ${orderProduct.quantity}개</c:if></span>
+                    가격: <span id="product-price"><span style="font-size:15px;font-weight:bold;">${orderProduct.productOptionItem.productOption.product.price + orderProduct.productOptionItem.optionsPrice}</span>원<c:if test="${orderProduct.quantity > 1}"> x ${orderProduct.quantity}개</c:if></span>
                   </div>
                 </div>
               </td>

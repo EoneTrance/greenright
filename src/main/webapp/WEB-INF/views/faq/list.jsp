@@ -126,6 +126,35 @@
     inline-size: fit-content;
     }
     
+    .page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #82ae46 !important;
+    border-color: #82ae46 !important;
+    }
+    
+    a.page-link {
+    color: black;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 50%;
+    margin: 2px;
+    }
+    
+    .page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: 50% !important; 
+    border-bottom-left-radius: 50% !important;
+    }
+    
+    .page-item:last-child .page-link {
+    border-top-right-radius: 50% !important;
+    border-bottom-right-radius: 50% !important;
+    }
+    
+    
    /* #pagination .page-item.active .page-link {
     z-index: 1;
     color: #fff;
@@ -143,7 +172,6 @@
     margin-top: 40px;
     }
     */
-
  </style>
 <script src='/node_modules/jquery/dist/jquery.min.js'></script>
 
@@ -208,10 +236,8 @@
                     <select name="faqselect" id="faqselect" class="form-control faq">
                       <option value="default">전체 </option>
                       <option value="배송안내">배송안내</option>
-                      <option value="주문결제">주문결제</option>
-                      <option value="주문취소">주문취소</option>
-                      <option value="교환, 환불">교환, 환불</option>
-                      <option value="적립금">적립금</option>
+                      <option value="주문">주문</option>
+                      <option value="교환,환불">교환,&nbsp;환불</option>
                       <option value="기타">기타</option>
                     </select>
                   </div>
@@ -356,7 +382,6 @@
 
 
 <script>
-
 /*페이징  */
 var paginationTemplateSrc = $('#paginationTemplate').html();
 var template = Handlebars.compile(paginationTemplateSrc);
@@ -365,10 +390,7 @@ var limitPerPage = ${pageSize};
 var totalPages = Math.ceil(numberOfItems / limitPerPage);
 var searchKeyword = undefined;
 var searchQuestionType = undefined;
-
-
 createPagination(1, totalPages, 1);
-
 function createPagination(startPage, endPage, activePageNo) {
   var pages = []
   for (var i = startPage; i <= endPage; i++) {
@@ -382,7 +404,6 @@ function createPagination(startPage, endPage, activePageNo) {
   });
   $('#pagination-nav').html(paginationHtml);
 }
-
 $("#pagination-nav").on("click", "#next-page", function() {
   var currentPage = $(".pagination li.active").index();
   if (currentPage === totalPages) {
@@ -400,22 +421,18 @@ $("#pagination-nav").on("click", "#previous-page", function() {
   moveActivePage(currentPage, -1);
   loadData(currentPage - 1);
 });
-
-
 $("#pagination-nav").on("click", ".page-item.current-page", (e) => {
   var currentPage = $(".pagination li.active").index();
   var pageNo = parseInt($(e.currentTarget).attr('data-page-no'));
   moveActivePage(pageNo, 0);
   loadData(pageNo);
 });
-
 /* 검색 이벤트 ajax  */
 $("#searchbtn").click(function(){
   searchKeyword = $("#keyword").val();
   searchQuestionType = $("#faqselect option:selected").val();
   loadData(1);
 })
-
 /* 검색 Enter 이벤트 ajax  */
  $("#keyword").keypress(function(key){
   if(key.keyCode == 13)
@@ -423,23 +440,21 @@ $("#searchbtn").click(function(){
   searchQuestionType = $("#faqselect option:selected").val();
   loadData(1);
 }) 
-
 /*select 이벤트 ajax  */
 $("#faqselect").change(function(){
   searchKeyword = $("#keyword").val();
   searchQuestionType = $("#faqselect option:selected").val();
   loadData(1);
 })
-
 function moveActivePage(currentPage, direction) {
   if ((direction > 0 && currentPage === totalPages) || (direction < 0 && currentPage == 1)) {
     return false;
   }
   currentPage += direction;
+  console.log(currentPage, direction);
   $(".pagination li").removeClass("active");
   $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass("active");
 }
-
 function loadData(pageNo) {
   $.ajax({
     url: "../json/faq/list",
@@ -473,8 +488,6 @@ function loadData(pageNo) {
   });
   
 }
-
-
 </script>
   
 
@@ -536,10 +549,6 @@ function loadData(pageNo) {
     });
   });
 }); */
-
-
-
-
 $(function(){
   /* enter 이벤트 ajax  */
   /*
@@ -571,15 +580,4 @@ $(function(){
   */
  
 })
-
 </script>  
-  
-  
-  
-  
-  
-      
-     
-
-
-

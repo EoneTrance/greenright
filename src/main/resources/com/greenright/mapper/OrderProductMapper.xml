@@ -8,12 +8,16 @@
   <resultMap type="OrderProduct" id="OrderProductMap">
     <id column="order_id" property="orderNo"/>
     <id column="option_item_id" property="optionItemNo"/>
+    <result column="quantity" property="quantity"/>
+    <result column="price" property="price"/>
   </resultMap>
   
   <resultMap type="OrderProduct" id="OrderProductWithAllMap">
   
     <id column="order_id" property="orderNo"/>
     <id column="option_item_id" property="optionItemNo"/>
+    <result column="quantity" property="quantity"/>
+    <result column="price" property="price"/>
     
     <association property="order" javaType="Order">
       <id column="order_id" property="no"/>
@@ -53,16 +57,20 @@
           <result column="registered_date" property="registeredDate" />
           <result column="diy_flag" property="diy" />
           <result column="product_name" property="productName" />
+          <result column="price" property="price" />
           <result column="expiration_date" property="expirationDate" />
           <result column="group_id" property="groupNo"/>
           <association property="seller" javaType="Seller">
-            <id column="member_id" property="no" />
-            <result column="account_num" property="accountNum" />
-            <result column="account_holder" property="accountHolder" />
-            <association property="member" javaType="Member">
-              <id column="member_id" property="no" />
-            </association>
-          </association>
+			      <id column="member_id" property="no" />
+			      <result column="account_num" property="accountNum" />
+			      <result column="account_holder" property="accountHolder" />
+			      <result column="tel" property="tel" />
+			      <result column="point" property="point" />
+			      <association property="member" javaType="Member">
+			        <id column="member_id" property="no" />
+			        <result column="name" property="name"/>
+			      </association>
+			    </association>
           <collection property="photos" ofType="ProductPhoto">
             <id column="product_photo_id" property="no" />
             <result column="product_id" property="productNo" />

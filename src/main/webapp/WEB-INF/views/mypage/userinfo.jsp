@@ -57,7 +57,7 @@
 
 
 <div id="mypage-title-h1">
-<h1>PROFILE</h1>
+<h1>MYPAGE</h1>
 </div>
 
 <section class="ftco-section py-5">
@@ -192,7 +192,7 @@
           </tbody>
         </table>
         <hr>
-        <button name="submitBtn" class="btn btn-lg btn-primary btn-inline-block signup-btn mr-1" style="width:100%;" type="submit">수정</button>
+        <button name="submitBtn" class="searchbtn btn-lg btn-primary btn-block signup-btn w-100" type="submit">수정</button>
       </form>
       </div>
     </div>

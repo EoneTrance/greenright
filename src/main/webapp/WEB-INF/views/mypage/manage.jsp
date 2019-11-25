@@ -101,7 +101,7 @@ span.productadderm {
 
 
 <div id="mypage-title-h1">
-  <h1>product Manage</h1>
+  <h1>MYPAGE</h1>
 </div>
 
 <section class="ftco-section py-5">
@@ -149,7 +149,8 @@ span.productadderm {
       
                     </div>
                     <span class="productadderm"><a href="/greenright/product/form">상품 등록</a>
-                    &nbsp;&nbsp;<a href="/greenright/product/upcyclingform">업사이클링 상품 등록</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/greenright/product/upcyclingform">업사이클링 상품 등록</a>
             </span>
           <div class="row">
             <div class="col">
@@ -208,8 +209,7 @@ span.productadderm {
                 </c:forEach>
               </tbody>
             </table>
-            <button id="deletewishlist" class="btn btn-primary"
-              style="border-radius: 2px 2px 2px 2px;">삭제</button>
+            <button type="button" id="deletewishlist" class="searchbtn btn-primary btn-md btn-block w-25 mt-2">선택상품 삭제</button>
             </div>
           </div>
           <div class="row mt-5">
@@ -375,6 +375,5 @@ $(function() {
   $('.my-check-all').click(function() {
     $('.my-check').prop('checked', this.checked);
   });
-  
 });
 </script>
