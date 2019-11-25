@@ -20,18 +20,18 @@
     <input type="text" name="id" class="form-control input-lg" maxlength="12" placeholder="아이디">
     <input type="password" name="password" class="form-control input-lg" maxlength="12" placeholder="비밀번호">
     <div class="inputState"></div><br>
-    <button class="btn searchbtn btn-lg btn-primary btn-block" type="submit">로그인</button>
+    <button class="searchbtn btn-lg btn-primary btn-block" type="submit">로그인</button>
   </form>
   <a href="../member/form">
-  <button class="btn searchbtn btn-lg btn-danger btn-block" type="submit">회원가입</button></a>
+  <button class="searchbtn btn-lg btn-danger btn-block" type="submit">회원가입</button></a>
   <div id="findAccount">
     <table>
       <tr style="width: 500px; text-align: center">
         <td style="width:248px;"><a href="../member/findAccount/id"><button
-              class="btn searchbtn btn-lg btn-dark my-find-button" type="button" name="findId">아이디 찾기</button></a>
+              class="searchbtn btn-lg btn-dark my-find-button" type="button" name="findId">아이디 찾기</button></a>
         </td>
         <td style="width: 248px"><a href="../member/findAccount/pw"><button
-              class="btn searchbtn btn-lg btn-dark my-find-button" type="button" name="findPw">비밀번호 찾기</button></a></td>
+              class="searchbtn btn-lg btn-dark my-find-button" type="button" name="findPw">비밀번호 찾기</button></a></td>
       </tr>
     </table>
   </div>
