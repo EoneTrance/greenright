@@ -19,7 +19,6 @@ import com.greenright.domain.OrderProduct;
 import com.greenright.domain.Product;
 import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
-import com.greenright.service.BasketService;
 import com.greenright.service.MemberService;
 import com.greenright.service.OrderProductService;
 import com.greenright.service.OrderService;
@@ -37,9 +36,6 @@ public class OrderController {
   @Resource
   private OrderProductService orderProductService;
   
-  @Resource
-  private BasketService basketService;
-
   @Resource
   private ProductOptionItemService productOptionItemService;
 

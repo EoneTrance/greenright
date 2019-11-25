@@ -2,10 +2,12 @@
     pageEncoding="UTF-8"%>
 
 <style>
+
 #my-dropdown-hover:hover
 {
   background-color: RGBA(130,174,70,0.5);
 }
+
 </style>
 
 <!--------------------------------------------header------------------------------------------>
@@ -78,8 +80,9 @@
 function mypage() {
   location.href="/greenright/mypage";
 }
+
 // window.onload = (function() {
-   
+	 
   var loginUser = '${loginUser.id}';
   var loginUserClass = '${loginUser.memberClass}';
   var loginStateY = document.querySelectorAll(".my-login-state-y");

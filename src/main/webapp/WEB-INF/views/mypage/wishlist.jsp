@@ -178,8 +178,7 @@ button#deletewishlist {
                   </c:forEach>
                 </tbody>
               </table>
-              <button id="deletewishlist" class="btn btn-primary"
-                style="border-radius: 2px 2px 2px 2px;">삭제</button>
+              <button type="button" id=my-delete class="searchbtn btn-primary btn-md btn-block w-25 mt-2">선택상품 삭제</button>
             </div>
           </div>
         </div>

@@ -61,7 +61,7 @@ table.my-join-table tbody th {
   <h3><span style="font-size:200%;color:#82AE46">${loginUser.name}</span> 님의 주문이 접수되었습니다.</h3>
   <br>
 <div id="smallContent">
-  <p>자세한 내용은 마이페이지 > 구매내역에서 확인하실 수 있습니다.</p>
+  <p>자세한 내용은 <a href="../mypage/order">마이페이지 > 구매내역</a> 에서 확인하실 수 있습니다.</p>
 <br><br>
 
 <div class="container-fluid">
@@ -112,6 +112,12 @@ table.my-join-table tbody th {
             <th class="my-col-3">배송지</th>
             <td class="my-col-9">
             <span style="color:black">${order.delivery.deliveryAddress}</span>
+            </td>
+          </tr>
+          <tr>
+            <th class="my-col-3">요청사항</th>
+            <td class="my-col-9">
+            <span style="color:black">${order.delivery.recieverRequest}</span>
             </td>
           </tr>
           </tbody>
