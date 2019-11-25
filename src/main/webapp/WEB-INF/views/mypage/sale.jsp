@@ -220,7 +220,7 @@
               <td class="my-product text-left py-2">
                 <div class="row">
                   <div class="col-sm-3 px-0">
-                    <img id="product-photo" src="/upload/product/${saleProduct.productOptionItem.productOption.product.photos[0]}" data-toggle="modal" data-target="#exampleModal${status.index}" data-whatever="@getbootstrap">
+                    <img id="product-photo" src="/upload/product/${saleProduct.productOptionItem.productOption.product.photos[0].photoPath}" data-toggle="modal" data-target="#exampleModal${status.index}" data-whatever="@getbootstrap">
                     <div class="modal fade bd-example-modal-lg" id="exampleModal${status.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -247,7 +247,7 @@
                                 <td class="my-product text-left py-2">
                                   <div class="row">
                                     <div class="col-sm-3 px-0">
-                                      <img id="product-photo" src="/upload/product/${saleProduct.productOptionItem.productOption.product.photos[0]}" data-toggle="modal" data-target="#exampleModal${status.index}" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
+                                      <img id="product-photo" src="/upload/product/${saleProduct.productOptionItem.productOption.product.photos[0].photoPath}" data-toggle="modal" data-target="#exampleModal${status.index}" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
                                     </div>
                                     <div class="col-sm-9 px-0" style="font-size:12px">
                                       주문번호: <span id="product-id" >${saleProduct.order.no}</span><br>

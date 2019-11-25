@@ -5,25 +5,48 @@ import java.sql.Date;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class Product implements Serializable {
+public class Product  implements Serializable {
 
   private static final long serialVersionUID = 1L;
-  private int no;
+  
+  private int no ;
+  
   private int groupNo;
+  
   private int memberNo;
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+  
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date registeredDate;
+  
   private int diy;
+  
   private int price;
+  
   private int quantity;
+  
   private String productName;
+  
   private String description;
+  
   private Date expirationDate;
+  
   private String origin;
+  
   private List<ProductPhoto> photos;
+  
   private List<ProductOption> options;
+  
+  private List<ProductDetailPhoto> detailPhotos;
+  
   private Seller seller;
+  
   private Group group;
+  
+  private Like like;
+  
+  private int RecommendCount;
+  
+  private int likeCheck;
 
   public int getNo() {
     return no;
@@ -71,6 +94,14 @@ public class Product implements Serializable {
 
   public void setPrice(int price) {
     this.price = price;
+  }
+
+  public int getQuantity() {
+    return quantity;
+  }
+
+  public void setQuantity(int quantity) {
+    this.quantity = quantity;
   }
 
   public String getProductName() {
@@ -121,6 +152,14 @@ public class Product implements Serializable {
     this.options = options;
   }
 
+  public List<ProductDetailPhoto> getDetailPhotos() {
+    return detailPhotos;
+  }
+
+  public void setDetailPhotos(List<ProductDetailPhoto> detailPhotos) {
+    this.detailPhotos = detailPhotos;
+  }
+
   public Seller getSeller() {
     return seller;
   }
@@ -137,12 +176,28 @@ public class Product implements Serializable {
     this.group = group;
   }
 
-  public int getQuantity() {
-    return quantity;
+  public Like getLike() {
+    return like;
   }
 
-  public void setQuantity(int quantity) {
-    this.quantity = quantity;
+  public void setLike(Like like) {
+    this.like = like;
+  }
+
+  public int getRecommendCount() {
+    return RecommendCount;
+  }
+
+  public void setRecommendCount(int recommendCount) {
+    RecommendCount = recommendCount;
+  }
+
+  public int getLikeCheck() {
+    return likeCheck;
+  }
+
+  public void setLikeCheck(int likeCheck) {
+    this.likeCheck = likeCheck;
   }
 
   @Override
@@ -151,9 +206,9 @@ public class Product implements Serializable {
         + ", registeredDate=" + registeredDate + ", diy=" + diy + ", price=" + price + ", quantity="
         + quantity + ", productName=" + productName + ", description=" + description
         + ", expirationDate=" + expirationDate + ", origin=" + origin + ", photos=" + photos
-        + ", options=" + options + ", seller=" + seller + ", group=" + group + "]";
+        + ", options=" + options + ", detailPhotos=" + detailPhotos + ", seller=" + seller
+        + ", group=" + group + ", like=" + like + ", RecommendCount=" + RecommendCount
+        + ", likeCheck=" + likeCheck + "]";
   }
-
-
-
+  
 }

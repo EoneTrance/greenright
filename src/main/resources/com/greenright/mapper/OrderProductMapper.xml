@@ -8,16 +8,12 @@
   <resultMap type="OrderProduct" id="OrderProductMap">
     <id column="order_id" property="orderNo"/>
     <id column="option_item_id" property="optionItemNo"/>
-    <result column="quantity" property="quantity"/>
-    <result column="price" property="price"/>
   </resultMap>
   
   <resultMap type="OrderProduct" id="OrderProductWithAllMap">
   
     <id column="order_id" property="orderNo"/>
     <id column="option_item_id" property="optionItemNo"/>
-    <result column="quantity" property="quantity"/>
-    <result column="price" property="price"/>
     
     <association property="order" javaType="Order">
       <id column="order_id" property="no"/>
@@ -27,17 +23,17 @@
       <result column="payment_flag" property="paymentFlag"/>
       <result column="payment_way" property="paymentWay"/>
       <association property="delivery" javaType="Delivery">
-	      <id column="delivery_id" property="no"/>
-	      <result column="invoice_num" property="invoiceNum"/>
-	      <result column="delivery_date" property="deliveryDate"/>
-	      <result column="delivery_flag" property="deliveryFlag"/>
-	      <result column="courier_name" property="courierName"/>
-	      <result column="reciever_name" property="recieverName"/>
-	      <result column="delivery_address" property="deliveryAddress"/>
-	      <result column="reciever_cell_phone" property="recieverCellPhone"/>
-	      <result column="reciever_email" property="recieverEmail"/>
-	      <result column="reciever_request" property="recieverRequest"/>
-	    </association>
+        <id column="delivery_id" property="no"/>
+        <result column="invoice_num" property="invoiceNum"/>
+        <result column="delivery_date" property="deliveryDate"/>
+        <result column="delivery_flag" property="deliveryFlag"/>
+        <result column="courier_name" property="courierName"/>
+        <result column="reciever_name" property="recieverName"/>
+        <result column="delivery_address" property="deliveryAddress"/>
+        <result column="reciever_cell_phone" property="recieverCellPhone"/>
+        <result column="reciever_email" property="recieverEmail"/>
+        <result column="reciever_request" property="recieverRequest"/>
+      </association>
     </association>
     
     <association property="productOptionItem" javaType="ProductOptionItem">
@@ -56,24 +52,17 @@
           <result column="member_id" property="memberNo" />
           <result column="registered_date" property="registeredDate" />
           <result column="diy_flag" property="diy" />
-          <result column="price" property="price" />
           <result column="product_name" property="productName" />
-          <result column="description" property="description" />
           <result column="expiration_date" property="expirationDate" />
-          <result column="origin" property="origin" />
-          <result column="quantity" property="quantity"/>
           <result column="group_id" property="groupNo"/>
           <association property="seller" javaType="Seller">
-			      <id column="member_id" property="no" />
-			      <result column="account_num" property="accountNum" />
-			      <result column="account_holder" property="accountHolder" />
-			      <result column="tel" property="tel" />
-			      <result column="point" property="point" />
-			      <association property="member" javaType="Member">
-			        <id column="member_id" property="no" />
-			        <result column="name" property="name"/>
-			      </association>
-			    </association>
+            <id column="member_id" property="no" />
+            <result column="account_num" property="accountNum" />
+            <result column="account_holder" property="accountHolder" />
+            <association property="member" javaType="Member">
+              <id column="member_id" property="no" />
+            </association>
+          </association>
           <collection property="photos" ofType="ProductPhoto">
             <id column="product_photo_id" property="no" />
             <result column="product_id" property="productNo" />

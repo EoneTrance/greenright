@@ -19,7 +19,6 @@ import com.greenright.domain.OrderProduct;
 import com.greenright.domain.Product;
 import com.greenright.domain.ProductOption;
 import com.greenright.domain.ProductOptionItem;
-import com.greenright.service.BasketService;
 import com.greenright.service.MemberService;
 import com.greenright.service.OrderProductService;
 import com.greenright.service.OrderService;
@@ -37,9 +36,6 @@ public class OrderController {
   @Resource
   private OrderProductService orderProductService;
   
-  @Resource
-  private BasketService basketService;
-
   @Resource
   private ProductOptionItemService productOptionItemService;
 
@@ -112,12 +108,12 @@ public class OrderController {
     
     String paymentWay;
     switch (order.getPaymentWay()) {
-      case "samsung" : paymentWay = "삼성페이"; break;
-      case "card" : paymentWay = "카드"; break;
-      case "trans" : paymentWay = "실시간 계좌이체"; break;
-      case "vbank" : paymentWay = "무통장 입금 (가상계좌)"; break;
-      case "phone" : paymentWay = "휴대폰 소액결제"; break;
-      default: paymentWay = "카드"; break;
+      case "samsung" : paymentWay = "삼성페이";
+      case "card" : paymentWay = "카드";
+      case "trans" : paymentWay = "실시간 계좌이체";
+      case "vbank" : paymentWay = "무통장 입금 (가상계좌)";
+      case "phone" : paymentWay = "휴대폰 소액결제";
+      default : paymentWay = "카드";
     }
     order.setPaymentWay(paymentWay);
     
@@ -148,8 +144,8 @@ public class OrderController {
     Order order = orderService.get(no);
     
     String orderProduct = 
-        orderProductList.get(0).getProductOptionItem().getOptionItemMatter() + "["
-      + orderProductList.get(0).getProductOptionItem().getProductOption().getProduct().getProductName() + "]";
+        orderProductList.get(0).getProductOptionItem().getProductOption().getProduct().getProductName() + "["
+      + orderProductList.get(0).getProductOptionItem().getOptionItemMatter() + "]";
     if (orderProductList.size() > 1) {
       orderProduct += " 외 " + (orderProductList.size() - 1) + "건";
     }

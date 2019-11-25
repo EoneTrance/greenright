@@ -77,28 +77,24 @@
           <ul class="list-unstyled mt-3 mb-4">
             <li>관심상품 관리</li>
           </ul>
-          <a href="mypage/wishlist">
           <button type="button" class="searchbtn btn-primary btn-lg btn-block">WISHLIST</button>
-          </a>
         </div>
       </div>
     </div>
-    <div id="my-sellerMenu" class="card-deck mb-3 text-center">
-      <div id="my-manage" class="card mb-4 shadow-sm" style="display:none;">
+    <div class="card-deck mb-3 text-center">
+      <div class="card mb-4 shadow-sm">
         <div class="card-header my-bg-color-gray">
-          <h4 class="my-0 font-weight-bold">PRODUCT MANAGE</h4>
+          <h4 class="my-0 font-weight-bold">ACHIEVEMENT</h4>
         </div>
         <div class="card-body">
-          <h1 class="card-title pricing-card-title my-color">판매상품 관리</h1>
+          <h1 class="card-title pricing-card-title my-color">업적</h1>
           <ul class="list-unstyled mt-3 mb-4">
-            <li>내 판매상품 관리</li>
+            <li>내 업적 관리</li>
           </ul>
-          <a href="mypage/manage">
-          <button type="button" class="searchbtn btn-primary btn-lg btn-block">PRODUCT MANAGE</button>
-          </a>
+          <button type="button" class="searchbtn btn-primary btn-lg btn-block">ACHIEVEMENT</button>
         </div>
       </div>
-      <div id="my-sale" class="card mb-4 shadow-sm" style="display:none;">
+      <div class="card mb-4 shadow-sm">
         <div class="card-header my-bg-color-gray">
           <h4 class="my-0 font-weight-bold">SALES</h4>
         </div>
@@ -112,7 +108,7 @@
           </a>
         </div>
       </div>
-      <div id="my-exhibition" class="card mb-4 shadow-sm" style="display:none;">
+      <div class="card mb-4 shadow-sm">
         <div class="card-header my-bg-color-gray">
           <h4 class="my-0 font-weight-bold">EXHIBITION</h4>
         </div>
@@ -123,20 +119,6 @@
           </ul>
           <a href="mypage/exhibition">
           <button type="button" class="searchbtn btn-primary btn-lg btn-block">EXHIBITION</button>
-          </a>
-        </div>
-      </div>
-      <div id="my-conversion" class="card mb-4 shadow-sm" style="display:none;">
-        <div class="card-header my-bg-color-gray">
-          <h4 class="my-0 font-weight-bold">CONVERSION</h4>
-        </div>
-        <div class="card-body">
-          <h1 class="card-title pricing-card-title my-color">판매회원 전환</h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>판매회원 전환</li>
-          </ul>
-          <a href="mypage/conversion">
-          <button type="button" class="searchbtn btn-primary btn-lg btn-block">CONVERSION</button>'
           </a>
         </div>
       </div>
@@ -178,15 +160,3 @@
 <script src="/js/aos.js"></script>
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
-
-<script>
-$(function(){
-  if (${loginUser.memberClass} == 2) {
-    $("#my-manage").css("display", "inline-block");
-    $("#my-sale").css("display", "inline-block");
-    $("#my-exhibition").css("display", "inline-block");
-  } else {
-    $("#my-conversion").css("display", "inline-block");
-  }
-});
-</script>

@@ -22,21 +22,26 @@
    border-bottom-left-radius: 2px;
    font-size: 14px; 
 }
-
 </style>
 
-  <%
-    session.setAttribute("memberName", "choi");
-  %>
-  <%
-    session.setAttribute("loginName", "choi");
-  %>
   
-  
+  <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center fadeInUp ftco-animated">
+            <p class="breadcrumbs">
+              <span class="mr-2">
+                <a href="index.html"></a>
+              </span> 
+              <span>greenright</span>
+            </p>
+            <h1 class="mb-0 bread">COMMUNITY</h1>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <!-- <div id="newimg" style="display:none">
-    <img  src='/images/new.jpg'/>
-    </div> -->
+  
 
   <section class="ftco-section">
     <div id='content'
@@ -45,12 +50,11 @@
       <div id="np" style="float:left;"></div>
       
       <br>
-
       <table class='table table-hover' id="products">
 
         <thead class="thead-primary">
           <tr class="text-center">
-            <th>번호</th>
+            <th>No</th>
             <th>제목</th>
             <th>글쓴이</th>
             <th>등록일</th>
@@ -64,7 +68,7 @@
               
               <td>${board.no}</td>
               <td id="btitle"><a href='detail?no=${board.no}'>${board.title}</a></td>
-              <td>${board.member.nickname}</td>
+              <td>${board.member.name}</td>
               <td class="cdate">${board.createdDate}</td>
               <td>${board.viewCount}</td>
                 <td>${board.recommendation}</td>
@@ -78,20 +82,52 @@
        
  
    
-    <select id="Aselect" name="Aselect" style="height:33px;">
+     <select id="Aselect" name="Aselect" style="height:33px; margin-left:400px;">
       <option value="Aoption1">제목</option>
       <option value="Aoption2">내용</option>
       <option value="Aoption3">글쓴이</option>
     </select>
  
-    <div id="forsel" style="display:inline-block; width:auto;">
+    <div class= id="forsel" style="display:inline-block; width:auto; margin-right: 330px;">
       <form action='search1'>
         <input type='text' name='title' style= "width:auto;">
         <button id='search1' class="btn btn-primary" style="height:33px;">검색</button>
       </form>
     </div>
-  </div>
-</section>
+   
+   
+ 
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul id="my-paging">
+                <li id='my-paging-first'>
+                 <span class="page-item" data-page="prev"  style="cursor: pointer;">&lt;</span>
+                </li>
+                <li data-page="1" class="active">
+               <!-- <span class="my-page-no">1</span> -->  
+                 </li>
+                   <c:forEach begin="${beginPage}" end="${endPage}" var="page" >
+                     <li class="page-item" data-page="${page}">
+                       <span style ="${page != pageNo ? "cursor: pointer;" : "color: white; background-color: #82ae46;"} border:1px solid #e6e6e6">${page}</span>
+                     </li>
+                    </c:forEach>
+                    
+                      <li id="my-paging-last">
+                      <span class="page-item" data-page="next" style="cursor: pointer;">&gt;</span> 
+                      </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+ 
+
+
+<br>
+<br>
+
 
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/js/popper.min.js"></script>
@@ -118,15 +154,12 @@ $('#my-paging').on('click','.page-item', () => {
   //var param = "commentNo="+commentNo+"&boardNo="+boardNo;
   
 });
-
 /* var currentPage = ${pageNo};
-
 $('.page-item').click((e) => {
   //e.preventDefault();
  
   //var page = e.currentTarget.getAttribute('data-page');
   var page = $(e.currentTarget).attr('data-page');
-
   $.get("list",{
   }, function(success) {
     if (page == "prev") {
@@ -146,14 +179,9 @@ $('.page-item').click((e) => {
     }
     
   });
-
-
 }); 
-
 */
-
  var currentPage = ${pageNo};
-
 $('.page-item').click((e) => {
   e.preventDefault();
   // e.currentTarget? 리스너가 호출될 때, 그 리스너가 등록된 태그를 가르킨다.
@@ -172,74 +200,15 @@ $('.page-item').click((e) => {
     location.href = "list?pageNo=" + (currentPage + 1) + "&pageSize=" + ${pageSize};
   
   } else {
-    console.log(e.currentTarget);
     if (page != currentPage)
       location.href = "list?pageNo=" + page + "&pageSize=" + ${pageSize};
     
   }
 }); 
-
-
-
 </script>  
   
-<!-- <script>
-var indexP=1;
-$('#my-paging').on('click','.my-page-no', () => {
-  var currentLi = $(event.target).parent().attr('data-no');
-  $(event.target).parent().parent().children('.active').removeClass('active');
-  $(event.target).parent().addClass('active');
-  //var boardNo = parseInt(document.querySelector('#jisooBoardNo').value);
-  //var param = "commentNo="+commentNo+"&boardNo="+boardNo;
-  
-});
-$('#my-paging-first').click(function(e){
-  var page='';
-  indexP-=5;
-  var i = indexP;
-  console.log(i)
-  
-  if(i <= 1) {
-    indexP=1;
-    i = indexP;
-    console.log(i);
-  }
-  
-  page += "\n<li class='active' data-no='"+i+"'><span class='my-page-no'>"+i+"</span></li>\n";
-  page += "<li data-no='"+(i+1)+"'><span class='my-page-no'>"+(i+1)+"</span></li>\n";
-  page += "<li data-no='"+(i+2)+"'><span class='my-page-no'>"+(i+2)+"</span></li>\n";
-  page += "<li data-no='"+(i+3)+"'><span class='my-page-no'>"+(i+3)+"</span></li>\n";
-  page += "<li data-no='"+(i+4)+"'><span class='my-page-no'>"+(i+4)+"</span></li>\n";
-  
-  
-  $('#my-paging > li[data-no]').remove();
-  $('#my-paging-first').after(page);
-  
-  
-});
-$('#my-paging-last').click(function(){
-  var page='';
-  indexP+=5;
-  var i = indexP;
-  console.log(i)
-  
- 
-  var listcount = $('#products tbody tr').length;
-  
-  console.log(count)
-  
- 
-   
-  page += "\n<li class='active' data-no='"+i+"'><span class='my-page-no'>"+i+"</span></li>\n";
-  page += "<li data-no='"+(i+1)+"'><span class='my-page-no'>"+(i+1)+"</span></li>\n";
-  page += "<li data-no='"+(i+2)+"'><span class='my-page-no'>"+(i+2)+"</span></li>\n";
-  page += "<li data-no='"+(i+3)+"'><span class='my-page-no'>"+(i+3)+"</span></li>\n";
-  page += "<li data-no='"+(i+4)+"'><span class='my-page-no'>"+(i+4)+"</span></li>\n";
-  
-  $('#my-paging > li[data-no]').remove();
-  $('#my-paging-first').after(page);
-});
-</script> -->
+
+
 
   <script>
       $('#Aselect')
@@ -260,51 +229,15 @@ $('#my-paging-last').click(function(){
                 }
               });
     </script>
+
 <script>
-
-
 var dt;
 dt = new Date();
 dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate();
-console.log(dt);
 var img = document.getElementById('#newimg');
-console.log(img);
-
 if($('.cdate') == dt) {
   $('#btitle').append(imgs);
 }
-
-
-
-/* var newt = "<img src='/images/new.jpg' />"
-if(year.equals(yea)){
-  $("#btitle").append("newt");
-} */
-
-
-
-   /*    var textareaVal = $(".cdate").text();
-      var count = 0;
-      var dt = new Date();
-      var day = dt.getDate();
-      var month = (dt.getMonth() + 1);
-      var year = dt.getFullYear();
-      if (month < 10) {
-        month = "0" + month;
-      }
-      if (day < 10) {
-        day = "0" + day;
-      }
-      
-      for (var i = 0; i < (textareaVal.length / 10) + 1; i++) {
-        var tday = textareaVal.substring(8 + (10 * i), (10 * (i + 1)));
-        var tyear = textareaVal.substring((10 * i), (4 + (10 * i)));
-        var tmonth = textareaVal.substring((5 + (10 * i)), (7 + (10 * i)));
-        if (tday == day && tyear == year && tmonth == (month)) {
-          count++
-        }
-      }
-      $("#np").text("새글[" + count + "/" + ((textareaVal.length / 10)) + "]"); */
     </script>
   <script>
       $(document).ready(function() {
@@ -353,7 +286,6 @@ if(year.equals(yea)){
       var member = "${loginName}"
       var smember = "${memberName}"
       if (member != smember) {
-        $("#newC").remove();
+       /*  $("#newC").remove(); */
       }
     </script>
-

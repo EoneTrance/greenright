@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenright.dao.FaqDao">
+
+  <resultMap type="Faq" id="FaqMapWithMemberMap">
+    <id column="faq_id" property="faqID"/>
+    <result column="member_id" property="memberNo"/>
+    <result column="question_type" property="questionType"/>
+    <result column="contents" property="contents"/>
+    <result column="title" property="title"/>
+    
+    <collection property="member" ofType="Member" >
+      <id column="member_id" property="no" />
+	    <result column="registered_date" property="registeredDate" />
+	    <result column="id" property="id" />
+	    <result column="password" property="password" />
+	    <result column="certification_flag" property="certification" />
+	    <result column="cell_phone" property="cellPhone" />
+	    <result column="name" property="name" />
+	    <result column="email" property="email" />
+	    <result column="postal_code" property="postalCode" />
+	    <result column="default_address" property="defaultAddress" />
+	    <result column="detail_address" property="detailAddress" />
+	    <result column="question" property="question" />
+	    <result column="answer" property="answer" />
+	    <result column="auth_key" property="authkey"/>
+	    <result column="password_authkey" property="passwordAuthkey"/>
+	    <result column="member_class" property="memberClass"/>
+    </collection>
+  </resultMap>
+
+  <sql id="basicColumn">
+    select
+      faq_id
+      , member_id
+      , question_type
+      , title
+      , contents 
+  </sql>
+
+
+  <sql id="where1">
+    where faq_id=#{faqID}
+  </sql>
+  
+  <insert id="insert" parameterType="Faq">
+    insert into faqs (
+      member_id
+      ,question_type
+      , title
+      , contents
+    )
+    values(
+    #{memberNo}
+    , #{questionType}
+    , #{title}
+    , #{contents}
+    )
+   </insert>
+   
+   <select id="findAll" resultMap="FaqMapWithMemberMap" parameterType="map">
+    <if test="keyword != null and keyword !=''">
+      <bind name="pattern" value="'%' + keyword + '%'"/>
+    </if>
+    <!-- <include refid="basicColumn"/> -->
+    
+    select
+      f.faq_id
+      ,f.question_type
+      ,f.title
+      ,f.contents
+      ,m.member_id
+      ,m.member_class
+      
+    from faqs f
+      left outer join members m on f.member_id=m.member_id
+    <where>
+      <if test="questionType != null and questionType != 'default'">question_type like #{questionType}</if>
+      <if test="pattern != null">and title like #{pattern}</if>
+    </where>
+      order by faq_id desc
+      limit #{offset}, #{pageSize}
+   </select>
+   
+   <select id="findBy" parameterType="int" resultMap="FaqMapWithMemberMap">
+    <include refid="basicColumn"/>
+    from faqs
+    <include refid="where1"/>
+   </select>
+    
+   <update id="update" parameterType="Faq">
+      update faqs 
+      <set>
+        <if test="questionType != null"> question_type=#{questionType},</if>
+        <if test="title != null"> title=#{title},</if>
+        <if test="contents !=null"> contents=#{contents},</if>
+        member_id=#{memberNo}
+      </set>
+      
+      <include refid="where1"/>  
+   </update>
+   
+   <delete id="delete" parameterType="int">
+	    delete from faqs
+	    <include refid="where1"/>
+   </delete>
+   
+  <select id="countAll" resultType="int" parameterType="map">
+    <if test="keyword != null and keyword !=''">
+      <bind name="pattern" value="'%' + keyword + '%'"/>
+    </if>
+    select count(*) 
+    from faqs
+    <where>
+      <if test="questionType != null and questionType != 'default'">question_type like #{questionType}</if>
+      <if test="pattern != null">and title like #{pattern}</if>
+    </where>
+  </select>
+  <!--  
+  
+   <select id="findByKeyword"
+          parameterType="string"
+          resultMap="FAQMap">
+    <bind name="pattern" value="'%' + _parameter + '%'"/>
+    <include refid="basicColumn"/> 
+    from faqs
+    where question_type like #{pattern} and title like #{pattern}
+      or title like #{pattern} or question_type like #{pattern}
+    order by question_type
+    where question_type like #{pattern} or title like #{pattern}
+    order by question_type
+  
+  </select>
+    -->
+ 
+ 
+<!--  <select id="findByKeyword"
+          parameterType="string"
+          resultMap="FaqMap">
+ <bind name="pattern" value="'%' + _parameter + '%'"/>
+     <include refid="basicColumn"/>
+ from faqs
+ where question_type like #{pattern} or title like #{pattern} or (question_type like #{pattern} and title like #{pattern})
+ order by question_type
+ 
+ 
+ </select> -->
+ 
+ 
+ 
+ 
+
+  </mapper>

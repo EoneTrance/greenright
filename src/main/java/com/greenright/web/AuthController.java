@@ -25,7 +25,7 @@ public class AuthController {
 
   @Resource
   SellerService sellerService;
-
+  
   @Resource
   UserMailSendService mailSender;
 
@@ -39,36 +39,37 @@ public class AuthController {
   }
 
   @PostMapping("login")
-  public String login(HttpServletResponse response, HttpServletRequest request, HttpSession session,
-      Model model, Member member) throws Exception {
+  public String login(HttpServletResponse response, HttpServletRequest request,
+      HttpSession session, Model model, Member member)
+      throws Exception {
     Cookie cookie = new Cookie("id", member.getId());
     cookie.setMaxAge(60 * 60 * 24 * 30);
     response.addCookie(cookie);
 
     Member loginUser = memberService.login(member);
     session.setAttribute("loginUser", loginUser);
-
-    if (loginUser.getMemberClass() == 2) {
+    if(loginUser.getMemberClass()==2) {
       Seller loginSeller = sellerService.get(loginUser.getNo());
       if (loginSeller != null) {
         session.setAttribute("loginSeller", loginSeller);
       }
     }
-
-    String redirectURI = (String) request.getSession().getAttribute("redirectURI");
+    
+    
+    String redirectURI = (String)request.getSession().getAttribute("redirectURI");
     if (redirectURI == null || redirectURI.indexOf("auth") != -1) {
       redirectURI = "/greenright/main";
     }
     return "redirect:" + redirectURI;
   }
-
+  
   @GetMapping("logout")
   public String logout(HttpSession session, HttpServletRequest request) throws Exception {
     session.invalidate();
     request.getHeader("referer");
     return "redirect:" + request.getHeader("referer");
   }
-
+  
   @GetMapping("mailAuthentication")
   public String mailAuthentication(Member member) throws Exception {
     if (mailSender.setState(member, UserMailSendService.JOIN) != 1) {
@@ -76,7 +77,8 @@ public class AuthController {
     }
     return "auth/mailAuthentication";
   }
-
+  
   @GetMapping("wellcome")
-  public void wellcome(Model model) {}
+  public void wellcome(Model model) {
+  }
 }

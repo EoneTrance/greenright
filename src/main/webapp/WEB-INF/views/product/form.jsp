@@ -1,7 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-
-<link rel="stylesheet" href="/js/jquery-ui-1.12.1/jquery-ui.min.css" />
+<meta name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link
+  href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+  rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
+  rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
+  rel="stylesheet">
+<link rel="stylesheet" href="../../css/fontawesome/css/all.css">
+<link rel="stylesheet" href="../../css/animate.css">
+<link rel="stylesheet" href="../../css/owl.carousel.min.css">
+<link rel="stylesheet" href="../../css/owl.theme.default.min.css">
+<link rel="stylesheet" href="../../css/magnific-popup.css">
+<link rel="stylesheet" href="../../css/aos.css">
+<link rel="stylesheet" href="../../css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="../../css/jquery.timepicker.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheer"
+  href="../../node_modules/bootstrap/css/bootstrap.min.css">
 
 <style>
 .adder {
@@ -11,7 +31,7 @@
   /*   resize: horizontal; // 가로크기만 조절가능  resize: vertical;  세로크기만 조절가능  */
 }
 
-input {
+inpit {
   width: 40px;
   height: 50px;
 }
@@ -29,10 +49,10 @@ input {
 }
 
 .out {
-  text-align: center;
+  /* text-align: center; */
   width: 1000px;
   margin: auto auto;
-  border: solid 0.5px #82ae46;
+ /*  border: solid 0.5px #82ae46; */
   background: #f7f6f2 !important;
 }
 
@@ -48,14 +68,14 @@ select.custom-select {
   width: 120px;
 }
 
-.in {
+/* .in {
   padding-left: 10px;
   text-align: left;
   padding-bottom: 10px;
   border-top: 0.1px #82ae46 solid;
   padding-top: 5px;
   padding-bottom: 8px;
-}
+} */
 
 .btn {
   height: 40px;
@@ -72,10 +92,10 @@ h5 {
   font-weight: bold;
 }
 
-h6 {
+/* h6 {
   padding-bottom: 10px;
   font-weight: 600;
-}
+} */
 
 select#Aselect {
   height: 30px;
@@ -85,9 +105,9 @@ select#Aselect {
   margin-left: 10px;
 }
 
-form {
+/* form {
   padding-top: 20px;
-}
+} */
 
 h3 {
   color: #82ae46;
@@ -95,8 +115,10 @@ h3 {
 }
 
 input#pN {
+  margin: auto;
   margin-top: 5px;
-  width: 963.1px;
+  width: 910px;
+  height: 35px !important;
 }
 
 input#mN {
@@ -105,18 +127,24 @@ input#mN {
 }
 
 input#datetimepicker4 {
-  width: 963.5px;
+  margin: auto;
+  width: 910px;
   margin-top: 5px;
+  height: 35px !important;
 }
 
 input#original {
-  width: 963.5px;
+  margin: auto;
+  width: 910px;
   margin-top: 5px;
+  height: 35px !important;
 }
 
 input#sellprice {
-  width: 963.5px;
+  margin: auto;
+  width: 910px;
   margin-top: 5px;
+  height: 35px !important;
 }
 
 input#btnAdd {
@@ -138,7 +166,7 @@ body.goto-here {
 }
 
 .attachFileDiv label {
-  -webkit-appearance: button;
+  -/* webkit-appearance: button; */
   display: inline-block;
   text-align: center;
   vertical-align: middle;
@@ -178,9 +206,9 @@ body.goto-here {
   padding: 0px;
 }
 
-td.dv {
+/* td.dv {
   font-weight: bolder;
-}
+} */
 
 label {
   font-weight: 400;
@@ -208,7 +236,19 @@ input:focus {
 }
 input.btn.btn-primary.py-3.px-4 {
     width: 58px;
+    margin-left:5px;
 }
+
+input.btn.btn-primary.py-3.px-4.add-btn {
+    vertical-align: super;
+    margin-left: 30px;
+}
+
+
+input.btn.btn-primary.py-3.px-4.delete-btn {
+    margin-left: 10px !important;
+}
+
 .optionAdd {
     width: 100px !important;
     height:33px !important;
@@ -216,175 +256,468 @@ input.btn.btn-primary.py-3.px-4 {
 button#button {
     width: 100px;
 }
-td.dv {
+
+/* td.dv {
     width: 980px;
     padding-left: 22px;
     padding-top: 5px;
     padding-bottom: 5px;
+} */
+
+td.dv {
+    display: list-item;
+    margin-left: 45px;
+    color: black;
+    font-weight: bold;
 }
+
 .margininput{
 margin :0px 10px 0px 10px;
 }
 #postionsaver{
 margin:0px 10px 0px 10.9px !important;
 }
+
+td.add-option-contents {
+    display: list-item;
+    margin-top: 10px;
+    color: black;
+}
+
+/*추가  */
+h3.add-title {
+    text-align: center;
+    font-size: 35px;
+    border: solid #82ae46 2px;
+    background-color: #82ae46;
+    padding: 20px;
+    color: white;
+}
+
+
+div#select-wrap {
+    text-align: center;
+}
+
+h6.subselect-group {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+}
+
+select#Aselect {
+    width: 220px;
+    font-weight: bold;
+}
+
+select#Bselect {
+    width: 220px;
+    font-weight: bold;
+}
+
+div#subselect {
+    display:inline-block;
+    margin-left: 20px;
+}
+
+h6.input-bar {
+    font-weight: bold;
+   /*  margin-left: 25px; */
+}
+
+h5.sub-title {
+    margin-top: 10px;
+    text-align: left;
+    margin-left: 30px;
+    display: inline-block;
+    font-size: 25px;
+}
+
+span.input-name {
+    color: black;
+    display: list-item;
+    margin: 15px 0px 15px 45px; 
+}
+
+hr.line-group {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+label#filelabel {
+    margin-left: 25px;
+}
+
+img.img-box {
+    margin-left: 25px;
+    margin-top: 10px;
+}
+
+h5.sub-title.none-inline-block {
+    display: block !important;
+}
+
+.fa-plus-square:before {
+    color: black;
+    content: "\f0fe";
+    margin-left: 5px;
+}
+
+.fa-minus-square:before {
+    color: black;
+    content: "\f146";
+}
+
+a#icon-wrap {
+    color: black;
+    font-size: 25px;
+    vertical-align: middle;
+}
+
+#item-specification-textarea {
+    width: 910px;
+    margin-top: 10px;
+}
+
+.item-specification-wrap {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.btn-wrap {
+    padding: 40px;
+}
+
+form#product-form {
+    margin-top: 30px;
+}
+
+.hero-wrap.hero-bread.product-form-page {
+    background-position: top;
+}
+
+form#product-form {
+    border: solid;
+}
+.marginer{
+margin-left : 25px;
+}
+.fa-trash-alt:before {
+    FONT-SIZE: X-LARGE;
+    color: black;
+    TEXT-ALIGN: CENTER;
+    content: "\f2ed";
+    /* MARGIN-TOP: 59PX; */
+}
+
+
 </style>
+
+    <div class="hero-wrap hero-bread product-form-page" style="background-image: url('/images/item9.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center fadeInUp ftco-animated">
+            <p class="breadcrumbs"><span class="mr-2"><a href="index.html"></a></span> <span>GREEN RIGHT</span></p>
+            <h1 class="mb-0 bread">새 상품 등록 관리</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
 <%
     session.setAttribute("memberNo", "1");
   %>
-<section class="ftco-section">
-<div class="container">
 <div class="out">
-  <form action='add' method='post' enctype='multipart/form-data'>
-    <h3>새 상품 등록 관리</h3>
+  <form id="product-form" action='add' method='post' enctype='multipart/form-data'>
+    <h3 class="add-title">새 상품 등록 관리</h3>
     <br>
     <div class="in">
-      <h5>I. 상품 등록</h5>
-      <h6>
-        상품 카테고리 대분류 선택 <select id="Aselect" class="custom-select">
-          <option value="clean">청소</option>
-          <option value="office">사무</option>
-          <option value="organic">유기농</option>
-          <option value="furniture">가구</option>
-          <option value="upcycleing">업사이클링</option>
-        </select>
-      </h6>
-      <div id="subselect">
-        <h6>
-          상품 카테고리 소분류 선택 <select name="groupNo" id="Bselect"
-            class="custom-select">
-            <option value=1>세제류</option>
-            <option value=2>위생용품</option>
-            <option value=3>화장지</option>
-            <option value=4>티슈</option>
+      <h5 class="sub-title">I. 상품 등록  &nbsp; <i class="fas fa-archive"></i> </h5>
+      <hr class="line-group">
+      <div id="select-wrap">
+        <h6 class="subselect-group">
+          상품 카테고리 대분류 선택 <select id="Aselect" class="custom-select">
+            <option value="clean">청소</option>
+            <option value="office">사무</option>
+            <option value="organic">유기농</option>
+            <option value="furniture">가구</option>
           </select>
         </h6>
+        <div id="subselect">
+          <h6 class="subselect-group">
+            상품 카테고리 소분류 선택 <select name="groupNo" id="Bselect"
+              class="custom-select">
+              <option value=1>세제류</option>
+              <option value=2>위생용품</option>
+              <option value=3>화장지</option>
+              <option value=4>티슈</option>
+            </select>
+          </h6>
+        </div>
       </div>
-      
-      <h6>
-        상품명 <br> <input class="adder form-control" type="text"
+
+      <h6 class="input-bar">
+        <span class="input-name">상품명</span> <input class="adder form-control" placeholder="상품명을 입력해주세요." type="text"
           id="pN" name="productName" required>
       </h6>
 
-      <h6>
-        <!--  일단 판매자 값을 받아서 처리중 나중에 마이페이지 구현되었을경우에는 세션에서 값 빼와서 처리할수있도록 .  -->
-        판매자명 <br> <input class="adder form-control" type="text"
-          id="mN" name="memberNo" required>
-      </h6>
-
-      <h6>
-        수량 <input class="adder form-control" type="number" id="pN"
+      <h6 class="input-bar">
+        <span class="input-name">수량</span> <input class="adder form-control fullproductNo" placeholder="수량을 입력해주세요." type="number" id="pN"
           name="quantity" min="0" required>
       </h6>
-
-      <h6>
-        유통기한 <br> <input class="adder datetimepicker4 form-control"
+      
+      <h6 class="input-bar">
+        <span class="input-name">유통기한</span>  <input class="adder datetimepicker4 form-control" placeholder="유통기한을 입력해주세요"
           type='text' id='datetimepicker4' name="expirationDate"
           required readonly />
       </h6>
 
 
-
-      <h6>
-        원산지 <br> <input class="adder form-control" id="original"
+      <h6 class="input-bar">
+        <span class="input-name">원산지</span>  <input class="adder form-control" id="original" placeholder="원산지를 입력해주세요"
           type="text" name="origin" class="form-control" required>
       </h6>
-      <h6>
-        판매가 <br> <input class="adder form-control" id="sellprice"
+      <h6 class="input-bar">
+       <span class="input-name">판매가</span>  <input class="adder form-control" id="sellprice" placeholder="가격을 입력해주세요"
           type="number" name="price" class="form-control" step=10
           required>
       </h6>
     </div>
-    <div class="in">
-      <h5>II. 이미지 등록</h5>
+    <hr class="line-group">
+    <div class="image-wrap">
+      <h5 class="sub-title">II. 이미지 등록  &nbsp; <i class="fas fa-images"></i> </h5>
+      <!-- <input type="button" class="btn btn-primary py-3 px-4 add-btn"
+            value="추가" onclick="attachFile.add()"> -->
+       <a id=" imgbar-add-btn" href="javascript:void(0)"><i onclick="attachFile.add()" class="fas fa-plus-square"></i></a>
+      <hr class="line-group">
       <div id="attachFileDiv" class="attachFileDiv">
         <h6 id="addbutton">
-          <input type="button" class="btn btn-primary py-3 px-4"
-            value="추가" onclick="attachFile.add()">
+          <!-- <input type="button" class="btn btn-primary py-3 px-4"
+            value="추가" onclick="attachFile.add()"> -->
         </h6>
       </div>
     </div>
+    <hr class="line-group">
     <table id="list">
     </table>
+    
+    
+    <div class="image-wrap">
+      <h5 class="sub-title">III. 상세이미지 등록  &nbsp; <i class="fas fa-images"></i> </h5>
+      <!-- <input type="button" class="btn btn-primary py-3 px-4 add-btn"
+            value="추가" onclick="attachFile.add()"> -->
+       <a id=" imgbar-add-btn2" href="javascript:void(0)"><i onclick="attachFile2.add()" class="fas fa-plus-square"></i></a>
+      <hr class="line-group">
+      <div id="attachFileDiv2" class="attachFileDiv marginer">
+        <h6 id="addbutton2">
+          <!-- <input type="button" class="btn btn-primary py-3 px-4"
+            value="추가" onclick="attachFile.add()"> -->
+        </h6>
+      </div>
+    </div>
+    
+    
+    <hr class="line-group">
+    <table id="list">
+    </table>
+    
+    
+    
+    
 
     <div class="in">
-      <h5>III. 옵션 관리</h5>
+      <h5 class="sub-title">III. 옵션 관리 &nbsp; <i class="far fa-list-alt"></i></h5>
+      <hr class="line-group">
       <h6>
-        <!--  옵션 이름<input class="btn btn-primary py-3 px-4" type="button"
-            id="optionN" value="옵션이름추가버튼"> -->
-
-        <input type="text" name="optionName" value="neverNo" hidden /> <input
-          type="text" name="optionContents" value="neverNo" hidden /> <input
-          type="text" name="optionprice" value="neverNo" hidden /> <input
-          type="text" name="optionquantity" value="neverNo" hidden />
       </h6>
       <table id="optionplus">
        <tr><td class="dv">옵션명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<input type="text" name="optionName"  id ="postionsaver"class="margininput" placeholder="수량-색깔-성별 형태로입력" >
-    <table class="dr"><input class="btn btn-primary py-3 px-4 optionAdd" type="button" id="optionitemadd" value="옵션항목추가"/></table>
-    <input type ="text" name="optionContents" value="divide" class="fordivide">
-    <input type ="text" name="optionprice" value="divide" class="fordivide">
-    <input type ="text" name="optionquantity" value="divide" class="fordivide">
+    <table class="dr"><a href="javascript:void(0)"><i  id="optionitemadd" class="fas fa-plus-square"></i></a></table>
     </td></tr>
       </table>
     </div>
-    <div class="in">
-      <h5>IV. 상품 설명</h5>
-      <textarea rows="5" cols="50" name="description"
+    <hr class="line-group">
+    <div class="item-specification-wrap">
+      <h5 class="sub-title  none-inline-block">IV. 상품 설명  &nbsp; <i class="fas fa-edit"></i> </h5>
+      <hr class="line-group">
+      <textarea id="item-specification-textarea" rows="5" cols="50" name="description"
         placeholder="내용을 입력하세요" required> </textarea>
       <br>
-      <button class="btn btn-primary py-3 px-4 adderButton" id=button>등록하기</button>
-      <INPUT type="button" value="취소" class="btn btn-primary py-3 px-4"
-        onClick="location.href='/greenright/product/manage'">
+      <div class="btn-wrap">
+        <button class="btn btn-primary py-3 px-4 adderButton" id=button>등록하기</button>
+        <INPUT type="button" value="취소" class="btn btn-primary py-3 px-4"
+          onClick="location.href='/greenright/product/manage'">
+      </div>
     </div>
   </form>
 </div>
-</div>
-</section>
 
-<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-  <div class="container py-4">
-    <div class="row d-flex justify-content-center py-5">
-      <div class="col-md-6">
-        <h2 style="font-size: 22px;" class="mb-0">Subcribe to our Author</h2>
-        <span>Get e-mail updates about our latest products and special upcycling</span>
-      </div>
-      <div class="col-md-6 d-flex align-items-center">
-        <form action="#" class="subscribe-form">
-          <div class="form-group d-flex">
-            <input type="text" class="form-control" placeholder="Enter email address">
-            <input type="submit" value="Subscribe" class="submit px-3">
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script src="/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/js/popper.min.js"></script>
-<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-<script src='/js/jquery-migrate-3.0.1.min.js'></script>
-<script src='/js/jquery.easing.1.3.js'></script>
-<script src='/js/jquery.waypoints.min.js'></script>
-<script src='/js/jquery.stellar.min.js'></script>
-<script src='/js/jquery.magnific-popup.min.js'></script>
-<script src='/js/jquery.animateNumber.min.js'></script>
-<script src="/js/owl.carousel.min.js"></script>
-<script src="/js/aos.js"></script>
-<script src="/js/scrollax.min.js"></script>
-<script src="/js/main.js"></script>
-
-<script src="/js/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
-
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/jquery-migrate-3.0.1.min.js"></script>
+<script src="../../js/popper.min.js"></script>
+<script src="../../js/jquery.easing.1.3.js"></script>
+<script src="../../js/jquery.waypoints.min.js"></script>
+<script src="../../js/jquery.stellar.min.js"></script>
+<script src="../../js/owl.carousel.min.js"></script>
+<script src="../../js/jquery.magnific-popup.min.js"></script>
+<script src="../../js/aos.js"></script>
+<script src="../../js/jquery.animateNumber.min.js"></script>
+<script src="../../js/bootstrap-datepicker.js"></script>
+<script src="../../js/scrollax.min.js"></script>
+<script src="../../js/main.js"></script>
+<link rel="stylesheet"
+  href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript">
+attachFile2 = {
+    idx : 0,
+    add : function() { // 파일필드 추가
+      var o = this;
+      var idx = o.idx;
+      var div2 = document.createElement('div');
+      div2.style.marginTop = '3px';
+      div2.id = 'file2' + o.idx;
+      var label2 = document.createElement('label');
+      label2.setAttribute("for", 'fileField2' + o.idx);
+      label2.innerHTML = "파일선택";
+      label2.id ="filelabel2";
+      
+      var dv2 = document.createElement('dv');
+      dv2.style.marginTop = '3px';
+      dv2.id = 'dv2' + o.idx;
+      var file2 = document.all ? document.createElement('<input name="files">')
+          : document.createElement('input');
+      file2.type = 'file';
+      file2.name = 'productDetailPhoto';
+      file2.size = '40';
+      file2.className = 'btn btn-primary py-3 px-4';
+      file2.id = 'fileField2' + o.idx;
+      file2.onchange = function() {
+        o.prev(this, 'dv2' + idx)
+      };
+      var atag2 = document.createElement('a');
+      atag2.setAttribute('href', "javascript:void(0)");
+      atag2.id = 'icon-wrap2';
+      
+      var ibtn2 = document.createElement('i'); 
+      ibtn2.className = 'fas fa-trash-alt';
+      ibtn2.onclick =function() {
+        o.del(idx)
+      }
+      ibtn2.style.marginLeft= '10px';
+      
+     /*  var btn = document.createElement('input');
+      btn.type = 'button';
+      btn.className = 'btn btn-primary py-3 px-4';
+      btn.value = '삭제';
+      btn.onclick = function() {
+        o.del(idx)
+      };
+      btn.style.marginLeft = '5px'; */
+      div2.appendChild(label2);
+      div2.appendChild(file2);
+      /* div.appendChild(btn); */
+      div2.appendChild(atag2);
+      atag2.appendChild(ibtn2);
+      document.getElementById('attachFileDiv2').appendChild(div2);
+      document.getElementById('attachFileDiv2').appendChild(dv2);
+      o.idx++;
+    },
+    del : function(idx) { // 파일필드 삭제
+      document.getElementById('attachFileDiv2').removeChild(
+          document.getElementById('file2' + idx));
+      document.getElementById('attachFileDiv2').removeChild(
+          document.getElementById('dv2' + idx));
+    },
+    prev : function(targetObj, View_area) { // 이미지 미리보기
+      var preview2 = document.getElementById(View_area); //div id
+      var ua = window.navigator.userAgent;
+      //ie일때(IE8 이하에서만 작동)
+      if (ua.indexOf("MSIE") > -1) {
+        targetObj.select();
+        try {
+          var src = document.selection.createRange().text; // get file full path(IE9, IE10에서 사용 불가)
+          var ie_preview_error = document.getElementById("ie_preview_error_"
+              + View_area);
+          if (ie_preview_error) {
+            preview.removeChild(ie_preview_error); //error가 있으면 delete
+          }
+          var img = document.getElementById(View_area); //이미지가 뿌려질 곳
+          //이미지 로딩, sizingMethod는 div에 맞춰서 사이즈를 자동조절 하는 역할
+          img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"
+              + src + "', sizingMethod='scale')";
+        } catch (e) {
+          if (!document.getElementById("ie_preview_error_" + View_area)) {
+            var info = document.createElement("<p>");
+            info.id = "ie_preview_error_" + View_area;
+            info.innerHTML = e.name;
+            preview.insertBefore(info, null);
+          }
+        }
+        //ie가 아닐때(크롬, 사파리, FF)
+      } else {
+        var files2 = targetObj.files;
+        for (var i = 0; i < files2.length; i++) {
+          var file2 = files2[i];
+          var imageType2 = /image.*/; //이미지 파일일경우만.. 뿌려준다.
+          var prevImg2 = document.getElementById("prev_2" + View_area);
+          if (!file2.type.match(imageType2)) {
+            preview2.removeChild(prevImg2);
+            continue;
+          }
+          //이전에 미리보기가 있다면 삭제
+          if (prevImg2) {
+            preview2.removeChild(prevImg2);
+          }
+          var img2 = document.createElement("img");
+          img2.id = "prev_2" + View_area;
+          img2.classList.add("obj");
+          img2.file = file2;
+          img2.style.width = '100px';
+          img2.style.height = '100px';
+          preview2.appendChild(img2);
+          if (window.FileReader) { // FireFox, Chrome, Opera 확인.
+            var reader = new FileReader();
+            reader.onloadend = (function(aImg2) {
+              return function(e) {
+                aImg2.src = e.target.result;
+              };
+            })(img2);
+            reader.readAsDataURL(file2);
+          } else { // safari is not supported FileReader
+            //alert('not supported FileReader');
+            if (!document.getElementById("sfr_preview_error_2" + View_area)) {
+              var info2 = document.createElement("p");
+              info2.id = "sfr_preview_error_2" + View_area;
+              info2.innerHTML = "not supported FileReader";
+              preview.insertBefore(info2, null);
+            }
+          }
+        }
+      }
+    }
+  }
+</script>
 <script>
-$(document).on("click",".adderButton",function(){
-  if(($("#pn").val)!=($(".optionsQuantity").val)) {
-  swal("옵션수량과 총수량이 일치하지않습니다");
-}
-})
+/*  $(document).on("click",".adderButton",function(e){
+  let fullq = $(".fullproductNo").val() 
+  let smallq = $(".optionsquantity")
+  let smallqsum = 0 ;
+  smallqsum * 1 ; 
+  for(var i = 0; i< smallq.length; i++){
+    smallqsum += ($(smallq[i]).val())*1 ;
+  }
+  if(smallqsum != fullq){
+    e.preventDefault();
+    swal("옵션개수의 총합과 상품개수가 다릅니다 ")
+  }else{
+  }
+  
+})  */
 
 </script>
 <script>
@@ -394,12 +727,28 @@ $(document).on("click",".adderButton",function(){
             "click",
             "#optionitemadd",
             function() {
-              var oip = '<tr><td>옵션내용:<input type="text"  class="margininput" name="optionContents" placeholder="수량-색깔-성별 형태로입력" >';
+              var oip = '<tr><td class="add-option-contents">옵션내용:<input type="text"  class="margininput" name="optionContents" placeholder="수량-색깔-성별 형태로입력" >';
               oip += '추가금액:<input type="number" name="optionprice" class="margininput" required min="0" step=10>';
-              oip += '개수:<input type="number" name="optionquantity"  class="margininput" required min="0" class="optionsQuantity">';
-              oip += '<input class="btn btn-primary py-3 px-4 optionAdd margininput" type="button" id="buttonDel" value="옵션항목삭제"/>';
+              oip += '개수:<input type="number" name="optionquantity"  class="margininput optionsQuantity" required min="0">';
+              oip += '<a href=javascript:void(0)><i id="buttonDel" class="fas fa-minus-square"></i></a>';
               oip += '</td></tr>';
               $(this).parent().append(oip);
+              
+              /* $(document).on("click",".adderButton",function(e){
+                let fullq = $(".fullproductNo").val() 
+                var smallq =document.getElementsByClassName("optionsQuantity") 
+                let smallqsum = 0 ;
+                for(var i = 0; i< smallq.length; i++){
+                  smallqsum += (smallq[i].value)*1 ;
+                }
+                if(smallqsum*1 != fullq){
+                e.preventDefault();
+                swal("옵션개수의 총합과 상품개수가 다릅니다 ")
+                }else{
+                }
+                
+              }) */
+              
             });
 
     $(document).on("click", "#buttonDel", function() {
@@ -416,24 +765,20 @@ $(document).on("click",".adderButton",function(){
             if (state == 'clean') {
               $("#subselect")
                   .html(
-                      "  <h6>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=1>세제류</option><option value=2>위생용품</option><option value=3>화장지</option><option value=4>티슈</option></select></h6>");
+                      "  <h6 class='subselect-group'>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=1>세제류</option><option value=2>위생용품</option><option value=3>화장지</option><option value=4>티슈</option></select></h6>");
             } else if (state == 'office') {
               $("#subselect")
                   .html(
-                      "  <h6>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=5>복사용지</option><option value=6>화일</option><option value=7>토너</option><option value=8>기타</option></select></h6>");
+                      "  <h6 class='subselect-group'>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=5>복사용지</option><option value=6>화일</option><option value=7>토너</option><option value=8>기타</option></select></h6>");
             } else if (state == 'organic') {
               $("#subselect")
                   .html(
-                      "  <h6>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=9>과일</option><option value=10>채소</option><option value=11>간식</option><option value=12>축산품</option></select></h6>");
+                      "  <h6 class='subselect-group'>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=9>과일</option><option value=10>채소</option><option value=11>간식</option><option value=12>축산품</option></select></h6>");
             } else if (state == 'furniture') {
               $("#subselect")
                   .html(
                       "  <h6>상품 카테고리 소분류 선택 <select name='groupNo' id='Bselect' class='custom-select'><option value=13>침대</option><option value=14>소파</option><option value=15>테이블</option><option value=16>의자</option><option value=17>파티션</option></select></h6>");
-            } else {
-              $("#subselect")
-                  .html(
-                      "<h3>업사이클링은 소분류가없습니다.</h3><input type='hidden' name='groupNo' value=18>")
-            }
+            } 
           });
 </script>
 <script>
@@ -450,7 +795,8 @@ $(document).on("click",".adderButton",function(){
       var label = document.createElement('label');
       label.setAttribute("for", 'fileField' + o.idx);
       label.innerHTML = "파일선택";
-
+      label.id ="filelabel";
+      
       var dv = document.createElement('dv');
       dv.style.marginTop = '3px';
       dv.id = 'dv' + o.idx;
@@ -465,19 +811,35 @@ $(document).on("click",".adderButton",function(){
       file.onchange = function() {
         o.prev(this, 'dv' + idx)
       };
-
-      var btn = document.createElement('input');
+      
+      /*아이콘으로 수정부분 */
+      var atag = document.createElement('a');
+      atag.setAttribute('href', "javascript:void(0)");
+      atag.id = 'icon-wrap';
+      
+      var ibtn = document.createElement('i'); 
+      ibtn.className = 'fas fa-trash-alt';
+      ibtn.onclick =function() {
+        o.del(idx)
+      }
+      ibtn.style.marginLeft= '10px';      
+      
+     /*  var btn = document.createElement('input');
       btn.type = 'button';
-      btn.className = 'btn btn-primary py-3 px-4';
+      btn.className = 'btn btn-primary py-3 px-4 delete-btn';
       btn.value = '삭제';
       btn.onclick = function() {
         o.del(idx)
       };
-      btn.style.marginLeft = '5px';
-
+      btn.style.marginLeft = '5px'; */
+      
+      
+      
       div.appendChild(label);
       div.appendChild(file);
-      div.appendChild(btn);
+      /* div.appendChild(btn); */
+      div.appendChild(atag);
+      atag.appendChild(ibtn);
       document.getElementById('attachFileDiv').appendChild(div);
       document.getElementById('attachFileDiv').appendChild(dv);
 
@@ -534,6 +896,7 @@ $(document).on("click",".adderButton",function(){
           }
           var img = document.createElement("img");
           img.id = "prev_" + View_area;
+          img.classList.add("img-box");
           img.classList.add("obj");
           img.file = file;
           img.style.width = '100px';
@@ -586,7 +949,6 @@ $(document).on("click",".adderButton",function(){
   });
 </script>
 <script>
-
 
 </script>
 

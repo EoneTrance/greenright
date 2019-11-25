@@ -7,11 +7,15 @@ public class ProductOption implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private int no;
-  private int productNo;
-  private String optionName;
-  private List<ProductOptionItem> optionItem;
-  private Product product;
   
+  private int productNo;
+  
+  private String optionName;
+  
+  private List<ProductOptionItem> optionItem;
+  
+  private Product product;
+
   public int getNo() {
     return no;
   }
@@ -57,5 +61,5 @@ public class ProductOption implements Serializable {
     return "ProductOption [no=" + no + ", productNo=" + productNo + ", optionName=" + optionName
         + ", optionItem=" + optionItem + ", product=" + product + "]";
   }
-
+  
 }

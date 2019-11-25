@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link rel="stylesheet" href="/css/greenright.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
+<link rel='stylesheet' href='/css/common.css'>
 
 <style>
  #ndp {
@@ -95,22 +97,11 @@ h6 {
   padding-bottom: 8px;
 }
 input:focus {outline:2px solid #82ae46;}
-
+label.star:before {
+    cursor: pointer;
+}
 </style>
  
-<div class="hero-wrap hero-bread" style="background-image: url('../../images/main.jpg');">
-  <div class="container">
-    <div class="row no-gutters slider-text align-items-center justify-content-center">
-      <div class="col-md-9 ftco-animate text-center">
-        <p class="breadcrumbs"><span class="mr-2"><a href="#">Green</a></span> <span>Right</span></p>
-        <h1 class="mb-0 bread">상품페이지</h1>
-      </div>
-    </div>
-  </div>
-</div>
-<!--------------------------------------------------------------------------------------->
-<section class="ftco-section">
-<div class="container">
     
 <div class='bigout'>
 <h1>상품상세보기</h1>
@@ -146,7 +137,7 @@ input:focus {outline:2px solid #82ae46;}
  <div class="${item.no}" id ="optionItems" > 
  <h6> 옵션항목명  <input type='text' name='optionItemMatter' class="form-control" value='${item.optionItemMatter}' ></h6>
  <h6> 추가금액  <input type='number' name='optionItemMatter' class="form-control" value='${item.optionsPrice}' step=10 ></h6>
- <h6> 옵션당개수  <input type='number' name='optionItemMatter' class="form-control" value='${item.optionsquantity}'>
+ <h6> 옵션당개수  <input type='number' name='optionItemMatter' class="form-control" value='${item.optionsQuantity}'>
  <input type="text" name="optionItemMatter" class="form-control" value ="${item.no}" hidden>
  <input type="text" name="optionItemMatter" value="${item.optionsNo}" hidden>
   <img src="/images/xmark.png" class="optionItemDelete"  width="10" height="10" alt="" ></h6>
@@ -163,7 +154,7 @@ input:focus {outline:2px solid #82ae46;}
 <c:forEach items="${productPhoto.photos}" var="file">
 <%-- ${file.no} --%>
 <div class="${file.no}" id ="photos"> 
-  <img src='/upload/product/${file.photoPath}' class='photo2' alt="">
+  <img src='/upload/product/${file.photoPath}' class='photo2' alt="" style="width:100px; height:100px; object-fit:cover;">
 <img src="/images/xmark.png" class="imageDelete" width="10" height="10" alt="" ><br>
 </div>
 </c:forEach>
@@ -185,27 +176,6 @@ class="btn btn-primary py-3 px-4">삭제</button>
 </form>
 </div>
 </div>
-</div>
-</section>
-
-<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-  <div class="container py-4">
-    <div class="row d-flex justify-content-center py-5">
-      <div class="col-md-6">
-        <h2 style="font-size: 22px;" class="mb-0">Subcribe to our Author</h2>
-        <span>Get e-mail updates about our latest products and special upcycling</span>
-      </div>
-      <div class="col-md-6 d-flex align-items-center">
-        <form action="#" class="subscribe-form">
-          <div class="form-group d-flex">
-            <input type="text" class="form-control" placeholder="Enter email address">
-            <input type="submit" value="Subscribe" class="submit px-3">
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
 
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/js/popper.min.js"></script>
@@ -223,6 +193,7 @@ class="btn btn-primary py-3 px-4">삭제</button>
 <script src="/js/main.js"></script>
 
 <script>
+$(function(){
 $(document).on("click", ".imageDelete", function() {
   
   var allData = {"no" : $(this).parent().attr('class')}
@@ -264,7 +235,7 @@ $(document).on("click", ".imageDelete", function() {
       }
     });
   })
-  
+});
 </script>
 <script>
   attachFile = {

@@ -11,6 +11,7 @@ import com.greenright.domain.Member;
 import com.greenright.domain.OrderProduct;
 import com.greenright.domain.Product;
 import com.greenright.domain.Seller;
+import com.greenright.service.LikeService;
 import com.greenright.service.MemberService;
 import com.greenright.service.OrderProductService;
 import com.greenright.service.OrderService;
@@ -34,7 +35,10 @@ public class MypageController {
   
   @Resource
   private ProductService productService;
-
+  
+  @Resource
+  private LikeService likeService;
+  
   @GetMapping("")
   public void mypage(Member member) throws Exception {}
 
@@ -76,8 +80,12 @@ public class MypageController {
   }
   
   @GetMapping("wishlist")
-  public void wishlist(Model model) throws Exception {
+  public void wishlist(HttpSession session,Model model) throws Exception {
     model.addAttribute("title", " - 관심상품");
+    Member member = (Member)session.getAttribute("loginUser");
+    List<Product> productList = likeService.findAll(member.getNo());
+    model.addAttribute("productList",productList);
+    
   }
 
   @GetMapping("conversion")
@@ -97,6 +105,8 @@ public class MypageController {
       return "redirect:userinfo";
     }
     model.addAttribute("title", " - 개인전 관리");
+    List<Product> productList= productService.getUpcyclingByMemberNo((loginUser).getNo());
+    model.addAttribute("productList",productList);
     return "mypage/exhibition";
   }
   

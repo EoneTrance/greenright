@@ -2,18 +2,18 @@ package com.greenright.domain;
 
 import java.io.Serializable;
 
-public class ProductOptionItem implements Serializable {
+public class ProductOptionItem implements Serializable{
   private static final long serialVersionUID = 1L;
-
+  
   private int no;
-
+  
   private int optionsNo;
-
-  private String optionItemMatter;
-
+  
   private int optionsPrice;
-
+  
   private int optionsQuantity;
+  
+  private String optionItemMatter;
   
   private ProductOption productOption;
 
@@ -33,14 +33,6 @@ public class ProductOptionItem implements Serializable {
     this.optionsNo = optionsNo;
   }
 
-  public String getOptionItemMatter() {
-    return optionItemMatter;
-  }
-
-  public void setOptionItemMatter(String optionItemMatter) {
-    this.optionItemMatter = optionItemMatter;
-  }
-
   public int getOptionsPrice() {
     return optionsPrice;
   }
@@ -57,6 +49,14 @@ public class ProductOptionItem implements Serializable {
     this.optionsQuantity = optionsQuantity;
   }
 
+  public String getOptionItemMatter() {
+    return optionItemMatter;
+  }
+
+  public void setOptionItemMatter(String optionItemMatter) {
+    this.optionItemMatter = optionItemMatter;
+  }
+
   public ProductOption getProductOption() {
     return productOption;
   }
@@ -67,9 +67,9 @@ public class ProductOptionItem implements Serializable {
 
   @Override
   public String toString() {
-    return "ProductOptionItem [no=" + no + ", optionsNo=" + optionsNo + ", optionItemMatter="
-        + optionItemMatter + ", optionsPrice=" + optionsPrice + ", optionsQuantity="
-        + optionsQuantity + ", productOption=" + productOption + "]";
+    return "ProductOptionItem [no=" + no + ", optionsNo=" + optionsNo + ", optionsPrice="
+        + optionsPrice + ", optionsQuantity=" + optionsQuantity + ", optionItemMatter="
+        + optionItemMatter + ", productOption=" + productOption + "]";
   }
-
+  
 }

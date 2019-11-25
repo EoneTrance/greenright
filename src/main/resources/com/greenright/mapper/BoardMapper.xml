@@ -44,7 +44,6 @@
     <result column="certification_flag" property="certification" />
     <result column="cell_phone" property="cellPhone" />
     <result column="tel" property="tel" />
-    <result column="nickname" property="nickname" />
     <result column="name" property="name" />
     <result column="email" property="email" />
     <result column="postal_code" property="postalCode" />
@@ -78,58 +77,58 @@
     boards_id=#{value}
   </select>
   
-  <select id="findyByKeyword1"
+  <select id="findByKeyword1"
           parameterType="string"
           resultMap="BoardMap">
-  <bind name="pattern" value="'%' + _parameter + '%'"/>
+  <bind name="pattern" value="'%' + title + '%'"/>
  select
       b.boards_id,
       b.title,
       b.contents,
-      m.nickname,
+      m.name,
       b.created_date,
       b.vw_count
     from
       boards b
         left outer join members m on b.member_id=m.member_id
       where b.title like #{pattern}
-      order by b.created_date desc
+      order by b.created_date desc limit #{offset}, #{pageSize}
       
   </select>
-  <select id="findyByKeyword2"
+  <select id="findByKeyword2"
           parameterType="string"
           resultMap="BoardMap">
-  <bind name="pattern" value="'%' + _parameter + '%'"/>
+  <bind name="pattern" value="'%' + contents + '%'"/>
     select
       b.boards_id,
       b.title,
       b.contents,
-      m.nickname,
+      m.name,
       b.created_date,
       b.vw_count
     from
       boards b
         left outer join members m on b.member_id=m.member_id
       where b.contents like #{pattern}
-      order by b.created_date desc
+      order by b.created_date desc limit #{offset}, #{pageSize}
   </select>
   
-   <select id="findyByKeyword3"
+   <select id="findByKeyword3"
           parameterType="string"
           resultMap="BoardMap">
-   <bind name="pattern" value="'%' + _parameter + '%'"/>
+   <bind name="pattern" value="'%' + name + '%'"/>
      select
       b.boards_id,
       b.title,
       b.contents,
-      m.nickname,
+      m.name,
       b.created_date,
       b.vw_count
     from
       boards b
         left outer join members m on b.member_id=m.member_id
-      where m.nickname like #{pattern}
-      order by b.created_date desc
+      where m.name like #{pattern}
+      order by b.created_date desc limit #{offset}, #{pageSize}
   </select>
   
    
@@ -139,7 +138,7 @@
       b.boards_id,
       b.title,
       b.contents,
-      m.nickname,
+      m.name,
       b.created_date,
       b.vw_count
     from
@@ -160,7 +159,7 @@
       b.member_id,
       p.board_photo_id,
       p.photo_path,
-      m.nickname
+      m.name
     from
       boards b
         left outer join board_photos p on b.boards_id=p.boards_id
@@ -175,6 +174,8 @@
     where
     boards_id=#{value}
   </update>
+  
+  
 
   <insert id="insert" parameterType="Board"
     useGeneratedKeys="true" keyColumn="boards_id" keyProperty="no">
@@ -193,7 +194,29 @@
     delete from boards
     where boards_id=#{no}
   </delete>
+  
  <select id="countAll" resultType="int">
     select count(*) from boards
+  </select>
+  
+  <select id="countAll1" resultType="int">
+  <bind name="pattern" value="'%' + title + '%'"/>
+     select count(*) from boards where title like #{pattern}
+   
+  </select>
+  
+   <select id="countAll2" resultType="int">
+  <bind name="pattern" value="'%' + contents + '%'"/>
+     select count(*) from boards where contents like #{pattern}
+   
+  </select>
+  
+   <select id="countAll3" resultType="int">
+  <bind name="pattern" value="'%' + name + '%'"/>
+select count(*)
+from boards
+left join members on boards.member_id = members.member_id
+where name like  #{pattern}
+   
   </select>
 </mapper>

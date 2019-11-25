@@ -4,15 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.greenright.dao.FaqDao">
 
-  <resultMap type="Faq" id="FaqMap">
+  <resultMap type="Faq" id="FaqMapWithMemberMap">
     <id column="faq_id" property="faqID"/>
+    <result column="member_id" property="memberNo"/>
     <result column="question_type" property="questionType"/>
+    <result column="contents" property="contents"/>
+    <result column="title" property="title"/>
   </resultMap>
-
 
   <sql id="basicColumn">
     select
       faq_id
+      , member_id
       , question_type
       , title
       , contents 
@@ -25,76 +28,76 @@
   
   <insert id="insert" parameterType="Faq">
     insert into faqs (
-      question_type
+      member_id
+      ,question_type
       , title
       , contents
     )
     values(
-    #{questionType}
+    #{memberNo}
+    , #{questionType}
     , #{title}
     , #{contents}
     )
    </insert>
    
-   <select id="findAll" resultMap="FaqMap">
-    <include refid="basicColumn"/>
-      from faqs
-      order by faq_id asc
+   <select id="findAll" resultMap="FaqMapWithMemberMap" parameterType="map">
+    <if test="keyword != null and keyword !=''">
+      <bind name="pattern" value="'%' + keyword + '%'"/>
+    </if>
+    <!-- <include refid="basicColumn"/> -->
+    
+    select
+      f.faq_id
+      ,f.question_type
+      ,f.title
+      ,f.contents
+      ,m.member_id
+      ,m.member_class
+      
+    from faqs f
+      left outer join members m on f.member_id=m.member_id
+    <where>
+      <if test="questionType != null and questionType != 'default'">question_type like #{questionType}</if>
+      <if test="pattern != null">and title like #{pattern}</if>
+    </where>
+      order by faq_id desc
+      limit #{offset}, #{pageSize}
    </select>
    
-   <select id="findBy" parameterType="int" resultMap="FaqMap">
+   <select id="findBy" parameterType="int" resultMap="FaqMapWithMemberMap">
     <include refid="basicColumn"/>
     from faqs
     <include refid="where1"/>
    </select>
     
    <update id="update" parameterType="Faq">
-      update faqs
+      update faqs 
       <set>
         <if test="questionType != null"> question_type=#{questionType},</if>
         <if test="title != null"> title=#{title},</if>
-        <if test="contents !=null"> contents=#{contents}</if>
+        <if test="contents !=null"> contents=#{contents},</if>
       </set>
+      
       <include refid="where1"/>  
    </update>
    
    <delete id="delete" parameterType="int">
-    delete from faqs
-    <include refid="where1"/>
+	    delete from faqs
+	    <include refid="where1"/>
    </delete>
    
-   
-  <!--  <select id ="findByKeyword" resultType="FAQ">
-    select * 
-      from faqs
-     <if test="searchType != null">
-        <if test="searchType == 'shipping-information'.toString()">
-          and shipping-information like CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="searchType == 'order-payment'.toString()">
-          and order-payment like CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="searchType == 'order-cancel'.toString()">
-          and order-cancel like CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="searchType == 'exchange'.toString()">
-          and exchange like CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="searchType == 'refund'.toString()">
-          and refund like CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="searchType == 'point'.toString()">
-          and point like CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="searchType == 'etc'.toString()">
-          and etc like CONCAT('%', #{keyword}, '%')
-        </if>
-     </if>   
-     order by question_type
-   </select> -->
-   
-   
-   
+  <select id="countAll" resultType="int" parameterType="map">
+    <if test="keyword != null and keyword !=''">
+      <bind name="pattern" value="'%' + keyword + '%'"/>
+    </if>
+    select count(*) 
+    from faqs
+    <where>
+      <if test="questionType != null and questionType != 'default'">question_type like #{questionType}</if>
+      <if test="pattern != null">and title like #{pattern}</if>
+    </where>
+  </select>
   <!--  
   
    <select id="findByKeyword"
@@ -128,22 +131,5 @@
  
  
  
- <select id="findByKeyword"
-          parameterType="map"
-          resultMap="FaqMap">
- <bind name="pattern" value="'%' + keyword + '%'"/>
- <include refid="basicColumn"/>
- from faqs
- <where>
-   <if test="questionType != null and questionType != 'default'">question_type like #{questionType}</if>
-   <if test="keyword != null and keyword !=''">and title like #{pattern}</if>
- <!-- <if test="keyword !=null and keyword !=''">
-  and keyword like #{pattern}
- </if> 
- <if test="questionType != default and keyword !='' ">and (questionType like {#pattern} and  </if> -->
- </where>
-  order by question_type
- 
- </select>
- 
+
   </mapper>

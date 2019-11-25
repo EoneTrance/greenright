@@ -1369,7 +1369,7 @@ pre {
 .table-primary,
 .table-primary > th,
 .table-primary > td {
-  background-color: #b8daff; }
+  background-color: #7abaff; }
 
 .table-primary th,
 .table-primary td,
@@ -8683,11 +8683,11 @@ h1, h2, h3, h4, h5,
     .product .img-prod span.status {
       position: absolute;
       top: 0;
-      left: 0;
+      right: 0;
       padding: 2px 10px;
       color: #fff;
       font-weight: 300;
-      background: #82ae46;
+      background-color: rgba(255,255,255,0);
       font-size: 12px; }
     .product .img-prod img {
       -webkit-transform: scale(1);

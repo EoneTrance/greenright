@@ -187,20 +187,6 @@ h6#marginless {
 }
 </style>
 
-<script src="/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/js/popper.min.js"></script>
-<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-<script src='/js/jquery-migrate-3.0.1.min.js'></script>
-<script src='/js/jquery.easing.1.3.js'></script>
-<script src='/js/jquery.waypoints.min.js'></script>
-<script src='/js/jquery.stellar.min.js'></script>
-<script src='/js/jquery.magnific-popup.min.js'></script>
-<script src='/js/jquery.animateNumber.min.js'></script>
-<script src="/js/owl.carousel.min.js"></script>
-<script src="/js/aos.js"></script>
-<script src="/js/scrollax.min.js"></script>
-<script src="/js/main.js"></script>
 
 <div  style="width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;">
  <h1 style="text-align: center; margin-top: 40px; font-size: 40px;">Community</h1>
@@ -258,8 +244,45 @@ h6#marginless {
 
 </form>
 </div>
+<br>
+<br>
+<jsp:include page="../greenfooter.jsp"/>
 
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src='/js/jquery-migrate-3.0.1.min.js'></script>
+<script src='/js/jquery.easing.1.3.js'></script>
+<script src='/js/jquery.waypoints.min.js'></script>
+<script src='/js/jquery.stellar.min.js'></script>
+<script src='/js/jquery.magnific-popup.min.js'></script>
+<script src='/js/jquery.animateNumber.min.js'></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/scrollax.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+$('#board-delete').click(function() {
+  swal({
+    title: "Are you sure?",
+    text: "You will not be able to recover this imaginary file!",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Yes, delete it!",
+    closeOnConfirm: false
+  },
+  function(){
+    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+  });
+  
+});
+
+
+</script>
+
 
 <script>
 var temp;

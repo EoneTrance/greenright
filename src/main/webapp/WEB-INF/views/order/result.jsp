@@ -99,7 +99,7 @@ table.my-join-table tbody th {
           <tr>
             <th class="my-col-3">결제금액</th>
             <td class="my-col-9">
-            <span style="color:black"><span style="font-weight:bold;">${order.paymentPrice}</span>원</span>
+            <span style="color:black">${order.paymentPrice}</span>
             </td>
           </tr>
           <tr>

@@ -15,7 +15,7 @@ public class DefaultBasketService implements BasketService {
 
   @Override
   public List<Basket> list(int no) throws Exception {
-    return basketDao.findAll(no);
+    return basketDao.findWithAll(no);
   }
 
   @Override

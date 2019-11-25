@@ -94,45 +94,12 @@ table.my-table-col td.my-seller {
 
 <section class="ftco-section py-5">
 <div id="mainContent">
-<!-- <nav class="navbar navbar-inverse visible-xs">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">MyPage</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="my-menu"><a href="userinfo">기본정보</a></li>
-        <li class="my-menu active"><a href="order">주문관리</a></li>
-        <li class="my-menu"><a href="#">관심상품</a></li>
-        <li class="my-menu"><a href="#">업적</a></li>
-        <li class="my-menu"><a href="sale">판매관리</a></li>
-        <li class="my-menu"><a href="exhibition">개인전관리</a></li>
-        <li class="my-menu"><a href="memberConversion">판매회원 전환</a></li>
-      </ul>
-    </div>
-  </div>
-</nav> -->
 
 <div class="container-fluid">
 <h2 id="mypage-title-h2">장바구니</h2>
 <hr>
   <div class="row">
     <div class="col-sm-9">
-      
-      <!-- <div class="well">
-        h4>주문관리</h4>
-        <p>- 기본적으로 최근 3개월간의 자료가 조회되며 기간 검색시 지난 주문관리을 조회하실 수 있습니다.</p>
-        <p>- 주문번호를 클릭하시면 해당 주문엗 대한 상세관리을 확인하실 수있습니다.</p>
-        <p>- [세금계산서 신청] 방법 → 해당 [주문번호] 클릭 → 왼쪽 하단 [세금계산서 신청] 클릭</p>
-        <p>- [현급영수증 신청] 방법 → 해당 [주문번호] 클릭 → 왼쪽 하단 [현금영수증 신청] 클릭</p>
-        <p>- [거래명세서 인쇄] 방법 → 해당 [주문번호] 클릭 → 왼쪽 하단 [거래명세서 신청] 클릭</p>
-        <p>- [카드매출전표 인쇄] 방법 → 해당 [주문번호] 클릭 → 왼쪽 하단 [카드매출전표 인쇄] 클릭</p>
-      </div> -->
       
       <div class="row">
         <div class="col">
@@ -152,31 +119,7 @@ table.my-table-col td.my-seller {
             </tr>
           </thead>
 
-          <tbody class="my-basket-list">
-            <!-- <tr>
-              <td class="my-check">
-                <div class="round">
-                <input type="checkbox" id="checkbox1" class="my-check"/>
-                <label for="checkbox1"></label>
-              </div>
-              </td>
-              <td class="my-product text-left py-2">
-                <div class="row">
-                  <div class="col-sm-3 px-0">
-                    <img id="product-photo" src="ddd" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
-                  </div>
-                  <div class="col-sm-9 px-0" style="font-size:12px">
-                    상품번호: <span id="product-id" >10238374</span><br>
-                    상품명: <span id="product-name">코트</span><br>
-                    옵션: <span id="product-option">95</span><hr class="my-1">
-                    가격: <span id="product-price" style="font-size:15px;font-weight:bold;">200,200</span> 원
-                  </div>
-                </div>
-              </td>
-              <td class="my-quantity">3</td>
-              <td class="my-price">200,20000 원</td>
-              <td class="my-seller">이원주</td>
-            </tr> -->
+          <tbody class="my-basket-list"> <!-- 상품 등록 테이블 -->
           </tbody>
           </table>
         </div>
@@ -226,8 +169,6 @@ table.my-table-col td.my-seller {
         <hr class="mb-2 mt-0">
       </div>
       <form id='my-basketForm' action='../order/form' method='post' style='display:none'>
-        <!-- <input id='my-order-optionItemNo' name='optionItemNo'>
-        <input id='my-order-quantity' name='quantity'> -->
         <input id='my-orderListJson' name='orderListJson'>
       </form>
       <button id="my-buyBtn" class="searchbtn btn-lg btn-primary btn-inline-block mr-1 w-100" type="button">구매하기</button>
@@ -301,6 +242,7 @@ $(function(){
     async: false,
     success: function(basketList) {
       if (basketList.state == "success") {
+    	  console.log(basketList.result.length);
         for (var i = 0; i < basketList.result.length; i++) {
           var basket = basketList.result[i];
           $(".my-basket-list").append(
@@ -314,17 +256,17 @@ $(function(){
            +  "<td class='my-product text-left py-2'>"
            +  "  <div class='row'>"
            +  "    <div class='col-sm-3 px-0'>"
-           +  "      <img id='product-photo' src='ddd'>"
+           +  "      <img id='product-photo' src='/upload/product/${basket.productOptionItem.productOption.product.photos[0].photoPath}'>"
            +  "    </div>"
            +  "    <div class='col-sm-9 px-0' style='font-size:12px'>"
-           +  "      상품번호: <span id='product-id'>" + basket.productNo + "</span><br>"
-           +  "      상품명: <span id='product-name'>" + basket.productName + "</span><br>"
-           +  "      옵션: <span id='product-option'>" + basket.optionName + " (" + basket.optionItemMatter + ")</span><hr class='my-1'>"
-           +  "      가격: <span id='product-price' style='font-size:120%;font-weight:bold;'>" + (basket.productPrice + basket.optionItemPrice) + "</span> 원"
+           +  "      상품번호: <span id='product-id'>" + basket.productOptionItem.productOption.product.no + "</span><br>"
+           +  "      상품명: <span id='product-name'>" + basket.productOptionItem.productOption.product.productName + "</span><br>"
+           +  "      옵션: <span id='product-option'>" + basket.productOptionItem.productOption.optionName + " (" + basket.productOptionItem.optionItemMatter + ")</span><hr class='my-1'>"
+           +  "      가격: <span id='product-price' style='font-size:120%;font-weight:bold;'>" + (basket.productOptionItem.productOption.product.price + basket.productOptionItem.optionsPrice) + "</span> 원"
            +  "    </div>"
            +  "  </div>"
            +  "</td>"
-           +  "<td class='my-quantity-td'>" + basket.basketQuantity + "</td>"
+           +  "<td class='my-quantity-td'>" + basket.quantity + "</td>"
            +  "<td class='my-price-td'><span class='my-price-span' style='font-size:120%;font-weight:bold;color:#82AE46;'>" + ((basket.productPrice + basket.optionItemPrice) * basket.basketQuantity) + "</span> 원</td>"
            +  "<td class='my-seller-td'>" + basket.sellerName + "</td>"
            +  "<td class='my-optionItemNo-td' style='display:none;'>" + basket.optionItemNo + "</td>"

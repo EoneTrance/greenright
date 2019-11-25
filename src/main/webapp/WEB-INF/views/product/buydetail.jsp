@@ -9,80 +9,65 @@ li {
   border: 0;
   float: left;
 }
-
 ul {
   list-style: none;
   margin: 0;
   padding: 0;
   width: 450px;
 }
-
 img.img-fluid {
   margin-bottom: 14px;
 }
-
 select.form-control {
   width: 400px;
 }
-
 section.ftco-section {
   padding: 30px 0;
 }
-
 li.useruse {
   display: inline;
   margin-left: 20px;
   margin-right: 20px;
 }
-
 ul.widthsizer {
   width: 1110px;
   padding-left: 203px;
 }
-
 .btn.btn-primary {
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 2px;
 }
-
 textarea {
   resize: none;
 }
-
 div.biglr {
   width: 100%;
   height: 500Wpx;
 }
-
 div.leftphoto {
   width: 60%;
   float: left;
   box-sizing: border-box;
   line-height: 500px;
 }
-
 div.rightcontents {
   width: 40%;
   float: right;
   box-sizing: border-box;
 }
-
 .tcontents {
   margin-top: 19px;
 }
-
 div.stars {
   width: 268px;
   display: inline-block;
   height: 70px;
 }
-
 input.star {
   display: none;
 }
-
 label.star {
   float: right;
   padding: 10px;
@@ -90,35 +75,28 @@ label.star {
   color: #444;
   transition: all .2s;
 }
-
 input.star:checked ~ label.star:before {
   content: '\f005';
   color: #FD4;
   transition: all .25s;
 }
-
 input.star-5:checked ~ label.star:before {
   color: #FE7;
   text-shadow: 0 0 20px #952;
 }
-
 input.star-1:checked ~ label.star:before {
   color: #F62;
 }
-
 label.star:hover {
   transform: rotate(-15deg) scale(1.3);
 }
-
 label.star:before {
   content: '\f006';
   font-family: FontAwesome;
 }
-
 .sellermdal-content {
   height: 383px;
 }
-
 .qnamodal, .sellermodal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -131,7 +109,6 @@ label.star:before {
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
-
 /* Modal Content/Box */
 .qnamodal-content, .sellermdal-content {
   background-color: #fefefe;
@@ -147,36 +124,29 @@ label.star:before {
   font-size: 28px;
   font-weight: bold;
 }
-
 .qnaclose:hover, .qnaclose:focus, .sellerclose:hover, .sellerclose:focus
   {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
-
 input.titleholder {
   width: 100%;
 }
-
 textarea#contentholder, textarea#sellerholder {
   height: 200px !important;
   width: 100%;
   margin-bottom: 10px;
 }
-
 div.qnabody, div.sellerbody {
   width: 97%
 }
-
 button#submitbut, button#answersubmit {
   float: right;
 }
-
 .anqfooter, .sellerfooter {
   margin-bottom: 10px;
 }
-
 .fix {
   position: fixed;
   _position: absolute;
@@ -184,15 +154,12 @@ button#submitbut, button#answersubmit {
   top: 0;
   z-index: 100
 }
-
 .c23 {
   color: #82ae46;
 }
-
 .reviewimagepresent {
   text-align: left;
 }
-
 td.conts {
   text-align: left;
   width: 690px;
@@ -201,85 +168,70 @@ td.conts {
   padding-bottom: 10px;
   font-size: large;
 }
-
 tr:hover {
   background-color: lightyellow;
 }
-
 td.title {
   text-align: left;
   cursor: pointer;
-  width: 930px;
+  width: 1110px;
   height: 50px;
   font-size: large;
   border-top: 0.5px solid beige;
   border-bottom: 0.5px solid beige;
 }
-
 #title {
   width: 743px;
   height: 50px;
   margin-right: 31px;
 }
-
 textarea#contents {
   margin-right: 200px;
 }
-
 button.qnaAdd.btn.btn-primary {
   margin-bottom: 30px;
   margin-top: 20px;
 }
-
 p.starpoint {
   display: inline;
 }
-
 span.reviewtitle {
   display: inline-block;
-  width: 500px;
+  width: 650px;
 }
-
 span.reviewid {
   display: inline-block;
   width: 140px;
 }
-
 span.reviewrating {
   display: inline-block;
   width: 97px;
 }
-
 strong.reviewcotents {
   margin-left: 34px;
 }
-
 .productquestionwrite {
   text-align: center;
 }
-
 span.answerquestion {
   font-size: larger;
 }
-
 textarea#rvcontents {
   margin-right: 234px;
+    margin-bottom: 15px;
 }
-
 input.titleholder.form-control {
   margin-bottom: 10px;
 }
-
 strong.marginmk {
   margin-right: 5px;
 }
-
 input#title {
   margin-bottom: 15px;
 }
 span.answertitle {
     display: inline-block;
-    width: 487px;
+    width: 667px;
     margin-left: 10px;
 }
 span.answerwriter {
@@ -296,12 +248,12 @@ span.answercontents,span.answerconts {
 span.secretbook {
     margin-left: 13px;
     display: inline-block;
-    width: 487px;
+    width: 667px;
 }
 .col-md-12.heading-section.text-center.ftco-animate.bordermaker.justify-content-center.fadeInUp.ftco-animated {
     height: 48px;
     background-color: white;
-    margin-top: 37px;
+    margin-top: 18.4px;
 }
 *:focus{
   outline: none;
@@ -310,11 +262,53 @@ h5.starratin {
     padding-top: 26px;
     color : light-yellow ;
 }
-
+input.priv {
+    height: 13px;
+}
+label.custom-file-label {
+    width: 743px;
+}
+button#review-add-btn {
+    height: fit-content;
+}
+button.btn.btn-primary.CartBut {
+    background: #82ae46 !important;
+}
 </style>
+<meta name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link
+  href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+  rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
+  rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
+  rel="stylesheet">
+<!-- 별점 표시를 위한 css -->
+<link rel="stylesheet"
+  href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="/css/animate.css">
+
+<link rel="stylesheet" href="/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/css/owl.theme.default.min.css">
+<link rel="stylesheet" href="/css/magnific-popup.css">
+
+<link rel="stylesheet" href="/css/aos.css">
+
+<link rel="stylesheet" href="/css/ionicons.min.css">
 
 <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="/css/jquery.timepicker.css">
+
+
+<link rel="stylesheet" href="/css/flaticon.css">
+<link rel="stylesheet" href="/css/icomoon.css">
+<link rel="stylesheet" href="/css/style.css">
 
 <div class="hero-wrap hero-bread"
   style="background-image: url('/images/bg_1.jpg');">
@@ -333,6 +327,8 @@ h5.starratin {
   </div>
 </div>
 
+
+<!-- 어떤거 보내야할지 정확하게 모르겠어서 일단 상품정보에대한부분은 다 폼으로 묶어놓았습니다 .  -->
 <section class="ftco-section">
   <div class="container">
     <div class="row">
@@ -368,15 +364,17 @@ h5.starratin {
             <div class="form-group d-flex">
               <div class="select-wrap">
                 <div class="icon">
-                  <span class="ion-ios-arrow-down"></span>
                 </div>
                 <c:forEach items="${product.options}" var="option">
-                  <select name="" id="my-select-option" class="form-control">
+                <c:if test="${option.no ne 0 }">
+                  <select name="optionItemNo"  class="form-control" id="my-select-option">
                     <c:forEach items="${option.optionItem}" var="item">
-                      <option class="my-selected-option" value="${item.no}">옵션명:&nbsp;${item.optionItemMatter}&nbsp;|&nbsp;가격:&nbsp;+${item.optionsPrice}원</option>
+                  <span class="ion-ios-arrow-down"></span>
+                      <option  value="${item.no}">옵션명:&nbsp;${item.optionItemMatter}&nbsp;|&nbsp;가격:&nbsp;+${item.optionsPrice}원</option>
                     </c:forEach>
                   </select>
-
+                </c:if>
+                <c:if test="${option.no eq 0 }"></c:if>
                 </c:forEach>
               </div>
             </div>
@@ -401,14 +399,13 @@ h5.starratin {
           <div class="col-md-12"></div>
         </div>
         <p>
-          <a href="#" id="add-to-cart" class="btn btn-black py-3 px-5">Add to
-            Cart</a>
+          <button  class="btn btn-primary CartBut" id="add-to-cart">Add to
+            Cart</button>
         </p>
       </div>
     </div>
   </div>
 </section>
-
 <section class="ftco-section">
   <div class="container">
     <div class="row justify-content-center mb-3 pb-3">
@@ -425,7 +422,7 @@ h5.starratin {
         <c:if test="${production.no ne product.no}">
           <div class="col-md-6 col-lg-3 ftco-animate">
             <div class="product">
-              <a href="#" class="img-prod"><img class="img-fluid"
+              <a href="/greenright/product/buydetail?no=${production.no}" class="img-prod"><img class="img-fluid"
                 src="/upload/product/${production.photos[0].photoPath}"
                 alt="Colorlib Template"
                 style="width: 208px; height: 208px; object-fit: cover;">
@@ -433,13 +430,13 @@ h5.starratin {
               <div class="overlay"></div>
               <div class="text py-3 pb-4 px-3 text-center">
                 <h3>
-                  <a href="#">"${production.productName}"</a>
+                  <a href="/greenright/product/buydetail?no=${production.no}" >${production.productName}</a>
                 </h3>
                 <div class="d-flex">
                   <div class="pricing">
                     <p class="price">
-                      <span class="mr-2 price-dc">"${production.price}"</span><span
-                        class="price-sale">"${production.price-5000}"</span>
+                      <span
+                        class="price-sale">${production.price}</span>
                     </p>
                   </div>
                 </div>
@@ -468,6 +465,9 @@ h5.starratin {
     </div>
   </div>
 </section>
+
+
+
 
 <!-- 상품평 상품문의 상세설명 리뷰 -->
 <div class="floatMenu">
@@ -502,12 +502,21 @@ h5.starratin {
   </section>
 </div>
 <!--  상품평 누를시 상품평 나오고 딴거 누를시 딴거 나오게 할부분  -->
+  
 <Section class="ftco-section">
   <div class="container">
+    <hr>
     <div class="row justify-content-center mb-3 pb-3">
       <div
         class="col-md-12 heading-section text-center ftco-animate userusechanage">
         <div class="productscore target" id="div1">
+          <h5>
+            <strong>상품상세</strong>
+          </h5>
+          <c:forEach items="${product.detailPhotos}"  var="ProductDetailPhoto">
+        <img alt="" src="/upload/productDetail/${ProductDetailPhoto.photoPath}" style="width:1000px; object-fit:cover;height:600px;margin-top:20px; margin-bottom:20px;">      
+          
+          </c:forEach>
           <br> <br> <br>
         </div>
         <br>
@@ -606,8 +615,9 @@ h5.starratin {
       <textarea class="contentholder form-control" id="contentholder"
         name="qnacontents" placeholder="내용을 입력해주세요" maxlength=1000
         style="resize: none;"></textarea>
-      <input type="checkbox" name="private" class="priv" value=0>
-      비공개
+     
+       <input type="checkbox" name="private" class="priv" value=0>
+      비공개 
       <button id="submitbut" class="btn btn-primary">작성</button>
     </div>
     <div class="anqfooter"></div>
@@ -633,31 +643,29 @@ h5.starratin {
   </div>
 </div>
 
-<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
-<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-<script src='/js/jquery-migrate-3.0.1.min.js'></script>
-<script src='/js/jquery.easing.1.3.js'></script>
-<script src='/js/jquery.waypoints.min.js'></script>
-<script src='/js/jquery.stellar.min.js'></script>
-<script src='/js/jquery.magnific-popup.min.js'></script>
-<script src='/js/jquery.animateNumber.min.js'></script>
+<script src="/js/jquery.easing.1.3.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
 <script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
 <script src="/js/aos.js"></script>
+<script src="/js/jquery.animateNumber.min.js"></script>
+<script src="/js/bootstrap-datepicker.js"></script>
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
 <script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="/js/google-map.js"></script>
-<script src="/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+  src="/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script
+  src="/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
 <script src="/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
 <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
-<script src="/node_modules/chart.js/dist/Chart.min.js"></script>
-
 <script>
 $(document).on("click", "#add-to-cart", function(e){
+  console.log($("#my-select-option").select().val())
+  console.log($("#quantity").val())
   $.ajax({
     type: "GET",
     url: "../json/basket/add",
@@ -679,7 +687,6 @@ $(document).on("click", "#add-to-cart", function(e){
   
 });
 </script>
-
 <script>
   $(document)
       .ready(
@@ -703,7 +710,6 @@ $(document).on("click", "#add-to-cart", function(e){
               } else {
                 $(".ratingimg").attr("src", "/images/0.PNG")
               }
-
             })
             let ratingAver = 0;
             $
@@ -714,7 +720,6 @@ $(document).on("click", "#add-to-cart", function(e){
                     },
                     function(k) {
                       var a = "";
-                      a += "<h5><strong>사진과 리뷰</strong></h5>"
                       if (k.result != null) {
                         a += "<div class='reviewimagepresent'>"
                         for (var i = 0; i < k.result.length; i++) {
@@ -744,7 +749,6 @@ $(document).on("click", "#add-to-cart", function(e){
                         a += "상품평이 하나도없습니다";
                       }
                       $(".productrating").html(a);
-
                       $('#contents tr').hide();
                       $('#contents').find('.title').parent().show();
                       $('#contents .title').parent().click(function() {
@@ -756,7 +760,6 @@ $(document).on("click", "#add-to-cart", function(e){
                           $(tr[rindex + 1]).hide();
                         }
                       });
-
                       $(document)
                           .on(
                               "click",
@@ -772,7 +775,6 @@ $(document).on("click", "#add-to-cart", function(e){
                                           "no" : reviewNo
                                         },
                                         function(a) {
-
                                           let html1 = "";
                                           html1 += "<img src='/images/member.PNG' style='width:30px; height:30px; object-fit:cover;'>"
                                           html1 += "<strong class='marginmk'>평점 :</strong>"
@@ -789,16 +791,12 @@ $(document).on("click", "#add-to-cart", function(e){
                                               + a.result.contents + "";
                                           $(".tcontents").html(html2);
                                         })
-
                                 $('div.modal').modal();
                               })
-
                     })
-
             /*  $(document).on("click",".qnaAdd",function(){
              $('div.modal2').modal();
              }) */
-
             var a = "";
             a += "<div class='container' style='width: 1140px; margin: auto auto; padding-right: 15px; padding-left: 15px;'>"
             a += "<div style='width: inherit;'>"
@@ -818,22 +816,23 @@ $(document).on("click", "#add-to-cart", function(e){
             a += "</div>"
             a += "<input type='text' id='title' style='width :743px' placeholder='제목을입력하세요'/>"
             a += "<br><TEXTAREA  id ='rvcontents' cols='90' rows='10' style='resize:none;'  placeholder='내용을 입력하세요.'/><br>"
-            a += "<br><button id='review-add-btn' class='btn btn-primary'>등록</button>"
-            a += "<input type='file' class='btn btn-primary' id='filePath' name='reviewPhoto'>"
+            a += "<div class='input-group mb-3'style='width :685px'>"
+            a +=  "<div class='custom-file' style='width :685px'>"
+            a += "<input type='file' class='custom-file-input btn btn-primary' id='filePath' name='reviewPhoto' style='width :685px'>"
+            a += "<label class='custom-file-label' for='filePath' aria-describedby='inputGroupFileAddon02' style='width :685px'>Choose file</label>"
+            a += "</div></div>"
+            a += "<button id='review-add-btn' class='btn btn-primary'>등록</button>"
             a += "<div id='images-div'><img  class='imgpreview'src='' alt='' style='width:100px height:100px'></div>"
             a += "</div></div><br><br>";
             $(".review").append(a);
-
             let ratingch = 5;
             $(document).on("change", ".star", function() {
               ratingch = $(this).val();
             })
-
-            $("#review-add-btn")
-                .click(
+            $(document)
+                .on("click","#review-add-btn",
                     function() {
                       let productNo = $("#productNo").val();
-                      let memberNo = 1;
                       let rating = ratingch
                       let title = $("#title").val();
                       let contents = $("#rvcontents").val();
@@ -843,7 +842,6 @@ $(document).on("click", "#add-to-cart", function(e){
                               "review/check",
                               {
                                 "productNo" : productNo,
-                                "memberNo" : memberNo
                               },
                               function(a) {
                                 if (a == 0) {
@@ -853,7 +851,6 @@ $(document).on("click", "#add-to-cart", function(e){
                                         type : "post",
                                         data : {
                                           "productNo" : productNo,
-                                          "memberNo" : memberNo,
                                           "rating" : rating,
                                           "title" : title,
                                           "contents" : contents,
@@ -903,7 +900,6 @@ $(document).on("click", "#add-to-cart", function(e){
                                                       a += "상품평이 하나도없습니다";
                                                     }
                                                     $(".productrating").html(a);
-
                                                     $('#contents tr').hide();
                                                     $('#contents').find(
                                                         '.title').parent()
@@ -931,7 +927,6 @@ $(document).on("click", "#add-to-cart", function(e){
                                                                     .hide();
                                                               }
                                                             });
-
                                                     $(document)
                                                         .on(
                                                             "click",
@@ -954,7 +949,6 @@ $(document).on("click", "#add-to-cart", function(e){
                                                                       },
                                                                       function(
                                                                           a) {
-
                                                                         let html1 = "";
                                                                         html1 += "<img src='/images/member.PNG' style='width:30px; height:30px; object-fit:cover;'>"
                                                                         html1 += "<strong class='marginmk'>평점 :</strong>"
@@ -982,11 +976,9 @@ $(document).on("click", "#add-to-cart", function(e){
                                                                             .html(
                                                                                 html2);
                                                                       })
-
                                                               $('div.modal')
                                                                   .modal();
                                                             })
-
                                                   })
                                         },
                                       });
@@ -994,9 +986,7 @@ $(document).on("click", "#add-to-cart", function(e){
                                   swal("이미 상품평을 작성하셨습니다.")
                                 }
                               })
-
                     })
-
             $('#filePath').fileupload(
                 {
                   url : "/greenright/json/Review/add",
@@ -1020,50 +1010,38 @@ $(document).on("click", "#add-to-cart", function(e){
                     $('#upload-btn').unbind("click");
                     $('#upload-btn').click(function() {
                       data.submit();
-
                     });
                   },
                   add : function(e, data) {
                     $("#review-add-btn").unbind();
                     $("#review-add-btn").off();
                     $('#review-add-btn').click(function() {
-
                       $.post("review/check", {
                         "productNo" : $("#productNo").val(),
-                        "memberNo" : 1
                       }, function(a) {
                         if (a == 0) {
                           data.submit(); // submit()을 호출하면, 서버에 데이터를 보내기 전에 submit 이벤트가 발생한다.
-
                           swal("상품평 등록완료")
-
                         } else {
                           swal("이미 상품평을 작성하셨습니다.")
                         }
-
                       })
-
                     });
                   },
                   submit : function(e, data) { // submit 이벤트가 발생했을 때 호출됨. 서버에 전송하기 전에 호출됨.
                     data.formData = {
                       "productNo" : $("#productNo").val(),
-                      "memberNo" : 1,
                       "rating" : ratingch,
                       "title" : $("#title").val(),
                       "contents" : $("#rvcontents").val()
                     }
-
                   }
-
                 });
-
             // When the user clicks on the button, open the modal 
             //질문 등록 하는 부분 
             $(document).on("click", ".qnaAdd", function() {
               document.getElementById('myModal').style.display = "block";
             })
-
             //답변 등록하는 부분 
             $(document)
                 .on(
@@ -1112,7 +1090,6 @@ $(document).on("click", "#add-to-cart", function(e){
                                               $(".sellerclose")
                                                   .trigger("click");
                                             }
-
                                             $
                                                 .get(
                                                     "/greenright/json/ProductQuestion/getQuestion",
@@ -1124,68 +1101,65 @@ $(document).on("click", "#add-to-cart", function(e){
                                                       let qa = "";
                                                       qa += "<table id='questions'>"
                                                       for (i = 0; i < a.result.length; i++) {
-
                                                         if (a.result[i].secretFlag == 0) {
                                                           if (a.result[i].productAnswer.answerContents != null) {
-                                                            qa += "<tr><td class='title'><strong class='marginmk'>답변상태:</strong>YES<span class ='answertitle'><strong class='marginmk'> 제목:</strong>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='title'><strong class='marginmk'>답변상태:</strong>YES<span class ='answertitle'><strong class='marginmk'> 제목:</strong>"
                                                                 + a.result[i].title
                                                                 + "</span><span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
                                                                 + a.result[i].member.id
                                                                 + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
                                                                 + a.result[i].createdDate
                                                                 + "</span></td></tr>"
-                                                            qa += "<tr><td class='conts'><span class='answercontents'><strong>내용 :</strong> "
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='conts'><span class='answercontents'><strong>내용 :</strong> "
                                                                 + a.result[i].contents
                                                                 + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
                                                                 + "<br><span class='answerconts'><strong class='marginmk'>답변내용 :</strong> "
                                                                 + a.result[i].productAnswer.answerContents
                                                                 + "</span></td></tr>"
                                                           } else {
-                                                            qa += "<tr><td class='title'><strong class='marginmk'>답변상태:</strong> NO <span class='answertitle'><strong  class='marginmk'>제목:</strong>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='title'><strong class='marginmk'>답변상태:</strong> NO <span class='answertitle'><strong  class='marginmk'>제목:</strong>"
                                                                 + a.result[i].title
                                                                 + "</span><span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
                                                                 + a.result[i].member.id
                                                                 + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
                                                                 + a.result[i].createdDate
                                                                 + "</span></td></tr>"
-                                                            qa += "<tr><td class='conts'><span class='answercontents'><strong class='marginmk'>내용 :</strong> "
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='conts'><span class='answercontents'><strong class='marginmk'>내용 :</strong> "
                                                                 + a.result[i].contents
                                                                 + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
                                                                 + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
                                                           }
                                                         } else {
                                                           if (a.result[i].productAnswer.answerContents != null) {
-                                                            qa += "<tr><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>YES <span class='secretbook'><img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>YES <span class='secretbook'><img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
                                                                 + "<span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
                                                                 + a.result[i].member.id
                                                                 + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
                                                                 + a.result[i].createdDate
                                                                 + "</span></td></tr>"
-                                                            qa += "<tr><td class='conts'><span class='answercontents'><strong>내용 :</strong> "
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='conts'><span class='answercontents'><strong>내용 :</strong> "
                                                                 + a.result[i].contents
                                                                 + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
                                                                 + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
                                                           } else {
-                                                            qa += "<tr><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>NO<span class='secretbook'> <img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>NO<span class='secretbook'> <img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
                                                               + "<span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
                                                                 + a.result[i].member.id
                                                                 + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
                                                                 + a.result[i].createdDate
                                                                 + "</span></td></tr>"
-                                                            qa += "<tr><span class='answercontents'><td class='conts'><strong>내용 : </strong>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><span class='answercontents'><td class='conts'><strong>내용 : </strong>"
                                                                 + a.result[i].contents
                                                                 + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
                                                                 + "<br><span class='answerconts'><strong class='marginmk'>답변내용 :</strong> "
                                                                 + a.result[i].productAnswer.answerContents
                                                                 + "</span></td></tr>"
                                                           }
-
                                                         }
                                                       }
                                                       qa += "</table>"
                                                       $(".ProductQuestionList")
                                                           .html(qa);
-
                                                       $('#questions tr').hide();
                                                       $('#questions').find(
                                                           '.title').parent()
@@ -1209,7 +1183,9 @@ $(document).on("click", "#add-to-cart", function(e){
                                                                       .children()
                                                                       .hasClass(
                                                                           "secretwrite")) {
+                                                                    
                                                                     swal("비밀글은 작성자와 운영자만 볼수있습니다.");
+                                                                    
                                                                   } else {
                                                                     $(
                                                                         tr[rindex + 1])
@@ -1221,14 +1197,11 @@ $(document).on("click", "#add-to-cart", function(e){
                                                                       .hide();
                                                                 }
                                                               });
-
                                                     })
-
                                           })
                                 }
                               })
                     })
-
             //질문 등록하는 모달 닫기 버튼 누르면 
             $(document).on("click", ".qnaclose", function() {
               document.getElementById('myModal').style.display = "none";
@@ -1247,7 +1220,6 @@ $(document).on("click", "#add-to-cart", function(e){
                 $(".titleholder").val("");
               }
             })
-
             $(document).on("click", window, function() {
               if (event.target == document.getElementById('sellerModal')) {
                 document.getElementById('sellerModal').style.display = "none";
@@ -1289,10 +1261,9 @@ $(document).on("click", "#add-to-cart", function(e){
                                             let qa = "";
                                             qa += "<table id='questions'>"
                                             for (i = 0; i < a.result.length; i++) {
-
                                               if (a.result[i].secretFlag == 0) {
                                                           if (a.result[i].productAnswer.answerContents != null) {
-                                                            qa += "<tr><td class='title'><strong class='marginmk'>답변상태:</strong>YES <span class ='answertitle'><strong class='marginmk'>제목:</strong>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='title'><strong class='marginmk'>답변상태:</strong>YES <span class ='answertitle'><strong class='marginmk'>제목:</strong>"
                                                                 + a.result[i].title
                                                                 + "</span><span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
                                                                 + a.result[i].member.id
@@ -1306,7 +1277,7 @@ $(document).on("click", "#add-to-cart", function(e){
                                                                 + a.result[i].productAnswer.answerContents
                                                                 + "</span></td></tr>"
                                                           } else {
-                                                            qa += "<tr><td class='title'><strong class='marginmk'>답변상태:</strong>NO <span class='answertitle'><strong  class='marginmk'>제목:</strong>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='title'><strong class='marginmk'>답변상태:</strong>NO <span class='answertitle'><strong  class='marginmk'>제목:</strong>"
                                                                 + a.result[i].title
                                                                 + "</span><span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
                                                                 + a.result[i].member.id
@@ -1320,36 +1291,34 @@ $(document).on("click", "#add-to-cart", function(e){
                                                           }
                                                         } else {
                                                           if (a.result[i].productAnswer.answerContents != null) {
-                                                            qa += "<tr><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>YES<span class='secretbook'> <img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>YES<span class='secretbook'> <img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
                                                               + "<span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
                                                                 + a.result[i].member.id
                                                                 + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
                                                                 + a.result[i].createdDate
                                                                 + "</span></td></tr>"
-                                                            qa += "<tr><td class='conts'><span class='answercontents'><strong>내용 :</strong> "
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='conts'><span class='answercontents'><strong>내용 :</strong> "
                                                                 + a.result[i].contents
                                                                 + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
                                                                 + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
                                                           } else {
-                                                            qa += "<tr><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>NO <span class='secretbook'><img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>NO <span class='secretbook'><img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
                                                             + "<span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
                                                                 + a.result[i].member.id
                                                                 + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
                                                                 + a.result[i].createdDate
                                                                 + "</span></td></tr>"
-                                                            qa += "<tr><span class='answercontents'><td class='conts'><strong>내용 : </strong>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><span class='answercontents'><td class='conts'><strong>내용 : </strong>"
                                                                 + a.result[i].contents
                                                                 + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
                                                                 + "<br><span class='answerconts'><strong class='marginmk'>답변내용 :</strong> "
                                                                 + a.result[i].productAnswer.answerContents
                                                                 + "</span></td></tr>"
                                                           }
-
                                                         }
                                             }
                                             qa += "</table>"
                                             $(".ProductQuestionList").html(qa);
-
                                             $('#questions tr').hide();
                                             $('#questions').find('.title')
                                                 .parent().show();
@@ -1367,6 +1336,8 @@ $(document).on("click", "#add-to-cart", function(e){
                                                             .children()
                                                             .hasClass(
                                                                 "secretwrite")) {
+                                                          
+                                                          
                                                           swal("비밀글은 작성자와 운영자만 볼수있습니다.");
                                                         } else {
                                                           $(tr[rindex + 1])
@@ -1377,7 +1348,6 @@ $(document).on("click", "#add-to-cart", function(e){
                                                             .hide();
                                                       }
                                                     });
-
                                           })
                                 })
                         document.getElementById('myModal').style.display = "none";
@@ -1385,7 +1355,6 @@ $(document).on("click", "#add-to-cart", function(e){
                         $(".titleholder").val("");
                       }
                     })
-
             $(document).on("change", ".priv", function() {
               if ($(this).is(":checked")) {
                 $(this).attr("value", 1)
@@ -1393,7 +1362,6 @@ $(document).on("click", "#add-to-cart", function(e){
                 $(this).attr("value", 0);
               }
             });
-
             $
                 .get(
                     "/greenright/json/ProductQuestion/getQuestion",
@@ -1404,68 +1372,65 @@ $(document).on("click", "#add-to-cart", function(e){
                       let qa = "";
                       qa += "<table id='questions'>"
                       for (i = 0; i < a.result.length; i++) {
-
                         if (a.result[i].secretFlag == 0) {
                                                           if (a.result[i].productAnswer.answerContents != null) {
-                                                            qa += "<tr><td class='title'><strong class='marginmk'>답변상태:</strong>YES <span class ='answertitle'><strong class='marginmk'>제목:</strong>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='title'><strong class='marginmk'>답변상태:</strong>YES <span class ='answertitle'><strong class='marginmk'>제목:</strong>"
                                                                 + a.result[i].title
                                                                 + "</span><span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
                                                                 + a.result[i].member.id
                                                                 + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
                                                                 + a.result[i].createdDate
                                                                 + "</span></td></tr>"
-                                                            qa += "<tr><td class='conts'><span class= 'answercontents'><strong>내용 :</strong> "
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='conts'><span class= 'answercontents'><strong>내용 :</strong> "
                                                                 + a.result[i].contents
                                                                 + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
                                                                 + "<br><span class='answerconts'><strong class='marginmk'>답변내용 :</strong> "
                                                                 + a.result[i].productAnswer.answerContents
                                                                 + "</span></td></tr>"
                                                           } else {
-                                                            qa += "<tr><td class='title'><strong class='marginmk'>답변상태:</strong>NO <span class='answertitle'> <strong class='marginmk'>제목:</strong>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='title'><strong class='marginmk'>답변상태:</strong>NO <span class='answertitle'> <strong class='marginmk'>제목:</strong>"
                                                                 + a.result[i].title
                                                                 + "</span><span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
                                                                 + a.result[i].member.id
                                                                 + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
                                                                 + a.result[i].createdDate
                                                                 + "</span></td></tr>"
-                                                            qa += "<tr><td class='conts'><span class='answercontents'><strong class='marginmk'>내용 :</strong> "
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='conts'><span class='answercontents'><strong class='marginmk'>내용 :</strong> "
                                                                 + a.result[i].contents
                                                                 + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
                                                                 + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
                                                           }
                                                         } else {
                                                           if (a.result[i].productAnswer.answerContents != null) {
-                                                            qa += "<tr><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>YES <span class='secretbook'><img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>YES <span class='secretbook'><img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
                                                             + "<span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
                                                                 + a.result[i].member.id
                                                                 + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
                                                                 + a.result[i].createdDate
                                                                 + "</span></td></tr>"
-                                                            qa += "<tr><td class='conts'><span class='answercontents'><strong>내용 :</strong> "
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='conts'><span class='answercontents'><strong>내용 :</strong> "
                                                                 + a.result[i].contents
                                                                 + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
                                                                 + "<button class='answersend btn btn-primary'>문의답변작성</button></td></tr>"
                                                           } else {
-                                                            qa += "<tr><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>NO <span class='secretbook'><img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><td class='title secretwrite'><strong class='marginmk'>답변상태:</strong>NO <span class='secretbook'><img src='/images/lock.PNG' style='width:32px; height:32px; object-fit:cover;'></span>"
                                                             + "<span class='answerwriter'><strong class='marginmk'> 작성자:</strong>"
                                                                 + a.result[i].member.id
                                                                 + "</span><span class='answerdate'><strong class='marginmk'> 작성일:</strong>"
                                                                 + a.result[i].createdDate
                                                                 + "</span></td></tr>"
                                                            
-                                                            qa += "<tr><span class='answercontents'><td class='conts'><strong>내용 : </strong>"
+                                                            qa += "<tr id="+a.result[i].member.id+"><span class='answercontents'><td class='conts'><strong>내용 : </strong>"
                                                                 + a.result[i].contents
                                                                 + "</span><input class='questionNo' value="+a.result[i].no+" hidden>"
                                                                 + "<br><span class='answerconts'><strong class='marginmk'>답변내용 :</strong> "
                                                                 + a.result[i].productAnswer.answerContents
                                                                 + "</span></td></tr>"
                                                           }
-
                                                         }
                       }
                       qa += "</table>"
                       $(".ProductQuestionList").append(qa);
-
                       $('#questions tr').hide();
                       $('.answersend').hide();
                       $('#questions').find('.title').parent().show();
@@ -1475,8 +1440,14 @@ $(document).on("click", "#add-to-cart", function(e){
                             var rindex = $(this).parent().children()
                                 .index(this);
                             if ($(tr[rindex + 1]).css("display") == "none") {
+                                  
+                              
+                                  
+                                  
                               if ($(tr[rindex]).children().hasClass(
                                   "secretwrite")) {
+                                
+                                
                                 swal("비밀글은 작성자와 운영자만 볼수있습니다.");
                               } else {
                                 $(tr[rindex + 1]).show();
@@ -1487,9 +1458,7 @@ $(document).on("click", "#add-to-cart", function(e){
                               $(this).find(".answersend").hide();
                             }
                           });
-
                     })
-
           })
 </script>
 
@@ -1509,13 +1478,11 @@ $(document).on("click", "#add-to-cart", function(e){
   $(document).on("mouseenter", ".changesaver", function() {
     var a = $(this).attr("id");
     $("#clickchange").attr("src", a);
-
   })
 </script>
 <script>
   function fnMove(seq) {
     var offset = $("#div" + seq).offset();
-
     $('html, body').animate({
       scrollTop : offset.top - 200
     }, 400);
@@ -1558,6 +1525,34 @@ $(document).on("click", "#add-to-cart", function(e){
       $('.floatMenu').removeClass("fix");
     }
   });
+  
+  $(document).on("click",'.quantity-right-plus',function(e){
+    
+    // Stop acting like a button
+    e.preventDefault();
+    // Get the field name
+    var quantity = parseInt($('#quantity').val());
+    
+    // If is not undefined
+        
+        $('#quantity').val(quantity + 1);
+      
+        // Increment
+    
+});
+ $(document).on("click",'.quantity-left-minus',function(e){
+    // Stop acting like a button
+    e.preventDefault();
+    // Get the field name
+    var quantity = parseInt($('#quantity').val());
+    
+    // If is not undefined
+  
+        // Increment
+        if(quantity>0){
+        $('#quantity').val(quantity - 1);
+        }
+});
+  
+  
 </script>
-
-

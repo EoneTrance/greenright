@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<title>Community Detail</title>
+
 <style>
 .my-comment-control {
   
@@ -24,9 +26,15 @@
   max-height: 500px;
   
 }
+.far.fa-thumbs-up.active {
+  color:#82ae46;
+}
+.far.fa-thumbs-up.recommend{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
-  <% session.setAttribute("memberName","kim");%>
-
   <!-- <div id='content'
     style="width: 1140px; margin-left: 374px; padding-right: 15px; padding-left: 15px;"> -->
     <div id='content'
@@ -40,16 +48,18 @@
           <tr>
             <th style="width:1100px;">
               <hr id="hr1">
-              <p style="text-align: center; font-size: 25px;">${board.title}</p>
+              <p style="text-align: center; font-size: 25px; font-weight: normal;">${board.title}</p>
               <hr id="hr1">
               <div class="row" >
                 <div class="col" style="text-align: left;">
                   <span style="font-size: 13px; font-weight: normal;">등록일: ${board.createdDate}</span><br> 
-                  <span style="font-size: 13px; font-weight: normal;">작성자 : ${board.member.nickname}</span>
+                  <span style="font-size: 13px; font-weight: normal;">작성자 : ${board.member.name}</span>
                 </div>
                 <div class="col" style="text-align: right;">
                   <span style="font-size: 13px; font-weight: normal;">조회수: ${board.viewCount}</span><br> 
-                    <span style="font-size: 13px; font-weight: normal;">추천수: 1</span>
+                    
+                    <span id="rec" style="font-size: 13px; font-weight: normal;">추천수: ${board.recommendation}</span>
+                    
                 </div>
               </div>
               <hr id="hr1">
@@ -67,12 +77,18 @@
                 </c:otherwise>
               </c:choose>
               </p>
-              <span style="display: block; font-weight: normal; width: 1100px; font-size: 20px; word-break:break-all;">${board.contents}</span>
+              <span style="display: block; text-align:center; font-weight: normal; width: 1100px; font-size: 20px; word-break:break-all;">${board.contents}</span>
+              <br>
+         
+              <i class="far fa-thumbs-up recommend" style="font-size:35px;"></i>
               <hr id="hr1">
+              <br>
+              <c:if test="${board.memberNo == loginUser.no || loginUser.memberClass == 0}">
               <p style="text-align: right;">
                 <button type="button" class="btn btn-primary"
                   onclick="location.href='detailedit.jsp?no=${board.no}'">수정</button>
               </p>
+              </c:if>
             </th>
           </tr>
         </thead>
@@ -103,7 +119,7 @@
           <p class='my-comment-content contents-${comment.no}'>${comment.contents}</p>
           <div>
             <textarea class="my-comment">${comment.contents}</textarea>
-            <c:if test="${comment.memberNo == 1}">
+            <c:if test="${comment.memberNo == loginUser.no}">
               <div class="my-comment-control"
                 data-member-no='${comment.memberNo}'>
                 <button class='my-save-btn btn btn-primary' style="display: none"
@@ -121,8 +137,10 @@
     </div>
   </div>
   <div style="margin-bottom: 50px;"></div>
-  </div>
-
+ </div>
+<link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel="stylesheet" href="/css/fontawesome/css/all.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -138,10 +156,24 @@
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
 
+  
+
 <script>
-$('.recommend').on('click',(event) =>{
+ $(document).ready(function() {
+  $('.far.fa-thumbs-up').on('click', () => {
+    if($('.far.fa-thumbs-up').hasClass('active')) {
+      $('.far.fa-thumbs-up').removeClass('active');
+    } else {
+      $('.far.fa-thumbs-up').addClass('active');
+    }
+  });  
+}); 
+</script>
+
+<script>
+$('.recommend').on('click',() =>{
   let recommendBoardNo = parseInt(document.querySelector('#jisooBoardNo').value);
-  let recommendMemberNo = 1;
+  let recommendMemberNo = ${loginUser.no};
    $.post("recommend/checkRecommendForCheck",{
      "recommendBoardNo":recommendBoardNo,
      "recommendMemberNo":recommendMemberNo
@@ -151,49 +183,63 @@ $('.recommend').on('click',(event) =>{
          "recommendBoardNo":recommendBoardNo,
          "recommendMemberNo":recommendMemberNo
        }, function(data){
-         
-       })
+         countRecommend(recommendBoardNo)
+       }, "json");
      }else{
        $.post("recommend/delete",{
          "recommendBoardNo":recommendBoardNo,
          "recommendMemberNo":recommendMemberNo
+  
        }, function(data){
-         
-       })
+         countRecommend(recommendBoardNo)
+       }, "json");
      }
-     $.post("recommend/checkNum",{
-       "recommendBoardNo":recommendBoardNo,
-     }, function(data){
-       $('#recommendCount').val(data);
-     });
    });
 });
+function countRecommend(boardNo) {
+  $.post("recommend/checkNum",{
+    "recommendBoardNo":boardNo,
+  }, function(data){
+    $('#rec').html("추천수:"+data);
+  });
+}
 </script>
+
+<script>
+$(document).ready(function() { 
+  let recommendBoardNo = parseInt(document.querySelector('#jisooBoardNo').value);
+  let recommendMemberNo = 1;
+  $.post("recommend/checkRecommendForCheck",{
+    "recommendBoardNo":recommendBoardNo,
+    "recommendMemberNo":recommendMemberNo
+  }, function(data) {
+    if(data==0) {
+      $('.far.fa-thumbs-up').removeClass('active');
+    } else {
+      
+        $('.far.fa-thumbs-up').addClass('active');
+    }
+  });
+});
+</script>
+
   <script>
  $('#my-add-btn').on('click', (event) => {
     let boardNo = parseInt(document.querySelector('#jisooBoardNo').value);
-    let memberNo = 1; // 1번 멤버 : jisoo
-    let id = 'jisoo';
     let contents = document.querySelector('.my-comment-form').value;
     
     
     $.post("detail/add", {
         "boardNo": boardNo,
-        "memberNo": memberNo,
-        "id": id,
         "contents": contents
       }, function(result) {
-        console.log(result);
-        console.log(result.no);
-        console.log(result.id);
-        
         var comment = "<div class='my-comment-div comment-"+result.no+"' data-no='"+result.no+"'>"; 
           comment += "<span class='id-"+result.no+"'>"+result.id+"</span>" 
           comment += "<span class='createdDate-"+result.no+"'>"+result.createdDate+"</span>";
           comment += "<p class='my-comment-content contents-"+result.no+"'>"+result.contents+"</p><div>";
           comment += "<textarea class='my-comment'>"+result.contents+"</textarea>";
           comment += "<div class='my-comment-control' data-member-no='"+result.memberNo+"'>";
-          comment += "<button class='my-save-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>저장</button>";
+          comment += "<button class='my-save-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>저장</button>\n";
           comment += "<button class='my-cancel-btn btn btn-primary' style='display: none' data-no='"+result.no+"' align='right'>취소</button>";
           comment += "<button class='my-update-btn btn btn-primary'>수정</button>\n";
           comment += "<button class='my-delete-btn btn btn-primary'>삭제</button></div></div><hr></div>";
@@ -247,6 +293,7 @@ $('.recommend').on('click',(event) =>{
     commentC.style['display'] = 'none';
     commentD.style['display'] = 'inline-block';
     commentU.style['display'] = 'inline-block';
+    
   });
   
   $('#mymy-comment').on('click','.my-save-btn', () => {
@@ -255,7 +302,6 @@ $('.recommend').on('click',(event) =>{
     var str = commentDiv.querySelector('textarea').value;
     var commentNo = commentDiv.getAttribute('data-no');
     var boardNo = ${board.no};
-    console.log(commentDiv);
     
     
     $.post("detail/update", {
@@ -295,6 +341,11 @@ $('#mymy-comment').on('click', '.my-update-btn', () => {
   commentC.style['display'] = 'inline-block';
   commentD.style['display'] = 'none';
   commentU.style['display'] = 'none';
-    console.log(commentDiv.getAttribute('data-no'));
+  
 });
 </script>
+
+
+
+
+  <jsp:include page="../greenfooter.jsp" />

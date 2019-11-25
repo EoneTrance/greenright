@@ -9,27 +9,26 @@ import com.greenright.service.RecommendService;
 @Service
 public class DefaultRecommendService implements RecommendService {
 
-  @Resource
-  private RecommendDao recommendDao;
+  @Resource private RecommendDao recommendDao;
 
   @Override
   public int insert(Recommend recommend) throws Exception {
-
-    return recommendDao.insertRecommend(recommend);
+    recommendDao.insertRecommend(recommend);
+    return recommendDao.CountRecommend(recommend.getRecommendBoardNo());
   }
 
   @Override
-  public void delete(Recommend recommend) throws Exception {
+  public int delete(Recommend recommend) throws Exception {
     recommendDao.deleteRecommend(recommend);
-
+    return recommendDao.CountRecommend(recommend.getRecommendBoardNo());
   }
 
   @Override
   public int checkNum(int recommendBoardNo) throws Exception {
-    return recommendDao.CountRecommend(recommendBoardNo);
+   return recommendDao.CountRecommend(recommendBoardNo);
   }
-
-  public int checkRecommendForCheck(Recommend recommend) throws Exception {
+  
+  public int checkRecommendForCheck(Recommend recommend)throws Exception {
     return recommendDao.CountRecommendForCheck(recommend);
   }
 

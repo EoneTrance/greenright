@@ -2,16 +2,22 @@ package com.greenright.domain;
 
 import java.io.Serializable;
 
-public class Seller implements Serializable {
-
+public class Seller implements Serializable{
+  
   private static final long serialVersionUID = 1L;
-
+  
   private int no;
+  
   private String bankName;
+  
   private String accountNum;
+  
   private String accountHolder;
+  
   private String tel;
+  
   private int point;
+  
   private Member member;
 
   public int getNo() {
@@ -76,5 +82,5 @@ public class Seller implements Serializable {
         + ", accountHolder=" + accountHolder + ", tel=" + tel + ", point=" + point + ", member="
         + member + "]";
   }
-
+  
 }

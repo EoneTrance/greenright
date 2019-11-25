@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenright.dao.LikeDao">
+  <resultMap type ="Like" id ="LikeMap">
+    <id column = "product_id" property="productNo"/>
+    <id column ="member_id" property="memberNo"/>
+  </resultMap>
+  
+  <select id="findLikeProduct" parameterType="int" resultMap="LikeMap">
+    select
+      product_id,
+      member_id
+    from likes
+    where member_id=#{no}
+  </select>
+  
+<insert id="insertLike" parameterType="Like"
+    useGeneratedKeys="true" keyColumn="boards_id" keyProperty="no">
+    insert into likes(product_id,member_id)
+    values(#{productNo}, #{memberNo})
+  </insert>
+
+  <delete id="deleteLike" parameterType="Like">
+    delete from likes  
+    where product_id=#{productNo} and member_id =#{memberNo}
+  </delete>
+
+  <select id="CheckLike" parameterType="Like" resultType="int">
+  select count(*) from likes where product_id =#{productNo} and member_id =#{memberNo}
+  </select>
+
+  <select id="getCountByProduct" parameterType="int" resultType="int">
+    select count(*) from likes where product_id =#{productNo}
+  </select>
+  
+  <delete id="deleteAllLikes" parameterType="int">
+    delete from likes  
+    where product_id=#{productNo}
+  </delete>
+  
+  <select id="getByMember" parameterType="int" resultMap="LikeMap">
+  select product_id from likes where
+  member_id =#{memberNo}
+  order by product_id desc
+  </select>
+ 
+</mapper>
