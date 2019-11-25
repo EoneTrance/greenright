@@ -102,10 +102,11 @@
             <select id="questionType" name="questionType" class="form-control faq-form-control">
               <option value="default">전체</option>
               <option value="배송안내">배송안내</option>
-              <option value="주문결제">주문결제</option>
-              <option value="주문취소">주문취소</option>
+              <option value="주문">주문</option>
+              <!-- <option value="주문결제">주문결제</option>
+              <option value="주문취소">주문취소</option> -->
               <option value="교환,환불">교환,환불</option>
-              <option value="적립금">적립금</option>
+              <!-- <option value="적립금">적립금</option> -->
               <option value="기타">기타</option>
             </select>
         </div>

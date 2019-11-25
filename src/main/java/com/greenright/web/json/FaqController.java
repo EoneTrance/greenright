@@ -57,12 +57,12 @@ public class FaqController {
   @GetMapping("list")
   public JsonResult list(
       @RequestParam(defaultValue = "1") int pageNo,
-      @RequestParam(defaultValue = "10") int pageSize,
+      @RequestParam(defaultValue = "5") int pageSize,
       String keyword,
       String questionType) throws Exception {
     
-    if(pageSize < 10 || pageSize > 20) {
-      pageSize = 10;
+    if(pageSize < 5 || pageSize > 20) {
+      pageSize = 5;
     }
     
     int size = faqService.size(keyword, questionType);
