@@ -234,13 +234,13 @@ public class BoardController {
   }
   
   @PostMapping("detail/add")
-  
   @ResponseBody
   public Object commentadd(Comment comment, HttpSession session) throws Exception {
     
     comment.setMemberNo(((Member)session.getAttribute("loginUser")).getNo());
     comment.setId(((Member)session.getAttribute("loginUser")).getId());
     commentService.insert(comment);
+    System.out.println(comment);
     return comment;
     
   }
