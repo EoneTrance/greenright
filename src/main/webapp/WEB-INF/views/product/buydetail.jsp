@@ -840,7 +840,6 @@ $(document).on("click", "#add-to-cart", function(e){
                                 "productNo" : productNo,
                               },
                               function(a) {
-                               console.log(a)
                                 if (a == 0) {
                                   $
                                       .ajax({

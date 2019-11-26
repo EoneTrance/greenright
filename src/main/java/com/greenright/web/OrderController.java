@@ -73,8 +73,6 @@ public class OrderController {
     }
     for (Product product : products) {
       sellers.add(memberService.get(product.getMemberNo()));
-      System.out.println("시작합니다.");
-      System.out.println(product.getPhotos().get(0).getPhotoPath());
     }
 
     List<Object> orderList = new ArrayList<>();

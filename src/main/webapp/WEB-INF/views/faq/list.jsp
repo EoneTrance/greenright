@@ -451,7 +451,6 @@ function moveActivePage(currentPage, direction) {
     return false;
   }
   currentPage += direction;
-  console.log(currentPage, direction);
   $(".pagination li").removeClass("active");
   $(".pagination li.current-page:eq(" + (currentPage - 1) + ")").addClass("active");
 }
@@ -467,7 +466,6 @@ function loadData(pageNo) {
       "questionType": (searchQuestionType) ? searchQuestionType : undefined
     },
     success: function(data){
-      console.log(data);
       var list = data.result.faqs;
       var tableTag ="";
      

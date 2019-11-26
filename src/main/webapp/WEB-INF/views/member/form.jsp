@@ -396,15 +396,6 @@ $(function() {
     
     eventGenerator();
     
-    /* 
-    for (var state of formState) {
-      //console.log(state);
-       if (state == false) {
-        return false;
-      }
-    } 
-    */
-    
     for (var j = 0; j < inputStates.length; j++) {
       if (inputStates[j].style.color == "red") {
         essentials[j].focus();

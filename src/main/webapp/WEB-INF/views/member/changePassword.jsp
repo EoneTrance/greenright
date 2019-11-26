@@ -43,7 +43,6 @@
 <script>
 $(function() {
   $("#passwordChangeForm")[0].addEventListener("focusout", function(e) {
-    console.log(e.target.tagName);
     if (e.target.tagName != "BUTTON") {
       
       var regularPassword = /^[A-Za-z0-9]{4,12}$/;

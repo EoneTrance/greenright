@@ -77,7 +77,6 @@ public class ProductController {
     product.setPhotos(productPhotoWriter.getPhotoFiles(photoPath));
     product.setDiy(1);
     product.setExpirationDate(new Date(20190101));
-    System.out.println(product.toString());
     productService.insert(product);
     return "redirect:manage";
   }
@@ -162,7 +161,6 @@ public class ProductController {
     int a = member.getNo();
     List<Product> products = productService.listBySeller(a);
     model.addAttribute("products", products);
-    System.out.println(products.toString());
     return "product/manage";
   }
   @Transactional

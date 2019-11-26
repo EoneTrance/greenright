@@ -205,9 +205,7 @@ $(function(){
     dataType: "json",
     async: false,
     success: function(basketList) {
-      console.log("A")
       if (basketList.state == "success") {
-    	  console.log(basketList.result.length);
         for (var i = 0; i < basketList.result.length; i++) {
           var basket = basketList.result[i];
           $(".my-basket-list").append(

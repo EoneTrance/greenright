@@ -177,7 +177,6 @@ $('.page-item').click((e) => {
     location.href = "list?pageNo=" + (currentPage + 1) + "&pageSize=" + ${pageSize};
   
   } else {
-    console.log(e.currentTarget);
     if (page != currentPage)
       location.href = "list?pageNo=" + page + "&pageSize=" + ${pageSize};
     

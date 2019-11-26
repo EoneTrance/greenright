@@ -16,7 +16,6 @@ public class SetUriFilter implements Filter {
     HttpServletRequest req = (HttpServletRequest) request;
     String servletPath = req.getRequestURI();
     String path = servletPath.substring(servletPath.lastIndexOf("/") + 1);
-    System.out.println(path);
     request.setAttribute("title", "GreenRight - " + path);
 
     chain.doFilter(request, response);

@@ -64,7 +64,6 @@
 $(function(){
  
   var answers = '${privateBoard.answers}';
-  console.log(answers);
   
   if (!(answers == null || answers == "")) {
     $('#answer-delete').css('display', 'inline-block');

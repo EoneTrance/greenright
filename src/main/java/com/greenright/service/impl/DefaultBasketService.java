@@ -29,7 +29,6 @@ public class DefaultBasketService implements BasketService {
 
   @Override
   public int insert(Basket basket) throws Exception {
-   System.out.println(basket);
     int result = 0;
     try {
       result = basketDao.insert(basket);
@@ -39,7 +38,6 @@ public class DefaultBasketService implements BasketService {
         result = basketDao.update(basket);
       }
     }
-    System.out.println(result);
     return result;
   }
 

@@ -274,7 +274,6 @@
             dataType : "json",
             data : allData,
             success : function(data) {
-              console.log(data);
                var list = data.result;
               var tableTag ="";
                 for(var i = 0 ; i < list.length; i++) {

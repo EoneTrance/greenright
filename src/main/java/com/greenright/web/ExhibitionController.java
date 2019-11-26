@@ -30,7 +30,6 @@ public class ExhibitionController {
       int no =  product.getNo();
       Product pprroo = productService.get(no);
       pprroo.setRecommendCount(product.getRecommendCount());
-      System.out.println(pprroo.toString());
       pro.add(pprroo);
       }
       model.addAttribute("products",pro);
@@ -39,9 +38,6 @@ public class ExhibitionController {
  @GetMapping("/detail")
  public void detail (Model model,int memberNo) throws Exception{
    List<Product>productList = productService.getByMemberNo(memberNo);
-   for(Product a : productList) {
-     System.out.println(a.toString());
-   }
    model.addAttribute("productList",productList);
    
  }
