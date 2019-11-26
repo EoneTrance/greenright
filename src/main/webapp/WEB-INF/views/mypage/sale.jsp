@@ -253,7 +253,9 @@
                                       주문번호: <span id="product-id" >${saleProduct.order.no}</span><br>
                                       상품명: <span id="product-name">${saleProduct.productOptionItem.productOption.product.productName}</span><br>
                                       옵션: <span id="product-option">${saleProduct.productOptionItem.optionItemMatter}</span><hr class="my-1">
-                                      가격: <span id="product-price"><span style="font-size:15px;font-weight:bold;">${saleProduct.productOptionItem.productOption.product.price}</span>원 [+${saleProduct.productOptionItem.optionsPrice}]<c:if test="${saleProduct.quantity > 1}"> x ${saleProduct.quantity}개</c:if>
+                                      가격: <span id="product-price"><span style="font-size:15px;font-weight:bold;">
+                                      <script>document.currentScript.parentElement.innerHTML = numberFormat(${saleProduct.productOptionItem.productOption.product.price})</script></span>원 [+<script>document.currentScript.parentElement.innerHTML += numberFormat(${saleProduct.productOptionItem.optionsPrice})</script>]
+                                      <c:if test="${saleProduct.quantity > 1}"> x ${saleProduct.quantity}개</c:if>
                                       </span>
                                     </div>
                                   </div>
@@ -279,7 +281,8 @@
                               <tr>
                                 <td class="my-payment-date">${saleProduct.order.paymentDate}</td>
                                 <td class="my-payment-way">${saleProduct.order.paymentWay}</td>
-                                <td class="my-price" style="border-right:none;"><span id="product-price"><span style="font-size:15px;font-weight:bold;">${saleProduct.productOptionItem.productOption.product.price + saleProduct.productOptionItem.optionsPrice * saleProduct.quantity + 2500}</span>원
+                                <td class="my-price" style="border-right:none;"><span id="product-price"><span style="font-size:15px;font-weight:bold;">
+                                <script>document.currentScript.parentElement.innerHTML = numberFormat(${saleProduct.productOptionItem.productOption.product.price + saleProduct.productOptionItem.optionsPrice * saleProduct.quantity + 2500})</script></span>원
                                       </span>(배송비 포함)
                                 </td>
                               </tr>
@@ -334,7 +337,9 @@
                     주문번호: <span id="product-id" >${saleProduct.order.no}</span><br>
                     상품명: <span id="product-name">${saleProduct.productOptionItem.productOption.product.productName}</span><br>
                     옵션: <span id="product-option">${saleProduct.productOptionItem.optionItemMatter}</span><hr class="my-1">
-                    가격: <span id="product-price"><span style="font-size:15px;font-weight:bold;">${saleProduct.productOptionItem.productOption.product.price + saleProduct.productOptionItem.optionsPrice}</span>원<c:if test="${saleProduct.quantity > 1}"> x ${saleProduct.quantity}개</c:if></span>
+                    가격: <span id="product-price"><span style="font-size:15px;font-weight:bold;">
+                    <script>document.currentScript.parentElement.innerHTML = numberFormat(${saleProduct.productOptionItem.productOption.product.price + saleProduct.productOptionItem.optionsPrice})</script></span>원
+                    <c:if test="${saleProduct.quantity > 1}"> x ${saleProduct.quantity}개</c:if></span>
                   </div>
                 </div>
               </td>

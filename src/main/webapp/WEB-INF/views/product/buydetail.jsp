@@ -360,7 +360,7 @@ button.btn.btn-primary.CartBut {
           </p>
         </div>
         <p class="price">
-          <span>${product.price}원</span>
+          <span  style="font-size:120%;"><span style="font-weight:bold;"><script>document.currentScript.parentElement.innerHTML = numberFormat(${product.price})</script></span>원</span>
         </p>
         <p>${product.description}</p>
         <div class="row mt-4">
@@ -440,7 +440,7 @@ button.btn.btn-primary.CartBut {
                   <div class="pricing">
                     <p class="price">
                       <span
-                        class="price-sale">${production.price}</span>
+                        class="price-sale"><script>document.currentScript.parentElement.innerHTML = numberFormat(${production.price})</script></span>
                     </p>
                   </div>
                 </div>

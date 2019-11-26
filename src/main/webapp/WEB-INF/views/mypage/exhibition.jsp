@@ -161,9 +161,13 @@
                       <img id="product-photo" src='/upload/product/${productList[0].photos[0].photoPath}' data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
                     </div>
                     <div class="col-sm-9 px-0" style="font-size:12px">
-                      상품명: <span id="product-name">${productList[0].productName}</span><br>
+                      상품명: <span id="main-product-name">${productList[0].productName}</span><br>
                      <hr class="my-1">
-                      가격: <span id="product-price" style="font-size:15px;font-weight:bold;">${productList[0].price }</span> 원
+                      가격: <span id="main-product-price" style="font-size:15px;font-weight:bold;">
+                      <script>
+                      document.currentScript.parentElement.innerHTML = numberFormat(${productList[0].price});
+                      </script>
+                      </span> 원
                     </div>
                   </div>
                 </td>
@@ -211,7 +215,8 @@
                   <div class="col-sm-9 px-0" style="font-size:12px">
                     상품명: <span id="product-name">${product.productName }</span><br>
                     <hr class="my-1">
-                    가격: <span id="product-price" style="font-size:15px;font-weight:bold;">${product.price }</span> 원
+                    가격: <span id="product-price" style="font-size:15px;font-weight:bold;">
+                    <script>document.currentScript.parentElement.innerHTML = numberFormat(${product.price});</script></span>원
                   </div>
                 </div>
               </td>

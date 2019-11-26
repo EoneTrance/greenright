@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="/css/icomoon.css">
 <link rel="stylesheet" href="/css/ionicons.min.css">
 <link rel="stylesheet" href="/css/style.css">
+<script src="/js/number-format.js"></script>
 
 <title>GreenRight${title}</title>
 

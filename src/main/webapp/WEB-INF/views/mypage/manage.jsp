@@ -203,7 +203,10 @@ span.productadderm {
                       </div>
 
                     </td>
-                    <td class="my-state">${product.price}원</td>
+                    <td class="my-state">
+                    <script>
+                    document.currentScript.parentElement.innerHTML = numberFormat(${product.price})
+                    </script>원</td>
                     <td class="my-seller">${product.seller.member.name }</td>
                   </tr>
                 </c:forEach>
@@ -327,7 +330,7 @@ $(document).on("change","#Aselect",function() {
          tableTag += "<div class='col-sm-9 text-left px-0'  style='font-size: 12px'>"
          tableTag += "상품명: <span id='product-name'>"+list[i].productName+"</span><br>"
          tableTag += "상품설명 :<span id='product-name'>"+list[i].description+"</span></div>"
-         tableTag += "</td><td class='my-state'>"+list[i].price+"원</td><td class='my-seller'>"
+         tableTag += "</td><td class='my-state'>"+numberFormat(list[i].price)+"원</td><td class='my-seller'>"
          tableTag += ""+list[i].seller.member.name+"</td></tr>"
         };
        $("#addto").html(tableTag);  
@@ -355,7 +358,7 @@ $(document).on("change","#Aselect",function() {
             tableTag += "<div class='col-sm-9 text-left px-0'  style='font-size: 12px'>"
             tableTag += "상품명: <span id='product-name'>"+list[i].productName+"</span><br>"
             tableTag += "상품설명 :<span id='product-name'>"+list[i].description+"</span></div>"
-            tableTag += "</td><td class='my-state'>"+list[i].price+"원</td><td class='my-seller'>"
+            tableTag += "</td><td class='my-state'>"+numberFormat(list[i].price)+"원</td><td class='my-seller'>"
             tableTag += ""+list[i].seller.member.name+"</td></tr>"
            };
           $("#addto").html(tableTag);  

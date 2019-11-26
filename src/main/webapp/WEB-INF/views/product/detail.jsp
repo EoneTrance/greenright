@@ -135,7 +135,7 @@ label.star:before {
  </div>
   <c:forEach items="${option.optionItem}"  var="item">
  <div class="${item.no}" id ="optionItems" > 
- <h6> 옵션항목명  <input type='text' name='optionItemMatter' class="form-control" value='${item.optionItemMatter}' ></h6>
+ <h6> 옵션항목명  <input type='text' name='optionItemMatter' class="form-control" value='numberFormat(${item.optionItemMatter})' ></h6>
  <h6> 추가금액  <input type='number' name='optionItemMatter' class="form-control" value='${item.optionsPrice}' step=10 ></h6>
  <h6> 옵션당개수  <input type='number' name='optionItemMatter' class="form-control" value='${item.optionsQuantity}'>
  <input type="text" name="optionItemMatter" class="form-control" value ="${item.no}" hidden>

@@ -95,7 +95,7 @@
       <div id=memberInfoForm>
       <h2 id="mypage-title-h2">판매회원 전환</h2>
       <hr>
-      <form action='../seller/conversion' method='post' onsubmit="return checkState()">
+      <form id="my-conversion" action='../seller/conversion' method='post'>
         <table class="col-sm-12 table-hover my-table my-join-table my-table-row" cellpadding="20" cellspacing="5">
           <tbody>
           <tr>
@@ -135,7 +135,7 @@
           </tbody>
         </table>
         <hr>
-        <button class="sarchbtn btn-lg btn-primary btn-block signup-btn mr-1 w-100" type="submit">판매회원 전환</button>
+        <button id="submitBtn" class="sarchbtn btn-lg btn-primary btn-block signup-btn mr-1 w-100" type="button">판매회원 전환</button>
       </form>
       </div>
       <hr>
@@ -178,6 +178,7 @@
 <script src="/js/aos.js"></script>
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
+<script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
 "use strict"
@@ -367,8 +368,15 @@ function checkState() {
       $("[name=" + key + "]").focus();
       return false;
     }
-  } 
-  
-  return true;
-};
+  }
+  swal("판매회원으로 전환되었습니다.").then((value) => {
+    if (value) {
+      $("#my-conversion").submit();
+    }
+  });
+}
+
+$("#submitBtn").click(function(e){
+  checkState();
+});
 </script>

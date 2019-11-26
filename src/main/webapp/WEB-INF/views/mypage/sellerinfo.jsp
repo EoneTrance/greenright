@@ -95,7 +95,7 @@
       <div id=memberInfoForm>
       <h2 id="mypage-title-h2">판매정보</h2>
       <hr>
-      <form class="text-center" action='../seller/update' method='post' onsubmit="return checkState()">
+      <form id="my-sellerInfo" class="text-center" action='../seller/update' method='post'>
         <table class="col-sm-12 table-hover my-table my-join-table my-table-row" cellpadding="20" cellspacing="5">
           <tbody>
           <tr>
@@ -139,7 +139,7 @@
           </tbody>
         </table>
         <hr>
-        <button class="searchbtn btn-lg btn-primary btn-block signup-btn w-100" type="submit">수정</button>
+        <button id="submitBtn" class="searchbtn btn-lg btn-primary btn-block signup-btn w-100" type="button">수정</button>
       </form>
       </div>
     </div>
@@ -181,6 +181,7 @@
 <script src="/js/aos.js"></script>
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
+<script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
 "use strict"
@@ -381,7 +382,14 @@ function checkState() {
       return false;
     }
   } 
-  
-  return true;
-};
+  swal("수정되었습니다.").then((value) => {
+    if (value) {
+      $("#my-sellerInfo").submit();
+    }
+  });
+}
+
+$("#submitBtn").click(function(e){
+  checkState();
+});
 </script>

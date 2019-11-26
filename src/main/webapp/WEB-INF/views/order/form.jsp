@@ -528,11 +528,11 @@ $(function() {
      +  "<td class='my-product text-left my-col-9 pl-0'>"
      +  "  <div class='px-0' style='font-size:12px'>"
      +  "    판매자: <span id='product-seller'>" + order.sellerName + "</span><br>"
-     +  "    상품명: <span id='product-name'>" + order.productName + " [" + order.productPrice + "원]" + "</span><br>"
-     +  "    옵션: <span id='product-option'>" + order.optionName + " (" + order.optionItemMatter + ") [+" + order.optionItemPrice + "원]" + "</span><br>"
-     +  "    선택옵션 가격: <span id='product-price'> [" + order.productPrice + "+" + order.optionItemPrice + "] = <span style='font-weight:bold;'>" + (order.productPrice + order.optionItemPrice) + "</span>원</span><br>"
+     +  "    상품명: <span id='product-name'>" + order.productName + " [" + numberFormat(order.productPrice) + "원]" + "</span><br>"
+     +  "    옵션: <span id='product-option'>" + order.optionName + " (" + order.optionItemMatter + ") [+" + numberFormat(order.optionItemPrice) + "원]" + "</span><br>"
+     +  "    선택옵션 가격: <span id='product-price'>" + numberFormat(order.productPrice + "[+" + order.optionItemPrice) + "] = <span style='font-weight:bold;'>" + numberFormat(order.productPrice + order.optionItemPrice) + "</span>원</span><br>"
      +  "    수량: <span id='product-quantity'><span style='font-weight:bold;'>" + order.optionItemQuantity + "</span>개</span><hr class='my-1'>"
-     +  "    가격: <span id='product-sumPrice' style='font-size:120%;font-weight:bold;'>" + ((order.productPrice + order.optionItemPrice) * order.optionItemQuantity) + "</span>원"
+     +  "    가격: <span id='product-sumPrice' style='font-size:120%;font-weight:bold;'>" + numberFormat((order.productPrice + order.optionItemPrice) * order.optionItemQuantity) + "</span>원"
      +  "  </div>"
      +  "</td>"
      +  "<td class='my-optionItemNo-td' style='display:none;'>" + order.optionItemNo + "</td>"
@@ -551,9 +551,9 @@ $(function() {
   deliveryPrice = (2500 * orderList.length);
   paymentPrice = (productPrice + deliveryPrice);
 
-  $(".my-priceSum").html(productPrice);
-  $(".my-deliveryChargeSum").html(2500 * i);
-  $(".my-sum").html(paymentPrice);
+  $(".my-priceSum").html(numberFormat(productPrice));
+  $(".my-deliveryChargeSum").html(numberFormat(2500 * i));
+  $(".my-sum").html(numberFormat(paymentPrice));
   
   $("input[type='checkbox']").click(function(e) {
     if ($(e.target).prop('checked')) {

@@ -89,7 +89,7 @@
       <div id=memberInfoForm>
       <h2 id="mypage-title-h2">기본정보</h2>
       <hr>
-      <form class="text-center" action='../member/update' method='post' enctype='multipart/form-data' onsubmit="return checkState()">
+      <form id="my-userInfo" class="text-center" action='../member/update' method='post' enctype='multipart/form-data'>
         <table class="col-sm-12 table-hover my-table my-join-table my-table-row" cellpadding="20" cellspacing="5">
           <tbody>
           <tr>
@@ -192,7 +192,7 @@
           </tbody>
         </table>
         <hr>
-        <button name="submitBtn" class="searchbtn btn-lg btn-primary btn-block signup-btn w-100" type="submit">수정</button>
+        <button id="submitBtn" name="submitBtn" class="searchbtn btn-lg btn-primary btn-block signup-btn w-100" type="button">수정</button>
       </form>
       </div>
     </div>
@@ -234,6 +234,7 @@
 <script src="/js/aos.js"></script>
 <script src="/js/scrollax.min.js"></script>
 <script src="/js/main.js"></script>
+<script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
 "use strict"
@@ -551,9 +552,16 @@ if(${loginUser.memberClass} == 2) {
         return false;
       }
     }
-    
-    return true;
+    swal("수정되었습니다.").then((value) => {
+      if (value) {
+        $("#my-userInfo").submit();
+      }
+    });
   }
+  
+  $("#submitBtn").click(function(e){
+    checkState();
+  });
 </script>
 
 <script src="/js/postcode.v2.js"></script>

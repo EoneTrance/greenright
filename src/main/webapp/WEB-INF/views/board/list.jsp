@@ -67,7 +67,12 @@
             <tr class="tr1">
               
               <td>${board.no}</td>
-              <td id="btitle"><a href='detail?no=${board.no}'>${board.title}</a></td>
+             <td>
+              <a  href='detail?no=${board.no}'>${board.title}</a>
+              <c:if test="${board.createdDate == today}">
+              <img  src='/images/new.jpg'/>
+              </c:if>
+              </td>
               <td>${board.member.name}</td>
               <td class="cdate">${board.createdDate}</td>
               <td>${board.viewCount}</td>

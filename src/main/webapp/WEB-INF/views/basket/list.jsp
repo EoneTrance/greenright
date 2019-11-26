@@ -227,12 +227,12 @@ $(function(){
            +  "      상품번호: <span id='product-id'>" + basket.productOptionItem.productOption.product.no + "</span><br>"
            +  "      상품명: <span id='product-name'>" + basket.productOptionItem.productOption.product.productName + "</span><br>"
            +  "      옵션: <span id='product-option'>" + basket.productOptionItem.productOption.optionName + " (" + basket.productOptionItem.optionItemMatter + ")</span><hr class='my-1'>"
-           +  "      가격: <span id='product-price' style='font-size:120%;font-weight:bold;'>" + (basket.productOptionItem.productOption.product.price + basket.productOptionItem.optionsPrice) + "</span> 원"
+           +  "      가격: <span id='product-price' style='font-size:120%;font-weight:bold;'>" + numberFormat(basket.productOptionItem.productOption.product.price + basket.productOptionItem.optionsPrice) + "</span> 원"
            +  "    </div>"
            +  "  </div>"
            +  "</td>"
            +  "<td class='my-quantity-td'>" + basket.quantity + "</td>"
-           +  "<td class='my-price-td'><span class='my-price-span' style='font-size:120%;font-weight:bold;color:#82AE46;'>" + ((basket.productOptionItem.productOption.product.price + basket.productOptionItem.optionsPrice) * basket.quantity) + "</span> 원</td>"
+           +  "<td class='my-price-td'><span class='my-price-span' style='font-size:120%;font-weight:bold;color:#82AE46;'>" + numberFormat((basket.productOptionItem.productOption.product.price + basket.productOptionItem.optionsPrice) * basket.quantity) + "</span> 원</td>"
            +  "<td class='my-seller-td'>" + basket.productOptionItem.productOption.product.seller.member.name + "</td>"
            +  "<td class='my-optionItemNo-td' style='display:none;'>" + basket.optionItemNo + "</td>"
            +  "<td class='my-quantity-td' style='display:none;'>" + basket.quantity + "</td>"
@@ -271,9 +271,9 @@ $(function(){
       }
     }
     
-    $(".my-priceSum").html(sumPrice);
-    $(".my-deliveryChargeSum").html(2500 * i);
-    $(".my-sum").html(sumPrice + (2500 * i));
+    $(".my-priceSum").html(numberFormat(sumPrice));
+    $(".my-deliveryChargeSum").html(numberFormat(2500 * i));
+    $(".my-sum").html(numberFormat(sumPrice + (2500 * i)));
     e.stopImmediatePropagation();
   });
   

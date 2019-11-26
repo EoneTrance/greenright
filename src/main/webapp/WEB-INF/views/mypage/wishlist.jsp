@@ -172,7 +172,9 @@ button#deletewishlist {
                         </div>
 
                       </td>
-                      <td class="my-state">${product.price}원</td>
+                      <td class="my-state"><span style="font-weight:bold;">
+                      <script>document.currentScript.parentElement.innerHTML = numberFormat(${product.price})</script></span>원
+                      </td>
                       <td class="my-seller">${product.seller.member.name }</td>
                     </tr>
                   </c:forEach>

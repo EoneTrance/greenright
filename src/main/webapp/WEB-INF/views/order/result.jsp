@@ -93,13 +93,13 @@ table.my-join-table tbody th {
           <tr>
             <th class="my-col-3">주문상품</th>
             <td class="my-col-9">
-            <span id="orderProduct" style="color:black">${orderProduct}</span>
+            <span style="color:black">${orderProduct}</span>
             </td>
           </tr>
           <tr>
             <th class="my-col-3">결제금액</th>
             <td class="my-col-9">
-            <span style="color:black">${order.paymentPrice}원</span>
+            <span id="my-price" style="color:black"></span>
             </td>
           </tr>
           <tr>
@@ -167,7 +167,6 @@ table.my-join-table tbody th {
 <script>
 "use strict";
 $(function(){
-  var orderProductList = ${orderProductList};
-  $("#orderProduct").html(orderProductList[0] + "외 ");
+  $("#my-price").html(numberFormat(${order.paymentPrice}) + "원");
 });
 </script>
