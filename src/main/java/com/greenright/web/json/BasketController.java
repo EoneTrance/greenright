@@ -37,7 +37,6 @@ public class BasketController {
   public JsonResult add(HttpSession session, Basket basket) throws Exception {
     Member loginUser = (Member) session.getAttribute("loginUser");
     basket.setMemberNo(loginUser.getNo());
-    System.out.println(basket);
     try {
       if (basketService.insert(basket) == 1) {
         return new JsonResult().setState(JsonResult.SUCCESS);
@@ -103,7 +102,6 @@ public class BasketController {
     Member loginUser = (Member) session.getAttribute("loginUser");
     List<Basket> basketList = basketService.list(loginUser.getNo());
     for (Basket basket : basketList) {
-      System.out.println(basket);
     }
     try {
       if (basketList.size() > 0) {

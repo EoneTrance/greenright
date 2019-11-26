@@ -233,7 +233,7 @@ $(function(){
            +  "<td class='my-price-td'><span class='my-price-span' style='font-size:120%;font-weight:bold;color:#82AE46;'>" + numberFormat((basket.productOptionItem.productOption.product.price + basket.productOptionItem.optionsPrice) * basket.quantity) + "</span> 원</td>"
            +  "<td class='my-seller-td'>" + basket.productOptionItem.productOption.product.seller.member.name + "</td>"
            +  "<td class='my-optionItemNo-td' style='display:none;'>" + basket.optionItemNo + "</td>"
-           +  "<td class='my-quantity-td' style='display:none;'>" + basket.quantity + "</td>"
+           +  "<td class='my-realPrice-td' style='display:none;'><span class='my-realPrice-span'>" + ((basket.productOptionItem.productOption.product.price + basket.productOptionItem.optionsPrice) * basket.quantity) + "</span> 원</td>"
            +  "</tr>"
           );
         }
@@ -263,12 +263,11 @@ $(function(){
           parseInt(
               $(check)
               .parents(".my-basket-tr")
-              .children(".my-price-td")
-              .children(".my-price-span").html());
+              .children(".my-realPrice-td")
+              .children(".my-realPrice-span").html());
         i++;
       }
     }
-    
     $(".my-priceSum").html(numberFormat(sumPrice));
     $(".my-deliveryChargeSum").html(numberFormat(2500 * i));
     $(".my-sum").html(numberFormat(sumPrice + (2500 * i)));

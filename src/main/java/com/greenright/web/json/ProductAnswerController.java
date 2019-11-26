@@ -19,7 +19,6 @@ public class ProductAnswerController {
   @PostMapping("add")
   public JsonResult  add(ProductAnswer productAnswer) throws Exception {
     try {
-      System.out.println(productAnswer.toString());
       productAnswerService.add(productAnswer);
       return new JsonResult().setResult(JsonResult.SUCCESS);
     }catch (Exception e) {

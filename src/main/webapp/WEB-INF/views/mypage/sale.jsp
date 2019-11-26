@@ -142,39 +142,29 @@
       <h2 id="mypage-title-h2">판매내역</h2>
       <hr>
       
-      <!-- <div class="well">
-        h4>주문관리</h4>
-        <p>- 기본적으로 최근 3개월간의 자료가 조회되며 기간 검색시 지난 주문관리을 조회하실 수 있습니다.</p>
-        <p>- 주문번호를 클릭하시면 해당 주문엗 대한 상세관리을 확인하실 수있습니다.</p>
-        <p>- [세금계산서 신청] 방법 → 해당 [주문번호] 클릭 → 왼쪽 하단 [세금계산서 신청] 클릭</p>
-        <p>- [현급영수증 신청] 방법 → 해당 [주문번호] 클릭 → 왼쪽 하단 [현금영수증 신청] 클릭</p>
-        <p>- [거래명세서 인쇄] 방법 → 해당 [주문번호] 클릭 → 왼쪽 하단 [거래명세서 신청] 클릭</p>
-        <p>- [카드매출전표 인쇄] 방법 → 해당 [주문번호] 클릭 → 왼쪽 하단 [카드매출전표 인쇄] 클릭</p>
-      </div> -->
-      
       <div class="row">
         <div class="col-sm-3">
           <div class="well text-center">
             <h4 class="mt-3 mb-0">입금대기중</h4>
-            <p class="mb-1">3</p>
+            <p class="mb-1">0</p>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="well text-center">
             <h4 class="mt-3 mb-0">배송준비중</h4>
-            <p class="mb-1">3</p>
+            <p class="mb-1">2</p>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="well text-center">
             <h4 class="mt-3 mb-0">배송진행중</h4>
-            <p class="mb-1">3</p>
+            <p class="mb-1">0</p>
           </div>
         </div>
         <div class="col-sm-3">
           <div class="well text-center">
             <h4 class="mt-3 mb-0">배송완료</h4>
-            <p class="mb-1">3</p>
+            <p class="mb-1">2</p>
           </div>
         </div>
       </div>
@@ -254,13 +244,24 @@
                                       상품명: <span id="product-name">${saleProduct.productOptionItem.productOption.product.productName}</span><br>
                                       옵션: <span id="product-option">${saleProduct.productOptionItem.optionItemMatter}</span><hr class="my-1">
                                       가격: <span id="product-price"><span style="font-size:15px;font-weight:bold;">
-                                      <script>document.currentScript.parentElement.innerHTML = numberFormat(${saleProduct.productOptionItem.productOption.product.price})</script></span>원 [+<script>document.currentScript.parentElement.innerHTML += numberFormat(${saleProduct.productOptionItem.optionsPrice})</script>]
+                                      <script>
+                                      document.currentScript.parentElement.innerHTML = numberFormat(${saleProduct.productOptionItem.productOption.product.price});
+                                      </script></span>원 [+<script>document.currentScript.parentElement.innerHTML += numberFormat(${saleProduct.productOptionItem.optionsPrice});</script>]
                                       <c:if test="${saleProduct.quantity > 1}"> x ${saleProduct.quantity}개</c:if>
                                       </span>
                                     </div>
                                   </div>
                                 </td>
-                                <td class="my-state">배송준비중</td>
+                                <td class="my-state">
+                                  <c:choose>
+                                  <c:when test="${status.index > 2}">
+                                    배송완료
+                                  </c:when>
+                                  <c:otherwise>
+                                    배송준비중
+                                  </c:otherwise>
+                                  </c:choose>
+                                </td>
                                <td class="my-buyer">${saleProduct.order.delivery.recieverName}</td>
                               </tr>
                             </tbody>
@@ -343,7 +344,16 @@
                   </div>
                 </div>
               </td>
-              <td class="my-state">배송준비중</td>
+              <td class="my-state">
+                <c:choose>
+                <c:when test="${status.index > 1}">
+                  배송완료
+                </c:when>
+                <c:otherwise>
+                  배송준비중
+                </c:otherwise>
+                </c:choose>
+              </td>
               <td class="my-buyer">${saleProduct.order.delivery.recieverName}</td>
             </tr>
             </c:forEach>
