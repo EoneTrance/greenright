@@ -101,8 +101,6 @@ public class BasketController {
   public JsonResult list(HttpSession session) throws Exception {
     Member loginUser = (Member) session.getAttribute("loginUser");
     List<Basket> basketList = basketService.list(loginUser.getNo());
-    for (Basket basket : basketList) {
-    }
     try {
       if (basketList.size() > 0) {
         return new JsonResult().setState(JsonResult.SUCCESS).setResult(basketList);
